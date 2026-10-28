@@ -3,153 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>互動式旅遊手冊與行程規劃</title>
+    <title>慢旅手冊 & 行程規劃產生器</title>
     <style>
         :root {
-            --primary-color: #5b7065;
-            --secondary-color: #d8c3a5;
-            --bg-color: #f7f5f0;
-            --text-color: #333;
-            --card-bg: #fff;
+            --primary: #5b7065;         /* 植感綠 */
+            --secondary: #d8c3a5;       /* 溫潤沙色 */
+            --bg: #f9f8f6;              /* 紙面灰白 */
+            --card-bg: #ffffff;         /* 卡片白 */
+            --text: #2c3e35;            /* 深墨綠文字 */
+            --border: #e3ede8;          /* 邊框線條 */
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
+        /* 封面風格 Header */
         header {
             text-align: center;
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(91, 112, 101, 0.08);
             margin-bottom: 30px;
-            background: var(--primary-color);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
         }
 
-        header input {
-            font-size: 1.8rem;
+        header input.title-input {
+            font-size: 2.2rem;
+            font-weight: bold;
             border: none;
-            border-bottom: 2px dashed white;
+            border-bottom: 2px dashed var(--secondary);
             background: transparent;
-            color: white;
+            color: var(--primary);
             text-align: center;
-            width: 80%;
+            width: 100%;
             outline: none;
+            margin-bottom: 10px;
         }
 
+        header p {
+            color: #7d8c83;
+            margin: 0;
+            letter-spacing: 2px;
+            font-size: 0.95rem;
+        }
+
+        /* 操作控制列 */
         .controls {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 10px;
-            flex-wrap: wrap;
+            margin-bottom: 30px;
+            gap: 12px;
         }
 
-        button {
-            background-color: var(--primary-color);
+        .btn {
+            background-color: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.2s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
 
-        button:hover {
+        .btn:hover {
             opacity: 0.9;
+            transform: translateY(-1px);
         }
 
+        .btn-print {
+            background-color: #c4a99e; /* 柔和可可色 */
+        }
+
+        /* 每日行程區塊 */
         .day-section {
             background: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border);
         }
 
         .day-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            border-bottom: 2px solid var(--bg);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
 
+        .day-title-input {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary);
+            border: none;
+            border-bottom: 1px solid #ddd;
+            background: transparent;
+            outline: none;
+            width: 60%;
+            padding: 2px 5px;
+        }
+
+        /* 單一景點卡片 */
         .spot-card {
-            background: #faf9f6;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
+            background: #fbfbf9;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
             margin-bottom: 15px;
-            border-radius: 4px;
+            border-radius: 8px;
             display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 15px;
-            align-items: center;
+            grid-template-columns: 1fr 140px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        @media (max-width: 600px) {
+            .spot-card {
+                grid-template-columns: 1fr;
+            }
         }
 
         .spot-info input, .spot-info textarea, .spot-info select {
             width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 10px;
+            margin: 6px 0;
+            border: 1px solid #d5dfd9;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-size: 0.95rem;
+            background: #fff;
+            color: var(--text);
+            outline: none;
         }
 
-        .photo-upload-area {
+        .spot-info input:focus, .spot-info textarea:focus, .spot-info select:focus {
+            border-color: var(--primary);
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .map-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 照片上傳與預覽 */
+        .photo-container {
             text-align: center;
-            border: 2px dashed #ccc;
-            padding: 10px;
-            border-radius: 6px;
+        }
+
+        .photo-upload-btn {
+            border: 2px dashed #cbdad2;
+            padding: 15px 10px;
+            border-radius: 8px;
             background: #fff;
             cursor: pointer;
+            font-size: 0.85rem;
+            color: #7d8c83;
+            transition: border-color 0.2s;
+            display: block;
+        }
+
+        .photo-upload-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         .photo-preview {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: 110px;
             object-fit: cover;
-            border-radius: 4px;
-            margin-top: 5px;
+            border-radius: 6px;
+            margin-top: 8px;
+            border: 1px solid var(--border);
             display: none;
         }
 
-        /* 印刷專用樣式 (Print Optimization) */
+        .delete-btn {
+            background: #e6dfdf;
+            color: #666;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            float: right;
+        }
+        .delete-btn:hover {
+            background: #d8c5c5;
+        }
+
+        /* 印刷與 PDF 匯出優化 (Print Mode) */
         @media print {
             body {
                 background: white;
                 color: black;
                 padding: 0;
             }
-            .controls, button, .photo-upload-area input {
+            .controls, .photo-upload-btn, .delete-btn, button {
                 display: none !important;
+            }
+            header {
+                box-shadow: none;
+                border: none;
+                padding: 10px;
+                margin-bottom: 10px;
             }
             .day-section {
                 break-inside: avoid;
                 box-shadow: none;
                 border: 1px solid #ccc;
+                margin-bottom: 15px;
             }
-            header {
-                background: none !important;
-                color: black !important;
-                box-shadow: none;
-                padding: 10px;
+            .spot-card {
+                break-inside: avoid;
+                border: 1px solid #ddd;
+                background: white;
             }
-            header input {
-                border: none;
-                color: black;
+            input, textarea, select {
+                border: none !important;
+                background: transparent !important;
+                resize: none;
+                padding: 2px 0 !important;
+            }
+            select {
+                -webkit-appearance: none;
+                appearance: none;
             }
         }
     </style>
@@ -158,38 +260,44 @@
 
 <div class="container">
     <header>
-        <input type="text" id="tripTitle" value="✨ 我的慢旅手冊 ✨">
-        <p>好好生活，慢慢旅行</p>
+        <input type="text" id="tripTitle" class="title-input" value="✨ 慢旅行程規劃 ｜ 慢漫手冊 ✨" onchange="saveData()">
+        <p>好好生活，慢慢旅行。把時間留給路上的風景。</p>
     </header>
 
     <div class="controls">
-        <button onclick="addDay()">＋ 新增一天行程</button>
-        <button onclick="window.print()" style="background-color: #d97706;">🖨️ 列印 / 儲存為 PDF 手冊</button>
+        <button class="btn" onclick="addDay()">＋ 新增一天行程</button>
+        <button class="btn btn-print" onclick="window.print()">🖨️ 列印 / 另存為 PDF 手冊</button>
     </div>
 
     <div id="itineraryContainer">
-        <!-- 動態生成的行程天數 -->
+        <!-- 動態渲染行程 -->
     </div>
 </div>
 
 <script>
-    let itineraryData = JSON.parse(localStorage.getItem('travel_handbook')) || [
+    // 預設範例資料
+    let itineraryData = JSON.parse(localStorage.getItem('samya_travel_handbook')) || [
         {
             day: 1,
-            title: "抵達與漫步",
+            title: "抵達與散策漫步",
             spots: [
-                { name: "機場 / 車站出發", transport: "大眾運輸 (地鐵/巴士)", note: "抵達後先前往飯店寄放行李", image: "" }
+                { 
+                    name: "市區咖啡館落腳", 
+                    transport: "🚶 建議移動：步行慢旅", 
+                    note: "先喝杯咖啡整理思緒，感受當地步調", 
+                    image: "" 
+                }
             ]
         }
     ];
 
     function saveData() {
-        localStorage.setItem('travel_handbook', JSON.stringify(itineraryData));
+        const titleVal = document.getElementById('tripTitle').value;
+        localStorage.setItem('samya_travel_handbook', JSON.stringify(itineraryData));
     }
 
     function render() {
         const container = document.getElementById('itineraryContainer');
-        const title = document.getElementById('tripTitle').value;
         container.innerHTML = '';
 
         itineraryData.forEach((dayObj, dayIndex) => {
@@ -198,21 +306,27 @@
                 spotsHtml += `
                     <div class="spot-card">
                         <div class="spot-info">
-                            <input type="text" placeholder="景點名稱 (例如: 嵐山竹林)" value="${spot.name}" onchange="updateSpot(${dayIndex}, ${spotIndex}, 'name', this.value)">
+                            <button class="delete-btn" onclick="deleteSpot(${dayIndex}, ${spotIndex})">刪除景點</button>
+                            <input type="text" placeholder="景點名稱 (例如: 由布院金鱗湖)" value="${spot.name}" onchange="updateSpot(${dayIndex}, ${spotIndex}, 'name', this.value)">
+                            
                             <select onchange="updateSpot(${dayIndex}, ${spotIndex}, 'transport', this.value)">
-                                <option value="步行" ${spot.transport === '步行' ? 'selected' : ''}>🚶 建議移動：步行</option>
-                                <option value="大眾運輸 (地鐵/巴士)" ${spot.transport.includes('大眾運輸') ? 'selected' : ''}>🚆 建議移動：大眾運輸</option>
-                                <option value="自駕 / 租車" ${spot.transport.includes('自駕') ? 'selected' : ''}>🚗 建議移動：自駕</option>
-                                <option value="計程車 /包車" ${spot.transport.includes('計程車') ? 'selected' : ''}>🚕 建議移動：計程車</option>
+                                <option value="🚶 建議移動：步行慢旅" ${spot.transport.includes('步行') ? 'selected' : ''}>🚶 建議移動：步行慢旅</option>
+                                <option value="🚆 建議移動：JR / 地鐵 / 大眾運輸" ${spot.transport.includes('大眾運輸') || spot.transport.includes('JR') ? 'selected' : ''}>🚆 建議移動：JR / 地鐵 / 大眾運輸</option>
+                                <option value="🚌 建議移動：高速巴士" ${spot.transport.includes('巴士') ? 'selected' : ''}>🚌 建議移動：高速巴士</option>
+                                <option value="🚗 建議移動：租車自駕" ${spot.transport.includes('自駕') ? 'selected' : ''}>🚗 建議移動：租車自駕</option>
+                                <option value="🚕 建議移動：計程車 / 包車" ${spot.transport.includes('計程車') ? 'selected' : ''}>🚕 建議移動：計程車 / 包車</option>
                             </select>
-                            <textarea placeholder="停留時間、備忘錄或導航備註..." rows="2" onchange="updateSpot(${dayIndex}, ${spotIndex}, 'note', this.value)">${spot.note}</textarea>
-                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}" target="_blank" style="font-size: 0.85rem; color: #5b7065; text-decoration: underline;">📍 在 Google 地圖上尋找交通路線</a>
+
+                            <textarea placeholder="停留時間、不踩雷小提醒、門票或備忘..." rows="2" onchange="updateSpot(${dayIndex}, ${spotIndex}, 'note', this.value)">${spot.note}</textarea>
+                            
+                            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}" target="_blank">📍 在 Google 地圖上尋找交通路線</a>
                         </div>
-                        <div style="text-align: center;">
-                            <div class="photo-upload-area" onclick="this.querySelector('input').click()">
+                        
+                        <div class="photo-container">
+                            <div class="photo-upload-btn" onclick="this.nextElementSibling.click()">
                                 <span>📷 上傳照片</span>
-                                <input type="file" accept="image/*" style="display:none" onchange="uploadPhoto(event, ${dayIndex}, ${spotIndex})">
                             </div>
+                            <input type="file" accept="image/*" style="display:none" onchange="uploadPhoto(event, ${dayIndex}, ${spotIndex})">
                             <img src="${spot.image}" class="photo-preview" style="display: ${spot.image ? 'block' : 'none'}">
                         </div>
                     </div>
@@ -222,8 +336,14 @@
             container.innerHTML += `
                 <div class="day-section">
                     <div class="day-header">
-                        <h3 style="margin:0;">Day ${dayObj.day}：<input type="text" value="${dayObj.title}" onchange="updateDayTitle(${dayIndex}, this.value)" style="border:none; border-bottom:1px solid #ccc; font-size:1rem; outline:none;"></h3>
-                        <button onclick="addSpot(${dayIndex})" style="background:#8a9a86; padding: 5px 10px; font-size: 0.9rem;">＋ 新增景點</button>
+                        <h3 style="margin:0; display:flex; align-items:center; gap:10px;">
+                            Day ${dayObj.day}：
+                            <input type="text" class="day-title-input" value="${dayObj.title}" onchange="updateDayTitle(${dayIndex}, this.value)">
+                        </h3>
+                        <div>
+                            <button class="btn" style="padding: 6px 12px; font-size: 0.85rem;" onclick="addSpot(${dayIndex})">＋ 新增景點</button>
+                            <button class="delete-btn" style="margin-left: 8px; padding: 6px 10px;" onclick="deleteDay(${dayIndex})">刪除整天</button>
+                        </div>
                     </div>
                     ${spotsHtml}
                 </div>
@@ -235,15 +355,29 @@
     function addDay() {
         itineraryData.push({
             day: itineraryData.length + 1,
-            title: "新的一天",
-            spots: [{ name: "新景點", transport: "步行", note: "", image: "" }]
+            title: "新的一天慢旅",
+            spots: [{ name: "新景點", transport: "🚶 建議移動：步行慢旅", note: "", image: "" }]
         });
         render();
     }
 
     function addSpot(dayIndex) {
-        itineraryData[dayIndex].spots.push({ name: "新景點", transport: "步行", note: "", image: "" });
+        itineraryData[dayIndex].spots.push({ name: "新景點", transport: "🚶 建議移動：步行慢旅", note: "", image: "" });
         render();
+    }
+
+    function deleteSpot(dayIndex, spotIndex) {
+        itineraryData[dayIndex].spots.splice(spotIndex, 1);
+        render();
+    }
+
+    function deleteDay(dayIndex) {
+        if(confirm("確定要刪除這整天的行程嗎？")) {
+            itineraryData.splice(dayIndex, 1);
+            // 重新編號 Day
+            itineraryData.forEach((d, idx) => d.day = idx + 1);
+            render();
+        }
     }
 
     function updateSpot(dayIndex, spotIndex, field, value) {
