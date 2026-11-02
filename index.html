@@ -3,298 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 電子旅行手帳</title>
-    
-    <!-- 引入 Leaflet 地圖套件 CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    
+    <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 旅行手帳書櫃</title>
     <style>
-        /* 莫蘭迪色系與基礎設定 */
         :root {
             --bg-color: #FDFBF7;
-            --accent-yellow: #FFE599;
             --accent-brown: #C4A99E;
-            --accent-pink: #E5D1C7;
             --text-dark: #4A4A4A;
-            --text-light: #7A7A7A;
+            --callout-blue: #eef4ff; /* 復刻藍色資訊框 */
+            --callout-green: #ecf7ee; /* 復刻綠色小撇步框 */
         }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Helvetica Neue', Arial, 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            height: 100%;
-        }
-
-        /* 雙欄排版設定 */
-        .container {
-            display: flex;
-            width: 100%;
-        }
-
-        /* 左側地圖：固定不動 */
-        #map-container {
-            position: sticky;
-            top: 0;
-            width: 50vw;
-            height: 100vh;
-            background-color: var(--accent-pink);
-        }
-
-        #map {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* 右側圖文手帳區：可以滾動 */
-        #content {
-            width: 50vw;
-            padding: 40px;
-            box-sizing: border-box;
-            /* 隱藏滾動條但保持可滾動 */
-            -ms-overflow-style: none;  
-            scrollbar-width: none;  
-        }
-        #content::-webkit-scrollbar { 
-            display: none; 
-        }
-
-        /* 手帳卡片（章節）設計 */
-        .chapter {
-            min-height: 80vh;
-            margin-bottom: 50px;
-            padding: 30px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15);
-            position: relative;
-            transition: opacity 0.5s ease;
-            opacity: 0.3; /* 預設半透明，滑到時變清晰 */
-        }
+        body { margin: 0; padding: 40px; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-dark); }
+        h1 { color: var(--accent-brown); text-align: center; border-bottom: 2px solid var(--accent-brown); padding-bottom: 20px; }
         
-        .chapter.active {
-            opacity: 1;
-        }
+        /* 底色重點框樣式 */
+        .callout { padding: 15px 20px; border-radius: 8px; margin-bottom: 30px; font-size: 0.95rem; }
+        .callout.info { background-color: var(--callout-blue); border-left: 4px solid #3b82f6; }
+        .callout.tip { background-color: var(--callout-green); border-left: 4px solid #10b981; }
 
-        .chapter h2 {
-            color: var(--accent-brown);
-            font-size: 1.5rem;
-            margin-top: 0;
-            border-bottom: 2px solid var(--accent-yellow);
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        .chapter p {
-            line-height: 1.8;
-            color: var(--text-light);
-            font-size: 1rem;
-            letter-spacing: 0.05em;
-        }
-
-        /* 假照片區塊 */
-        .photo-placeholder {
-            width: 100%;
-            height: 250px;
-            background-color: var(--accent-pink);
-            border-radius: 8px;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-        }
-
-        /* 編輯按鈕（模擬） */
-        .edit-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: var(--bg-color);
-            border: 1px solid var(--accent-brown);
-            color: var(--accent-brown);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-        .chapter:hover .edit-btn {
-            opacity: 1;
-        }
-        .edit-btn:hover {
-            background-color: var(--accent-brown);
-            color: white;
-        }
-
-        /* 浮動上傳按鈕（模擬） */
-        .upload-fab {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 60px;
-            height: 60px;
-            background-color: var(--accent-brown);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5);
-            cursor: pointer;
-            font-size: 24px;
-            z-index: 1000;
-            transition: transform 0.2s;
-        }
-        .upload-fab:hover {
-            transform: scale(1.1);
-        }
-
-        /* 自訂地圖標記樣式 */
-        .custom-marker {
-            background-color: var(--accent-brown);
-            border: 3px solid white;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        @media (max-width: 768px) {
-            .container { flex-direction: column; }
-            #map-container { width: 100vw; height: 40vh; position: sticky; z-index: 10; }
-            #content { width: 100vw; padding: 20px; }
-            .chapter { min-height: auto; margin-bottom: 30px; }
-        }
+        /* 書櫃網格排版 */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        /* 旅程卡片 */
+        .trip-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(196, 169, 158, 0.2); transition: transform 0.3s; text-decoration: none; color: inherit; display: block; }
+        .trip-card:hover { transform: translateY(-5px); }
+        
+        /* 三格拼貼封面 (模擬比例) */
+        .cover-collage { display: flex; height: 200px; }
+        .cover-collage div { flex: 1; border-right: 2px solid white; background-color: var(--accent-brown); opacity: 0.8; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; }
+        .cover-collage div:last-child { border-right: none; }
+        
+        /* 卡片內容與表格 */
+        .card-content { padding: 20px; }
+        .card-content h3 { margin-top: 0; color: var(--accent-brown); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 15px; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; }
+        th { color: #888; width: 30%; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- 左側：地圖區塊 -->
-        <div id="map-container">
-            <div id="map"></div>
-        </div>
+    <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 手帳書櫃</h1>
 
-        <!-- 右側：內容區塊 -->
-        <div id="content">
-            
-            <section class="chapter active" id="ch-1" data-lat="22.5771" data-lng="120.3473" data-zoom="13">
-                <button class="edit-btn">編輯日記</button>
-                <h2>01. 啟程｜高雄小港機場</h2>
-                <div class="photo-placeholder">此處可放置啟程的機票或行李照片</div>
-                <p>帶著輕簡的行囊，準備再次感受另一座城市的呼吸。晨光下的機場總是充滿著期待的氛圍，不需要趕路，好好吃頓早餐，慢慢走向登機門。</p>
-            </section>
-
-            <section class="chapter" id="ch-2" data-lat="2.7456" data-lng="101.7072" data-zoom="12">
-                <button class="edit-btn">編輯日記</button>
-                <h2>02. 抵達｜吉隆坡國際機場 (KUL)</h2>
-                <div class="photo-placeholder">此處可放置飛機窗外或機場大廳照片</div>
-                <p>歷經幾個小時的飛行，濕熱的熱帶空氣迎面而來。機場的指標交錯著不同的語言，這是一座多元融合的城市，而我們的慢旅才正要開始。</p>
-            </section>
-
-            <section class="chapter" id="ch-3" data-lat="4.5975" data-lng="101.0901" data-zoom="14">
-                <button class="edit-btn">編輯日記</button>
-                <h2>03. 漫步｜怡保 (Ipoh)</h2>
-                <div class="photo-placeholder">此處可放置老街或白咖啡照片</div>
-                <p>斑駁的舊建築與安靜的巷弄，怡保的步調剛剛好。點了一杯溫潤的白咖啡，看著光影在騎樓間緩緩移動。生活，本該如此慢慢品味。</p>
-            </section>
-
-            <!-- 在這裡可以無限新增 section，只要填上對應的經緯度 -->
-            <section class="chapter" id="ch-4" data-lat="3.1578" data-lng="101.7116" data-zoom="14">
-                <button class="edit-btn">編輯日記</button>
-                <h2>04. 璀璨｜雙峰塔夜景</h2>
-                <div class="photo-placeholder">此處可放城市夜景照片或影片</div>
-                <p>夜幕低垂，城市的輪廓被燈光重新描繪。站在此刻，回想這一路的軌跡，每一段停留都有其獨特的溫度。</p>
-            </section>
-
-        </div>
+    <div class="callout info">
+        <strong>📚 總覽資訊：</strong> 點擊下方的旅程卡片，即可開啟該趟旅行的專屬「動態地圖手帳」。
     </div>
 
-    <!-- 右下角浮動上傳按鈕 -->
-    <div class="upload-fab" onclick="alert('這裡未來可以觸發照片/影片上傳的 Modal 或跳轉至 CMS 後台！')">+</div>
+    <div class="grid-container">
+        
+        <!-- 卡片 1：日本東北 -->
+        <a href="journal.html?trip=tohoku_2026" class="trip-card">
+            <div class="cover-collage">
+                <div>直式 3:4 照片</div>
+                <div>直式 3:4 照片</div>
+                <div>直式 3:4 照片</div>
+            </div>
+            <div class="card-content">
+                <h3>日本東北冬日慢旅</h3>
+                <table>
+                    <tr><th>天數</th><td>6 天 5 夜</td></tr>
+                    <tr><th>重點</th><td>藏王樹冰、銀山溫泉</td></tr>
+                    <tr><th>季節</th><td>2026 冬季</td></tr>
+                </table>
+            </div>
+        </a>
 
-    <!-- 引入 Leaflet 地圖套件 JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <script>
-        // 1. 初始化地圖 (預設視角為高雄)
-        const map = L.map('map', {
-            zoomControl: false // 為了畫面乾淨隱藏縮放按鈕，可依喜好開啟
-        }).setView([22.5771, 120.3473], 13);
+        <!-- 卡片 2：馬來西亞 -->
+        <a href="journal.html?trip=malaysia_2027" class="trip-card">
+            <div class="cover-collage">
+                <div>直式照 1</div>
+                <div>直式照 2</div>
+                <div>直式照 3</div>
+            </div>
+            <div class="card-content">
+                <h3>馬來西亞慢旅</h3>
+                <table>
+                    <tr><th>天數</th><td>5 天 4 夜</td></tr>
+                    <tr><th>重點</th><td>怡保白咖啡、吉隆坡雙峰塔</td></tr>
+                    <tr><th>季節</th><td>2027 春季</td></tr>
+                </table>
+            </div>
+        </a>
 
-        // 載入極簡風格的底圖 (替換為免金鑰的 Esri 淺灰階地圖)
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
-    maxZoom: 16
-}).addTo(map);
-
-        // 自訂圖示 (圓點)
-        const dotIcon = L.divIcon({
-            className: 'custom-marker',
-            iconSize: [16, 16],
-            iconAnchor: [8, 8]
-        });
-
-        // 儲存所有地圖標記與軌跡點
-        const markers = {};
-        const latlngs = [];
-
-        // 2. 收集所有章節的經緯度並畫在地上
-        const chapters = document.querySelectorAll('.chapter');
-        chapters.forEach(chapter => {
-            const id = chapter.id;
-            const lat = parseFloat(chapter.getAttribute('data-lat'));
-            const lng = parseFloat(chapter.getAttribute('data-lng'));
-            
-            // 建立標記
-            const marker = L.marker([lat, lng], {icon: dotIcon}).addTo(map);
-            markers[id] = marker;
-            latlngs.push([lat, lng]);
-        });
-
-        // 畫出移動軌跡線 (使用莫蘭迪棕色)
-        const polyline = L.polyline(latlngs, {
-            color: '#C4A99E', 
-            weight: 3, 
-            opacity: 0.6,
-            dashArray: '5, 10' // 虛線效果
-        }).addTo(map);
-
-        // 3. 使用 Intersection Observer 監聽滾動事件
-        const observerOptions = {
-            root: null,
-            rootMargin: '-40% 0px -60% 0px', // 當元素進入畫面上半部時觸發
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const chapter = entry.target;
-                    const lat = parseFloat(chapter.getAttribute('data-lat'));
-                    const lng = parseFloat(chapter.getAttribute('data-lng'));
-                    const zoom = parseInt(chapter.getAttribute('data-zoom'));
-
-                    // 將其他章節設為半透明，當前章節設為清晰
-                    document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
-                    chapter.classList.add('active');
-
-                    // 地圖平滑飛行到該座標
-                    map.flyTo([lat, lng], zoom, {
-                        animate: true,
-                        duration: 1.5 // 飛行時間
-                    });
-                }
-            });
-        }, observerOptions);
-
-        // 綁定監聽器
-        chapters.forEach(chapter => observer.observe(chapter));
-    </script>
+    </div>
 
 </body>
 </html>
