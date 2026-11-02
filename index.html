@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫率 *•° ｜ 旅行手帳</title>
+    <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 旅行手帳</title>
     
     <!-- 引入 Leaflet 地圖套件 CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -226,12 +226,11 @@
             zoomControl: false // 為了畫面乾淨隱藏縮放按鈕，可依喜好開啟
         }).setView([22.5771, 120.3473], 13);
 
-        // 載入極簡風格的底圖 (CartoDB Positron，很適合搭配莫蘭迪色系)
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-            subdomains: 'abcd',
-            maxZoom: 20
-        }).addTo(map);
+        // 載入極簡風格的底圖 (替換為免金鑰的 Esri 淺灰階地圖)
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+    maxZoom: 16
+}).addTo(map);
 
         // 自訂圖示 (圓點)
         const dotIcon = L.divIcon({
