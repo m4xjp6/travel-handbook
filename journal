@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>讀取中... ｜ 電子旅行手帳</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* 樣式與你之前確認過的一模一樣，無更動 */
+        :root {
+            --bg-color: #FDFBF7;
+            --accent-yellow: #FFE599;
+            --accent-brown: #C4A99E;
+            --accent-pink: #E5D1C7;
+            --text-dark: #4A4A4A;
+            --text-light: #7A7A7A;
+        }
+        body, html { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-dark); height: 100%; }
+        .container { display: flex; width: 100%; }
+        #map-container { position: sticky; top: 0; width: 50vw; height: 100vh; background-color: var(--accent-pink); }
+        #map { width: 100%; height: 100%; }
+        #content { width: 50vw; padding: 40px; box-sizing: border-box; -ms-overflow-style: none; scrollbar-width: none; }
+        #content::-webkit-scrollbar { display: none; }
+        .chapter { min-height: 80vh; margin-bottom: 50px; padding: 30px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15); position: relative; transition: opacity 0.5s ease; opacity: 0.3; }
+        .chapter.active { opacity: 1; }
+        .chapter h2 { color: var(--accent-brown); font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
+        .chapter p { line-height: 1.8; color: var(--text-light); font-size: 1rem; letter-spacing: 0.05em; }
+        .photo-placeholder { width: 100%; height: 250px; background-color: var(--accent-pink); border-radius: 8px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; letter-spacing: 0.1em; }
+        .edit-btn { position: absolute; top: 20px; right: 20px; background-color: var(--bg-color); border: 1px solid var(--accent-brown); color: var(--accent-brown); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; opacity: 0; transition: all 0.3s; }
+        .chapter:hover .edit-btn { opacity: 1; }
+        .edit-btn:hover { background-color: var(--accent-brown); color: white; }
+        .upload-fab { position: fixed; bottom: 40px; right: 40px; width: 60px; height: 60px; background-color: var(--accent-brown); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5); cursor: pointer; font-size: 24px; z-index: 1000; transition: transform 0.2s; }
+        .upload-fab:hover { transform: scale(1.1); }
+        .custom-marker { background-color: var(--accent-brown); border: 3px solid white; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        @media (max-width: 768px) { .container { flex-direction: column; } #map-container { width: 100vw; height: 40vh; position: sticky; z-index: 10; } #content { width: 100vw; padding: 20px; } .chapter { min-height: auto; margin-bottom: 30px; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="map-container"><div id="map"></div></div>
+        <!-- 內容區塊將由 JavaScript 動態生成 -->
+        <div id="content"></div>
+    </div>
+    <div class="upload-fab" onclick="alert('這裡未來可以觸發照片/影片上傳的 Modal！')">+</div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // 1. 取得網址列的 trip 參數 (例如 journal.html?trip=malaysia)
+        const urlParams = new URLSearchParams(window.location.search);
+        const tripId = urlParams.get('trip') || 'malaysia'; // 預設載入 malaysia
+
+        // 2. 動態去抓取對應的 JSON 資料檔
+        fetch(`data/${tripId}.json`)
+            .then(response => {
+                if (!response.ok) throw new Error('找不到該旅程的資料檔');
+                return response.json();
+            })
+            .then(data => {
+                document.title = data.tripTitle; // 更新網頁標題
+                buildPage(data.chapters);        // 建立圖文區塊
+                initMap(data.chapters);          // 初始化地圖與軌跡
+            })
+            .catch(error => {
+                document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
+            });
+
+        // 3. 將 JSON 資料轉換為 HTML 的函數
+        function buildPage(chaptersData) {
+            const contentDiv = document.getElementById('content');
+            
+            chaptersData.forEach((ch, index) => {
+                const section = document.createElement('section');
+                section.className = `chapter ${index === 0 ? 'active' : ''}`;
+                section.setAttribute('data-lat', ch.lat);
+                section.setAttribute('data-lng', ch.lng);
+                section.setAttribute('data-zoom', ch.zoom);
+
+                section.innerHTML = `
+                    <button class="edit-btn">編輯日記</button>
+                    <h2>${ch.title}</h2>
+                    <div class="photo-placeholder">${ch.mediaPlaceholder}</div>
+                    <p>${ch.content}</p>
+                `;
+                contentDiv.appendChild(section);
+            });
+        }
+
+        // 4. 初始化地圖與滾動監聽的函數
+        function initMap(chaptersData) {
+            // 預設視角設定為第一筆資料的座標
+            const firstPoint = chaptersData[0];
+            const map = L.map('map', { zoomControl: false }).setView([firstPoint.lat, firstPoint.lng], firstPoint.zoom);
+
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+                maxZoom: 16
+            }).addTo(map);
+
+            const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
+            const latlngs = [];
+
+            // 標記所有座標點與軌跡
+            chaptersData.forEach(ch => {
+                L.marker([ch.lat, ch.lng], {icon: dotIcon}).addTo(map);
+                latlngs.push([ch.lat, ch.lng]);
+            });
+
+            L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.6, dashArray: '5, 10' }).addTo(map);
+
+            // 綁定 Intersection Observer (滾動監聽)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const chapter = entry.target;
+                        const lat = parseFloat(chapter.getAttribute('data-lat'));
+                        const lng = parseFloat(chapter.getAttribute('data-lng'));
+                        const zoom = parseInt(chapter.getAttribute('data-zoom'));
+
+                        document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+                        chapter.classList.add('active');
+
+                        map.flyTo([lat, lng], zoom, { animate: true, duration: 1.5 });
+                    }
+                });
+            }, { root: null, rootMargin: '-40% 0px -60% 0px', threshold: 0 });
+
+            document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
+        }
+    </script>
+</body>
+</html>
