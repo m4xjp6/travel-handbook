@@ -9,47 +9,45 @@
             --bg-color: #FDFBF7;
             --accent-brown: #C4A99E;
             --text-dark: #4A4A4A;
-            --callout-blue: #eef4ff; /* 復刻藍色資訊框 */
-            --callout-green: #ecf7ee; /* 復刻綠色小撇步框 */
+            --callout-blue: #eef4ff;
         }
         body { margin: 0; padding: 40px; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-dark); }
         h1 { color: var(--accent-brown); text-align: center; border-bottom: 2px solid var(--accent-brown); padding-bottom: 20px; }
         
-        /* 底色重點框樣式 */
-        .callout { padding: 15px 20px; border-radius: 8px; margin-bottom: 30px; font-size: 0.95rem; }
-        .callout.info { background-color: var(--callout-blue); border-left: 4px solid #3b82f6; }
-        .callout.tip { background-color: var(--callout-green); border-left: 4px solid #10b981; }
-
-        /* 書櫃網格排版 */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .callout { padding: 15px 20px; border-radius: 8px; margin-bottom: 30px; font-size: 0.95rem; background-color: var(--callout-blue); border-left: 4px solid #3b82f6; }
         
-        /* 旅程卡片 */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .trip-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(196, 169, 158, 0.2); transition: transform 0.3s; text-decoration: none; color: inherit; display: block; }
         .trip-card:hover { transform: translateY(-5px); }
         
-        /* 三格拼貼封面 (模擬比例) */
         .cover-collage { display: flex; height: 200px; }
         .cover-collage div { flex: 1; border-right: 2px solid white; background-color: var(--accent-brown); opacity: 0.8; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; }
         .cover-collage div:last-child { border-right: none; }
         
-        /* 卡片內容與表格 */
         .card-content { padding: 20px; }
         .card-content h3 { margin-top: 0; color: var(--accent-brown); }
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 15px; }
         th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; }
         th { color: #888; width: 30%; }
+
+        /* 密碼設定彈窗樣式 */
+        #netlify-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 350px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); text-align: center; }
+        .modal-content input { width: 100%; padding: 10px; margin: 15px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; }
+        .modal-content button { background: var(--accent-brown); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; width: 100%; }
     </style>
+    <!-- 引入 Netlify Identity Widget 套件，用來處理密碼設定與登入彈窗 -->
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
-    <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 手帳書櫃</h1>
+    <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
 
-    <div class="callout info">
-        <strong>📚 總覽資訊：</strong> 點擊下方的旅程卡片，即可開啟該趟旅行的專屬「動態地圖手帳」。
+    <div class="callout">
+        <strong>📚 總覽資訊：</strong> 點擊下方的旅程卡片，即可開啟該趟旅行的專屬「動態地圖手帳」。點擊右上角可進行管理。
     </div>
 
     <div class="grid-container">
-        
         <!-- 卡片 1：日本東北 -->
         <a href="journal.html?trip=tohoku_2026" class="trip-card">
             <div class="cover-collage">
@@ -58,7 +56,7 @@
                 <div>直式 3:4 照片</div>
             </div>
             <div class="card-content">
-                <h3>日本東北冬日漫旅</h3>
+                <h3>日本東北冬日慢旅</h3>
                 <table>
                     <tr><th>天數</th><td>8 天 7 夜</td></tr>
                     <tr><th>重點</th><td>藏王樹冰、銀山溫泉、狐狸村</td></tr>
@@ -83,8 +81,27 @@
                 </table>
             </div>
         </a>
-
     </div>
 
+    <!-- 內建 Netlify 驗證攔截腳本 -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+        
+        // 當你點擊信件連結進來時，自動攔截並彈出「設定密碼」的視窗！
+        window.netlifyIdentity.on("invite", token => {
+          window.netlifyIdentity.open();
+          window.netlifyIdentity.on("signup", user => {
+            document.location.href = "/admin/";
+          });
+        });
+      }
+    </script>
 </body>
 </html>
