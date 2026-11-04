@@ -18,9 +18,9 @@ collections:
         name: "days"
         widget: "list"
         fields:
-          - {label: "天數標籤", name: "day", widget: "string", hint: "例如: Day 01, Day 05"}
-          - {label: "當日主題標題", name: "dayTitle", widget: "string", hint: "例如: 走進日本三景的水墨畫！"}
-          - {label: "是否為行程實測", name: "isFieldTest", widget: "boolean", default: false, required: false, hint: "打勾後會在標題自動加上【行程實測】"}
+          - {label: "天數標籤", name: "day", widget: "string"}
+          - {label: "當日主題標題", name: "dayTitle", widget: "string"}
+          - {label: "是否為行程實測", name: "isFieldTest", widget: "boolean", default: false, required: false}
           - label: "章節內容"
             name: "chapters"
             widget: "list"
@@ -29,6 +29,6 @@ collections:
               - {label: "緯度 (Lat)", name: "lat", widget: "number"}
               - {label: "經度 (Lng)", name: "lng", widget: "number"}
               - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", default: 13}
-              - {label: "標題", name: "title", widget: "string", hint: "格式：01. 動作/亮點｜地點與細節"}
+              - {label: "標題", name: "title", widget: "string"}
               - {label: "圖片/佔位文字", name: "mediaPlaceholder", widget: "string", required: false}
-              - {label: "內文 (支援 HTML/Markdown)", name: "content", widget: "text"}
+              - {label: "內文", name: "content", widget: "text"}
