@@ -83,24 +83,54 @@
         </a>
     </div>
 
-
-
-    <!-- 內建 Netlify 驗證攔截腳本 -->
+    <!-- 內建 Netlify 驗證攔截與右下角管理按鈕腳本 -->
     <script>
       if (window.netlifyIdentity) {
+        // 初始化並綁定 Netlify 應用程式網址，確保靜態頁面也能正確對應驗證
+        window.netlifyIdentity.init({
+          APIUrl: "https://gentle-buttercream-d75e97.netlify.app/.netlify/identity"
+        });
+
         window.netlifyIdentity.on("init", user => {
-          if (!user) {
+          if (user) {
+            // 如果已經登入，自動在右下角建立一個「管理／新增手帳」的快捷按鈕
+            const adminBtn = document.createElement('div');
+            adminBtn.innerHTML = `
+              <a href="https://gentle-buttercream-d75e97.netlify.app/admin/" target="_blank" style="
+                position: fixed;
+                bottom: 24px;
+                right: 24px;
+                background-color: #C4A99E;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 30px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                font-size: 14px;
+                z-index: 9999;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                cursor: pointer;
+              ">
+                ✏️ 管理／新增手帳
+              </a>
+            `;
+            document.body.appendChild(adminBtn);
+          } else {
+            // 若未登入，點擊登入後自動導向後台
             window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
+              document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
             });
           }
         });
         
-        // 當你點擊信件連結進來時，自動攔截並彈出「設定密碼」的視窗！
+        // 當點擊信件連結進來時，自動攔截並彈出「設定密碼」的視窗
         window.netlifyIdentity.on("invite", token => {
           window.netlifyIdentity.open();
           window.netlifyIdentity.on("signup", user => {
-            document.location.href = "/admin/";
+            document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
           });
         });
       }
