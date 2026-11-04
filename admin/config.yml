@@ -1,8 +1,8 @@
 backend:
-  name: github
-  repo: m4xjp6/travel-handbook
+  name: git-gateway
   branch: main
-  site_domain: gentle-buttercream-d75e97.netlify.app
+  identity_url: "https://gentle-buttercream-d75e97.netlify.app/.netlify/identity"
+  gateway_url: "https://gentle-buttercream-d75e97.netlify.app/.netlify/git"
 
 media_folder: "images"
 public_folder: "/images"
