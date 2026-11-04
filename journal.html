@@ -356,4 +356,48 @@
             }
 
             const coordsString = latlngs.map(pt => `${pt[1]},${pt[0]}`).join(';');
-            const osrm
+            const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${coordsString}?overview=full&geometries=geojson`;
+
+            fetch(osrmUrl)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                        const fullRouteCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+                        routeLine = L.polyline(fullRouteCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
+                        
+                        const waypoints = data.waypoints;
+                        if(waypoints && waypoints.length === latlngs.length) {
+                            const segmentIndices = [0]; 
+                            const totalPoints = fullRouteCoords.length;
+                            
+                            for(let i=1; i<latlngs.length - 1; i++) {
+                                segmentIndices.push(Math.floor((i / (latlngs.length - 1)) * totalPoints));
+                            }
+                            segmentIndices.push(totalPoints - 1);
+
+                            for (let i = 0; i < segmentIndices.length - 1; i++) {
+                                const startIdx = segmentIndices[i];
+                                const endIdx = segmentIndices[i+1];
+                                const forwardSegment = fullRouteCoords.slice(startIdx, endIdx + 1);
+                                
+                                routeSegments[`${i}-${i+1}`] = forwardSegment;
+                                routeSegments[`${i+1}-${i}`] = [...forwardSegment].reverse();
+                            }
+                        }
+                    } else {
+                        routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
+                    }
+                    if (chaptersList.length > 0) {
+                        map.setView([chaptersList[0].lat, chaptersList[0].lng], 12, { animate: true });
+                    }
+                })
+                .catch(() => {
+                    routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
+                    if (chaptersList.length > 0) {
+                        map.setView([chaptersList[0].lat, chaptersList[0].lng], 12, { animate: true });
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
