@@ -32,5 +32,5 @@ collections:
               - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
               - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
               - {label: "標題", name: "title", widget: "string"}
-              - {label: "圖片/佔位文字", name: "mediaPlaceholder", widget: "string", required: false}
+              - {label: "照片或影片", name: "mediaPlaceholder", widget: "image", required: false, hint: "可直接從電腦上傳照片或影片"}
               - {label: "內文", name: "content", widget: "text"}
