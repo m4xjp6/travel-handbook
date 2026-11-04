@@ -86,7 +86,7 @@
         /* 文章內容容器 */
         #content { padding: 30px 40px 60px 40px; }
 
-        /* 每日大標題橫幅：統一標籤格式 */
+        /* 每日大標題橫幅：完美統一兩個半透明橢圓標籤的尺寸與字體 */
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
@@ -98,11 +98,11 @@
         .day-banner-header {
             display: flex;
             align-items: center;
-            gap: 8px; /* 兩個標籤之間的間距 */
+            gap: 8px;
             margin-bottom: 8px;
         }
         
-        /* 讓 Day 標籤與行程實測徽章擁有完全相同的尺寸、字體大小與外框格式 */
+        /* 讓 Day 標籤與行程實測徽章共用同一組精確的字體與大小格式 */
         .day-banner .day-badge,
         .day-banner .field-test-badge {
             display: inline-block;
@@ -110,7 +110,7 @@
             color: white;
             padding: 4px 12px;
             border-radius: 12px;
-            font-size: 0.8rem; /* 統一字體大小 */
+            font-size: 0.8rem;
             letter-spacing: 0.08em;
             font-weight: bold;
         }
@@ -268,7 +268,6 @@
                 const banner = document.createElement('div');
                 banner.className = 'day-banner';
                 
-                // 獨立渲染標籤：只有當 isFieldTest 為 true 時才顯示【行程實測】小徽章
                 let fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
 
                 banner.innerHTML = `
