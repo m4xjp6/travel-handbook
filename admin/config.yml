@@ -1,17 +1,19 @@
 backend:
   name: git-gateway
-  branch: main # 你的 GitHub 預設分支名稱
+  branch: main
 
-# 圖片上傳後會自動存放在這個資料夾中
-media_folder: "images" 
+media_folder: "images"
 public_folder: "/images"
 
 collections:
   - name: "trips"
     label: "旅程手帳"
-    folder: "data" # 對應你剛才建立的 data 資料夾
+    folder: "data"
     create: true
-    slug: "{{slug}}"
+    format: "json"
+    extension: "json"
+    identifier_field: "tripId"
+    slug: "{{tripId}}"
     fields:
       - {label: "旅程代號 (英文)", name: "tripId", widget: "string", hint: "例如: tohoku_2026"}
       - {label: "旅程標題", name: "tripTitle", widget: "string", hint: "例如: °•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 日本東北冬日漫旅"}
@@ -24,5 +26,5 @@ collections:
           - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float", hint: "例如: 140.9169"}
           - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
           - {label: "標題", name: "title", widget: "string", hint: "例如: 01. 降落｜仙台國際機場"}
-          - {label: "照片或影片", name: "mediaPlaceholder", widget: "image", hint: "可直接從電腦上傳照片！"}
+          - {label: "照片或影片", name: "mediaPlaceholder", widget: "image", required: false, hint: "可直接從電腦上傳照片（可先留空）"}
           - {label: "手帳內文", name: "content", widget: "text"}
