@@ -7,32 +7,28 @@ public_folder: "/images"
 
 collections:
   - name: "trips"
-    label: "旅程手帳"
+    label: "旅遊手帳"
     folder: "data"
     create: true
-    format: "json"
-    extension: "json"
-    identifier_field: "tripId"
     slug: "{{tripId}}"
     fields:
-      - {label: "旅程代號 (英文)", name: "tripId", widget: "string", hint: "例如: tohoku_2026"}
-      - {label: "旅程標題", name: "tripTitle", widget: "string", hint: "例如: °•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 日本東北冬日漫旅 (8天7夜)"}
-      - label: "每日行程 (Day 01 ~ Day 08)"
+      - {label: "旅程 ID (英文)", name: "tripId", widget: "string"}
+      - {label: "旅程總標題", name: "tripTitle", widget: "string"}
+      - label: "天數日記列表"
         name: "days"
         widget: "list"
-        summary: "{{fields.day}} ｜ {{fields.dayTitle}}"
         fields:
-          - {label: "天數標籤", name: "day", widget: "string", default: "Day 01", hint: "例如: Day 01、Day 02 ... Day 08"}
-          - {label: "當日主題標題", name: "dayTitle", widget: "string", hint: "例如: 南部人追雪去！高雄直飛成田轉新幹線"}
-          - label: "當日章節內容"
+          - {label: "天數標籤", name: "day", widget: "string", hint: "例如: Day 01, Day 05"}
+          - {label: "當日主題標題", name: "dayTitle", widget: "string", hint: "例如: 走進日本三景的水墨畫！"}
+          - {label: "是否為行程實測", name: "isFieldTest", widget: "boolean", default: false, required: false, hint: "打勾後會在標題自動加上【行程實測】"}
+          - label: "章節內容"
             name: "chapters"
             widget: "list"
-            summary: "{{fields.title}}"
             fields:
-              - {label: "章節 ID", name: "id", widget: "string", hint: "例如: d1-ch1"}
-              - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float", hint: "例如: 38.2486"}
-              - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float", hint: "例如: 140.3275"}
-              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
-              - {label: "標題", name: "title", widget: "string", hint: "例如: 05:40｜KKday專車與小港機場起飛"}
-              - {label: "照片或預留文字", name: "mediaPlaceholder", widget: "image", required: false}
-              - {label: "手帳內文 (支援 HTML 底色框)", name: "content", widget: "text"}
+              - {label: "章節 ID", name: "id", widget: "string"}
+              - {label: "緯度 (Lat)", name: "lat", widget: "number"}
+              - {label: "經度 (Lng)", name: "lng", widget: "number"}
+              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", default: 13}
+              - {label: "標題", name: "title", widget: "string", hint: "格式：01. 動作/亮點｜地點與細節"}
+              - {label: "圖片/佔位文字", name: "mediaPlaceholder", widget: "string", required: false}
+              - {label: "內文 (支援 HTML/Markdown)", name: "content", widget: "text"}
