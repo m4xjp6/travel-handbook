@@ -1,42 +1,35 @@
-{
-    "tripId": "tohoku_2026",
-    "tripTitle": "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 日本東北冬日慢旅",
-    "chapters": [
-        {
-            "id": "ch-1",
-            "lat": 38.1397,
-            "lng": 140.9169,
-            "zoom": 12,
-            "title": "01. 降落｜成田國際機場",
-            "mediaPlaceholder": "此處可放抵達機場的照片",
-            "content": "帶著幫家人打理好一切的「新手導遊」心情，終於順利抵達。一出機場，冷空氣瞬間讓思緒變得清晰。"
-        },
-        {
-            "id": "ch-2",
-            "lat": 38.1424,
-            "lng": 140.3951,
-            "zoom": 13,
-            "title": "02. 驚嘆｜山形藏王樹冰",
-            "mediaPlaceholder": "此處可放纜車往外看的樹冰雪景影片",
-            "content": "搭乘纜車緩緩上升，窗外是一片白雪皚皚。那些被冰雪包覆的樹木像是一個個雪怪，大自然的鬼斧神工令人屏息。"
-        },
-        {
-            "id": "ch-3",
-            "lat": 37.9942,
-            "lng": 140.5488,
-            "zoom": 14,
-            "title": "03. 療癒｜宮城藏王狐狸村",
-            "mediaPlaceholder": "此處可放狐狸在雪地裡睡覺的照片",
-            "content": "毛茸茸的狐狸在雪地裡縮成一團熟睡，或是好奇地盯著旅人看。這裡的步調很慢，心也被這些小動物給融化了。"
-        },
-        {
-            "id": "ch-4",
-            "lat": 38.5706,
-            "lng": 140.5312,
-            "zoom": 15,
-            "title": "04. 穿越｜銀山溫泉",
-            "mediaPlaceholder": "此處可放銀山溫泉街夜景、煤氣燈照片",
-            "content": "夜幕降臨，溫泉街兩旁的煤氣燈亮起，雪花靜靜飄落在木造的傳統旅館上，彷彿走進了神隱少女的奇幻世界。"
-        }
-    ]
-}
+---
+tripId: tohoku_2026
+tripTitle: °•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 日本東北冬日漫旅
+chapters:
+  - zoom: 13
+    id: ch-1
+    lat: 22.5771
+    lng: 120.3473
+    title: 01. 啟程｜高雄小港機場出發
+    content: 帶著輕簡的行囊，搭乘 KKday 專車摸黑出發，準備展開三千公里的雪國旅程。搭乘 AirAsia FD234
+      直飛成田，揮別熱情的太陽，準備迎接零下北國。
+    mediaPlaceholder: https://www.instagram.com/p/DTSqKyrD06V/
+  - zoom: 12
+    id: ch-2
+    lat: 35.7719
+    lng: 137
+    title: 02. 抵達｜成田機場與 Skyliner 疾走
+    content: 抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵，儲存體力。
+    mediaPlaceholder: https://www.instagram.com/p/DTSqKyrD06V/
+  - zoom: 13
+    id: ch-3
+    lat: 37.6967
+    lng: 140.4636
+    title: 03. 疾行｜東北新幹線翼號與福島奇觀
+    content: 搭乘東北新幹線「翼號 (Tsubasa)」直奔山形。窗外的景色也漸漸被白雪覆蓋。
+    mediaPlaceholder: https://www.instagram.com/p/DTSqKyrD06V/
+  - zoom: 13
+    id: ch-4
+    lat: 38.2404
+    lng: 140.3299
+    title: 04. 抵達｜山形大都會飯店與五十番中華料理
+    content: 零秒入住車站直結的 Hotel Metropolitan
+      Yamagata。深夜在山形五十番飯店享用充滿鍋氣的炒飯與炒豆苗，為第一天的極凍冒險畫下完美句點。
+    mediaPlaceholder: https://www.instagram.com/p/DTSqKyrD06V/
+---
