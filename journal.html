@@ -86,7 +86,7 @@
         /* 文章內容容器 */
         #content { padding: 30px 40px 60px 40px; }
 
-        /* 每日大標題橫幅 */
+        /* 每日大標題橫幅：完美呈現圖二的標籤設計 */
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
@@ -95,6 +95,12 @@
             margin: 20px 0 30px 0;
             box-shadow: 0 4px 15px rgba(196, 169, 158, 0.25);
         }
+        .day-banner-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
         .day-banner .day-badge {
             display: inline-block;
             background: rgba(255, 255, 255, 0.25);
@@ -102,8 +108,17 @@
             border-radius: 12px;
             font-size: 0.8rem;
             letter-spacing: 0.08em;
-            margin-bottom: 8px;
             font-weight: bold;
+        }
+        .day-banner .field-test-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.35);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
         }
         .day-banner h1 {
             margin: 0;
@@ -258,15 +273,15 @@
                 const banner = document.createElement('div');
                 banner.className = 'day-banner';
                 
-                // 動態判斷：如果後台勾選了 isFieldTest，就在主題標題後方自動補上 【行程實測】
-                let fullTitle = dayObj.dayTitle || dayObj.day;
-                if (dayObj.isFieldTest && !fullTitle.includes('行程實測')) {
-                    fullTitle += '【行程實測】';
-                }
+                // 獨立渲染標籤：只有當 isFieldTest 為 true 時才顯示【行程實測】小徽章
+                let fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
 
                 banner.innerHTML = `
-                    <div class="day-badge">${dayObj.day}</div>
-                    <h1>${fullTitle}</h1>
+                    <div class="day-banner-header">
+                        <div class="day-badge">${dayObj.day}</div>
+                        ${fieldTestBadgeHTML}
+                    </div>
+                    <h1>${dayObj.dayTitle || dayObj.day}</h1>
                 `;
                 contentDiv.appendChild(banner);
 
