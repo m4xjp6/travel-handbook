@@ -223,6 +223,66 @@
           "content": "緩步走回飯店，褪去厚重衣裳泡進天然溫泉大浴場中，讓熱騰騰的泉水放鬆緊繃的肌肉，完美結束充滿驚奇與美味的一天。準備迎接明天日本三景「松島」的到來！"
         }
       ]
+    },
+    {
+      "day": "Day 05",
+      "dayTitle": "走進日本三景的水墨畫！絕美遊船，探訪伊達政宗的國寶古剎【行程實測】",
+      "chapters": [
+        {
+          "zoom": 14,
+          "id": "d5-ch1",
+          "lat": 38.2601,
+          "lng": 140.8824,
+          "title": "01. 出發｜搭乘 JR 仙石線前進松島海岸",
+          "mediaPlaceholder": "此處可放 JR 仙台站月台或仙石線列車照片",
+          "content": "早上在御宿野乃享用豐富的日式早餐後，步行至 JR 仙台站搭乘 08:30 發車的 JR 仙石線。大約 40 分鐘車程便順利抵達「松島海岸站」，沿途窗外風景逐漸轉為海景與林蔭，心情也跟著放鬆。<div class='callout-box callout-info'><div class='callout-icon'>🚆</div><div class='callout-content'><div class='callout-title'>JR 仙石線搭乘小撇步</div><ul><li><strong>IC 卡對應：</strong>松島海岸站支援 Suica、PASMO 等全國互通 IC 卡，直接嗶卡進出非常方便，不需要另外買紙本車票。</li><li><strong>座位選擇：</strong>去程建議坐在列車的<strong>右側</strong>，快到松島海岸站前可以搶先看到漂亮的海灣與島嶼風光！</li></ul></div></div>"
+        },
+        {
+          "zoom": 15,
+          "id": "d5-ch2",
+          "lat": 38.3739,
+          "lng": 141.0622,
+          "title": "02. 遊船｜松島灣觀光船漫遊水墨島嶼群",
+          "mediaPlaceholder": "此處可放松島灣遊船照片",
+          "content": "步行 7 分鐘穿過商店街來到碼頭。松島灣內散落著約 260 個被松樹覆蓋的奇岩小島，乘船穿梭其中就像走進活生生的水墨畫！<div class='callout-box callout-tip'><div class='callout-icon'>🛳️</div><div class='callout-content'><div class='callout-title'>松島遊船實用資訊</div><ul><li><strong>航線選擇：</strong>最經典的是繞行松島灣一周的航程，約 50 分鐘。</li><li><strong>"
+        },
+        {
+          "zoom": 16,
+          "id": "d5-ch3",
+          "lat": 38.3748,
+          "lng": 141.0665,
+          "title": "03. 美食｜松島魚市場大啖現烤牡蠣",
+          "mediaPlaceholder": "此處可放松島魚市場烤牡蠣照片",
+          "content": "結束一小時的浪漫遊船後，步行 10 分鐘來到在地饕客必訪的「松島魚市場」。一樓集結了現烤大牡蠣、生魚片丼飯等新鮮海味，現烤牡蠣鮮也沒有腥味，可惜烤久了沒有什麼汁，一口咬下還是超級滿足！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>松島魚市場用餐小提醒</div>尖峰時刻（11:30 - 13:00）座位區一位難求，建議採取分工合作，一人先找座位，其他人去排隊買烤牡蠣和海鮮丼！</div></div>"
+        },
+        {
+          "zoom": 16,
+          "id": "d5-ch4",
+          "lat": 38.3736,
+          "lng": 141.0592,
+          "title": "04. 歷史｜國寶古剎瑞嚴寺莊嚴巡禮",
+          "mediaPlaceholder": "此處可放瑞嚴寺杉樹林參道或本堂照片",
+          "content": "散步前往松島最具代表性的歷史名寺──瑞嚴寺。這是東北地區最著名的禪寺，也是江戶時代仙台藩祖「伊達政宗」的家族菩提寺。走進兩旁高聳巨大杉樹林的參道，肅穆氛圍讓人瞬間沉澱，本堂與庫裡的桃山樣式建築雕刻極具歷史價值。"
+        },
+        {
+          "zoom": 16,
+          "id": "d5-ch5",
+          "lat": 38.3721,
+          "lng": 141.0595,
+          "title": "05. 漫步｜結緣五大堂與朱紅色福浦橋",
+          "mediaPlaceholder": "此處可放五大堂結緣橋或福浦橋紅橋照片",
+          "content": "造訪建在海中小島上的松島地標「五大堂」，需跨越採用空隙結構的紅色木橋（結緣橋 / 剪戀橋 / 透橋），走在上面能微微看到下方海水讓人專注腳步。"
+        },
+        {
+          "zoom": 15,
+          "id": "d5-ch6",
+          "lat": 38.2635,
+          "lng": 140.8753,
+          "title": "06. 住宿｜仙台御宿野乃溫泉泡湯與宵夜",
+          "mediaPlaceholder": "此處可放御宿野乃溫泉飯店或宵夜拉麵照片",
+          "content": "搭乘夕陽時分的 JR 仙石線返回仙台站，晚餐在車站附近簡單解決後回飯店泡湯。今晚同樣以御宿野乃溫泉飯店的天然溫泉與免費宵夜醬油拉麵作為完美句點，帶著滿滿的暖意入眠。"
+        }
+      ]
     }
   ]
 }
