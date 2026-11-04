@@ -36,7 +36,7 @@
         .modal-content input { width: 100%; padding: 10px; margin: 15px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; }
         .modal-content button { background: var(--accent-brown); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; width: 100%; }
     </style>
-    <!-- 引入 Netlify Identity Widget 套件，用來處理密碼設定與登入彈窗 -->
+    <!-- 引入 Netlify Identity Widget 套件 -->
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
@@ -44,59 +44,62 @@
     <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
 
     <div class="callout">
-        <strong>📚 總覽資訊：</strong> 點擊下方的旅程卡片，即可開啟該趟旅行的專屬「動態地圖手帳」。點擊右上角可進行管理。
+        <strong>📚 總覽資訊：</strong> 點擊下方的旅程卡片，即可開啟該趟旅行的專屬「動態地圖手帳」。點擊右下角按鈕可進行管理。
     </div>
 
-    <div class="grid-container">
-        <!-- 卡片 1：日本東北 -->
-        <a href="journal.html?trip=tohoku_2026" class="trip-card">
-            <div class="cover-collage">
-                <div>直式 3:4 照片</div>
-                <div>直式 3:4 照片</div>
-                <div>直式 3:4 照片</div>
-            </div>
-            <div class="card-content">
-                <h3>日本東北冬季漫旅</h3>
-                <table>
-                    <tr><th>天數</th><td>9 天 8 夜</td></tr>
-                    <tr><th>重點</th><td>藏王樹冰、銀山溫泉、狐狸村</td></tr>
-                    <tr><th>季節</th><td>2026 冬季</td></tr>
-                </table>
-            </div>
-        </a>
-
-        <!-- 卡片 2：南洋星馬 -->
-        <a href="journal.html?trip=malaysia_2027" class="trip-card">
-            <div class="cover-collage">
-                <div>直式照 1</div>
-                <div>直式照 2</div>
-                <div>直式照 3</div>
-            </div>
-            <div class="card-content">
-                <h3>南洋星馬春季漫旅</h3>
-                <table>
-                    <tr><th>天數</th><td>11 天 10 夜</td></tr>
-                    <tr><th>重點</th><td>吉隆坡敘宴、又見馬六甲、星耀樟宜</td></tr>
-                    <tr><th>季節</th><td>2027 春季</td></tr>
-                </table>
-            </div>
-        </a>
+    <!-- 動態生成卡片的容器 -->
+    <div class="grid-container" id="trip-bookcase">
+        <!-- 卡片會由下方 JavaScript 自動讀取 JSON 填入 -->
     </div>
 
-    <!-- 內建 Netlify 驗證攔截與右下角管理按鈕腳本 -->
+    <!-- 自動讀取 JSON 與管理按鈕邏輯 -->
     <script>
-      if (window.netlifyIdentity) {
-        // 初始化並綁定 Netlify 應用程式網址，確保靜態頁面也能正確對應驗證
-        window.netlifyIdentity.init({
-          APIUrl: "https://gentle-buttercream-d75e97.netlify.app/.netlify/identity"
+        // 1. 在這裡填入你所有行程的代號（對應 data/ 資料夾底下的檔名，例如 tohoku_2026.json 填 "tohoku_2026"）
+        const tripSlugs = ["tohoku_2026", "malaysia_2027"];
+
+        const container = document.getElementById('trip-bookcase');
+
+        // 2. 迴圈讀取每個行程的 JSON 檔案並動態建立卡片
+        tripSlugs.forEach(slug => {
+            fetch(`data/${slug}.json`)
+                .then(response => {
+                    if (!response.ok) throw new Error('找不到檔案');
+                    return response.json();
+                })
+                .then(data => {
+                    const card = document.createElement('a');
+                    card.href = `journal.html?trip=${slug}`;
+                    card.className = 'trip-card';
+                    card.innerHTML = `
+                        <div class="cover-collage">
+                            <div>封面照 1</div>
+                            <div>封面照 2</div>
+                            <div>封面照 3</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>${data.title || '未命名旅程'}</h3>
+                            <table>
+                                <tr><th>天數</th><td>${data.days || ''}</td></tr>
+                                <tr><th>重點</th><td>${data.highlights || ''}</td></tr>
+                                <tr><th>季節</th><td>${data.season || ''}</td></tr>
+                            </table>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                })
+                .catch(err => console.log(`載入行程 ${slug} 失敗:`, err));
         });
 
-        window.netlifyIdentity.on("init", user => {
-          if (user) {
-            // 如果已經登入，自動在右下角建立一個「管理／新增手帳」的快捷按鈕
+        // 3. Netlify Identity 驗證與右下角常駐管理按鈕
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.init({
+                APIUrl: "https://gentle-buttercream-d75e97.netlify.app/.netlify/identity"
+            });
+
+            // 建立右下角常駐按鈕
             const adminBtn = document.createElement('div');
             adminBtn.innerHTML = `
-              <a href="https://gentle-buttercream-d75e97.netlify.app/admin/" target="_blank" style="
+              <button id="floating-admin-btn" style="
                 position: fixed;
                 bottom: 24px;
                 right: 24px;
@@ -108,32 +111,37 @@
                 font-family: 'Helvetica Neue', Arial, sans-serif;
                 font-size: 14px;
                 z-index: 9999;
-                text-decoration: none;
+                border: none;
+                cursor: pointer;
                 display: flex;
                 align-items: center;
                 gap: 6px;
-                cursor: pointer;
               ">
-                ✏️ 管理／新增手帳
-              </a>
+                ✏️ 管理手帳
+              </button>
             `;
             document.body.appendChild(adminBtn);
-          } else {
-            // 若未登入，點擊登入後自動導向後台
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
+
+            document.getElementById('floating-admin-btn').addEventListener('click', () => {
+                const user = window.netlifyIdentity.currentUser();
+                if (user) {
+                    window.open("https://gentle-buttercream-d75e97.netlify.app/admin/", "_blank");
+                } else {
+                    window.netlifyIdentity.open();
+                }
             });
-          }
-        });
-        
-        // 當點擊信件連結進來時，自動攔截並彈出「設定密碼」的視窗
-        window.netlifyIdentity.on("invite", token => {
-          window.netlifyIdentity.open();
-          window.netlifyIdentity.on("signup", user => {
-            document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
-          });
-        });
-      }
+
+            window.netlifyIdentity.on("login", () => {
+                document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
+            });
+            
+            window.netlifyIdentity.on("invite", token => {
+                window.netlifyIdentity.open();
+                window.netlifyIdentity.on("signup", user => {
+                    document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
+                });
+            });
+        }
     </script>
 </body>
 </html>
