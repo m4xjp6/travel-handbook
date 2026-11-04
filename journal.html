@@ -6,127 +6,196 @@
     <title>讀取中... ｜ 電子旅行手帳</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        /* 樣式與你之前確認過的一模一樣，無更動 */
         :root {
             --bg-color: #FDFBF7;
             --accent-yellow: #FFE599;
             --accent-brown: #C4A99E;
+            --accent-brown-dark: #a6897c;
             --accent-pink: #E5D1C7;
             --text-dark: #4A4A4A;
             --text-light: #7A7A7A;
         }
         body, html { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-dark); height: 100%; }
         .container { display: flex; width: 100%; }
+        
+        /* 左側地圖區塊 */
         #map-container { position: sticky; top: 0; width: 50vw; height: 100vh; background-color: var(--accent-pink); }
         #map { width: 100%; height: 100%; }
-        #content { width: 50vw; padding: 40px; box-sizing: border-box; -ms-overflow-style: none; scrollbar-width: none; }
-        #content::-webkit-scrollbar { display: none; }
-        .chapter { min-height: 80vh; margin-bottom: 50px; padding: 30px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15); position: relative; transition: opacity 0.5s ease; opacity: 0.3; }
+        
+        /* 右側內容區塊 */
+        #right-panel { width: 50vw; box-sizing: border-box; }
+        
+        /* 頂部常駐：返回首頁與天數切換導覽列 */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 16px 40px 12px 40px;
+            border-bottom: 1px solid rgba(196, 169, 158, 0.25);
+        }
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .back-link {
+            text-decoration: none;
+            color: var(--accent-brown-dark);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .trip-main-title {
+            margin: 0;
+            font-size: 1.15rem;
+            color: var(--accent-brown-dark);
+        }
+        
+        /* 天數按鈕列 (Day Tabs) */
+        .day-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+        }
+        .day-tab {
+            border: 1px solid var(--accent-brown);
+            background: white;
+            color: var(--accent-brown-dark);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .day-tab:hover {
+            background: var(--accent-pink);
+            color: white;
+        }
+        .day-tab.active {
+            background: var(--accent-brown);
+            color: white;
+            box-shadow: 0 2px 8px rgba(196, 169, 158, 0.4);
+        }
+
+        /* 文章內容容器 */
+        #content { padding: 30px 40px 60px 40px; }
+
+        /* 每日大標題橫幅 */
+        .day-banner {
+            background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
+            color: white;
+            padding: 18px 24px;
+            border-radius: 12px;
+            margin: 20px 0 30px 0;
+            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.25);
+        }
+        .day-banner .day-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+        .day-banner h1 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        /* 單一章節卡片 */
+        .chapter { min-height: 65vh; margin-bottom: 45px; padding: 30px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15); position: relative; transition: opacity 0.4s ease; opacity: 0.35; }
         .chapter.active { opacity: 1; }
-        .chapter h2 { color: var(--accent-brown); font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
-        .chapter p { line-height: 1.8; color: var(--text-light); font-size: 1rem; letter-spacing: 0.05em; }
-        .photo-placeholder { width: 100%; height: 250px; background-color: var(--accent-pink); border-radius: 8px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; letter-spacing: 0.1em; }
-        .edit-btn { position: absolute; top: 20px; right: 20px; background-color: var(--bg-color); border: 1px solid var(--accent-brown); color: var(--accent-brown); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; opacity: 0; transition: all 0.3s; }
-        .chapter:hover .edit-btn { opacity: 1; }
-        .edit-btn:hover { background-color: var(--accent-brown); color: white; }
-        .upload-fab { position: fixed; bottom: 40px; right: 40px; width: 60px; height: 60px; background-color: var(--accent-brown); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5); cursor: pointer; font-size: 24px; z-index: 1000; transition: transform 0.2s; }
-        .upload-fab:hover { transform: scale(1.1); }
+        .chapter h2 { color: var(--accent-brown); font-size: 1.4rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
+        .chapter-body { line-height: 1.8; color: var(--text-light); font-size: 1rem; letter-spacing: 0.04em; white-space: pre-line; }
+        .photo-placeholder { width: 100%; min-height: 220px; background-color: var(--accent-pink); border-radius: 8px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; letter-spacing: 0.1em; overflow: hidden; }
+        .photo-placeholder img { width: 100%; height: auto; display: block; object-fit: cover; }
+
+        /* 內建：四色重點底色框 (Callout Box) */
+        .callout-box { display: flex; align-items: flex-start; padding: 14px 18px; border-radius: 8px; margin: 16px 0; font-size: 0.92rem; line-height: 1.6; color: #333; white-space: normal; }
+        .callout-icon { font-size: 1.2rem; margin-right: 12px; flex-shrink: 0; }
+        .callout-content { flex-grow: 1; }
+        .callout-title { font-weight: bold; margin-bottom: 4px; }
+        .callout-warning { background-color: #fdf6ec; border-left: 4px solid #e6a23c; }
+        .callout-warning .callout-title { color: #b88230; }
+        .callout-tip { background-color: #f0f9eb; border-left: 4px solid #67c23a; }
+        .callout-tip .callout-title { color: #529b2e; }
+        .callout-info { background-color: #eef4ff; border-left: 4px solid #3b82f6; }
+        .callout-info .callout-title { color: #2563eb; }
+
         .custom-marker { background-color: var(--accent-brown); border: 3px solid white; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        @media (max-width: 768px) { .container { flex-direction: column; } #map-container { width: 100vw; height: 40vh; position: sticky; z-index: 10; } #content { width: 100vw; padding: 20px; } .chapter { min-height: auto; margin-bottom: 30px; } }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            #map-container { width: 100vw; height: 38vh; position: sticky; top: 0; z-index: 200; }
+            #right-panel { width: 100vw; }
+            .top-nav { top: 38vh; padding: 12px 20px; }
+            #content { padding: 20px; }
+            .chapter { min-height: auto; margin-bottom: 30px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- 左側地圖 -->
         <div id="map-container"><div id="map"></div></div>
-        <!-- 內容區塊將由 JavaScript 動態生成 -->
-        <div id="content"></div>
+        
+        <!-- 右側導覽列與日記內容 -->
+        <div id="right-panel">
+            <div class="top-nav">
+                <div class="nav-header">
+                    <a href="index.html" class="back-link">← 返回手帳書櫃</a>
+                    <h2 class="trip-main-title" id="trip-title">讀取中...</h2>
+                </div>
+                <div class="day-tabs" id="day-tabs"></div>
+            </div>
+            <div id="content"></div>
+        </div>
     </div>
-    <div class="upload-fab" onclick="alert('這裡未來可以觸發照片/影片上傳的 Modal！')">+</div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // 1. 取得網址列的 trip 參數 (例如 journal.html?trip=malaysia)
         const urlParams = new URLSearchParams(window.location.search);
-        const tripId = urlParams.get('trip') || 'malaysia'; // 預設載入 malaysia
+        const tripId = urlParams.get('trip') || 'tohoku_2026';
 
-        // 2. 動態去抓取對應的 JSON 資料檔
+        let map = null;
+        let markersLayer = null;
+        let routeLine = null;
+        let observer = null;
+        let normalizedDays = [];
+
         fetch(`data/${tripId}.json`)
             .then(response => {
                 if (!response.ok) throw new Error('找不到該旅程的資料檔');
                 return response.json();
             })
             .then(data => {
-                document.title = data.tripTitle; // 更新網頁標題
-                buildPage(data.chapters);        // 建立圖文區塊
-                initMap(data.chapters);          // 初始化地圖與軌跡
+                document.title = data.tripTitle || '電子旅行手帳';
+                document.getElementById('trip-title').textContent = data.tripTitle || '';
+
+                // 自動相容「按天分組 (days)」或「單層章節 (chapters)」兩種格式
+                if (Array.isArray(data.days) && data.days.length > 0) {
+                    normalizedDays = data.days;
+                } else if (Array.isArray(data.chapters)) {
+                    const grouped = {};
+                    data.chapters.forEach(ch => {
+                        const d = ch.day || 'Day 01';
+                        if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', chapters: [] };
+                        grouped[d].chapters.push(ch);
+                    });
+                    normalizedDays = Object.values(grouped);
+                }
+
+                initMap();
+                buildDayTabs();
+                renderDay('ALL'); // 預設顯示全部天數，亦可點選切換單日
             })
-            .catch(error => {
-                document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
-            });
-
-        // 3. 將 JSON 資料轉換為 HTML 的函數
-        function buildPage(chaptersData) {
-            const contentDiv = document.getElementById('content');
-            
-            chaptersData.forEach((ch, index) => {
-                const section = document.createElement('section');
-                section.className = `chapter ${index === 0 ? 'active' : ''}`;
-                section.setAttribute('data-lat', ch.lat);
-                section.setAttribute('data-lng', ch.lng);
-                section.setAttribute('data-zoom', ch.zoom);
-
-                section.innerHTML = `
-                    <button class="edit-btn">編輯日記</button>
-                    <h2>${ch.title}</h2>
-                    <div class="photo-placeholder">${ch.mediaPlaceholder}</div>
-                    <p>${ch.content}</p>
-                `;
-                contentDiv.appendChild(section);
-            });
-        }
-
-        // 4. 初始化地圖與滾動監聽的函數
-        function initMap(chaptersData) {
-            // 預設視角設定為第一筆資料的座標
-            const firstPoint = chaptersData[0];
-            const map = L.map('map', { zoomControl: false }).setView([firstPoint.lat, firstPoint.lng], firstPoint.zoom);
-
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
-                maxZoom: 16
-            }).addTo(map);
-
-            const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
-            const latlngs = [];
-
-            // 標記所有座標點與軌跡
-            chaptersData.forEach(ch => {
-                L.marker([ch.lat, ch.lng], {icon: dotIcon}).addTo(map);
-                latlngs.push([ch.lat, ch.lng]);
-            });
-
-            L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.6, dashArray: '5, 10' }).addTo(map);
-
-            // 綁定 Intersection Observer (滾動監聽)
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const chapter = entry.target;
-                        const lat = parseFloat(chapter.getAttribute('data-lat'));
-                        const lng = parseFloat(chapter.getAttribute('data-lng'));
-                        const zoom = parseInt(chapter.getAttribute('data-zoom'));
-
-                        document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
-                        chapter.classList.add('active');
-
-                        map.flyTo([lat, lng], zoom, { animate: true, duration: 1.5 });
-                    }
-                });
-            }, { root: null, rootMargin: '-40% 0px -60% 0px', threshold: 0 });
-
-            document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
-        }
-    </script>
-</body>
-</html>
+            .
