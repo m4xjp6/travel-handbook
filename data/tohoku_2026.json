@@ -163,6 +163,30 @@
           "content": "經歷近一小時的高速巴士車程，終於抵達被譽為溫泉系商務飯店的「御宿 野乃仙台」。全館榻榻米設計讓人進門就脫鞋，彷彿回到家般放鬆。晚上 21:30 泡完天然溫泉後，來碗免費提供的清爽醬油拉麵，為奔波的一天畫下最溫暖的句點！<div class='callout-box callout-tip'><div class='callout-icon'>🚌</div><div class='callout-content'><div class='callout-title'>山形 ⇔ 仙台 交通末班車警報</div><ul><li><strong>高速巴士：</strong>末班車 21:30（從山形車站前1號搭往廣瀨通一番町）。</li><li><strong>JR 仙山線：</strong>末班車 21:46。</li><li>錯過末班車，計程車至少 ¥15,000 起跳（不含夜間加成），千萬別跟荷包開玩笑！</li></ul></div></div>"
         }
       ]
+    },
+    {
+      "day": "Day 04",
+      "dayTitle": "融化了！藏王狐狸村一日遊：被百隻狐狸包圍的幸福時刻 🥰【行程實測】",
+      "chapters": [
+        {
+          "zoom": 15,
+          "id": "d4-ch1",
+          "lat": 38.201,
+          "lng": 140.8824,
+          "title": "01. 出發｜仙台站東口集合出發",
+          "mediaPlaceholder": "此處可放仙台站東口觀光巴士或HIS標誌照片",
+          "content": "早上 08:00 從飯店出發，慢慢散步至藍色 HIS 標誌的集合點「仙台站東口觀光巴士乘車點」。08:45 準時搭上暖氣充足的專車，一路前往宮城藏王狐狸村。"
+        },
+        {
+          "zoom": 15,
+          "id": "d4-ch2",
+          "lat": 37.9892,
+          "lng": 140.5471,
+          "title": "02. 體驗｜宮城藏王狐狸村雪中探險",
+          "mediaPlaceholder": "此處可放狐狸村雪景或放養狐狸照片",
+          "content": "抵達宮城藏王狐狸村。雖然因為風雪交加取消了抱狐狸體驗，但在雪白園區中看著成群狐狸在雪地裡穿梭，甚至調皮地咬了褲腳與衣襬，也是最近距離的深刻互動。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>狐狸村安全與參觀小提醒</div><ul><li><strong>絕對禁止觸摸：</strong>放養區狐狸具有野性，可能會咬人，只有在工作人員指導的體驗活動中才能觸碰。</li><li><strong>收好隨身物品：</strong>狐狸對懸掛物很有興趣，手機吊飾、手套繩務必收好。</li></ul></div></div>"
+        }
+      ]
     }
   ]
 }
