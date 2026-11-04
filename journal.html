@@ -86,7 +86,7 @@
         /* 文章內容容器 */
         #content { padding: 30px 40px 60px 40px; }
 
-        /* 每日大標題橫幅：完美統一兩個半透明橢圓標籤的尺寸與字體 */
+        /* 每日大標題橫幅：強制統一兩個半透明膠囊標籤的尺寸與格式 */
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
@@ -102,17 +102,22 @@
             margin-bottom: 8px;
         }
         
-        /* 讓 Day 標籤與行程實測徽章共用同一組精確的字體與大小格式 */
+        /* 嚴格對齊：強制相同的內距、字體、圓角與邊界尺寸 */
         .day-banner .day-badge,
         .day-banner .field-test-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background: rgba(255, 255, 255, 0.28);
             color: white;
             padding: 4px 12px;
+            height: 24px;
+            box-sizing: border-box;
             border-radius: 12px;
             font-size: 0.8rem;
             letter-spacing: 0.08em;
             font-weight: bold;
+            line-height: 1;
         }
 
         .day-banner h1 {
