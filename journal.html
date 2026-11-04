@@ -171,6 +171,7 @@
         let routeLine = null;
         let observer = null;
         let normalizedDays = [];
+        let routeSegments = {}; 
 
         fetch(`data/${tripId}.json`)
             .then(response => {
@@ -243,15 +244,15 @@
 
             markersLayer.clearLayers();
             if (routeLine) map.removeLayer(routeLine);
+            routeSegments = {};
 
             const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
             const latlngs = [];
+            let chaptersList = [];
 
             const daysToRender = dayKey === 'ALL'
                 ? normalizedDays
                 : normalizedDays.filter(d => d.day === dayKey);
-
-            let firstChapter = null;
 
             daysToRender.forEach(dayObj => {
                 const banner = document.createElement('div');
@@ -262,14 +263,16 @@
                 `;
                 contentDiv.appendChild(banner);
 
-                (dayObj.chapters || []).forEach((ch, idx) => {
-                    if (!firstChapter) firstChapter = ch;
-
+                (dayObj.chapters || []).forEach((ch) => {
+                    chaptersList.push(ch);
                     const section = document.createElement('section');
-                    section.className = `chapter ${firstChapter === ch ? 'active' : ''}`;
+                    section.className = `chapter ${chaptersList.length === 1 ? 'active' : ''}`;
+                    section.id = `section-${ch.id}`;
+                    section.setAttribute('data-id', ch.id);
                     section.setAttribute('data-lat', ch.lat);
                     section.setAttribute('data-lng', ch.lng);
                     section.setAttribute('data-zoom', ch.zoom || 13);
+                    section.setAttribute('data-index', chaptersList.length - 1);
 
                     let mediaHTML = '';
                     if (ch.mediaPlaceholder) {
@@ -295,24 +298,31 @@
             });
 
             if (latlngs.length > 0) {
-                // 自動串接 OSRM 導航 API 繪製真實道路/鐵道動態曲線
-                drawRoadRoute(latlngs, firstChapter);
+                drawRoadRoute(latlngs, chaptersList);
             }
+
+            let currentIndex = 0;
 
             observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const chapter = entry.target;
-                        const lat = parseFloat(chapter.getAttribute('data-lat'));
-                        const lng = parseFloat(chapter.getAttribute('data-lng'));
-                        const zoom = parseInt(chapter.getAttribute('data-zoom'));
+                        const newIndex = parseInt(chapter.getAttribute('data-index'));
+                        const targetLat = parseFloat(chapter.getAttribute('data-lat'));
+                        const targetLng = parseFloat(chapter.getAttribute('data-lng'));
+                        const targetZoom = parseInt(chapter.getAttribute('data-zoom'));
 
                         document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
                         chapter.classList.add('active');
 
-                        if (!isNaN(lat) && !isNaN(lng)) {
-                            map.flyTo([lat, lng], zoom, { animate: true, duration: 1.5 });
+                        if (!isNaN(targetLat) && !isNaN(targetLng)) {
+                            if (Math.abs(newIndex - currentIndex) === 1 && routeSegments[`${currentIndex}-${newIndex}`]) {
+                                 panAlongRoute(routeSegments[`${currentIndex}-${newIndex}`], targetZoom);
+                            } else {
+                                 map.flyTo([targetLat, targetLng], targetZoom, { animate: true, duration: 1.5 });
+                            }
                         }
+                        currentIndex = newIndex;
                     }
                 });
             }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
@@ -320,16 +330,34 @@
             document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
         }
 
-        // OSRM 動態道路軌跡繪製函數
-        function drawRoadRoute(latlngs, firstChapter) {
+        function panAlongRoute(coordsArray, finalZoom) {
+            if (!coordsArray || coordsArray.length === 0) return;
+            
+            let i = 0;
+            const totalDuration = 1200; 
+            const intervalTime = Math.max(10, totalDuration / coordsArray.length);
+            const movingZoom = Math.min(map.getZoom(), 12);
+            map.setZoom(movingZoom);
+
+            const panInterval = setInterval(() => {
+                if (i >= coordsArray.length) {
+                    clearInterval(panInterval);
+                    map.flyTo(coordsArray[coordsArray.length - 1], finalZoom, { animate: true, duration: 0.8 });
+                    return;
+                }
+                map.panTo(coordsArray[i], { animate: true, duration: intervalTime / 1000, easeLinearity: 1 });
+                i += Math.ceil(coordsArray.length / 30); 
+            }, intervalTime);
+        }
+
+        function drawRoadRoute(latlngs, chaptersList) {
             if (latlngs.length < 2) {
-                if (firstChapter) {
-                    map.flyTo([firstChapter.lat, firstChapter.lng], firstChapter.zoom || 13, { animate: true, duration: 1.2 });
+                if (chaptersList.length > 0) {
+                    map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
                 }
                 return;
             }
 
-            // OSRM 要求格式為 lon,lat;lon,lat...
             const coordsString = latlngs.map(pt => `${pt[1]},${pt[0]}`).join(';');
             const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${coordsString}?overview=full&geometries=geojson`;
 
@@ -337,22 +365,39 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-                        // OSRM 回傳的座標是 [lng, lat]，Leaflet 需要 [lat, lng]
-                        const routeCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
-                        routeLine = L.polyline(routeCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
+                        const fullRouteCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+                        routeLine = L.polyline(fullRouteCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
+                        
+                        const waypoints = data.waypoints;
+                        if(waypoints && waypoints.length === latlngs.length) {
+                            const segmentIndices = [0]; 
+                            const totalPoints = fullRouteCoords.length;
+                            
+                            for(let i=1; i<latlngs.length - 1; i++) {
+                                segmentIndices.push(Math.floor((i / (latlngs.length - 1)) * totalPoints));
+                            }
+                            segmentIndices.push(totalPoints - 1);
+
+                            for (let i = 0; i < segmentIndices.length - 1; i++) {
+                                const startIdx = segmentIndices[i];
+                                const endIdx = segmentIndices[i+1];
+                                const forwardSegment = fullRouteCoords.slice(startIdx, endIdx + 1);
+                                
+                                routeSegments[`${i}-${i+1}`] = forwardSegment;
+                                routeSegments[`${i+1}-${i}`] = [...forwardSegment].reverse();
+                            }
+                        }
                     } else {
-                        // 若導航 API 回傳失敗，自動改用直線備用
                         routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
                     }
-                    if (firstChapter) {
-                        map.flyTo([firstChapter.lat, firstChapter.lng], firstChapter.zoom || 13, { animate: true, duration: 1.2 });
+                    if (chaptersList.length > 0) {
+                        map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
                     }
                 })
                 .catch(() => {
-                    // 網路或跨域失敗時的備用方案
                     routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
-                    if (firstChapter) {
-                        map.flyTo([firstChapter.lat, firstChapter.lng], firstChapter.zoom || 13, { animate: true, duration: 1.2 });
+                    if (chaptersList.length > 0) {
+                        map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
                     }
                 });
         }
