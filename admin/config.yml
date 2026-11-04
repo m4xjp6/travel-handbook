@@ -16,15 +16,23 @@ collections:
     slug: "{{tripId}}"
     fields:
       - {label: "旅程代號 (英文)", name: "tripId", widget: "string", hint: "例如: tohoku_2026"}
-      - {label: "旅程標題", name: "tripTitle", widget: "string", hint: "例如: °•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 日本東北冬日漫旅"}
-      - label: "每日章節內容"
-        name: "chapters"
+      - {label: "旅程標題", name: "tripTitle", widget: "string", hint: "例如: °•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 日本東北冬日漫旅 (8天7夜)"}
+      - label: "每日行程 (Day 01 ~ Day 08)"
+        name: "days"
         widget: "list"
+        summary: "{{fields.day}} ｜ {{fields.dayTitle}}"
         fields:
-          - {label: "章節 ID", name: "id", widget: "string", hint: "例如: ch-1"}
-          - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float", hint: "例如: 38.1397"}
-          - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float", hint: "例如: 140.9169"}
-          - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
-          - {label: "標題", name: "title", widget: "string", hint: "例如: 01. 降落｜仙台國際機場"}
-          - {label: "照片或影片", name: "mediaPlaceholder", widget: "image", required: false, hint: "可直接從電腦上傳照片（可先留空）"}
-          - {label: "手帳內文", name: "content", widget: "text"}
+          - {label: "天數標籤", name: "day", widget: "string", default: "Day 01", hint: "例如: Day 01、Day 02 ... Day 08"}
+          - {label: "當日主題標題", name: "dayTitle", widget: "string", hint: "例如: 南部人追雪去！高雄直飛成田轉新幹線"}
+          - label: "當日章節內容"
+            name: "chapters"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "章節 ID", name: "id", widget: "string", hint: "例如: d1-ch1"}
+              - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float", hint: "例如: 38.2486"}
+              - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float", hint: "例如: 140.3275"}
+              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
+              - {label: "標題", name: "title", widget: "string", hint: "例如: 05:40｜KKday專車與小港機場起飛"}
+              - {label: "照片或預留文字", name: "mediaPlaceholder", widget: "image", required: false}
+              - {label: "手帳內文 (支援 HTML 底色框)", name: "content", widget: "text"}
