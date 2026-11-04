@@ -419,6 +419,22 @@
           "content": "吃飽後直接投入東京最有活力的「阿美橫丁」商店街。這裡叫賣聲此起彼落，是藥妝與零食補貨的一級戰區。在 OS Drug 瘋狂掃貨免稅藥品，再到二木的菓子採買大量伴手禮，大包小包地結束精彩的一天！<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>阿美橫丁購物小提醒</div><ul><li><strong>現金準備：</strong>部分藥妝店（如 OS Drug）或路面攤販僅收現金，建議準備充足日幣。</li><li><strong>護照隨身帶：</strong>藥妝免稅門檻為未稅滿 ¥5,000，記得備妥護照與免稅 QR code。</li></ul></div></div>"
         }
       ]
+    },
+    {
+      "isFieldTest": false,
+      "day": "Day 08",
+      "dayTitle": "穿梭東京的時光機！從昭和風情的日暮里夕陽，到浪漫璀璨的東京鐵塔",
+      "chapters": [
+        {
+          "zoom": 15,
+          "id": "d8-ch1",
+          "lat": 35.7278,
+          "lng": 139.771,
+          "title": "01. 散策｜日暮里纖維街與昭和下町風情",
+          "mediaPlaceholder": "此處可放日暮里纖維街布料行或復古街道照片",
+          "content": "搭乘京成本線短短 5 分鐘來到充滿下町風情的日暮里。東口著名的「纖維街」聚集了超過 80 間專賣布料與裁縫配件的批發店，價格親民是手作迷的天堂，讓媽媽也忍不住挑選了心儀的材料。"
+        }
+      ]
     }
   ]
 }
