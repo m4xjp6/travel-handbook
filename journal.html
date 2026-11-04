@@ -86,7 +86,7 @@
         /* 文章內容容器 */
         #content { padding: 30px 40px 60px 40px; }
 
-        /* 每日大標題橫幅：完美呈現圖二的標籤設計 */
+        /* 每日大標題橫幅：統一標籤格式 */
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
@@ -98,28 +98,23 @@
         .day-banner-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px; /* 兩個標籤之間的間距 */
             margin-bottom: 8px;
         }
-        .day-banner .day-badge {
+        
+        /* 讓 Day 標籤與行程實測徽章擁有完全相同的尺寸、字體大小與外框格式 */
+        .day-banner .day-badge,
+        .day-banner .field-test-badge {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.28);
+            color: white;
             padding: 4px 12px;
             border-radius: 12px;
-            font-size: 0.8rem;
+            font-size: 0.8rem; /* 統一字體大小 */
             letter-spacing: 0.08em;
             font-weight: bold;
         }
-        .day-banner .field-test-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.35);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            letter-spacing: 0.05em;
-        }
+
         .day-banner h1 {
             margin: 0;
             font-size: 1.25rem;
