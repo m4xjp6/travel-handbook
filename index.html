@@ -55,7 +55,39 @@
 
         // 2. 迴圈讀取每個行程的 JSON 檔案並動態建立卡片
         tripSlugs.forEach(slug => {
-            fetch(`data/${slug}.json`) .then(response => { if (!response.ok) throw new Error('找不到檔案'); return response.json(); }) .then(data => { // 抓取標題（對應你的 tripTitle，並把前面的裝飾符號稍微修飾或直接使用） let rawTitle = data.tripTitle \vert{}\vert{} "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 未命名旅程"; // 如果標題包含分隔符號，可以只取後半段或完整保留 const titleParts = rawTitle.split("｜"); const displayTitle = titleParts.length > 1 ? titleParts[1].trim() : rawTitle;  // 自動計算天數（根據 days 陣列長度） let totalDays = data.days && Array.isArray(data.days) ? data.days.length : 0; let daysStr = totalDays > 0 ? `${totalDays} 天 ${totalDays - 1} 夜` : "多日行程";  // 自動萃取重點（從前幾天的 dayTitle 中抓取關鍵字作為亮點摘要） let highlightsList = []; if (data.days && Array.isArray(data.days)) { data.days.forEach(d => { if (d.dayTitle) { highlightsList.push(d.dayTitle); } }); } // 取前三個亮點串接成重點摘要 let highlightsStr = highlightsList.length > 0 ? highlightsList.slice(0, 3).join('、') : "精彩豐富景點";  // 季節判斷（可以從標題或檔名推導，或預設顯示） let seasonStr = slug.includes("2026") ? "2026 冬季" : (slug.includes("2027") ? "2027 春季" : "精選季節");  const card = document.createElement('a'); card.href = `journal.html?trip=${slug}`;
+            fetch(`data/${slug}.json`)
+                .then(response => {
+                    if (!response.ok) throw new Error('找不到檔案');
+                    return response.json();
+                })
+                .then(data => {
+                    // 抓取標題（對應你的 tripTitle，並把前面的裝飾符號稍微修飾或直接使用）
+                    let rawTitle = data.tripTitle || "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 未命名旅程";
+                    // 如果標題包含分隔符號，可以只取後半段或完整保留
+                    const titleParts = rawTitle.split("｜");
+                    const displayTitle = titleParts.length > 1 ? titleParts[1].trim() : rawTitle;
+
+                    // 自動計算天數（根據 days 陣列長度）
+                    let totalDays = data.days && Array.isArray(data.days) ? data.days.length : 0;
+                    let daysStr = totalDays > 0 ? `${totalDays} 天 ${totalDays - 1} 夜` : "多日行程";
+
+                    // 自動萃取重點（從前幾天的 dayTitle 中抓取關鍵字作為亮點摘要）
+                    let highlightsList = [];
+                    if (data.days && Array.isArray(data.days)) {
+                        data.days.forEach(d => {
+                            if (d.dayTitle) {
+                                highlightsList.push(d.dayTitle);
+                            }
+                        });
+                    }
+                    // 取前三個亮點串接成重點摘要
+                    let highlightsStr = highlightsList.length > 0 ? highlightsList.slice(0, 3).join('、') : "精彩豐富景點";
+
+                    // 季節判斷（可以從標題或檔名推導，或預設顯示）
+                    let seasonStr = slug.includes("2026") ? "2026 冬季" : (slug.includes("2027") ? "2027 春季" : "精選季節");
+
+                    const card = document.createElement('a');
+                    card.href = `journal.html?trip=${slug}`;
                     card.className = 'trip-card';
                     card.innerHTML = `
                         <div class="cover-collage">
@@ -94,4 +126,41 @@
                 color: white;
                 padding: 12px 20px;
                 border-radius: 30px;
-                box-shadow: 0 4px 12px
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                font-size: 14px;
+                z-index: 9999;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+              ">
+                ✏️ 管理手帳
+              </button>
+            `;
+            document.body.appendChild(adminBtn);
+
+            document.getElementById('floating-admin-btn').addEventListener('click', () => {
+                const user = window.netlifyIdentity.currentUser();
+                if (user) {
+                    window.open("https://gentle-buttercream-d75e97.netlify.app/admin/", "_blank");
+                } else {
+                    window.netlifyIdentity.open();
+                }
+            });
+
+            window.netlifyIdentity.on("login", () => {
+                document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
+            });
+            
+            window.netlifyIdentity.on("invite", token => {
+                window.netlifyIdentity.open();
+                window.netlifyIdentity.on("signup", user => {
+                    document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
+                });
+            });
+        }
+    </script>
+</body>
+</html>
