@@ -11,25 +11,25 @@
           "lat": 22.5771,
           "lng": 120.3473,
           "zoom": 13,
-          "title": "05:40 - 08:05｜KKday專車與小港機場起飛",
+          "title": "01. 啟程｜高雄小港機場出發",
           "mediaPlaceholder": "此處可放專車接送或小港機場登機照片",
-          "content": "為了讓一家人從出門這一刻就能優雅輕鬆，果斷選擇 KKday 機場專車接送直達小港機場。搭乘 AirAsia FD234 直飛成田，揮別熱情的太陽，展開三千公里的雪國之旅！"
+          "content": "帶著輕簡的行囊，搭乘 KKday 專車摸黑出發，準備展開三千公里的雪國旅程。搭乘 AirAsia FD234 直飛成田，揮別熱情的太陽，準備迎接零下北國。"
         },
         {
           "id": "d1-ch2",
           "lat": 35.7719,
           "lng": 140.3928,
           "zoom": 12,
-          "title": "12:30 - 13:42｜成田機場兌票與 Skyliner 直奔上野",
+          "title": "02. 抵達｜成田機場與 Skyliner 疾走",
           "mediaPlaceholder": "此處可放 Skyliner 車票或いろり庵きらくそば照片",
-          "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票前往京成上野。轉乘新幹線前，在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥烏龍麵！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>Skyliner 兌換與上野站小撇步</div><ul><li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。</li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li></ul></div></div>"
+          "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵與烏龍麵，儲存體力！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>Skyliner 兌換與上野站小撇步</div><ul><li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。</li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li></ul></div></div>"
         },
         {
           "id": "d1-ch3",
           "lat": 37.7547,
           "lng": 140.4593,
           "zoom": 11,
-          "title": "16:06｜搭乘東北新幹線「翼號 (Tsubasa)」直奔山形",
+          "title": "03. 疾行｜東北新幹線翼號與福島奇觀",
           "mediaPlaceholder": "此處可放新幹線列車或窗外積雪照片",
           "content": "一手拉著行李、一手拿著票券，搭上前往山形的新幹線。看著窗外路邊的積雪映入眼簾，隨著列車廣播響起：「山形，請多多指教了！」<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>鐵道迷必看：福島站「華麗分手」</div>搭乘山形新幹線「翼號」時，列車在經過<strong>福島站</strong>時會有著名的解聯奇觀：車身較窄的 Tsubasa 會與前方連結的 Yamabiko 山彥號在此分道揚鑣，獨自進入山區前往山形。</div></div>"
         },
@@ -38,7 +38,7 @@
           "lat": 38.2486,
           "lng": 140.3275,
           "zoom": 15,
-          "title": "18:43 - 19:30｜零秒入住山形大都會飯店 ＆ 五十番飯店晚餐",
+          "title": "04. 抵達｜山形大都會飯店與五十番中華料理",
           "mediaPlaceholder": "此處可放山形大都會飯店或五十番炒飯照片",
           "content": "入住與 JR 山形站東口直結的「Hotel Metropolitan Yamagata」，從檢票口出來不用吹風淋雪，3 分鐘即達溫暖大廳。晚餐在站前步行 3 分鐘的「山形五十番飯店」享用充滿鍋氣的炒飯與炒豆苗，在零下低溫中溫暖收尾！"
         }
