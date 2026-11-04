@@ -113,7 +113,7 @@
         /* 單一章節卡片 */
         .chapter { min-height: 65vh; margin-bottom: 45px; padding: 30px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15); position: relative; transition: opacity 0.4s ease; opacity: 0.35; }
         .chapter.active { opacity: 1; }
-        .chapter h2 { color: var(--accent-brown); font-size: 1.4rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
+        .chapter h2 { color: var(--accent-brown); font-size: 1.3rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
         .chapter-body { line-height: 1.8; color: var(--text-light); font-size: 1rem; letter-spacing: 0.04em; white-space: pre-line; }
         .photo-placeholder { width: 100%; min-height: 220px; background-color: var(--accent-pink); border-radius: 8px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; letter-spacing: 0.1em; overflow: hidden; }
         .photo-placeholder img { width: 100%; height: auto; display: block; object-fit: cover; }
@@ -181,7 +181,6 @@
                 document.title = data.tripTitle || '電子旅行手帳';
                 document.getElementById('trip-title').textContent = data.tripTitle || '';
 
-                // 自動相容「按天分組 (days)」或「單層章節 (chapters)」兩種格式
                 if (Array.isArray(data.days) && data.days.length > 0) {
                     normalizedDays = data.days;
                 } else if (Array.isArray(data.chapters)) {
@@ -196,6 +195,167 @@
 
                 initMap();
                 buildDayTabs();
-                renderDay('ALL'); // 預設顯示全部天數，亦可點選切換單日
+                renderDay('ALL');
             })
-            .
+            .catch(error => {
+                document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
+            });
+
+        function initMap() {
+            map = L.map('map', { zoomControl: false }).setView([35.6895, 139.6917], 6);
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri',
+                maxZoom: 16
+            }).addTo(map);
+            markersLayer = L.layerGroup().addTo(map);
+        }
+
+        function buildDayTabs() {
+            const tabsContainer = document.getElementById('day-tabs');
+            tabsContainer.innerHTML = '';
+
+            const allBtn = document.createElement('button');
+            allBtn.className = 'day-tab active';
+            allBtn.textContent = '全部天數';
+            allBtn.onclick = () => selectTab('ALL', allBtn);
+            tabsContainer.appendChild(allBtn);
+
+            normalizedDays.forEach(dayObj => {
+                const btn = document.createElement('button');
+                btn.className = 'day-tab';
+                btn.textContent = dayObj.day;
+                btn.onclick = () => selectTab(dayObj.day, btn);
+                tabsContainer.appendChild(btn);
+            });
+        }
+
+        function selectTab(dayKey, clickedBtn) {
+            document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
+            clickedBtn.classList.add('active');
+            renderDay(dayKey);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderDay(dayKey) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '';
+            if (observer) observer.disconnect();
+
+            markersLayer.clearLayers();
+            if (routeLine) map.removeLayer(routeLine);
+
+            const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
+            const latlngs = [];
+
+            const daysToRender = dayKey === 'ALL'
+                ? normalizedDays
+                : normalizedDays.filter(d => d.day === dayKey);
+
+            let firstChapter = null;
+
+            daysToRender.forEach(dayObj => {
+                const banner = document.createElement('div');
+                banner.className = 'day-banner';
+                banner.innerHTML = `
+                    <div class="day-badge">${dayObj.day}</div>
+                    <h1>${dayObj.dayTitle || dayObj.day}</h1>
+                `;
+                contentDiv.appendChild(banner);
+
+                (dayObj.chapters || []).forEach((ch, idx) => {
+                    if (!firstChapter) firstChapter = ch;
+
+                    const section = document.createElement('section');
+                    section.className = `chapter ${firstChapter === ch ? 'active' : ''}`;
+                    section.setAttribute('data-lat', ch.lat);
+                    section.setAttribute('data-lng', ch.lng);
+                    section.setAttribute('data-zoom', ch.zoom || 13);
+
+                    let mediaHTML = '';
+                    if (ch.mediaPlaceholder) {
+                        if (ch.mediaPlaceholder.match(/\.(jpeg|jpg|gif|png|webp)$/i) || ch.mediaPlaceholder.startsWith('/images')) {
+                            mediaHTML = `<div class="photo-placeholder"><img src="${ch.mediaPlaceholder}" alt="${ch.title}"></div>`;
+                        } else {
+                            mediaHTML = `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>`;
+                        }
+                    }
+
+                    section.innerHTML = `
+                        <h2>${ch.title}</h2>
+                        ${mediaHTML}
+                        <div class="chapter-body">${ch.content || ''}</div>
+                    `;
+                    contentDiv.appendChild(section);
+
+                    if (ch.lat && ch.lng) {
+                        L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
+                        latlngs.push([ch.lat, ch.lng]);
+                    }
+                });
+            });
+
+            if (latlngs.length > 0) {
+                // 自動串接 OSRM 導航 API 繪製真實道路/鐵道動態曲線
+                drawRoadRoute(latlngs, firstChapter);
+            }
+
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const chapter = entry.target;
+                        const lat = parseFloat(chapter.getAttribute('data-lat'));
+                        const lng = parseFloat(chapter.getAttribute('data-lng'));
+                        const zoom = parseInt(chapter.getAttribute('data-zoom'));
+
+                        document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+                        chapter.classList.add('active');
+
+                        if (!isNaN(lat) && !isNaN(lng)) {
+                            map.flyTo([lat, lng], zoom, { animate: true, duration: 1.5 });
+                        }
+                    }
+                });
+            }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+
+            document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
+        }
+
+        // OSRM 動態道路軌跡繪製函數
+        function drawRoadRoute(latlngs, firstChapter) {
+            if (latlngs.length < 2) {
+                if (firstChapter) {
+                    map.flyTo([firstChapter.lat, firstChapter.lng], firstChapter.zoom || 13, { animate: true, duration: 1.2 });
+                }
+                return;
+            }
+
+            // OSRM 要求格式為 lon,lat;lon,lat...
+            const coordsString = latlngs.map(pt => `${pt[1]},${pt[0]}`).join(';');
+            const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${coordsString}?overview=full&geometries=geojson`;
+
+            fetch(osrmUrl)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                        // OSRM 回傳的座標是 [lng, lat]，Leaflet 需要 [lat, lng]
+                        const routeCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+                        routeLine = L.polyline(routeCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
+                    } else {
+                        // 若導航 API 回傳失敗，自動改用直線備用
+                        routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
+                    }
+                    if (firstChapter) {
+                        map.flyTo([firstChapter.lat, firstChapter.lng], firstChapter.zoom || 13, { animate: true, duration: 1.2 });
+                    }
+                })
+                .catch(() => {
+                    // 網路或跨域失敗時的備用方案
+                    routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
+                    if (firstChapter) {
+                        map.flyTo([firstChapter.lat, firstChapter.lng], firstChapter.zoom || 13, { animate: true, duration: 1.2 });
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
