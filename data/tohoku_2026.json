@@ -5,6 +5,7 @@
     {
       "day": "Day 01",
       "dayTitle": "南部人追雪去！高雄直飛成田轉新幹線：3000公里的移動全紀錄",
+      "isFieldTest": false,
       "chapters": [
         {
           "id": "d1-ch1",
@@ -47,6 +48,7 @@
     {
       "day": "Day 02",
       "dayTitle": "走進零下 10 度的白色異世界！藏王樹冰震撼絕景",
+      "isFieldTest": false,
       "chapters": [
         {
           "id": "d2-ch1",
@@ -98,6 +100,7 @@
     {
       "day": "Day 03",
       "dayTitle": "穿越時空的大正浪漫！銀山溫泉《神隱少女》湯屋巡禮",
+      "isFieldTest": false,
       "chapters": [
         {
           "zoom": 14,
@@ -166,7 +169,8 @@
     },
     {
       "day": "Day 04",
-      "dayTitle": "融化了！藏王狐狸村一日遊：被百隻狐狸包圍的幸福時刻 🥰【行程實測】",
+      "dayTitle": "融化了！藏王狐狸村一日遊：被百隻狐狸包圍的幸福時刻 🥰",
+      "isFieldTest": true,
       "chapters": [
         {
           "zoom": 15,
@@ -226,7 +230,8 @@
     },
     {
       "day": "Day 05",
-      "dayTitle": "走進日本三景的水墨畫！絕美遊船，探訪伊達政宗的國寶古剎【行程實測】",
+      "dayTitle": "走進日本三景的水墨畫！絕美遊船，探訪伊達政宗的國寶古剎",
+      "isFieldTest": true,
       "chapters": [
         {
           "zoom": 14,
