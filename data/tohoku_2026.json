@@ -46,16 +46,52 @@
     },
     {
       "day": "Day 02",
-      "dayTitle": "Day 02 行程標題（可從後台自由修改）",
+      "dayTitle": "走進零下 10 度的白色異世界！藏王樹冰震撼絕景",
       "chapters": [
         {
           "id": "d2-ch1",
+          "lat": 38.1656,
+          "lng": 140.3986,
+          "zoom": 14,
+          "title": "01. 出發｜山交巴士與藏王纜車",
+          "mediaPlaceholder": "https://www.instagram.com/p/DTVLtiij6TD/",
+          "content": "從山形站前 1 號月台搭乘山交巴士前往藏王溫泉。下車後穿戴好簡易冰爪套，小心翼翼踩在結冰路面上步行約 15 分鐘抵達「藏王山麓站」。隨著第一段山麓線與第二段山頂線纜車緩緩攀升，成千上萬隻白色雪怪佇立在山坡上，壯闊景色讓人屏息！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>藏王交通與雪地行走小提醒</div><ul><li><strong>套票政策變動：</strong>今年山交巴士停售「藏王樹冰套票」，建議提早至山形站前排隊購票，或事先於網路預訂「藏王纜車優先通關票」。</li><li><strong>必備簡易冰爪：</strong>從藏王溫泉巴士站步行往纜車站的路面容易結冰，強烈建議套上簡易冰爪套防滑！</li></ul></div></div>"
+        },
+        {
+          "zoom": 15,
+          "mediaPlaceholder": "https://www.instagram.com/p/DTVLtiij6TD/",
+          "id": "d2-ch2",
           "lat": 38.1424,
-          "lng": 140.3951,
-          "zoom": 13,
-          "title": "01. 範例景點｜山形藏王樹冰",
-          "mediaPlaceholder": "此處可放 Day 02 照片",
-          "content": "這裡是 Day 02 的第一段行程內容，之後可以在後台直接點開 Day 02 編輯或新增更多天數！"
+          "lng": 140.4172,
+          "title": "02. 絕景｜山頂展望台與藏王地藏尊",
+          "content": "步出地藏山頂站，零下低溫直衝腦門，登上 360 度展望台盡情與樹冰合照。接著躲進 1 樓的「レストラン山頂 (Restaurant Sancho)」來支霜淇淋配熱紅茶回溫（只收現金）。離開前敲響「開運之鐘」、參拜半身埋在白雪中的「藏王地藏尊」，還在棉花般的厚雪上開心往後倒體驗躺雪地，回程更幸運全家包下一整台纜車！<div class='callout-box callout-info'><div class='callout-icon'>🔋</div><div class='callout-content'><div class='callout-title'>極凍山頂手機保命秘訣</div>山頂氣溫極低，手機電量掉速非常驚人！不拍照時務必將<strong>手機與暖暖包一起放進外套懷裡回溫</strong>，避免瞬間凍到自動關機。</div></div>"
+        },
+        {
+          "zoom": 16,
+          "mediaPlaceholder": "https://www.instagram.com/p/DTVLtiij6TD/",
+          "id": "d2-ch3",
+          "lat": 38.1678,
+          "lng": 140.3976,
+          "title": "03. 午餐｜音茶屋溫泉街的質感咖哩",
+          "content": "下纜車後步行 2 分鐘來到質感滿分的「音茶屋」。熱騰騰的湯咖哩、咖哩牛與牛蓋飯瞬間療癒飢腸轆轆的胃。最令人驚豔的是甜點「巧克力巴斯克 ft. 柚子檸檬醬」，微酸的自製果醬搭配濃郁巴斯克，清爽不死甜且層次感十足，絕對推薦！"
+        },
+        {
+          "zoom": 16,
+          "mediaPlaceholder": "https://www.instagram.com/p/DTVLtiij6TD/",
+          "id": "d2-ch4",
+          "lat": 38.1695,
+          "lng": 140.4005,
+          "title": "04. 漫步｜藏王溫泉郵便局與酢川溫泉神社",
+          "content": "漫步在煙霧繚繞、充滿硫磺香的溫泉街，途經藏王溫泉郵便局（可惜遇上週末公休錯過風景印）。接著獨自挑戰覆滿白雪的五階段長階梯，登上西元 110 年創立的「酢川溫泉神社」感謝山神賜予大晴天。下山時看著結滿白雪的階梯，靈機一動抓緊扶手直接用屁股當雪板「溜滑梯」下山，解鎖另類滑雪成就！<div class='callout-box callout-tip'><div class='callout-icon'>📮</div><div class='callout-content'><div class='callout-title'>集章迷必存：日本郵局「風景印」禮儀與日文</div><ul><li><strong>貼郵票才能蓋：</strong>風景印本質是註銷郵票的郵戳，無論寄出或蓋在集章本收藏，都<strong>必須先購買郵票貼上</strong>才能請櫃檯人員蓋章（僅平日 09:00-17:00 營業）。</li><li><strong>實用日文金句：</strong>「風景印を押してもらえますか？」（請問可以幫我蓋風景印嗎？）</li></ul></div></div>"
+        },
+        {
+          "zoom": 15,
+          "mediaPlaceholder": "https://www.instagram.com/p/DTVLtiij6TD/",
+          "id": "d2-ch5",
+          "lat": 38.2494,
+          "lng": 140.3259,
+          "title": "05. 晚餐｜山形牛燒肉及免費百萬夜景",
+          "content": "搭巴士返回山形站休整後，直奔東口交通中心 2 樓的肉舖直營店「かかし駅前店」，大啖油花迷人的 A4/A5 山形牛拼盤（盛り合わせ），油脂滲入熱白飯簡直人間天堂！餐後散步前往霞城公園幸運遇上絢麗的冬季煙火大會，最後登上西口直結的「霞城中央大樓（霞城セントラル）」24 樓免費展望台，將 360 度的雪國城市燈火盡收眼底。<div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>吃貨科普：山形牛 vs. 米澤牛，到底差在哪？</div><ul><li><strong>產地範圍：</strong>「山形牛」為山形縣全域飼養合格牛隻；「米澤牛」僅限置賜地區（三市五町）。</li><li><strong>性別與等級：</strong>「山形牛」包含未生育母牛與去勢公牛；「米澤牛」僅限黑毛和種未生育母牛且須達 A3 等級以上，如同山形牛家族中的頂級資優班，價格也較高。同樓層有另一間米澤牛餐廳，進門前別看錯招牌囉！</li></ul></div></div>"
         }
       ]
     }
