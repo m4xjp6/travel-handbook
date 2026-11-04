@@ -14,23 +14,23 @@ collections:
     extension: "json"
     format: "json"
     fields:
-      - {label: "旅程 ID (英文)", name: "tripId", widget: "string"}
+      - {label: "旅程 ID (英文，例如: tohoku_2026)", name: "tripId", widget: "string"}
       - {label: "旅程總標題", name: "tripTitle", widget: "string"}
       - label: "天數日記列表"
         name: "days"
         widget: "list"
         fields:
-          - {label: "天數標籤", name: "day", widget: "string"}
-          - {label: "當日主題標題", name: "dayTitle", widget: "string"}
-          - {label: "是否為行程實測", name: "isFieldTest", widget: "boolean", default: false, required: false}
+          - {label: "天數標籤", name: "day", widget: "string", hint: "例如: Day 01"}
+          - {label: "當日主題標題", name: "dayTitle", widget: "string", hint: "例如: 走進日本三景的水墨畫！"}
+          - {label: "是否為行程實測", name: "isFieldTest", widget: "boolean", default: false, required: false, hint: "打勾後會在前端標題自動加上【行程實測】"}
           - label: "章節內容"
             name: "chapters"
             widget: "list"
             fields:
               - {label: "章節 ID", name: "id", widget: "string"}
-              - {label: "緯度 (Lat)", name: "lat", widget: "number"}
-              - {label: "經度 (Lng)", name: "lng", widget: "number"}
-              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", default: 13}
+              - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float"}
+              - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
+              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
               - {label: "標題", name: "title", widget: "string"}
               - {label: "圖片/佔位文字", name: "mediaPlaceholder", widget: "string", required: false}
               - {label: "內文", name: "content", widget: "text"}
