@@ -7,9 +7,9 @@ public_folder: "/images"
 
 collections:
   - name: "trip_data"
-    label: "旅遊手帳資料"
+    label: "旅行手帳後台--°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•°"
     files:
-      - label: "2026_tohoku"
+      - label: "tohoku_2026"
         name: "tohoku_2026"
         file: "data/tohoku_2026.json"
         fields:
