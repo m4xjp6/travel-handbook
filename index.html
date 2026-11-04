@@ -29,12 +29,6 @@
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 15px; }
         th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; }
         th { color: #888; width: 30%; }
-
-        /* 密碼設定彈窗樣式 */
-        #netlify-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; }
-        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 350px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); text-align: center; }
-        .modal-content input { width: 100%; padding: 10px; margin: 15px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; }
-        .modal-content button { background: var(--accent-brown); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; width: 100%; }
     </style>
     <!-- 引入 Netlify Identity Widget 套件 -->
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -59,6 +53,18 @@
 
         const container = document.getElementById('trip-bookcase');
 
+        // 輔助函式：安全地將欄位轉為字串（避免出現 [object Object]）
+        function parseField(val) {
+            if (!val) return '';
+            if (typeof val === 'object') {
+                if (Array.isArray(val)) {
+                    return val.map(item => (typeof item === 'object' ? (item.title || item.name || JSON.stringify(item)) : item)).join('、');
+                }
+                return val.title || val.name || JSON.stringify(val);
+            }
+            return val;
+        }
+
         // 2. 迴圈讀取每個行程的 JSON 檔案並動態建立卡片
         tripSlugs.forEach(slug => {
             fetch(`data/${slug}.json`)
@@ -67,6 +73,11 @@
                     return response.json();
                 })
                 .then(data => {
+                    const title = parseField(data.title) || '未命名旅程';
+                    const days = parseField(data.days);
+                    const highlights = parseField(data.highlights);
+                    const season = parseField(data.season);
+
                     const card = document.createElement('a');
                     card.href = `journal.html?trip=${slug}`;
                     card.className = 'trip-card';
@@ -77,11 +88,11 @@
                             <div>封面照 3</div>
                         </div>
                         <div class="card-content">
-                            <h3>${data.title || '未命名旅程'}</h3>
+                            <h3>${title}</h3>
                             <table>
-                                <tr><th>天數</th><td>${data.days || ''}</td></tr>
-                                <tr><th>重點</th><td>${data.highlights || ''}</td></tr>
-                                <tr><th>季節</th><td>${data.season || ''}</td></tr>
+                                <tr><th>天數</th><td>${days}</td></tr>
+                                <tr><th>重點</th><td>${highlights}</td></tr>
+                                <tr><th>季節</th><td>${season}</td></tr>
                             </table>
                         </div>
                     `;
