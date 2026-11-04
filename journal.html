@@ -163,244 +163,267 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const tripId = urlParams.get('trip') || 'tohoku_2026';
+    const urlParams = new URLSearchParams(window.location.search);
+    const tripId = urlParams.get('trip') || 'tohoku_2026';
 
-        let map = null;
-        let markersLayer = null;
-        let routeLine = null;
-        let observer = null;
-        let normalizedDays = [];
-        let routeSegments = {}; 
+    let map = null;
+    let markersLayer = null;
+    let routeLine = null;
+    let observer = null;
+    let normalizedDays = [];
+    
+    // 用來儲存每天每一段（章節到章節之間）的詳細 OSRM 軌跡點
+    let routeSegments = {}; 
 
-        fetch(`data/${tripId}.json`)
-            .then(response => {
-                if (!response.ok) throw new Error('找不到該旅程的資料檔');
-                return response.json();
-            })
-            .then(data => {
-                document.title = data.tripTitle || '電子旅行手帳';
-                document.getElementById('trip-title').textContent = data.tripTitle || '';
+    fetch(`data/${tripId}.json`)
+        .then(response => {
+            if (!response.ok) throw new Error('找不到該旅程的資料檔');
+            return response.json();
+        })
+        .then(data => {
+            document.title = data.tripTitle || '電子旅行手帳';
+            document.getElementById('trip-title').textContent = data.tripTitle || '';
 
-                if (Array.isArray(data.days) && data.days.length > 0) {
-                    normalizedDays = data.days;
-                } else if (Array.isArray(data.chapters)) {
-                    const grouped = {};
-                    data.chapters.forEach(ch => {
-                        const d = ch.day || 'Day 01';
-                        if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', chapters: [] };
-                        grouped[d].chapters.push(ch);
-                    });
-                    normalizedDays = Object.values(grouped);
-                }
-
-                initMap();
-                buildDayTabs();
-                renderDay('ALL');
-            })
-            .catch(error => {
-                document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
-            });
-
-        function initMap() {
-            map = L.map('map', { zoomControl: false }).setView([35.6895, 139.6917], 6);
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri',
-                maxZoom: 16
-            }).addTo(map);
-            markersLayer = L.layerGroup().addTo(map);
-        }
-
-        function buildDayTabs() {
-            const tabsContainer = document.getElementById('day-tabs');
-            tabsContainer.innerHTML = '';
-
-            const allBtn = document.createElement('button');
-            allBtn.className = 'day-tab active';
-            allBtn.textContent = '全部天數';
-            allBtn.onclick = () => selectTab('ALL', allBtn);
-            tabsContainer.appendChild(allBtn);
-
-            normalizedDays.forEach(dayObj => {
-                const btn = document.createElement('button');
-                btn.className = 'day-tab';
-                btn.textContent = dayObj.day;
-                btn.onclick = () => selectTab(dayObj.day, btn);
-                tabsContainer.appendChild(btn);
-            });
-        }
-
-        function selectTab(dayKey, clickedBtn) {
-            document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
-            clickedBtn.classList.add('active');
-            renderDay(dayKey);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function renderDay(dayKey) {
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = '';
-            if (observer) observer.disconnect();
-
-            markersLayer.clearLayers();
-            if (routeLine) map.removeLayer(routeLine);
-            routeSegments = {};
-
-            const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
-            const latlngs = [];
-            let chaptersList = [];
-
-            const daysToRender = dayKey === 'ALL'
-                ? normalizedDays
-                : normalizedDays.filter(d => d.day === dayKey);
-
-            daysToRender.forEach(dayObj => {
-                const banner = document.createElement('div');
-                banner.className = 'day-banner';
-                banner.innerHTML = `
-                    <div class="day-badge">${dayObj.day}</div>
-                    <h1>${dayObj.dayTitle || dayObj.day}</h1>
-                `;
-                contentDiv.appendChild(banner);
-
-                (dayObj.chapters || []).forEach((ch) => {
-                    chaptersList.push(ch);
-                    const section = document.createElement('section');
-                    section.className = `chapter ${chaptersList.length === 1 ? 'active' : ''}`;
-                    section.id = `section-${ch.id}`;
-                    section.setAttribute('data-id', ch.id);
-                    section.setAttribute('data-lat', ch.lat);
-                    section.setAttribute('data-lng', ch.lng);
-                    section.setAttribute('data-zoom', ch.zoom || 13);
-                    section.setAttribute('data-index', chaptersList.length - 1);
-
-                    let mediaHTML = '';
-                    if (ch.mediaPlaceholder) {
-                        if (ch.mediaPlaceholder.match(/\.(jpeg|jpg|gif|png|webp)$/i) || ch.mediaPlaceholder.startsWith('/images')) {
-                            mediaHTML = `<div class="photo-placeholder"><img src="${ch.mediaPlaceholder}" alt="${ch.title}"></div>`;
-                        } else {
-                            mediaHTML = `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>`;
-                        }
-                    }
-
-                    section.innerHTML = `
-                        <h2>${ch.title}</h2>
-                        ${mediaHTML}
-                        <div class="chapter-body">${ch.content || ''}</div>
-                    `;
-                    contentDiv.appendChild(section);
-
-                    if (ch.lat && ch.lng) {
-                        L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
-                        latlngs.push([ch.lat, ch.lng]);
-                    }
+            if (Array.isArray(data.days) && data.days.length > 0) {
+                normalizedDays = data.days;
+            } else if (Array.isArray(data.chapters)) {
+                const grouped = {};
+                data.chapters.forEach(ch => {
+                    const d = ch.day || 'Day 01';
+                    if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', chapters: [] };
+                    grouped[d].chapters.push(ch);
                 });
-            });
-
-            if (latlngs.length > 0) {
-                drawRoadRoute(latlngs, chaptersList);
+                normalizedDays = Object.values(grouped);
             }
 
-            let currentIndex = 0;
+            initMap();
+            buildDayTabs();
+            renderDay('ALL');
+        })
+        .catch(error => {
+            document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
+        });
 
-            observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const chapter = entry.target;
-                        const newIndex = parseInt(chapter.getAttribute('data-index'));
-                        const targetLat = parseFloat(chapter.getAttribute('data-lat'));
-                        const targetLng = parseFloat(chapter.getAttribute('data-lng'));
-                        const targetZoom = parseInt(chapter.getAttribute('data-zoom'));
+    function initMap() {
+        map = L.map('map', { zoomControl: false }).setView([35.6895, 139.6917], 6);
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri',
+            maxZoom: 16
+        }).addTo(map);
+        markersLayer = L.layerGroup().addTo(map);
+    }
 
-                        document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
-                        chapter.classList.add('active');
+    function buildDayTabs() {
+        const tabsContainer = document.getElementById('day-tabs');
+        tabsContainer.innerHTML = '';
 
-                        if (!isNaN(targetLat) && !isNaN(targetLng)) {
-                            if (Math.abs(newIndex - currentIndex) === 1 && routeSegments[`${currentIndex}-${newIndex}`]) {
-                                 panAlongRoute(routeSegments[`${currentIndex}-${newIndex}`], targetZoom);
-                            } else {
-                                 map.flyTo([targetLat, targetLng], targetZoom, { animate: true, duration: 1.5 });
-                            }
-                        }
-                        currentIndex = newIndex;
+        const allBtn = document.createElement('button');
+        allBtn.className = 'day-tab active';
+        allBtn.textContent = '全部天數';
+        allBtn.onclick = () => selectTab('ALL', allBtn);
+        tabsContainer.appendChild(allBtn);
+
+        normalizedDays.forEach(dayObj => {
+            const btn = document.createElement('button');
+            btn.className = 'day-tab';
+            btn.textContent = dayObj.day;
+            btn.onclick = () => selectTab(dayObj.day, btn);
+            tabsContainer.appendChild(btn);
+        });
+    }
+
+    function selectTab(dayKey, clickedBtn) {
+        document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
+        clickedBtn.classList.add('active');
+        renderDay(dayKey);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderDay(dayKey) {
+        const contentDiv = document.getElementById('content');
+        contentDiv.innerHTML = '';
+        if (observer) observer.disconnect();
+
+        markersLayer.clearLayers();
+        if (routeLine) map.removeLayer(routeLine);
+        routeSegments = {}; // 清空之前的軌跡資料
+
+        const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
+        const latlngs = [];
+        let chaptersList = [];
+
+        const daysToRender = dayKey === 'ALL'
+            ? normalizedDays
+            : normalizedDays.filter(d => d.day === dayKey);
+
+        daysToRender.forEach(dayObj => {
+            const banner = document.createElement('div');
+            banner.className = 'day-banner';
+            banner.innerHTML = `
+                <div class="day-badge">${dayObj.day}</div>
+                <h1>${dayObj.dayTitle || dayObj.day}</h1>
+            `;
+            contentDiv.appendChild(banner);
+
+            (dayObj.chapters || []).forEach((ch) => {
+                chaptersList.push(ch);
+                const section = document.createElement('section');
+                section.className = `chapter ${chaptersList.length === 1 ? 'active' : ''}`;
+                section.id = `section-${ch.id}`; // 給一個獨立 ID 方便對應
+                section.setAttribute('data-id', ch.id);
+                section.setAttribute('data-lat', ch.lat);
+                section.setAttribute('data-lng', ch.lng);
+                section.setAttribute('data-zoom', ch.zoom || 13);
+                // 記錄這是第幾個點，用來找對應的軌跡段
+                section.setAttribute('data-index', chaptersList.length - 1); 
+
+                let mediaHTML = '';
+                if (ch.mediaPlaceholder) {
+                    if (ch.mediaPlaceholder.match(/\.(jpeg|jpg|gif|png|webp)$/i) || ch.mediaPlaceholder.startsWith('/images')) {
+                        mediaHTML = `<div class="photo-placeholder"><img src="${ch.mediaPlaceholder}" alt="${ch.title}"></div>`;
+                    } else {
+                        mediaHTML = `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>`;
                     }
-                });
-            }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
-
-            document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
-        }
-
-        function panAlongRoute(coordsArray, finalZoom) {
-            if (!coordsArray || coordsArray.length === 0) return;
-            
-            let i = 0;
-            const totalDuration = 1200; 
-            const intervalTime = Math.max(10, totalDuration / coordsArray.length);
-            const movingZoom = Math.min(map.getZoom(), 12);
-            map.setZoom(movingZoom);
-
-            const panInterval = setInterval(() => {
-                if (i >= coordsArray.length) {
-                    clearInterval(panInterval);
-                    map.flyTo(coordsArray[coordsArray.length - 1], finalZoom, { animate: true, duration: 0.8 });
-                    return;
                 }
-                map.panTo(coordsArray[i], { animate: true, duration: intervalTime / 1000, easeLinearity: 1 });
-                i += Math.ceil(coordsArray.length / 30); 
-            }, intervalTime);
+
+                section.innerHTML = `
+                    <h2>${ch.title}</h2>
+                    ${mediaHTML}
+                    <div class="chapter-body">${ch.content || ''}</div>
+                `;
+                contentDiv.appendChild(section);
+
+                if (ch.lat && ch.lng) {
+                    L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
+                    latlngs.push([ch.lat, ch.lng]);
+                }
+            });
+        });
+
+        if (latlngs.length > 0) {
+            drawRoadRoute(latlngs, chaptersList);
         }
 
-        function drawRoadRoute(latlngs, chaptersList) {
-            if (latlngs.length < 2) {
+        // 追蹤當前是哪個點
+        let currentIndex = 0;
+
+        observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const chapter = entry.target;
+                    const newIndex = parseInt(chapter.getAttribute('data-index'));
+                    const targetLat = parseFloat(chapter.getAttribute('data-lat'));
+                    const targetLng = parseFloat(chapter.getAttribute('data-lng'));
+                    const targetZoom = parseInt(chapter.getAttribute('data-zoom'));
+
+                    document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+                    chapter.classList.add('active');
+
+                    if (!isNaN(targetLat) && !isNaN(targetLng)) {
+                        // 如果只是上下捲動一格，且有 OSRM 算好的細節軌跡，就沿著線「滑過去」
+                        if (Math.abs(newIndex - currentIndex) === 1 && routeSegments[`${currentIndex}-${newIndex}`]) {
+                             panAlongRoute(routeSegments[`${currentIndex}-${newIndex}`], targetZoom);
+                        } else {
+                             // 如果是跳躍過大，或是還沒有軌跡資料，就直接飛過去
+                             map.flyTo([targetLat, targetLng], targetZoom, { animate: true, duration: 1.5 });
+                        }
+                    }
+                    currentIndex = newIndex;
+                }
+            });
+        }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+
+        document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
+    }
+
+    // 沿著軌跡點慢慢移動的函數
+    function panAlongRoute(coordsArray, finalZoom) {
+        if (!coordsArray || coordsArray.length === 0) return;
+        
+        let i = 0;
+        // 將沿線移動的總時間控制在約 1.2 秒內
+        const totalDuration = 1200; 
+        const intervalTime = Math.max(10, totalDuration / coordsArray.length);
+
+        // 先將地圖縮放到適合觀看移動的層級 (不要太近，免得頭暈)
+        const movingZoom = Math.min(map.getZoom(), 12);
+        map.setZoom(movingZoom);
+
+        const panInterval = setInterval(() => {
+            if (i >= coordsArray.length) {
+                clearInterval(panInterval);
+                // 抵達終點後，縮放到該章節設定的 zoom
+                map.flyTo(coordsArray[coordsArray.length - 1], finalZoom, { animate: true, duration: 0.8 });
+                return;
+            }
+            // 使用 panTo 進行平滑移動，不改變縮放層級
+            map.panTo(coordsArray[i], { animate: true, duration: intervalTime / 1000, easeLinearity: 1 });
+            // 跳著取點可以讓移動速度看起來更流暢
+            i += Math.ceil(coordsArray.length / 30); 
+        }, intervalTime);
+    }
+
+    function drawRoadRoute(latlngs, chaptersList) {
+        if (latlngs.length < 2) {
+            if (chaptersList.length > 0) {
+                map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
+            }
+            return;
+        }
+
+        const coordsString = latlngs.map(pt => `${pt[1]},${pt[0]}`).join(';');
+        // 加上 annotations=nodes 參數讓 OSRM 回傳可以跟原始點對應的資料
+        const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${coordsString}?overview=full&geometries=geojson`;
+
+        fetch(osrmUrl)
+            .then(res => res.json())
+            .then(data => {
+                if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                    const fullRouteCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+                    routeLine = L.polyline(fullRouteCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
+                    
+                    // 這裡是一個小技巧：將整條長長的線，切分成「點與點之間」的線段
+                    // 讓捲動時知道要從哪一段滑到哪一段
+                    const waypoints = data.waypoints;
+                    if(waypoints && waypoints.length === latlngs.length) {
+                        // 因為 OSRM 可能會稍微改變我們給的原始點的位置到最近的馬路上，
+                        // 我們要找到這幾大景點在 fullRouteCoords 陣列中的索引位置 (粗略估計)
+                        const segmentIndices = [0]; 
+                        const totalPoints = fullRouteCoords.length;
+                        
+                        // 簡單按比例切分軌跡 (這是一個相對簡易且穩定的做法)
+                        for(let i=1; i<latlngs.length - 1; i++) {
+                            segmentIndices.push(Math.floor((i / (latlngs.length - 1)) * totalPoints));
+                        }
+                        segmentIndices.push(totalPoints - 1);
+
+                        // 把切分好的線段存進 routeSegments 裡
+                        for (let i = 0; i < segmentIndices.length - 1; i++) {
+                            const startIdx = segmentIndices[i];
+                            const endIdx = segmentIndices[i+1];
+                            const forwardSegment = fullRouteCoords.slice(startIdx, endIdx + 1);
+                            
+                            // 往下滾：從 i 到 i+1
+                            routeSegments[`${i}-${i+1}`] = forwardSegment;
+                            // 往上滾：從 i+1 到 i (陣列反轉)
+                            routeSegments[`${i+1}-${i}`] = [...forwardSegment].reverse();
+                        }
+                    }
+
+                } else {
+                    routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
+                }
                 if (chaptersList.length > 0) {
                     map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
                 }
-                return;
-            }
-
-            const coordsString = latlngs.map(pt => `${pt[1]},${pt[0]}`).join(';');
-            const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${coordsString}?overview=full&geometries=geojson`;
-
-            fetch(osrmUrl)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-                        const fullRouteCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
-                        routeLine = L.polyline(fullRouteCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
-                        
-                        const waypoints = data.waypoints;
-                        if(waypoints && waypoints.length === latlngs.length) {
-                            const segmentIndices = [0]; 
-                            const totalPoints = fullRouteCoords.length;
-                            
-                            for(let i=1; i<latlngs.length - 1; i++) {
-                                segmentIndices.push(Math.floor((i / (latlngs.length - 1)) * totalPoints));
-                            }
-                            segmentIndices.push(totalPoints - 1);
-
-                            for (let i = 0; i < segmentIndices.length - 1; i++) {
-                                const startIdx = segmentIndices[i];
-                                const endIdx = segmentIndices[i+1];
-                                const forwardSegment = fullRouteCoords.slice(startIdx, endIdx + 1);
-                                
-                                routeSegments[`${i}-${i+1}`] = forwardSegment;
-                                routeSegments[`${i+1}-${i}`] = [...forwardSegment].reverse();
-                            }
-                        }
-                    } else {
-                        routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
-                    }
-                    if (chaptersList.length > 0) {
-                        map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                    }
-                })
-                .catch(() => {
-                    routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
-                    if (chaptersList.length > 0) {
-                        map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                    }
-                });
-        }
-    </script>
+            })
+            .catch(() => {
+                routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
+                if (chaptersList.length > 0) {
+                    map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
+                }
+            });
+    }
+</script>
 </body>
 </html>
