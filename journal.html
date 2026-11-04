@@ -90,7 +90,7 @@
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
-            padding: 18px 24px;
+            padding: 20px 24px;
             border-radius: 12px;
             margin: 20px 0 30px 0;
             box-shadow: 0 4px 15px rgba(196, 169, 158, 0.25);
@@ -98,16 +98,18 @@
         .day-banner .day-badge {
             display: inline-block;
             background: rgba(255, 255, 255, 0.25);
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.8rem;
             letter-spacing: 0.08em;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            font-weight: bold;
         }
         .day-banner h1 {
             margin: 0;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 600;
+            line-height: 1.5;
         }
 
         /* 單一章節卡片 */
@@ -171,7 +173,6 @@
         let routeLine = null;
         let observer = null;
         let normalizedDays = [];
-        let routeSegments = {}; 
 
         fetch(`data/${tripId}.json`)
             .then(response => {
@@ -188,7 +189,7 @@
                     const grouped = {};
                     data.chapters.forEach(ch => {
                         const d = ch.day || 'Day 01';
-                        if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', chapters: [] };
+                        if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
                         grouped[d].chapters.push(ch);
                     });
                     normalizedDays = Object.values(grouped);
@@ -244,7 +245,6 @@
 
             markersLayer.clearLayers();
             if (routeLine) map.removeLayer(routeLine);
-            routeSegments = {};
 
             const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
             const latlngs = [];
@@ -257,9 +257,16 @@
             daysToRender.forEach(dayObj => {
                 const banner = document.createElement('div');
                 banner.className = 'day-banner';
+                
+                // 動態判斷：如果後台勾選了 isFieldTest，就在主題標題後方自動補上 【行程實測】
+                let fullTitle = dayObj.dayTitle || dayObj.day;
+                if (dayObj.isFieldTest && !fullTitle.includes('行程實測')) {
+                    fullTitle += '【行程實測】';
+                }
+
                 banner.innerHTML = `
                     <div class="day-badge">${dayObj.day}</div>
-                    <h1>${dayObj.dayTitle || dayObj.day}</h1>
+                    <h1>${fullTitle}</h1>
                 `;
                 contentDiv.appendChild(banner);
 
@@ -271,9 +278,7 @@
                     section.setAttribute('data-id', ch.id);
                     section.setAttribute('data-lat', ch.lat);
                     section.setAttribute('data-lng', ch.lng);
-                    // 獨立讀取 JSON/後台設定的 zoom 層級（如 13、15 或 16 級）
                     section.setAttribute('data-zoom', ch.zoom || 13);
-                    section.setAttribute('data-index', chaptersList.length - 1);
 
                     let mediaHTML = '';
                     if (ch.mediaPlaceholder) {
@@ -302,13 +307,10 @@
                 drawRoadRoute(latlngs, chaptersList);
             }
 
-            let currentIndex = 0;
-
             observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const chapter = entry.target;
-                        const newIndex = parseInt(chapter.getAttribute('data-index'));
                         const targetLat = parseFloat(chapter.getAttribute('data-lat'));
                         const targetLng = parseFloat(chapter.getAttribute('data-lng'));
                         const targetZoom = parseInt(chapter.getAttribute('data-zoom'));
@@ -317,39 +319,13 @@
                         chapter.classList.add('active');
 
                         if (!isNaN(targetLat) && !isNaN(targetLng)) {
-                            // 鄰近段落捲動時，採用滑順的沿線平移（保持當前縮放，不頭暈）；若跨度大則直接 flyTo
-                            if (Math.abs(newIndex - currentIndex) === 1 && routeSegments[`${currentIndex}-${newIndex}`]) {
-                                panAlongRoute(routeSegments[`${currentIndex}-${newIndex}`], targetZoom);
-                            } else {
-                                map.flyTo([targetLat, targetLng], targetZoom, { animate: true, duration: 1.5 });
-                            }
+                            map.flyTo([targetLat, targetLng], targetZoom, { animate: true, duration: 1.5 });
                         }
-                        currentIndex = newIndex;
                     }
                 });
             }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
 
             document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
-        }
-
-        // 沿著路線平移（維持當前視野流暢滑過，抵達終點時才精準縮放到該景點專屬的 targetZoom）
-        function panAlongRoute(coordsArray, finalZoom) {
-            if (!coordsArray || coordsArray.length === 0) return;
-            
-            let i = 0;
-            const totalDuration = 900; 
-            const intervalTime = Math.max(10, totalDuration / coordsArray.length);
-
-            const panInterval = setInterval(() => {
-                if (i >= coordsArray.length) {
-                    clearInterval(panInterval);
-                    // 抵達該章節後，精準套用該景點專屬的 Zoom（例如 16 級看細節）
-                    map.flyTo(coordsArray[coordsArray.length - 1], finalZoom, { animate: true, duration: 0.8 });
-                    return;
-                }
-                map.panTo(coordsArray[i], { animate: true, duration: intervalTime / 1000, easeLinearity: 1 });
-                i += Math.ceil(coordsArray.length / 25); 
-            }, intervalTime);
         }
 
         function drawRoadRoute(latlngs, chaptersList) {
@@ -369,26 +345,6 @@
                     if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
                         const fullRouteCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
                         routeLine = L.polyline(fullRouteCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
-                        
-                        const waypoints = data.waypoints;
-                        if(waypoints && waypoints.length === latlngs.length) {
-                            const segmentIndices = [0]; 
-                            const totalPoints = fullRouteCoords.length;
-                            
-                            for(let i=1; i<latlngs.length - 1; i++) {
-                                segmentIndices.push(Math.floor((i / (latlngs.length - 1)) * totalPoints));
-                            }
-                            segmentIndices.push(totalPoints - 1);
-
-                            for (let i = 0; i < segmentIndices.length - 1; i++) {
-                                const startIdx = segmentIndices[i];
-                                const endIdx = segmentIndices[i+1];
-                                const forwardSegment = fullRouteCoords.slice(startIdx, endIdx + 1);
-                                
-                                routeSegments[`${i}-${i+1}`] = forwardSegment;
-                                routeSegments[`${i+1}-${i}`] = [...forwardSegment].reverse();
-                            }
-                        }
                     } else {
                         routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
                     }
