@@ -25,7 +25,7 @@
         .cover-collage div:last-child { border-right: none; }
         
         .card-content { padding: 20px; }
-        .card-content h3 { margin-top: 0; color: var(--accent-brown); font-size: 1.2rem; }
+        .card-content h3 { margin-top: 0; color: var(--accent-brown); }
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 15px; }
         th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; }
         th { color: #888; width: 30%; }
@@ -41,75 +41,44 @@
         <strong>📚 總覽資訊：</strong> 點擊下方的旅程卡片，即可開啟該趟旅行的專屬「動態地圖手帳」。點擊右下角按鈕可進行管理。
     </div>
 
-    <!-- 動態生成卡片的容器 -->
-    <div class="grid-container" id="trip-bookcase">
-        <!-- 卡片會由下方 JavaScript 自動讀取 JSON 填入 -->
+    <div class="grid-container">
+        <!-- 卡片 1：日本東北 -->
+        <a href="journal.html?trip=tohoku_2026" class="trip-card">
+            <div class="cover-collage">
+                <div>封面照 1</div>
+                <div>封面照 2</div>
+                <div>封面照 3</div>
+            </div>
+            <div class="card-content">
+                <h3>日本東北冬季漫旅</h3>
+                <table>
+                    <tr><th>天數</th><td>9 天 8 夜</td></tr>
+                    <tr><th>重點</th><td>藏王樹冰、銀山溫泉、狐狸村</td></tr>
+                    <tr><th>季節</th><td>2026 冬季</td></tr>
+                </table>
+            </div>
+        </a>
+
+        <!-- 卡片 2：南洋星馬 -->
+        <a href="journal.html?trip=malaysia_2027" class="trip-card">
+            <div class="cover-collage">
+                <div>封面照 1</div>
+                <div>封面照 2</div>
+                <div>封面照 3</div>
+            </div>
+            <div class="card-content">
+                <h3>南洋星馬春季漫旅</h3>
+                <table>
+                    <tr><th>天數</th><td>11 天 10 夜</td></tr>
+                    <tr><th>重點</th><td>吉隆坡敘宴、又見馬六甲、星耀樟宜</td></tr>
+                    <tr><th>季節</th><td>2027 春季</td></tr>
+                </table>
+            </div>
+        </a>
     </div>
 
-    <!-- 自動讀取 JSON 與管理按鈕邏輯 -->
+    <!-- Netlify Identity 驗證與右下角常駐管理按鈕邏輯 -->
     <script>
-        // 1. 填入你所有行程的代號（對應 data/ 資料夾底下的檔名）
-        const tripSlugs = ["tohoku_2026", "malaysia_2027"];
-
-        const container = document.getElementById('trip-bookcase');
-
-        // 2. 迴圈讀取每個行程的 JSON 檔案並動態建立卡片
-        tripSlugs.forEach(slug => {
-            fetch(`data/${slug}.json`)
-                .then(response => {
-                    if (!response.ok) throw new Error('找不到檔案');
-                    return response.json();
-                })
-                .then(data => {
-                    // 抓取標題（對應你的 tripTitle，並把前面的裝飾符號稍微修飾或直接使用）
-                    let rawTitle = data.tripTitle || "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 未命名旅程";
-                    // 如果標題包含分隔符號，可以只取後半段或完整保留
-                    const titleParts = rawTitle.split("｜");
-                    const displayTitle = titleParts.length > 1 ? titleParts[1].trim() : rawTitle;
-
-                    // 自動計算天數（根據 days 陣列長度）
-                    let totalDays = data.days && Array.isArray(data.days) ? data.days.length : 0;
-                    let daysStr = totalDays > 0 ? `${totalDays} 天 ${totalDays - 1} 夜` : "多日行程";
-
-                    // 自動萃取重點（從前幾天的 dayTitle 中抓取關鍵字作為亮點摘要）
-                    let highlightsList = [];
-                    if (data.days && Array.isArray(data.days)) {
-                        data.days.forEach(d => {
-                            if (d.dayTitle) {
-                                highlightsList.push(d.dayTitle);
-                            }
-                        });
-                    }
-                    // 取前三個亮點串接成重點摘要
-                    let highlightsStr = highlightsList.length > 0 ? highlightsList.slice(0, 3).join('、') : "精彩豐富景點";
-
-                    // 季節判斷（可以從標題或檔名推導，或預設顯示）
-                    let seasonStr = slug.includes("2026") ? "2026 冬季" : (slug.includes("2027") ? "2027 春季" : "精選季節");
-
-                    const card = document.createElement('a');
-                    card.href = `journal.html?trip=${slug}`;
-                    card.className = 'trip-card';
-                    card.innerHTML = `
-                        <div class="cover-collage">
-                            <div>封面照 1</div>
-                            <div>封面照 2</div>
-                            <div>封面照 3</div>
-                        </div>
-                        <div class="card-content">
-                            <h3>${displayTitle}</h3>
-                            <table>
-                                <tr><th>天數</th><td>${daysStr}</td></tr>
-                                <tr><th>重點</th><td>${highlightsStr}</td></tr>
-                                <tr><th>季節</th><td>${seasonStr}</td></tr>
-                            </table>
-                        </div>
-                    `;
-                    container.appendChild(card);
-                })
-                .catch(err => console.log(`載入行程 ${slug} 失敗:`, err));
-        });
-
-        // 3. Netlify Identity 驗證與右下角常駐管理按鈕
         if (window.netlifyIdentity) {
             window.netlifyIdentity.init({
                 APIUrl: "https://gentle-buttercream-d75e97.netlify.app/.netlify/identity"
