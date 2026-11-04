@@ -23,7 +23,7 @@
           "zoom": 12,
           "title": "02. 抵達｜成田機場與 Skyliner 疾走",
           "mediaPlaceholder": "此處可放 Skyliner 車票或いろり庵きらくそば照片",
-          "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵與烏龍麵，儲存體力！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>Skyliner 兌換與上野站小撇步</div><ul><li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。</li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li></ul>"
+          "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵與烏龍麵，儲存體力！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>Skyliner 兌換與上野站小撇步</div><ul><li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。</li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li></ul></div></div>"
         },
         {
           "id": "d1-ch3",
@@ -60,39 +60,39 @@
           "content": "從山形站前 1 號月台搭乘山交巴士前往藏王溫泉。下車後穿戴好簡易冰爪套，小心翼翼踩在結冰路面上步行約 15 分鐘抵達「藏王山麓站」。隨著第一段山麓線與第二段山頂線纜車緩緩攀升，成千上萬隻白色雪怪佇立在山坡上，壯闊景色讓人屏息！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>藏王交通與雪地行走小提醒</div><ul><li><strong>套票政策變動：</strong>今年山交巴士停售「藏王樹冰套票」，建議提早至山形站前排隊購票，或事先於網路預訂「藏王纜車優先通關票」。</li><li><strong>必備簡易冰爪：</strong>從藏王溫泉巴士站步行往纜車站的路面容易結冰，強烈建議套上簡易冰爪套防滑！</li></ul></div></div>"
         },
         {
-          "zoom": 15,
-          "mediaPlaceholder": "此處可放藏王樹冰、山頂霜淇淋或藏王地藏尊照片",
           "id": "d2-ch2",
           "lat": 38.1424,
           "lng": 140.4172,
+          "zoom": 15,
           "title": "02. 絕景｜山頂展望台與藏王地藏尊",
+          "mediaPlaceholder": "此處可放藏王樹冰、山頂霜淇淋或藏王地藏尊照片",
           "content": "步出地藏山頂站，零下低溫直衝腦門，登上 360 度展望台盡情與樹冰合照。接著躲進 1 樓的「レストラン山頂 (Restaurant Sancho)」來支霜淇淋配熱紅茶回溫（只收現金）。離開前敲響「開運之鐘」、參拜半身埋在白雪中的「藏王地藏尊」，還在棉花般的厚雪上開心往後倒體驗躺雪地，回程更幸運全家包下一整台纜車！<div class='callout-box callout-info'><div class='callout-icon'>🔋</div><div class='callout-content'><div class='callout-title'>極凍山頂手機保命秘訣</div>山頂氣溫極低，手機電量掉速非常驚人！不拍照時務必將<strong>手機與暖暖包一起放進外套懷裡回溫</strong>，避免瞬間凍到自動關機。</div></div>"
         },
         {
-          "zoom": 16,
-          "mediaPlaceholder": "此處可放音茶屋湯咖哩或巧克力巴斯克照片",
           "id": "d2-ch3",
           "lat": 38.1678,
           "lng": 140.3976,
+          "zoom": 16,
           "title": "03. 午餐｜音茶屋溫泉街的質感咖哩",
+          "mediaPlaceholder": "此處可放音茶屋湯咖哩或巧克力巴斯克照片",
           "content": "下纜車後步行 2 分鐘來到質感滿分的「音茶屋」。熱騰騰的湯咖哩、咖哩牛與牛蓋飯瞬間療癒飢腸轆轆的胃。最令人驚豔的是甜點「巧克力巴斯克 ft. 柚子檸檬醬」，微酸的自製果醬搭配濃郁巴斯克，清爽不死甜且層次感十足，絕對推薦！"
         },
         {
-          "zoom": 16,
-          "mediaPlaceholder": "此處可放紅色鳥居、雪地階梯或酢川溫泉神社照片",
           "id": "d2-ch4",
           "lat": 38.1695,
           "lng": 140.4005,
+          "zoom": 16,
           "title": "04. 漫步｜藏王溫泉郵便局與酢川溫泉神社",
+          "mediaPlaceholder": "此處可放紅色鳥居、雪地階梯或酢川溫泉神社照片",
           "content": "漫步在煙霧繚繞、充滿硫磺香的溫泉街，途經藏王溫泉郵便局（可惜遇上週末公休錯過風景印）。接著獨自挑戰覆滿白雪的五階段長階梯，登上西元 110 年創立的「酢川溫泉神社」感謝山神賜予大晴天。下山時看著結滿白雪的階梯，靈機一動抓緊扶手直接用屁股當雪板「溜滑梯」下山，解鎖另類滑雪成就！<div class='callout-box callout-tip'><div class='callout-icon'>📮</div><div class='callout-content'><div class='callout-title'>集章迷必存：日本郵局「風景印」禮儀與日文</div><ul><li><strong>貼郵票才能蓋：</strong>風景印本質是註銷郵票的郵戳，無論寄出或蓋在集章本收藏，都<strong>必須先購買郵票貼上</strong>才能請櫃檯人員蓋章（僅平日 09:00-17:00 營業）。</li><li><strong>實用日文金句：</strong>「風景印を押してもらえますか？」（請問可以幫我蓋風景印嗎？）</li></ul></div></div>"
         },
         {
-          "zoom": 15,
-          "mediaPlaceholder": "此處可放山形牛拼盤、煙火或霞城中央大樓夜景照",
           "id": "d2-ch5",
           "lat": 38.2494,
           "lng": 140.3259,
+          "zoom": 15,
           "title": "05. 晚餐｜山形牛燒肉及免費百萬夜景",
+          "mediaPlaceholder": "此處可放山形牛拼盤、煙火或霞城中央大樓夜景照",
           "content": "搭巴士返回山形站休整後，直奔東口交通中心 2 樓的肉舖直營店「かかし駅前店」，大啖油花迷人的 A4/A5 山形牛拼盤（盛り合わせ），油脂滲入熱白飯簡直人間天堂！餐後散步前往霞城公園幸運遇上絢麗的冬季煙火大會，最後登上西口直結的「霞城中央大樓（霞城セントラル）」24 樓免費展望台，將 360 度的雪國城市燈火盡收眼底。<div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>吃貨科普：山形牛 vs. 米澤牛，到底差在哪？</div><ul><li><strong>產地範圍：</strong>「山形牛」為山形縣全域飼養合格牛隻；「米澤牛」僅限置賜地區（三市五町）。</li><li><strong>性別與等級：</strong>「山形牛」包含未生育母牛與去勢公牛；「米澤牛」僅限黑毛和種未生育母牛且須達 A3 等級以上，如同山形牛家族中的頂級資優班，價格也較高。同樓層有另一間米澤牛餐廳，進門前別看錯招牌囉！</li></ul></div></div>"
         }
       ]
@@ -103,64 +103,64 @@
       "isFieldTest": false,
       "chapters": [
         {
-          "zoom": 14,
           "id": "d3-ch1",
           "lat": 38.5954,
           "lng": 140.3832,
+          "zoom": 14,
           "title": "01. 出發｜搭乘 JR 奧羽本線前進大石田",
           "mediaPlaceholder": "此處可放大石田車站或新幹線照片",
-          "content": "早上將大型行李寄放在山形飯店櫃檯後，輕裝出發。搭乘 JR 奧羽本線抵達大石田站，幾乎九成的人都在此下車！準備轉乘巴士前，因為這站的 IC 卡僅限在來線使用，所以乖乖排隊請站務員人工協助過卡，順利通關不用重新買票！"
+          "content": "早上將大型行李寄放在山形飯店櫃檯後，輕裝出發。搭乘 JR 奧羽本線抵達大石田站，幾乎九成的人都在此下車！準備轉乘巴士前，因為這站 the IC 卡僅限在來線使用，所以乖乖排隊請站務員人工協助過卡，順利通關不用重新買票！"
         },
         {
-          "zoom": 15,
           "id": "d3-ch2",
           "lat": 38.5714,
           "lng": 140.5284,
+          "zoom": 15,
           "title": "02. 時光隧道｜銀山溫泉巴士與大正浪漫街道",
           "mediaPlaceholder": "此處可放銀山溫泉街道全景或白雪木屋照片",
           "content": "搭上「尾花澤市營巴士銀山線」，一路直達溫泉街入口。下車後映入眼簾的是清澈的銀山川，兩旁並列著三、四層樓高、被白雪覆蓋的木造建築。深吸一口氣，空氣中瀰漫著溫泉特有的氣息，瞬間彷彿乘坐時光機回到了百年前的大正時代。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>銀山溫泉交通管制提醒</div>由於冬季旅客眾多，每年交通管制都會調整：<ul><li><strong>一般路線巴士 (銀山線)：</strong>可直達溫泉街入口，不用換車。</li><li><strong>自駕/觀光巴士：</strong>需在大正浪漫館轉乘接駁車。</li><li><strong>大正浪漫館 ⇔ 銀山溫泉：</strong>這段路程在管制期間禁止步行通行。</li></ul></div></div>"
         },
         {
-          "zoom": 16,
           "id": "d3-ch3",
           "lat": 38.5716,
           "lng": 140.5301,
+          "zoom": 16,
           "title": "03. 午餐｜140年古民家的伊豆の華",
           "mediaPlaceholder": "此處可放伊豆之華二樓神席窗景或炸茄子蕎麥麵照片",
           "content": "趁早來到才剛營業 10 分鐘就需要候位的「伊豆の華」。這間由築齡 140 年古民家改建的餐廳保留了濃厚的木造結構。幸運坐在二樓窗邊，看著最經典的銀山川神席視角，品嚐尾花沢產「最上早生」蕎麥粉製成的麵條（個人最推薦炸茄子蕎麥麵）。"
         },
         {
-          "zoom": 16,
           "id": "d3-ch4",
           "lat": 38.5712,
           "lng": 140.5319,
+          "zoom": 16,
           "title": "04. 巡禮｜能登屋橋見證《神隱少女》場景",
           "mediaPlaceholder": "此處可放能登屋旅館前紅色木橋或人物打卡照",
           "content": "順著街道往內走，看見那橫跨溪流的紅色木橋，身後是層層堆疊、煙霧繚繞的「能登屋旅館」。雖然沒有官方證實，但在走過短短幾步路的紅橋時，內心彷彿自動響起了《神隱少女》的配樂，自己就如同千尋一般。<div class='callout-box callout-info'><div class='callout-icon'>📸</div><div class='callout-content'><div class='callout-title'>拍照禮儀提醒</div>這座紅橋主要供住宿旅客進出，若非住客，建議在橋頭拍照留念即可，避免長時間佔用或擅自闖入旅館喔！</div></div>"
         },
         {
-          "zoom": 16,
           "id": "d3-ch5",
           "lat": 38.5699,
           "lng": 140.5323,
+          "zoom": 16,
           "title": "05. 絕景｜白銀瀑布與洞窟守護者鬼子母神",
           "mediaPlaceholder": "此處可放白銀瀑布震撼水流或雪中紅色欄杆照片",
           "content": "走到溫泉街盡頭，一座高 22 公尺、水聲轟隆的「白銀瀑布」宣洩而下，黑白分明的對比在雪地裡格外震撼，這時天空也開始飄下細雪，浪漫滿分。轉過身，瀑布對面有一處守護兒童安全的「鬼子母神」，在一片雪白中紅色的欄杆十分醒目，洗滌了心靈與精神。"
         },
         {
-          "zoom": 15,
           "id": "d3-ch6",
-          "lat": 38.2683,
+          "lat": 38.2483,
           "lng": 140.3283,
+          "zoom": 15,
           "title": "06. 晚餐｜產地直送高品質豬肉的平田牧場",
           "mediaPlaceholder": "此處可放平田牧場豬排",
           "content": "傍晚搭巴士轉 JR 回到山形，在車站東口的「平田牧場」享用產地直送的高品質豬肉後，領取行李搭乘高速巴士大移動前往仙台。"
         },
         {
-          "zoom": 15,
           "id": "d3-ch7",
           "lat": 38.2635,
           "lng": 140.8753,
+          "zoom": 15,
           "title": "07. 住宿｜仙台御宿野乃溫泉與宵夜拉麵",
           "mediaPlaceholder": "此處可放榻榻米房間或宵夜拉麵照",
           "content": "經歷近一小時的高速巴士車程，終於抵達被譽為溫泉系商務飯店的「御宿 野乃仙台」。全館榻榻米設計讓人進門就脫鞋，彷彿回到家般放鬆。晚上 21:30 泡完天然溫泉後，來碗免費提供的清爽醬油拉麵，為奔波的一天畫下最溫暖的句點！<div class='callout-box callout-tip'><div class='callout-icon'>🚌</div><div class='callout-content'><div class='callout-title'>山形 ⇔ 仙台 交通末班車警報</div><ul><li><strong>高速巴士：</strong>末班車 21:30（從山形車站前1號搭往廣瀨通一番町）。</li><li><strong>JR 仙山線：</strong>末班車 21:46。</li><li>錯過末班車，計程車至少 ¥15,000 起跳（不含夜間加成），千萬別跟荷包開玩笑！</li></ul></div></div>"
@@ -173,55 +173,55 @@
       "isFieldTest": true,
       "chapters": [
         {
-          "zoom": 15,
           "id": "d4-ch1",
-          "lat": 38.201,
+          "lat": 38.2601,
           "lng": 140.8824,
+          "zoom": 15,
           "title": "01. 出發｜仙台站東口集合出發",
           "mediaPlaceholder": "此處可放仙台站東口觀光巴士或HIS標誌照片",
           "content": "早上 08:00 從飯店出發，慢慢散步至藍色 HIS 標誌的集合點「仙台站東口觀光巴士乘車點」。08:45 準時搭上暖氣充足的專車，一路前往宮城藏王狐狸村。"
         },
         {
-          "zoom": 15,
           "id": "d4-ch2",
           "lat": 37.9892,
           "lng": 140.5471,
+          "zoom": 15,
           "title": "02. 體驗｜宮城藏王狐狸村雪中探險",
           "mediaPlaceholder": "此處可放狐狸村雪景或放養狐狸照片",
           "content": "抵達宮城藏王狐狸村。雖然因為風雪交加取消了抱狐狸體驗，但在雪白園區中看著成群狐狸在雪地裡穿梭，甚至調皮地咬了褲腳與衣襬，也是最近距離的深刻互動。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>狐狸村安全與參觀小提醒</div><ul><li><strong>絕對禁止觸摸：</strong>放養區狐狸具有野性，可能會咬人，只有在工作人員指導的體驗活動中才能觸碰。</li><li><strong>收好隨身物品：</strong>狐狸對懸掛物很有興趣，手機吊飾、手套繩務必收好。</li></ul></div></div>"
         },
         {
-          "zoom": 15,
           "id": "d4-ch3",
           "lat": 38.2655,
           "lng": 140.9512,
+          "zoom": 15,
           "title": "03. 採果｜JR Fruit Park Sendai Arahama 採草莓",
           "mediaPlaceholder": "此處可放草莓棚或紅寶石完熟草莓照片",
           "content": "下午搭乘活動巴士抵達草莓農場「JRフルーツパーク仙台あらはま」。聽完工作人員傳授「向上轉寶特瓶蓋」的輕鬆採摘訣竅與挑選蒂頭朝上完熟草莓的技巧後，展開 30 分鐘的草莓吃到飽甜蜜爆擊！"
         },
         {
-          "zoom": 16,
           "id": "d4-ch4",
           "lat": 38.2601,
           "lng": 140.8824,
+          "zoom": 16,
           "title": "04. 漫步｜仙台站東口尋找麵包超人",
           "mediaPlaceholder": "此處可放麵包超人雕像或地磚照片",
           "content": "回到活動解散地仙台站東口，順便購買明天要使用的「仙台 2 日券」。在電梯出口的地磚與人群圍繞的「麵包超人」雕像合影，尋找八年級生的童年共同回憶。"
         },
         {
-          "zoom": 16,
           "id": "d4-ch5",
           "lat": 38.2638,
           "lng": 140.8719,
+          "zoom": 16,
           "title": "05. 晚餐｜創作料理 真都 享用 A5 仙台牛饗宴",
           "mediaPlaceholder": "此處可放 A5 仙台牛或海膽炙燒料理照片",
           "content": "隱身在國分町凱旋門大樓 1 樓的「創作料理 真都 －マツ－」，享用預訂的高級暢飲套餐（¥8,800/人）。奢華的海膽與牛肉炙燒在口中炸裂，搭配綠茶解膩，度過完美的一天。<div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>用餐預訂小提醒</div>預訂不同的餐點套餐會有不同的「用餐限時」（2小時/2.5小時/3小時），預約時請務必確認方案內容！</div></div>"
         },
         {
-          "zoom": 15,
           "id": "d4-ch6",
           "lat": 38.2635,
           "lng": 140.8753,
+          "zoom": 15,
           "title": "06. 住宿｜仙台御宿野乃溫泉飯店泡湯",
           "mediaPlaceholder": "此處可放天然溫泉大浴場或榻榻米走廊照片",
           "content": "緩步走回飯店，褪去厚重衣裳泡進天然溫泉大浴場中，讓熱騰騰的泉水放鬆緊繃的肌肉，完美結束充滿驚奇與美味的一天。準備迎接明天日本三景「松島」的到來！"
@@ -234,55 +234,55 @@
       "isFieldTest": true,
       "chapters": [
         {
-          "zoom": 14,
           "id": "d5-ch1",
           "lat": 38.2601,
           "lng": 140.8824,
+          "zoom": 14,
           "title": "01. 出發｜搭乘 JR 仙石線前進松島海岸",
           "mediaPlaceholder": "此處可放 JR 仙台站月台或仙石線列車照片",
           "content": "早上在御宿野乃享用豐富的日式早餐後，步行至 JR 仙台站搭乘 08:30 發車的 JR 仙石線。大約 40 分鐘車程便順利抵達「松島海岸站」，沿途窗外風景逐漸轉為海景與林蔭，心情也跟著放鬆。<div class='callout-box callout-info'><div class='callout-icon'>🚆</div><div class='callout-content'><div class='callout-title'>JR 仙石線搭乘小撇步</div><ul><li><strong>IC 卡對應：</strong>松島海岸站支援 Suica、PASMO 等全國互通 IC 卡，直接嗶卡進出非常方便，不需要另外買紙本車票。</li><li><strong>座位選擇：</strong>去程建議坐在列車的<strong>右側</strong>，快到松島海岸站前可以搶先看到漂亮的海灣與島嶼風光！</li></ul></div></div>"
         },
         {
-          "zoom": 15,
           "id": "d5-ch2",
           "lat": 38.3739,
           "lng": 141.0622,
+          "zoom": 15,
           "title": "02. 遊船｜松島灣觀光船漫遊水墨島嶼群",
           "mediaPlaceholder": "此處可放松島灣遊船照片",
-          "content": "步行 7 分鐘穿過商店街來到碼頭。松島灣內散落著約 260 個被松樹覆蓋的奇岩小島，乘船穿梭其中就像走進活生生的水墨畫！<div class='callout-box callout-tip'><div class='callout-icon'>🛳️</div><div class='callout-content'><div class='callout-title'>松島遊船實用資訊</div><ul><li><strong>航線選擇：</strong>最經典的是繞行松島灣一周的航程，約 50 分鐘。</li><li>"
+          "content": "步行 7 分鐘穿過商店街來到碼頭。松島灣內散落著約 260 個被松樹覆蓋的奇岩小島，乘船穿梭其中就像走進活生生的水墨畫！<div class='callout-box callout-tip'><div class='callout-icon'>🛳️</div><div class='callout-content'><div class='callout-title'>松島遊船實用資訊</div><ul><li><strong>航線選擇：</strong>最經典的是繞行松島灣一周的航程，約 50 分鐘。</li></ul></div></div>"
         },
         {
-          "zoom": 16,
           "id": "d5-ch3",
           "lat": 38.3748,
           "lng": 141.0665,
+          "zoom": 16,
           "title": "03. 美食｜松島魚市場大啖現烤牡蠣",
           "mediaPlaceholder": "此處可放松島魚市場烤牡蠣照片",
-          "content": "結束一小時的浪漫遊船後，步行 10 分鐘來到在地饕客必訪的「松島魚市場」。一樓集結了現烤大牡蠣、生魚片丼飯等新鮮海味，現烤牡蠣鮮也沒有腥味，可惜烤久了沒有什麼汁，一口咬下還是超級滿足！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>松島魚市場用餐小提醒</div>尖峰時刻（11:30 - 13:00）座位區一位難求，建議採取分工合作，一人先找座位，其他人去排隊買烤牡蠣和海鮮丼！</div></div>"
+          "content": "結束一小時的浪漫遊船後，步行 10 分鐘來到在地饕客必訪的「松島魚市場」。一樓集結了現烤大牡蠣、生魚片丼飯等新鮮海味，現烤牡蠣鮮也沒有腥味，一口咬下超級滿足！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>松島魚市場用餐小提醒</div>尖峰時刻（11:30 - 13:00）座位區一位難求，建議採取分工合作，一人先找座位，其他人去排隊買烤牡蠣和海鮮丼！</div></div>"
         },
         {
-          "zoom": 16,
           "id": "d5-ch4",
           "lat": 38.3736,
           "lng": 141.0592,
+          "zoom": 16,
           "title": "04. 歷史｜國寶古剎瑞嚴寺莊嚴巡禮",
           "mediaPlaceholder": "此處可放瑞嚴寺杉樹林參道或本堂照片",
           "content": "散步前往松島最具代表性的歷史名寺──瑞嚴寺。這是東北地區最著名的禪寺，也是江戶時代仙台藩祖「伊達政宗」的家族菩提寺。走進兩旁高聳巨大杉樹林的參道，肅穆氛圍讓人瞬間沉澱，本堂與庫裡的桃山樣式建築雕刻極具歷史價值。"
         },
         {
-          "zoom": 16,
           "id": "d5-ch5",
           "lat": 38.3721,
           "lng": 141.0595,
+          "zoom": 16,
           "title": "05. 漫步｜結緣五大堂與朱紅色福浦橋",
           "mediaPlaceholder": "此處可放五大堂結緣橋或福浦橋紅橋照片",
           "content": "造訪建在海中小島上的松島地標「五大堂」，需跨越採用空隙結構的紅色木橋（結緣橋 / 剪戀橋 / 透橋），走在上面能微微看到下方海水讓人專注腳步。"
         },
         {
-          "zoom": 15,
           "id": "d5-ch6",
           "lat": 38.2635,
           "lng": 140.8753,
+          "zoom": 15,
           "title": "06. 住宿｜仙台御宿野乃溫泉泡湯與宵夜",
           "mediaPlaceholder": "此處可放御宿野乃溫泉飯店或宵夜拉麵照片",
           "content": "搭乘夕陽時分的 JR 仙石線返回仙台站，晚餐在車站附近簡單解決後回飯店泡湯。今晚同樣以御宿野乃溫泉飯店的天然溫泉與免費宵夜醬油拉麵作為完美句點，帶著滿滿的暖意入眠。"
