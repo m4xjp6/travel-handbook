@@ -9,7 +9,7 @@ collections:
   - name: "trip_data"
     label: "旅遊手帳資料"
     files:
-      - label: "2026 日本東北冬日慢旅"
+      - label: "2026_tohoku"
         name: "tohoku_2026"
         file: "data/tohoku_2026.json"
         fields:
