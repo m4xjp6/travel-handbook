@@ -83,39 +83,7 @@
         </a>
     </div>
 
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (user) {
-        // 當你本人登入後，動態在右下角建立一個「管理手帳」按鈕
-        const adminBtn = document.createElement('div');
-        adminBtn.innerHTML = `
-          <a href="./admin/" style="
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background-color: #8C6D62;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-family: sans-serif;
-            font-size: 14px;
-            z-index: 9999;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          ">
-            ✏️
-          </a>
-        `;
-        document.body.appendChild(adminBtn);
-      }
-    });
-  }
-</script>
+
 
     <!-- 內建 Netlify 驗證攔截腳本 -->
     <script>
