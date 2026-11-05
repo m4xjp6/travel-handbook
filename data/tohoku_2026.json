@@ -13,7 +13,7 @@
           "lng": 120.3473,
           "zoom": 13,
           "title": "01. 啟程｜高雄小港機場出發",
-          "mediaLayout": "auto",
+          "mediaLayout": "grid-equal",
           "mediaPlaceholder": "此處可放專車接送或小港機場登機照片",
           "mediaList": [
             {
@@ -37,7 +37,7 @@
           "lng": 140.3928,
           "zoom": 12,
           "title": "02. 抵達｜成田機場與 Skyliner 疾走",
-          "mediaLayout": "auto",
+          "mediaLayout": "grid-equal",
           "mediaPlaceholder": "此處可放 Skyliner 車票或いろり庵きらくそば照片",
           "mediaList": [
             {
@@ -65,7 +65,7 @@
           "lng": 140.4593,
           "zoom": 11,
           "title": "03. 疾行｜東北新幹線翼號與福島奇觀",
-          "mediaLayout": "auto",
+          "mediaLayout": "grid-equal",
           "mediaPlaceholder": "此處可放新幹線列車或窗外積雪照片",
           "mediaList": [
             {
@@ -85,7 +85,7 @@
           "lng": 140.3275,
           "zoom": 15,
           "title": "04. 抵達｜山形大都會飯店與五十番中華料理",
-          "mediaLayout": "auto",
+          "mediaLayout": "grid-equal",
           "mediaPlaceholder": "此處可放山形大都會飯店或五十番炒飯照片",
           "mediaList": [
             {
