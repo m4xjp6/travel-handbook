@@ -86,7 +86,7 @@
         /* 文章內容容器 */
         #content { padding: 30px 40px 60px 40px; }
 
-        /* 每日大標題橫幅：強制統一兩個半透明膠囊標籤的尺寸與格式 */
+        /* 每日大標題橫幅 */
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
@@ -101,8 +101,6 @@
             gap: 8px;
             margin-bottom: 8px;
         }
-        
-        /* 嚴格對齊：強制相同的內距、字體、圓角與邊界尺寸 */
         .day-banner .day-badge,
         .day-banner .field-test-badge {
             display: inline-flex;
@@ -119,7 +117,6 @@
             font-weight: bold;
             line-height: 1;
         }
-
         .day-banner h1 {
             margin: 0;
             font-size: 1.25rem;
@@ -132,8 +129,103 @@
         .chapter.active { opacity: 1; }
         .chapter h2 { color: var(--accent-brown); font-size: 1.3rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
         .chapter-body { line-height: 1.8; color: var(--text-light); font-size: 1rem; letter-spacing: 0.04em; white-space: pre-line; }
+        
+        /* 舊版佔位與新版多媒體畫廊樣式 */
         .photo-placeholder { width: 100%; min-height: 220px; background-color: var(--accent-pink); border-radius: 8px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; letter-spacing: 0.1em; overflow: hidden; }
         .photo-placeholder img { width: 100%; height: auto; display: block; object-fit: cover; }
+
+        /* 多媒體畫廊容器與版面配置 */
+        .media-gallery { margin: 20px 0; display: grid; gap: 10px; }
+        .media-gallery.layout-single,
+        .media-gallery.layout-stack { grid-template-columns: 1fr; }
+        .media-gallery.layout-grid-equal,
+        .media-gallery.layout-auto-2,
+        .media-gallery.layout-auto-4 { grid-template-columns: repeat(2, 1fr); }
+        .media-gallery.layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
+        .media-gallery.layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
+        .media-gallery.layout-auto-3 { grid-template-columns: repeat(2, 1fr); }
+        .media-gallery.layout-auto-3 .media-item:first-child { grid-column: 1 / -1; }
+
+        /* IG 風橫向滑動輪播 */
+        .media-gallery.layout-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 12px;
+            padding-bottom: 8px;
+            scrollbar-width: thin;
+        }
+        .media-gallery.layout-carousel .media-item {
+            flex: 0 0 82%;
+            scroll-snap-align: center;
+        }
+
+        /* 單一媒體項目外觀 */
+        .media-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f5efe6;
+        }
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            max-height: 460px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+        .layout-grid-2-1 .media-item,
+        .layout-grid-1-2 .media-item,
+        .layout-grid-equal .media-item,
+        .layout-auto-2 .media-item,
+        .layout-auto-4 .media-item { height: 260px; }
+
+        .media-caption {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: center;
+            padding: 6px 8px;
+            background: #faf7f2;
+        }
+
+        /* 影片重播按鈕 */
+        .replay-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(74, 74, 74, 0.75);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 16px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            z-index: 5;
+            backdrop-filter: blur(4px);
+            transition: background 0.2s;
+        }
+        .replay-btn:hover { background: var(--accent-brown); }
+
+        /* 點圖放大燈箱 (Lightbox) */
+        #lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+        #lightbox-overlay img {
+            max-width: 92vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            object-fit: contain;
+        }
 
         /* 內建：四色重點底色框 (Callout Box) */
         .callout-box { display: flex; align-items: flex-start; padding: 14px 18px; border-radius: 8px; margin: 16px 0; font-size: 0.92rem; line-height: 1.6; color: #333; white-space: normal; }
@@ -187,6 +279,7 @@
         let markersLayer = null;
         let routeLine = null;
         let observer = null;
+        let videoObserver = null;
         let normalizedDays = [];
 
         fetch(`data/${tripId}.json`)
@@ -253,10 +346,119 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // 檢查是否為媒體檔案
+        function isMediaFile(str) {
+            if (!str || typeof str !== 'string') return false;
+            return /\.(jpeg|jpg|gif|png|webp|avif|svg|mp4|mov|webm)$/i.test(str) ||
+                   str.includes('media/') ||
+                   str.includes('images/');
+        }
+
+        // 檢查是否為影片檔案
+        function isVideoFile(str) {
+            return /\.(mp4|mov|webm)$/i.test(str);
+        }
+
+        // 建立多媒體畫廊 HTML
+        function buildMediaHTML(ch) {
+            const items = [];
+
+            if (isMediaFile(ch.mediaPlaceholder)) {
+                items.push({ src: ch.mediaPlaceholder, caption: '' });
+            }
+
+            if (Array.isArray(ch.mediaList)) {
+                ch.mediaList.forEach(item => {
+                    const src = typeof item === 'string' ? item : item.src;
+                    const caption = typeof item === 'object' && item.caption ? item.caption : '';
+                    if (isMediaFile(src)) {
+                        items.push({ src, caption });
+                    }
+                });
+            }
+
+            if (items.length === 0) {
+                return ch.mediaPlaceholder
+                    ? `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>`
+                    : '';
+            }
+
+            let layout = ch.mediaLayout || 'auto';
+            let layoutClass = `layout-${layout}`;
+            if (layout === 'auto') {
+                if (items.length === 1) layoutClass = 'layout-single';
+                else if (items.length === 2) layoutClass = 'layout-auto-2';
+                else if (items.length === 3) layoutClass = 'layout-auto-3';
+                else if (items.length === 4) layoutClass = 'layout-auto-4';
+                else layoutClass = 'layout-carousel';
+            }
+
+            const itemsHTML = items.map(item => {
+                const captionHTML = item.caption ? `<div class="media-caption">${item.caption}</div>` : '';
+                if (isVideoFile(item.src)) {
+                    return `
+                        <div class="media-item">
+                            <video class="auto-video" src="${item.src}" muted loop playsinline preload="metadata"></video>
+                            <button type="button" class="replay-btn" onclick="replayVideo(this)">↻ 重播</button>
+                            ${captionHTML}
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="media-item">
+                            <img src="${item.src}" alt="${item.caption || ch.title}" loading="lazy" onclick="openLightbox('${item.src}')">
+                            ${captionHTML}
+                        </div>
+                    `;
+                }
+            }).join('');
+
+            return `<div class="media-gallery ${layoutClass}">${itemsHTML}</div>`;
+        }
+
+        function replayVideo(btn) {
+            const video = btn.parentElement.querySelector('video');
+            if (video) {
+                video.currentTime = 0;
+                video.play();
+            }
+        }
+
+        function initVideoAutoplay() {
+            if (videoObserver) videoObserver.disconnect();
+            videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    if (entry.isIntersecting) {
+                        video.currentTime = 0;
+                        video.play().catch(() => {});
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.45 });
+
+            document.querySelectorAll('.auto-video').forEach(v => videoObserver.observe(v));
+        }
+
+        function openLightbox(src) {
+            let overlay = document.getElementById('lightbox-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'lightbox-overlay';
+                overlay.onclick = () => overlay.style.display = 'none';
+                overlay.innerHTML = '<img id="lightbox-img" src="" alt="放大預覽">';
+                document.body.appendChild(overlay);
+            }
+            document.getElementById('lightbox-img').src = src;
+            overlay.style.display = 'flex';
+        }
+
         function renderDay(dayKey) {
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = '';
             if (observer) observer.disconnect();
+            if (videoObserver) videoObserver.disconnect();
 
             markersLayer.clearLayers();
             if (routeLine) map.removeLayer(routeLine);
@@ -294,14 +496,7 @@
                     section.setAttribute('data-lng', ch.lng);
                     section.setAttribute('data-zoom', ch.zoom || 13);
 
-                    let mediaHTML = '';
-                    if (ch.mediaPlaceholder) {
-                        if (ch.mediaPlaceholder.match(/\.(jpeg|jpg|gif|png|webp)$/i) || ch.mediaPlaceholder.startsWith('/images')) {
-                            mediaHTML = `<div class="photo-placeholder"><img src="${ch.mediaPlaceholder}" alt="${ch.title}"></div>`;
-                        } else {
-                            mediaHTML = `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>`;
-                        }
-                    }
+                    let mediaHTML = buildMediaHTML(ch);
 
                     section.innerHTML = `
                         <h2>${ch.title}</h2>
@@ -340,6 +535,7 @@
             }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
 
             document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
+            initVideoAutoplay();
         }
 
         function drawRoadRoute(latlngs, chaptersList) {
