@@ -1,17 +1,17 @@
 backend:
   name: git-gateway
   branch: main
-  identity_url: "https://gentle-buttercream-d75e97.netlify.app/.netlify/identity"
-  gateway_url: "https://gentle-buttercream-d75e97.netlify.app/.netlify/git"
 
-media_folder: "images"
-public_folder: "/images"
+# 預設全域媒體資料夾
+media_folder: "media/tohoku_2026"
+public_folder: "media/tohoku_2026"
 
 collections:
   - name: "trips"
     label: "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 旅行手帳後台"
     folder: "data"
     create: true
+    identifier_field: "tripId"
     slug: "{{tripId}}"
     extension: "json"
     format: "json"
@@ -21,6 +21,7 @@ collections:
       - label: "天數日記列表"
         name: "days"
         widget: "list"
+        summary: "{{fields.day}} ｜ {{fields.dayTitle}}"
         fields:
           - {label: "天數標籤", name: "day", widget: "string", hint: "例如: Day 01"}
           - {label: "當日主題標題", name: "dayTitle", widget: "string", hint: "例如: 走進日本三景的水墨畫！"}
@@ -28,11 +29,45 @@ collections:
           - label: "章節內容"
             name: "chapters"
             widget: "list"
+            summary: "{{fields.title}}"
             fields:
               - {label: "章節 ID", name: "id", widget: "string"}
               - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float"}
               - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
               - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
               - {label: "標題", name: "title", widget: "string"}
-              - {label: "照片或影片", name: "mediaPlaceholder", widget: "image", required: false, hint: "可直接從電腦上傳照片或影片"}
+              - label: "照片排版樣式"
+                name: "mediaLayout"
+                widget: "select"
+                required: false
+                default: "auto"
+                options:
+                  - { label: "✨ 自動智慧排版 (依張數自動調整)", value: "auto" }
+                  - { label: "📐 左寬右窄 (2:1 雜誌風雙圖)", value: "grid-2-1" }
+                  - { label: "📐 左窄右寬 (1:2 雜誌風雙圖)", value: "grid-1-2" }
+                  - { label: "⚖️ 雙欄對稱並排 (1:1)", value: "grid-equal" }
+                  - { label: "🎠 橫向滑動輪播 (IG風，適合多張照片)", value: "carousel" }
+                  - { label: "🖼️ 單欄垂直大圖堆疊", value: "stack" }
+              - label: "單張主圖/影片 或 佔位提示文字 (相容舊資料)"
+                name: "mediaPlaceholder"
+                widget: "file"
+                required: false
+                media_folder: "../media/{{tripId}}"
+                public_folder: "media/{{tripId}}"
+                hint: "若只有 1 張照片或影片可直接傳這裡；若有多張請用下方清單"
+              - label: "多張照片與影片清單 (可新增多筆)"
+                name: "mediaList"
+                widget: "list"
+                required: false
+                hint: "點擊 Add 新增多張照片(.jpg/.png/.gif)或影片(.mp4/.mov)，可拖曳調整順序"
+                fields:
+                  - label: "檔案 (照片/GIF/影片)"
+                    name: "src"
+                    widget: "file"
+                    media_folder: "../media/{{tripId}}"
+                    public_folder: "media/{{tripId}}"
+                  - label: "圖說 (選填)"
+                    name: "caption"
+                    widget: "string"
+                    required: false
               - {label: "內文", name: "content", widget: "text"}
