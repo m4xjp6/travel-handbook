@@ -4,20 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>旅遊手帳管理後台</title>
-    <!-- 引入 Netlify Identity 登入小工具樣式 -->
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-    <!-- 引入 Decap CMS 套件 -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
-    <!-- 綁定 Netlify Identity 導向你的 Netlify 網域 -->
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.init({
-          APIUrl: "https://gentle-buttercream-d75e97.netlify.app/.netlify/identity"
-        });
-      }
+        // 自動綁定你的 Netlify 驗證伺服器，讓 GitHub Pages 也能直接登入後台
+        if (!localStorage.getItem("netlifySiteURL")) {
+            localStorage.setItem("netlifySiteURL", "https://gentle-buttercream-d75e97.netlify.app");
+        }
     </script>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
