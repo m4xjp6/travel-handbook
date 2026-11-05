@@ -3,8 +3,8 @@ backend:
   branch: main
 
 # 預設全域媒體資料夾
-media_folder: "media/tohoku_2026"
-public_folder: "media/tohoku_2026"
+media_folder: "images/tohoku_2026"
+public_folder: "images/tohoku_2026"
 
 collections:
   - name: "trips"
@@ -52,8 +52,8 @@ collections:
                 name: "mediaPlaceholder"
                 widget: "file"
                 required: false
-                media_folder: "../media/{{tripId}}"
-                public_folder: "media/{{tripId}}"
+                media_folder: "../images/{{tripId}}"
+                public_folder: "images/{{tripId}}"
                 hint: "若只有 1 張照片或影片可直接傳這裡；若有多張請用下方清單"
               - label: "多張照片與影片清單 (可新增多筆)"
                 name: "mediaList"
@@ -64,8 +64,8 @@ collections:
                   - label: "檔案 (照片/GIF/影片)"
                     name: "src"
                     widget: "file"
-                    media_folder: "../media/{{tripId}}"
-                    public_folder: "media/{{tripId}}"
+                    media_folder: "../images/{{tripId}}"
+                    public_folder: "images/{{tripId}}"
                   - label: "圖說 (選填)"
                     name: "caption"
                     widget: "string"
