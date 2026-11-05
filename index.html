@@ -3,51 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 旅行手帳書櫃</title>
+    <title>°•* Flâneur *•° 旅行手帳書櫃</title>
     <style>
         :root {
             --bg-color: #FDFBF7;
             --accent-brown: #C4A99E;
+            --accent-brown-dark: #a6897c;
             --text-dark: #4A4A4A;
             --callout-blue: #eef4ff;
         }
-        body { margin: 0; padding: 40px; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-dark); }
-        h1 { color: var(--accent-brown); text-align: center; border-bottom: 2px solid var(--accent-brown); padding-bottom: 20px; }
+        body {
+            margin: 0;
+            padding: 40px 24px 90px 24px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            color: var(--accent-brown);
+            text-align: center;
+            border-bottom: 2px solid var(--accent-brown);
+            padding-bottom: 20px;
+            line-height: 1.4;
+        }
         
-        .callout { padding: 15px 20px; border-radius: 8px; margin-bottom: 30px; font-size: 0.95rem; background-color: var(--callout-blue); border-left: 4px solid #3b82f6; }
+        .callout {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            background-color: var(--callout-blue);
+            border-left: 4px solid #3b82f6;
+        }
         
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .trip-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(196, 169, 158, 0.2); transition: transform 0.3s; text-decoration: none; color: inherit; display: block; }
-        .trip-card:hover { transform: translateY(-5px); }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .trip-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.2);
+            transition: transform 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .trip-card:hover {
+            transform: translateY(-5px);
+        }
         
-        .cover-collage { display: flex; height: 200px; }
-        .cover-collage div { flex: 1; border-right: 2px solid white; background-color: var(--accent-brown); opacity: 0.8; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; }
-        .cover-collage div:last-child { border-right: none; }
+        /* 3:4 三格封面拼貼區塊 */
+        .cover-collage {
+            display: flex;
+            aspect-ratio: 9 / 4; /* 三張 3:4 並排的黃金比例 (3+3+3 : 4) */
+            min-height: 220px;
+        }
+        .cover-collage div {
+            flex: 1;
+            border-right: 2px solid white;
+            background-color: var(--accent-brown);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.85rem;
+        }
+        .cover-collage div:last-child {
+            border-right: none;
+        }
+        .cover-collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .trip-card:hover .cover-collage img {
+            transform: scale(1.04);
+        }
         
-        .card-content { padding: 20px; }
-        .card-content h3 { margin-top: 0; color: var(--accent-brown); }
-        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 15px; }
-        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #eee; }
-        th { color: #888; width: 30%; }
+        .card-content {
+            padding: 22px;
+        }
+        .card-content h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: var(--accent-brown);
+            font-size: 1.25rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid #f0ece6;
+            line-height: 1.5;
+        }
+        tr:last-child th, tr:last-child td {
+            border-bottom: none;
+        }
+        th {
+            color: #888;
+            width: 25%;
+            font-weight: 500;
+        }
+
+        /* 右下角管理手帳懸浮按鈕 */
+        .admin-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--accent-brown);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 1000;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .admin-fab:hover {
+            background-color: var(--accent-brown-dark);
+            transform: translateY(-2px);
+        }
     </style>
-    <!-- 引入 Netlify Identity Widget 套件 -->
+    <!-- 引入 Netlify Identity Widget 套件，處理密碼設定與登入彈窗 -->
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
-    <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
+    <h1>°•* Flâneur *•° 旅行手帳書櫃</h1>
 
     <div class="callout">
-        <strong>📚 總覽資訊：</strong> 點擊下方的旅程卡片，即可開啟該趟旅行的專屬「動態地圖手帳」。點擊右下角按鈕可進行管理。
+        <strong>📚 總覽資訊：</strong>點擊下方的旅程卡片，即可開啟該趟旅行的專屬「動態地圖手帳」。點擊右下角按鈕可進行管理。
     </div>
 
     <div class="grid-container">
         <!-- 卡片 1：日本東北 -->
         <a href="journal.html?trip=tohoku_2026" class="trip-card">
             <div class="cover-collage">
-                <div>封面照 1</div>
-                <div>封面照 2</div>
-                <div>封面照 3</div>
+                <div><img src="media/tohoku_2026/cover1.png" alt="封面照 1"></div>
+                <div><img src="media/tohoku_2026/cover2.png" alt="封面照 2"></div>
+                <div><img src="media/tohoku_2026/cover3.png" alt="封面照 3"></div>
             </div>
             <div class="card-content">
                 <h3>日本東北冬季漫旅</h3>
@@ -59,12 +173,12 @@
             </div>
         </a>
 
-        <!-- 卡片 2：南洋星馬 -->
+        <!-- 卡片 2：馬來西亞 -->
         <a href="journal.html?trip=malaysia_2027" class="trip-card">
             <div class="cover-collage">
-                <div>封面照 1</div>
-                <div>封面照 2</div>
-                <div>封面照 3</div>
+                <div><img src="media/malaysia_2027/cover1.png" alt="封面照 1"></div>
+                <div><img src="media/malaysia_2027/cover2.png" alt="封面照 2"></div>
+                <div><img src="media/malaysia_2027/cover3.png" alt="封面照 3"></div>
             </div>
             <div class="card-content">
                 <h3>南洋星馬春季漫旅</h3>
@@ -77,59 +191,27 @@
         </a>
     </div>
 
-    <!-- Netlify Identity 驗證與右下角常駐管理按鈕邏輯 -->
+    <!-- 右下角管理手帳按鈕 -->
+    <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
+
+    <!-- 內建 Netlify 驗證攔截腳本 -->
     <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.init({
-                APIUrl: "https://gentle-buttercream-d75e97.netlify.app/.netlify/identity"
-            });
-
-            // 建立右下角常駐按鈕
-            const adminBtn = document.createElement('div');
-            adminBtn.innerHTML = `
-              <button id="floating-admin-btn" style="
-                position: fixed;
-                bottom: 24px;
-                right: 24px;
-                background-color: #C4A99E;
-                color: white;
-                padding: 12px 20px;
-                border-radius: 30px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                font-family: 'Helvetica Neue', Arial, sans-serif;
-                font-size: 14px;
-                z-index: 9999;
-                border: none;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-              ">
-                ✏️ 管理手帳
-              </button>
-            `;
-            document.body.appendChild(adminBtn);
-
-            document.getElementById('floating-admin-btn').addEventListener('click', () => {
-                const user = window.netlifyIdentity.currentUser();
-                if (user) {
-                    window.open("https://gentle-buttercream-d75e97.netlify.app/admin/", "_blank");
-                } else {
-                    window.netlifyIdentity.open();
-                }
-            });
-
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
             window.netlifyIdentity.on("login", () => {
-                document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
+              document.location.href = "/admin/";
             });
-            
-            window.netlifyIdentity.on("invite", token => {
-                window.netlifyIdentity.open();
-                window.netlifyIdentity.on("signup", user => {
-                    document.location.href = "https://gentle-buttercream-d75e97.netlify.app/admin/";
-                });
-            });
-        }
+          }
+        });
+        
+        window.netlifyIdentity.on("invite", token => {
+          window.netlifyIdentity.open();
+          window.netlifyIdentity.on("signup", user => {
+            document.location.href = "/admin/";
+          });
+        });
+      }
     </script>
 </body>
 </html>
