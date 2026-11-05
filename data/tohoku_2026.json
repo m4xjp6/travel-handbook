@@ -13,7 +13,7 @@
           "lng": 120.3473,
           "zoom": 13,
           "title": "01. 啟程｜高雄小港機場出發",
-          "mediaLayout": "grid-equal",
+          "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放專車接送或小港機場登機照片",
           "mediaList": [
             {
@@ -67,7 +67,16 @@
           "title": "03. 疾行｜東北新幹線翼號與福島奇觀",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放新幹線列車或窗外積雪照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d1-ch3-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d1-ch3-2.png",
+              "caption": ""
+            }
+          ],
           "content": "一手拉著行李、一手拿著票券，搭上前往山形的新幹線。看著窗外路邊的積雪映入眼簾，隨著列車廣播響起：「山形，請多多指教了！」<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>鐵道迷必看：福島站「華麗分手」</div>搭乘山形新幹線「翼號」時，列車在經過<strong>福島站</strong>時會有著名的解聯奇觀：車身較窄的 Tsubasa 會與前方連結的 Yamabiko 山彥號在此分道揚鑣，獨自進入山區前往山形。</div></div>"
         },
         {
@@ -78,7 +87,16 @@
           "title": "04. 抵達｜山形大都會飯店與五十番中華料理",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放山形大都會飯店或五十番炒飯照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d1-ch4-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d1-ch4-2.png",
+              "caption": ""
+            }
+          ],
           "content": "入住與 JR 山形站東口直結的「Hotel Metropolitan Yamagata」，從檢票口出來不用吹風淋雪，3 分鐘即達溫暖大廳。晚餐在站前步行 3 分鐘的「山形五十番飯店」享用充滿鍋氣的炒飯與炒豆苗，在零下低溫中溫暖收尾！"
         }
       ]
