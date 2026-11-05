@@ -13,7 +13,7 @@
           "lng": 120.3473,
           "zoom": 13,
           "title": "01. 啟程｜高雄小港機場出發",
-          "mediaLayout": "auto",
+          "mediaLayout": "grid-equal",
           "mediaPlaceholder": "此處可放專車接送或小港機場登機照片",
           "mediaList": [
             {
