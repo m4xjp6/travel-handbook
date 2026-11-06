@@ -86,7 +86,7 @@
         /* 文章內容容器 */
         #content { padding: 30px 40px 60px 40px; }
 
-        /* 每日大標題橫幅 */
+        /* 每日大標題橫幅：統一兩個半透明膠囊標籤的尺寸與格式 */
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
@@ -129,23 +129,32 @@
         .chapter.active { opacity: 1; }
         .chapter h2 { color: var(--accent-brown); font-size: 1.3rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
         .chapter-body { line-height: 1.8; color: var(--text-light); font-size: 1rem; letter-spacing: 0.04em; white-space: pre-line; }
-        
-        /* 舊版佔位與新版多媒體畫廊樣式 */
         .photo-placeholder { width: 100%; min-height: 220px; background-color: var(--accent-pink); border-radius: 8px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; letter-spacing: 0.1em; overflow: hidden; }
         .photo-placeholder img { width: 100%; height: auto; display: block; object-fit: cover; }
 
-        /* 多媒體畫廊容器與版面配置 */
-        .media-gallery { margin: 20px 0; display: grid; gap: 10px; }
+        /* === 網頁版（電腦版）：多媒體畫廊容器與版面配置 === */
+        .media-gallery {
+            margin: 20px 0;
+            display: grid;
+            gap: 10px;
+            width: 100%;
+        }
+        /* 單張或垂直堆疊：100% 滿版 */
         .media-gallery.layout-single,
-        .media-gallery.layout-stack { grid-template-columns: 1fr; }
+        .media-gallery.layout-stack {
+            grid-template-columns: 1fr;
+        }
+        /* 網頁版：自動依張數等比平分寬度 (2張=50%/50%、3張=33%/33%/33%、4張=25%/25%/25%/25%) */
         .media-gallery.layout-grid-equal,
         .media-gallery.layout-auto-2,
-        .media-gallery.layout-auto-4 { grid-template-columns: repeat(4, 1fr); }
+        .media-gallery.layout-auto-3,
+        .media-gallery.layout-auto-4 {
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+        }
+        /* 雜誌風一寬一窄 */
         .media-gallery.layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
         .media-gallery.layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
         .media-gallery.layout-grid-1-2-1 { grid-template-columns: 1fr 2fr 1fr; }
-        .media-gallery.layout-auto-3 { grid-template-columns: repeat(4, 1fr); }
-        .media-gallery.layout-auto-3 .media-item:first-child { grid-column: 1 / -1; }
 
         /* IG 風橫向滑動輪播 */
         .media-gallery.layout-carousel {
@@ -164,6 +173,7 @@
         /* 單一媒體項目外觀 */
         .media-item {
             position: relative;
+            min-width: 0;
             border-radius: 10px;
             overflow: hidden;
             background-color: #f5efe6;
@@ -177,11 +187,15 @@
             display: block;
             cursor: pointer;
         }
+        /* 網頁版並排時：全部固定為同一高度 (260px) */
         .layout-grid-2-1 .media-item,
         .layout-grid-1-2 .media-item,
         .layout-grid-equal .media-item,
         .layout-auto-2 .media-item,
-        .layout-auto-4 .media-item { height: 260px; }
+        .layout-auto-3 .media-item,
+        .layout-auto-4 .media-item {
+            height: 260px;
+        }
 
         .media-caption {
             font-size: 0.8rem;
@@ -242,6 +256,7 @@
 
         .custom-marker { background-color: var(--accent-brown); border: 3px solid white; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
+        /* === 手機版：一排最多放 2 張照片 === */
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             #map-container { width: 100vw; height: 38vh; position: sticky; top: 0; z-index: 200; }
@@ -249,6 +264,26 @@
             .top-nav { top: 38vh; padding: 12px 20px; }
             #content { padding: 20px; }
             .chapter { min-height: auto; margin-bottom: 30px; }
+
+            /* 手機版強制改成一排最多 2 張（50% - 50%） */
+            .media-gallery.layout-grid-equal,
+            .media-gallery.layout-auto-2,
+            .media-gallery.layout-auto-3,
+            .media-gallery.layout-auto-4,
+            .media-gallery.layout-grid-2-1,
+            .media-gallery.layout-grid-1-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* 手機版並排照片高度調整，讓兩張並排比例更自然 */
+            .layout-grid-2-1 .media-item,
+            .layout-grid-1-2 .media-item,
+            .layout-grid-equal .media-item,
+            .layout-auto-2 .media-item,
+            .layout-auto-3 .media-item,
+            .layout-auto-4 .media-item {
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -347,7 +382,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 檢查是否為媒體檔案
+        // 判斷是否為實際媒體路徑（而非預留提示文字）
         function isMediaFile(str) {
             if (!str || typeof str !== 'string') return false;
             return /\.(jpeg|jpg|gif|png|webp|avif|svg|mp4|mov|webm)$/i.test(str) ||
@@ -355,19 +390,21 @@
                    str.includes('images/');
         }
 
-        // 檢查是否為影片檔案
+        // 判斷是否為影片檔
         function isVideoFile(str) {
             return /\.(mp4|mov|webm)$/i.test(str);
         }
 
-        // 建立多媒體畫廊 HTML
+        // 產生章節的多媒體 HTML（支援單張、多張清單與 6 種排版）
         function buildMediaHTML(ch) {
             const items = [];
 
+            // 1. 先檢查單張欄位是否有實際圖片或影片
             if (isMediaFile(ch.mediaPlaceholder)) {
                 items.push({ src: ch.mediaPlaceholder, caption: '' });
             }
 
+            // 2. 再併入多張清單 (mediaList)
             if (Array.isArray(ch.mediaList)) {
                 ch.mediaList.forEach(item => {
                     const src = typeof item === 'string' ? item : item.src;
@@ -378,12 +415,14 @@
                 });
             }
 
+            // 3. 若完全沒有上傳檔案，但有預留文字，顯示原本的粉色預留框
             if (items.length === 0) {
                 return ch.mediaPlaceholder
                     ? `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>`
                     : '';
             }
 
+            // 4. 決定排版樣式 class
             let layout = ch.mediaLayout || 'auto';
             let layoutClass = `layout-${layout}`;
             if (layout === 'auto') {
@@ -391,7 +430,7 @@
                 else if (items.length === 2) layoutClass = 'layout-auto-2';
                 else if (items.length === 3) layoutClass = 'layout-auto-3';
                 else if (items.length === 4) layoutClass = 'layout-auto-4';
-                else layoutClass = 'layout-carousel';
+                else layoutClass = 'layout-carousel'; // 超過 4 張自動切換為橫向滑動輪播
             }
 
             const itemsHTML = items.map(item => {
@@ -417,6 +456,7 @@
             return `<div class="media-gallery ${layoutClass}">${itemsHTML}</div>`;
         }
 
+        // 點擊「↻ 重播」按鈕時，從第 0 秒重新播放
         function replayVideo(btn) {
             const video = btn.parentElement.querySelector('video');
             if (video) {
@@ -425,6 +465,7 @@
             }
         }
 
+        // 監聽滾動：滑到影片時自動從頭播放，滑離時自動暫停
         function initVideoAutoplay() {
             if (videoObserver) videoObserver.disconnect();
             videoObserver = new IntersectionObserver((entries) => {
@@ -442,6 +483,7 @@
             document.querySelectorAll('.auto-video').forEach(v => videoObserver.observe(v));
         }
 
+        // 點圖放大燈箱功能
         function openLightbox(src) {
             let overlay = document.getElementById('lightbox-overlay');
             if (!overlay) {
@@ -459,7 +501,6 @@
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = '';
             if (observer) observer.disconnect();
-            if (videoObserver) videoObserver.disconnect();
 
             markersLayer.clearLayers();
             if (routeLine) map.removeLayer(routeLine);
