@@ -218,7 +218,20 @@
           "title": "05. 晚餐｜山形牛燒肉及免費百萬夜景",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放山形牛拼盤、煙火或霞城中央大樓夜景照",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d2-ch5-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d2-ch5-2.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d2-ch5-3.mp4",
+              "caption": ""
+            }
+          ],
           "content": "搭巴士返回山形站休整後，直奔東口交通中心 2 樓的肉舖直營店「かかし駅前店」，大啖油花迷人的 A4/A5 山形牛拼盤（盛り合わせ），油脂滲入熱白飯簡直人間天堂！餐後散步前往霞城公園幸運遇上絢麗的冬季煙火大會，最後登上西口直結的「霞城中央大樓（霞城セントラル）」24 樓免費展望台，將 360 度的雪國城市燈火盡收眼底。<div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>吃貨科普：山形牛 vs. 米澤牛，到底差在哪？</div><ul><li><strong>產地範圍：</strong>「山形牛」為山形縣全域飼養合格牛隻；「米澤牛」僅限置賜地區（三市五町）。</li><li><strong>性別與等級：</strong>「山形牛」包含未生育母牛與去勢公牛；「米澤牛」僅限黑毛和種未生育母牛且須達 A3 等級以上，如同山形牛家族中的頂級資優班，價格也較高。同樓層有另一間米澤牛餐廳，進門前別看錯招牌囉！</li></ul></div></div>"
         }
       ]
