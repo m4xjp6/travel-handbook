@@ -353,7 +353,12 @@
           "title": "06. 晚餐｜產地直送高品質豬肉的平田牧場",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放平田牧場豬排",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d3-ch6-1.png",
+              "caption": ""
+            }
+          ],
           "content": "傍晚搭巴士轉 JR 回到山形，在車站東口的「平田牧場」享用產地直送的高品質豬肉後，領取行李搭乘高速巴士大移動前往仙台。"
         },
         {
@@ -364,7 +369,16 @@
           "title": "07. 住宿｜仙台御宿野乃溫泉與宵夜拉麵",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放榻榻米房間或宵夜拉麵照",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d3-ch7-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d3-ch7-2.png",
+              "caption": ""
+            }
+          ],
           "content": "經歷近一小時的高速巴士車程，終於抵達被譽為溫泉系商務飯店的「御宿 野乃仙台」。全館榻榻米設計讓人進門就脫鞋，彷彿回到家般放鬆。晚上 21:30 泡完天然溫泉後，來碗免費提供的清爽醬油拉麵，為奔波的一天畫下最溫暖的句點！<div class='callout-box callout-tip'><div class='callout-icon'>🚌</div><div class='callout-content'><div class='callout-title'>山形 ⇔ 仙台 交通末班車警報</div><ul><li><strong>高速巴士：</strong>末班車 21:30（從山形車站前1號搭往廣瀨通一番町）。</li><li><strong>JR 仙山線：</strong>末班車 21:46。</li><li>錯過末班車，計程車至少 ¥15,000 起跳（不含夜間加成），千萬別跟荷包開玩笑！</li></ul></div></div>"
         }
       ]
@@ -382,7 +396,16 @@
           "title": "01. 出發｜仙台站東口集合出發",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放仙台站東口觀光巴士或HIS標誌照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d4-ch1-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch1-2.mp4",
+              "caption": ""
+            }
+          ],
           "content": "早上 08:00 從飯店出發，慢慢散步至藍色 HIS 標誌的集合點「仙台站東口觀光巴士乘車點」。08:45 準時搭上暖氣充足的專車，一路前往宮城藏王狐狸村。"
         },
         {
