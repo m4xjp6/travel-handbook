@@ -172,19 +172,11 @@
           "mediaPlaceholder": "此處可放音茶屋湯咖哩或巧克力巴斯克照片",
           "mediaList": [
             {
-              "src": "media/tohoku_2026/d2-ch3-1.mp4",
+              "src": "media/tohoku_2026/d2-ch3-1.png",
               "caption": ""
             },
             {
-              "src": "media/tohoku_2026/d2-ch3-2.png",
-              "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d2-ch3-3.png",
-              "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d2-ch3-4.mp4",
+              "src": "media/tohoku_2026/d2-ch3-2.mp4",
               "caption": ""
             }
           ],
