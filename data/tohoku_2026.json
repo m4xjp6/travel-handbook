@@ -13,7 +13,7 @@
           "lng": 120.3473,
           "zoom": 13,
           "title": "01. 啟程｜高雄小港機場出發",
-          "mediaLayout": "grid-equal",
+          "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放專車接送或小港機場登機照片",
           "mediaList": [
             {
@@ -37,7 +37,7 @@
           "lng": 140.3928,
           "zoom": 12,
           "title": "02. 抵達｜成田機場與 Skyliner 疾走",
-          "mediaLayout": "grid-equal",
+          "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放 Skyliner 車票或いろり庵きらくそば照片",
           "mediaList": [
             {
@@ -65,7 +65,7 @@
           "lng": 140.4593,
           "zoom": 11,
           "title": "03. 疾行｜東北新幹線翼號與福島奇觀",
-          "mediaLayout": "grid-equal",
+          "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放新幹線列車或窗外積雪照片",
           "mediaList": [
             {
@@ -142,7 +142,24 @@
           "title": "02. 絕景｜山頂展望台與藏王地藏尊",
           "mediaLayout": "grid-equal",
           "mediaPlaceholder": "此處可放藏王樹冰、山頂霜淇淋或藏王地藏尊照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d2-ch2-1.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d2-ch2-2.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d2-ch2-3.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d2-ch2-4.mp4",
+              "caption": ""
+            }
+          ],
           "content": "步出地藏山頂站，零下低溫直衝腦門，登上 360 度展望台盡情與樹冰合照。接著躲進 1 樓的「レストラン山頂 (Restaurant Sancho)」來支霜淇淋配熱紅茶回溫（只收現金）。離開前敲響「開運之鐘」、參拜半身埋在白雪中的「藏王地藏尊」，還在棉花般的厚雪上開心往後倒體驗躺雪地，回程更幸運全家包下一整台纜車！<div class='callout-box callout-info'><div class='callout-icon'>🔋</div><div class='callout-content'><div class='callout-title'>極凍山頂手機保命秘訣</div>山頂氣溫極低，手機電量掉速非常驚人！不拍照時務必將<strong>手機與暖暖包一起放進外套懷裡回溫</strong>，避免瞬間凍到自動關機。</div></div>"
         },
         {
@@ -153,7 +170,24 @@
           "title": "03. 午餐｜音茶屋溫泉街的質感咖哩",
           "mediaLayout": "grid-equal",
           "mediaPlaceholder": "此處可放音茶屋湯咖哩或巧克力巴斯克照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d2-ch3-1.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d2-ch3-2.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d2-ch3-3.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d2-ch3-4.mp4",
+              "caption": ""
+            }
+          ],
           "content": "下纜車後步行 2 分鐘來到質感滿分的「音茶屋」。熱騰騰的湯咖哩、咖哩牛與牛蓋飯瞬間療癒飢腸轆轆的胃。最令人驚豔的是甜點「巧克力巴斯克 ft. 柚子檸檬醬」，微酸的自製果醬搭配濃郁巴斯克，清爽不死甜且層次感十足，絕對推薦！"
         },
         {
