@@ -42,7 +42,7 @@
         
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
         .trip-card {
@@ -59,14 +59,15 @@
             transform: translateY(-5px);
         }
         
-        /* 3:4 三格封面拼貼區塊 */
+        /* 3:4 三格封面拼貼區塊（手機與電腦皆嚴格三等份平分，不跑版） */
         .cover-collage {
-            display: flex;
-            aspect-ratio: 9 / 4; /* 三張 3:4 並排的黃金比例 (3+3+3 : 4) */
-            min-height: 220px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            aspect-ratio: 9 / 4; /* 三張 3:4 並排比例 */
         }
         .cover-collage div {
-            flex: 1;
+            min-width: 0;
             border-right: 2px solid white;
             background-color: var(--accent-brown);
             overflow: hidden;
@@ -178,7 +179,7 @@
             <div class="cover-collage">
                 <div><img src="media/malaysia_2027/cover-1.png" alt="封面照 1"></div>
                 <div><img src="media/malaysia_2027/cover-2.png" alt="封面照 2"></div>
-                <div><img src="media/malaysia_2027/cover-3.png" alt="封面照 3"></div>
+                <div><img src="media/malaysia_2027/cover-3.png" alt="封面照 3"</div>
             </div>
             <div class="card-content">
                 <h3>南洋星馬春季漫旅</h3>
