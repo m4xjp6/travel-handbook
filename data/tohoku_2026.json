@@ -468,7 +468,16 @@
           "title": "04. 漫步｜仙台站東口尋找麵包超人",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放麵包超人雕像或地磚照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d4-ch4-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch4-2.png",
+              "caption": ""
+            }
+          ],
           "content": "回到活動解散地仙台站東口，順便購買明天要使用的「仙台 2 日券」。在電梯出口的地磚與人群圍繞的「麵包超人」雕像合影，尋找八年級生的童年共同回憶。"
         },
         {
@@ -479,7 +488,24 @@
           "title": "05. 晚餐｜創作料理 真都 享用 A5 仙台牛饗宴",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放 A5 仙台牛或海膽炙燒料理照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d4-ch5-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch5-2.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch5-3.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch5-4.png",
+              "caption": ""
+            }
+          ],
           "content": "隱身在國分町凱旋門大樓 1 樓的「創作料理 真都 －マツ－」，享用預訂的高級暢飲套餐（¥8,800/人）。奢華的海膽與牛肉炙燒在口中炸裂，搭配綠茶解膩，度過完美的一天。<div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>用餐預訂小提醒</div>預訂不同的餐點套餐會有不同的「用餐限時」（2小時/2.5小時/3小時），預約時請務必確認方案內容！</div></div>"
         },
         {
@@ -490,7 +516,16 @@
           "title": "06. 住宿｜仙台御宿野乃溫泉飯店泡湯",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放天然溫泉大浴場或榻榻米走廊照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d4-ch6-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch6-2.png",
+              "caption": ""
+            }
+          ],
           "content": "緩步走回飯店，褪去厚重衣裳泡進天然溫泉大浴場中，讓熱騰騰的泉水放鬆緊繃的肌肉，完美結束充滿驚奇與美味的一天。準備迎接明天日本三景「松島」的到來！"
         }
       ]
@@ -508,7 +543,16 @@
           "title": "01. 出發｜搭乘 JR 仙石線前進松島海岸",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放 JR 仙台站月台或仙石線列車照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d5-ch1-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d5-ch1-2.png",
+              "caption": ""
+            }
+          ],
           "content": "早上在御宿野乃享用豐富的日式早餐後，步行至 JR 仙台站搭乘 08:30 發車的 JR 仙石線。大約 40 分鐘車程便順利抵達「松島海岸站」，沿途窗外風景逐漸轉為海景與林蔭，心情也跟著放鬆。<div class='callout-box callout-info'><div class='callout-icon'>🚆</div><div class='callout-content'><div class='callout-title'>JR 仙石線搭乘小撇步</div><ul><li><strong>IC 卡對應：</strong>松島海岸站支援 Suica、PASMO 等全國互通 IC 卡，直接嗶卡進出非常方便，不需要另外買紙本車票。</li><li><strong>座位選擇：</strong>去程建議坐在列車的<strong>右側</strong>，快到松島海岸站前可以搶先看到漂亮的海灣與島嶼風光！</li></ul></div></div>"
         },
         {
