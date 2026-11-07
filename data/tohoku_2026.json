@@ -440,7 +440,24 @@
           "title": "03. 採果｜JR Fruit Park Sendai Arahama 採草莓",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放草莓棚或紅寶石完熟草莓照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d4-ch3-1.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch3-2.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch3-3.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch3-4.png",
+              "caption": ""
+            }
+          ],
           "content": "下午搭乘活動巴士抵達草莓農場「JRフルーツパーク仙台あらはま」。聽完工作人員傳授「向上轉寶特瓶蓋」的輕鬆採摘訣竅與挑選蒂頭朝上完熟草莓的技巧後，展開 30 分鐘的草莓吃到飽甜蜜爆擊！"
         },
         {
