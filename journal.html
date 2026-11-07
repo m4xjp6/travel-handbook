@@ -139,19 +139,35 @@
             gap: 10px;
             width: 100%;
         }
+        /* 單張或垂直堆疊：100% 滿版 */
         .media-gallery.layout-single,
         .media-gallery.layout-stack {
             grid-template-columns: 1fr;
         }
+        /* 網頁版：自動依張數等比平分寬度 (2張=50%/50%、3張=33%/33%/33%、4張=25%/25%/25%/25%) */
         .media-gallery.layout-grid-equal,
         .media-gallery.layout-auto-2,
         .media-gallery.layout-auto-3,
         .media-gallery.layout-auto-4 {
             grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
         }
+        
+        /* 固定 3 等份（每張固定佔 33.3%，就算只放 1~2 張也是 33.3%） */
+        .media-gallery.layout-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        /* 固定 4 等份（每張固定佔 25%，就算只放 1~3 張也是 25%） */
+        .media-gallery.layout-grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        /* 雜誌風一寬一窄 */
         .media-gallery.layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
         .media-gallery.layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
+        .media-gallery.layout-grid-1-2-1 { grid-template-columns: 1fr 2fr 1fr; }
 
+        /* IG 風橫向滑動輪播 */
         .media-gallery.layout-carousel {
             display: flex;
             overflow-x: auto;
@@ -165,6 +181,7 @@
             scroll-snap-align: center;
         }
 
+        /* 單一媒體項目外觀 */
         .media-item {
             position: relative;
             min-width: 0;
@@ -181,6 +198,7 @@
             display: block;
             cursor: pointer;
         }
+        /* 網頁版並排時：全部固定為同一高度 (260px) */
         .layout-grid-2-1 .media-item,
         .layout-grid-1-2 .media-item,
         .layout-grid-equal .media-item,
