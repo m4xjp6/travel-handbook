@@ -591,7 +591,16 @@
           "title": "03. 美食｜松島魚市場大啖現烤牡蠣",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放松島魚市場烤牡蠣照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d5-ch3-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d5-ch3-2.mp4",
+              "caption": ""
+            }
+          ],
           "content": "結束一小時的浪漫遊船後，步行 10 分鐘來到在地饕客必訪的「松島魚市場」。一樓集結了現烤大牡蠣、生魚片丼飯等新鮮海味，現烤牡蠣鮮也沒有腥味，一口咬下超級滿足！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>松島魚市場用餐小提醒</div>尖峰時刻（11:30 - 13:00）座位區一位難求，建議採取分工合作，一人先找座位，其他人去排隊買烤牡蠣和海鮮丼！</div></div>"
         },
         {
