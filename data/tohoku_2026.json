@@ -416,7 +416,20 @@
           "title": "02. 體驗｜宮城藏王狐狸村雪中探險",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放狐狸村雪景或放養狐狸照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d4-ch2-1.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch2-2.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d4-ch2-3.mp4",
+              "caption": ""
+            }
+          ],
           "content": "抵達宮城藏王狐狸村。雖然因為風雪交加取消了抱狐狸體驗，但在雪白園區中看著成群狐狸在雪地裡穿梭，甚至調皮地咬了褲腳與衣襬，也是最近距離的深刻互動。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>狐狸村安全與參觀小提醒</div><ul><li><strong>絕對禁止觸摸：</strong>放養區狐狸具有野性，可能會咬人，只有在工作人員指導的體驗活動中才能觸碰。</li><li><strong>收好隨身物品：</strong>狐狸對懸掛物很有興趣，手機吊飾、手套繩務必收好。</li></ul></div></div>"
         },
         {
