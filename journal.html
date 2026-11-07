@@ -139,35 +139,19 @@
             gap: 10px;
             width: 100%;
         }
-        /* 單張或垂直堆疊：100% 滿版 */
         .media-gallery.layout-single,
         .media-gallery.layout-stack {
             grid-template-columns: 1fr;
         }
-        /* 網頁版：自動依張數等比平分寬度 (2張=50%/50%、3張=33%/33%/33%、4張=25%/25%/25%/25%) */
         .media-gallery.layout-grid-equal,
         .media-gallery.layout-auto-2,
         .media-gallery.layout-auto-3,
         .media-gallery.layout-auto-4 {
             grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
         }
-        
-        /* 固定 3 等份（每張固定佔 33.3%，就算只放 1~2 張也是 33.3%） */
-        .media-gallery.layout-grid-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        
-        /* 固定 4 等份（每張固定佔 25%，就算只放 1~3 張也是 25%） */
-        .media-gallery.layout-grid-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        
-        /* 雜誌風一寬一窄 */
         .media-gallery.layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
         .media-gallery.layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
-        .media-gallery.layout-grid-1-2-1 { grid-template-columns: 1fr 2fr 1fr; }
 
-        /* IG 風橫向滑動輪播 */
         .media-gallery.layout-carousel {
             display: flex;
             overflow-x: auto;
@@ -181,7 +165,6 @@
             scroll-snap-align: center;
         }
 
-        /* 單一媒體項目外觀 */
         .media-item {
             position: relative;
             min-width: 0;
@@ -198,7 +181,6 @@
             display: block;
             cursor: pointer;
         }
-        /* 網頁版並排時：全部固定為同一高度 (260px) */
         .layout-grid-2-1 .media-item,
         .layout-grid-1-2 .media-item,
         .layout-grid-equal .media-item,
@@ -265,7 +247,34 @@
         .callout-info { background-color: #eef4ff; border-left: 4px solid #3b82f6; }
         .callout-info .callout-title { color: #2563eb; }
 
-        .custom-marker { background-color: var(--accent-brown); border: 3px solid white; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        /* 地圖標記與互動樣式 */
+        .custom-marker {
+            background-color: var(--accent-brown);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .custom-marker:hover,
+        .custom-marker.active {
+            background-color: var(--accent-brown-dark);
+            transform: scale(1.35);
+            box-shadow: 0 0 0 4px rgba(255, 229, 153, 0.7), 0 3px 8px rgba(0,0,0,0.3);
+            z-index: 999 !important;
+        }
+        .marker-tooltip {
+            background: rgba(74, 74, 74, 0.92);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .marker-tooltip::before {
+            border-top-color: rgba(74, 74, 74, 0.92) !important;
+        }
 
         /* === 手機版：一排最多放 2 張照片 === */
         @media (max-width: 768px) {
@@ -276,7 +285,6 @@
             #content { padding: 20px; }
             .chapter { min-height: auto; margin-bottom: 30px; }
 
-            /* 手機版強制改成一排最多 2 張（50% - 50%） */
             .media-gallery.layout-grid-equal,
             .media-gallery.layout-auto-2,
             .media-gallery.layout-auto-3,
@@ -286,7 +294,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            /* 手機版並排照片高度調整，讓兩張並排比例更自然 */
             .layout-grid-2-1 .media-item,
             .layout-grid-1-2 .media-item,
             .layout-grid-equal .media-item,
@@ -328,6 +335,11 @@
         let observer = null;
         let videoObserver = null;
         let normalizedDays = [];
+
+        // 用於對應章節 DOM 與地圖 Marker，以及處理點擊滾動鎖定
+        let chapterMarkers = new Map();
+        let isClickScrolling = false;
+        let scrollUnlockTimer = null;
 
         fetch(`data/${tripId}.json`)
             .then(response => {
@@ -393,7 +405,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 判斷是否為實際媒體路徑（而非預留提示文字）
         function isMediaFile(str) {
             if (!str || typeof str !== 'string') return false;
             return /\.(jpeg|jpg|gif|png|webp|avif|svg|mp4|mov|webm)$/i.test(str) ||
@@ -401,21 +412,17 @@
                    str.includes('images/');
         }
 
-        // 判斷是否為影片檔
         function isVideoFile(str) {
             return /\.(mp4|mov|webm)$/i.test(str);
         }
 
-        // 產生章節的多媒體 HTML（支援單張、多張清單與 6 種排版）
         function buildMediaHTML(ch) {
             const items = [];
 
-            // 1. 先檢查單張欄位是否有實際圖片或影片
             if (isMediaFile(ch.mediaPlaceholder)) {
                 items.push({ src: ch.mediaPlaceholder, caption: '' });
             }
 
-            // 2. 再併入多張清單 (mediaList)
             if (Array.isArray(ch.mediaList)) {
                 ch.mediaList.forEach(item => {
                     const src = typeof item === 'string' ? item : item.src;
@@ -426,14 +433,12 @@
                 });
             }
 
-            // 3. 若完全沒有上傳檔案，但有預留文字，顯示原本的粉色預留框
             if (items.length === 0) {
                 return ch.mediaPlaceholder
                     ? `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>`
                     : '';
             }
 
-            // 4. 決定排版樣式 class
             let layout = ch.mediaLayout || 'auto';
             let layoutClass = `layout-${layout}`;
             if (layout === 'auto') {
@@ -441,7 +446,7 @@
                 else if (items.length === 2) layoutClass = 'layout-auto-2';
                 else if (items.length === 3) layoutClass = 'layout-auto-3';
                 else if (items.length === 4) layoutClass = 'layout-auto-4';
-                else layoutClass = 'layout-carousel'; // 超過 4 張自動切換為橫向滑動輪播
+                else layoutClass = 'layout-carousel';
             }
 
             const itemsHTML = items.map(item => {
@@ -467,7 +472,6 @@
             return `<div class="media-gallery ${layoutClass}">${itemsHTML}</div>`;
         }
 
-        // 點擊「↻ 重播」按鈕時，從第 0 秒重新播放
         function replayVideo(btn) {
             const video = btn.parentElement.querySelector('video');
             if (video) {
@@ -476,7 +480,6 @@
             }
         }
 
-        // 監聽滾動：滑到影片時自動從頭播放，滑離時自動暫停
         function initVideoAutoplay() {
             if (videoObserver) videoObserver.disconnect();
             videoObserver = new IntersectionObserver((entries) => {
@@ -494,7 +497,6 @@
             document.querySelectorAll('.auto-video').forEach(v => videoObserver.observe(v));
         }
 
-        // 點圖放大燈箱功能
         function openLightbox(src) {
             let overlay = document.getElementById('lightbox-overlay');
             if (!overlay) {
@@ -508,12 +510,25 @@
             overlay.style.display = 'flex';
         }
 
+        // 統一同步切換章節卡片與地圖圓點的 Active 狀態
+        function setActiveChapter(activeSection, activeMarker) {
+            document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+            if (activeSection) activeSection.classList.add('active');
+
+            document.querySelectorAll('.custom-marker').forEach(el => el.classList.remove('active'));
+            const marker = activeMarker || chapterMarkers.get(activeSection);
+            if (marker && marker.getElement()) {
+                marker.getElement().classList.add('active');
+            }
+        }
+
         function renderDay(dayKey) {
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = '';
             if (observer) observer.disconnect();
 
             markersLayer.clearLayers();
+            chapterMarkers.clear();
             if (routeLine) map.removeLayer(routeLine);
 
             const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
@@ -559,8 +574,41 @@
                     contentDiv.appendChild(section);
 
                     if (ch.lat && ch.lng) {
-                        L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
+                        const marker = L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
+
+                        // 滑鼠懸停時顯示「天數｜章節標題」
+                        marker.bindTooltip(`${dayObj.day}｜${ch.title}`, {
+                            direction: 'top',
+                            offset: [0, -10],
+                            className: 'marker-tooltip'
+                        });
+
+                        // 點擊地圖節點跳轉至對應章節卡片
+                        marker.on('click', () => {
+                            isClickScrolling = true;
+                            clearTimeout(scrollUnlockTimer);
+
+                            setActiveChapter(section, marker);
+                            map.flyTo([ch.lat, ch.lng], ch.zoom || 13, { animate: true, duration: 1.2 });
+
+                            const topNav = document.querySelector('.top-nav');
+                            const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
+                            const targetY = window.pageYOffset + section.getBoundingClientRect().top - navBottom - 20;
+
+                            window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+
+                            scrollUnlockTimer = setTimeout(() => {
+                                isClickScrolling = false;
+                            }, 900);
+                        });
+
+                        chapterMarkers.set(section, marker);
                         latlngs.push([ch.lat, ch.lng]);
+
+                        // 預設高亮第一個節點
+                        if (chaptersList.length === 1 && marker.getElement()) {
+                            marker.getElement().classList.add('active');
+                        }
                     }
                 });
             });
@@ -570,6 +618,9 @@
             }
 
             observer = new IntersectionObserver((entries) => {
+                // 若正在執行點擊地圖觸發的平滑滾動，暫不觸發中途章節的飛行
+                if (isClickScrolling) return;
+
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const chapter = entry.target;
@@ -577,8 +628,7 @@
                         const targetLng = parseFloat(chapter.getAttribute('data-lng'));
                         const targetZoom = parseInt(chapter.getAttribute('data-zoom'));
 
-                        document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
-                        chapter.classList.add('active');
+                        setActiveChapter(chapter);
 
                         if (!isNaN(targetLat) && !isNaN(targetLng)) {
                             map.flyTo([targetLat, targetLng], targetZoom, { animate: true, duration: 1.5 });
