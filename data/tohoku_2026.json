@@ -822,7 +822,24 @@
           "title": "05. 歷史｜仙台城跡與伊達政宗騎馬像",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放伊達政宗騎馬像或仙台市景遠眺照",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d6-ch5-1.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch5-2.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch5-3.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch5-4.mp4",
+              "caption": ""
+            }
+          ],
           "content": "搭乘巴士抵達仙台城跡站，爬上階梯迎面而來的就是經典的伊達政宗騎馬像。當初政宗為了向德川家康表示沒有謀反之意，仙台城是難得沒有天守閣的一座城池。順著他的目光遠眺整個仙台市景，一旁還有宮城縣護國神社，感受歷史的厚重與傳承。"
         },
         {
