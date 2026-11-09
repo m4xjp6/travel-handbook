@@ -746,7 +746,24 @@
           "title": "02. 震撼｜仙台大觀音內部參拜與展望",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放大觀音正面全景或龍口入口照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d6-ch2-1.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch2-2.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch2-3.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch2-4.mp4",
+              "caption": ""
+            }
+          ],
           "content": "下車後站在祂的腳下，脖子仰到酸都還看不到頂！入口設有龍口雕像，寓意開運與升龍。內部共有 12 層樓，搭電梯直達頂樓欣賞壯麗市景，沿著螺旋樓梯慢慢下樓，逐層參觀 108 尊象徵人類煩惱的胎內佛像，是個神聖莊嚴與巨大恐懼交織的奇妙體驗。<div class='callout-box callout-info'><div class='callout-icon'>📝</div><div class='callout-content'><div class='callout-title'>景點資訊</div><ul><li><strong>名稱：</strong>仙台天道白衣大観音</li><li><strong>門票：</strong>¥500 (會給一張守護札)</li></ul></div></div>"
         },
         {
@@ -757,7 +774,16 @@
           "title": "03. 祈福｜油掛大黑天與獨特浴油法",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放油掛大黑天神像或彩帶祈願照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d6-ch3-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch3-2.mp4",
+              "caption": ""
+            }
+          ],
           "content": "從大觀音出來後，順道參訪了入口旁邊的小神社──油掛大黑天。我們入鄉隨俗，舀起一旁的專用油，慢慢地淋在大黑天像上，誠心祈求旅途一切平安。一旁還有粉色（求良緣）與紫色（求職場順利）的彩帶可以綁上祈願。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>特殊的參拜方式：浴油法</div><ul><li>1. 點亮蠟燭 ➔ 2. 點燃線香 ➔ 3. 邊澆油邊唸大黑天真言共 7 次。</li></ul></div></div>"
         },
         {
@@ -768,7 +794,24 @@
           "title": "04. 午餐｜山頭火拉麵朝聖美味辣味噌拉麵",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放辣味噌拉麵或叉燒照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d6-ch4-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch4-2.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch4-3.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch4-4.png",
+              "caption": ""
+            }
+          ],
           "content": "充滿麻油香氣的油掛大黑天勾起了大家的食慾，步行半小時來到源自北海道的名店「らーめん山頭火 仙台南中山店」。我每次必點的「辣味噌拉麵 (辛味噌らーめん)」， Q 彈帶勁的麵體吸附著濃郁鹹辣的豚骨味噌湯底，在冷冷的冬天喝下一口熱辣的湯，簡直幸福滿分！"
         },
         {
