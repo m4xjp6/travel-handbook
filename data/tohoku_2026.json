@@ -593,19 +593,15 @@
           "mediaPlaceholder": "此處可放五大堂結緣橋或福浦橋紅橋照片",
           "mediaList": [
             {
-              "src": "media/tohoku_2026/d5-ch4-1.png",
+              "src": "media/tohoku_2026/d5-ch3-1.png",
               "caption": ""
             },
             {
-              "src": "media/tohoku_2026/d5-ch4-2.mp4",
+              "src": "media/tohoku_2026/d5-ch3-2.mp4",
               "caption": ""
             },
             {
-              "src": "media/tohoku_2026/d5-ch4-3.mp4",
-              "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d5-ch4-4.mp4",
+              "src": "media/tohoku_2026/d5-ch3-3.png",
               "caption": ""
             }
           ],
@@ -643,18 +639,6 @@
             {
               "src": "media/tohoku_2026/d5-ch5-1.png",
               "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d5-ch5-2.mp4",
-              "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d5-ch5-3.mp4",
-              "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d5-ch5-4.mp4",
-              "caption": ""
             }
           ],
           "content": "透過館內兩百多尊栩栩如生的等身大蠟像與二十五個歷史場景，生動重現「奧州獨眼龍」伊達政宗波瀾壯闊的一生，在光影與語音導覽間細細品味戰國名將的傳奇故事。"
@@ -667,35 +651,6 @@
           "title": "06. 歷史｜國寶古剎瑞嚴寺莊嚴巡禮",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放瑞嚴寺杉樹林參道或本堂照片",
-          "mediaList": [
-            {
-              "src": "media/tohoku_2026/d5-ch7-1.png",
-              "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d5-ch7-2.mp4",
-              "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d5-ch7-3.mp4",
-              "caption": ""
-            },
-            {
-              "src": "media/tohoku_2026/d5-ch7-4.mp4",
-              "caption": ""
-            }
-          ],
-          "content": "散步前往松島最具代表性的歷史名寺──瑞嚴寺。這是東北地區最著名的禪寺，也是江戶時代仙台藩祖「伊達政宗」的家族菩提寺。走進兩旁高聳巨大杉樹林的參道，肅穆氛圍讓人瞬間沉澱，本堂與庫裡的桃山樣式建築雕刻極具歷史價值。"
-        },
-        ,
-        {
-          "id": "d5-ch7",
-          "lat": 38.2614,
-          "lng": 140.8720,
-          "zoom": 16,
-          "title": "07. 晚餐｜牛たん料理 閣 ブランドーム本店",
-          "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放炭烤厚切牛舌定食、半熟牛舌或店門招牌照片",
           "mediaList": [
             {
               "src": "media/tohoku_2026/d5-ch6-1.png",
@@ -714,6 +669,27 @@
               "caption": ""
             }
           ],
+          "content": "散步前往松島最具代表性的歷史名寺──瑞嚴寺。這是東北地區最著名的禪寺，也是江戶時代仙台藩祖「伊達政宗」的家族菩提寺。走進兩旁高聳巨大杉樹林的參道，肅穆氛圍讓人瞬間沉澱，本堂與庫裡的桃山樣式建築雕刻極具歷史價值。"
+        },
+        ,
+        {
+          "id": "d5-ch7",
+          "lat": 38.2614,
+          "lng": 140.8720,
+          "zoom": 16,
+          "title": "07. 晚餐｜牛たん料理 閣 ブランドーム本店",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放炭烤厚切牛舌定食、半熟牛舌或店門招牌照片",
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d5-ch7-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d5-ch7-2.png",
+              "caption": ""
+            }
+          ],
           "content": "返回仙台市區品嚐人氣名店「閣」，招牌炭火現烤牛舌外層微焦酥脆、內裡軟嫩多汁，搭配溫潤清爽的牛尾湯與麥飯，為充實的松島一日行程畫下滿足的句點。"
         }
         {
@@ -724,7 +700,12 @@
           "title": "08. 住宿｜仙台御宿野乃溫泉泡湯與宵夜",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放御宿野乃溫泉飯店或宵夜拉麵照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d5-ch8-1.png",
+              "caption": ""
+            }
+          ],
           "content": "搭乘夕陽時分的 JR 仙石線返回仙台站，晚餐在車站附近簡單解決後回飯店泡湯。今晚同樣以御宿野乃溫泉飯店的天然溫泉與免費宵夜醬油拉麵作為完美句點，帶著滿滿的暖意入眠。"
         }
       ]
