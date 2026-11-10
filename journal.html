@@ -369,13 +369,51 @@
             border-top-color: rgba(74, 74, 74, 0.92) !important;
         }
 
+        /* 1、固定多媒體呈現高度樣式 */
+        .media-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f5efe6;
+            height: 260px; /* 統一固定整體外框高度 */
+            display: flex;
+            flex-direction: column;
+        }
+        .media-container {
+            width: 100%;
+            height: 260px; /* 確保內容容器完全填滿 */
+            position: relative;
+            overflow: hidden;
+        }
+        .media-item img,
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 完美裁剪填滿 */
+            display: block;
+            cursor: pointer;
+        }
+
+        .media-caption {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: center;
+            padding: 6px 8px;
+            background: #faf7f2;
+        }
+
+        /* 2、手機排版 RWD 限制（同一高度最多 2 張） */
         @media (max-width: 768px) {
-            .container { flex-direction: column; }
-            #map-container { width: 100vw; height: 38vh; position: sticky; top: 0; z-index: 200; }
-            #right-panel { width: 100vw; }
-            .top-nav { top: 38vh; padding: 12px 20px; }
-            #content { padding: 20px; }
-            .chapter { min-height: auto; margin-bottom: 30px; }
+            .media-gallery {
+                grid-template-columns: repeat(2, 1fr) !important; /* 強制覆蓋所有網頁版排版 */
+            }
+            .media-gallery.layout-single,
+            .media-gallery.layout-stack {
+                grid-template-columns: 1fr !important; /* 只有單張或堆疊維持 1 欄 */
+            }
+            /* 手機版適度降低高度避免太窄長 */
+            .media-item, .media-container {
+                height: 180px; 
         }
     </style>
 </head>
