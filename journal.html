@@ -15,17 +15,30 @@
             --text-dark: #4A4A4A;
             --text-light: #7A7A7A;
         }
-        body, html { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-dark); height: 100%; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            height: 100%;
+        }
         .container { display: flex; width: 100%; }
-        
+
         /* 左側地圖區塊 */
-        #map-container { position: sticky; top: 0; width: 50vw; height: 100vh; background-color: var(--accent-pink); }
+        #map-container {
+            position: sticky;
+            top: 0;
+            width: 50vw;
+            height: 100vh;
+            background-color: var(--accent-pink);
+        }
         #map { width: 100%; height: 100%; }
-        
+
         /* 右側內容區塊 */
         #right-panel { width: 50vw; box-sizing: border-box; }
-        
-        /* 頂部常駐：返回首頁與天數切換導覽列 */
+
+        /* 頂部常駐導覽列 */
         .top-nav {
             position: sticky;
             top: 0;
@@ -52,7 +65,7 @@
             font-size: 1.15rem;
             color: var(--accent-brown-dark);
         }
-        
+
         /* 天數按鈕列 (Day Tabs) */
         .day-tabs {
             display: flex;
@@ -73,10 +86,7 @@
             white-space: nowrap;
             transition: all 0.2s;
         }
-        .day-tab:hover {
-            background: var(--accent-pink);
-            color: white;
-        }
+        .day-tab:hover { background: var(--accent-pink); color: white; }
         .day-tab.active {
             background: var(--accent-brown);
             color: white;
@@ -125,27 +135,76 @@
         }
 
         /* 單一章節卡片 */
-        .chapter { min-height: 65vh; margin-bottom: 45px; padding: 30px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15); position: relative; transition: opacity 0.4s ease; opacity: 0.35; }
+        .chapter {
+            min-height: 65vh;
+            margin-bottom: 45px;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15);
+            position: relative;
+            transition: opacity 0.4s ease;
+            opacity: 0.35;
+        }
         .chapter.active { opacity: 1; }
-        .chapter h2 { color: var(--accent-brown); font-size: 1.3rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
-        .chapter-body { line-height: 1.8; color: var(--text-light); font-size: 1rem; letter-spacing: 0.04em; white-space: pre-line; }
-        .photo-placeholder { width: 100%; min-height: 220px; background-color: var(--accent-pink); border-radius: 8px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; letter-spacing: 0.1em; overflow: hidden; }
-        .photo-placeholder img { width: 100%; height: auto; display: block; object-fit: cover; }
+        .chapter h2 {
+            color: var(--accent-brown);
+            font-size: 1.3rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent-yellow);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .chapter-body {
+            line-height: 1.8;
+            color: var(--text-light);
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            white-space: pre-line;
+        }
+        .photo-placeholder {
+            width: 100%;
+            min-height: 220px;
+            background-color: var(--accent-pink);
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            overflow: hidden;
+        }
 
-        /* === 網頁版（電腦版）：多媒體畫廊容器與版面配置 === */
+        /* === 網頁版（電腦版）多媒體畫廊排版系統 === */
         .media-gallery {
             margin: 20px 0;
             display: grid;
             gap: 10px;
             width: 100%;
         }
-        
-        /* 網頁版 layout-auto：依實際項目動態平分欄位 (100%, 50%-50%, 33%-33%-33%, 25%-25%-25%-25%) */
-        .media-gallery.layout-auto {
-            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+        .media-gallery.layout-single,
+        .media-gallery.layout-stack {
+            grid-template-columns: 1fr;
         }
-        
-        /* 網頁版 layout-grid-4 強制四等分 (25% x 4) */
+        .media-gallery.layout-single .media-item { max-height: 440px; }
+
+        /* 網頁版 auto 依數量精確平分：1張=100%, 2張=50%, 3張=33%, 4張以上=25% */
+        .media-gallery.layout-auto {
+            grid-template-columns: 1fr;
+        }
+        .media-gallery.layout-auto:has(.media-item:nth-child(2):last-child) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .media-gallery.layout-auto:has(.media-item:nth-child(3):last-child) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .media-gallery.layout-auto:has(.media-item:nth-child(4)) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        /* 網頁版 grid-4 或 auto-4 強制 25% 四等分 */
         .media-gallery.layout-grid-4,
         .media-gallery.layout-grid-equal,
         .media-gallery.layout-auto-4 {
@@ -154,8 +213,6 @@
 
         .media-gallery.layout-auto-2 { grid-template-columns: repeat(2, 1fr); }
         .media-gallery.layout-auto-3 { grid-template-columns: repeat(3, 1fr); }
-        .media-gallery.layout-single,
-        .media-gallery.layout-stack { grid-template-columns: 1fr; }
         .media-gallery.layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
         .media-gallery.layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
 
@@ -173,14 +230,14 @@
             scroll-snap-align: center;
         }
 
-        /* 單一媒體項目外觀與固定高度設定 */
+        /* 單一媒體項目外觀與固定高度 */
         .media-item {
             position: relative;
             min-width: 0;
             border-radius: 10px;
             overflow: hidden;
             background-color: #f5efe6;
-            height: 260px; /* 網頁版統一固定高度 */
+            height: 260px;
         }
         .media-item img,
         .media-item video {
@@ -189,35 +246,40 @@
             object-fit: cover;
             display: block;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
+        .media-item img:hover { transform: scale(1.02); }
 
         .media-caption {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            text-align: center;
-            padding: 6px 8px;
-            background: #faf7f2;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.65));
+            color: #fff;
+            font-size: 0.78rem;
+            padding: 16px 10px 6px;
+            pointer-events: none;
         }
 
         /* 影片重播按鈕 */
         .replay-btn {
             position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(74, 74, 74, 0.75);
-            color: white;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
             border: none;
-            padding: 5px 10px;
-            border-radius: 16px;
-            font-size: 0.78rem;
+            border-radius: 14px;
+            padding: 4px 10px;
+            font-size: 0.75rem;
             cursor: pointer;
-            z-index: 5;
             backdrop-filter: blur(4px);
-            transition: background 0.2s;
+            z-index: 5;
         }
-        .replay-btn:hover { background: var(--accent-brown); }
+        .replay-btn:hover { background: rgba(0, 0, 0, 0.8); }
 
-        /* 點圖放大燈箱 (Lightbox) */
+        /* 點擊放大燈箱 */
         #lightbox-overlay {
             display: none;
             position: fixed;
@@ -226,31 +288,73 @@
             z-index: 9999;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 24px;
             cursor: zoom-out;
         }
         #lightbox-overlay img {
             max-width: 92vw;
             max-height: 90vh;
-            border-radius: 8px;
-            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
         }
 
-        /* 內建：四色重點底色框 (Callout Box) */
-        .callout-box { display: flex; align-items: flex-start; padding: 14px 18px; border-radius: 8px; margin: 16px 0; font-size: 0.92rem; line-height: 1.6; color: #333; white-space: normal; }
-        .callout-icon { font-size: 1.2rem; margin-right: 12px; flex-shrink: 0; }
-        .callout-content { flex-grow: 1; }
-        .callout-title { font-weight: bold; margin-bottom: 4px; }
-        .callout-warning { background-color: #fdf6ec; border-left: 4px solid #e6a23c; }
-        .callout-warning .callout-title { color: #b88230; }
-        .callout-tip { background-color: #f0f9eb; border-left: 4px solid #67c23a; }
-        .callout-tip .callout-title { color: #529b2e; }
-        .callout-info { background-color: #eef4ff; border-left: 4px solid #3b82f6; }
-        .callout-info .callout-title { color: #2563eb; }
+        /* 地圖標記圓點與互動樣式 */
+        .custom-marker { background: transparent; border: none; }
+        .custom-marker .marker-dot {
+            width: 16px;
+            height: 16px;
+            box-sizing: border-box;
+            background-color: var(--accent-brown);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .custom-marker:hover .marker-dot,
+        .custom-marker.active .marker-dot {
+            background-color: var(--accent-brown-dark);
+            transform: scale(1.35);
+            box-shadow: 0 0 0 4px rgba(255, 229, 153, 0.7), 0 3px 8px rgba(0,0,0,0.3);
+        }
+        .custom-marker:hover,
+        .custom-marker.active {
+            z-index: 900 !important;
+        }
 
-        .custom-marker { background-color: var(--accent-brown); border: 3px solid white; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        /* 路線上的方向小箭頭 (- - > - - >) */
+        .route-arrow-icon { background: transparent; border: none; pointer-events: none; }
+        .route-arrow-inner {
+            width: 14px; height: 14px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent-brown-dark); font-weight: bold; font-size: 13px; line-height: 1;
+            text-shadow: 0 0 3px #fff, 0 0 3px #fff;
+        }
 
-        /* === 5. 手機檢視時：不論 data 設定，在同一高度最多排版 2 張 === */
+        /* 🦊 沿街移動的小狐狸角色樣式 */
+        .fox-traveler-icon { background: transparent; border: none; z-index: 2000 !important; pointer-events: none; }
+        .fox-wrapper {
+            width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            background: #fff; border: 2.5px solid var(--accent-brown-dark);
+            border-radius: 50%; box-shadow: 0 4px 12px rgba(166, 137, 124, 0.55);
+            font-size: 20px; transition: transform 0.15s ease;
+        }
+        .fox-wrapper.walking { animation: foxWalkBounce 0.32s infinite alternate ease-in-out; }
+        @keyframes foxWalkBounce {
+            0% { margin-top: 0px; }
+            100% { margin-top: -6px; }
+        }
+
+        .marker-tooltip {
+            background: rgba(74, 74, 74, 0.92);
+            color: #fff; border: none; border-radius: 6px;
+            padding: 4px 10px; font-size: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .marker-tooltip::before { border-top-color: rgba(74, 74, 74, 0.92) !important; }
+
+        /* === 手機版 RWD 限制：不論設定為何，在同一高度最多排版 2 張 === */
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             #map-container { width: 100vw; height: 38vh; position: sticky; top: 0; z-index: 200; }
@@ -259,7 +363,6 @@
             #content { padding: 20px; }
             .chapter { min-height: auto; margin-bottom: 30px; }
 
-            /* 手機版強制全面覆蓋為一排最多 2 張 (50%-50%)，單張維持 1 欄 */
             .media-gallery {
                 grid-template-columns: repeat(2, 1fr) !important;
             }
@@ -267,10 +370,8 @@
             .media-gallery.layout-stack {
                 grid-template-columns: 1fr !important;
             }
-
-            /* 手機版並排項目高度調整 */
             .media-item {
-                height: 200px;
+                height: 180px;
             }
         }
     </style>
@@ -280,12 +381,12 @@
     <div class="container">
         <!-- 左側地圖 -->
         <div id="map-container"><div id="map"></div></div>
-        
+
         <!-- 右側導覽列與日記內容 -->
         <div id="right-panel">
             <div class="top-nav">
                 <div class="nav-header">
-                    <a href="index.html" class="back-link">&lt; 書櫃</a>
+                    <a href="index.html" class="back-link">← 返回手帳書櫃</a>
                     <h2 class="trip-main-title" id="trip-title">讀取中...</h2>
                 </div>
                 <div class="day-tabs" id="day-tabs"></div>
@@ -300,20 +401,27 @@
         const tripId = urlParams.get('trip') || 'tohoku_2026';
 
         let map = null;
-        let markersLayer = null;
-        let routeLine = null;
+        let baseRouteLayer = null;   // 底層：整天輕量乾淨的淺虛線 (- - - -)
+        let activeRouteLayer = null; // 當前移動段：清楚的轉彎虛線與方向箭頭 (- - > - - >)
+        let markersLayer = null;     // 景點圓點圖層
+        let foxMarker = null;        // 🦊 小狐狸移動角色
+        let foxAnimFrame = null;     // 小狐狸動畫計時器
+
         let observer = null;
         let videoObserver = null;
         let normalizedDays = [];
+        let currentChaptersList = [];
+        let currentActiveIndex = 0;
 
+        const segmentCoordsCache = {};
         let chapterMarkers = new Map();
         let isClickScrolling = false;
         let scrollUnlockTimer = null;
 
         fetch(`data/${tripId}.json`)
-            .then(response => {
-                if (!response.ok) throw new Error('找不到該旅程的資料檔');
-                return response.json();
+            .then(res => {
+                if (!res.ok) throw new Error('找不到該旅程的資料檔');
+                return res.json();
             })
             .then(data => {
                 document.title = data.tripTitle || '電子旅行手帳';
@@ -331,7 +439,7 @@
                     normalizedDays = Object.values(grouped);
                 }
 
-                initMap();
+                initMap(normalizedDays);
                 buildDayTabs();
                 renderDay('ALL');
             })
@@ -339,13 +447,248 @@
                 document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
             });
 
-        function initMap() {
-            map = L.map('map', { zoomControl: false }).setView([35.6895, 139.6917], 7);
+        function initMap(daysData) {
+            let startLat = 35.6895, startLng = 139.6917, startZoom = 7;
+            if (daysData && daysData.length > 0 && daysData[0].chapters && daysData[0].chapters.length > 0) {
+                const firstCh = daysData[0].chapters[0];
+                if (firstCh.lat && firstCh.lng) {
+                    startLat = firstCh.lat;
+                    startLng = firstCh.lng;
+                    startZoom = firstCh.zoom || 13;
+                }
+            }
+
+            map = L.map('map', { zoomControl: false }).setView([startLat, startLng], startZoom);
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri',
                 maxZoom: 16
             }).addTo(map);
+
+            baseRouteLayer = L.layerGroup().addTo(map);
+            activeRouteLayer = L.layerGroup().addTo(map);
             markersLayer = L.layerGroup().addTo(map);
+        }
+
+        function getDistanceKm(lat1, lng1, lat2, lng2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        function autoDetectMode(prevCh, currCh, distKm) {
+            if (currCh.transport) return currCh.transport.toString().trim().toLowerCase();
+            const text = `${currCh.title || ''} ${currCh.content || ''}`;
+            if (distKm > 250 || /直飛|航班|班機|起飛|降落/.test(text)) return 'flight';
+            if (/遊船|觀光船|渡輪|乘船/.test(text)) return 'boat';
+            if (/纜車|山頂站/.test(currCh.title || '')) return 'ropeway';
+            if (/新幹線|高鐵/.test(currCh.title || '')) return 'hsr';
+            if (/JR|仙石線|奧羽本線|電鐵|Skyliner|火車|台鐵/i.test(currCh.title || '')) return 'train';
+            if (/地鐵|捷運|Metro/i.test(currCh.title || '')) return 'metro';
+            return distKm <= 3.5 ? 'walk' : 'bus';
+        }
+
+        async function getDetailedPath(prevCh, currCh) {
+            const cacheKey = `auto_v1_${prevCh.id}_to_${currCh.id}`;
+            if (segmentCoordsCache[cacheKey]) return segmentCoordsCache[cacheKey];
+
+            const start = [prevCh.lat, prevCh.lng];
+            const end = [currCh.lat, currCh.lng];
+            const distKm = getDistanceKm(prevCh.lat, prevCh.lng, currCh.lat, currCh.lng);
+            const mode = autoDetectMode(prevCh, currCh, distKm);
+
+            const curveModes = {
+                'flight': 0.22, 'airplane': 0.22, 'plane': 0.22, '飛機': 0.22, '航班': 0.22,
+                'hsr': 0.12, 'shinkansen': 0.12, '高鐵': 0.12, '新幹線': 0.12,
+                'train': 0.08, 'jr': 0.08, '火車': 0.08, '台鐵': 0.08,
+                'metro': 0.05, 'mrt': 0.05, 'subway': 0.05, '捷運': 0.05, '地鐵': 0.05,
+                'boat': 0.12, 'ferry': 0.12, '遊船': 0.12, '渡輪': 0.12,
+                'ropeway': 0.04, 'cable_car': 0.04, '纜車': 0.04
+            };
+
+            if (curveModes[mode] !== undefined || distKm > 250) {
+                const curv = curveModes[mode] !== undefined ? curveModes[mode] : 0.22;
+                const arcCoords = generateCurve(start, end, curv, 36);
+                segmentCoordsCache[cacheKey] = arcCoords;
+                return arcCoords;
+            }
+
+            const saved = localStorage.getItem(cacheKey);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                segmentCoordsCache[cacheKey] = parsed;
+                return parsed;
+            }
+
+            try {
+                const profile = ['walk', 'foot', '步行', '散步'].includes(mode) ? 'foot' : 'driving';
+                const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${prevCh.lng},${prevCh.lat};${currCh.lng},${currCh.lat}?overview=full&geometries=geojson`;
+                const res = await fetch(osrmUrl);
+                const data = await res.json();
+                if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                    const roadCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+                    segmentCoordsCache[cacheKey] = roadCoords;
+                    try { localStorage.setItem(cacheKey, JSON.stringify(roadCoords)); } catch (e) {}
+                    return roadCoords;
+                }
+            } catch (e) {}
+
+            const fallbackCoords = generateCurve(start, end, 0.05, 24);
+            segmentCoordsCache[cacheKey] = fallbackCoords;
+            return fallbackCoords;
+        }
+
+        function generateCurve(start, end, curvature = 0.15, segments = 32) {
+            const [lat1, lng1] = start, [lat2, lng2] = end;
+            const midLat = (lat1 + lat2) / 2, midLng = (lng1 + lng2) / 2;
+            const dLat = lat2 - lat1, dLng = lng2 - lng1;
+            const ctrlLat = midLat - dLng * curvature;
+            const ctrlLng = midLng + dLat * curvature;
+
+            const points = [];
+            for (let i = 0; i <= segments; i++) {
+                const t = i / segments;
+                const lat = (1 - t) * (1 - t) * lat1 + 2 * (1 - t) * t * ctrlLat + t * t * lat2;
+                const lng = (1 - t) * (1 - t) * lng1 + 2 * (1 - t) * t * ctrlLng + t * t * lng2;
+                points.push([Number(lat.toFixed(5)), Number(lng.toFixed(5))]);
+            }
+            return points;
+        }
+
+        function drawActiveArrowRoute(coords) {
+            activeRouteLayer.clearLayers();
+            if (!coords || coords.length < 2) return;
+
+            L.polyline(coords, {
+                color: '#a6897c', weight: 3.5, opacity: 0.9, dashArray: '6, 8'
+            }).addTo(activeRouteLayer);
+
+            const arrowCount = Math.min(7, Math.max(2, Math.floor(coords.length / 6)));
+            for (let k = 1; k <= arrowCount; k++) {
+                const idx = Math.min(coords.length - 1, Math.floor((k / (arrowCount + 1)) * coords.length));
+                const p1 = coords[idx - 1], p2 = coords[idx];
+                if (!p1 || !p2) continue;
+
+                const angleDeg = Math.atan2(p2[0] - p1[0], p2[1] - p1[1]) * (180 / Math.PI);
+                const arrowIcon = L.divIcon({
+                    className: 'route-arrow-icon',
+                    html: `<div class="route-arrow-inner" style="transform: rotate(${-angleDeg}deg);">❯</div>`,
+                    iconSize: [14, 14], iconAnchor: [7, 7]
+                });
+                L.marker([(p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2], {
+                    icon: arrowIcon, interactive: false
+                }).addTo(activeRouteLayer);
+            }
+        }
+
+        function animateFoxAlongPath(coords, targetZoom) {
+            if (foxAnimFrame) cancelAnimationFrame(foxAnimFrame);
+            if (!coords || coords.length === 0) return;
+
+            if (!foxMarker) {
+                const foxIcon = L.divIcon({
+                    className: 'fox-traveler-icon',
+                    html: '<div class="fox-wrapper" id="fox-avatar">🦊</div>',
+                    iconSize: [36, 36], iconAnchor: [18, 18]
+                });
+                foxMarker = L.marker(coords[0], { icon: foxIcon, zIndexOffset: 2000 }).addTo(map);
+            } else {
+                foxMarker.setLatLng(coords[0]);
+            }
+
+            if (coords.length === 1) {
+                map.flyTo(coords[0], targetZoom || 14, { animate: true, duration: 1.2 });
+                return;
+            }
+
+            const cumDist = [0];
+            let totalDist = 0;
+            for (let i = 1; i < coords.length; i++) {
+                const segDist = Math.hypot(coords[i][0] - coords[i - 1][0], coords[i][1] - coords[i - 1][1]);
+                totalDist += segDist;
+                cumDist.push(totalDist);
+            }
+
+            if (totalDist === 0) {
+                foxMarker.setLatLng(coords[coords.length - 1]);
+                map.flyTo(coords[coords.length - 1], targetZoom || 14, { animate: true, duration: 1.0 });
+                return;
+            }
+
+            const bounds = L.latLngBounds(coords);
+            map.flyToBounds(bounds, { padding: [70, 70], maxZoom: targetZoom || 15, animate: true, duration: 0.7 });
+
+            const foxEl = document.getElementById('fox-avatar');
+            if (foxEl) foxEl.classList.add('walking');
+
+            const duration = 1900;
+            const startTime = performance.now();
+
+            function step(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(1, elapsed / duration);
+                const eased = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                const targetD = eased * totalDist;
+
+                let segIdx = 0;
+                while (segIdx < cumDist.length - 2 && cumDist[segIdx + 1] < targetD) {
+                    segIdx++;
+                }
+
+                const segStartD = cumDist[segIdx];
+                const segLen = cumDist[segIdx + 1] - segStartD;
+                const ratio = segLen > 0 ? (targetD - segStartD) / segLen : 0;
+
+                const p1 = coords[segIdx], p2 = coords[segIdx + 1];
+                const curLat = p1[0] + (p2[0] - p1[0]) * ratio;
+                const curLng = p1[1] + (p2[1] - p1[1]) * ratio;
+
+                foxMarker.setLatLng([curLat, curLng]);
+
+                const avatar = document.getElementById('fox-avatar');
+                if (avatar && Math.abs(p2[1] - p1[1]) > 0.00001) {
+                    const scaleX = (p2[1] - p1[1]) < 0 ? 1 : -1;
+                    avatar.style.transform = `scaleX(${scaleX})`;
+                }
+
+                if (progress < 1) {
+                    foxAnimFrame = requestAnimationFrame(step);
+                } else {
+                    if (avatar) avatar.classList.remove('walking');
+                    map.flyTo(coords[coords.length - 1], targetZoom || 15, { animate: true, duration: 0.9 });
+                }
+            }
+
+            foxAnimFrame = requestAnimationFrame(step);
+        }
+
+        async function transitionToChapter(newIndex) {
+            const targetCh = currentChaptersList[newIndex];
+            if (!targetCh || !targetCh.lat || !targetCh.lng) return;
+
+            if (newIndex !== currentActiveIndex && Math.abs(newIndex - currentActiveIndex) === 1) {
+                const fromCh = currentChaptersList[currentActiveIndex];
+                const isForward = newIndex > currentActiveIndex;
+
+                const rawPath = await getDetailedPath(isForward ? fromCh : targetCh, isForward ? targetCh : fromCh);
+                const moveCoords = isForward ? rawPath : [...rawPath].reverse();
+
+                drawActiveArrowRoute(moveCoords);
+                animateFoxAlongPath(moveCoords, targetCh.zoom || 14);
+            } else {
+                activeRouteLayer.clearLayers();
+                if (newIndex > 0) {
+                    const prevCh = currentChaptersList[newIndex - 1];
+                    const pathCoords = await getDetailedPath(prevCh, targetCh);
+                    drawActiveArrowRoute(pathCoords);
+                }
+                animateFoxAlongPath([[targetCh.lat, targetCh.lng]], targetCh.zoom || 14);
+            }
+
+            currentActiveIndex = newIndex;
         }
 
         function buildDayTabs() {
@@ -408,7 +751,6 @@
                     : '';
             }
 
-            // 支援 3. 網頁檢視 auto 與 4. grid-4 設定
             let layout = ch.mediaLayout || 'auto';
             let layoutClass = `layout-${layout}`;
             if (layout === 'auto') {
@@ -422,10 +764,9 @@
             const itemsHTML = items.map(item => {
                 const captionHTML = item.caption ? `<div class="media-caption">${item.caption}</div>` : '';
                 if (isVideoFile(item.src)) {
-                    // 2. 當上傳為影片檔時需設定 autoplay, muted, loop, playsinline 達成無限循環，並帶有重播鈕
                     return `
                         <div class="media-item">
-                            <video class="auto-video" src="${item.src}" autoplay muted loop playsinline preload="metadata"></video>
+                            <video class="auto-video" src="${item.src}" muted loop playsinline preload="metadata"></video>
                             <button type="button" class="replay-btn" onclick="replayVideo(this)">↻ 重播</button>
                             ${captionHTML}
                         </div>
@@ -498,12 +839,20 @@
             if (observer) observer.disconnect();
 
             markersLayer.clearLayers();
+            baseRouteLayer.clearLayers();
+            activeRouteLayer.clearLayers();
             chapterMarkers.clear();
-            if (routeLine) map.removeLayer(routeLine);
 
-            const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
-            const latlngs = [];
-            let chaptersList = [];
+            const dotIcon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div class="marker-dot"></div>',
+                iconSize: [16, 16],
+                iconAnchor: [8, 8]
+            });
+
+            currentChaptersList = [];
+            currentActiveIndex = 0;
+            const simpleLatLngs = [];
 
             const daysToRender = dayKey === 'ALL'
                 ? normalizedDays
@@ -512,8 +861,8 @@
             daysToRender.forEach(dayObj => {
                 const banner = document.createElement('div');
                 banner.className = 'day-banner';
-                
-                let fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
+
+                const fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
 
                 banner.innerHTML = `
                     <div class="day-banner-header">
@@ -525,16 +874,19 @@
                 contentDiv.appendChild(banner);
 
                 (dayObj.chapters || []).forEach((ch) => {
-                    chaptersList.push(ch);
+                    const chIndex = currentChaptersList.length;
+                    currentChaptersList.push(ch);
+
                     const section = document.createElement('section');
-                    section.className = `chapter ${chaptersList.length === 1 ? 'active' : ''}`;
+                    section.className = `chapter ${chIndex === 0 ? 'active' : ''}`;
                     section.id = `section-${ch.id}`;
                     section.setAttribute('data-id', ch.id);
+                    section.setAttribute('data-index', chIndex);
                     section.setAttribute('data-lat', ch.lat);
                     section.setAttribute('data-lng', ch.lng);
                     section.setAttribute('data-zoom', ch.zoom || 13);
 
-                    let mediaHTML = buildMediaHTML(ch);
+                    const mediaHTML = buildMediaHTML(ch);
 
                     section.innerHTML = `
                         <h2>${ch.title}</h2>
@@ -544,6 +896,8 @@
                     contentDiv.appendChild(section);
 
                     if (ch.lat && ch.lng) {
+                        simpleLatLngs.push([ch.lat, ch.lng]);
+
                         const marker = L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
 
                         marker.bindTooltip(`${dayObj.day}｜${ch.title}`, {
@@ -557,7 +911,7 @@
                             clearTimeout(scrollUnlockTimer);
 
                             setActiveChapter(section, marker);
-                            map.flyTo([ch.lat, ch.lng], ch.zoom || 13, { animate: true, duration: 1.2 });
+                            transitionToChapter(chIndex);
 
                             const topNav = document.querySelector('.top-nav');
                             const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
@@ -567,21 +921,27 @@
 
                             scrollUnlockTimer = setTimeout(() => {
                                 isClickScrolling = false;
-                            }, 900);
+                            }, 950);
                         });
 
                         chapterMarkers.set(section, marker);
-                        latlngs.push([ch.lat, ch.lng]);
-
-                        if (chaptersList.length === 1 && marker.getElement()) {
-                            marker.getElement().classList.add('active');
-                        }
                     }
                 });
             });
 
-            if (latlngs.length > 0) {
-                drawRoadRoute(latlngs, chaptersList);
+            if (simpleLatLngs.length > 1) {
+                L.polyline(simpleLatLngs, {
+                    color: '#C4A99E',
+                    weight: 2,
+                    opacity: 0.45,
+                    dashArray: '5, 10'
+                }).addTo(baseRouteLayer);
+            }
+
+            if (currentChaptersList.length > 0) {
+                const firstSec = document.querySelector('.chapter');
+                setActiveChapter(firstSec);
+                transitionToChapter(0);
             }
 
             observer = new IntersectionObserver((entries) => {
@@ -590,14 +950,11 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const chapter = entry.target;
-                        const targetLat = parseFloat(chapter.getAttribute('data-lat'));
-                        const targetLng = parseFloat(chapter.getAttribute('data-lng'));
-                        const targetZoom = parseInt(chapter.getAttribute('data-zoom'));
+                        const newIdx = parseInt(chapter.getAttribute('data-index'), 10);
 
                         setActiveChapter(chapter);
-
-                        if (!isNaN(targetLat) && !isNaN(targetLng)) {
-                            map.flyTo([targetLat, targetLng], targetZoom, { animate: true, duration: 1.5 });
+                        if (!isNaN(newIdx)) {
+                            transitionToChapter(newIdx);
                         }
                     }
                 });
@@ -605,38 +962,6 @@
 
             document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
             initVideoAutoplay();
-        }
-
-        function drawRoadRoute(latlngs, chaptersList) {
-            if (latlngs.length < 2) {
-                if (chaptersList.length > 0) {
-                    map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                }
-                return;
-            }
-
-            const coordsString = latlngs.map(pt => `${pt[1]},${pt[0]}`).join(';');
-            const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${coordsString}?overview=full&geometries=geojson`;
-
-            fetch(osrmUrl)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-                        const fullRouteCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
-                        routeLine = L.polyline(fullRouteCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
-                    } else {
-                        routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
-                    }
-                    if (chaptersList.length > 0) {
-                        map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                    }
-                })
-                .catch(() => {
-                    routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
-                    if (chaptersList.length > 0) {
-                        map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                    }
-                });
         }
     </script>
 </body>
