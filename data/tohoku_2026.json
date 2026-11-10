@@ -1033,7 +1033,16 @@
           "title": "02. 午餐｜民福北京烤鴨店上野店",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放北京烤鴨或美食照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d7-ch2-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d7-ch2-2.png",
+              "caption": ""
+            }
+          ],
           "content": "本來想朝聖排隊名店「らーめん 鴨to葱」，無奈排隊人潮實在太驚人只好放棄。轉身前往離車站不遠的「民福北京烤鴨店」，意外遇到會講中文的店員，點了一大桌美味餐點，四個人吃得超級飽足！"
         },
         {
