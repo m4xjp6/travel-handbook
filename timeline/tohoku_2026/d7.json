@@ -1,0 +1,142 @@
+[
+  {
+    "endTime" : "2026-01-15T09:15:00.121+09:00",
+    "startTime" : "2026-01-14T18:32:47.428+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.366938",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJBbQeco8pil8ROFMLA934W-Q",
+        "placeLocation" : "geo:38.263097,140.875948"
+      },
+      "probability" : "0.924636"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T09:26:42.999+09:00",
+    "startTime" : "2026-01-15T09:15:00.121+09:00",
+    "activity" : {
+      "probability" : "0.924491",
+      "end" : "geo:38.261768,140.881514",
+      "topCandidate" : {
+        "type" : "walking",
+        "probability" : "0.858237"
+      },
+      "distanceMeters" : "527.917847",
+      "start" : "geo:38.263057,140.876458"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T09:27:42.999+09:00",
+    "startTime" : "2026-01-15T09:26:42.999+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.485139",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJ6zzTPSIoil8RKIJWfuuyGZU",
+        "placeLocation" : "geo:38.261992,140.881532"
+      },
+      "probability" : "0.524737"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T11:45:15.119+09:00",
+    "startTime" : "2026-01-15T09:27:42.999+09:00",
+    "activity" : {
+      "probability" : "0.995741",
+      "end" : "geo:35.744132,139.751907",
+      "topCandidate" : {
+        "type" : "in train",
+        "probability" : "0.978795"
+      },
+      "distanceMeters" : "301483.312500",
+      "start" : "geo:38.261244,140.882028"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T12:07:57.478+09:00",
+    "startTime" : "2026-01-15T11:45:15.119+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.019163",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJ9wt-IG6NGGARCrJW_vu6UJs",
+        "placeLocation" : "geo:35.744893,139.751755"
+      },
+      "probability" : "0.518781"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T12:26:34.999+09:00",
+    "startTime" : "2026-01-15T12:07:57.478+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.276912",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJCwbTk56OGGARRJJPe22ziWw",
+        "placeLocation" : "geo:35.714167,139.777409"
+      },
+      "probability" : "0.526221"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T13:44:53.993+09:00",
+    "startTime" : "2026-01-15T12:26:34.999+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.289632",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJ0c5jEJ6OGGARBwiwjODYrb0",
+        "placeLocation" : "geo:35.711171,139.773894"
+      },
+      "probability" : "0.884637"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T15:33:13.446+09:00",
+    "startTime" : "2026-01-15T13:44:53.993+09:00",
+    "activity" : {
+      "probability" : "0.595244",
+      "end" : "geo:35.714599,139.768886",
+      "topCandidate" : {
+        "type" : "walking",
+        "probability" : "0.547639"
+      },
+      "distanceMeters" : "80.942688",
+      "start" : "geo:35.714713,139.768000"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T16:04:00.000+09:00",
+    "startTime" : "2026-01-15T15:33:13.446+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.402319",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJf2129yiMGGAR9I6Yoe-1uHY",
+        "placeLocation" : "geo:35.716015,139.772882"
+      },
+      "probability" : "0.809073"
+    }
+  },
+  {
+    "endTime" : "2026-01-15T19:20:07.999+09:00",
+    "startTime" : "2026-01-15T16:04:00.000+09:00",
+    "activity" : {
+      "probability" : "0.572451",
+      "end" : "geo:35.709124,139.773120",
+      "topCandidate" : {
+        "type" : "walking",
+        "probability" : "0.565382"
+      },
+      "distanceMeters" : "442.258453",
+      "start" : "geo:35.708863,139.774282"
+    }
+  }
+]
