@@ -3,8 +3,8 @@ backend:
   branch: main
 
 # 預設全域媒體資料夾
-media_folder: "media/tohoku_2026"
-public_folder: "media/tohoku_2026"
+media_folder: "media"
+public_folder: "media"
 
 collections:
   - name: "trips"
