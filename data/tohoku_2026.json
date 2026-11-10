@@ -922,7 +922,24 @@
           "title": "06. 巡禮｜大崎八幡宮國寶權現造建築",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放大崎八幡宮黑底金箔御社殿照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d6-ch6-1.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch6-2.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch6-3.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch6-4.png",
+              "caption": ""
+            }
+          ],
           "content": "搭乘 Loople仙台來到仙台第一守護神──大崎八幡宮。眼前由伊達政宗下令建造的「御社殿」採用了華麗的權現造建築，黑底點綴金箔與五彩雕刻，與樸素的長床形成強烈對比。這裡對祈求「必勝」相當靈驗，可以看到許多運動選手的繪馬！"
         },
         {
@@ -935,7 +952,20 @@
           "title": "07. 祭典｜零下溫度的松焚祭與屋台美食",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放御神火巨大火堆或屋台攤販照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d6-ch7-1.mp4",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch7-2.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d6-ch7-3.png",
+              "caption": ""
+            }
+          ],
           "content": "大崎八幡宮聞名世界的莫過於一年一度的「松焚祭 (どんと祭)」，人們將新年裝飾堆成小山點燃「御神火」送走年神。現場還能看見成千上萬在零下低溫中進行「裸參拜」的參拜者，伴隨清脆鈴鐺聲，結合信仰與毅力的氛圍讓人震撼。參道兩旁的屋台擺滿熱食，喝上一口熱湯暖胃又暖心！"
         },
         {
