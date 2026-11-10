@@ -15,17 +15,30 @@
             --text-dark: #4A4A4A;
             --text-light: #7A7A7A;
         }
-        body, html { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-color); color: var(--text-dark); height: 100%; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            height: 100%;
+        }
         .container { display: flex; width: 100%; }
-        
+
         /* 左側地圖區塊 */
-        #map-container { position: sticky; top: 0; width: 50vw; height: 100vh; background-color: var(--accent-pink); }
+        #map-container {
+            position: sticky;
+            top: 0;
+            width: 50vw;
+            height: 100vh;
+            background-color: var(--accent-pink);
+        }
         #map { width: 100%; height: 100%; }
-        
+
         /* 右側內容區塊 */
         #right-panel { width: 50vw; box-sizing: border-box; }
-        
-        /* 頂部常駐：返回首頁與天數切換導覽列 */
+
+        /* 頂部常駐導覽列 */
         .top-nav {
             position: sticky;
             top: 0;
@@ -52,7 +65,7 @@
             font-size: 1.15rem;
             color: var(--accent-brown-dark);
         }
-        
+
         /* 天數按鈕列 (Day Tabs) */
         .day-tabs {
             display: flex;
@@ -73,10 +86,7 @@
             white-space: nowrap;
             transition: all 0.2s;
         }
-        .day-tab:hover {
-            background: var(--accent-pink);
-            color: white;
-        }
+        .day-tab:hover { background: var(--accent-pink); color: white; }
         .day-tab.active {
             background: var(--accent-brown);
             color: white;
@@ -86,7 +96,7 @@
         /* 文章內容容器 */
         #content { padding: 30px 40px 60px 40px; }
 
-        /* 每日大標題橫幅：統一兩個半透明膠囊標籤的尺寸與格式 */
+        /* 每日大標題橫幅 */
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
@@ -103,19 +113,14 @@
         }
         .day-banner .day-badge,
         .day-banner .field-test-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            display: inline-block;
             background: rgba(255, 255, 255, 0.28);
             color: white;
             padding: 4px 12px;
-            height: 24px;
-            box-sizing: border-box;
             border-radius: 12px;
             font-size: 0.8rem;
             letter-spacing: 0.08em;
             font-weight: bold;
-            line-height: 1;
         }
         .day-banner h1 {
             margin: 0;
@@ -125,116 +130,133 @@
         }
 
         /* 單一章節卡片 */
-        .chapter { min-height: 65vh; margin-bottom: 45px; padding: 30px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15); position: relative; transition: opacity 0.4s ease; opacity: 0.35; }
+        .chapter {
+            min-height: 65vh;
+            margin-bottom: 45px;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15);
+            position: relative;
+            transition: opacity 0.4s ease;
+            opacity: 0.35;
+        }
         .chapter.active { opacity: 1; }
-        .chapter h2 { color: var(--accent-brown); font-size: 1.3rem; margin-top: 0; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 10px; display: inline-block; }
-        .chapter-body { line-height: 1.8; color: var(--text-light); font-size: 1rem; letter-spacing: 0.04em; white-space: pre-line; }
-        .photo-placeholder { width: 100%; min-height: 220px; background-color: var(--accent-pink); border-radius: 8px; margin: 20px 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.9rem; letter-spacing: 0.1em; overflow: hidden; }
-        .photo-placeholder img { width: 100%; height: auto; display: block; object-fit: cover; }
+        .chapter h2 {
+            color: var(--accent-brown);
+            font-size: 1.3rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent-yellow);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .chapter-body {
+            line-height: 1.8;
+            color: var(--text-light);
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            white-space: pre-line;
+        }
+        .photo-placeholder {
+            width: 100%;
+            min-height: 220px;
+            background-color: var(--accent-pink);
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            overflow: hidden;
+        }
 
-        /* === 網頁版（電腦版）：多媒體畫廊容器與版面配置 === */
+        /* 多媒體畫廊排版系統 */
         .media-gallery {
             margin: 20px 0;
             display: grid;
             gap: 10px;
             width: 100%;
         }
-        /* 單張或垂直堆疊：100% 滿版 */
-        .media-gallery.layout-single,
-        .media-gallery.layout-stack {
-            grid-template-columns: 1fr;
-        }
-        /* 網頁版：自動依張數等比平分寬度 (2張=50%/50%、3張=33%/33%/33%、4張=25%/25%/25%/25%) */
-        .media-gallery.layout-grid-equal,
-        .media-gallery.layout-auto-2,
-        .media-gallery.layout-auto-3,
-        .media-gallery.layout-auto-4 {
-            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-        }
-        
-        /* 固定 3 等份（每張固定佔 33.3%，就算只放 1~2 張也是 33.3%） */
-        .media-gallery.layout-grid-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        
-        /* 固定 4 等份（每張固定佔 25%，就算只放 1~3 張也是 25%） */
-        .media-gallery.layout-grid-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        
-        /* 雜誌風一寬一窄 */
-        .media-gallery.layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
-        .media-gallery.layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
-        .media-gallery.layout-grid-1-2-1 { grid-template-columns: 1fr 2fr 1fr; }
-
-        /* IG 風橫向滑動輪播 */
-        .media-gallery.layout-carousel {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 12px;
-            padding-bottom: 8px;
-            scrollbar-width: thin;
-        }
-        .media-gallery.layout-carousel .media-item {
-            flex: 0 0 82%;
-            scroll-snap-align: center;
-        }
-
-        /* 單一媒體項目外觀 */
         .media-item {
             position: relative;
-            min-width: 0;
             border-radius: 10px;
             overflow: hidden;
-            background-color: #f5efe6;
+            background: #f3ece8;
+            width: 100%;
+            height: 100%;
         }
         .media-item img,
         .media-item video {
             width: 100%;
             height: 100%;
-            max-height: 460px;
             object-fit: cover;
             display: block;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
-        /* 網頁版並排時：全部固定為同一高度 (260px) */
-        .layout-grid-2-1 .media-item,
-        .layout-grid-1-2 .media-item,
-        .layout-grid-equal .media-item,
-        .layout-auto-2 .media-item,
-        .layout-auto-3 .media-item,
-        .layout-auto-4 .media-item {
-            height: 260px;
-        }
-
+        .media-item img:hover { transform: scale(1.02); }
         .media-caption {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            text-align: center;
-            padding: 6px 8px;
-            background: #faf7f2;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.65));
+            color: #fff;
+            font-size: 0.78rem;
+            padding: 16px 10px 6px;
+            pointer-events: none;
         }
-
-        /* 影片重播按鈕 */
         .replay-btn {
             position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(74, 74, 74, 0.75);
-            color: white;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
             border: none;
-            padding: 5px 10px;
-            border-radius: 16px;
-            font-size: 0.78rem;
+            border-radius: 14px;
+            padding: 4px 10px;
+            font-size: 0.75rem;
             cursor: pointer;
-            z-index: 5;
             backdrop-filter: blur(4px);
-            transition: background 0.2s;
+            z-index: 5;
         }
-        .replay-btn:hover { background: var(--accent-brown); }
+        .replay-btn:hover { background: rgba(0, 0, 0, 0.8); }
 
-        /* 點圖放大燈箱 (Lightbox) */
+        /* 畫廊版型配置 */
+        .layout-single { grid-template-columns: 1fr; }
+        .layout-single .media-item { max-height: 440px; }
+        .layout-auto-2, .layout-grid-equal { grid-template-columns: 1fr 1fr; }
+        .layout-auto-2 .media-item, .layout-grid-equal .media-item { aspect-ratio: 4 / 5; }
+        .layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
+        .layout-grid-2-1 .media-item { aspect-ratio: 4 / 3; }
+        .layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
+        .layout-grid-1-2 .media-item { aspect-ratio: 4 / 3; }
+        .layout-auto-3 { grid-template-columns: 1fr 1fr; }
+        .layout-auto-3 .media-item:first-child { grid-column: span 2; aspect-ratio: 16 / 9; }
+        .layout-auto-3 .media-item:nth-child(n+2) { aspect-ratio: 1 / 1; }
+        .layout-grid-1-2-1 { grid-template-columns: 1fr 2fr 1fr; }
+        .layout-grid-1-2-1 .media-item { aspect-ratio: 3 / 4; }
+        .layout-grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .layout-grid-3 .media-item { aspect-ratio: 3 / 4; }
+        .layout-auto-4, .layout-grid-4 { grid-template-columns: 1fr 1fr; }
+        .layout-auto-4 .media-item, .layout-grid-4 .media-item { aspect-ratio: 4 / 3; }
+        .layout-stack { grid-template-columns: 1fr; gap: 14px; }
+        .layout-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 6px;
+        }
+        .layout-carousel .media-item {
+            flex: 0 0 78%;
+            scroll-snap-align: center;
+            aspect-ratio: 4 / 3;
+        }
+
+        /* 點擊放大燈箱 */
         #lightbox-overlay {
             display: none;
             position: fixed;
@@ -243,14 +265,14 @@
             z-index: 9999;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 24px;
             cursor: zoom-out;
         }
         #lightbox-overlay img {
             max-width: 92vw;
             max-height: 90vh;
-            border-radius: 8px;
-            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
         }
 
         /* 內建：四色重點底色框 (Callout Box) */
@@ -265,7 +287,7 @@
         .callout-info { background-color: #eef4ff; border-left: 4px solid #3b82f6; }
         .callout-info .callout-title { color: #2563eb; }
 
-        /* 地圖標記與互動樣式（外層定位、內層圓點，徹底解決 Zoom 偏移問題） */
+        /* 地圖標記圓點（雙層結構，縮放時圓心 100% 鎖定不偏移） */
         .custom-marker {
             background: transparent;
             border: none;
@@ -289,8 +311,56 @@
         }
         .custom-marker:hover,
         .custom-marker.active {
-            z-index: 999 !important;
+            z-index: 900 !important;
         }
+
+        /* 路線上的方向小箭頭 (- - > - - >) */
+        .route-arrow-icon {
+            background: transparent;
+            border: none;
+            pointer-events: none;
+        }
+        .route-arrow-inner {
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-brown-dark);
+            font-weight: bold;
+            font-size: 13px;
+            line-height: 1;
+            text-shadow: 0 0 3px #fff, 0 0 3px #fff;
+        }
+
+        /* 🦊 沿街移動的小狐狸角色樣式 */
+        .fox-traveler-icon {
+            background: transparent;
+            border: none;
+            z-index: 2000 !important;
+            pointer-events: none;
+        }
+        .fox-wrapper {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 2.5px solid var(--accent-brown-dark);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(166, 137, 124, 0.55);
+            font-size: 20px;
+            transition: transform 0.15s ease;
+        }
+        .fox-wrapper.walking {
+            animation: foxWalkBounce 0.32s infinite alternate ease-in-out;
+        }
+        @keyframes foxWalkBounce {
+            0% { margin-top: 0px; }
+            100% { margin-top: -6px; }
+        }
+
         .marker-tooltip {
             background: rgba(74, 74, 74, 0.92);
             color: #fff;
@@ -304,7 +374,6 @@
             border-top-color: rgba(74, 74, 74, 0.92) !important;
         }
 
-        /* === 手機版：一排最多放 2 張照片 === */
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             #map-container { width: 100vw; height: 38vh; position: sticky; top: 0; z-index: 200; }
@@ -312,26 +381,6 @@
             .top-nav { top: 38vh; padding: 12px 20px; }
             #content { padding: 20px; }
             .chapter { min-height: auto; margin-bottom: 30px; }
-
-            .media-gallery.layout-grid-equal,
-            .media-gallery.layout-auto-2,
-            .media-gallery.layout-auto-3,
-            .media-gallery.layout-auto-4,
-            .media-gallery.layout-grid-2-1,
-            .media-gallery.layout-grid-4,
-            .media-gallery.layout-grid-1-2-1,
-            .media-gallery.layout-grid-1-2 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .layout-grid-2-1 .media-item,
-            .layout-grid-1-2 .media-item,
-            .layout-grid-equal .media-item,
-            .layout-auto-2 .media-item,
-            .layout-auto-3 .media-item,
-            .layout-auto-4 .media-item {
-                height: 200px;
-            }
         }
     </style>
 </head>
@@ -340,12 +389,12 @@
     <div class="container">
         <!-- 左側地圖 -->
         <div id="map-container"><div id="map"></div></div>
-        
+
         <!-- 右側導覽列與日記內容 -->
         <div id="right-panel">
             <div class="top-nav">
                 <div class="nav-header">
-                    <a href="index.html" class="back-link">&lt; 書櫃</a>
+                    <a href="index.html" class="back-link">← 返回手帳書櫃</a>
                     <h2 class="trip-main-title" id="trip-title">讀取中...</h2>
                 </div>
                 <div class="day-tabs" id="day-tabs"></div>
@@ -360,207 +409,58 @@
         const tripId = urlParams.get('trip') || 'tohoku_2026';
 
         let map = null;
-        let markersLayer = null;
-        let routeLayerGroup = null;
+        let baseRouteLayer = null;   // 底層：整天輕量乾淨的淺虛線 (- - - -)
+        let activeRouteLayer = null; // 當前移動段：清楚的轉彎路線與方向箭頭 (- - > - - >)
+        let markersLayer = null;     // 景點圓點圖層
+        let foxMarker = null;        // 🦊 小狐狸移動角色
+        let foxAnimFrame = null;     // 小狐狸動畫計時器
+
         let observer = null;
         let videoObserver = null;
         let normalizedDays = [];
+        let currentChaptersList = [];
+        let currentActiveIndex = 0;
 
-        // 儲存從 timeline/tohoku_2026.json 解析出的歷史軌跡資料
-        let timelinePoints = [];      // 依時間排序的純座標陣列 [[lat, lng], ...]
-        let timelineChapterMap = {};  // 若檔案內已按章節 ID 分類 {"d1-ch2": [[lat, lng], ...]}
-        let timelineSearchCursor = 0; // 記錄目前比對到的時間軸索引，確保依行程順序往後找
+        // 快取每天的 Google Timeline 座標陣列 (例如 { "d1": [[lat,lng], ...], "d2": [...] })
+        const dayTimelineCache = {};
+        // 快取已經算過的 A->B 路線段
+        const segmentCoordsCache = {};
 
         let chapterMarkers = new Map();
         let isClickScrolling = false;
         let scrollUnlockTimer = null;
 
-        // 同步讀取 data/tohoku_2026.json 與 timeline/tohoku_2026.json
-        Promise.all([
-            fetch(`data/${tripId}.json`).then(res => {
+        fetch(`data/${tripId}.json`)
+            .then(res => {
                 if (!res.ok) throw new Error('找不到該旅程的資料檔');
                 return res.json();
-            }),
-            fetch(`timeline/${tripId}.json`)
-                .then(res => res.ok ? res.json() : null)
-                .catch(() => null) // 若尚未上傳 timeline 檔案則自動略過，不影響網頁運作
-        ])
-        .then(([data, rawTimeline]) => {
-            document.title = data.tripTitle || '電子旅行手帳';
-            document.getElementById('trip-title').textContent = data.tripTitle || '';
+            })
+            .then(data => {
+                document.title = data.tripTitle || '電子旅行手帳';
+                document.getElementById('trip-title').textContent = data.tripTitle || '';
 
-            // 解析 Google 時間軸檔案
-            if (rawTimeline) {
-                parseTimelineFile(rawTimeline);
-            }
-
-            if (Array.isArray(data.days) && data.days.length > 0) {
-                normalizedDays = data.days;
-            } else if (Array.isArray(data.chapters)) {
-                const grouped = {};
-                data.chapters.forEach(ch => {
-                    const d = ch.day || 'Day 01';
-                    if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
-                    grouped[d].chapters.push(ch);
-                });
-                normalizedDays = Object.values(grouped);
-            }
-
-            initMap();
-            buildDayTabs();
-            renderDay('ALL');
-        })
-        .catch(error => {
-            document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
-        });
-
-        /**
-         * 自動解析 timeline/tohoku_2026.json（相容 Google Maps 匯出格式與自訂格式）
-         */
-        function parseTimelineFile(raw) {
-            timelinePoints = [];
-            timelineChapterMap = {};
-
-            // 格式 A：如果是已經按章節 ID 分好的物件，例如 { "d2-ch1": [[38.1, 140.3], ...] }
-            if (!Array.isArray(raw) && !raw.semanticSegments && !raw.timelineObjects && !raw.locations && !raw.features) {
-                timelineChapterMap = raw;
-                return;
-            }
-
-            // 格式 B：手機新版 Google Maps 匯出的 Timeline.json (semanticSegments)
-            if (Array.isArray(raw.semanticSegments)) {
-                const temp = [];
-                raw.semanticSegments.forEach(seg => {
-                    if (Array.isArray(seg.timelinePath)) {
-                        seg.timelinePath.forEach(pt => {
-                            const coord = parseLatLngString(pt.point);
-                            if (coord) {
-                                temp.push({
-                                    time: pt.time ? new Date(pt.time).getTime() : 0,
-                                    coord
-                                });
-                            }
-                        });
-                    }
-                });
-                temp.sort((a, b) => a.time - b.time);
-                timelinePoints = temp.map(item => item.coord);
-                return;
-            }
-
-            // 格式 C：GeoJSON 格式
-            if (raw.features && Array.isArray(raw.features)) {
-                raw.features.forEach(f => {
-                    if (f.geometry && f.geometry.type === 'LineString') {
-                        f.geometry.coordinates.forEach(c => timelinePoints.push([c[1], c[0]]));
-                    }
-                });
-                return;
-            }
-
-            // 格式 D：純座標陣列 [[lat, lng], ...]
-            if (Array.isArray(raw)) {
-                timelinePoints = raw;
-            }
-        }
-
-        // 解析 Google 時間軸字串 (相容 Android "38.3721°, 141.0595°" 與 iOS "geo:38.3721,141.0595")
-        function parseLatLngString(str) {
-            if (!str || typeof str !== 'string') return null;
-            const cleaned = str.replace('geo:', '').replace(/°/g, '').trim();
-            const parts = cleaned.split(',').map(s => parseFloat(s.trim()));
-            if (parts.length >= 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
-                return [Number(parts[0].toFixed(5)), Number(parts[1].toFixed(5))];
-            }
-            return null;
-        }
-
-        // 計算兩個經緯度之間的直線距離（單位：公里）
-        function getDistanceKm(lat1, lng1, lat2, lng2) {
-            const R = 6371;
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLng = (lng2 - lng1) * Math.PI / 180;
-            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLng / 2) * Math.sin(dLng / 2);
-            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        }
-
-        /**
-         * 從單一 timelinePoints 陣列中，自動擷取「從 prevCh 到 currCh」的真實 GPS 軌跡段
-         */
-        function extractTimelineSegment(prevCh, currCh) {
-            // 1. 若檔案內有明確指定該章節 ID 的軌跡
-            if (timelineChapterMap[currCh.id] && timelineChapterMap[currCh.id].length > 1) {
-                return timelineChapterMap[currCh.id];
-            }
-
-            if (timelinePoints.length < 2) return null;
-
-            const thresholdKm = 1.2; // 判定「抵達景點附近」的半徑容許值（1.2 公里內）
-            let startIdx = -1;
-            let bestStartDist = Infinity;
-
-            // 從上次找到的游標位置往後搜尋起點 (prevCh)
-            for (let i = timelineSearchCursor; i < timelinePoints.length; i++) {
-                const [lat, lng] = timelinePoints[i];
-                const dist = getDistanceKm(prevCh.lat, prevCh.lng, lat, lng);
-                if (dist <= thresholdKm) {
-                    if (dist < bestStartDist) {
-                        bestStartDist = dist;
-                        startIdx = i;
-                    }
-                } else if (startIdx !== -1 && i - startIdx > 15) {
-                    // 已經離開起點範圍，停止尋找起點
-                    break;
+                if (Array.isArray(data.days) && data.days.length > 0) {
+                    normalizedDays = data.days;
+                } else if (Array.isArray(data.chapters)) {
+                    const grouped = {};
+                    data.chapters.forEach(ch => {
+                        const d = ch.day || 'Day 01';
+                        if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
+                        grouped[d].chapters.push(ch);
+                    });
+                    normalizedDays = Object.values(grouped);
                 }
-            }
 
-            // 若從游標找不到，嘗試從頭搜尋一次（以防使用者單獨切換某一天 Tab）
-            if (startIdx === -1) {
-                for (let i = 0; i < timelinePoints.length; i++) {
-                    const [lat, lng] = timelinePoints[i];
-                    const dist = getDistanceKm(prevCh.lat, prevCh.lng, lat, lng);
-                    if (dist <= thresholdKm && dist < bestStartDist) {
-                        bestStartDist = dist;
-                        startIdx = i;
-                    }
-                }
-            }
-
-            if (startIdx === -1) return null;
-
-            // 從起點往後搜尋終點 (currCh)，最多往後找 800 個定位點避免跨天誤判
-            let endIdx = -1;
-            let bestEndDist = Infinity;
-            const maxLookAhead = Math.min(timelinePoints.length, startIdx + 800);
-
-            for (let j = startIdx + 1; j < maxLookAhead; j++) {
-                const [lat, lng] = timelinePoints[j];
-                const dist = getDistanceKm(currCh.lat, currCh.lng, lat, lng);
-                if (dist <= thresholdKm) {
-                    if (dist < bestEndDist) {
-                        bestEndDist = dist;
-                        endIdx = j;
-                    }
-                } else if (endIdx !== -1 && j - endIdx > 10) {
-                    break;
-                }
-            }
-
-            if (endIdx !== -1 && endIdx > startIdx) {
-                timelineSearchCursor = endIdx; // 更新游標給下一章節使用
-                const sliced = timelinePoints.slice(startIdx, endIdx + 1);
-                // 將首尾座標與章節圓點精準接合
-                return [[prevCh.lat, prevCh.lng], ...sliced, [currCh.lat, currCh.lng]];
-            }
-
-            return null;
-        }
+                initMap(normalizedDays);
+                buildDayTabs();
+                renderDay('ALL');
+            })
+            .catch(error => {
+                document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
+            });
 
         function initMap(daysData) {
-            // 自動抓取該旅程第一個章節的座標作為初始視角（若無資料則預設停在台灣）
-            let startLat = 23.6978, startLng = 120.9605, startZoom = 7;
+            let startLat = 35.6895, startLng = 139.6917, startZoom = 7;
             if (daysData && daysData.length > 0 && daysData[0].chapters && daysData[0].chapters.length > 0) {
                 const firstCh = daysData[0].chapters[0];
                 if (firstCh.lat && firstCh.lng) {
@@ -575,8 +475,432 @@
                 attribution: 'Tiles &copy; Esri',
                 maxZoom: 16
             }).addTo(map);
-            routeLayerGroup = L.layerGroup().addTo(map);
+
+            baseRouteLayer = L.layerGroup().addTo(map);
+            activeRouteLayer = L.layerGroup().addTo(map);
             markersLayer = L.layerGroup().addTo(map);
+        }
+
+        // === 自動讀取 timeline/tohoku_2026/d1.json, d2.json ... ===
+        function getDayKeyFromChapter(ch) {
+            // 從章節 id (如 "d5-ch3") 抓取 "d5"
+            if (ch.id) {
+                const m = ch.id.match(/^(d\d+)/i);
+                if (m) return m[1].toLowerCase();
+            }
+            // 或從所屬 Day 名稱 (如 "Day 05") 轉換為 "d5"
+            if (ch._dayLabel) {
+                const m = ch._dayLabel.match(/(\d+)/);
+                if (m) return `d${parseInt(m[1], 10)}`;
+            }
+            return 'd1';
+        }
+
+        async function loadDayTimeline(dayFileKey) {
+            if (dayTimelineCache[dayFileKey] !== undefined) {
+                return dayTimelineCache[dayFileKey];
+            }
+            try {
+                const res = await fetch(`timeline/${tripId}/${dayFileKey}.json`);
+                if (!res.ok) {
+                    dayTimelineCache[dayFileKey] = null;
+                    return null;
+                }
+                const raw = await res.json();
+                const parsed = parseTimelineFormat(raw);
+                dayTimelineCache[dayFileKey] = parsed;
+                return parsed;
+            } catch (e) {
+                dayTimelineCache[dayFileKey] = null;
+                return null;
+            }
+        }
+
+        // 相容所有 Google Maps Timeline 匯出格式 (semanticSegments / rawSignals / timelineObjects / GeoJSON / 純陣列)
+        function parseTimelineFormat(raw) {
+            const points = [];
+            if (!raw) return points;
+
+            // 1. 新版 Google Timeline (semanticSegments)
+            if (Array.isArray(raw.semanticSegments)) {
+                const temp = [];
+                raw.semanticSegments.forEach(seg => {
+                    if (Array.isArray(seg.timelinePath)) {
+                        seg.timelinePath.forEach(pt => {
+                            const coord = parseCoordString(pt.point);
+                            if (coord) {
+                                temp.push({ t: pt.time ? new Date(pt.time).getTime() : 0, coord });
+                            }
+                        });
+                    }
+                });
+                temp.sort((a, b) => a.t - b.t);
+                temp.forEach(item => points.push(item.coord));
+            }
+
+            // 2. rawSignals 補充定位點
+            if (points.length === 0 && Array.isArray(raw.rawSignals)) {
+                const temp = [];
+                raw.rawSignals.forEach(sig => {
+                    if (sig.position && sig.position.LatLng) {
+                        const coord = parseCoordString(sig.position.LatLng);
+                        if (coord) {
+                            temp.push({ t: sig.position.timestamp ? new Date(sig.position.timestamp).getTime() : 0, coord });
+                        }
+                    }
+                });
+                temp.sort((a, b) => a.t - b.t);
+                temp.forEach(item => points.push(item.coord));
+            }
+
+            // 3. 舊版 Google Takeout (timelineObjects)
+            if (points.length === 0 && Array.isArray(raw.timelineObjects)) {
+                raw.timelineObjects.forEach(obj => {
+                    const seg = obj.activitySegment;
+                    if (!seg) return;
+                    if (seg.waypointPath && Array.isArray(seg.waypointPath.waypoints)) {
+                        seg.waypointPath.waypoints.forEach(w => {
+                            if (w.latE7 && w.lngE7) points.push([w.latE7 / 1e7, w.lngE7 / 1e7]);
+                        });
+                    } else if (seg.simplifiedRawPath && Array.isArray(seg.simplifiedRawPath.points)) {
+                        seg.simplifiedRawPath.points.forEach(p => {
+                            if (p.latE7 && p.lngE7) points.push([p.latE7 / 1e7, p.lngE7 / 1e7]);
+                        });
+                    }
+                });
+            }
+
+            // 4. GeoJSON 格式
+            if (points.length === 0 && Array.isArray(raw.features)) {
+                raw.features.forEach(f => {
+                    if (f.geometry && f.geometry.type === 'LineString') {
+                        f.geometry.coordinates.forEach(c => points.push([c[1], c[0]]));
+                    }
+                });
+            }
+
+            // 5. 純座標陣列 [[lat, lng], ...]
+            if (points.length === 0 && Array.isArray(raw)) {
+                raw.forEach(c => {
+                    if (Array.isArray(c) && c.length >= 2) points.push([Number(c[0]), Number(c[1])]);
+                });
+            }
+
+            return points;
+        }
+
+        function parseCoordString(str) {
+            if (!str || typeof str !== 'string') return null;
+            const cleaned = str.replace('geo:', '').replace(/°/g, '').trim();
+            const parts = cleaned.split(',').map(s => parseFloat(s.trim()));
+            if (parts.length >= 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+                return [Number(parts[0].toFixed(5)), Number(parts[1].toFixed(5))];
+            }
+            return null;
+        }
+
+        function getDistanceKm(lat1, lng1, lat2, lng2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        // 從當天的 dX.json 座標點中，擷取 A 點 (prevCh) 到 B 點 (currCh) 的街角轉彎軌跡
+        function extractSegmentFromDayPoints(dayPoints, prevCh, currCh) {
+            if (!dayPoints || dayPoints.length < 2) return null;
+
+            const radiusKm = 1.5; // 搜尋景點周邊 1.5 公里內的軌跡點
+            let bestPair = null;
+            let bestScore = Infinity;
+
+            // 找出所有靠近起點 A 的索引候選
+            const startCandidates = [];
+            for (let i = 0; i < dayPoints.length - 1; i++) {
+                const d = getDistanceKm(prevCh.lat, prevCh.lng, dayPoints[i][0], dayPoints[i][1]);
+                if (d <= radiusKm) startCandidates.push({ idx: i, dist: d });
+            }
+
+            // 配對在起點之後、且靠近終點 B 的索引
+            for (const s of startCandidates) {
+                for (let j = s.idx + 1; j < dayPoints.length; j++) {
+                    const dEnd = getDistanceKm(currCh.lat, currCh.lng, dayPoints[j][0], dayPoints[j][1]);
+                    if (dEnd <= radiusKm) {
+                        const score = s.dist + dEnd + (j - s.idx) * 0.002;
+                        if (score < bestScore) {
+                            bestScore = score;
+                            bestPair = [s.idx, j];
+                        }
+                    }
+                }
+            }
+
+            if (bestPair) {
+                const sliced = dayPoints.slice(bestPair[0], bestPair[1] + 1);
+                return [[prevCh.lat, prevCh.lng], ...sliced, [currCh.lat, currCh.lng]];
+            }
+            return null;
+        }
+
+        // 取得 A 點到 B 點的詳細轉彎座標（優先讀 dX.json 時間軸 ➔ 其次 OSRM 真實街道轉角 ➔ 跨海/長途弧線）
+        async function getDetailedPath(prevCh, currCh) {
+            const cacheKey = `${prevCh.id}_to_${currCh.id}`;
+            if (segmentCoordsCache[cacheKey]) {
+                return segmentCoordsCache[cacheKey];
+            }
+
+            const start = [prevCh.lat, prevCh.lng];
+            const end = [currCh.lat, currCh.lng];
+            const mode = (currCh.transport || 'walk').toString().trim().toLowerCase();
+            const distKm = getDistanceKm(prevCh.lat, prevCh.lng, currCh.lat, currCh.lng);
+
+            // 1. 若章節內有手寫 track 陣列
+            if (Array.isArray(currCh.track) && currCh.track.length > 1) {
+                segmentCoordsCache[cacheKey] = currCh.track;
+                return currCh.track;
+            }
+
+            // 2. 讀取 timeline/tohoku_2026/dX.json 真實移動紀錄（同日且非飛機跨海段）
+            const prevDayKey = getDayKeyFromChapter(prevCh);
+            const currDayKey = getDayKeyFromChapter(currCh);
+            const isFlight = ['flight', 'airplane', 'plane', '飛機', '航班'].includes(mode) || distKm > 300;
+
+            if (!isFlight && prevDayKey === currDayKey) {
+                const dayPoints = await loadDayTimeline(currDayKey);
+                const timelineSeg = extractSegmentFromDayPoints(dayPoints, prevCh, currCh);
+                if (timelineSeg && timelineSeg.length > 2) {
+                    segmentCoordsCache[cacheKey] = timelineSeg;
+                    return timelineSeg;
+                }
+            }
+
+            // 3. 若為飛機、遊船、纜車或高鐵長途移動，產生平滑弧線點陣列
+            const curveModes = {
+                'flight': 0.22, 'airplane': 0.22, '飛機': 0.22,
+                'hsr': 0.12, 'shinkansen': 0.12, '高鐵': 0.12, '新幹線': 0.12,
+                'train': 0.08, 'jr': 0.08, '火車': 0.08, '台鐵': 0.08,
+                'metro': 0.05, 'mrt': 0.05, 'subway': 0.05, '捷運': 0.05, '地鐵': 0.05,
+                'boat': 0.12, 'ferry': 0.12, '遊船': 0.12,
+                'ropeway': 0.04, '纜車': 0.04
+            };
+
+            if (curveModes[mode] !== undefined || isFlight) {
+                const curv = curveModes[mode] !== undefined ? curveModes[mode] : 0.2;
+                const arcCoords = generateCurve(start, end, curv, 40);
+                segmentCoordsCache[cacheKey] = arcCoords;
+                return arcCoords;
+            }
+
+            // 4. 一般街道移動（步行/巴士/自駕）：呼叫 OSRM 取得真實街道的每個左轉、右轉路口座標
+            try {
+                const profile = ['walk', 'foot', '步行', '散步'].includes(mode) ? 'foot' : 'driving';
+                const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${prevCh.lng},${prevCh.lat};${currCh.lng},${currCh.lat}?overview=full&geometries=geojson`;
+                const res = await fetch(osrmUrl);
+                const data = await res.json();
+                if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                    const roadCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+                    segmentCoordsCache[cacheKey] = roadCoords;
+                    return roadCoords;
+                }
+            } catch (e) {
+                console.warn('OSRM 街道計算失敗，改用直線插值');
+            }
+
+            const fallbackCoords = generateCurve(start, end, 0, 20);
+            segmentCoordsCache[cacheKey] = fallbackCoords;
+            return fallbackCoords;
+        }
+
+        function generateCurve(start, end, curvature = 0.15, segments = 32) {
+            const [lat1, lng1] = start;
+            const [lat2, lng2] = end;
+            const midLat = (lat1 + lat2) / 2;
+            const midLng = (lng1 + lng2) / 2;
+            const dLat = lat2 - lat1;
+            const dLng = lng2 - lng1;
+            const ctrlLat = midLat - dLng * curvature;
+            const ctrlLng = midLng + dLat * curvature;
+
+            const points = [];
+            for (let i = 0; i <= segments; i++) {
+                const t = i / segments;
+                const lat = (1 - t) * (1 - t) * lat1 + 2 * (1 - t) * t * ctrlLat + t * t * lat2;
+                const lng = (1 - t) * (1 - t) * lng1 + 2 * (1 - t) * t * ctrlLng + t * t * lng2;
+                points.push([Number(lat.toFixed(5)), Number(lng.toFixed(5))]);
+            }
+            return points;
+        }
+
+        // === 繪製「方向箭頭虛線 (- - > - - >)」與「小狐狸 🦊 沿街轉彎動畫」 ===
+        function drawActiveArrowRoute(coords) {
+            activeRouteLayer.clearLayers();
+            if (!coords || coords.length < 2) return;
+
+            // 1. 畫出當前移動路段的清晰虛線 (- - - -)
+            L.polyline(coords, {
+                color: '#a6897c',
+                weight: 3.5,
+                opacity: 0.9,
+                dashArray: '6, 8'
+            }).addTo(activeRouteLayer);
+
+            // 2. 在虛線上等距加上方向小箭頭 (- - > - - >)
+            const arrowCount = Math.min(8, Math.max(2, Math.floor(coords.length / 6)));
+            for (let k = 1; k <= arrowCount; k++) {
+                const idx = Math.min(coords.length - 1, Math.floor((k / (arrowCount + 1)) * coords.length));
+                const p1 = coords[idx - 1];
+                const p2 = coords[idx];
+                if (!p1 || !p2) continue;
+
+                // 計算箭頭旋轉角度
+                const angleDeg = Math.atan2(p2[0] - p1[0], p2[1] - p1[1]) * (180 / Math.PI);
+                const arrowIcon = L.divIcon({
+                    className: 'route-arrow-icon',
+                    html: `<div class="route-arrow-inner" style="transform: rotate(${-angleDeg}deg);">❯</div>`,
+                    iconSize: [14, 14],
+                    iconAnchor: [7, 7]
+                });
+                L.marker([ (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2 ], {
+                    icon: arrowIcon,
+                    interactive: false
+                }).addTo(activeRouteLayer);
+            }
+        }
+
+        // 讓小狐狸 🦊 沿著 coords 的每一個街角（直走、左轉、右轉）平滑移動
+        function animateFoxAlongPath(coords, targetZoom) {
+            if (foxAnimFrame) cancelAnimationFrame(foxAnimFrame);
+            if (!coords || coords.length === 0) return;
+
+            // 建立或取得小狐狸標記
+            if (!foxMarker) {
+                const foxIcon = L.divIcon({
+                    className: 'fox-traveler-icon',
+                    html: '<div class="fox-wrapper" id="fox-avatar">🦊</div>',
+                    iconSize: [36, 36],
+                    iconAnchor: [18, 18]
+                });
+                foxMarker = L.marker(coords[0], { icon: foxIcon, zIndexOffset: 2000 }).addTo(map);
+            } else {
+                foxMarker.setLatLng(coords[0]);
+            }
+
+            if (coords.length === 1) {
+                map.flyTo(coords[0], targetZoom || 14, { animate: true, duration: 1.2 });
+                return;
+            }
+
+            // 計算整條轉彎路徑的累積距離，確保小狐狸在每個轉角都是「等速移動」
+            const cumDist = [0];
+            let totalDist = 0;
+            for (let i = 1; i < coords.length; i++) {
+                const segDist = Math.hypot(coords[i][0] - coords[i - 1][0], coords[i][1] - coords[i - 1][1]);
+                totalDist += segDist;
+                cumDist.push(totalDist);
+            }
+
+            if (totalDist === 0) {
+                foxMarker.setLatLng(coords[coords.length - 1]);
+                map.flyTo(coords[coords.length - 1], targetZoom || 14, { animate: true, duration: 1.0 });
+                return;
+            }
+
+            // 先將鏡頭平滑調整到能看清楚整段 A ➔ B 移動的視野
+            const bounds = L.latLngBounds(coords);
+            map.flyToBounds(bounds, {
+                padding: [70, 70],
+                maxZoom: targetZoom || 15,
+                animate: true,
+                duration: 0.7
+            });
+
+            const foxEl = document.getElementById('fox-avatar');
+            if (foxEl) foxEl.classList.add('walking');
+
+            const duration = 2000; // 小狐狸走完全程的時間 (2 秒)
+            const startTime = performance.now();
+
+            function step(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(1, elapsed / duration);
+                // 使用緩入緩出讓起步與停下更自然
+                const eased = progress < 0.5
+                    ? 2 * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+                const targetD = eased * totalDist;
+
+                // 找出小狐狸當下所在的轉彎路段
+                let segIdx = 0;
+                while (segIdx < cumDist.length - 2 && cumDist[segIdx + 1] < targetD) {
+                    segIdx++;
+                }
+
+                const segStartD = cumDist[segIdx];
+                const segLen = cumDist[segIdx + 1] - segStartD;
+                const ratio = segLen > 0 ? (targetD - segStartD) / segLen : 0;
+
+                const p1 = coords[segIdx];
+                const p2 = coords[segIdx + 1];
+                const curLat = p1[0] + (p2[0] - p1[0]) * ratio;
+                const curLng = p1[1] + (p2[1] - p1[1]) * ratio;
+
+                foxMarker.setLatLng([curLat, curLng]);
+
+                // 根據小狐狸往東或往西走，自動左右轉頭
+                const avatar = document.getElementById('fox-avatar');
+                if (avatar && Math.abs(p2[1] - p1[1]) > 0.00001) {
+                    const scaleX = (p2[1] - p1[1]) < 0 ? 1 : -1;
+                    avatar.style.transform = `scaleX(${scaleX})`;
+                }
+
+                if (progress < 1) {
+                    foxAnimFrame = requestAnimationFrame(step);
+                } else {
+                    if (avatar) avatar.classList.remove('walking');
+                    // 小狐狸抵達終點 B 後，鏡頭優雅聚焦至該章節設定的 Zoom
+                    const finalPt = coords[coords.length - 1];
+                    map.flyTo(finalPt, targetZoom || 15, { animate: true, duration: 0.9 });
+                }
+            }
+
+            foxAnimFrame = requestAnimationFrame(step);
+        }
+
+        // 當使用者切換到第 newIndex 個章節時觸發
+        async function transitionToChapter(newIndex) {
+            const targetCh = currentChaptersList[newIndex];
+            if (!targetCh || !targetCh.lat || !targetCh.lng) return;
+
+            // 如果是相鄰章節移動（例如 A ➔ B 或 B ➔ A），讓小狐狸沿著真實轉彎路徑走過去！
+            if (newIndex !== currentActiveIndex && Math.abs(newIndex - currentActiveIndex) === 1) {
+                const fromCh = currentChaptersList[currentActiveIndex];
+                const isForward = newIndex > currentActiveIndex;
+
+                // 永遠以「較早章節 ➔ 較晚章節」取得軌跡，若往回滾動則反轉座標陣列
+                const rawPath = await getDetailedPath(
+                    isForward ? fromCh : targetCh,
+                    isForward ? targetCh : fromCh
+                );
+                const moveCoords = isForward ? rawPath : [...rawPath].reverse();
+
+                drawActiveArrowRoute(moveCoords);
+                animateFoxAlongPath(moveCoords, targetCh.zoom || 14);
+            } else {
+                // 若是跨很多章節點擊跳轉，或是剛載入第 1 章
+                activeRouteLayer.clearLayers();
+                if (newIndex > 0) {
+                    const prevCh = currentChaptersList[newIndex - 1];
+                    const pathCoords = await getDetailedPath(prevCh, targetCh);
+                    drawActiveArrowRoute(pathCoords);
+                }
+                animateFoxAlongPath([[targetCh.lat, targetCh.lng]], targetCh.zoom || 14);
+            }
+
+            currentActiveIndex = newIndex;
         }
 
         function buildDayTabs() {
@@ -727,9 +1051,9 @@
             if (observer) observer.disconnect();
 
             markersLayer.clearLayers();
-            routeLayerGroup.clearLayers();
+            baseRouteLayer.clearLayers();
+            activeRouteLayer.clearLayers();
             chapterMarkers.clear();
-            timelineSearchCursor = 0; // 重置時間軸搜尋游標
 
             const dotIcon = L.divIcon({
                 className: 'custom-marker',
@@ -738,7 +1062,9 @@
                 iconAnchor: [8, 8]
             });
 
-            let chaptersList = [];
+            currentChaptersList = [];
+            currentActiveIndex = 0;
+            const simpleLatLngs = [];
 
             const daysToRender = dayKey === 'ALL'
                 ? normalizedDays
@@ -747,8 +1073,8 @@
             daysToRender.forEach(dayObj => {
                 const banner = document.createElement('div');
                 banner.className = 'day-banner';
-                
-                let fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
+
+                const fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
 
                 banner.innerHTML = `
                     <div class="day-banner-header">
@@ -760,16 +1086,20 @@
                 contentDiv.appendChild(banner);
 
                 (dayObj.chapters || []).forEach((ch) => {
-                    chaptersList.push(ch);
+                    ch._dayLabel = dayObj.day;
+                    const chIndex = currentChaptersList.length;
+                    currentChaptersList.push(ch);
+
                     const section = document.createElement('section');
-                    section.className = `chapter ${chaptersList.length === 1 ? 'active' : ''}`;
+                    section.className = `chapter ${chIndex === 0 ? 'active' : ''}`;
                     section.id = `section-${ch.id}`;
                     section.setAttribute('data-id', ch.id);
+                    section.setAttribute('data-index', chIndex);
                     section.setAttribute('data-lat', ch.lat);
                     section.setAttribute('data-lng', ch.lng);
                     section.setAttribute('data-zoom', ch.zoom || 13);
 
-                    let mediaHTML = buildMediaHTML(ch);
+                    const mediaHTML = buildMediaHTML(ch);
 
                     section.innerHTML = `
                         <h2>${ch.title}</h2>
@@ -779,6 +1109,8 @@
                     contentDiv.appendChild(section);
 
                     if (ch.lat && ch.lng) {
+                        simpleLatLngs.push([ch.lat, ch.lng]);
+
                         const marker = L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
 
                         marker.bindTooltip(`${dayObj.day}｜${ch.title}`, {
@@ -792,7 +1124,7 @@
                             clearTimeout(scrollUnlockTimer);
 
                             setActiveChapter(section, marker);
-                            map.flyTo([ch.lat, ch.lng], ch.zoom || 13, { animate: true, duration: 1.2 });
+                            transitionToChapter(chIndex);
 
                             const topNav = document.querySelector('.top-nav');
                             const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
@@ -802,21 +1134,29 @@
 
                             scrollUnlockTimer = setTimeout(() => {
                                 isClickScrolling = false;
-                            }, 900);
+                            }, 950);
                         });
 
                         chapterMarkers.set(section, marker);
-
-                        if (chaptersList.length === 1 && marker.getElement()) {
-                            marker.getElement().classList.add('active');
-                        }
                     }
                 });
             });
 
-            if (chaptersList.length > 0) {
-                map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                drawHybridRoutes(chaptersList);
+            // 底圖只畫一層極簡清爽的淺色點對點細虛線 (- - - -)，完全不雜亂
+            if (simpleLatLngs.length > 1) {
+                L.polyline(simpleLatLngs, {
+                    color: '#C4A99E',
+                    weight: 2,
+                    opacity: 0.45,
+                    dashArray: '5, 10'
+                }).addTo(baseRouteLayer);
+            }
+
+            // 初始定位小狐狸於第 1 個章節
+            if (currentChaptersList.length > 0) {
+                const firstSec = document.querySelector('.chapter');
+                setActiveChapter(firstSec);
+                transitionToChapter(0);
             }
 
             observer = new IntersectionObserver((entries) => {
@@ -825,14 +1165,11 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const chapter = entry.target;
-                        const targetLat = parseFloat(chapter.getAttribute('data-lat'));
-                        const targetLng = parseFloat(chapter.getAttribute('data-lng'));
-                        const targetZoom = parseInt(chapter.getAttribute('data-zoom'));
+                        const newIdx = parseInt(chapter.getAttribute('data-index'), 10);
 
                         setActiveChapter(chapter);
-
-                        if (!isNaN(targetLat) && !isNaN(targetLng)) {
-                            map.flyTo([targetLat, targetLng], targetZoom, { animate: true, duration: 1.5 });
+                        if (!isNaN(newIdx)) {
+                            transitionToChapter(newIdx);
                         }
                     }
                 });
@@ -840,115 +1177,6 @@
 
             document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
             initVideoAutoplay();
-        }
-
-        // === 混合式軌跡引擎：1. 單一 Timeline 檔自動擷取 ➔ 2. 依 transport 畫鐵道/弧線/OSRM 道路 ===
-        async function drawHybridRoutes(chaptersList) {
-            for (let i = 1; i < chaptersList.length; i++) {
-                const prevCh = chaptersList[i - 1];
-                const currCh = chaptersList[i];
-                if (!prevCh.lat || !prevCh.lng || !currCh.lat || !currCh.lng) continue;
-
-                const { coords, isArc } = await getSegmentRoute(prevCh, currCh);
-
-                L.polyline(coords, {
-                    color: '#C4A99E',
-                    weight: isArc ? 3 : 4,
-                    opacity: 0.85,
-                    dashArray: isArc ? '6, 8' : null
-                }).addTo(routeLayerGroup);
-            }
-        }
-
-        async function getSegmentRoute(prevCh, currCh) {
-            const start = [prevCh.lat, prevCh.lng];
-            const end = [currCh.lat, currCh.lng];
-            const mode = (currCh.transport || 'walk').toString().trim().toLowerCase();
-
-            // 1. 若章節內有手寫指定 track 陣列
-            if (Array.isArray(currCh.track) && currCh.track.length > 1) {
-                return { coords: currCh.track, isArc: false };
-            }
-
-            // 判斷是否為飛機（飛機開飛航無 GPS，直接使用高空弧線）
-            const isFlight = ['flight', 'airplane', 'plane', '飛機', '航班'].includes(mode);
-
-            // 2. 【優先：做法三】從已載入的 timeline/${tripId}.json 自動擷取該段真實軌跡
-            if (!isFlight) {
-                const matchedTrack = extractTimelineSegment(prevCh, currCh);
-                if (matchedTrack && matchedTrack.length > 2) {
-                    return { coords: matchedTrack, isArc: false };
-                }
-            }
-
-            // 3. 【補位：做法二】全球通用交通工具弧度字典（支援英文通用碼、各國別名與中文）
-            const curveModes = {
-                // ✈️ 飛機 / 航班
-                'flight': 0.22, 'airplane': 0.22, 'plane': 0.22, '飛機': 0.22, '航班': 0.22,
-                // 🚄 高鐵 / 新幹線 / 各國高速鐵路
-                'hsr': 0.12, 'high_speed_rail': 0.12, 'shinkansen': 0.12, 'tgv': 0.12, 'eurostar': 0.12, '高鐵': 0.12, '新幹線': 0.12,
-                // 🚆 一般火車 / 台鐵 / JR / 各國國鐵與私鐵
-                'train': 0.08, 'railway': 0.08, 'tra': 0.08, 'jr': 0.08, 'ktm': 0.08, '火車': 0.08, '台鐵': 0.08, '鐵道': 0.08,
-                // 🚇 捷運 / 地鐵 / 輕軌 / 單軌電車
-                'metro': 0.05, 'mrt': 0.05, 'subway': 0.05, 'lrt': 0.05, 'monorail': 0.05, '捷運': 0.05, '地鐵': 0.05, '輕軌': 0.05,
-                // 🚡 纜車 / 索道
-                'ropeway': 0.04, 'cable_car': 0.04, 'gondola': 0.04, '纜車': 0.04,
-                // ⛴️ 遊船 / 渡輪 / 郵輪
-                'boat': 0.12, 'ferry': 0.12, 'cruise': 0.12, 'ship': 0.12, '遊船': 0.12, '渡輪': 0.12, '船': 0.12
-            };
-
-            const isLongDistance = getDistanceKm(prevCh.lat, prevCh.lng, currCh.lat, currCh.lng) > 250;
-
-            if (curveModes[mode] !== undefined || isLongDistance) {
-                const curvature = curveModes[mode] !== undefined ? curveModes[mode] : 0.22;
-                return { coords: generateCurve(start, end, curvature), isArc: true };
-            }
-
-            // 4. 一般道路模式（步行 walk / 巴士 bus / 自駕 drive / 計程車 taxi）：呼叫 OSRM 計算全球街道
-            const isWalk = ['walk', 'foot', '步行', '散步'].includes(mode);
-            const profile = isWalk ? 'foot' : 'driving';
-
-            const cacheKey = `route_v4_${prevCh.id}_${currCh.id}_${profile}`;
-            const cached = localStorage.getItem(cacheKey);
-            if (cached) {
-                return { coords: JSON.parse(cached), isArc: false };
-            }
-
-            try {
-                const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${prevCh.lng},${prevCh.lat};${currCh.lng},${currCh.lat}?overview=full&geometries=geojson`;
-                const res = await fetch(osrmUrl);
-                const data = await res.json();
-
-                if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-                    const roadCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
-                    localStorage.setItem(cacheKey, JSON.stringify(roadCoords));
-                    return { coords: roadCoords, isArc: false };
-                }
-            } catch (e) {
-                console.warn(`OSRM 計算失敗 (${currCh.id})，使用直線替代`);
-            }
-
-            return { coords: [start, end], isArc: true };
-        }
-
-        function generateCurve(start, end, curvature = 0.15, segments = 32) {
-            const [lat1, lng1] = start;
-            const [lat2, lng2] = end;
-            const midLat = (lat1 + lat2) / 2;
-            const midLng = (lng1 + lng2) / 2;
-            const dLat = lat2 - lat1;
-            const dLng = lng2 - lng1;
-            const ctrlLat = midLat - dLng * curvature;
-            const ctrlLng = midLng + dLat * curvature;
-
-            const points = [];
-            for (let i = 0; i <= segments; i++) {
-                const t = i / segments;
-                const lat = (1 - t) * (1 - t) * lat1 + 2 * (1 - t) * t * ctrlLat + t * t * lat2;
-                const lng = (1 - t) * (1 - t) * lng1 + 2 * (1 - t) * t * ctrlLng + t * t * lng2;
-                points.push([Number(lat.toFixed(5)), Number(lng.toFixed(5))]);
-            }
-            return points;
         }
     </script>
 </body>
