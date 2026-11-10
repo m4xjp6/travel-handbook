@@ -34,15 +34,16 @@ collections:
               - {label: "章節 ID", name: "id", widget: "string"}
               - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float"}
               - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
-              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", default: 13}
-              - label: "抵達本站的交通方式 (無時間軸紀錄時繪製路線用)"
+              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
+              - label: "抵達本站的交通方式 (小狐狸移動與路線繪製用)"
                 name: "transport"
                 widget: "select"
                 default: "walk"
                 required: false
                 options:
                   - { label: "🚶 步行 / 散步 (貼合人行街道)", value: "walk" }
-                  - { label: "🚌 巴士 / 公車 / 自駕 / 計程車 (貼合公路)", value: "bus" }
+                  - { label: "🚌 巴士 / 公車 / 客運 (貼合公路)", value: "bus" }
+                  - { label: "🚗 自駕 / 專車 / 計程車 (貼合公路)", value: "drive" }
                   - { label: "🚇 捷運 / 地鐵 / 輕軌 (Metro / MRT / Subway)", value: "metro" }
                   - { label: "🚆 火車 / 台鐵 / JR / 私鐵 (Train / Railway)", value: "train" }
                   - { label: "🚄 高鐵 / 新幹線 / 高速鐵路 (HSR / Shinkansen)", value: "hsr" }
