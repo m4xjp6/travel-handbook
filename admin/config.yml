@@ -34,8 +34,22 @@ collections:
               - {label: "章節 ID", name: "id", widget: "string"}
               - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float"}
               - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
-              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
-              - {label: "標題", name: "title", widget: "string"}
+              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", default: 13}
+              - label: "抵達本站的交通方式 (無時間軸紀錄時繪製路線用)"
+                name: "transport"
+                widget: "select"
+                default: "walk"
+                required: false
+                options:
+                  - { label: "🚶 步行 / 散步 (貼合人行街道)", value: "walk" }
+                  - { label: "🚌 巴士 / 公車 / 自駕 / 計程車 (貼合公路)", value: "bus" }
+                  - { label: "🚇 捷運 / 地鐵 / 輕軌 (Metro / MRT / Subway)", value: "metro" }
+                  - { label: "🚆 火車 / 台鐵 / JR / 私鐵 (Train / Railway)", value: "train" }
+                  - { label: "🚄 高鐵 / 新幹線 / 高速鐵路 (HSR / Shinkansen)", value: "hsr" }
+                  - { label: "🚡 纜車 / 索道 (Ropeway / Cable Car)", value: "ropeway" }
+                  - { label: "⛴️ 遊船 / 渡輪 / 船班 (Boat / Ferry)", value: "boat" }
+                  - { label: "✈️ 飛機 / 國內外航班 (Flight)", value: "flight" }
+              - {label: "標題", name: "title", widget: "string", hint: "格式：01. 動作/亮點｜地點與細節"}
               - label: "照片排版樣式"
                 name: "mediaLayout"
                 widget: "select"
@@ -45,7 +59,10 @@ collections:
                   - { label: "✨ 自動智慧排版 (依張數自動調整)", value: "auto" }
                   - { label: "📐 左寬右窄 (2:1 雜誌風雙圖)", value: "grid-2-1" }
                   - { label: "📐 左窄右寬 (1:2 雜誌風雙圖)", value: "grid-1-2" }
+                  - { label: "📐 雙窄中寬 (1:2:1 雜誌風三圖)", value: "grid-1-2-1" }
                   - { label: "⚖️ 雙欄對稱並排 (1:1)", value: "grid-equal" }
+                  - { label: "⚖️ 三張固定並排 (1:1:1)", value: "grid-3" }
+                  - { label: "⚖️ 四張固定並排 (1:1:1:1)", value: "grid-4" }
                   - { label: "🎠 橫向滑動輪播 (IG風，適合多張照片)", value: "carousel" }
                   - { label: "🖼️ 單欄垂直大圖堆疊", value: "stack" }
               - label: "單張主圖/影片 或 佔位提示文字 (相容舊資料)"
