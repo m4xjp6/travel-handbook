@@ -1,0 +1,226 @@
+[
+    {
+    "endTime" : "2026-01-10T07:25:18.230+09:00",
+    "startTime" : "2026-01-09T19:48:40.000+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.447600",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJn0CjYA62i18RZlU8KVwKaZc",
+        "placeLocation" : "geo:38.248568,140.327475"
+      },
+      "probability" : "0.773891"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T07:41:34.134+09:00",
+    "startTime" : "2026-01-10T07:25:18.230+09:00",
+    "activity" : {
+      "probability" : "0.575527",
+      "end" : "geo:38.248364,140.328504",
+      "topCandidate" : {
+        "type" : "walking",
+        "probability" : "0.491092"
+      },
+      "distanceMeters" : "177.438477",
+      "start" : "geo:38.248626,140.328045"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T08:19:39.825+09:00",
+    "startTime" : "2026-01-10T07:41:34.134+09:00",
+    "activity" : {
+      "probability" : "0.996679",
+      "end" : "geo:38.167758,140.391958",
+      "topCandidate" : {
+        "type" : "in passenger vehicle",
+        "probability" : "0.864432"
+      },
+      "distanceMeters" : "12747.651367",
+      "start" : "geo:38.225774,140.327181"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T08:36:01.576+09:00",
+    "startTime" : "2026-01-10T08:19:39.825+09:00",
+    "activity" : {
+      "probability" : "0.714089",
+      "end" : "geo:38.161901,140.395196",
+      "topCandidate" : {
+        "type" : "walking",
+        "probability" : "0.536657"
+      },
+      "distanceMeters" : "831.233948",
+      "start" : "geo:38.167758,140.391958"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T09:13:38.759+09:00",
+    "startTime" : "2026-01-10T08:36:01.576+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.770083",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJ9dVANwtLil8RLCyvTtj8TAU",
+        "placeLocation" : "geo:38.161601,140.395220"
+      },
+      "probability" : "0.987232"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T09:34:20.466+09:00",
+    "startTime" : "2026-01-10T09:13:38.759+09:00",
+    "activity" : {
+      "probability" : "0.944030",
+      "end" : "geo:38.154650,140.430597",
+      "topCandidate" : {
+        "type" : "skiing",
+        "probability" : "0.640245"
+      },
+      "distanceMeters" : "3471.455566",
+      "start" : "geo:38.161394,140.395585"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T11:44:35.299+09:00",
+    "startTime" : "2026-01-10T09:34:20.466+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.709877",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJewyzHrZLil8RGsEC9ppeFtw",
+        "placeLocation" : "geo:38.154712,140.431272"
+      },
+      "probability" : "0.906085"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T11:44:35.299+09:00",
+    "startTime" : "2026-01-10T09:34:20.466+09:00",
+    "visit" : {
+      "hierarchyLevel" : "1",
+      "topCandidate" : {
+        "probability" : "0.957515",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJRUI5NwtLil8R5b62h7BY_04",
+        "placeLocation" : "geo:38.154693,140.430949"
+      },
+      "probability" : "0.906085"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T11:52:50.158+09:00",
+    "startTime" : "2026-01-10T11:44:35.299+09:00",
+    "activity" : {
+      "probability" : "0.929559",
+      "end" : "geo:38.151807,140.410171",
+      "topCandidate" : {
+        "type" : "skiing",
+        "probability" : "0.690250"
+      },
+      "distanceMeters" : "1758.066406",
+      "start" : "geo:38.154648,140.429930"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T12:10:48.473+09:00",
+    "startTime" : "2026-01-10T11:52:50.158+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.683636",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJ7Qzsp6pLil8RGB1v5zPd1XU",
+        "placeLocation" : "geo:38.151921,140.409982"
+      },
+      "probability" : "0.985481"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T12:29:02.766+09:00",
+    "startTime" : "2026-01-10T12:10:48.473+09:00",
+    "activity" : {
+      "probability" : "0.974193",
+      "end" : "geo:38.162441,140.394955",
+      "topCandidate" : {
+        "type" : "in passenger vehicle",
+        "probability" : "0.591169"
+      },
+      "distanceMeters" : "1821.104858",
+      "start" : "geo:38.151539,140.410499"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T13:38:10.122+09:00",
+    "startTime" : "2026-01-10T12:29:02.766+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.213487",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJ2a1dfQxLil8Rpx13DfBHCIY",
+        "placeLocation" : "geo:38.163500,140.395237"
+      },
+      "probability" : "0.745105"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T13:50:52.968+09:00",
+    "startTime" : "2026-01-10T13:38:10.122+09:00",
+    "activity" : {
+      "probability" : "0.918965",
+      "end" : "geo:38.168137,140.396737",
+      "topCandidate" : {
+        "type" : "walking",
+        "probability" : "0.870479"
+      },
+      "distanceMeters" : "378.294189",
+      "start" : "geo:38.165191,140.395172"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T14:28:01.555+09:00",
+    "startTime" : "2026-01-10T13:50:52.968+09:00",
+    "visit" : {
+      "hierarchyLevel" : "0",
+      "topCandidate" : {
+        "probability" : "0.230110",
+        "semanticType" : "Unknown",
+        "placeID" : "ChIJlxGc3w9Lil8RfJfRvnA4HlU",
+        "placeLocation" : "geo:38.168601,140.397662"
+      },
+      "probability" : "0.685186"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T15:11:54.190+09:00",
+    "startTime" : "2026-01-10T14:28:01.555+09:00",
+    "activity" : {
+      "probability" : "0.604989",
+      "end" : "geo:38.165548,140.383862",
+      "topCandidate" : {
+        "type" : "walking",
+        "probability" : "0.561652"
+      },
+      "distanceMeters" : "1163.962036",
+      "start" : "geo:38.168123,140.396594"
+    }
+  },
+  {
+    "endTime" : "2026-01-10T15:48:30.877+09:00",
+    "startTime" : "2026-01-10T15:11:54.190+09:00",
+    "activity" : {
+      "probability" : "0.995395",
+      "end" : "geo:38.248675,140.328465",
+      "topCandidate" : {
+        "type" : "in bus",
+        "probability" : "0.538610"
+      },
+      "distanceMeters" : "13864.206055",
+      "start" : "geo:38.165548,140.383862"
+    }
+  }
+]
