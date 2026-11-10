@@ -265,8 +265,15 @@
         .callout-info { background-color: #eef4ff; border-left: 4px solid #3b82f6; }
         .callout-info .callout-title { color: #2563eb; }
 
-        /* 地圖標記與互動樣式 */
+        /* 地圖標記與互動樣式（外層定位、內層圓點，徹底解決 Zoom 偏移問題） */
         .custom-marker {
+            background: transparent;
+            border: none;
+        }
+        .custom-marker .marker-dot {
+            width: 16px;
+            height: 16px;
+            box-sizing: border-box;
             background-color: var(--accent-brown);
             border: 3px solid white;
             border-radius: 50%;
@@ -274,11 +281,14 @@
             cursor: pointer;
             transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
         }
-        .custom-marker:hover,
-        .custom-marker.active {
+        .custom-marker:hover .marker-dot,
+        .custom-marker.active .marker-dot {
             background-color: var(--accent-brown-dark);
             transform: scale(1.35);
             box-shadow: 0 0 0 4px rgba(255, 229, 153, 0.7), 0 3px 8px rgba(0,0,0,0.3);
+        }
+        .custom-marker:hover,
+        .custom-marker.active {
             z-index: 999 !important;
         }
         .marker-tooltip {
