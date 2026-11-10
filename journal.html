@@ -361,44 +361,202 @@
 
         let map = null;
         let markersLayer = null;
-        let routeLayerGroup = null; // 改為圖層群組，支援分段繪製路線
+        let routeLayerGroup = null;
         let observer = null;
         let videoObserver = null;
         let normalizedDays = [];
 
-        // 用於對應章節 DOM 與地圖 Marker，以及處理點擊滾動鎖定
+        // 儲存從 timeline/tohoku_2026.json 解析出的歷史軌跡資料
+        let timelinePoints = [];      // 依時間排序的純座標陣列 [[lat, lng], ...]
+        let timelineChapterMap = {};  // 若檔案內已按章節 ID 分類 {"d1-ch2": [[lat, lng], ...]}
+        let timelineSearchCursor = 0; // 記錄目前比對到的時間軸索引，確保依行程順序往後找
+
         let chapterMarkers = new Map();
         let isClickScrolling = false;
         let scrollUnlockTimer = null;
 
-        fetch(`data/${tripId}.json`)
-            .then(response => {
-                if (!response.ok) throw new Error('找不到該旅程的資料檔');
-                return response.json();
-            })
-            .then(data => {
-                document.title = data.tripTitle || '電子旅行手帳';
-                document.getElementById('trip-title').textContent = data.tripTitle || '';
+        // 同步讀取 data/tohoku_2026.json 與 timeline/tohoku_2026.json
+        Promise.all([
+            fetch(`data/${tripId}.json`).then(res => {
+                if (!res.ok) throw new Error('找不到該旅程的資料檔');
+                return res.json();
+            }),
+            fetch(`timeline/${tripId}.json`)
+                .then(res => res.ok ? res.json() : null)
+                .catch(() => null) // 若尚未上傳 timeline 檔案則自動略過，不影響網頁運作
+        ])
+        .then(([data, rawTimeline]) => {
+            document.title = data.tripTitle || '電子旅行手帳';
+            document.getElementById('trip-title').textContent = data.tripTitle || '';
 
-                if (Array.isArray(data.days) && data.days.length > 0) {
-                    normalizedDays = data.days;
-                } else if (Array.isArray(data.chapters)) {
-                    const grouped = {};
-                    data.chapters.forEach(ch => {
-                        const d = ch.day || 'Day 01';
-                        if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
-                        grouped[d].chapters.push(ch);
-                    });
-                    normalizedDays = Object.values(grouped);
+            // 解析 Google 時間軸檔案
+            if (rawTimeline) {
+                parseTimelineFile(rawTimeline);
+            }
+
+            if (Array.isArray(data.days) && data.days.length > 0) {
+                normalizedDays = data.days;
+            } else if (Array.isArray(data.chapters)) {
+                const grouped = {};
+                data.chapters.forEach(ch => {
+                    const d = ch.day || 'Day 01';
+                    if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
+                    grouped[d].chapters.push(ch);
+                });
+                normalizedDays = Object.values(grouped);
+            }
+
+            initMap();
+            buildDayTabs();
+            renderDay('ALL');
+        })
+        .catch(error => {
+            document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
+        });
+
+        /**
+         * 自動解析 timeline/tohoku_2026.json（相容 Google Maps 匯出格式與自訂格式）
+         */
+        function parseTimelineFile(raw) {
+            timelinePoints = [];
+            timelineChapterMap = {};
+
+            // 格式 A：如果是已經按章節 ID 分好的物件，例如 { "d2-ch1": [[38.1, 140.3], ...] }
+            if (!Array.isArray(raw) && !raw.semanticSegments && !raw.timelineObjects && !raw.locations && !raw.features) {
+                timelineChapterMap = raw;
+                return;
+            }
+
+            // 格式 B：手機新版 Google Maps 匯出的 Timeline.json (semanticSegments)
+            if (Array.isArray(raw.semanticSegments)) {
+                const temp = [];
+                raw.semanticSegments.forEach(seg => {
+                    if (Array.isArray(seg.timelinePath)) {
+                        seg.timelinePath.forEach(pt => {
+                            const coord = parseLatLngString(pt.point);
+                            if (coord) {
+                                temp.push({
+                                    time: pt.time ? new Date(pt.time).getTime() : 0,
+                                    coord
+                                });
+                            }
+                        });
+                    }
+                });
+                temp.sort((a, b) => a.time - b.time);
+                timelinePoints = temp.map(item => item.coord);
+                return;
+            }
+
+            // 格式 C：GeoJSON 格式
+            if (raw.features && Array.isArray(raw.features)) {
+                raw.features.forEach(f => {
+                    if (f.geometry && f.geometry.type === 'LineString') {
+                        f.geometry.coordinates.forEach(c => timelinePoints.push([c[1], c[0]]));
+                    }
+                });
+                return;
+            }
+
+            // 格式 D：純座標陣列 [[lat, lng], ...]
+            if (Array.isArray(raw)) {
+                timelinePoints = raw;
+            }
+        }
+
+        // 解析 Google 時間軸字串 (相容 Android "38.3721°, 141.0595°" 與 iOS "geo:38.3721,141.0595")
+        function parseLatLngString(str) {
+            if (!str || typeof str !== 'string') return null;
+            const cleaned = str.replace('geo:', '').replace(/°/g, '').trim();
+            const parts = cleaned.split(',').map(s => parseFloat(s.trim()));
+            if (parts.length >= 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+                return [Number(parts[0].toFixed(5)), Number(parts[1].toFixed(5))];
+            }
+            return null;
+        }
+
+        // 計算兩個經緯度之間的直線距離（單位：公里）
+        function getDistanceKm(lat1, lng1, lat2, lng2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        /**
+         * 從單一 timelinePoints 陣列中，自動擷取「從 prevCh 到 currCh」的真實 GPS 軌跡段
+         */
+        function extractTimelineSegment(prevCh, currCh) {
+            // 1. 若檔案內有明確指定該章節 ID 的軌跡
+            if (timelineChapterMap[currCh.id] && timelineChapterMap[currCh.id].length > 1) {
+                return timelineChapterMap[currCh.id];
+            }
+
+            if (timelinePoints.length < 2) return null;
+
+            const thresholdKm = 1.2; // 判定「抵達景點附近」的半徑容許值（1.2 公里內）
+            let startIdx = -1;
+            let bestStartDist = Infinity;
+
+            // 從上次找到的游標位置往後搜尋起點 (prevCh)
+            for (let i = timelineSearchCursor; i < timelinePoints.length; i++) {
+                const [lat, lng] = timelinePoints[i];
+                const dist = getDistanceKm(prevCh.lat, prevCh.lng, lat, lng);
+                if (dist <= thresholdKm) {
+                    if (dist < bestStartDist) {
+                        bestStartDist = dist;
+                        startIdx = i;
+                    }
+                } else if (startIdx !== -1 && i - startIdx > 15) {
+                    // 已經離開起點範圍，停止尋找起點
+                    break;
                 }
+            }
 
-                initMap();
-                buildDayTabs();
-                renderDay('ALL');
-            })
-            .catch(error => {
-                document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
-            });
+            // 若從游標找不到，嘗試從頭搜尋一次（以防使用者單獨切換某一天 Tab）
+            if (startIdx === -1) {
+                for (let i = 0; i < timelinePoints.length; i++) {
+                    const [lat, lng] = timelinePoints[i];
+                    const dist = getDistanceKm(prevCh.lat, prevCh.lng, lat, lng);
+                    if (dist <= thresholdKm && dist < bestStartDist) {
+                        bestStartDist = dist;
+                        startIdx = i;
+                    }
+                }
+            }
+
+            if (startIdx === -1) return null;
+
+            // 從起點往後搜尋終點 (currCh)，最多往後找 800 個定位點避免跨天誤判
+            let endIdx = -1;
+            let bestEndDist = Infinity;
+            const maxLookAhead = Math.min(timelinePoints.length, startIdx + 800);
+
+            for (let j = startIdx + 1; j < maxLookAhead; j++) {
+                const [lat, lng] = timelinePoints[j];
+                const dist = getDistanceKm(currCh.lat, currCh.lng, lat, lng);
+                if (dist <= thresholdKm) {
+                    if (dist < bestEndDist) {
+                        bestEndDist = dist;
+                        endIdx = j;
+                    }
+                } else if (endIdx !== -1 && j - endIdx > 10) {
+                    break;
+                }
+            }
+
+            if (endIdx !== -1 && endIdx > startIdx) {
+                timelineSearchCursor = endIdx; // 更新游標給下一章節使用
+                const sliced = timelinePoints.slice(startIdx, endIdx + 1);
+                // 將首尾座標與章節圓點精準接合
+                return [[prevCh.lat, prevCh.lng], ...sliced, [currCh.lat, currCh.lng]];
+            }
+
+            return null;
+        }
 
         function initMap() {
             map = L.map('map', { zoomControl: false }).setView([35.6895, 139.6917], 7);
@@ -406,7 +564,6 @@
                 attribution: 'Tiles &copy; Esri',
                 maxZoom: 16
             }).addTo(map);
-            // 先加路線圖層、再加標記圖層，確保圓點永遠壓在路線上方
             routeLayerGroup = L.layerGroup().addTo(map);
             markersLayer = L.layerGroup().addTo(map);
         }
@@ -542,7 +699,6 @@
             overlay.style.display = 'flex';
         }
 
-        // 統一同步切換章節卡片與地圖圓點的 Active 狀態
         function setActiveChapter(activeSection, activeMarker) {
             document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
             if (activeSection) activeSection.classList.add('active');
@@ -562,8 +718,8 @@
             markersLayer.clearLayers();
             routeLayerGroup.clearLayers();
             chapterMarkers.clear();
+            timelineSearchCursor = 0; // 重置時間軸搜尋游標
 
-            // 內嵌 .marker-dot 結構，讓圓心精準鎖定在 [8, 8] 不隨縮放漂移
             const dotIcon = L.divIcon({
                 className: 'custom-marker',
                 html: '<div class="marker-dot"></div>',
@@ -675,7 +831,7 @@
             initVideoAutoplay();
         }
 
-        // === 混合式軌跡引擎：做法三 (Timeline) 優先 ➔ 做法二 (OSRM / 弧線) 自動補位 ===
+        // === 混合式軌跡引擎：1. 單一 Timeline 檔自動擷取 ➔ 2. 依 transport 畫鐵道/弧線/OSRM 道路 ===
         async function drawHybridRoutes(chaptersList) {
             for (let i = 1; i < chaptersList.length; i++) {
                 const prevCh = chaptersList[i - 1];
@@ -688,7 +844,7 @@
                     color: '#C4A99E',
                     weight: isArc ? 3 : 4,
                     opacity: 0.85,
-                    dashArray: isArc ? '6, 8' : null // 飛機/船/新幹線弧線以精緻虛線呈現，道路/時間軸以實線呈現
+                    dashArray: isArc ? '6, 8' : null
                 }).addTo(routeLayerGroup);
             }
         }
@@ -696,49 +852,43 @@
         async function getSegmentRoute(prevCh, currCh) {
             const start = [prevCh.lat, prevCh.lng];
             const end = [currCh.lat, currCh.lng];
+            const mode = (currCh.transport || 'walk').toLowerCase();
 
-            // 1. 【優先檢查做法三】章節內是否直接寫了 track 座標陣列
+            // 1. 若章節內有手寫指定 track 陣列
             if (Array.isArray(currCh.track) && currCh.track.length > 1) {
                 return { coords: currCh.track, isArc: false };
             }
 
-            // 2. 【優先檢查做法三】讀取 timeline/ 資料夾下的軌跡檔
-            // 若 currCh.track 填檔名 (如 "timeline/tohoku_2026/d5-ch2.json")，或自動嘗試讀取預設路徑
-            const timelinePath = typeof currCh.track === 'string'
-                ? currCh.track
-                : `timeline/${tripId}/${currCh.id}.json`;
-
-            // 只有當章節有指定 track 字串，或設定 useTimeline: true 時才發送請求，避免無謂的 404
-            if (typeof currCh.track === 'string' || currCh.useTimeline) {
-                try {
-                    const res = await fetch(timelinePath);
-                    if (res.ok) {
-                        const data = await res.json();
-                        // 支援純座標陣列 [[lat, lng], ...] 或 GeoJSON 格式
-                        if (Array.isArray(data) && data.length > 1) {
-                            return { coords: data, isArc: false };
-                        } else if (data.features && data.features[0]) {
-                            const coords = data.features[0].geometry.coordinates.map(pt => [pt[1], pt[0]]);
-                            return { coords, isArc: false };
-                        }
-                    }
-                } catch (e) {
-                    console.warn(`未找到時間軸檔案 ${timelinePath}，自動切換為道路計算`);
+            // 2. 【優先：做法三】從已載入的 timeline/tohoku_2026.json 自動擷取該段真實軌跡
+            // （飛機跨海段除外，因為飛機上無 GPS 紀錄）
+            if (mode !== 'flight') {
+                const matchedTrack = extractTimelineSegment(prevCh, currCh);
+                if (matchedTrack && matchedTrack.length > 2) {
+                    return { coords: matchedTrack, isArc: false };
                 }
             }
 
-            // 3. 【做法二補位】依交通方式 (transport) 決定畫弧線或算 OSRM 真實道路
-            const mode = currCh.transport || 'walk';
+            // 3. 【補位：做法二】當沒有時間軸紀錄時，依交通方式 (transport) 繪製
+            const isLongDistance = getDistanceKm(prevCh.lat, prevCh.lng, currCh.lat, currCh.lng) > 250;
 
-            // 若是飛機、遊船、纜車、長途鐵道（或兩點直線距離超過 250 公里如跨海），自動畫平滑貝茲弧線
-            const isLongDistance = Math.hypot(currCh.lat - prevCh.lat, currCh.lng - prevCh.lng) > 2.5;
-            if (['flight', 'boat', 'ropeway', 'train'].includes(mode) || isLongDistance) {
-                const curvature = mode === 'flight' || isLongDistance ? 0.22 : 0.12;
+            // 支援：日本新幹線 (shinkansen)、日本 JR (jr)、日本地鐵 (subway)、飛機 (flight)、遊船 (boat)、纜車 (ropeway)
+            const curveModes = {
+                'flight': 0.22,      // 飛機大弧線
+                'shinkansen': 0.12,  // 日本新幹線平滑鐵道曲線
+                'train': 0.12,       // 一般火車
+                'jr': 0.08,          // 日本 JR 在來線微弧線
+                'subway': 0.05,      // 日本地鐵微彎線
+                'boat': 0.12,        // 遊船水面曲線
+                'ropeway': 0.04      // 纜車索道微弧線
+            };
+
+            if (curveModes[mode] !== undefined || isLongDistance) {
+                const curvature = curveModes[mode] !== undefined ? curveModes[mode] : 0.22;
                 return { coords: generateCurve(start, end, curvature), isArc: true };
             }
 
-            // 一般道路模式：先檢查瀏覽器快取，算過的路線秒載入
-            const cacheKey = `route_v2_${prevCh.id}_${currCh.id}_${mode}`;
+            // 一般道路模式（walk / bus / drive）：使用 OSRM 自動計算貼合日本街道的路線
+            const cacheKey = `route_v3_${prevCh.id}_${currCh.id}_${mode}`;
             const cached = localStorage.getItem(cacheKey);
             if (cached) {
                 return { coords: JSON.parse(cached), isArc: false };
@@ -759,11 +909,9 @@
                 console.warn(`OSRM 計算失敗 (${currCh.id})，使用直線替代`);
             }
 
-            // 4. 【最終保底】點對點虛線
             return { coords: [start, end], isArc: true };
         }
 
-        // 產生平滑貝茲弧線（用於飛機、遊船、纜車與長途新幹線）
         function generateCurve(start, end, curvature = 0.15, segments = 32) {
             const [lat1, lng1] = start;
             const [lat2, lng2] = end;
