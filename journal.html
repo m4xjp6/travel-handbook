@@ -361,7 +361,7 @@
 
         let map = null;
         let markersLayer = null;
-        let routeLine = null;
+        let routeLayerGroup = null; // 改為圖層群組，支援分段繪製路線
         let observer = null;
         let videoObserver = null;
         let normalizedDays = [];
@@ -406,6 +406,8 @@
                 attribution: 'Tiles &copy; Esri',
                 maxZoom: 16
             }).addTo(map);
+            // 先加路線圖層、再加標記圖層，確保圓點永遠壓在路線上方
+            routeLayerGroup = L.layerGroup().addTo(map);
             markersLayer = L.layerGroup().addTo(map);
         }
 
@@ -558,11 +560,17 @@
             if (observer) observer.disconnect();
 
             markersLayer.clearLayers();
+            routeLayerGroup.clearLayers();
             chapterMarkers.clear();
-            if (routeLine) map.removeLayer(routeLine);
 
-            const dotIcon = L.divIcon({ className: 'custom-marker', iconSize: [16, 16], iconAnchor: [8, 8] });
-            const latlngs = [];
+            // 內嵌 .marker-dot 結構，讓圓心精準鎖定在 [8, 8] 不隨縮放漂移
+            const dotIcon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div class="marker-dot"></div>',
+                iconSize: [16, 16],
+                iconAnchor: [8, 8]
+            });
+
             let chaptersList = [];
 
             const daysToRender = dayKey === 'ALL'
@@ -606,14 +614,12 @@
                     if (ch.lat && ch.lng) {
                         const marker = L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
 
-                        // 滑鼠懸停時顯示「天數｜章節標題」
                         marker.bindTooltip(`${dayObj.day}｜${ch.title}`, {
                             direction: 'top',
                             offset: [0, -10],
                             className: 'marker-tooltip'
                         });
 
-                        // 點擊地圖節點跳轉至對應章節卡片
                         marker.on('click', () => {
                             isClickScrolling = true;
                             clearTimeout(scrollUnlockTimer);
@@ -633,9 +639,7 @@
                         });
 
                         chapterMarkers.set(section, marker);
-                        latlngs.push([ch.lat, ch.lng]);
 
-                        // 預設高亮第一個節點
                         if (chaptersList.length === 1 && marker.getElement()) {
                             marker.getElement().classList.add('active');
                         }
@@ -643,12 +647,12 @@
                 });
             });
 
-            if (latlngs.length > 0) {
-                drawRoadRoute(latlngs, chaptersList);
+            if (chaptersList.length > 0) {
+                map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
+                drawHybridRoutes(chaptersList);
             }
 
             observer = new IntersectionObserver((entries) => {
-                // 若正在執行點擊地圖觸發的平滑滾動，暫不觸發中途章節的飛行
                 if (isClickScrolling) return;
 
                 entries.forEach(entry => {
@@ -671,36 +675,113 @@
             initVideoAutoplay();
         }
 
-        function drawRoadRoute(latlngs, chaptersList) {
-            if (latlngs.length < 2) {
-                if (chaptersList.length > 0) {
-                    map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                }
-                return;
+        // === 混合式軌跡引擎：做法三 (Timeline) 優先 ➔ 做法二 (OSRM / 弧線) 自動補位 ===
+        async function drawHybridRoutes(chaptersList) {
+            for (let i = 1; i < chaptersList.length; i++) {
+                const prevCh = chaptersList[i - 1];
+                const currCh = chaptersList[i];
+                if (!prevCh.lat || !prevCh.lng || !currCh.lat || !currCh.lng) continue;
+
+                const { coords, isArc } = await getSegmentRoute(prevCh, currCh);
+
+                L.polyline(coords, {
+                    color: '#C4A99E',
+                    weight: isArc ? 3 : 4,
+                    opacity: 0.85,
+                    dashArray: isArc ? '6, 8' : null // 飛機/船/新幹線弧線以精緻虛線呈現，道路/時間軸以實線呈現
+                }).addTo(routeLayerGroup);
+            }
+        }
+
+        async function getSegmentRoute(prevCh, currCh) {
+            const start = [prevCh.lat, prevCh.lng];
+            const end = [currCh.lat, currCh.lng];
+
+            // 1. 【優先檢查做法三】章節內是否直接寫了 track 座標陣列
+            if (Array.isArray(currCh.track) && currCh.track.length > 1) {
+                return { coords: currCh.track, isArc: false };
             }
 
-            const coordsString = latlngs.map(pt => `${pt[1]},${pt[0]}`).join(';');
-            const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${coordsString}?overview=full&geometries=geojson`;
+            // 2. 【優先檢查做法三】讀取 timeline/ 資料夾下的軌跡檔
+            // 若 currCh.track 填檔名 (如 "timeline/tohoku_2026/d5-ch2.json")，或自動嘗試讀取預設路徑
+            const timelinePath = typeof currCh.track === 'string'
+                ? currCh.track
+                : `timeline/${tripId}/${currCh.id}.json`;
 
-            fetch(osrmUrl)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-                        const fullRouteCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
-                        routeLine = L.polyline(fullRouteCoords, { color: '#C4A99E', weight: 4, opacity: 0.85 }).addTo(map);
-                    } else {
-                        routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
+            // 只有當章節有指定 track 字串，或設定 useTimeline: true 時才發送請求，避免無謂的 404
+            if (typeof currCh.track === 'string' || currCh.useTimeline) {
+                try {
+                    const res = await fetch(timelinePath);
+                    if (res.ok) {
+                        const data = await res.json();
+                        // 支援純座標陣列 [[lat, lng], ...] 或 GeoJSON 格式
+                        if (Array.isArray(data) && data.length > 1) {
+                            return { coords: data, isArc: false };
+                        } else if (data.features && data.features[0]) {
+                            const coords = data.features[0].geometry.coordinates.map(pt => [pt[1], pt[0]]);
+                            return { coords, isArc: false };
+                        }
                     }
-                    if (chaptersList.length > 0) {
-                        map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                    }
-                })
-                .catch(() => {
-                    routeLine = L.polyline(latlngs, { color: '#C4A99E', weight: 3, opacity: 0.7, dashArray: '5, 10' }).addTo(map);
-                    if (chaptersList.length > 0) {
-                        map.flyTo([chaptersList[0].lat, chaptersList[0].lng], chaptersList[0].zoom || 13, { animate: true, duration: 1.2 });
-                    }
-                });
+                } catch (e) {
+                    console.warn(`未找到時間軸檔案 ${timelinePath}，自動切換為道路計算`);
+                }
+            }
+
+            // 3. 【做法二補位】依交通方式 (transport) 決定畫弧線或算 OSRM 真實道路
+            const mode = currCh.transport || 'walk';
+
+            // 若是飛機、遊船、纜車、長途鐵道（或兩點直線距離超過 250 公里如跨海），自動畫平滑貝茲弧線
+            const isLongDistance = Math.hypot(currCh.lat - prevCh.lat, currCh.lng - prevCh.lng) > 2.5;
+            if (['flight', 'boat', 'ropeway', 'train'].includes(mode) || isLongDistance) {
+                const curvature = mode === 'flight' || isLongDistance ? 0.22 : 0.12;
+                return { coords: generateCurve(start, end, curvature), isArc: true };
+            }
+
+            // 一般道路模式：先檢查瀏覽器快取，算過的路線秒載入
+            const cacheKey = `route_v2_${prevCh.id}_${currCh.id}_${mode}`;
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                return { coords: JSON.parse(cached), isArc: false };
+            }
+
+            try {
+                const profile = mode === 'walk' ? 'foot' : 'driving';
+                const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${prevCh.lng},${prevCh.lat};${currCh.lng},${currCh.lat}?overview=full&geometries=geojson`;
+                const res = await fetch(osrmUrl);
+                const data = await res.json();
+
+                if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                    const roadCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
+                    localStorage.setItem(cacheKey, JSON.stringify(roadCoords));
+                    return { coords: roadCoords, isArc: false };
+                }
+            } catch (e) {
+                console.warn(`OSRM 計算失敗 (${currCh.id})，使用直線替代`);
+            }
+
+            // 4. 【最終保底】點對點虛線
+            return { coords: [start, end], isArc: true };
+        }
+
+        // 產生平滑貝茲弧線（用於飛機、遊船、纜車與長途新幹線）
+        function generateCurve(start, end, curvature = 0.15, segments = 32) {
+            const [lat1, lng1] = start;
+            const [lat2, lng2] = end;
+            const midLat = (lat1 + lat2) / 2;
+            const midLng = (lng1 + lng2) / 2;
+            const dLat = lat2 - lat1;
+            const dLng = lng2 - lng1;
+            const ctrlLat = midLat - dLng * curvature;
+            const ctrlLng = midLng + dLat * curvature;
+
+            const points = [];
+            for (let i = 0; i <= segments; i++) {
+                const t = i / segments;
+                const lat = (1 - t) * (1 - t) * lat1 + 2 * (1 - t) * t * ctrlLat + t * t * lat2;
+                const lng = (1 - t) * (1 - t) * lng1 + 2 * (1 - t) * t * ctrlLng + t * t * lng2;
+                points.push([Number(lat.toFixed(5)), Number(lng.toFixed(5))]);
+            }
+            return points;
         }
     </script>
 </body>
