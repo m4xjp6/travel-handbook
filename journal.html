@@ -558,8 +558,19 @@
             return null;
         }
 
-        function initMap() {
-            map = L.map('map', { zoomControl: false }).setView([35.6895, 139.6917], 7);
+        function initMap(daysData) {
+            // 自動抓取該旅程第一個章節的座標作為初始視角（若無資料則預設停在台灣）
+            let startLat = 23.6978, startLng = 120.9605, startZoom = 7;
+            if (daysData && daysData.length > 0 && daysData[0].chapters && daysData[0].chapters.length > 0) {
+                const firstCh = daysData[0].chapters[0];
+                if (firstCh.lat && firstCh.lng) {
+                    startLat = firstCh.lat;
+                    startLng = firstCh.lng;
+                    startZoom = firstCh.zoom || 13;
+                }
+            }
+
+            map = L.map('map', { zoomControl: false }).setView([startLat, startLng], startZoom);
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri',
                 maxZoom: 16
@@ -852,50 +863,58 @@
         async function getSegmentRoute(prevCh, currCh) {
             const start = [prevCh.lat, prevCh.lng];
             const end = [currCh.lat, currCh.lng];
-            const mode = (currCh.transport || 'walk').toLowerCase();
+            const mode = (currCh.transport || 'walk').toString().trim().toLowerCase();
 
             // 1. 若章節內有手寫指定 track 陣列
             if (Array.isArray(currCh.track) && currCh.track.length > 1) {
                 return { coords: currCh.track, isArc: false };
             }
 
-            // 2. 【優先：做法三】從已載入的 timeline/tohoku_2026.json 自動擷取該段真實軌跡
-            // （飛機跨海段除外，因為飛機上無 GPS 紀錄）
-            if (mode !== 'flight') {
+            // 判斷是否為飛機（飛機開飛航無 GPS，直接使用高空弧線）
+            const isFlight = ['flight', 'airplane', 'plane', '飛機', '航班'].includes(mode);
+
+            // 2. 【優先：做法三】從已載入的 timeline/${tripId}.json 自動擷取該段真實軌跡
+            if (!isFlight) {
                 const matchedTrack = extractTimelineSegment(prevCh, currCh);
                 if (matchedTrack && matchedTrack.length > 2) {
                     return { coords: matchedTrack, isArc: false };
                 }
             }
 
-            // 3. 【補位：做法二】當沒有時間軸紀錄時，依交通方式 (transport) 繪製
-            const isLongDistance = getDistanceKm(prevCh.lat, prevCh.lng, currCh.lat, currCh.lng) > 250;
-
-            // 支援：日本新幹線 (shinkansen)、日本 JR (jr)、日本地鐵 (subway)、飛機 (flight)、遊船 (boat)、纜車 (ropeway)
+            // 3. 【補位：做法二】全球通用交通工具弧度字典（支援英文通用碼、各國別名與中文）
             const curveModes = {
-                'flight': 0.22,      // 飛機大弧線
-                'shinkansen': 0.12,  // 日本新幹線平滑鐵道曲線
-                'train': 0.12,       // 一般火車
-                'jr': 0.08,          // 日本 JR 在來線微弧線
-                'subway': 0.05,      // 日本地鐵微彎線
-                'boat': 0.12,        // 遊船水面曲線
-                'ropeway': 0.04      // 纜車索道微弧線
+                // ✈️ 飛機 / 航班
+                'flight': 0.22, 'airplane': 0.22, 'plane': 0.22, '飛機': 0.22, '航班': 0.22,
+                // 🚄 高鐵 / 新幹線 / 各國高速鐵路
+                'hsr': 0.12, 'high_speed_rail': 0.12, 'shinkansen': 0.12, 'tgv': 0.12, 'eurostar': 0.12, '高鐵': 0.12, '新幹線': 0.12,
+                // 🚆 一般火車 / 台鐵 / JR / 各國國鐵與私鐵
+                'train': 0.08, 'railway': 0.08, 'tra': 0.08, 'jr': 0.08, 'ktm': 0.08, '火車': 0.08, '台鐵': 0.08, '鐵道': 0.08,
+                // 🚇 捷運 / 地鐵 / 輕軌 / 單軌電車
+                'metro': 0.05, 'mrt': 0.05, 'subway': 0.05, 'lrt': 0.05, 'monorail': 0.05, '捷運': 0.05, '地鐵': 0.05, '輕軌': 0.05,
+                // 🚡 纜車 / 索道
+                'ropeway': 0.04, 'cable_car': 0.04, 'gondola': 0.04, '纜車': 0.04,
+                // ⛴️ 遊船 / 渡輪 / 郵輪
+                'boat': 0.12, 'ferry': 0.12, 'cruise': 0.12, 'ship': 0.12, '遊船': 0.12, '渡輪': 0.12, '船': 0.12
             };
+
+            const isLongDistance = getDistanceKm(prevCh.lat, prevCh.lng, currCh.lat, currCh.lng) > 250;
 
             if (curveModes[mode] !== undefined || isLongDistance) {
                 const curvature = curveModes[mode] !== undefined ? curveModes[mode] : 0.22;
                 return { coords: generateCurve(start, end, curvature), isArc: true };
             }
 
-            // 一般道路模式（walk / bus / drive）：使用 OSRM 自動計算貼合日本街道的路線
-            const cacheKey = `route_v3_${prevCh.id}_${currCh.id}_${mode}`;
+            // 4. 一般道路模式（步行 walk / 巴士 bus / 自駕 drive / 計程車 taxi）：呼叫 OSRM 計算全球街道
+            const isWalk = ['walk', 'foot', '步行', '散步'].includes(mode);
+            const profile = isWalk ? 'foot' : 'driving';
+
+            const cacheKey = `route_v4_${prevCh.id}_${currCh.id}_${profile}`;
             const cached = localStorage.getItem(cacheKey);
             if (cached) {
                 return { coords: JSON.parse(cached), isArc: false };
             }
 
             try {
-                const profile = mode === 'walk' ? 'foot' : 'driving';
                 const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${prevCh.lng},${prevCh.lat};${currCh.lng},${currCh.lat}?overview=full&geometries=geojson`;
                 const res = await fetch(osrmUrl);
                 const data = await res.json();
