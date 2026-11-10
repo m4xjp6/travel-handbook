@@ -978,7 +978,12 @@
           "title": "08. 晚安｜返回仙台御宿野乃溫泉泡湯",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放御宿野乃溫泉飯店或深夜泡湯照",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d6-ch8-1.png",
+              "caption": ""
+            }
+          ],
           "content": "在復古懷舊的冬日祭典中體驗了最道地的仙台夜生活。回到飯店，依舊是溫暖的天然泉水迎接滿身寒氣的我們。褪去寒意，享受沉澱的個人時光，為充實的一天畫下完美句點。"
         }
       ]
@@ -998,7 +1003,24 @@
           "title": "01. 出發｜新幹線瞬間移動到東京上野",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放東北新幹線列車或APA飯店房間照片",
-          "mediaList": [],
+          "mediaList": [
+            {
+              "src": "media/tohoku_2026/d7-ch1-1.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d7-ch1-2.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d7-ch1-3.png",
+              "caption": ""
+            },
+            {
+              "src": "media/tohoku_2026/d7-ch1-4.png",
+              "caption": ""
+            }
+          ],
           "content": "享用完御宿野乃豐盛的自助早餐（牛舌與海鮮丼吃到飽！）後，搭上新幹線 Hayabusa 108 號，一個半小時就從雪國回到了繁華的東京上野。入住地理位置絕佳的「APA 京成上野站前飯店」，挑戰行李箱收納的俄羅斯方塊空間智慧！"
         },
         {
