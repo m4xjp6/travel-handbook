@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>°•* Flâneur *•° 旅行手帳書櫃</title>
     <style>
-        /* === 1. 全域色彩變數與基礎頁面設定 === */
+        /* === 1. 全域色彩變數與基礎頁面設定（全面採用溫潤奶茶棕，不使用黑色字體） === */
         :root {
             --bg-color: #FDFBF7;          /* 手帳米白底色 */
             --accent-brown: #C4A99E;      /* 主題奶茶棕 */
-            --accent-brown-dark: #a6897c; /* 深奶茶棕（懸停與強調） */
-            --accent-pink: #E5D1C7;       /* 藕粉底色 */
-            --text-dark: #4A4A4A;         /* 主要深灰文字 */
-            --text-light: #7A7A7A;        /* 次要淺灰文字 */
-            --callout-blue: #eef4ff;      /* 資訊框淺藍底色 */
+            --accent-brown-dark: #a6897c; /* 深奶茶棕（按鈕文字與強調色） */
+            --accent-pink: #E5D1C7;       /* 藕粉底色（滑鼠懸停） */
+            --text-main: #7A6258;         /* 主要內文深可可棕（取代原本偏黑的深灰色） */
+            --text-light: #9E887E;        /* 次要內文淺可可棕 */
+            --callout-bg: #F5EFE6;        /* 溫潤米杏色提示框底色 */
         }
 
         body {
@@ -21,18 +21,18 @@
             padding: 40px 24px 80px;
             font-family: 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-dark);
+            color: var(--text-main);
             max-width: 1060px;
             margin-inline: auto;
             box-sizing: border-box;
         }
 
         h1 {
-            color: var(--accent-brown);
+            color: var(--accent-brown-dark);
             text-align: center;
             font-size: 1.75rem;
             letter-spacing: 0.05em;
-            margin: 0 0 20px 0;
+            margin: 0 0 22px 0;
         }
 
         /* === 2. 七大洲與國家雙層篩選按鈕區 === */
@@ -54,11 +54,24 @@
             width: 100%;
         }
 
-        /* 第一層：七大洲按鈕樣式 */
-        .filter-btn {
+        /* 國家按鈕列：未點選任何大洲時預設隱藏 */
+        #country-filters {
+            display: none;
+            padding-top: 4px;
+            animation: fadeInDown 0.25s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 第一層（七大洲）與第二層（國家）共用溫潤奶茶色系按鈕設定 */
+        .filter-btn,
+        .country-btn {
             border: 1.5px solid var(--accent-brown);
             background: white;
-            color: var(--accent-brown-dark);
+            color: var(--accent-brown-dark); /* 文字採用深奶茶棕，非黑色 */
             padding: 7px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -67,39 +80,35 @@
             transition: all 0.2s ease;
             user-select: none;
         }
-        .filter-btn:hover {
+
+        /* 國家按鈕尺寸稍微輕巧，方便與大洲區分層級 */
+        .country-btn {
+            padding: 5px 14px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+        }
+
+        /* 滑鼠移過去的效果 */
+        .filter-btn:hover,
+        .country-btn:hover {
             background: var(--accent-pink);
+            border-color: var(--accent-pink);
             color: white;
         }
+
+        /* 點選後的狀態（維持有底色與白字） */
         .filter-btn.active {
             background: var(--accent-brown);
+            border-color: var(--accent-brown);
             color: white;
             box-shadow: 0 2px 8px rgba(196, 169, 158, 0.45);
         }
 
-        /* 第二層：國家按鈕樣式（稍微輕巧以區分層級） */
-        .country-btn {
-            border: 1px solid rgba(196, 169, 158, 0.75);
-            background: rgba(255, 255, 255, 0.75);
-            color: var(--text-dark);
-            padding: 5px 14px;
-            border-radius: 16px;
-            font-size: 0.84rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
-        }
-        .country-btn:hover {
-            border-color: var(--accent-brown-dark);
-            background: var(--accent-pink);
-            color: white;
-        }
         .country-btn.active {
             background: var(--accent-brown-dark);
             border-color: var(--accent-brown-dark);
             color: white;
-            box-shadow: 0 2px 6px rgba(166, 137, 124, 0.4);
+            box-shadow: 0 2px 8px rgba(166, 137, 124, 0.45);
         }
 
         /* === 3. 總覽提示框 (Callout) === */
@@ -108,9 +117,9 @@
             border-radius: 10px;
             margin-bottom: 28px;
             font-size: 0.92rem;
-            background-color: var(--callout-blue);
-            border-left: 4px solid #3b82f6;
-            color: #334155;
+            background-color: var(--callout-bg);
+            border-left: 4px solid var(--accent-brown);
+            color: var(--text-main);
             line-height: 1.6;
         }
 
@@ -175,6 +184,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 0.88rem;
+            color: var(--text-main);
         }
         th, td {
             padding: 8px 4px;
@@ -236,7 +246,7 @@
 
     <h1>°•* Flâneur *•° 旅行手帳書櫃</h1>
 
-    <!-- 雙層篩選器：上排七大洲、下排國家 -->
+    <!-- 雙層篩選器：上排七大洲、下排為點選該洲後才出現的國家 -->
     <div class="filter-section">
         <!-- 第一排：全部 + 七大洲按鈕 -->
         <div class="filter-row" id="continent-filters">
@@ -250,20 +260,21 @@
             <button type="button" class="filter-btn" data-continent="南極洲">南極洲</button>
         </div>
 
-        <!-- 第二排：國家／地區按鈕（未來去新國家可直接複製一行按鈕加在這裡） -->
+        <!-- 第二排：國家／地區按鈕（預設隱藏，點擊對應大洲時才會顯示該洲的國家） -->
+        <!-- 未來若去其他洲的國家，只需複製一行並設定對應的 data-continent="歐洲" 即可 -->
         <div class="filter-row" id="country-filters">
-            <button type="button" class="country-btn" data-country="台灣">台灣</button>
-            <button type="button" class="country-btn" data-country="日本">日本</button>
-            <button type="button" class="country-btn" data-country="韓國">韓國</button>
-            <button type="button" class="country-btn" data-country="香港">香港</button>
-            <button type="button" class="country-btn" data-country="中國">中國</button>
-            <button type="button" class="country-btn" data-country="馬來西亞">馬來西亞</button>
-            <button type="button" class="country-btn" data-country="新加坡">新加坡</button>
+            <button type="button" class="country-btn" data-continent="亞洲" data-country="台灣">台灣</button>
+            <button type="button" class="country-btn" data-continent="亞洲" data-country="日本">日本</button>
+            <button type="button" class="country-btn" data-continent="亞洲" data-country="韓國">韓國</button>
+            <button type="button" class="country-btn" data-continent="亞洲" data-country="香港">香港</button>
+            <button type="button" class="country-btn" data-continent="亞洲" data-country="中國">中國</button>
+            <button type="button" class="country-btn" data-continent="亞洲" data-country="馬來西亞">馬來西亞</button>
+            <button type="button" class="country-btn" data-continent="亞洲" data-country="新加坡">新加坡</button>
         </div>
     </div>
 
     <div class="callout">
-        <strong>📚 總覽資訊：</strong>點擊上方洲別或國家可快速篩選旅程，點擊下方的旅程卡片即可開啟該趟旅行的專屬「動態地圖手帳」。
+        <strong>📚 總覽資訊：</strong>點擊上方七大洲可展開對應國家並篩選旅程，點擊下方的旅程卡片即可開啟該趟旅行的專屬「動態地圖手帳」。
     </div>
 
     <!-- 手帳卡片列表（新增卡片時，設定 data-continent="洲名" 與 data-country="國家名" 即可自動連動篩選） -->
@@ -314,14 +325,37 @@
     <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
 
     <script>
-        /* === 七大洲與國家卡片篩選邏輯 === */
+        /* === 七大洲與國家雙層連動篩選邏輯 === */
         const continentBtns = document.querySelectorAll('#continent-filters .filter-btn');
+        const countryRow = document.getElementById('country-filters');
         const countryBtns = document.querySelectorAll('#country-filters .country-btn');
         const cards = document.querySelectorAll('.trip-card');
         const emptyState = document.getElementById('empty-state');
 
-        let currentContinent = 'ALL'; // 預設顯示全部洲
-        let currentCountry = null;    // 預設未限定單一國家
+        let currentContinent = 'ALL'; // 預設為全部（不選特定洲）
+        let currentCountry = null;    // 預設不選特定國家
+
+        // 更新國家按鈕列的顯示狀態（僅在選中特定大洲時，顯示屬於該洲的國家按鈕）
+        function updateCountryRowVisibility() {
+            if (currentContinent === 'ALL') {
+                countryRow.style.display = 'none';
+                return;
+            }
+
+            let hasCountriesForContinent = false;
+            countryBtns.forEach(btn => {
+                const btnContinent = (btn.getAttribute('data-continent') || '').trim();
+                if (btnContinent === currentContinent) {
+                    btn.style.display = 'inline-block';
+                    hasCountriesForContinent = true;
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+
+            // 若該洲有設定國家按鈕則展開，否則保持隱藏
+            countryRow.style.display = hasCountriesForContinent ? 'flex' : 'none';
+        }
 
         // 執行卡片顯示與隱藏判斷
         function applyFilter() {
@@ -347,46 +381,45 @@
             emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
         }
 
-        // 1. 點擊「七大洲」按鈕：顯示該洲所有卡片，並清除單一國家鎖定
+        // 1. 點擊「七大洲」按鈕：切換大洲（保持底色）並展開該洲的國家按鈕
         continentBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const selected = btn.getAttribute('data-continent');
 
-                // 若重複點擊當前已選中的洲，則自動切回「全部」
+                // 若再次點擊目前已選中的大洲（且未選國家），則退回「全部」並收起國家列
                 if (currentContinent === selected && !currentCountry && selected !== 'ALL') {
                     currentContinent = 'ALL';
                 } else {
                     currentContinent = selected;
                 }
+
+                // 切換大洲時重置國家選擇
                 currentCountry = null;
 
+                // 讓被點選的大洲維持有底色 (active)
                 continentBtns.forEach(b => {
                     b.classList.toggle('active', b.getAttribute('data-continent') === currentContinent);
                 });
                 countryBtns.forEach(b => b.classList.remove('active'));
 
+                updateCountryRowVisibility();
                 applyFilter();
             });
         });
 
-        // 2. 點擊「國家」按鈕：精準顯示去過該國家的所有卡片
+        // 2. 點擊「國家」按鈕：篩選該國卡片，且大洲與國家按鈕同時維持有底色
         countryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const selected = btn.getAttribute('data-country');
+                const selectedCountry = btn.getAttribute('data-country');
 
-                // 若重複點擊已選中的國家，則取消國家篩選並回到全部卡片
-                if (currentCountry === selected) {
+                // 若再次點擊已選中的國家，則取消國家鎖定（退回顯示該洲的所有卡片）
+                if (currentCountry === selectedCountry) {
                     currentCountry = null;
-                    currentContinent = 'ALL';
                     countryBtns.forEach(b => b.classList.remove('active'));
-                    continentBtns.forEach(b => {
-                        b.classList.toggle('active', b.getAttribute('data-continent') === 'ALL');
-                    });
                 } else {
-                    currentCountry = selected;
-                    currentContinent = 'ALL'; // 切到國家時不限制洲別，確保直接顯示該國所有卡片
+                    currentCountry = selectedCountry;
+                    // 讓點選的國家按鈕維持有底色，同時上方的大洲按鈕也保留底色！
                     countryBtns.forEach(b => b.classList.toggle('active', b === btn));
-                    continentBtns.forEach(b => b.classList.remove('active'));
                 }
 
                 applyFilter();
