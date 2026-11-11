@@ -6,14 +6,15 @@
     <title>讀取中... ｜ 電子旅行手帳</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
+        /* === 1. 全域色彩變數與基礎頁面設定 === */
         :root {
-            --bg-color: #FDFBF7;
-            --accent-yellow: #FFE599;
-            --accent-brown: #C4A99E;
-            --accent-brown-dark: #a6897c;
-            --accent-pink: #E5D1C7;
-            --text-dark: #4A4A4A;
-            --text-light: #7A7A7A;
+            --bg-color: #FDFBF7;          /* 手帳米白底色 */
+            --accent-yellow: #FFE599;     /* 標題底線亮黃色 */
+            --accent-brown: #C4A99E;      /* 主題奶茶棕 */
+            --accent-brown-dark: #a6897c; /* 深奶茶棕（強調與文字用） */
+            --accent-pink: #E5D1C7;       /* 藕粉底色（地圖載入與預留框用） */
+            --text-dark: #4A4A4A;         /* 主要深灰文字 */
+            --text-light: #7A7A7A;        /* 內文淺灰文字 */
         }
         body, html {
             margin: 0;
@@ -23,9 +24,9 @@
             color: var(--text-dark);
             height: 100%;
         }
-        .container { display: flex; width: 100%; }
 
-        /* 左側地圖區塊 */
+        /* === 2. 左右雙欄主版面配置 (左地圖 50% / 右內容 50%) === */
+        .container { display: flex; width: 100%; }
         #map-container {
             position: sticky;
             top: 0;
@@ -34,18 +35,16 @@
             background-color: var(--accent-pink);
         }
         #map { width: 100%; height: 100%; }
-
-        /* 右側內容區塊 */
         #right-panel { width: 50vw; box-sizing: border-box; }
 
-        /* 頂部常駐導覽列 */
+        /* === 3. 右側頂部常駐導覽列與天數切換按鈕 (Day Tabs) === */
         .top-nav {
             position: sticky;
             top: 0;
             z-index: 100;
             background: rgba(253, 251, 247, 0.95);
             backdrop-filter: blur(8px);
-            padding: 16px 40px 12px 40px;
+            padding: 16px 40px 12px;
             border-bottom: 1px solid rgba(196, 169, 158, 0.25);
         }
         .nav-header {
@@ -65,8 +64,6 @@
             font-size: 1.15rem;
             color: var(--accent-brown-dark);
         }
-
-        /* 天數按鈕列 (Day Tabs) */
         .day-tabs {
             display: flex;
             gap: 8px;
@@ -93,16 +90,14 @@
             box-shadow: 0 2px 8px rgba(196, 169, 158, 0.4);
         }
 
-        /* 文章內容容器 */
-        #content { padding: 30px 40px 60px 40px; }
-
-        /* 每日大標題橫幅 */
+        /* === 4. 日記文章容器與每日大標題橫幅 (Day Banner) === */
+        #content { padding: 30px 40px 60px; }
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
             padding: 20px 24px;
             border-radius: 12px;
-            margin: 20px 0 30px 0;
+            margin: 20px 0 30px;
             box-shadow: 0 4px 15px rgba(196, 169, 158, 0.25);
         }
         .day-banner-header {
@@ -134,7 +129,7 @@
             line-height: 1.5;
         }
 
-        /* 單一章節卡片 */
+        /* === 5. 單一章節卡片樣式 (Chapter Card) === */
         .chapter {
             min-height: 65vh;
             margin-bottom: 45px;
@@ -144,7 +139,7 @@
             box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15);
             position: relative;
             transition: opacity 0.4s ease;
-            opacity: 0.35;
+            opacity: 0.35; /* 非當前閱讀章節半透明化 */
         }
         .chapter.active { opacity: 1; }
         .chapter h2 {
@@ -162,6 +157,7 @@
             letter-spacing: 0.04em;
             white-space: pre-line;
         }
+        /* 無照片時的粉色文字佔位框 */
         .photo-placeholder {
             width: 100%;
             min-height: 220px;
@@ -177,46 +173,32 @@
             overflow: hidden;
         }
 
-        /* === 網頁版（電腦版）多媒體畫廊排版系統 === */
+        /* === 6. 多媒體畫廊排版系統 (對應 config.yml 的所有版型選項) === */
         .media-gallery {
             margin: 20px 0;
             display: grid;
             gap: 10px;
             width: 100%;
         }
+        /* 單張滿版 / 垂直堆疊 */
         .media-gallery.layout-single,
-        .media-gallery.layout-stack {
-            grid-template-columns: 1fr;
-        }
+        .media-gallery.layout-stack { grid-template-columns: 1fr; }
         .media-gallery.layout-single .media-item { max-height: 440px; }
 
-        /* 網頁版 auto 依數量精確平分：1張=100%, 2張=50%, 3張=33%, 4張以上=25% */
-        .media-gallery.layout-auto {
-            grid-template-columns: 1fr;
-        }
-        .media-gallery.layout-auto:has(.media-item:nth-child(2):last-child) {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .media-gallery.layout-auto:has(.media-item:nth-child(3):last-child) {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        .media-gallery.layout-auto:has(.media-item:nth-child(4)) {
-            grid-template-columns: repeat(4, 1fr);
-        }
+        /* 2 欄、3 欄、4 欄等寬並排 */
+        .media-gallery.layout-auto-2,
+        .media-gallery.layout-grid-equal { grid-template-columns: repeat(2, 1fr); }
+        .media-gallery.layout-auto-3,
+        .media-gallery.layout-grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .media-gallery.layout-auto-4,
+        .media-gallery.layout-grid-4 { grid-template-columns: repeat(4, 1fr); }
 
-        /* 網頁版 grid-4 或 auto-4 強制 25% 四等分 */
-        .media-gallery.layout-grid-4,
-        .media-gallery.layout-grid-equal,
-        .media-gallery.layout-auto-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .media-gallery.layout-auto-2 { grid-template-columns: repeat(2, 1fr); }
-        .media-gallery.layout-auto-3 { grid-template-columns: repeat(3, 1fr); }
+        /* 雜誌風比例排版 (2:1 / 1:2 / 1:2:1) */
         .media-gallery.layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
         .media-gallery.layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
+        .media-gallery.layout-grid-1-2-1 { grid-template-columns: 1fr 2fr 1fr; }
 
-        /* IG 風橫向滑動輪播 */
+        /* IG 風橫向滑動輪播 (5 張以上自動套用或手動指定) */
         .media-gallery.layout-carousel {
             display: flex;
             overflow-x: auto;
@@ -230,7 +212,7 @@
             scroll-snap-align: center;
         }
 
-        /* 單一媒體項目外觀與固定高度 */
+        /* 單一照片/影片項目容器與懸停效果 */
         .media-item {
             position: relative;
             min-width: 0;
@@ -249,7 +231,6 @@
             transition: transform 0.3s ease;
         }
         .media-item img:hover { transform: scale(1.02); }
-
         .media-caption {
             position: absolute;
             bottom: 0;
@@ -261,8 +242,6 @@
             padding: 16px 10px 6px;
             pointer-events: none;
         }
-
-        /* 影片重播按鈕 */
         .replay-btn {
             position: absolute;
             bottom: 8px;
@@ -279,7 +258,7 @@
         }
         .replay-btn:hover { background: rgba(0, 0, 0, 0.8); }
 
-        /* 點擊放大燈箱 */
+        /* === 7. 點擊圖片放大預覽燈箱 (Lightbox) === */
         #lightbox-overlay {
             display: none;
             position: fixed;
@@ -298,8 +277,18 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
         }
 
-        /* 內建：四色重點底色框 (Callout Box) */
-        .callout-box { display: flex; align-items: flex-start; padding: 14px 18px; border-radius: 8px; margin: 16px 0; font-size: 0.92rem; line-height: 1.6; color: #333; white-space: normal; }
+        /* === 8. 內文重點提示框樣式 (Callout Box：警告橘/秘訣綠/資訊藍) === */
+        .callout-box {
+            display: flex;
+            align-items: flex-start;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: #333;
+            white-space: normal;
+        }
         .callout-icon { font-size: 1.2rem; margin-right: 12px; flex-shrink: 0; }
         .callout-content { flex-grow: 1; }
         .callout-title { font-weight: bold; margin-bottom: 4px; }
@@ -310,7 +299,7 @@
         .callout-info { background-color: #eef4ff; border-left: 4px solid #3b82f6; }
         .callout-info .callout-title { color: #2563eb; }
 
-        /* 地圖標記圓點與互動樣式 */
+        /* === 9. 地圖標記、路線方向箭頭與小狐狸角色樣式 === */
         .custom-marker { background: transparent; border: none; }
         .custom-marker .marker-dot {
             width: 16px;
@@ -330,27 +319,37 @@
             box-shadow: 0 0 0 4px rgba(255, 229, 153, 0.7), 0 3px 8px rgba(0,0,0,0.3);
         }
         .custom-marker:hover,
-        .custom-marker.active {
-            z-index: 900 !important;
-        }
+        .custom-marker.active { z-index: 900 !important; }
 
-        /* 路線上的方向小箭頭 (- - > - - >) */
+        /* 路線上的方向小箭頭 */
         .route-arrow-icon { background: transparent; border: none; pointer-events: none; }
         .route-arrow-inner {
-            width: 14px; height: 14px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--accent-brown-dark); font-weight: bold; font-size: 13px; line-height: 1;
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-brown-dark);
+            font-weight: bold;
+            font-size: 13px;
+            line-height: 1;
             text-shadow: 0 0 3px #fff, 0 0 3px #fff;
         }
 
-        /* 🦊 沿街移動的小狐狸角色樣式 */
+        /* 🦊 沿路線移動的小狐狸角色 */
         .fox-traveler-icon { background: transparent; border: none; z-index: 2000 !important; pointer-events: none; }
         .fox-wrapper {
-            width: 36px; height: 36px;
-            display: flex; align-items: center; justify-content: center;
-            background: #fff; border: 2.5px solid var(--accent-brown-dark);
-            border-radius: 50%; box-shadow: 0 4px 12px rgba(166, 137, 124, 0.55);
-            font-size: 20px; transition: transform 0.15s ease;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 2.5px solid var(--accent-brown-dark);
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(166, 137, 124, 0.55);
+            font-size: 20px;
+            transition: transform 0.15s ease;
         }
         .fox-wrapper.walking { animation: foxWalkBounce 0.32s infinite alternate ease-in-out; }
         @keyframes foxWalkBounce {
@@ -358,15 +357,19 @@
             100% { margin-top: -6px; }
         }
 
+        /* 地圖節點懸停提示框 (Tooltip) */
         .marker-tooltip {
             background: rgba(74, 74, 74, 0.92);
-            color: #fff; border: none; border-radius: 6px;
-            padding: 4px 10px; font-size: 0.8rem;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         .marker-tooltip::before { border-top-color: rgba(74, 74, 74, 0.92) !important; }
 
-        /* === 手機版 RWD 限制：不論設定為何，在同一高度最多排版 2 張 === */
+        /* === 10. 手機版 RWD 響應式配置 (上地圖 38vh / 下內容，照片每排最多 2 張) === */
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             #map-container { width: 100vw; height: 38vh; position: sticky; top: 0; z-index: 200; }
@@ -374,27 +377,20 @@
             .top-nav { top: 38vh; padding: 12px 20px; }
             #content { padding: 20px; }
             .chapter { min-height: auto; margin-bottom: 30px; }
-
-            .media-gallery {
-                grid-template-columns: repeat(2, 1fr) !important;
+            .media-gallery:not(.layout-single):not(.layout-stack):not(.layout-carousel) {
+                grid-template-columns: repeat(2, 1fr);
             }
-            .media-gallery.layout-single,
-            .media-gallery.layout-stack {
-                grid-template-columns: 1fr !important;
-            }
-            .media-item {
-                height: 180px;
-            }
+            .media-item { height: 180px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- 左側地圖 -->
+        <!-- 左側常駐地圖區 -->
         <div id="map-container"><div id="map"></div></div>
 
-        <!-- 右側導覽列與日記內容 -->
+        <!-- 右側導覽列與日記文章區 -->
         <div id="right-panel">
             <div class="top-nav">
                 <div class="nav-header">
@@ -407,29 +403,46 @@
         </div>
     </div>
 
+    <!-- 點圖放大預覽燈箱 -->
+    <div id="lightbox-overlay" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="" alt="放大預覽">
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        /* === 1. 全域狀態變數與參數初始化 === */
         const urlParams = new URLSearchParams(window.location.search);
         const tripId = urlParams.get('trip') || 'tohoku_2026';
 
         let map = null;
-        let baseRouteLayer = null;   // 底層：整天輕量乾淨的淺虛線 (- - - -)
-        let activeRouteLayer = null; // 當前移動段：清楚的轉彎虛線與方向箭頭 (- - > - - >)
-        let markersLayer = null;     // 景點圓點圖層
-        let foxMarker = null;        // 🦊 小狐狸移動角色
-        let foxAnimFrame = null;     // 小狐狸動畫計時器
+        let baseRouteLayer = null;   // 底層：整天行程的淺色虛線
+        let activeRouteLayer = null; // 頂層：當前移動區段的深色虛線與方向箭頭
+        let markersLayer = null;     // 景點圓點標記圖層
+        let foxMarker = null;        // 🦊 小狐狸角色標記
+        let foxAnimFrame = null;     // 小狐狸移動動畫計時器
 
-        let observer = null;
-        let videoObserver = null;
-        let normalizedDays = [];
-        let currentChaptersList = [];
-        let currentActiveIndex = 0;
+        let observer = null;         // 章節滾動監聽器
+        let videoObserver = null;    // 影片自動播放監聽器
+        let normalizedDays = [];     // 統一格式後的每日行程陣列
+        let currentChaptersList = [];// 當前顯示的所有章節清單
+        let currentActiveIndex = 0;  // 當前閱讀中的章節索引
 
-        const segmentCoordsCache = {};
-        let chapterMarkers = new Map();
-        let isClickScrolling = false;
+        const segmentCoordsCache = {};     // 路線座標記憶體快取
+        const chapterMarkers = new Map();  // 章節 DOM 對應地圖 Marker 的映射表
+        let isClickScrolling = false;      // 點擊地圖平滑滾動時的鎖定旗標
         let scrollUnlockTimer = null;
 
+        // 非公路類交通工具的弧線曲率設定（數值越大弧度越彎）
+        const CURVE_MODES = {
+            flight: 0.22,
+            hsr: 0.12,
+            boat: 0.12,
+            train: 0.08,
+            metro: 0.05,
+            ropeway: 0.04
+        };
+
+        /* === 2. 讀取旅程 JSON 資料並初始化畫面 === */
         fetch(`data/${tripId}.json`)
             .then(res => {
                 if (!res.ok) throw new Error('找不到該旅程的資料檔');
@@ -439,13 +452,16 @@
                 document.title = data.tripTitle || '電子旅行手帳';
                 document.getElementById('trip-title').textContent = data.tripTitle || '';
 
+                // 相容新版 days 結構與舊版扁平 chapters 結構
                 if (Array.isArray(data.days) && data.days.length > 0) {
                     normalizedDays = data.days;
                 } else if (Array.isArray(data.chapters)) {
                     const grouped = {};
                     data.chapters.forEach(ch => {
                         const d = ch.day || 'Day 01';
-                        if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
+                        if (!grouped[d]) {
+                            grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
+                        }
                         grouped[d].chapters.push(ch);
                     });
                     normalizedDays = Object.values(grouped);
@@ -459,16 +475,12 @@
                 document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
             });
 
+        /* === 3. 初始化 Leaflet 地圖與圖層 === */
         function initMap(daysData) {
-            let startLat = 35.6895, startLng = 139.6917, startZoom = 7;
-            if (daysData && daysData.length > 0 && daysData[0].chapters && daysData[0].chapters.length > 0) {
-                const firstCh = daysData[0].chapters[0];
-                if (firstCh.lat && firstCh.lng) {
-                    startLat = firstCh.lat;
-                    startLng = firstCh.lng;
-                    startZoom = firstCh.zoom || 13;
-                }
-            }
+            const firstCh = daysData?.[0]?.chapters?.[0];
+            const startLat = firstCh?.lat || 35.6895;
+            const startLng = firstCh?.lng || 139.6917;
+            const startZoom = firstCh?.zoom || 7;
 
             map = L.map('map', { zoomControl: false }).setView([startLat, startLng], startZoom);
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
@@ -481,18 +493,37 @@
             markersLayer = L.layerGroup().addTo(map);
         }
 
+        /* === 4. 距離計算、交通方式判別與路線座標產生 === */
+        // 計算兩組經緯度之間的直線距離 (公里)
         function getDistanceKm(lat1, lng1, lat2, lng2) {
             const R = 6371;
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLng = (lng2 - lng1) * Math.PI / 180;
-            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            const a = Math.sin(dLat / 2) ** 2 +
                       Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+                      Math.sin(dLng / 2) ** 2;
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         }
 
-        function autoDetectMode(prevCh, currCh, distKm) {
-            if (currCh.transport) return currCh.transport.toString().trim().toLowerCase();
+        // 統一將交通方式正規化為標準英文代碼（支援後台設定與內文關鍵字自動偵測）
+        function resolveTransportMode(currCh, distKm) {
+            const raw = (currCh.transport || '').toString().trim().toLowerCase();
+            const modeAliases = {
+                flight: ['flight', 'airplane', 'plane', '飛機', '航班'],
+                hsr: ['hsr', 'shinkansen', '高鐵', '新幹線'],
+                train: ['train', 'jr', '火車', '台鐵'],
+                metro: ['metro', 'mrt', 'subway', '捷運', '地鐵'],
+                boat: ['boat', 'ferry', '遊船', '渡輪'],
+                ropeway: ['ropeway', 'cable_car', '纜車'],
+                walk: ['walk', 'foot', '步行', '散步'],
+                drive: ['drive', 'car', '自駕', '計程車'],
+                bus: ['bus', '巴士', '公車']
+            };
+            for (const [stdMode, aliases] of Object.entries(modeAliases)) {
+                if (aliases.includes(raw)) return stdMode;
+            }
+
+            // 若未指定，依距離與章節文字自動推斷
             const text = `${currCh.title || ''} ${currCh.content || ''}`;
             if (distKm > 250 || /直飛|航班|班機|起飛|降落/.test(text)) return 'flight';
             if (/遊船|觀光船|渡輪|乘船/.test(text)) return 'boat';
@@ -503,6 +534,24 @@
             return distKm <= 3.5 ? 'walk' : 'bus';
         }
 
+        // 產生兩點之間的平滑二次貝茲曲線座標（用於飛機、鐵道、纜車、船班或備援路線）
+        function generateCurve(start, end, curvature = 0.15, segments = 32) {
+            const [lat1, lng1] = start, [lat2, lng2] = end;
+            const midLat = (lat1 + lat2) / 2, midLng = (lng1 + lng2) / 2;
+            const ctrlLat = midLat - (lng2 - lng1) * curvature;
+            const ctrlLng = midLng + (lat2 - lat1) * curvature;
+
+            const points = [];
+            for (let i = 0; i <= segments; i++) {
+                const t = i / segments;
+                const lat = (1 - t) ** 2 * lat1 + 2 * (1 - t) * t * ctrlLat + t ** 2 * lat2;
+                const lng = (1 - t) ** 2 * lng1 + 2 * (1 - t) * t * ctrlLng + t ** 2 * lng2;
+                points.push([Number(lat.toFixed(5)), Number(lng.toFixed(5))]);
+            }
+            return points;
+        }
+
+        // 取得兩章節間的詳細路徑（鐵道/航空走優美弧線，步行/巴士/自駕查詢 OSRM 實際街道）
         async function getDetailedPath(prevCh, currCh) {
             const cacheKey = `auto_v1_${prevCh.id}_to_${currCh.id}`;
             if (segmentCoordsCache[cacheKey]) return segmentCoordsCache[cacheKey];
@@ -510,24 +559,17 @@
             const start = [prevCh.lat, prevCh.lng];
             const end = [currCh.lat, currCh.lng];
             const distKm = getDistanceKm(prevCh.lat, prevCh.lng, currCh.lat, currCh.lng);
-            const mode = autoDetectMode(prevCh, currCh, distKm);
+            const mode = resolveTransportMode(currCh, distKm);
 
-            const curveModes = {
-                'flight': 0.22, 'airplane': 0.22, 'plane': 0.22, '飛機': 0.22, '航班': 0.22,
-                'hsr': 0.12, 'shinkansen': 0.12, '高鐵': 0.12, '新幹線': 0.12,
-                'train': 0.08, 'jr': 0.08, '火車': 0.08, '台鐵': 0.08,
-                'metro': 0.05, 'mrt': 0.05, 'subway': 0.05, '捷運': 0.05, '地鐵': 0.05,
-                'boat': 0.12, 'ferry': 0.12, '遊船': 0.12, '渡輪': 0.12,
-                'ropeway': 0.04, 'cable_car': 0.04, '纜車': 0.04
-            };
-
-            if (curveModes[mode] !== undefined || distKm > 250) {
-                const curv = curveModes[mode] !== undefined ? curveModes[mode] : 0.22;
+            // 1. 軌道、航空、船隻或長途跨區：直接產生平滑曲線
+            if (CURVE_MODES[mode] !== undefined || distKm > 250) {
+                const curv = CURVE_MODES[mode] ?? 0.22;
                 const arcCoords = generateCurve(start, end, curv, 36);
                 segmentCoordsCache[cacheKey] = arcCoords;
                 return arcCoords;
             }
 
+            // 2. 檢查瀏覽器 localStorage 是否已有街道快取
             const saved = localStorage.getItem(cacheKey);
             if (saved) {
                 const parsed = JSON.parse(saved);
@@ -535,12 +577,13 @@
                 return parsed;
             }
 
+            // 3. 呼叫 OSRM 取得貼合街道的真實路線
             try {
-                const profile = ['walk', 'foot', '步行', '散步'].includes(mode) ? 'foot' : 'driving';
+                const profile = mode === 'walk' ? 'foot' : 'driving';
                 const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${prevCh.lng},${prevCh.lat};${currCh.lng},${currCh.lat}?overview=full&geometries=geojson`;
                 const res = await fetch(osrmUrl);
                 const data = await res.json();
-                if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+                if (data.code === 'Ok' && data.routes?.length > 0) {
                     const roadCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]);
                     segmentCoordsCache[cacheKey] = roadCoords;
                     try { localStorage.setItem(cacheKey, JSON.stringify(roadCoords)); } catch (e) {}
@@ -548,28 +591,14 @@
                 }
             } catch (e) {}
 
+            // 4. 若網路或 API 失敗，以微彎曲線作為備援
             const fallbackCoords = generateCurve(start, end, 0.05, 24);
             segmentCoordsCache[cacheKey] = fallbackCoords;
             return fallbackCoords;
         }
 
-        function generateCurve(start, end, curvature = 0.15, segments = 32) {
-            const [lat1, lng1] = start, [lat2, lng2] = end;
-            const midLat = (lat1 + lat2) / 2, midLng = (lng1 + lng2) / 2;
-            const dLat = lat2 - lat1, dLng = lng2 - lng1;
-            const ctrlLat = midLat - dLng * curvature;
-            const ctrlLng = midLng + dLat * curvature;
-
-            const points = [];
-            for (let i = 0; i <= segments; i++) {
-                const t = i / segments;
-                const lat = (1 - t) * (1 - t) * lat1 + 2 * (1 - t) * t * ctrlLat + t * t * lat2;
-                const lng = (1 - t) * (1 - t) * lng1 + 2 * (1 - t) * t * ctrlLng + t * t * lng2;
-                points.push([Number(lat.toFixed(5)), Number(lng.toFixed(5))]);
-            }
-            return points;
-        }
-
+        /* === 5. 繪製當前移動路線與小狐狸沿途移動動畫 === */
+        // 繪製深色虛線與沿途方向小箭頭 (- - > - - >)
         function drawActiveArrowRoute(coords) {
             activeRouteLayer.clearLayers();
             if (!coords || coords.length < 2) return;
@@ -596,6 +625,7 @@
             }
         }
 
+        // 控制小狐狸沿座標點平滑移動並自動翻轉面向
         function animateFoxAlongPath(coords, targetZoom) {
             if (foxAnimFrame) cancelAnimationFrame(foxAnimFrame);
             if (!coords || coords.length === 0) return;
@@ -611,16 +641,17 @@
                 foxMarker.setLatLng(coords[0]);
             }
 
+            // 單點直接定點飛行
             if (coords.length === 1) {
                 map.flyTo(coords[0], targetZoom || 14, { animate: true, duration: 1.2 });
                 return;
             }
 
+            // 計算各段累積距離以確保等速平滑移動
             const cumDist = [0];
             let totalDist = 0;
             for (let i = 1; i < coords.length; i++) {
-                const segDist = Math.hypot(coords[i][0] - coords[i - 1][0], coords[i][1] - coords[i - 1][1]);
-                totalDist += segDist;
+                totalDist += Math.hypot(coords[i][0] - coords[i - 1][0], coords[i][1] - coords[i - 1][1]);
                 cumDist.push(totalDist);
             }
 
@@ -630,8 +661,7 @@
                 return;
             }
 
-            const bounds = L.latLngBounds(coords);
-            map.flyToBounds(bounds, { padding: [70, 70], maxZoom: targetZoom || 15, animate: true, duration: 0.7 });
+            map.flyToBounds(L.latLngBounds(coords), { padding: [70, 70], maxZoom: targetZoom || 15, animate: true, duration: 0.7 });
 
             const foxEl = document.getElementById('fox-avatar');
             if (foxEl) foxEl.classList.add('walking');
@@ -640,30 +670,27 @@
             const startTime = performance.now();
 
             function step(now) {
-                const elapsed = now - startTime;
-                const progress = Math.min(1, elapsed / duration);
+                const progress = Math.min(1, (now - startTime) / duration);
                 const eased = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
                 const targetD = eased * totalDist;
 
                 let segIdx = 0;
-                while (segIdx < cumDist.length - 2 && cumDist[segIdx + 1] < targetD) {
-                    segIdx++;
-                }
+                while (segIdx < cumDist.length - 2 && cumDist[segIdx + 1] < targetD) segIdx++;
 
                 const segStartD = cumDist[segIdx];
                 const segLen = cumDist[segIdx + 1] - segStartD;
                 const ratio = segLen > 0 ? (targetD - segStartD) / segLen : 0;
 
                 const p1 = coords[segIdx], p2 = coords[segIdx + 1];
-                const curLat = p1[0] + (p2[0] - p1[0]) * ratio;
-                const curLng = p1[1] + (p2[1] - p1[1]) * ratio;
+                foxMarker.setLatLng([
+                    p1[0] + (p2[0] - p1[0]) * ratio,
+                    p1[1] + (p2[1] - p1[1]) * ratio
+                ]);
 
-                foxMarker.setLatLng([curLat, curLng]);
-
+                // 依東西向移動方向自動左右翻轉小狐狸
                 const avatar = document.getElementById('fox-avatar');
                 if (avatar && Math.abs(p2[1] - p1[1]) > 0.00001) {
-                    const scaleX = (p2[1] - p1[1]) < 0 ? 1 : -1;
-                    avatar.style.transform = `scaleX(${scaleX})`;
+                    avatar.style.transform = `scaleX(${(p2[1] - p1[1]) < 0 ? 1 : -1})`;
                 }
 
                 if (progress < 1) {
@@ -677,14 +704,14 @@
             foxAnimFrame = requestAnimationFrame(step);
         }
 
+        // 切換章節時觸發路線繪製與小狐狸移動（相鄰章節雙向走動，跨章節跳轉直接定位）
         async function transitionToChapter(newIndex) {
             const targetCh = currentChaptersList[newIndex];
-            if (!targetCh || !targetCh.lat || !targetCh.lng) return;
+            if (!targetCh?.lat || !targetCh?.lng) return;
 
             if (newIndex !== currentActiveIndex && Math.abs(newIndex - currentActiveIndex) === 1) {
                 const fromCh = currentChaptersList[currentActiveIndex];
                 const isForward = newIndex > currentActiveIndex;
-
                 const rawPath = await getDetailedPath(isForward ? fromCh : targetCh, isForward ? targetCh : fromCh);
                 const moveCoords = isForward ? rawPath : [...rawPath].reverse();
 
@@ -703,37 +730,35 @@
             currentActiveIndex = newIndex;
         }
 
+        /* === 6. 天數導覽列建立與切換 (Day Tabs) === */
         function buildDayTabs() {
             const tabsContainer = document.getElementById('day-tabs');
             tabsContainer.innerHTML = '';
 
-            const allBtn = document.createElement('button');
-            allBtn.className = 'day-tab active';
-            allBtn.textContent = '全部天數';
-            allBtn.onclick = () => selectTab('ALL', allBtn);
-            tabsContainer.appendChild(allBtn);
+            const tabs = [
+                { key: 'ALL', label: '全部天數' },
+                ...normalizedDays.map(d => ({ key: d.day, label: d.day }))
+            ];
 
-            normalizedDays.forEach(dayObj => {
+            tabs.forEach((tab, idx) => {
                 const btn = document.createElement('button');
-                btn.className = 'day-tab';
-                btn.textContent = dayObj.day;
-                btn.onclick = () => selectTab(dayObj.day, btn);
+                btn.className = `day-tab ${idx === 0 ? 'active' : ''}`;
+                btn.textContent = tab.label;
+                btn.onclick = () => {
+                    document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderDay(tab.key);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
                 tabsContainer.appendChild(btn);
             });
         }
 
-        function selectTab(dayKey, clickedBtn) {
-            document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
-            clickedBtn.classList.add('active');
-            renderDay(dayKey);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
+        /* === 7. 多媒體畫廊 HTML 生成、影片自動播放與燈箱控制 === */
         function isMediaFile(str) {
             if (!str || typeof str !== 'string') return false;
             return /\.(jpeg|jpg|gif|png|webp|avif|svg|mp4|mov|webm)$/i.test(str) ||
-                   str.includes('media/') ||
-                   str.includes('images/');
+                   str.includes('media/') || str.includes('images/');
         }
 
         function isVideoFile(str) {
@@ -743,33 +768,31 @@
         function buildMediaHTML(ch) {
             const items = [];
 
+            // 1. 檢查單張主圖欄位是否為實際媒體路徑
             if (isMediaFile(ch.mediaPlaceholder)) {
                 items.push({ src: ch.mediaPlaceholder, caption: '' });
             }
 
+            // 2. 匯入多張媒體清單
             if (Array.isArray(ch.mediaList)) {
                 ch.mediaList.forEach(item => {
                     const src = typeof item === 'string' ? item : item.src;
                     const caption = typeof item === 'object' && item.caption ? item.caption : '';
-                    if (isMediaFile(src)) {
-                        items.push({ src, caption });
-                    }
+                    if (isMediaFile(src)) items.push({ src, caption });
                 });
             }
 
+            // 3. 若無任何媒體檔案，顯示粉色預留提示框
             if (items.length === 0) {
-                return ch.mediaPlaceholder
-                    ? `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>`
-                    : '';
+                return ch.mediaPlaceholder ? `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>` : '';
             }
 
-            let layout = ch.mediaLayout || 'auto';
+            // 4. 決定排版樣式 class (auto 會依張數自動對應)
+            const layout = ch.mediaLayout || 'auto';
             let layoutClass = `layout-${layout}`;
             if (layout === 'auto') {
                 if (items.length === 1) layoutClass = 'layout-single';
-                else if (items.length === 2) layoutClass = 'layout-auto-2';
-                else if (items.length === 3) layoutClass = 'layout-auto-3';
-                else if (items.length === 4) layoutClass = 'layout-auto-4';
+                else if (items.length <= 4) layoutClass = `layout-auto-${items.length}`;
                 else layoutClass = 'layout-carousel';
             }
 
@@ -781,16 +804,13 @@
                             <video class="auto-video" src="${item.src}" muted loop playsinline preload="metadata"></video>
                             <button type="button" class="replay-btn" onclick="replayVideo(this)">↻ 重播</button>
                             ${captionHTML}
-                        </div>
-                    `;
-                } else {
-                    return `
-                        <div class="media-item">
-                            <img src="${item.src}" alt="${item.caption || ch.title}" loading="lazy" onclick="openLightbox('${item.src}')">
-                            ${captionHTML}
-                        </div>
-                    `;
+                        </div>`;
                 }
+                return `
+                    <div class="media-item">
+                        <img src="${item.src}" alt="${item.caption || ch.title}" loading="lazy" onclick="openLightbox('${item.src}')">
+                        ${captionHTML}
+                    </div>`;
             }).join('');
 
             return `<div class="media-gallery ${layoutClass}">${itemsHTML}</div>`;
@@ -822,29 +842,25 @@
         }
 
         function openLightbox(src) {
-            let overlay = document.getElementById('lightbox-overlay');
-            if (!overlay) {
-                overlay = document.createElement('div');
-                overlay.id = 'lightbox-overlay';
-                overlay.onclick = () => overlay.style.display = 'none';
-                overlay.innerHTML = '<img id="lightbox-img" src="" alt="放大預覽">';
-                document.body.appendChild(overlay);
-            }
+            const overlay = document.getElementById('lightbox-overlay');
             document.getElementById('lightbox-img').src = src;
             overlay.style.display = 'flex';
         }
 
+        /* === 8. 渲染日記內容、地圖節點綁定與滾動監聽 === */
+        // 同步切換右側章節卡片與左側地圖圓點的 Active 高亮狀態
         function setActiveChapter(activeSection, activeMarker) {
             document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
             if (activeSection) activeSection.classList.add('active');
 
             document.querySelectorAll('.custom-marker').forEach(el => el.classList.remove('active'));
             const marker = activeMarker || chapterMarkers.get(activeSection);
-            if (marker && marker.getElement()) {
+            if (marker?.getElement()) {
                 marker.getElement().classList.add('active');
             }
         }
 
+        // 渲染指定天數或全部天數的日記與地圖路線
         function renderDay(dayKey) {
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = '';
@@ -871,11 +887,10 @@
                 : normalizedDays.filter(d => d.day === dayKey);
 
             daysToRender.forEach(dayObj => {
+                // 建立每日橫幅 (Day Banner)
                 const banner = document.createElement('div');
                 banner.className = 'day-banner';
-
                 const fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
-
                 banner.innerHTML = `
                     <div class="day-banner-header">
                         <div class="day-badge">${dayObj.day}</div>
@@ -885,31 +900,24 @@
                 `;
                 contentDiv.appendChild(banner);
 
-                (dayObj.chapters || []).forEach((ch) => {
+                // 建立該日的所有章節卡片與地圖標記
+                (dayObj.chapters || []).forEach(ch => {
                     const chIndex = currentChaptersList.length;
                     currentChaptersList.push(ch);
 
                     const section = document.createElement('section');
                     section.className = `chapter ${chIndex === 0 ? 'active' : ''}`;
                     section.id = `section-${ch.id}`;
-                    section.setAttribute('data-id', ch.id);
                     section.setAttribute('data-index', chIndex);
-                    section.setAttribute('data-lat', ch.lat);
-                    section.setAttribute('data-lng', ch.lng);
-                    section.setAttribute('data-zoom', ch.zoom || 13);
-
-                    const mediaHTML = buildMediaHTML(ch);
-
                     section.innerHTML = `
                         <h2>${ch.title}</h2>
-                        ${mediaHTML}
+                        ${buildMediaHTML(ch)}
                         <div class="chapter-body">${ch.content || ''}</div>
                     `;
                     contentDiv.appendChild(section);
 
                     if (ch.lat && ch.lng) {
                         simpleLatLngs.push([ch.lat, ch.lng]);
-
                         const marker = L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
 
                         marker.bindTooltip(`${dayObj.day}｜${ch.title}`, {
@@ -918,6 +926,7 @@
                             className: 'marker-tooltip'
                         });
 
+                        // 點擊地圖圓點：鎖定滾動監聽並平滑捲動至對應章節卡片
                         marker.on('click', () => {
                             isClickScrolling = true;
                             clearTimeout(scrollUnlockTimer);
@@ -928,12 +937,9 @@
                             const topNav = document.querySelector('.top-nav');
                             const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
                             const targetY = window.pageYOffset + section.getBoundingClientRect().top - navBottom - 20;
-
                             window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
 
-                            scrollUnlockTimer = setTimeout(() => {
-                                isClickScrolling = false;
-                            }, 950);
+                            scrollUnlockTimer = setTimeout(() => { isClickScrolling = false; }, 950);
                         });
 
                         chapterMarkers.set(section, marker);
@@ -941,33 +947,28 @@
                 });
             });
 
+            // 繪製底層全天淺色參考虛線
             if (simpleLatLngs.length > 1) {
                 L.polyline(simpleLatLngs, {
-                    color: '#C4A99E',
-                    weight: 2,
-                    opacity: 0.45,
-                    dashArray: '5, 10'
+                    color: '#C4A99E', weight: 2, opacity: 0.45, dashArray: '5, 10'
                 }).addTo(baseRouteLayer);
             }
 
+            // 預設聚焦於第一個章節
             if (currentChaptersList.length > 0) {
-                const firstSec = document.querySelector('.chapter');
-                setActiveChapter(firstSec);
+                setActiveChapter(document.querySelector('.chapter'));
                 transitionToChapter(0);
             }
 
+            // 監聽右側文章滾動，自動觸發小狐狸移動與地圖飛行
             observer = new IntersectionObserver((entries) => {
                 if (isClickScrolling) return;
-
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const chapter = entry.target;
                         const newIdx = parseInt(chapter.getAttribute('data-index'), 10);
-
                         setActiveChapter(chapter);
-                        if (!isNaN(newIdx)) {
-                            transitionToChapter(newIdx);
-                        }
+                        if (!isNaN(newIdx)) transitionToChapter(newIdx);
                     }
                 });
             }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
