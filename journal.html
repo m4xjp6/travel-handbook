@@ -230,7 +230,8 @@
             cursor: pointer;
             transition: transform 0.3s ease;
         }
-        .media-item img:hover { transform: scale(1.02); }
+        .media-item img:hover,
+        .media-item video:hover { transform: scale(1.02); }
         .media-caption {
             position: absolute;
             bottom: 0;
@@ -258,7 +259,7 @@
         }
         .replay-btn:hover { background: rgba(0, 0, 0, 0.8); }
 
-        /* === 7. 點擊圖片放大預覽燈箱 (Lightbox) === */
+        /* === 7. 點擊圖片/影片放大預覽燈箱 (Lightbox) === */
         #lightbox-overlay {
             display: none;
             position: fixed;
@@ -270,11 +271,13 @@
             padding: 24px;
             cursor: zoom-out;
         }
-        #lightbox-overlay img {
+        #lightbox-overlay img,
+        #lightbox-overlay video {
             max-width: 92vw;
             max-height: 90vh;
             border-radius: 10px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            object-fit: contain;
         }
 
         /* === 8. 內文重點提示框樣式 (Callout Box：警告橘/秘訣綠/資訊藍) === */
@@ -403,9 +406,10 @@
         </div>
     </div>
 
-    <!-- 點圖放大預覽燈箱 -->
-    <div id="lightbox-overlay" onclick="this.style.display='none'">
+    <!-- 點圖/點影片放大預覽燈箱 -->
+    <div id="lightbox-overlay" onclick="closeLightbox()">
         <img id="lightbox-img" src="" alt="放大預覽">
+        <video id="lightbox-video" src="" controls loop playsinline onclick="event.stopPropagation()" style="display: none;"></video>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -442,8 +446,8 @@
             ropeway: 0.04
         };
 
-        /* === 2. 讀取旅程 JSON 資料並初始化畫面 === */
-        fetch(`data/${tripId}.json`)
+        /* === 2. 讀取旅程 JSON 資料並初始化畫面（已加入防快取機制） === */
+        fetch(`data/${tripId}.json?t=${Date.now()}`, { cache: 'no-store' })
             .then(res => {
                 if (!res.ok) throw new Error('找不到該旅程的資料檔');
                 return res.json();
@@ -754,15 +758,26 @@
             });
         }
 
-        /* === 7. 多媒體畫廊 HTML 生成、影片自動播放與燈箱控制 === */
+        /* === 7. 多媒體畫廊 HTML 生成、路徑智慧補全、影片自動播放與燈箱 === */
         function isMediaFile(str) {
             if (!str || typeof str !== 'string') return false;
-            return /\.(jpeg|jpg|gif|png|webp|avif|svg|mp4|mov|webm)$/i.test(str) ||
-                   str.includes('media/') || str.includes('images/');
+            const clean = str.trim();
+            return /\.(jpeg|jpg|gif|png|webp|avif|svg|heic|mp4|mov|m4v|webm)$/i.test(clean) ||
+                   clean.includes('media/') || clean.includes('images/');
         }
 
         function isVideoFile(str) {
-            return /\.(mp4|mov|webm)$/i.test(str);
+            return /\.(mp4|mov|m4v|webm)$/i.test((str || '').trim());
+        }
+
+        // 智慧修正媒體路徑（移除開頭斜線、若只填檔名自動補上 media/旅程ID/ 前綴）
+        function normalizeMediaSrc(rawSrc) {
+            let s = (rawSrc || '').trim().replace(/^\/+/, '');
+            if (!s) return '';
+            if (!s.includes('/') && !s.startsWith('http')) {
+                return `media/${tripId}/${s}`;
+            }
+            return s;
         }
 
         function buildMediaHTML(ch) {
@@ -770,15 +785,17 @@
 
             // 1. 檢查單張主圖欄位是否為實際媒體路徑
             if (isMediaFile(ch.mediaPlaceholder)) {
-                items.push({ src: ch.mediaPlaceholder, caption: '' });
+                items.push({ src: normalizeMediaSrc(ch.mediaPlaceholder), caption: '' });
             }
 
-            // 2. 匯入多張媒體清單
+            // 2. 匯入多張媒體清單（相容字串陣列與 {src, caption} 物件陣列）
             if (Array.isArray(ch.mediaList)) {
                 ch.mediaList.forEach(item => {
-                    const src = typeof item === 'string' ? item : item.src;
-                    const caption = typeof item === 'object' && item.caption ? item.caption : '';
-                    if (isMediaFile(src)) items.push({ src, caption });
+                    const rawSrc = typeof item === 'string' ? item : (item?.src || item?.file || item?.url || '');
+                    const caption = typeof item === 'object' && item?.caption ? item.caption : '';
+                    if (isMediaFile(rawSrc)) {
+                        items.push({ src: normalizeMediaSrc(rawSrc), caption });
+                    }
                 });
             }
 
@@ -801,8 +818,8 @@
                 if (isVideoFile(item.src)) {
                     return `
                         <div class="media-item">
-                            <video class="auto-video" src="${item.src}" muted loop playsinline preload="metadata"></video>
-                            <button type="button" class="replay-btn" onclick="replayVideo(this)">↻ 重播</button>
+                            <video class="auto-video" src="${item.src}" muted loop playsinline preload="metadata" onclick="openLightbox('${item.src}')"></video>
+                            <button type="button" class="replay-btn" onclick="event.stopPropagation(); replayVideo(this)">↻ 重播</button>
                             ${captionHTML}
                         </div>`;
                 }
@@ -841,10 +858,36 @@
             document.querySelectorAll('.auto-video').forEach(v => videoObserver.observe(v));
         }
 
+        // 開啟放大燈箱（自動判斷是影片還是照片）
         function openLightbox(src) {
             const overlay = document.getElementById('lightbox-overlay');
-            document.getElementById('lightbox-img').src = src;
+            const imgEl = document.getElementById('lightbox-img');
+            const videoEl = document.getElementById('lightbox-video');
+
+            if (isVideoFile(src)) {
+                imgEl.style.display = 'none';
+                imgEl.src = '';
+                videoEl.style.display = 'block';
+                videoEl.src = src;
+                videoEl.currentTime = 0;
+                videoEl.play().catch(() => {});
+            } else {
+                videoEl.pause();
+                videoEl.style.display = 'none';
+                videoEl.src = '';
+                imgEl.style.display = 'block';
+                imgEl.src = src;
+            }
             overlay.style.display = 'flex';
+        }
+
+        // 關閉放大燈箱並停止燈箱內的影片播放
+        function closeLightbox() {
+            const overlay = document.getElementById('lightbox-overlay');
+            const videoEl = document.getElementById('lightbox-video');
+            videoEl.pause();
+            videoEl.src = '';
+            overlay.style.display = 'none';
         }
 
         /* === 8. 渲染日記內容、地圖節點綁定與滾動監聽 === */
