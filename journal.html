@@ -259,7 +259,7 @@
         }
         .replay-btn:hover { background: rgba(0, 0, 0, 0.8); }
 
-        /* === 7. 點擊圖片/影片放大預覽燈箱 (支援左右切換與底部圖說) === */
+        /* === 7. 點擊圖片/影片放大預覽燈箱 (支援左右按鈕、鍵盤與手機觸控滑動) === */
         #lightbox-overlay {
             display: none;
             position: fixed;
@@ -270,6 +270,7 @@
             justify-content: center;
             padding: 24px;
             cursor: zoom-out;
+            touch-action: pan-y; /* 允許垂直捲動但攔截水平滑動手勢 */
         }
         #lightbox-overlay img,
         #lightbox-overlay video {
@@ -279,6 +280,8 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
             object-fit: contain;
             cursor: default;
+            user-select: none;
+            -webkit-user-drag: none;
         }
         .lightbox-nav {
             position: fixed;
@@ -452,8 +455,8 @@
         </div>
     </div>
 
-    <!-- 點圖/點影片放大預覽燈箱（支援同章節左右切換與鍵盤方向鍵） -->
-    <div id="lightbox-overlay" onclick="closeLightbox()">
+    <!-- 點圖/點影片放大預覽燈箱（支援同章節左右按鈕、鍵盤方向鍵與手機手指左右滑動） -->
+    <div id="lightbox-overlay" onclick="handleOverlayClick()">
         <button type="button" class="lightbox-nav prev" id="lightbox-prev" onclick="event.stopPropagation(); stepLightbox(-1)">❮</button>
         <img id="lightbox-img" src="" alt="放大預覽" onclick="event.stopPropagation()">
         <video id="lightbox-video" src="" controls loop playsinline onclick="event.stopPropagation()" style="display: none;"></video>
@@ -480,9 +483,12 @@
         let currentChaptersList = [];// 當前顯示的所有章節清單
         let currentActiveIndex = 0;  // 當前閱讀中的章節索引
 
-        // 燈箱專用的章節媒體清單與當前索引狀態
+        // 燈箱專用的章節媒體清單、索引與觸控滑動狀態
         let lightboxItems = [];
         let lightboxIndex = 0;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let justSwiped = false;
 
         const segmentCoordsCache = {};     // 路線座標記憶體快取
         const chapterMarkers = new Map();  // 章節 DOM 對應地圖 Marker 的映射表
@@ -969,6 +975,12 @@
             updateLightboxContent();
         }
 
+        // 點擊燈箱黑底關閉（若剛完成手指滑動則忽略此次點擊，避免誤關）
+        function handleOverlayClick() {
+            if (justSwiped) return;
+            closeLightbox();
+        }
+
         // 關閉放大燈箱並停止燈箱內的影片播放
         function closeLightbox() {
             const overlay = document.getElementById('lightbox-overlay');
@@ -994,6 +1006,34 @@
                 closeLightbox();
             }
         });
+
+        // 監聽手機版燈箱手指左右滑動（Touch Swipe）切換上/下一張
+        const lightboxOverlayEl = document.getElementById('lightbox-overlay');
+        lightboxOverlayEl.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }
+        }, { passive: true });
+
+        lightboxOverlayEl.addEventListener('touchend', (e) => {
+            if (lightboxItems.length <= 1 || e.changedTouches.length === 0) return;
+
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+
+            // 確認為水平滑動（水平距離大於 45px 且大於垂直距離）
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+                justSwiped = true;
+                setTimeout(() => { justSwiped = false; }, 300);
+
+                if (dx < 0) {
+                    stepLightbox(1);  // 手指往左滑 ➔ 下一張
+                } else {
+                    stepLightbox(-1); // 手指往右滑 ➔ 上一張
+                }
+            }
+        }, { passive: true });
 
         /* === 8. 渲染日記內容、地圖節點綁定與滾動監聽 === */
         // 同步切換右側章節卡片與左側地圖圓點的 Active 高亮狀態
