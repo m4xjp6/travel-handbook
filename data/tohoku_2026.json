@@ -740,7 +740,11 @@
           "title": "01. 散策｜日暮里纖維街與昭和下町風情",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放日暮里纖維街布料行或復古街道照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d8-ch1-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch1-2.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch1-3.png", "caption": "" }
+          ],
           "content": "搭乘京成本線短短 5 分鐘來到充滿下町風情的日暮里。東口著名的「纖維街」聚集了超過 80 間專賣布料與裁縫配件的批發店，價格親民是手作迷的天堂，讓媽媽也忍不住挑選了心儀的材料。"
         },
         {
@@ -752,7 +756,9 @@
           "title": "02. 午茶｜ダージリン 日暮里店品嚐印度香料奶茶",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放印度奶茶或起司蛋糕照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d8-ch2-1.png", "caption": "" }
+          ],
           "content": "漫步巷弄來到由孟加拉老闆開的印度料理店「ダージリン」。店內充滿寶石藍燈光與華麗掛毯，點了現點現沖的香料奶茶（Chai）與濃郁紮實的重乳酪起司蛋糕，享受片刻異國風情。"
         },
         {
@@ -764,7 +770,10 @@
           "title": "03. 藝術｜貓町ギャラリー隱身民宅的貓咪藝廊",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放貓町藝廊木造老宅或陶藝作品照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d8-ch3-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch3-2.png", "caption": "" }
+          ],
           "content": "避開人潮鑽進谷中巷弄，來到由昭和木造老宅改建的「猫町ギャラリー」。入內欣賞溫潤的陶藝作品與貓咪主題個展，感受藝術家展現的生活美學與心靈沉靜。"
         },
         {
@@ -776,7 +785,12 @@
           "title": "04. 巡禮｜根津神社與乙女稻荷神社千本鳥居",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放根津神社木造建築或迷你千本鳥居照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d8-ch4-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch4-2.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch4-3.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch4-4.png", "caption": "" }
+          ],
           "content": "造訪擁有近 1900 年歷史的東京十社之一「根津神社」。境內保存了完整的江戶時代神社建築群，並參拜了乙女稻荷神社旁蜿蜒小山坡的迷你版千本鳥居，氣場莊嚴寧靜。"
         },
         {
