@@ -673,7 +673,7 @@
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放北京烤鴨或美食照片",
           "mediaList": [
-            { "src": "media/tohoku_2026/d7-ch2-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d7-ch2-1.png", "caption": "沒吃到的鴨to葱" },
             { "src": "media/tohoku_2026/d7-ch2-2.png", "caption": "" }
           ],
           "content": "本來想朝聖排隊名店「らーめん 鴨to葱」，無奈排隊人潮實在太驚人只好放棄。轉身前往離車站不遠的「民福北京烤鴨店」，意外遇到會講中文的店員，點了一大桌美味餐點，四個人吃得超級飽足！"
@@ -687,7 +687,12 @@
           "title": "03. 萌寵｜上野動物園探訪人氣王與奇特動物",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放上野動物園熊貓、鯨頭鸛或北極熊照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d7-ch3-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d7-ch3-2.mp4", "caption": "" },
+            { "src": "media/tohoku_2026/d7-ch3-3.mp4", "caption": "" },
+            { "src": "media/tohoku_2026/d7-ch3-4.mp4", "caption": "" }
+          ],
           "content": "漫步穿過上野恩賜公園來到歷史悠久的上野動物園。直奔西園想看人氣明星大貓熊「曉曉」與「蕾蕾」，可惜平日下午門票早已完售！不過還是觀賞了厭世臉的鯨頭鸛、表情豐富的兔猻，以及東園的北極熊與海豹，度過療癒的動物園時光。<div class='callout-box callout-info'><div class='callout-icon'>🐼</div><div class='callout-content'><div class='callout-title'>上野動物園參觀小貼士</div>上野動物園的明星大貓熊人氣極高，即使是平日也強烈建議提前預約或留意當日票券販售狀況，以免撲空喔！</div></div>"
         },
         {
