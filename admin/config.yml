@@ -1,11 +1,13 @@
+# === 1. Git 儲存庫與分支設定 ===
 backend:
   name: git-gateway
   branch: main
 
-# 預設全域媒體資料夾
+# === 2. 預設全域媒體存放路徑 ===
 media_folder: "media"
 public_folder: "media"
 
+# === 3. 旅行手帳資料集合 (對應 data/*.json) ===
 collections:
   - name: "trips"
     label: "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 旅行手帳後台"
@@ -16,8 +18,11 @@ collections:
     extension: "json"
     format: "json"
     fields:
+      # --- 旅程基本資訊 ---
       - {label: "旅程 ID (英文，例如: tohoku_2026)", name: "tripId", widget: "string"}
       - {label: "旅程總標題", name: "tripTitle", widget: "string"}
+
+      # --- 每日行程清單 ---
       - label: "天數日記列表"
         name: "days"
         widget: "list"
@@ -26,6 +31,8 @@ collections:
           - {label: "天數標籤", name: "day", widget: "string", hint: "例如: Day 01"}
           - {label: "當日主題標題", name: "dayTitle", widget: "string", hint: "例如: 走進日本三景的水墨畫！"}
           - {label: "是否為行程實測", name: "isFieldTest", widget: "boolean", default: false, required: false, hint: "打勾後會在前端標題自動加上【行程實測】"}
+
+          # --- 單日內的各景點章節 ---
           - label: "章節內容"
             name: "chapters"
             widget: "list"
@@ -35,6 +42,8 @@ collections:
               - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float"}
               - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
               - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
+
+              # --- 交通方式 (對應 journal.html 的 resolveTransportMode 與 CURVE_MODES) ---
               - label: "抵達本站的交通方式 (小狐狸移動與路線繪製用)"
                 name: "transport"
                 widget: "select"
@@ -50,7 +59,10 @@ collections:
                   - { label: "🚡 纜車 / 索道 (Ropeway / Cable Car)", value: "ropeway" }
                   - { label: "⛴️ 遊船 / 渡輪 / 船班 (Boat / Ferry)", value: "boat" }
                   - { label: "✈️ 飛機 / 國內外航班 (Flight)", value: "flight" }
+
               - {label: "標題", name: "title", widget: "string", hint: "格式：01. 動作/亮點｜地點與細節"}
+
+              # --- 多媒體畫廊排版選項 (對應 journal.html 的 .layout-* CSS) ---
               - label: "照片排版樣式"
                 name: "mediaLayout"
                 widget: "select"
@@ -66,13 +78,16 @@ collections:
                   - { label: "⚖️ 四張固定並排 (1:1:1:1)", value: "grid-4" }
                   - { label: "🎠 橫向滑動輪播 (IG風，適合多張照片)", value: "carousel" }
                   - { label: "🖼️ 單欄垂直大圖堆疊", value: "stack" }
+
+              # --- 媒體檔案與文字內容 ---
               - label: "單張主圖/影片 或 佔位提示文字 (相容舊資料)"
                 name: "mediaPlaceholder"
                 widget: "file"
                 required: false
                 media_folder: "../media/{{tripId}}"
                 public_folder: "media/{{tripId}}"
-                hint: "若只有 1 張照片或影片可直接傳這裡；若有多張請用下方清單"
+                hint: "若只有 1 張照片或影片可直接傳這裡；若未上傳媒體，此欄文字會顯示為粉色提示框"
+
               - label: "多張照片與影片清單 (可新增多筆)"
                 name: "mediaList"
                 widget: "list"
@@ -88,4 +103,5 @@ collections:
                     name: "caption"
                     widget: "string"
                     required: false
+
               - {label: "內文", name: "content", widget: "text"}
