@@ -259,12 +259,12 @@
         }
         .replay-btn:hover { background: rgba(0, 0, 0, 0.8); }
 
-        /* === 7. 點擊圖片/影片放大預覽燈箱 (Lightbox) === */
+        /* === 7. 點擊圖片/影片放大預覽燈箱 (支援左右切換與底部圖說) === */
         #lightbox-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             z-index: 9999;
             align-items: center;
             justify-content: center;
@@ -273,11 +273,54 @@
         }
         #lightbox-overlay img,
         #lightbox-overlay video {
-            max-width: 92vw;
-            max-height: 90vh;
+            max-width: 85vw;
+            max-height: 85vh;
             border-radius: 10px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
             object-fit: contain;
+            cursor: default;
+        }
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10001;
+            backdrop-filter: blur(4px);
+            transition: background 0.2s, transform 0.2s;
+            user-select: none;
+        }
+        .lightbox-nav:hover {
+            background: rgba(196, 169, 158, 0.85);
+            transform: translateY(-50%) scale(1.08);
+        }
+        .lightbox-nav.prev { left: 24px; }
+        .lightbox-nav.next { right: 24px; }
+
+        .lightbox-info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            pointer-events: none;
+            z-index: 10001;
+            white-space: nowrap;
         }
 
         /* === 8. 內文重點提示框樣式 (Callout Box：警告橘/秘訣綠/資訊藍) === */
@@ -384,6 +427,9 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .media-item { height: 180px; }
+            .lightbox-nav { width: 40px; height: 40px; font-size: 1.1rem; }
+            .lightbox-nav.prev { left: 10px; }
+            .lightbox-nav.next { right: 10px; }
         }
     </style>
 </head>
@@ -406,10 +452,13 @@
         </div>
     </div>
 
-    <!-- 點圖/點影片放大預覽燈箱 -->
+    <!-- 點圖/點影片放大預覽燈箱（支援同章節左右切換與鍵盤方向鍵） -->
     <div id="lightbox-overlay" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="放大預覽">
+        <button type="button" class="lightbox-nav prev" id="lightbox-prev" onclick="event.stopPropagation(); stepLightbox(-1)">❮</button>
+        <img id="lightbox-img" src="" alt="放大預覽" onclick="event.stopPropagation()">
         <video id="lightbox-video" src="" controls loop playsinline onclick="event.stopPropagation()" style="display: none;"></video>
+        <button type="button" class="lightbox-nav next" id="lightbox-next" onclick="event.stopPropagation(); stepLightbox(1)">❯</button>
+        <div id="lightbox-info" class="lightbox-info"></div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -430,6 +479,10 @@
         let normalizedDays = [];     // 統一格式後的每日行程陣列
         let currentChaptersList = [];// 當前顯示的所有章節清單
         let currentActiveIndex = 0;  // 當前閱讀中的章節索引
+
+        // 燈箱專用的章節媒體清單與當前索引狀態
+        let lightboxItems = [];
+        let lightboxIndex = 0;
 
         const segmentCoordsCache = {};     // 路線座標記憶體快取
         const chapterMarkers = new Map();  // 章節 DOM 對應地圖 Marker 的映射表
@@ -758,7 +811,7 @@
             });
         }
 
-        /* === 7. 多媒體畫廊 HTML 生成、路徑智慧補全、影片自動播放與燈箱 === */
+        /* === 7. 多媒體畫廊 HTML 生成、路徑智慧補全、影片自動播放與燈箱切換 === */
         function isMediaFile(str) {
             if (!str || typeof str !== 'string') return false;
             const clean = str.trim();
@@ -780,7 +833,7 @@
             return s;
         }
 
-        function buildMediaHTML(ch) {
+        function buildMediaHTML(ch, chIndex) {
             const items = [];
 
             // 1. 檢查單張主圖欄位是否為實際媒體路徑
@@ -799,6 +852,9 @@
                 });
             }
 
+            // 將整理好的媒體陣列存進該章節物件，供燈箱左右切換讀取
+            ch._mediaItems = items;
+
             // 3. 若無任何媒體檔案，顯示粉色預留提示框
             if (items.length === 0) {
                 return ch.mediaPlaceholder ? `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>` : '';
@@ -813,19 +869,19 @@
                 else layoutClass = 'layout-carousel';
             }
 
-            const itemsHTML = items.map(item => {
+            const itemsHTML = items.map((item, itemIdx) => {
                 const captionHTML = item.caption ? `<div class="media-caption">${item.caption}</div>` : '';
                 if (isVideoFile(item.src)) {
                     return `
                         <div class="media-item">
-                            <video class="auto-video" src="${item.src}" muted loop playsinline preload="metadata" onclick="openLightbox('${item.src}')"></video>
+                            <video class="auto-video" src="${item.src}" muted loop playsinline preload="metadata" onclick="openLightbox(${chIndex}, ${itemIdx})"></video>
                             <button type="button" class="replay-btn" onclick="event.stopPropagation(); replayVideo(this)">↻ 重播</button>
                             ${captionHTML}
                         </div>`;
                 }
                 return `
                     <div class="media-item">
-                        <img src="${item.src}" alt="${item.caption || ch.title}" loading="lazy" onclick="openLightbox('${item.src}')">
+                        <img src="${item.src}" alt="${item.caption || ch.title}" loading="lazy" onclick="openLightbox(${chIndex}, ${itemIdx})">
                         ${captionHTML}
                     </div>`;
             }).join('');
@@ -858,17 +914,43 @@
             document.querySelectorAll('.auto-video').forEach(v => videoObserver.observe(v));
         }
 
-        // 開啟放大燈箱（自動判斷是影片還是照片）
-        function openLightbox(src) {
-            const overlay = document.getElementById('lightbox-overlay');
+        // 開啟放大燈箱（載入指定章節的媒體清單與當前索引）
+        function openLightbox(chIndex, itemIdx = 0) {
+            const ch = currentChaptersList[chIndex];
+            if (!ch || !Array.isArray(ch._mediaItems) || ch._mediaItems.length === 0) return;
+
+            lightboxItems = ch._mediaItems;
+            lightboxIndex = itemIdx;
+            updateLightboxContent();
+            document.getElementById('lightbox-overlay').style.display = 'flex';
+        }
+
+        // 更新燈箱顯示內容（自動判斷圖片或影片、更新頁碼圖說與左右按鈕顯示狀態）
+        function updateLightboxContent() {
+            const item = lightboxItems[lightboxIndex];
+            if (!item) return;
+
             const imgEl = document.getElementById('lightbox-img');
             const videoEl = document.getElementById('lightbox-video');
+            const prevBtn = document.getElementById('lightbox-prev');
+            const nextBtn = document.getElementById('lightbox-next');
+            const infoEl = document.getElementById('lightbox-info');
 
-            if (isVideoFile(src)) {
+            // 若該章節只有 1 個檔案則隱藏左右按鈕，多於 1 個才顯示
+            const hasMultiple = lightboxItems.length > 1;
+            prevBtn.style.display = hasMultiple ? 'flex' : 'none';
+            nextBtn.style.display = hasMultiple ? 'flex' : 'none';
+
+            // 顯示頁碼與圖說（例如：1 / 4 ｜ 沒吃到的鴨to葱）
+            const countText = `${lightboxIndex + 1} / ${lightboxItems.length}`;
+            infoEl.textContent = item.caption ? `${countText} ｜ ${item.caption}` : countText;
+            infoEl.style.display = (hasMultiple || item.caption) ? 'block' : 'none';
+
+            if (isVideoFile(item.src)) {
                 imgEl.style.display = 'none';
                 imgEl.src = '';
                 videoEl.style.display = 'block';
-                videoEl.src = src;
+                videoEl.src = item.src;
                 videoEl.currentTime = 0;
                 videoEl.play().catch(() => {});
             } else {
@@ -876,9 +958,15 @@
                 videoEl.style.display = 'none';
                 videoEl.src = '';
                 imgEl.style.display = 'block';
-                imgEl.src = src;
+                imgEl.src = item.src;
             }
-            overlay.style.display = 'flex';
+        }
+
+        // 左右切換同一章節的上/下一張照片或影片（頭尾自動循環）
+        function stepLightbox(dir) {
+            if (lightboxItems.length <= 1) return;
+            lightboxIndex = (lightboxIndex + dir + lightboxItems.length) % lightboxItems.length;
+            updateLightboxContent();
         }
 
         // 關閉放大燈箱並停止燈箱內的影片播放
@@ -889,6 +977,23 @@
             videoEl.src = '';
             overlay.style.display = 'none';
         }
+
+        // 監聽鍵盤左右方向鍵與 Esc 鍵操作燈箱
+        document.addEventListener('keydown', (e) => {
+            const overlay = document.getElementById('lightbox-overlay');
+            if (!overlay || overlay.style.display !== 'flex') return;
+
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                stepLightbox(-1);
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                stepLightbox(1);
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                closeLightbox();
+            }
+        });
 
         /* === 8. 渲染日記內容、地圖節點綁定與滾動監聽 === */
         // 同步切換右側章節卡片與左側地圖圓點的 Active 高亮狀態
@@ -954,7 +1059,7 @@
                     section.setAttribute('data-index', chIndex);
                     section.innerHTML = `
                         <h2>${ch.title}</h2>
-                        ${buildMediaHTML(ch)}
+                        ${buildMediaHTML(ch, chIndex)}
                         <div class="chapter-body">${ch.content || ''}</div>
                     `;
                     contentDiv.appendChild(section);
