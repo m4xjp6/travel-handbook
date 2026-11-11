@@ -786,10 +786,9 @@
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放根津神社木造建築或迷你千本鳥居照片",
           "mediaList": [
-            { "src": "media/tohoku_2026/d8-ch4-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch4-1.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d8-ch4-2.png", "caption": "" },
-            { "src": "media/tohoku_2026/d8-ch4-3.png", "caption": "" },
-            { "src": "media/tohoku_2026/d8-ch4-4.png", "caption": "" }
+            { "src": "media/tohoku_2026/d8-ch4-3.mp4", "caption": "" }
           ],
           "content": "造訪擁有近 1900 年歷史的東京十社之一「根津神社」。境內保存了完整的江戶時代神社建築群，並參拜了乙女稻荷神社旁蜿蜒小山坡的迷你版千本鳥居，氣場莊嚴寧靜。"
         },
@@ -802,7 +801,12 @@
           "title": "05. 美食｜谷中銀座商店街吃爆炸肉餅與貓尾巴甜甜圈",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放元氣炸肉餅或貓尾巴甜甜圈照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d8-ch5-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch5-2.mp4", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch5-3.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch5-4.mp4", "caption": "" }
+          ],
           "content": "來到充滿貓咪元素的「谷中銀座商店街」，一路尋找貓咪蹤影並品嚐排隊美食。一口咬下外酥內潤的「肉のすずき」元氣炸肉餅，再品嚐造型可愛的虎紋貓尾巴甜甜圈，滿足味蕾。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>谷中銀座美食推薦</div><ul><li><strong>元氣炸肉餅：</strong>外皮酥脆、肉汁飽滿，強烈建議趁熱吃！</li><li><strong>貓尾巴甜甜圈：</strong>人氣第一名的 Tora (虎紋貓) 是可可麵團搭配白巧克力豆，造型與甜度都剛剛好。</li></ul></div></div>"
         },
         {
@@ -814,7 +818,10 @@
           "title": "06. 絕景｜夕陽階梯俯瞰懷舊黃金時刻",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放夕陽階梯黃金時刻天空照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d8-ch6-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch6-2.mp4", "caption": "" }
+          ],
           "content": "站在著名的「夕陽階梯」頂端往下俯瞰，橘黃色調的天空灑落在懷舊的街道上，感受日劇名場景的浪漫氛圍，將谷中下町的溫柔餘暉收進眼底。"
         },
         {
@@ -826,7 +833,11 @@
           "title": "07. 晚餐｜五代目野田岩品嚐江戶時代傳承鰻魚飯",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放野田岩合掌造建築或鰻魚飯照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d8-ch7-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch7-2.png", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch7-3.png", "caption": "" }
+          ],
           "content": "在登高看夜景前，前往創業於江戶時代、擁有兩百多年歷史並拿過米其林一星的「五代目 野田岩 麻布飯倉本店」。古色古香的合掌造建築與東京鐵塔相映成趣，品嚐傳承百年的精緻鰻魚飯。"
         },
         {
@@ -838,7 +849,12 @@
           "title": "08. 浪漫｜東京鐵塔 250 公尺高空夜景",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放東京鐵塔夜景或頂層展望台照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d8-ch8-1.mp4", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch8-2.mp4", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch8-3.mp4", "caption": "" },
+            { "src": "media/tohoku_2026/d8-ch8-4.mp4", "caption": "" }
+          ],
           "content": "登上 250 公尺高的東京鐵塔 Top Deck 頂層展望台，鳥瞰整個東京如流動光河般的壯麗夜景。兌現了去年的承諾，在紅白相間的經典鐵塔餘暉中，為 9 天 8 夜的日本東北與東京冬日旅程留下最璀璨的夜晚記憶！"
         }
       ]
@@ -857,7 +873,9 @@
           "title": "01. 出發｜Skyliner 京成電鐵快速返回機場",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放 Skyliner 列車或車站照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d9-ch1-1.png", "caption": "" }
+          ],
           "content": "辦理完退房手續，推著明顯變重的行李搭乘 Skyliner 特急列車。從京成上野出發，最快 41 分鐘順利抵達成田機場第二航廈，在窗外逐漸開闊的田野風景中迎來旅程最終章。"
         },
         {
@@ -869,7 +887,9 @@
           "title": "02. 午餐｜謝朋殿成田機場店品嚐中華料理",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放謝朋殿炒飯或機場美食照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d9-ch2-1.png", "caption": "沒拍到謝朋殿就用星巴克代勞" }
+          ],
           "content": "提早抵達機場辦理完托運後，在第二航廈 4 樓美食街的「謝朋殿」享用在日本的最後一餐。肉質軟嫩的雞牛肉與美味炒飯，為這趟旅程畫下飽足的句點。<div class='callout-box callout-info'><div class='callout-icon'>🛍️</div><div class='callout-content'><div class='callout-title'>機場免稅店與伴手禮小撇步</div>機場免稅店雖然便利，但若喜歡尋找當地限定的特色伴手禮，建議在各個景點當地先買齊！不過長輩們幫親友帶菸酒的心意，也是維繫情感的重要環節。</div></div>"
         },
         {
@@ -881,7 +901,11 @@
           "title": "03. 告別｜飛機窗外與富士山的美麗道別",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放飛機窗外富士山雪景照片",
-          "mediaList": [],
+          "mediaList": [
+            { "src": "media/tohoku_2026/d9-ch3-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d9-ch3-2.mp4", "caption": "" },
+            { "src": "media/tohoku_2026/d9-ch3-3.png", "caption": "" }
+          ],
           "content": "飛機沿著跑道緩緩起飛，幸運被分配到右側窗邊的位置，不僅超近距離看到下過雪後絕美的富士山，還有陽光透過雲層灑下的光芒。九天跨越三千公里的冬日慢旅，在老天爺的眷顧下完美落幕。旅行的終點，是為了在平凡的日子裡重新拾起對生活的熱誠與期待！"
         }
       ]
