@@ -105,3 +105,16 @@ collections:
                     required: false
 
               - {label: "內文", name: "content", widget: "text"}
+
+              # --- Travelpayouts 聯盟行銷預訂按鈕 (對應 journal.html 的 buildAffiliateHTML 與 .affiliate-btn) ---
+              - {label: "推薦預訂按鈕文字 (選填)", name: "affiliateText", widget: "string", required: false, hint: "例如：🚐 預約同款：KKday 高雄小港機場專車接送（若留空則顯示預設文字）"}
+              - {label: "Travelpayouts 分潤網址 (選填)", name: "affiliateUrl", widget: "string", required: false, hint: "貼上分潤短網址或原始商品網址；若未填寫網址，前端不會顯示按鈕"}
+
+              - label: "多筆推薦預訂按鈕 (選填，同章節有多個預訂連結時使用)"
+                name: "affiliateLinks"
+                widget: "list"
+                required: false
+                hint: "點擊 Add 可在同一章節下方並排顯示多顆莫蘭迪色預訂按鈕（例如同時放 Agoda 與 Booking.com 查房價）"
+                fields:
+                  - {label: "按鈕文字", name: "text", widget: "string", hint: "例如：🏨 Agoda 查房價"}
+                  - {label: "分潤網址", name: "url", widget: "string", hint: "貼上分潤短網址或原始商品網址"}
