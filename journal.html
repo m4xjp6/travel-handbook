@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>讀取中... ｜ 電子旅行手帳</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    <!-- 👇 貼在這裡：Travelpayouts Drive 腳本 👇 -->
+    <!-- 👇 貼在這裡：Travelpayouts Drive 腳本 (需放在 <head> 內) 👇 -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
         (function () {
             var script = document.createElement("script");
@@ -9,15 +14,10 @@
             script.setAttribute("data-cmp-ab","2");
             script.src = 'https://emrld.ltd/NTk5Njg0.js?t=599684';
             document.head.appendChild(script);
-            })();
-        </script>
+        })();
+    </script>
     <!-- 👆 Travelpayouts Drive 腳本結束 👆 -->
-    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>讀取中... ｜ 電子旅行手帳</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     <style>
         /* === 1. 全域色彩變數與基礎頁面設定 === */
         :root {
@@ -339,7 +339,7 @@
             white-space: nowrap;
         }
 
-        /* === 8. 內文重點提示框樣式 (Callout Box：警告橘/秘訣綠/資訊藍) === */
+        /* === 8. 內文重點提示框樣式 (Callout Box) 與 莫蘭迪色預訂按鈕 === */
         .callout-box {
             display: flex;
             align-items: flex-start;
@@ -360,6 +360,50 @@
         .callout-tip .callout-title { color: #529b2e; }
         .callout-info { background-color: #eef4ff; border-left: 4px solid #3b82f6; }
         .callout-info .callout-title { color: #2563eb; }
+
+        /* 莫蘭迪色 Travelpayouts 推薦預訂按鈕外層容器 (支援多顆按鈕自動換行並排) */
+        .affiliate-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px dashed rgba(196, 169, 158, 0.35); /* 頂部奶茶色虛線分隔 */
+        }
+        /* 莫蘭迪色膠囊預訂按鈕本體 */
+        .affiliate-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 18px;
+            background-color: #f7f1ed;       /* 淺米杏底色 */
+            color: var(--accent-brown-dark); /* 深奶茶文字色 */
+            border: 1px solid #d8c3b8;       /* 柔和奶茶邊框 */
+            border-radius: 24px;             /* 膠囊圓角 */
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(196, 169, 158, 0.15);
+        }
+        /* 滑鼠移上預訂按鈕時的微浮起與反白效果 */
+        .affiliate-btn:hover {
+            background-color: var(--accent-brown);
+            color: #ffffff;
+            border-color: var(--accent-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(196, 169, 158, 0.35);
+        }
+        /* 按鈕右側小箭頭 (↗) 動畫 */
+        .affiliate-btn .arrow-icon {
+            font-size: 0.85em;
+            opacity: 0.85;
+            transition: transform 0.2s ease;
+        }
+        .affiliate-btn:hover .arrow-icon {
+            transform: translate(2px, -2px);
+        }
 
         /* === 9. 地圖標記、路線方向箭頭與小狐狸角色樣式 === */
         .custom-marker { background: transparent; border: none; }
@@ -446,6 +490,8 @@
             .lightbox-nav { width: 40px; height: 40px; font-size: 1.1rem; }
             .lightbox-nav.prev { left: 10px; }
             .lightbox-nav.next { right: 10px; }
+            /* 手機版預訂按鈕自動滿版置中，方便拇指點擊 */
+            .affiliate-btn { width: 100%; justify-content: center; box-sizing: border-box; }
         }
     </style>
 </head>
@@ -830,7 +876,7 @@
             });
         }
 
-        /* === 7. 多媒體畫廊 HTML 生成、路徑智慧補全、影片自動播放與燈箱切換 === */
+        /* === 7. 多媒體畫廊、莫蘭迪預訂按鈕 HTML 生成、路徑智慧補全、影片自動播放與燈箱切換 === */
         function isMediaFile(str) {
             if (!str || typeof str !== 'string') return false;
             const clean = str.trim();
@@ -906,6 +952,48 @@
             }).join('');
 
             return `<div class="media-gallery ${layoutClass}">${itemsHTML}</div>`;
+        }
+
+        // 生成莫蘭迪色 Travelpayouts 預訂按鈕 HTML（相容單筆欄位與多筆清單，未填寫時完全隱形）
+        function buildAffiliateHTML(ch) {
+            const links = [];
+
+            // 1. 讀取單筆推薦預訂欄位 (affiliateText + affiliateUrl)
+            if (ch.affiliateUrl && ch.affiliateUrl.trim() !== '') {
+                links.push({
+                    text: (ch.affiliateText && ch.affiliateText.trim() !== '')
+                        ? ch.affiliateText.trim()
+                        : '🔗 查看同款行程與最新優惠',
+                    url: ch.affiliateUrl.trim()
+                });
+            }
+
+            // 2. 讀取多筆推薦預訂清單 (affiliateLinks: [{text, url}, ...])
+            if (Array.isArray(ch.affiliateLinks)) {
+                ch.affiliateLinks.forEach(item => {
+                    if (item && item.url && item.url.trim() !== '') {
+                        links.push({
+                            text: (item.text && item.text.trim() !== '')
+                                ? item.text.trim()
+                                : '🔗 查看同款行程與最新優惠',
+                            url: item.url.trim()
+                        });
+                    }
+                });
+            }
+
+            // 3. 若該章節沒有設定任何預訂連結，回傳空字串（完全不佔畫面空間）
+            if (links.length === 0) return '';
+
+            // 4. 產生莫蘭迪色膠囊按鈕群組 HTML
+            const buttonsHTML = links.map(link => `
+                <a href="${link.url}" target="_blank" rel="noopener sponsored" class="affiliate-btn">
+                    <span>${link.text}</span>
+                    <span class="arrow-icon">↗</span>
+                </a>
+            `).join('');
+
+            return `<div class="affiliate-container">${buttonsHTML}</div>`;
         }
 
         function replayVideo(btn) {
@@ -1110,10 +1198,12 @@
                     section.className = `chapter ${chIndex === 0 ? 'active' : ''}`;
                     section.id = `section-${ch.id}`;
                     section.setAttribute('data-index', chIndex);
+                    // 組合章節卡片內容（標題 + 多媒體畫廊 + 內文 + 莫蘭迪色預訂按鈕）
                     section.innerHTML = `
                         <h2>${ch.title}</h2>
                         ${buildMediaHTML(ch, chIndex)}
                         <div class="chapter-body">${ch.content || ''}</div>
+                        ${buildAffiliateHTML(ch)}
                     `;
                     contentDiv.appendChild(section);
 
