@@ -21,10 +21,13 @@
             { "src": "media/tohoku_2026/d1-ch1-2.png", "caption": "" },
             { "src": "media/tohoku_2026/d1-ch1-3.png", "caption": "" }
           ],
-          "content": "帶著輕簡的行囊，搭乘 KKday 專車摸黑出發，準備展開三千公里的雪國旅程。搭乘 AirAsia FD234 直飛成田，揮別熱情的太陽，準備迎接零下北國。",
-          "affiliateText": "🚐 預約｜高雄小港機場專車接送",
-          "affiliateUrl": "https://kkday.tpk.lu/uHxcv1ku",
-          "affiliateLinks": []
+          "content": "帶著輕簡的行囊，搭乘機場接送專車摸黑出發，準備展開三千公里的雪國旅程。搭乘 AirAsia FD234 直飛成田，揮別熱情的太陽，準備迎接零下北國。<div class='callout-box callout-tip'><div class='callout-icon'>💳</div><div class='callout-content'><div class='callout-title'>省錢小提醒｜善用信用卡機場接送優惠</div>預訂機場專車前，別忘了先確認手邊刷機票的信用卡權益！許多銀行都有提供<strong>免費或卡友專屬優惠價的機場接送服務</strong>（通常需提前預約），不妨先與平台方案比價看看哪個最划算！</div></div><div class='callout-box callout-info'><div class='callout-icon'>🚗</div><div class='callout-content'><div class='callout-title'>專車預約｜車型與行李計件規則</div><ul><li><strong>車型選擇：</strong>五人座（1-3人，2-4件大行李）、七人座（4-6人，4-6件大行李）、九人座（5-8人，6-8件大行李）。</li><li><strong>計件規則：</strong>20吋以上皆算大行李，紙箱不論大小皆算一件；特殊行李（如嬰兒車、滑雪板）須預先告知。</li></ul></div></div>"",
+          "affiliateText": "",
+          "affiliateUrl": "",
+          "affiliateLinks": [
+            {"text": "kkday｜高雄小港機場專車接送", "url": "https://kkday.tpk.lu/uHxcv1ku"},
+            {"text": "klook｜高雄小港機場專車接送", "url": "https://klook.tpk.lu/YH8NQa3A"}
+            ]
         },
         {
           "id": "d1-ch2",
@@ -42,13 +45,13 @@
             { "src": "media/tohoku_2026/d1-ch2-4.png", "caption": "" }
           ],
           "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵與烏龍麵，儲存體力！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>Skyliner 兌換與上野站小撇步</div><ul><li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。</li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li></ul></div></div>",
-          "affiliateText": "🎟️ 預訂｜京成電鐵 Skyliner 特急優惠車票",
+          "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
-            {"text": "🔗 官方網站", "url": "https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/zht/"},
-            {"text": "🔗 trip.com", "url": ""},
-            {"text": "🔗 kkday", "url": "https://klook.tpk.lu/u1yyYcRx"},
-            {"text": "🔗 klook", "url": "https://kkday.tpk.lu/I8DI56to"}
+            {"text": "官方網站｜京成電鐵 Skyliner 特急車票", "url": "https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/zht/"},
+            {"text": "trip.com｜京成電鐵 Skyliner 特急車票", "url": "https://www.trip.com/t/9H8O3xjr9X2"},
+            {"text": "kkday｜京成電鐵 Skyliner 特急車票", "url": "https://klook.tpk.lu/u1yyYcRx"},
+            {"text": "klook｜京成電鐵 Skyliner 特急車票", "url": "https://kkday.tpk.lu/I8DI56to"}
           ]
         },
         {
@@ -65,13 +68,13 @@
             { "src": "media/tohoku_2026/d1-ch3-2.png", "caption": "" }
           ],
           "content": "一手拉著行李、一手拿著票券，搭上前往山形的新幹線。看著窗外路邊的積雪映入眼簾，隨著列車廣播響起：「山形，請多多指教了！」<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>鐵道迷必看：福島站「華麗分手」</div>搭乘山形新幹線「翼號」時，列車在經過<strong>福島站</strong>時會有著名的解聯奇觀：車身較窄的 Tsubasa 會與前方連結的 Yamabiko 山彥號在此分道揚鑣，獨自進入山區前往山形。</div></div>",
-          "affiliateText": "🚄 預訂｜日本新幹線車票",
-          "affiliateUrl": "https://klook.tpk.lu/jTlNAbwv",
+          "affiliateText": "",
+          "affiliateUrl": "",
           "affiliateLinks": [
-            {"text": "🔗 官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html"},
-            {"text": "🔗 trip.com｜JR 東日本鐵路周遊券", "url": ""},
-            {"text": "🔗 kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons"},
-            {"text": "🔗 klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk"}
+            {"text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html"},
+            {"text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2"},
+            {"text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons"},
+            {"text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk"}
           ]
         },
         {
@@ -91,13 +94,13 @@
           "affiliateText": "🏨 預訂｜山形大都會飯店 (Hotel Metropolitan Yamagata)",
           "affiliateUrl": "",
           "affiliateLinks": [
-            {"text": "🔗 官方網站｜山形大都會飯店", "url": "https://yamagata.hotel-metropolitan.com/tw/"},
-            {"text": "🔗 agoda｜山形大都會飯店", "url": ""},
-            {"text": "🔗 booking.com｜山形大都會飯店", "url": ""},
-            {"text": "🔗 hotels.com｜山形大都會飯店", "url": ""},
-            {"text": "🔗 trip.com｜山形大都會飯店", "url": ""},
-            {"text": "🔗 kkday｜山形大都會飯店", "url": ""},
-            {"text": "🔗 klook｜山形大都會飯店", "url": "https://klook.tpk.lu/HOdCFhKI"}
+            {"text": "官方網站｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://yamagata.hotel-metropolitan.com/tw/"},
+            {"text": "agoda｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=9067279"},
+            {"text": "booking.com｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": ""},
+            {"text": "hotels.com｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": ""},
+            {"text": "trip.com｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://www.trip.com/t/qZMwt06s9X2"},
+            {"text": "kkday｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://kkday.tpk.lu/VjMGBnKI"},
+            {"text": "klook｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://klook.tpk.lu/HOdCFhKI"}
           ]
         }
       ]
@@ -123,8 +126,8 @@
             { "src": "media/tohoku_2026/d2-ch1-4.mp4", "caption": "" }
           ],
           "content": "從山形站前 1 號月台搭乘山交巴士前往藏王溫泉。下車後穿戴好簡易冰爪套，小心翼翼踩在結冰路面上步行約 15 分鐘抵達「藏王山麓站」。隨著第一段山麓線與第二段山頂線纜車緩緩攀升，成千上萬隻白色雪怪佇立在山坡上，壯闊景色讓人屏息！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>藏王交通與雪地行走小提醒</div><ul><li><strong>套票政策變動：</strong>今年山交巴士停售「藏王樹冰套票」，建議提早至山形站前排隊購票，或事先於網路預訂「藏王纜車優先通關票」。</li><li><strong>必備簡易冰爪：</strong>從藏王溫泉巴士站步行往纜車站的路面容易結冰，強烈建議套上簡易冰爪套防滑！</li></ul></div></div>",
-          "affiliateText": "🚡 查看藏王樹冰纜車票券與一日遊行程",
-          "affiliateUrl": "",
+          "affiliateText": "官方網站｜藏王樹冰纜車票券",
+          "affiliateUrl": "https://zaoropeway.co.jp/winter/cn.php",
           "affiliateLinks": []
         },
         {
@@ -202,7 +205,10 @@
           "content": "搭巴士返回山形站休整後，直奔東口交通中心 2 樓的肉舖直營店「かかし駅前店」，大啖油花迷人的 A4/A5 山形牛拼盤（盛り合わせ），油脂滲入熱白飯簡直人間天堂！餐後散步前往霞城公園幸運遇上絢麗的冬季煙火大會，最後登上西口直結的「霞城中央大樓（霞城セントラル）」24 樓免費展望台，將 360 度的雪國城市燈火盡收眼底。<div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>吃貨科普：山形牛 vs. 米澤牛，到底差在哪？</div><ul><li><strong>產地範圍：</strong>「山形牛」為山形縣全域飼養合格牛隻；「米澤牛」僅限置賜地區（三市五町）。</li><li><strong>性別與等級：</strong>「山形牛」包含未生育母牛與去勢公牛；「米澤牛」僅限黑毛和種未生育母牛且須達 A3 等級以上，如同山形牛家族中的頂級資優班，價格也較高。同樓層有另一間米澤牛餐廳，進門前別看錯招牌囉！</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "tabelog｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://tabelog.com/tw/yamagata/A0601/A060101/6004194/"},
+            {"text": "instagram｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://www.instagram.com/yamagatagyukakashi/"}
+          ]
         }
       ]
     },
@@ -228,7 +234,12 @@
           "content": "早上將大型行李寄放在山形飯店櫃檯後，輕裝出發。搭乘 JR 奧羽本線抵達大石田站，幾乎九成的人都在此下車！準備轉乘巴士前，因為這站的 IC 卡僅限在來線使用，所以乖乖排隊請站務員人工協助過卡，順利通關不用重新買票！",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html"},
+            {"text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2"},
+            {"text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons"},
+            {"text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk"}
+          ]
         },
         {
           "id": "d3-ch2",
@@ -245,7 +256,9 @@
           "content": "搭上「尾花澤市營巴士銀山線」，一路直達溫泉街入口。下車後映入眼簾的是清澈的銀山川，兩旁並列著三、四層樓高、被白雪覆蓋的木造建築。深吸一口氣，空氣中瀰漫著溫泉特有的氣息，瞬間彷彿乘坐時光機回到了百年前的大正時代。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>銀山溫泉交通管制提醒</div>由於冬季旅客眾多，每年交通管制都會調整：<ul><li><strong>一般路線巴士 (銀山線)：</strong>可直達溫泉街入口，不用換車。</li><li><strong>自駕/觀光巴士：</strong>需在大正浪漫館轉乘接駁車。</li><li><strong>大正浪漫館 ⇔ 銀山溫泉：</strong>這段路程在管制期間禁止步行通行。</li></ul></div></div>",
           "affiliateText": "🚌 查看銀山溫泉＆藏王樹冰一日遊專車行程",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "時刻表｜［尾花澤市營巴士］銀山線", "url": "https://japantravel.navitime.com/zh-tw/area/jp/railroad/00097911/"}
+          ]
         },
         {
           "id": "d3-ch3",
@@ -485,7 +498,12 @@
           "content": "早上在御宿野乃享用豐富的日式早餐後，步行至 JR 仙台站搭乘 08:30 發車的 JR 仙石線。大約 40 分鐘車程便順利抵達「松島海岸站」，沿途窗外風景逐漸轉為海景與林蔭，心情也跟著放鬆。<div class='callout-box callout-info'><div class='callout-icon'>🚆</div><div class='callout-content'><div class='callout-title'>JR 仙石線搭乘小撇步</div><ul><li><strong>IC 卡對應：</strong>松島海岸站支援 Suica、PASMO 等全國互通 IC 卡，直接嗶卡進出非常方便，不需要另外買紙本車票。</li><li><strong>座位選擇：</strong>去程建議坐在列車的<strong>右側</strong>，快到松島海岸站前可以搶先看到漂亮的海灣與島嶼風光！</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html"},
+            {"text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2"},
+            {"text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons"},
+            {"text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk"}
+          ]
         },
         {
           "id": "d5-ch2",
@@ -802,10 +820,10 @@
           "affiliateText": "🏨 查看 APA 京成上野站前飯店 (APA Hotel Keisei Ueno-Ekimae) 房價",
           "affiliateUrl": "",
           "affiliateLinks": [
-            {
-              "text": "🏨 Booking.com 比價",
-              "url": ""
-            }
+            {"text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html"},
+            {"text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2"},
+            {"text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons"},
+            {"text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk"}
           ]
         },
         {
