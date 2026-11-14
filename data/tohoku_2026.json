@@ -90,17 +90,17 @@
             { "src": "media/tohoku_2026/d1-ch4-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d1-ch4-2.png", "caption": "" }
           ],
-          "content": "入住與 JR 山形站東口直結的「Hotel Metropolitan Yamagata」，從檢票口出來不用吹風淋雪，3 分鐘即達溫暖大廳。晚餐在站前步行 3 分鐘的「山形五十番飯店」享用充滿鍋氣的炒飯與炒豆苗，在零下低溫中溫暖收尾！",
-          "affiliateText": "🏨 預訂｜山形大都會飯店 (Hotel Metropolitan Yamagata)",
+          "content": "入住與 JR 山形站東口直結的「Hotel Metropolitan Yamagata」，從檢票口出來不用吹風淋雪，3 分鐘即達溫暖大廳。晚餐在站前步行 3 分鐘的「山形五十番飯店」享用充滿鍋氣的炒飯與炒豆苗，在零下低溫中溫暖收尾！<div class='callout-box callout-info'><div class='callout-icon'>🍽️</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜山形五十番飯店 駅前店</div><ul><li><strong>位置：</strong>JR 山形站東口步行約 2–3 分鐘（山形市香澄町 1-8-8 1F）。</li><li><strong>營業時間：</strong>週一至週六 11:30–15:00、15:30–02:00（週四晚間 17:00 開始營業；週日公休）。</li><li><strong>點餐小撇步：</strong>店內採用附有餐點照片的<strong>平板點餐系統</strong>，不懂日文也能輕鬆點餐！推薦必點充滿鍋氣的炒飯與炒豆苗。</li></ul></div></div>",
+          "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
             {"text": "官方網站｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://yamagata.hotel-metropolitan.com/tw/"},
-            {"text": "agoda｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=9067279"},
-            {"text": "booking.com｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": ""},
-            {"text": "hotels.com｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": ""},
-            {"text": "trip.com｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://www.trip.com/t/qZMwt06s9X2"},
-            {"text": "kkday｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://kkday.tpk.lu/VjMGBnKI"},
-            {"text": "klook｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://klook.tpk.lu/HOdCFhKI"}
+            {"text": "agoda｜JR東日本大都會大飯店山形", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=9067279"},
+            {"text": "booking.com｜JR東日本大都會大飯店山形", "url": ""},
+            {"text": "hotels.com｜JR東日本大都會大飯店山形", "url": ""},
+            {"text": "trip.com｜JR東日本大都會大飯店山形", "url": "https://www.trip.com/t/qZMwt06s9X2"},
+            {"text": "kkday｜JR東日本大都會大飯店山形", "url": "https://kkday.tpk.lu/VjMGBnKI"},
+            {"text": "klook｜JR東日本大都會大飯店山形", "url": "https://klook.tpk.lu/HOdCFhKI"}
           ]
         }
       ]
@@ -206,8 +206,8 @@
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
-            {"text": "tabelog｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://tabelog.com/tw/yamagata/A0601/A060101/6004194/"},
-            {"text": "instagram｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://www.instagram.com/yamagatagyukakashi/"}
+            {"text": "instagram｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://www.instagram.com/yamagatagyukakashi/"},
+            {"text": "tabelog｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://tabelog.com/tw/yamagata/A0601/A060101/6004194/"}            
           ]
         }
       ]
@@ -254,7 +254,7 @@
             { "src": "media/tohoku_2026/d3-ch2-1.mp4", "caption": "" }
           ],
           "content": "搭上「尾花澤市營巴士銀山線」，一路直達溫泉街入口。下車後映入眼簾的是清澈的銀山川，兩旁並列著三、四層樓高、被白雪覆蓋的木造建築。深吸一口氣，空氣中瀰漫著溫泉特有的氣息，瞬間彷彿乘坐時光機回到了百年前的大正時代。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>銀山溫泉交通管制提醒</div>由於冬季旅客眾多，每年交通管制都會調整：<ul><li><strong>一般路線巴士 (銀山線)：</strong>可直達溫泉街入口，不用換車。</li><li><strong>自駕/觀光巴士：</strong>需在大正浪漫館轉乘接駁車。</li><li><strong>大正浪漫館 ⇔ 銀山溫泉：</strong>這段路程在管制期間禁止步行通行。</li></ul></div></div>",
-          "affiliateText": "🚌 查看銀山溫泉＆藏王樹冰一日遊專車行程",
+          "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
             {"text": "時刻表｜［尾花澤市營巴士］銀山線", "url": "https://japantravel.navitime.com/zh-tw/area/jp/railroad/00097911/"}
@@ -330,7 +330,11 @@
           "content": "傍晚搭巴士轉 JR 回到山形，在車站東口的「平田牧場」享用產地直送的高品質豬肉後，領取行李搭乘高速巴士大移動前往仙台。",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜平田牧場 ホテルメトロポリタン山形店", "url": "https://www.hiraboku.info/shop/metropolitan/"},
+            {"text": "instagram｜平田牧場 ホテルメトロポリタン山形店", "url": "https://www.instagram.com/hiraboku_official/"},
+            {"text": "tabelog｜平田牧場 ホテルメトロポリタン山形店", "url": "https://tabelog.com/tw/yamagata/A0601/A060101/6005167/"}
+          ]
         },
         {
           "id": "d3-ch7",
@@ -349,10 +353,13 @@
           "affiliateText": "♨️ 查看仙台御宿野乃溫泉飯店 (Onyado Nono Sendai) 房價",
           "affiliateUrl": "",
           "affiliateLinks": [
-            {
-              "text": "🏨 Booking.com 比價",
-              "url": ""
-            }
+            {"text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/reserve/select-plan?number_of_nights=1&checkin=2026%2F11%2F28&keyword=%E5%A4%A9%E7%84%B6%E6%B8%A9%E6%B3%89%20%E6%9D%9C%E9%83%BD%E3%81%AE%E6%B9%AF%20%E5%BE%A1%E5%AE%BF%20%E9%87%8E%E4%B9%83%E4%BB%99%E5%8F%B0&utm_content=282&utm_source=google&utm_medium=hotelad_free&utm_campaign=hotelad_free&utm_id=6682500495&roomTypeId=376&search_by_tag=hotel&stock_check=true&hotelId=282&order_by=price_asc&dsclid=1235355982372016128&planId=&number_of_rooms=1&tags=&brands=&number_of_adults[]=2&number_of_children_need_futons[]=0&number_of_children_no_need_futons[]=0"},
+            {"text": "agoda｜JR東日本大都會大飯店山形", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500"},
+            {"text": "booking.com｜JR東日本大都會大飯店山形", "url": ""},
+            {"text": "hotels.com｜JR東日本大都會大飯店山形", "url": ""},
+            {"text": "trip.com｜JR東日本大都會大飯店山形", "url": "https://www.trip.com/t/sRFMcjEv9X2"},
+            {"text": "kkday｜JR東日本大都會大飯店山形", "url": "https://kkday.tpk.lu/eIem8Y1r"},
+            {"text": "klook｜JR東日本大都會大飯店山形", "url": "https://klook.tpk.lu/jxJIUXXA"}
           ]
         }
       ]
@@ -376,7 +383,7 @@
             { "src": "media/tohoku_2026/d4-ch1-2.mp4", "caption": "" }
           ],
           "content": "早上 08:00 從飯店出發，慢慢散步至藍色 HIS 標誌的集合點「仙台站東口觀光巴士乘車點」。08:45 準時搭上暖氣充足的專車，一路前往宮城藏王狐狸村。",
-          "affiliateText": "🦊 預約同款：仙台出發｜宮城藏王狐狸村＆採草莓一日遊巴士",
+          "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
         },
@@ -397,7 +404,12 @@
           "content": "抵達宮城藏王狐狸村。雖然因為風雪交加取消了抱狐狸體驗，但在雪白園區中看著成群狐狸在雪地裡穿梭，甚至調皮地咬了褲腳與衣襬，也是最近距離的深刻互動。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>狐狸村安全與參觀小提醒</div><ul><li><strong>絕對禁止觸摸：</strong>放養區狐狸具有野性，可能會咬人，只有在工作人員指導的體驗活動中才能觸碰。</li><li><strong>收好隨身物品：</strong>狐狸對懸掛物很有興趣，手機吊飾、手套繩務必收好。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜宮城蔵王キツネ村", "url": "https://zao-fox-village.com/"},
+            {"text": "trip.com｜藏王狐狸村", "url": "https://www.trip.com/t/Lc8RvRXv9X2"},
+            {"text": "kkday｜藏王狐狸村", "url": "https://kkday.tpk.lu/yBVq8nkp"},
+            {"text": "klook｜藏王狐狸村", "url": "https://klook.tpk.lu/ElsJgKzZ"}
+          ]
         },
         {
           "id": "d4-ch3",
@@ -417,7 +429,14 @@
           "content": "下午搭乘活動巴士抵達草莓農場「JRフルーツパーク仙台あらはま」。聽完工作人員傳授「向上轉寶特瓶蓋」的輕鬆採摘訣竅與挑選蒂頭朝上完熟草莓的技巧後，展開 30 分鐘的草莓吃到飽甜蜜爆擊！",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜JRフルーツパーク仙台あらはま", "url": "https://stbl-fruit-farm.jp/arahama/"},
+            {"text": "instagram｜JRフルーツパーク仙台あらはま", "url": "https://www.instagram.com/stbl_fruitfarm/?hl=ja"},
+            {"text": "facebook｜JRフルーツパーク仙台あらはま", "url": "https://www.facebook.com/sendaiagriculture/"},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜JRフルーツパーク仙台あらはま", "url": "https://klook.tpk.lu/WoDTFRgj"}
+          ]
         },
         {
           "id": "d4-ch4",
@@ -452,7 +471,7 @@
             { "src": "media/tohoku_2026/d4-ch5-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d4-ch5-4.png", "caption": "" }
           ],
-          "content": "隱身在國分町凱旋門大樓 1 樓的「創作料理 真都 －マツ－」，享用預訂的高級暢飲套餐（¥8,800/人）。奢華的海膽與牛肉炙燒在口中炸裂，搭配綠茶解膩，度過完美的一天。<div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>用餐預訂小提醒</div><ul><li>預訂不同的餐點套餐會有不同的「用餐限時」（2小時/2.5小時/3小時），預約時請務必確認方案內容！</li></ul></div></div>",
+          "content": "隱身在國分町凱旋門大樓 1 樓的「創作料理 真都 －マツ－」，享用預訂的高級暢飲套餐（¥8,800/人）。奢華的海膽與牛肉炙燒在口中炸裂，搭配綠茶解膩，度過完美的一天。<div class='callout-box callout-info'><div class='callout-icon'>🍽️</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜創作料理 真都 －マツ－</div><ul><li><strong>位置：</strong>仙台市青葉區國分町 2-1-22 凱旋門大樓 1F。</li><li><strong>營業時間：</strong>16:00–01:00（25:00）。</li><li><strong>消費與停留：</strong>本次預訂高級暢飲套餐 ¥8,800／人，建議停留約 2–3 小時。</li></ul></div></div><div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>用餐預訂小提醒</div><ul><li>預訂不同的餐點套餐會有不同的「用餐限時」（2小時／2.5小時／3小時），預約時請務必確認方案內容！</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
