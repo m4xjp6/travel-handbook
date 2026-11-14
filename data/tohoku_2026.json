@@ -354,12 +354,13 @@
           "affiliateUrl": "",
           "affiliateLinks": [
             {"text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/reserve/select-plan?number_of_nights=1&checkin=2026%2F11%2F28&keyword=%E5%A4%A9%E7%84%B6%E6%B8%A9%E6%B3%89%20%E6%9D%9C%E9%83%BD%E3%81%AE%E6%B9%AF%20%E5%BE%A1%E5%AE%BF%20%E9%87%8E%E4%B9%83%E4%BB%99%E5%8F%B0&utm_content=282&utm_source=google&utm_medium=hotelad_free&utm_campaign=hotelad_free&utm_id=6682500495&roomTypeId=376&search_by_tag=hotel&stock_check=true&hotelId=282&order_by=price_asc&dsclid=1235355982372016128&planId=&number_of_rooms=1&tags=&brands=&number_of_adults[]=2&number_of_children_need_futons[]=0&number_of_children_no_need_futons[]=0"},
-            {"text": "agoda｜JR東日本大都會大飯店山形", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500"},
-            {"text": "booking.com｜JR東日本大都會大飯店山形", "url": ""},
-            {"text": "hotels.com｜JR東日本大都會大飯店山形", "url": ""},
-            {"text": "trip.com｜JR東日本大都會大飯店山形", "url": "https://www.trip.com/t/sRFMcjEv9X2"},
-            {"text": "kkday｜JR東日本大都會大飯店山形", "url": "https://kkday.tpk.lu/eIem8Y1r"},
-            {"text": "klook｜JR東日本大都會大飯店山形", "url": "https://klook.tpk.lu/jxJIUXXA"}
+            {"text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/"},
+            {"text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500"},
+            {"text": "booking.com｜", "url": ""},
+            {"text": "hotels.com｜", "url": ""},
+            {"text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2"},
+            {"text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r"},
+            {"text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA"}
           ]
         }
       ]
@@ -474,7 +475,15 @@
           "content": "隱身在國分町凱旋門大樓 1 樓的「創作料理 真都 －マツ－」，享用預訂的高級暢飲套餐（¥8,800/人）。奢華的海膽與牛肉炙燒在口中炸裂，搭配綠茶解膩，度過完美的一天。<div class='callout-box callout-info'><div class='callout-icon'>🍽️</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜創作料理 真都 －マツ－</div><ul><li><strong>位置：</strong>仙台市青葉區國分町 2-1-22 凱旋門大樓 1F。</li><li><strong>營業時間：</strong>16:00–01:00（25:00）。</li><li><strong>消費與停留：</strong>本次預訂高級暢飲套餐 ¥8,800／人，建議停留約 2–3 小時。</li></ul></div></div><div class='callout-box callout-tip'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>用餐預訂小提醒</div><ul><li>預訂不同的餐點套餐會有不同的「用餐限時」（2小時／2.5小時／3小時），預約時請務必確認方案內容！</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "instagram｜創作料理 真都", "url": "https://www.instagram.com/sosakuryouri.matu/"},
+            {"text": "facebook｜", "url": ""},
+            {"text": "tabelog｜創作料理 真都", "url": "https://tabelog.com/tw/miyagi/A0401/A040101/4023058/"},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜創作料理 真都", "url": "https://kkday.tpk.lu/PiLrE3RT"},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d4-ch6",
@@ -492,7 +501,16 @@
           "content": "緩步走回飯店，褪去厚重衣裳泡進天然溫泉大浴場中，讓熱騰騰的泉水放鬆緊繃的肌肉，完美結束充滿驚奇與美味的一天。準備迎接明天日本三景「松島」的到來！",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/reserve/select-plan?number_of_nights=1&checkin=2026%2F11%2F28&keyword=%E5%A4%A9%E7%84%B6%E6%B8%A9%E6%B3%89%20%E6%9D%9C%E9%83%BD%E3%81%AE%E6%B9%AF%20%E5%BE%A1%E5%AE%BF%20%E9%87%8E%E4%B9%83%E4%BB%99%E5%8F%B0&utm_content=282&utm_source=google&utm_medium=hotelad_free&utm_campaign=hotelad_free&utm_id=6682500495&roomTypeId=376&search_by_tag=hotel&stock_check=true&hotelId=282&order_by=price_asc&dsclid=1235355982372016128&planId=&number_of_rooms=1&tags=&brands=&number_of_adults[]=2&number_of_children_need_futons[]=0&number_of_children_no_need_futons[]=0"},
+            {"text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/"},
+            {"text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500"},
+            {"text": "booking.com｜", "url": ""},
+            {"text": "hotels.com｜", "url": ""},
+            {"text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2"},
+            {"text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r"},
+            {"text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA"}
+          ]
         }
       ]
     },
@@ -651,7 +669,16 @@
           "content": "飽餐一頓後慢慢散步回飯店泡湯。今晚同樣以御宿野乃溫泉飯店的天然溫泉與免費宵夜醬油拉麵作為完美句點，帶著滿滿的暖意入眠。",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/reserve/select-plan?number_of_nights=1&checkin=2026%2F11%2F28&keyword=%E5%A4%A9%E7%84%B6%E6%B8%A9%E6%B3%89%20%E6%9D%9C%E9%83%BD%E3%81%AE%E6%B9%AF%20%E5%BE%A1%E5%AE%BF%20%E9%87%8E%E4%B9%83%E4%BB%99%E5%8F%B0&utm_content=282&utm_source=google&utm_medium=hotelad_free&utm_campaign=hotelad_free&utm_id=6682500495&roomTypeId=376&search_by_tag=hotel&stock_check=true&hotelId=282&order_by=price_asc&dsclid=1235355982372016128&planId=&number_of_rooms=1&tags=&brands=&number_of_adults[]=2&number_of_children_need_futons[]=0&number_of_children_no_need_futons[]=0"},
+            {"text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/"},
+            {"text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500"},
+            {"text": "booking.com｜", "url": ""},
+            {"text": "hotels.com｜", "url": ""},
+            {"text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2"},
+            {"text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r"},
+            {"text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA"}
+          ]
         }
       ]
     },
@@ -811,7 +838,16 @@
           "content": "在復古懷舊的冬日祭典中體驗了最道地的仙台夜生活。回到飯店，依舊是溫暖的天然泉水迎接滿身寒氣的我們。褪去寒意，享受沉澱的個人時光，為充實的一天畫下完美句點。",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/reserve/select-plan?number_of_nights=1&checkin=2026%2F11%2F28&keyword=%E5%A4%A9%E7%84%B6%E6%B8%A9%E6%B3%89%20%E6%9D%9C%E9%83%BD%E3%81%AE%E6%B9%AF%20%E5%BE%A1%E5%AE%BF%20%E9%87%8E%E4%B9%83%E4%BB%99%E5%8F%B0&utm_content=282&utm_source=google&utm_medium=hotelad_free&utm_campaign=hotelad_free&utm_id=6682500495&roomTypeId=376&search_by_tag=hotel&stock_check=true&hotelId=282&order_by=price_asc&dsclid=1235355982372016128&planId=&number_of_rooms=1&tags=&brands=&number_of_adults[]=2&number_of_children_need_futons[]=0&number_of_children_no_need_futons[]=0"},
+            {"text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/"},
+            {"text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500"},
+            {"text": "booking.com｜", "url": ""},
+            {"text": "hotels.com｜", "url": ""},
+            {"text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2"},
+            {"text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r"},
+            {"text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA"}
+          ]
         }
       ]
     },
