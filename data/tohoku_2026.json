@@ -44,7 +44,37 @@
             { "src": "media/tohoku_2026/d1-ch2-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d1-ch2-4.png", "caption": "" }
           ],
-          "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵與烏龍麵，儲存體力！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>Skyliner 兌換與上野站小撇步</div><ul><li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。</li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li></ul></div></div>",
+          "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵與烏龍麵，儲存體力！
+            <div class='callout-box callout-info'>
+            <div class='callout-icon'>🍜</div>
+              <div class='callout-content'>
+              <div class='callout-title'>餐廳資訊｜いろり庵きらくそば 上野店</div>
+              <ul>
+                <li><strong>位置：</strong>JR 上野站 1F 中央改札外（出改札口後往左、淺草口方向左側）。</li>
+                <li><strong>營業時間：</strong>平日 06:30–22:30 / 週六 06:30–22:00  / 週日及假日 07:00–21:30。</li>
+                <li><strong>平均預算：</strong>約 ¥450–¥850（支援現金與 Suica 等交通系 IC 卡）。</li>
+                <li><strong>預留時間：</strong>約 20–30 分鐘即可完食。</li>
+                <li><strong>推薦餐點：</strong>什錦天婦羅蕎麥麵（かき揚げそば）。</li>
+              </ul>
+              </div>
+            </div>
+            <div class='callout-box callout-tip'>
+          <div class='callout-icon'>💡</div>
+            <div class='callout-content'>
+            <div class='callout-title'>旅人點餐小撇步：全自動叫號免開口</div>
+            在門口食券機點餐並刷 Suica 結帳後，訂單會<strong>自動傳送至廚房</strong>！無須將票券交給店員，直接拿著食券入座，待上方螢幕顯示號碼再到取餐口領取即可。
+            </div>
+          </div>
+          <div class='callout-box callout-warning'>
+          <div class='callout-icon'>⚠️</div>
+            <div class='callout-content'>
+            <div class='callout-title'>Skyliner 兌換與上野站小撇步</div>
+            <ul>
+              <li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。
+              </li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li>
+            </ul>
+            </div>
+          </div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -453,8 +483,8 @@
             { "src": "media/tohoku_2026/d4-ch4-2.png", "caption": "" }
           ],
           "content": "回到活動解散地仙台站東口，順便購買明天要使用的「仙台 2 日券」。在電梯出口的地磚與人群圍繞的「麵包超人」雕像合影，尋找八年級生的童年共同回憶。",
-          "affiliateText": "",
-          "affiliateUrl": "",
+          "affiliateText": "官方網站｜仙台二日券",
+          "affiliateUrl": "https://sendaitravelpass.jp/2days/en/",
           "affiliateLinks": []
         },
         {
@@ -481,7 +511,7 @@
             {"text": "facebook｜", "url": ""},
             {"text": "tabelog｜創作料理 真都", "url": "https://tabelog.com/tw/miyagi/A0401/A040101/4023058/"},
             {"text": "trip.com｜", "url": ""},
-            {"text": "kkday｜創作料理 真都", "url": "https://kkday.tpk.lu/PiLrE3RT"},
+            {"text": "kkday｜創作料理 真都", "url": "https://kkday.tpk.lu/tXUpBboA"},
             {"text": "klook｜", "url": ""}
           ]
         },
@@ -558,9 +588,14 @@
             { "src": "media/tohoku_2026/d5-ch2-4.mp4", "caption": "" }
           ],
           "content": "步行 7 分鐘穿過商店街來到碼頭。松島灣內散落著約 260 個被松樹覆蓋的奇岩小島，乘船穿梭其中就像走進活生生的水墨畫！<div class='callout-box callout-tip'><div class='callout-icon'>🛳️</div><div class='callout-content'><div class='callout-title'>松島遊船實用資訊</div><ul><li><strong>航線選擇：</strong>最經典的是繞行松島灣一周的航程，約 50 分鐘。</li></ul></div></div>",
-          "affiliateText": "⛴️ 預訂日本三景｜松島灣觀光遊船優惠船票",
+          "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜松島灣觀光船", "url": "https://www.matsushima.or.jp/"},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜松島灣觀光船組合套票", "url": "https://kkday.tpk.lu/Ka7WunkH"},
+            {"text": "klook｜松島灣觀光船組合套票", "url": "https://klook.tpk.lu/6GLUFjjj"}
+          ]
         },
         {
           "id": "d5-ch3",
@@ -595,9 +630,14 @@
             { "src": "media/tohoku_2026/d5-ch4-2.mp4", "caption": "" }
           ],
           "content": "沿著海岸散步約 10 分鐘，來到在地饕客必訪的「松島魚市場」。一樓集結了現烤大牡蠣、生魚片丼飯等新鮮海味，現烤牡蠣鮮甜飽滿、完全沒有腥味，一口咬下超級滿足！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>松島魚市場用餐小提醒</div>尖峰時刻（11:30 - 13:00）座位區一位難求，建議採取分工合作，一人先找座位，其他人去排隊買烤牡蠣和海鮮丼！</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateText": "官方網站｜松島さかな市場",
+          "affiliateUrl": "https://www.sakana-ichiba.co.jp/",
+          "affiliateLinks": [
+            {"text": "", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d5-ch5",
@@ -614,7 +654,12 @@
           "content": "透過館內兩百多尊栩栩如生的等身大蠟像與二十五個歷史場景，生動重現「奧州獨眼龍」伊達政宗波瀾壯闊的一生，在光影與語音導覽間細細品味戰國名將的傳奇故事。",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d5-ch6",
@@ -634,7 +679,12 @@
           "content": "散步前往松島最具代表性的歷史名寺──瑞嚴寺。這是東北地區最著名的禪寺，也是江戶時代仙台藩祖「伊達政宗」的家族菩提寺。走進兩旁高聳巨大杉樹林的參道，肅穆氛圍讓人瞬間沉澱，本堂與庫裡的桃山樣式建築雕刻極具歷史價值。",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d5-ch7",
@@ -652,7 +702,12 @@
           "content": "搭乘夕陽時分的 JR 仙石線返回仙台市區，直奔一番町商店街的人氣名店「閣」。招牌炭火現烤牛舌外層微焦酥脆、內裡軟嫩多汁，搭配溫潤清爽的牛尾湯與麥飯，讓人大呼過癮！",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d5-ch8",
@@ -724,7 +779,12 @@
           "content": "下車後站在祂的腳下，脖子仰到酸都還看不到頂！入口設有龍口雕像，寓意開運與升龍。內部共有 12 層樓，搭電梯直達頂樓欣賞壯麗市景，沿著螺旋樓梯慢慢下樓，逐層參觀 108 尊象徵人類煩惱的胎內佛像，是個神聖莊嚴與巨大恐懼交織的奇妙體驗。<div class='callout-box callout-info'><div class='callout-icon'>📝</div><div class='callout-content'><div class='callout-title'>景點資訊</div><ul><li><strong>名稱：</strong>仙台天道白衣大観音</li><li><strong>門票：</strong>¥500 (會給一張守護札)</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d6-ch3",
@@ -782,7 +842,12 @@
           "content": "搭乘巴士抵達仙台城跡站，爬上階梯迎面而來的就是經典的伊達政宗騎馬像。當初政宗為了向德川家康表示沒有謀反之意，仙台城是難得沒有天守閣的一座城池。順著他的目光遠眺整個仙台市景，一旁還有宮城縣護國神社，感受歷史的厚重與傳承。",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d6-ch6",
@@ -802,7 +867,12 @@
           "content": "搭乘 Loople仙台來到仙台第一守護神──大崎八幡宮。眼前由伊達政宗下令建造的「御社殿」採用了華麗的權現造建築，黑底點綴金箔與五彩雕刻，與樸素的長床形成強烈對比。這裡對祈求「必勝」相當靈驗，可以看到許多運動選手的繪馬！",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d6-ch7",
@@ -917,7 +987,12 @@
           "content": "漫步穿過上野恩賜公園來到歷史悠久的上野動物園。直奔西園想看人氣明星大貓熊「曉曉」與「蕾蕾」，可惜平日下午門票早已完售！不過還是觀賞了厭世臉的鯨頭鸛、表情豐富的兔猻，以及東園的北極熊與海豹，度過療癒的動物園時光。<div class='callout-box callout-info'><div class='callout-icon'>🐼</div><div class='callout-content'><div class='callout-title'>上野動物園參觀小貼士</div>上野動物園的明星大貓熊人氣極高，即使是平日也強烈建議提前預約或留意當日票券販售狀況，以免撲空喔！</div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d7-ch4",
@@ -978,7 +1053,12 @@
           "content": "搭乘京成本線短短 5 分鐘來到充滿下町風情的日暮里。東口著名的「纖維街」聚集了超過 80 間專賣布料與裁縫配件的批發店，價格親民是手作迷的天堂，讓媽媽也忍不住挑選了心儀的材料。",
           "affiliateText": "",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d8-ch2",
@@ -1109,7 +1189,12 @@
           "content": "登上 250 公尺高的東京鐵塔 Top Deck 頂層展望台，鳥瞰整個東京如流動光河般的壯麗夜景。兌現了去年的承諾，在紅白相間的經典鐵塔餘暉中，為 9 天 8 夜的日本東北與東京冬日旅程留下最璀璨的夜晚記憶！",
           "affiliateText": "🗼 預訂東京鐵塔展望台優惠門票 (Main Deck / Top Deck)",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         }
       ]
     },
@@ -1133,7 +1218,12 @@
           "content": "辦理完退房手續，推著明顯變重的行李搭乘 Skyliner 特急列車。從京成上野出發，最快 41 分鐘順利抵達成田機場第二航廈，在窗外逐漸開闊的田野風景中迎來旅程最終章。",
           "affiliateText": "🎟️ 預訂京成電鐵 Skyliner 特急優惠車票",
           "affiliateUrl": "",
-          "affiliateLinks": []
+          "affiliateLinks": [
+            {"text": "官方網站｜", "url": ""},
+            {"text": "trip.com｜", "url": ""},
+            {"text": "kkday｜", "url": ""},
+            {"text": "klook｜", "url": ""}
+          ]
         },
         {
           "id": "d9-ch2",
