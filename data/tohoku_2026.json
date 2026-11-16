@@ -299,7 +299,7 @@
             { "src": "media/tohoku_2026/d3-ch4-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d3-ch4-2.mp4", "caption": "" }
           ],
-          "content": "順著街道往內走，看見那橫跨溪流的紅色木橋，身後是層層堆疊、煙霧繚繞的「能登屋旅館」。雖然沒有官方證實，但在走過短短幾步路的紅橋時，內心彷彿自動響起了《神隱少女》的配樂，自己就如同千尋一般。<div class='callout-box callout-info'><div class='callout-icon'>📸</div><div class='callout-content'><div class='callout-title'>拍照禮儀提醒</div>這座紅橋主要供住宿旅客進出，若非住客，建議在橋頭拍照留念即可，避免長時間佔用或擅自闖入旅館喔！</div></div>",
+          "content": "順著街道往內走，看見那橫跨溪流的紅色木橋，身後是層層堆疊、煙霧繚繞的「能登屋旅館」。雖然沒有官方證實，但在走過短短幾步路的紅橋時，內心彷彿自動響起了《神隱少女》的配樂，自己就如同千尋一般。<div class='callout-box callout-tip'><div class='callout-icon'>📸</div><div class='callout-content'><div class='callout-title'>拍照禮儀提醒</div>這座紅橋主要供住宿旅客進出，若非住客，建議在橋頭拍照留念即可，避免長時間佔用或擅自闖入旅館喔！</div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -360,7 +360,7 @@
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
-            {"text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/dormyinn/hotels/nono_sendai/},
+            {"text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/dormyinn/hotels/nono_sendai/"},
             {"text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/"},
             {"text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500"},
             {"text": "booking.com｜", "url": ""},
@@ -391,8 +391,8 @@
             { "src": "media/tohoku_2026/d4-ch1-2.mp4", "caption": "" }
           ],
           "content": "早上 08:00 從飯店出發，慢慢散步至藍色 HIS 標誌的集合點「仙台站東口觀光巴士乘車點」。08:45 準時搭上暖氣充足的專車，一路前往宮城藏王狐狸村。",
-          "affiliateText": "",
-          "affiliateUrl": "",
+          "affiliateText": "官方網站｜株式会社エイチ・アイ・エス（H.I.S 日本旅行）",
+          "affiliateUrl": "https://bushisgo.rezio.shop/zh-TW",
           "affiliateLinks": []
         },
         {
