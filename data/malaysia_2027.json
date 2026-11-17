@@ -1,42 +1,107 @@
 {
-    "tripId": "malaysia_2027",
-    "tripTitle": "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 馬來西亞慢旅",
-    "chapters": [
+  "tripId": "malaysia_2027",
+  "tripTitle": "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 南洋雙星春季漫旅",
+  "days": [
+    {
+      "day": "Day 01",
+      "dayTitle": "建構中",
+      "isFieldTest": false,
+      "chapters": [
         {
-            "id": "ch-1",
-            "lat": 22.5771,
-            "lng": 120.3473,
-            "zoom": 13,
-            "title": "01. 啟程｜高雄小港機場",
-            "mediaPlaceholder": "此處可放置啟程的機票或行李照片",
-            "content": "帶著輕簡的行囊，準備再次感受另一座城市的呼吸。晨光下的機場總是充滿著期待的氛圍，不需要趕路，好好吃頓早餐，慢慢走向登機門。"
+          "id": "d1-ch1",
+          "lat": 22.5751,
+          "lng": 120.3472,
+          "zoom": 13,
+          "transport": "walk",
+          "title": "01. 啟程｜高雄小港機場出發",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放專車接送或小港機場登機照片",
+          "mediaList": [
+            { "src": "media/tohoku_2026/d1-ch1-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d1-ch1-2.png", "caption": "" },
+            { "src": "media/tohoku_2026/d1-ch1-3.png", "caption": "" }
+          ],
+          "content": "帶著輕簡的行囊，搭乘機場接送專車摸黑出發，準備展開三千公里的雪國旅程。搭乘 AirAsia FD234 直飛成田，揮別熱情的太陽，準備迎接零下北國。<div class='callout-box callout-tip'><div class='callout-icon'>💳</div><div class='callout-content'><div class='callout-title'>省錢小提醒｜善用信用卡機場接送優惠</div>預訂機場專車前，別忘了先確認手邊刷機票的信用卡權益！許多銀行都有提供<strong>免費或卡友專屬優惠價的機場接送服務</strong>（通常需提前預約），不妨先與平台方案比價看看哪個最划算！</div></div><div class='callout-box callout-info'><div class='callout-icon'>🚗</div><div class='callout-content'><div class='callout-title'>專車預約｜車型與行李計件規則</div><ul><li><strong>車型選擇：</strong>五人座（1-3人，2-4件大行李）、七人座（4-6人，4-6件大行李）、九人座（5-8人，6-8件大行李）。</li><li><strong>計件規則：</strong>20吋以上皆算大行李，紙箱不論大小皆算一件；特殊行李（如嬰兒車、滑雪板）須預先告知。</li></ul></div></div>",
+          "affiliateText": "",
+          "affiliateUrl": "",
+          "affiliateLinks": [
+            {"text": "kkday｜高雄小港機場專車接送", "url": "https://kkday.tpk.lu/uHxcv1ku"},
+            {"text": "klook｜高雄小港機場專車接送", "url": "https://klook.tpk.lu/YH8NQa3A"}
+          ]
         },
         {
-            "id": "ch-2",
-            "lat": 2.7456,
-            "lng": 101.7072,
-            "zoom": 12,
-            "title": "02. 抵達｜吉隆坡國際機場 (KUL)",
-            "mediaPlaceholder": "此處可放置飛機窗外或機場大廳照片",
-            "content": "歷經幾個小時的飛行，濕熱的熱帶空氣迎面而來。機場的指標交錯著不同的語言，這是一座多元融合的城市，而我們的慢旅才正要開始。"
+          "id": "d1-ch2",
+          "lat": 35.7709,
+          "lng": 140.3842,
+          "zoom": 12,
+          "transport": "flight",
+          "title": "02. 抵達｜成田機場與 Skyliner 疾走",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放 Skyliner 車票或いろり庵きらくそば照片",
+          "mediaList": [
+            { "src": "media/tohoku_2026/d1-ch2-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d1-ch2-2.png", "caption": "" },
+            { "src": "media/tohoku_2026/d1-ch2-3.png", "caption": "" },
+            { "src": "media/tohoku_2026/d1-ch2-4.png", "caption": "" }
+          ],
+          "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵與烏龍麵，儲存體力！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>Skyliner 兌換與上野站小撇步</div><ul><li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。</li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🍜</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜いろり庵きらくそば 上野店</div><ul><li><strong>位置：</strong>JR 上野站 1F 中央改札外（出改札口後往左、淺草口方向左側）。</li><li><strong>營業時間：</strong>平日 06:30–22:30 / 週六 06:30–22:00 / 週日及假日 07:00–21:30。</li><li><strong>平均預算：</strong>約 ¥450 – ¥850（支援現金與 Suica 等交通系 IC 卡）。</li><li><strong>預留時間：</strong>約 20 – 30 分鐘完食。</li><li><strong>餐點推薦：</strong>什錦天婦羅蕎麥麵（かき揚げそば）。</li></ul></div></div>",
+          "affiliateText": "",
+          "affiliateUrl": "",
+          "affiliateLinks": [
+            {"text": "官方網站｜京成電鐵 Skyliner 特急車票", "url": "https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/zht/"},
+            {"text": "trip.com｜京成電鐵 Skyliner 特急車票", "url": "https://www.trip.com/t/9H8O3xjr9X2"},
+            {"text": "kkday｜京成電鐵 Skyliner 特急車票", "url": "https://kkday.tpk.lu/I8DI56to"},
+            {"text": "klook｜京成電鐵 Skyliner 特急車票", "url": "https://klook.tpk.lu/u1yyYcRx"}
+          ]
         },
         {
-            "id": "ch-3",
-            "lat": 4.5975,
-            "lng": 101.0901,
-            "zoom": 14,
-            "title": "03. 漫步｜怡保 (Ipoh)",
-            "mediaPlaceholder": "此處可放置老街或白咖啡照片",
-            "content": "斑駁的舊建築與安靜的巷弄，怡保的步調剛剛好。點了一杯溫潤的白咖啡，看著光影在騎樓間緩緩移動。生活，本該如此慢慢品味。"
+          "id": "d1-ch3",
+          "lat": 38.2478,
+          "lng": 140.3268,
+          "zoom": 11,
+          "transport": "hsr",
+          "title": "03. 疾行｜東北新幹線翼號與福島奇觀",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放新幹線列車或窗外積雪照片",
+          "mediaList": [
+            { "src": "media/tohoku_2026/d1-ch3-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d1-ch3-2.png", "caption": "" }
+          ],
+          "content": "一手拉著行李、一手拿著票券，搭上前往山形的新幹線。看著窗外路邊的積雪映入眼簾，隨著列車廣播響起：「山形，請多多指教了！」<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>鐵道迷必看：福島站「華麗分手」</div>搭乘山形新幹線「翼號」時，列車在經過<strong>福島站</strong>時會有著名的解聯奇觀：車身較窄的 Tsubasa 會與前方連結的 Yamabiko 山彥號在此分道揚鑣，獨自進入山區前往山形。</div></div>",
+          "affiliateText": "",
+          "affiliateUrl": "",
+          "affiliateLinks": [
+            {"text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html"},
+            {"text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2"},
+            {"text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons"},
+            {"text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk"}
+          ]
         },
         {
-            "id": "ch-4",
-            "lat": 3.1578,
-            "lng": 101.7116,
-            "zoom": 14,
-            "title": "04. 璀璨｜雙峰塔夜景",
-            "mediaPlaceholder": "此處可放城市夜景照片或影片",
-            "content": "夜幕低垂，城市的輪廓被燈光重新描繪。站在此刻，回想這一路的軌跡，每一段停留都有其獨特的溫度。"
+          "id": "d1-ch4",
+          "lat": 38.2490,
+          "lng": 140.3280,
+          "zoom": 15,
+          "transport": "hsr",
+          "title": "04. 抵達｜山形大都會飯店與五十番中華料理",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放山形大都會飯店或五十番炒飯照片",
+          "mediaList": [
+            { "src": "media/tohoku_2026/d1-ch4-1.png", "caption": "" },
+            { "src": "media/tohoku_2026/d1-ch4-2.png", "caption": "" }
+          ],
+          "content": "入住與 JR 山形站東口直結的「Hotel Metropolitan Yamagata」，從檢票口出來不用吹風淋雪，3 分鐘即達溫暖大廳。晚餐在站前步行 3 分鐘的「山形五十番飯店」享用充滿鍋氣的炒飯與炒豆苗，在零下低溫中溫暖收尾！<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>點餐小撇步</div><ul><li><strong>附圖平板點餐：</strong>桌邊配有觸控平板且附餐點照片，免開口就能輕鬆加點。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🍽️</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜山形五十番飯店 駅前店</div><ul><li><strong>位置：</strong>JR 山形站東口步行約 2–3 分鐘（山形市香澄町 1-8-8 1F）。</li><li><strong>營業時間：</strong>週一至週六 11:30–15:00、15:30–02:00 / 週四晚間 17:00 開始 / 週日公休）。</li><li><strong>平均預算：</strong>約 ¥800 – ¥1,500（以現金支付為主，建議備妥現金）。</li><li><strong>預留時間：</strong>約 40–50 分鐘即可完食。</li><li><strong>推薦餐點：</strong>炒飯（チャーハン）、炒豆苗（豆苗炒め）。</li></ul></div></div>",
+          "affiliateText": "",
+          "affiliateUrl": "",
+          "affiliateLinks": [
+            {"text": "官方網站｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://yamagata.hotel-metropolitan.com/tw/"},
+            {"text": "agoda｜JR東日本大都會大飯店山形", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=9067279"},
+            {"text": "booking.com｜JR東日本大都會大飯店山形", "url": ""},
+            {"text": "hotels.com｜JR東日本大都會大飯店山形", "url": ""},
+            {"text": "trip.com｜JR東日本大都會大飯店山形", "url": "https://www.trip.com/t/qZMwt06s9X2"},
+            {"text": "kkday｜JR東日本大都會大飯店山形", "url": "https://kkday.tpk.lu/VjMGBnKI"},
+            {"text": "klook｜JR東日本大都會大飯店山形", "url": "https://klook.tpk.lu/HOdCFhKI"}
+          ]
         }
-    ]
-}
+      ]
+    }
