@@ -27,7 +27,7 @@
           "affiliateLinks": [
             {"text": "kkday｜高雄小港機場專車接送", "url": "https://kkday.tpk.lu/uHxcv1ku"},
             {"text": "klook｜高雄小港機場專車接送", "url": "https://klook.tpk.lu/YH8NQa3A"}
-            ]
+          ]
         },
         {
           "id": "d1-ch2",
@@ -210,7 +210,7 @@
           "affiliateUrl": "",
           "affiliateLinks": [
             {"text": "instagram｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://www.instagram.com/yamagatagyukakashi/"},
-            {"text": "tabelog｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://tabelog.com/tw/yamagata/A0601/A060101/6004194/"}            
+            {"text": "tabelog｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://tabelog.com/tw/yamagata/A0601/A060101/6004194/"}
           ]
         }
       ]
@@ -932,14 +932,15 @@
             { "src": "media/tohoku_2026/d7-ch1-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d7-ch1-4.png", "caption": "" }
           ],
-          "content": "享用完御宿野乃豐盛的自助早餐（牛舌與海鮮丼吃到飽！）後，搭上新幹線 Hayabusa 108 號，一個半小時就從雪國回到了繁華的東京上野。入住地理位置絕佳的「APA 京成上野站前飯店」，挑戰行李箱收納的俄羅斯方塊空間智慧！",
-          "affiliateText": "🏨 查看 APA 京成上野站前飯店 (APA Hotel Keisei Ueno-Ekimae) 房價",
+          "content": "享用完御宿野乃豐盛的自助早餐（牛舌與海鮮丼吃到飽！）後，搭上新幹線 Hayabusa 108 號，一個半小時就從雪國回到了繁華的東京上野。入住地理位置絕佳的「APA 京成上野站前飯店」，挑戰行李箱收納的俄羅斯方塊空間智慧！<div class='callout-box callout-info'><div class='callout-icon'>🛏️</div><div class='callout-content'><div class='callout-title'>飯店資訊｜APA 京成上野站前飯店（アパホテル〈京成上野駅前〉）</div><ul><li><strong>位置與交通：</strong>東京都台東區上野 2-14-26（京成電鐵 Skyliner「京成上野站」池之端口步行約 1 分鐘 / JR「上野站」不忍口步行約 3 分鐘）。</li><li><strong>入住 / 退房：</strong>Check-in 15:00 後 / Check-out 10:00 前（退房僅需將房卡投入回收箱即可 1 秒閃人）。</li><li><strong>早餐供應時間：</strong>1F 餐廳 07:00–09:30（最後入場 09:00）。</li><li><strong>貼心設施：</strong>大廳行李寄放服務、1F 投幣式自助洗衣機、製冰機與微波爐（房內 50 吋大電視支援手機投屏並可即時查看洗衣機使用狀態）。</li></ul></div></div>",
+          "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
-            {"text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html"},
-            {"text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2"},
-            {"text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons"},
-            {"text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk"}
+            {"text": "官方網站｜アパホテル〈京成上野駅前〉", "url": "https://www.apahotel.com/"},
+            {"text": "agoda｜アパホテル〈京成上野駅前〉", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=1145700"},
+            {"text": "booking.com｜アパホテル〈京成上野駅前〉", "url": "https://reurl.cc/MWqArp"},
+            {"text": "trip.com｜アパホテル〈京成上野駅前〉", "url": "https://www.trip.com/t/MUuq0mxgCX2"},
+            {"text": "hotels.com｜アパホテル〈京成上野駅前〉", "url": "https://reurl.cc/p8Og7Z"}
           ]
         },
         {
