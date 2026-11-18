@@ -6,7 +6,7 @@
     <title>讀取中... ｜ 電子旅行手帳</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-    <!-- 👇 貼在這裡：Travelpayouts Drive 腳本 (需放在 <head> 內) 👇 -->
+    <!-- 👇 Travelpayouts Drive 腳本 (需放在 <head> 內) 👇 -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
         (function () {
             var script = document.createElement("script");
@@ -18,6 +18,10 @@
     </script>
     <!-- 👆 Travelpayouts Drive 腳本結束 👆 -->
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+
     <style>
         /* === 1. 全域色彩變數與基礎頁面設定 === */
         :root {
@@ -26,16 +30,19 @@
             --accent-brown: #C4A99E;      /* 主題奶茶棕 */
             --accent-brown-dark: #a6897c; /* 深奶茶棕（強調與文字用） */
             --accent-pink: #E5D1C7;       /* 藕粉底色（地圖載入與預留框用） */
+            --accent-sage: #D8E2D5;       /* 鼠尾草綠 */
             --text-dark: #4A4A4A;         /* 主要深灰文字 */
             --text-light: #7A7A7A;        /* 內文淺灰文字 */
+            --border-soft: rgba(196, 169, 158, 0.32);
         }
         body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            font-family: 'Noto Sans TC', 'Helvetica Neue', Arial, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-dark);
             height: 100%;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* === 2. 左右雙欄主版面配置 (左地圖 50% / 右內容 50%) === */
@@ -50,33 +57,125 @@
         #map { width: 100%; height: 100%; }
         #right-panel { width: 50vw; box-sizing: border-box; }
 
-        /* === 3. 右側頂部常駐導覽列與天數切換按鈕 (Day Tabs) === */
+        /* 左側地圖右上角：路線／尋訪切換膠囊 (復刻第一組圖3、8) */
+        .map-mode-overlay {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(253, 251, 247, 0.92);
+            backdrop-filter: blur(6px);
+            padding: 5px 8px;
+            border-radius: 24px;
+            border: 1.5px solid var(--border-soft);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+        }
+        .map-mode-btn {
+            font-family: inherit;
+            border: none;
+            background: transparent;
+            color: var(--text-dark);
+            padding: 5px 12px;
+            border-radius: 18px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .map-mode-btn.active {
+            background: var(--accent-brown-dark);
+            color: white;
+        }
+        .map-stats-pill {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 800;
+            background: rgba(253, 251, 247, 0.92);
+            backdrop-filter: blur(6px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-soft);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-brown-dark);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            pointer-events: none;
+        }
+
+        /* === 3. 右側頂部常駐導覽列、四大模式切換與天數切換按鈕 === */
         .top-nav {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(253, 251, 247, 0.95);
+            background: rgba(253, 251, 247, 0.96);
             backdrop-filter: blur(8px);
-            padding: 16px 40px 12px;
+            padding: 14px 36px 12px;
             border-bottom: 1px solid rgba(196, 169, 158, 0.25);
         }
         .nav-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            gap: 10px;
         }
         .back-link {
             text-decoration: none;
             color: var(--accent-brown-dark);
             font-size: 0.9rem;
             font-weight: bold;
+            white-space: nowrap;
         }
         .trip-main-title {
             margin: 0;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--accent-brown-dark);
+            text-align: right;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
+
+        /* 頂部四大功能模式列（整排無底色，僅選中按鈕顯示底色） */
+        .view-mode-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: none;
+        }
+        .view-mode-btn {
+            font-family: inherit;
+            background: transparent;
+            color: var(--text-dark);
+            border: 1.5px solid transparent;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .view-mode-btn:hover {
+            color: var(--accent-brown-dark);
+            border-color: var(--border-soft);
+        }
+        .view-mode-btn.active {
+            background: var(--accent-brown);
+            color: white;
+            border-color: var(--accent-brown);
+            box-shadow: 0 3px 9px rgba(196, 169, 158, 0.4);
+        }
+
         .day-tabs {
             display: flex;
             gap: 8px;
@@ -88,9 +187,9 @@
             border: 1px solid var(--accent-brown);
             background: white;
             color: var(--accent-brown-dark);
-            padding: 6px 14px;
+            padding: 5px 13px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
@@ -98,19 +197,27 @@
         }
         .day-tab:hover { background: var(--accent-pink); color: white; }
         .day-tab.active {
-            background: var(--accent-brown);
+            background: var(--accent-brown-dark);
+            border-color: var(--accent-brown-dark);
             color: white;
-            box-shadow: 0 2px 8px rgba(196, 169, 158, 0.4);
+            box-shadow: 0 2px 8px rgba(166, 137, 124, 0.35);
         }
 
         /* === 4. 日記文章容器與每日大標題橫幅 (Day Banner) === */
-        #content { padding: 30px 40px 60px; }
+        .view-section {
+            display: none;
+            padding: 26px 36px 60px;
+        }
+        .view-section.active {
+            display: block;
+        }
+
         .day-banner {
             background: linear-gradient(135deg, #C4A99E 0%, #d8c2b8 100%);
             color: white;
             padding: 20px 24px;
             border-radius: 12px;
-            margin: 20px 0 30px;
+            margin: 14px 0 26px;
             box-shadow: 0 4px 15px rgba(196, 169, 158, 0.25);
         }
         .day-banner-header {
@@ -152,7 +259,7 @@
             box-shadow: 0 4px 20px rgba(196, 169, 158, 0.15);
             position: relative;
             transition: opacity 0.4s ease;
-            opacity: 0.35; /* 非當前閱讀章節半透明化 */
+            opacity: 0.35;
         }
         .chapter.active { opacity: 1; }
         .chapter h2 {
@@ -170,7 +277,6 @@
             letter-spacing: 0.04em;
             white-space: pre-line;
         }
-        /* 無照片時的粉色文字佔位框 */
         .photo-placeholder {
             width: 100%;
             min-height: 220px;
@@ -186,32 +292,25 @@
             overflow: hidden;
         }
 
-        /* === 6. 多媒體畫廊排版系統 (對應 config.yml 的所有版型選項) === */
+        /* === 6. 多媒體畫廊排版系統 === */
         .media-gallery {
             margin: 20px 0;
             display: grid;
             gap: 10px;
             width: 100%;
         }
-        /* 單張滿版 / 垂直堆疊 */
         .media-gallery.layout-single,
         .media-gallery.layout-stack { grid-template-columns: 1fr; }
         .media-gallery.layout-single .media-item { max-height: 440px; }
-
-        /* 2 欄、3 欄、4 欄等寬並排 */
         .media-gallery.layout-auto-2,
         .media-gallery.layout-grid-equal { grid-template-columns: repeat(2, 1fr); }
         .media-gallery.layout-auto-3,
         .media-gallery.layout-grid-3 { grid-template-columns: repeat(3, 1fr); }
         .media-gallery.layout-auto-4,
         .media-gallery.layout-grid-4 { grid-template-columns: repeat(4, 1fr); }
-
-        /* 雜誌風比例排版 (2:1 / 1:2 / 1:2:1) */
         .media-gallery.layout-grid-2-1 { grid-template-columns: 2fr 1fr; }
         .media-gallery.layout-grid-1-2 { grid-template-columns: 1fr 2fr; }
         .media-gallery.layout-grid-1-2-1 { grid-template-columns: 1fr 2fr 1fr; }
-
-        /* IG 風橫向滑動輪播 (5 張以上自動套用或手動指定) */
         .media-gallery.layout-carousel {
             display: flex;
             overflow-x: auto;
@@ -224,8 +323,6 @@
             flex: 0 0 82%;
             scroll-snap-align: center;
         }
-
-        /* 單一照片/影片項目容器與懸停效果 */
         .media-item {
             position: relative;
             min-width: 0;
@@ -272,7 +369,7 @@
         }
         .replay-btn:hover { background: rgba(0, 0, 0, 0.8); }
 
-        /* === 7. 點擊圖片/影片放大預覽燈箱 (支援左右按鈕、鍵盤與手機觸控滑動) === */
+        /* === 7. 點擊圖片/影片放大預覽燈箱 === */
         #lightbox-overlay {
             display: none;
             position: fixed;
@@ -283,7 +380,7 @@
             justify-content: center;
             padding: 24px;
             cursor: zoom-out;
-            touch-action: pan-y; /* 允許垂直捲動但攔截水平滑動手勢 */
+            touch-action: pan-y;
         }
         #lightbox-overlay img,
         #lightbox-overlay video {
@@ -322,7 +419,6 @@
         }
         .lightbox-nav.prev { left: 24px; }
         .lightbox-nav.next { right: 24px; }
-
         .lightbox-info {
             position: fixed;
             bottom: 20px;
@@ -339,7 +435,7 @@
             white-space: nowrap;
         }
 
-        /* === 8. 內文重點提示框樣式 (Callout Box) 與 莫蘭迪色預訂按鈕 === */
+        /* === 8. 內文重點提示框樣式與莫蘭迪色預訂按鈕 === */
         .callout-box {
             display: flex;
             align-items: flex-start;
@@ -365,25 +461,23 @@
         .callout-warning { background-color: #fff1f2; border-left: 4px solid #f43f5e; }
         .callout-warning .callout-title { color: #be123c; }
 
-        /* 莫蘭迪色 Travelpayouts 推薦預訂按鈕外層容器 (支援多顆按鈕自動換行並排) */
         .affiliate-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 20px;
             padding-top: 16px;
-            border-top: 1px dashed rgba(196, 169, 158, 0.35); /* 頂部奶茶色虛線分隔 */
+            border-top: 1px dashed rgba(196, 169, 158, 0.35);
         }
-        /* 莫蘭迪色膠囊預訂按鈕本體 */
         .affiliate-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 9px 18px;
-            background-color: #f7f1ed;       /* 淺米杏底色 */
-            color: var(--accent-brown-dark); /* 深奶茶文字色 */
-            border: 1px solid #d8c3b8;       /* 柔和奶茶邊框 */
-            border-radius: 24px;             /* 膠囊圓角 */
+            background-color: #f7f1ed;
+            color: var(--accent-brown-dark);
+            border: 1px solid #d8c3b8;
+            border-radius: 24px;
             font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 0.03em;
@@ -391,7 +485,6 @@
             transition: all 0.25s ease;
             box-shadow: 0 2px 6px rgba(196, 169, 158, 0.15);
         }
-        /* 滑鼠移上預訂按鈕時的微浮起與反白效果 */
         .affiliate-btn:hover {
             background-color: var(--accent-brown);
             color: #ffffff;
@@ -399,17 +492,532 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(196, 169, 158, 0.35);
         }
-        /* 按鈕右側小箭頭 (↗) 動畫 */
         .affiliate-btn .arrow-icon {
             font-size: 0.85em;
             opacity: 0.85;
             transition: transform 0.2s ease;
         }
-        .affiliate-btn:hover .arrow-icon {
-            transform: translate(2px, -2px);
+        .affiliate-btn:hover .arrow-icon { transform: translate(2px, -2px); }
+
+        /* ==============================================================
+           9. 新增模組 A：📅 行程＆景點介紹手風琴卡片 (復刻附圖三)
+           ============================================================== */
+        .itinerary-day-block {
+            margin-bottom: 38px;
+        }
+        .itin-day-header {
+            margin-bottom: 14px;
+        }
+        .itin-day-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.32rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0 0 6px 0;
+        }
+        .itin-day-sub {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        /* 當日交通時間與交通花費雙欄統計框 */
+        .itin-summary-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #F4EFE6;
+            border: 1.5px solid #D8C8B8;
+            border-radius: 14px;
+            padding: 14px 10px;
+            margin: 14px 0 18px;
+            text-align: center;
+        }
+        .itin-sum-col:first-child {
+            border-right: 1px solid #DFD3C5;
+        }
+        .itin-sum-label {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+        .itin-sum-val {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2C3E50;
+        }
+        .itin-sum-val.cost {
+            color: #B84A39;
         }
 
-        /* === 9. 地圖標記、路線方向箭頭與小狐狸角色樣式 === */
+        /* 站與站之間的交通移動列 */
+        .itin-transit-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 6px 0;
+            font-size: 0.84rem;
+            color: var(--text-light);
+            border-bottom: 1px dotted rgba(196, 169, 158, 0.45);
+        }
+        .itin-transit-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        .itin-transit-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #EFE7DA;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+        .itin-transit-right {
+            font-weight: 600;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+
+        /* 景點介紹可收合手風琴卡片 */
+        .spot-intro-card {
+            background: white;
+            border: 1.5px solid #8E7F76;
+            border-radius: 16px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(196, 169, 158, 0.12);
+            transition: box-shadow 0.2s;
+        }
+        .spot-intro-card:hover {
+            box-shadow: 0 5px 16px rgba(196, 169, 158, 0.24);
+        }
+        .spot-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            cursor: pointer;
+            user-select: none;
+            gap: 10px;
+        }
+        .spot-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .spot-time-box {
+            background: #F4EFE6;
+            border: 1.5px solid #6E6259;
+            color: #3A322D;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 4px 11px;
+            border-radius: 10px;
+            letter-spacing: 0.03em;
+        }
+        .spot-cat-pill {
+            background: #F5E6D3;
+            color: #9C6B3B;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 8px;
+        }
+        .spot-title-text {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: #2B2B2B;
+        }
+        .spot-toggle-arrow {
+            color: #8E7F76;
+            font-size: 0.85rem;
+            transition: transform 0.25s ease;
+        }
+        .spot-intro-card.open .spot-toggle-arrow {
+            transform: rotate(90deg);
+        }
+        .spot-card-body {
+            display: none;
+            padding: 0 18px 16px;
+            border-top: 1px dashed #E5DEC9;
+        }
+        .spot-intro-card.open .spot-card-body {
+            display: block;
+        }
+        .spot-intro-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #4A7C59;
+            margin: 12px 0 6px;
+        }
+        .spot-intro-text {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin: 0 0 12px;
+            white-space: pre-line;
+        }
+        .spot-action-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .spot-pill-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 13px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid #C9D6DF;
+            background: #F0F5F9;
+            color: #3A506B;
+            transition: all 0.2s;
+        }
+        .spot-pill-btn.loc {
+            background: #F4EFE6;
+            border-color: #D8C8B8;
+            color: #6E5A4F;
+        }
+        .spot-pill-btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(0.96);
+        }
+
+        /* ==============================================================
+           10. 新增模組 B：📡 資訊情報站 (復刻附圖二，含重新整理按鈕)
+           ============================================================== */
+        .info-station-header {
+            background: linear-gradient(135deg, #EBF3F9 0%, #F5F9FC 100%);
+            border: 1.5px solid #C5D9E8;
+            border-radius: 16px;
+            padding: 20px 22px;
+            margin-bottom: 20px;
+        }
+        .info-tag-pill {
+            display: inline-block;
+            background: white;
+            border: 1px solid #B8CFE0;
+            color: #3B5975;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+        .info-station-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #23394D;
+            margin: 0 0 6px 0;
+        }
+        .info-station-sub {
+            font-size: 0.86rem;
+            color: #546E85;
+            margin: 0 0 14px 0;
+        }
+        .info-status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(184, 207, 224, 0.5);
+            font-size: 0.82rem;
+            color: #46637A;
+        }
+        .info-live-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #38A169;
+            border-radius: 50%;
+            margin-right: 5px;
+            box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.2);
+        }
+        .info-refresh-btn {
+            font-family: inherit;
+            background: white;
+            color: #2B4C6F;
+            border: 1.5px solid #B0C7D9;
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+        .info-refresh-btn:hover {
+            background: #2B4C6F;
+            color: white;
+        }
+
+        .info-card-panel {
+            background: white;
+            border: 1.5px solid #D5E3ED;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 14px rgba(59, 89, 117, 0.06);
+        }
+        .info-panel-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #23394D;
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .quick-read-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .quick-read-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #E2ECF2;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            color: #2D3748;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .quick-read-list li:last-child { border-bottom: none; }
+
+        /* 九天行程影響雷達網格 */
+        .radar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .radar-cell {
+            background: #F8FBFD;
+            border: 1px solid #D5E3ED;
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .radar-cell:hover {
+            border-color: #7FA6C4;
+            transform: translateY(-2px);
+        }
+        .radar-day-num {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #23394D;
+            margin-bottom: 3px;
+        }
+        .radar-day-status {
+            font-size: 0.76rem;
+            color: #647F94;
+            line-height: 1.35;
+        }
+        .radar-cell.warn {
+            background: #FFFDF5;
+            border-color: #F6AD55;
+        }
+        .radar-cell.warn .radar-day-status {
+            color: #C05621;
+            font-weight: 600;
+        }
+
+        /* 情報剪報篩選與列表 */
+        .clip-filter-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .clip-pill {
+            border: 1px solid #C5D9E8;
+            background: white;
+            color: #46637A;
+            padding: 5px 12px;
+            border-radius: 18px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .clip-pill.active {
+            background: #4A7696;
+            border-color: #4A7696;
+            color: white;
+        }
+        .clip-search-row {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .clip-input, .clip-select {
+            font-family: inherit;
+            border: 1px solid #C5D9E8;
+            border-radius: 10px;
+            padding: 7px 10px;
+            font-size: 0.84rem;
+            color: #23394D;
+            background: #F8FBFD;
+        }
+        .clip-item {
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: #F8FBFD;
+            border: 1px solid #E2ECF2;
+            margin-bottom: 8px;
+        }
+        .clip-item-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #647F94;
+            margin-bottom: 4px;
+        }
+        .clip-item-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #23394D;
+            margin-bottom: 4px;
+        }
+        .clip-item-desc {
+            font-size: 0.83rem;
+            color: #4A5568;
+            line-height: 1.5;
+        }
+
+        /* ==============================================================
+           11. 新增模組 C：🎫 文牒・盤纏・舟車・佳餚 (復刻第一組圖 4～7)
+           ============================================================== */
+        .pack-sub-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            background: #F3ECE3;
+            padding: 6px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+        .pack-sub-btn {
+            font-family: inherit;
+            border: none;
+            background: transparent;
+            color: var(--text-dark);
+            padding: 8px 6px;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .pack-sub-btn.active {
+            background: #3B4D54;
+            color: white;
+        }
+        .pack-panel { display: none; }
+        .pack-panel.active { display: block; }
+
+        /* 文牒票根卡 (圖4) */
+        .voucher-card {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 3px 10px rgba(196, 169, 158, 0.12);
+        }
+        .voucher-left {
+            width: 58px;
+            background: #3B4D54;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 4px;
+            flex-shrink: 0;
+        }
+        .voucher-left.hotel { background: #5B4B49; }
+        .voucher-left.spot { background: #8C4A32; }
+        .voucher-body {
+            padding: 12px 16px;
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .voucher-title {
+            font-weight: 700;
+            font-size: 0.94rem;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+        .voucher-sub {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .voucher-badge {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-brown-dark);
+            white-space: nowrap;
+        }
+
+        /* 盤纏記帳本 (圖5) */
+        .budget-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border-soft);
+            margin-bottom: 16px;
+        }
+        .budget-bar-wrap {
+            height: 8px;
+            background: #EFEAE4;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 8px 0 14px;
+        }
+        .budget-bar-fill {
+            height: 100%;
+            background: #3B4D54;
+            border-radius: 6px;
+        }
+        .budget-cat-row {
+            margin-bottom: 12px;
+        }
+        .budget-cat-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        /* === 12. 地圖標記、尋訪方章、路線方向箭頭與小狐狸角色樣式 === */
         .custom-marker { background: transparent; border: none; }
         .custom-marker .marker-dot {
             width: 16px;
@@ -428,10 +1036,31 @@
             transform: scale(1.35);
             box-shadow: 0 0 0 4px rgba(255, 229, 153, 0.7), 0 3px 8px rgba(0,0,0,0.3);
         }
-        .custom-marker:hover,
-        .custom-marker.active { z-index: 900 !important; }
 
-        /* 路線上的方向小箭頭 */
+        /* 尋訪模式：東方冊頁印章標記 (景 / 食 / 住 / 驛) */
+        .stamp-marker { background: transparent; border: none; }
+        .stamp-box {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            background: #3B4D54;
+            color: #fff;
+            border: 2px solid #fff;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.28);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .stamp-box.food { background: #9C4A32; }
+        .stamp-box.hotel { background: #5B6E58; }
+        .stamp-box.transit { background: #7A6258; }
+        .stamp-box:hover { transform: scale(1.2); }
+
         .route-arrow-icon { background: transparent; border: none; pointer-events: none; }
         .route-arrow-inner {
             width: 14px;
@@ -446,7 +1075,6 @@
             text-shadow: 0 0 3px #fff, 0 0 3px #fff;
         }
 
-        /* 🦊 沿路線移動的小狐狸角色 */
         .fox-traveler-icon { background: transparent; border: none; z-index: 2000 !important; pointer-events: none; }
         .fox-wrapper {
             width: 36px;
@@ -467,7 +1095,6 @@
             100% { margin-top: -6px; }
         }
 
-        /* 地圖節點懸停提示框 (Tooltip) */
         .marker-tooltip {
             background: rgba(74, 74, 74, 0.92);
             color: #fff;
@@ -479,14 +1106,14 @@
         }
         .marker-tooltip::before { border-top-color: rgba(74, 74, 74, 0.92) !important; }
 
-        /* === 10. 手機版 RWD 響應式配置 (上地圖 38vh / 下內容，照片每排最多 2 張) === */
+        /* === 13. 手機版 RWD 響應式配置 === */
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             #map-container { width: 100vw; height: 38vh; position: sticky; top: 0; z-index: 200; }
             #right-panel { width: 100vw; }
-            .top-nav { top: 38vh; padding: 12px 20px; }
-            #content { padding: 20px; }
-            .chapter { min-height: auto; margin-bottom: 30px; }
+            .top-nav { top: 38vh; padding: 10px 16px; }
+            .view-section { padding: 18px 16px 50px; }
+            .chapter { min-height: auto; margin-bottom: 30px; padding: 22px 18px; }
             .media-gallery:not(.layout-single):not(.layout-stack):not(.layout-carousel) {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -494,31 +1121,120 @@
             .lightbox-nav { width: 40px; height: 40px; font-size: 1.1rem; }
             .lightbox-nav.prev { left: 10px; }
             .lightbox-nav.next { right: 10px; }
-            /* 手機版預訂按鈕自動滿版置中，方便拇指點擊 */
             .affiliate-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+            .radar-grid { grid-template-columns: repeat(2, 1fr); }
+            .clip-search-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- 左側常駐地圖區 -->
-        <div id="map-container"><div id="map"></div></div>
+        <!-- 左側常駐地圖區（含右上角「路線｜尋訪」切換鈕） -->
+        <div id="map-container">
+            <div class="map-stats-pill" id="map-stats-pill">讀取行跡中...</div>
+            <div class="map-mode-overlay">
+                <button type="button" class="map-mode-btn active" id="btn-map-route" onclick="switchMapDisplayMode('route')">🗺️ 路線</button>
+                <button type="button" class="map-mode-btn" id="btn-map-explore" onclick="switchMapDisplayMode('explore')">🧭 尋訪</button>
+            </div>
+            <div id="map"></div>
+        </div>
 
-        <!-- 右側導覽列與日記文章區 -->
+        <!-- 右側導覽列與四大視角內容區 -->
         <div id="right-panel">
             <div class="top-nav">
                 <div class="nav-header">
-                    <a href="index.html" class="back-link">← 返回手帳書櫃</a>
+                    <a href="index.html" class="back-link">&lt; 書櫃</a>
                     <h2 class="trip-main-title" id="trip-title">讀取中...</h2>
                 </div>
+
+                <!-- 頂部四大模式切換列（整排無底色，選中才有底色） -->
+                <div class="view-mode-bar">
+                    <button type="button" class="view-mode-btn active" data-view="view-journal" onclick="switchRightView('view-journal')">📖 遊記圖文</button>
+                    <button type="button" class="view-mode-btn" data-view="view-itinerary" onclick="switchRightView('view-itinerary')">📅 行程＆景點介紹</button>
+                    <button type="button" class="view-mode-btn" data-view="view-info" onclick="switchRightView('view-info')">📡 資訊情報站</button>
+                    <button type="button" class="view-mode-btn" data-view="view-pack" onclick="switchRightView('view-pack')">🎫 文牒＆盤纏</button>
+                </div>
+
+                <!-- 天數篩選列 -->
                 <div class="day-tabs" id="day-tabs"></div>
             </div>
-            <div id="content"></div>
+
+            <!-- 視角 1：原本的長篇圖文遊記 -->
+            <div id="view-journal" class="view-section active">
+                <div id="content"></div>
+            </div>
+
+            <!-- 視角 2：行程時間軸＆可收合景點介紹卡 (復刻附圖三) -->
+            <div id="view-itinerary" class="view-section">
+                <div id="itinerary-content"></div>
+            </div>
+
+            <!-- 視角 3：旅途即時資訊情報站 (復刻附圖二，含重新整理按鈕) -->
+            <div id="view-info" class="view-section">
+                <div class="info-station-header">
+                    <span class="info-tag-pill" id="info-trip-code">TRIP LIVE ・ 旅の速報</span>
+                    <h2 class="info-station-title" id="info-station-title">旅途即時情報手帳</h2>
+                    <p class="info-station-sub">掌握出發前與旅途中的即時天氣、交通運行變動、防災提醒與期間限定活動。</p>
+                    <div class="info-status-bar">
+                        <span><span class="info-live-dot"></span>即時連線 ｜ <span id="info-update-time">更新：讀取中...</span></span>
+                        <button type="button" class="info-refresh-btn" id="btn-refresh-info" onclick="refreshInfoStation(true)">↻ 重新整理</button>
+                    </div>
+                </div>
+
+                <!-- 30 秒情報速讀 -->
+                <div class="info-card-panel">
+                    <h3 class="info-panel-title">⚡ 30 秒情報速讀：出發前與旅途中先看這五件事</h3>
+                    <ul class="quick-read-list" id="info-quick-five"></ul>
+                </div>
+
+                <!-- 九天行程影響雷達 -->
+                <div class="info-card-panel">
+                    <h3 class="info-panel-title">🧭 每日行程天氣與風速影響雷達</h3>
+                    <div class="radar-grid" id="info-radar-grid"></div>
+                    <div style="font-size: 0.76rem; color: #718096; line-height: 1.5;">
+                        ＊點擊上方任一天數格可快速跳轉查看當日景點攻略；雷達數據串接 Open-Meteo 即時氣象預報。
+                    </div>
+                </div>
+
+                <!-- 情報剪報 -->
+                <div class="info-card-panel">
+                    <h3 class="info-panel-title">📰 情報剪報（交通／天氣／防災／活動）</h3>
+                    <div class="clip-filter-pills" id="clip-cat-pills">
+                        <button type="button" class="clip-pill active" data-cat="ALL">全部</button>
+                        <button type="button" class="clip-pill" data-cat="交通">交通</button>
+                        <button type="button" class="clip-pill" data-cat="天氣">天氣</button>
+                        <button type="button" class="clip-pill" data-cat="防災">防災</button>
+                        <button type="button" class="clip-pill" data-cat="活動">活動</button>
+                    </div>
+                    <div class="clip-search-row">
+                        <select id="clip-region-select" class="clip-select" onchange="filterInfoClippings()">
+                            <option value="ALL">全部地區</option>
+                        </select>
+                        <input type="text" id="clip-search-input" class="clip-input" placeholder="🔍 搜尋車站、城市、景點或活動..." oninput="filterInfoClippings()">
+                    </div>
+                    <div id="info-clippings-list"></div>
+                </div>
+            </div>
+
+            <!-- 視角 4：文牒・盤纏・舟車・佳餚 (復刻第一組圖 4～7) -->
+            <div id="view-pack" class="view-section">
+                <div class="pack-sub-tabs">
+                    <button type="button" class="pack-sub-btn active" onclick="switchPackSubTab('pack-vouchers', this)">🎫 文牒票夾</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 盤纏帳目</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-transit', this)">🚄 舟車段次</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 佳餚清單</button>
+                </div>
+
+                <div id="pack-vouchers" class="pack-panel active"></div>
+                <div id="pack-budget" class="pack-panel"></div>
+                <div id="pack-transit" class="pack-panel"></div>
+                <div id="pack-food" class="pack-panel"></div>
+            </div>
         </div>
     </div>
 
-    <!-- 點圖/點影片放大預覽燈箱（支援同章節左右按鈕、鍵盤方向鍵與手機手指左右滑動） -->
+    <!-- 點圖/點影片放大預覽燈箱 -->
     <div id="lightbox-overlay" onclick="handleOverlayClick()">
         <button type="button" class="lightbox-nav prev" id="lightbox-prev" onclick="event.stopPropagation(); stepLightbox(-1)">❮</button>
         <img id="lightbox-img" src="" alt="放大預覽" onclick="event.stopPropagation()">
@@ -533,32 +1249,39 @@
         const urlParams = new URLSearchParams(window.location.search);
         const tripId = urlParams.get('trip') || 'tohoku_2026';
 
+        let rawTripData = {};
         let map = null;
-        let baseRouteLayer = null;   // 底層：整天行程的淺色虛線
-        let activeRouteLayer = null; // 頂層：當前移動區段的深色虛線與方向箭頭
-        let markersLayer = null;     // 景點圓點標記圖層
-        let foxMarker = null;        // 🦊 小狐狸角色標記
-        let foxAnimFrame = null;     // 小狐狸移動動畫計時器
+        let baseRouteLayer = null;
+        let activeRouteLayer = null;
+        let markersLayer = null;
+        let exploreStampsLayer = null; // 尋訪模式印章圖層
+        let currentMapMode = 'route';  // 'route' | 'explore'
+        let currentDayFilter = 'ALL';
 
-        let observer = null;         // 章節滾動監聽器
-        let videoObserver = null;    // 影片自動播放監聽器
-        let normalizedDays = [];     // 統一格式後的每日行程陣列
-        let currentChaptersList = [];// 當前顯示的所有章節清單
-        let currentActiveIndex = 0;  // 當前閱讀中的章節索引
+        let foxMarker = null;
+        let foxAnimFrame = null;
+        let observer = null;
+        let videoObserver = null;
+        let normalizedDays = [];
+        let currentChaptersList = [];
+        let currentActiveIndex = 0;
 
-        // 燈箱專用的章節媒體清單、索引與觸控滑動狀態
         let lightboxItems = [];
         let lightboxIndex = 0;
         let touchStartX = 0;
         let touchStartY = 0;
         let justSwiped = false;
 
-        const segmentCoordsCache = {};     // 路線座標記憶體快取
-        const chapterMarkers = new Map();  // 章節 DOM 對應地圖 Marker 的映射表
-        let isClickScrolling = false;      // 點擊地圖平滑滾動時的鎖定旗標
+        const segmentCoordsCache = {};
+        const chapterMarkers = new Map();
+        let isClickScrolling = false;
         let scrollUnlockTimer = null;
 
-        // 非公路類交通工具的弧線曲率設定（數值越大弧度越彎）
+        // 情報站快取資料
+        let liveWeatherByDay = {};
+        let allInfoClippings = [];
+        let currentClipCategory = 'ALL';
+
         const CURVE_MODES = {
             flight: 0.22,
             hsr: 0.12,
@@ -568,17 +1291,17 @@
             ropeway: 0.04
         };
 
-        /* === 2. 讀取旅程 JSON 資料並初始化畫面（已加入防快取機制） === */
+        /* === 2. 讀取旅程 JSON 資料並初始化所有模組 === */
         fetch(`data/${tripId}.json?t=${Date.now()}`, { cache: 'no-store' })
             .then(res => {
                 if (!res.ok) throw new Error('找不到該旅程的資料檔');
                 return res.json();
             })
             .then(data => {
+                rawTripData = data;
                 document.title = data.tripTitle || '電子旅行手帳';
                 document.getElementById('trip-title').textContent = data.tripTitle || '';
 
-                // 相容新版 days 結構與舊版扁平 chapters 結構
                 if (Array.isArray(data.days) && data.days.length > 0) {
                     normalizedDays = data.days;
                 } else if (Array.isArray(data.chapters)) {
@@ -596,12 +1319,56 @@
                 initMap(normalizedDays);
                 buildDayTabs();
                 renderDay('ALL');
+                renderPackAndBudgetViews();
+                refreshInfoStation(false);
             })
             .catch(error => {
                 document.getElementById('content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
             });
 
-        /* === 3. 初始化 Leaflet 地圖與圖層 === */
+        /* === 3. 右側四大視角切換與左側地圖「路線／尋訪」切換 === */
+        function switchRightView(viewId) {
+            document.querySelectorAll('.view-mode-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-view') === viewId);
+            });
+            document.querySelectorAll('.view-section').forEach(sec => {
+                sec.classList.toggle('active', sec.id === viewId);
+            });
+            // 在情報站與行囊冊時隱藏天數列，讓版面更清爽
+            const dayTabsEl = document.getElementById('day-tabs');
+            dayTabsEl.style.display = (viewId === 'view-journal' || viewId === 'view-itinerary') ? 'flex' : 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchPackSubTab(panelId, btnEl) {
+            document.querySelectorAll('.pack-sub-btn').forEach(b => b.classList.remove('active'));
+            btnEl.classList.add('active');
+            document.querySelectorAll('.pack-panel').forEach(p => {
+                p.classList.toggle('active', p.id === panelId);
+            });
+        }
+
+        function switchMapDisplayMode(mode) {
+            currentMapMode = mode;
+            document.getElementById('btn-map-route').classList.toggle('active', mode === 'route');
+            document.getElementById('btn-map-explore').classList.toggle('active', mode === 'explore');
+
+            if (mode === 'explore') {
+                map.removeLayer(baseRouteLayer);
+                map.removeLayer(activeRouteLayer);
+                map.removeLayer(markersLayer);
+                if (foxMarker) foxMarker.setOpacity(0);
+                exploreStampsLayer.addTo(map);
+            } else {
+                map.removeLayer(exploreStampsLayer);
+                baseRouteLayer.addTo(map);
+                activeRouteLayer.addTo(map);
+                markersLayer.addTo(map);
+                if (foxMarker) foxMarker.setOpacity(1);
+            }
+        }
+
+        /* === 4. 初始化 Leaflet 地圖與圖層 === */
         function initMap(daysData) {
             const firstCh = daysData?.[0]?.chapters?.[0];
             const startLat = firstCh?.lat || 35.6895;
@@ -617,10 +1384,10 @@
             baseRouteLayer = L.layerGroup().addTo(map);
             activeRouteLayer = L.layerGroup().addTo(map);
             markersLayer = L.layerGroup().addTo(map);
+            exploreStampsLayer = L.layerGroup();
         }
 
-        /* === 4. 距離計算、交通方式判別與路線座標產生 === */
-        // 計算兩組經緯度之間的直線距離 (公里)
+        /* === 5. 距離計算、交通方式判別與路線座標產生 === */
         function getDistanceKm(lat1, lng1, lat2, lng2) {
             const R = 6371;
             const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -631,7 +1398,6 @@
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         }
 
-        // 統一將交通方式正規化為標準英文代碼（支援後台設定與內文關鍵字自動偵測）
         function resolveTransportMode(currCh, distKm) {
             const raw = (currCh.transport || '').toString().trim().toLowerCase();
             const modeAliases = {
@@ -649,7 +1415,6 @@
                 if (aliases.includes(raw)) return stdMode;
             }
 
-            // 若未指定，依距離與章節文字自動推斷
             const text = `${currCh.title || ''} ${currCh.content || ''}`;
             if (distKm > 250 || /直飛|航班|班機|起飛|降落/.test(text)) return 'flight';
             if (/遊船|觀光船|渡輪|乘船/.test(text)) return 'boat';
@@ -660,7 +1425,6 @@
             return distKm <= 3.5 ? 'walk' : 'bus';
         }
 
-        // 產生兩點之間的平滑二次貝茲曲線座標（用於飛機、鐵道、纜車、船班或備援路線）
         function generateCurve(start, end, curvature = 0.15, segments = 32) {
             const [lat1, lng1] = start, [lat2, lng2] = end;
             const midLat = (lat1 + lat2) / 2, midLng = (lng1 + lng2) / 2;
@@ -677,7 +1441,6 @@
             return points;
         }
 
-        // 取得兩章節間的詳細路徑（鐵道/航空走優美弧線，步行/巴士/自駕查詢 OSRM 實際街道）
         async function getDetailedPath(prevCh, currCh) {
             const cacheKey = `auto_v1_${prevCh.id}_to_${currCh.id}`;
             if (segmentCoordsCache[cacheKey]) return segmentCoordsCache[cacheKey];
@@ -687,7 +1450,6 @@
             const distKm = getDistanceKm(prevCh.lat, prevCh.lng, currCh.lat, currCh.lng);
             const mode = resolveTransportMode(currCh, distKm);
 
-            // 1. 軌道、航空、船隻或長途跨區：直接產生平滑曲線
             if (CURVE_MODES[mode] !== undefined || distKm > 250) {
                 const curv = CURVE_MODES[mode] ?? 0.22;
                 const arcCoords = generateCurve(start, end, curv, 36);
@@ -695,7 +1457,6 @@
                 return arcCoords;
             }
 
-            // 2. 檢查瀏覽器 localStorage 是否已有街道快取
             const saved = localStorage.getItem(cacheKey);
             if (saved) {
                 const parsed = JSON.parse(saved);
@@ -703,7 +1464,6 @@
                 return parsed;
             }
 
-            // 3. 呼叫 OSRM 取得貼合街道的真實路線
             try {
                 const profile = mode === 'walk' ? 'foot' : 'driving';
                 const osrmUrl = `https://router.project-osrm.org/route/v1/${profile}/${prevCh.lng},${prevCh.lat};${currCh.lng},${currCh.lat}?overview=full&geometries=geojson`;
@@ -717,14 +1477,12 @@
                 }
             } catch (e) {}
 
-            // 4. 若網路或 API 失敗，以微彎曲線作為備援
             const fallbackCoords = generateCurve(start, end, 0.05, 24);
             segmentCoordsCache[cacheKey] = fallbackCoords;
             return fallbackCoords;
         }
 
-        /* === 5. 繪製當前移動路線與小狐狸沿途移動動畫 === */
-        // 繪製深色虛線與沿途方向小箭頭 (- - > - - >)
+        /* === 6. 繪製當前移動路線與小狐狸沿途移動動畫 === */
         function drawActiveArrowRoute(coords) {
             activeRouteLayer.clearLayers();
             if (!coords || coords.length < 2) return;
@@ -751,7 +1509,6 @@
             }
         }
 
-        // 控制小狐狸沿座標點平滑移動並自動翻轉面向
         function animateFoxAlongPath(coords, targetZoom) {
             if (foxAnimFrame) cancelAnimationFrame(foxAnimFrame);
             if (!coords || coords.length === 0) return;
@@ -767,13 +1524,11 @@
                 foxMarker.setLatLng(coords[0]);
             }
 
-            // 單點直接定點飛行
             if (coords.length === 1) {
                 map.flyTo(coords[0], targetZoom || 14, { animate: true, duration: 1.2 });
                 return;
             }
 
-            // 計算各段累積距離以確保等速平滑移動
             const cumDist = [0];
             let totalDist = 0;
             for (let i = 1; i < coords.length; i++) {
@@ -813,7 +1568,6 @@
                     p1[1] + (p2[1] - p1[1]) * ratio
                 ]);
 
-                // 依東西向移動方向自動左右翻轉小狐狸
                 const avatar = document.getElementById('fox-avatar');
                 if (avatar && Math.abs(p2[1] - p1[1]) > 0.00001) {
                     avatar.style.transform = `scaleX(${(p2[1] - p1[1]) < 0 ? 1 : -1})`;
@@ -830,7 +1584,6 @@
             foxAnimFrame = requestAnimationFrame(step);
         }
 
-        // 切換章節時觸發路線繪製與小狐狸移動（相鄰章節雙向走動，跨章節跳轉直接定位）
         async function transitionToChapter(newIndex) {
             const targetCh = currentChaptersList[newIndex];
             if (!targetCh?.lat || !targetCh?.lng) return;
@@ -856,7 +1609,7 @@
             currentActiveIndex = newIndex;
         }
 
-        /* === 6. 天數導覽列建立與切換 (Day Tabs) === */
+        /* === 7. 天數導覽列建立與切換 (Day Tabs) === */
         function buildDayTabs() {
             const tabsContainer = document.getElementById('day-tabs');
             tabsContainer.innerHTML = '';
@@ -873,6 +1626,7 @@
                 btn.onclick = () => {
                     document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
+                    currentDayFilter = tab.key;
                     renderDay(tab.key);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 };
@@ -880,7 +1634,7 @@
             });
         }
 
-        /* === 7. 多媒體畫廊、莫蘭迪預訂按鈕 HTML 生成、路徑智慧補全、影片自動播放與燈箱切換 === */
+        /* === 8. 多媒體畫廊、預訂按鈕與燈箱功能 === */
         function isMediaFile(str) {
             if (!str || typeof str !== 'string') return false;
             const clean = str.trim();
@@ -892,7 +1646,6 @@
             return /\.(mp4|mov|m4v|webm)$/i.test((str || '').trim());
         }
 
-        // 智慧修正媒體路徑（移除開頭斜線、若只填檔名自動補上 media/旅程ID/ 前綴）
         function normalizeMediaSrc(rawSrc) {
             let s = (rawSrc || '').trim().replace(/^\/+/, '');
             if (!s) return '';
@@ -904,13 +1657,9 @@
 
         function buildMediaHTML(ch, chIndex) {
             const items = [];
-
-            // 1. 檢查單張主圖欄位是否為實際媒體路徑
             if (isMediaFile(ch.mediaPlaceholder)) {
                 items.push({ src: normalizeMediaSrc(ch.mediaPlaceholder), caption: '' });
             }
-
-            // 2. 匯入多張媒體清單（相容字串陣列與 {src, caption} 物件陣列）
             if (Array.isArray(ch.mediaList)) {
                 ch.mediaList.forEach(item => {
                     const rawSrc = typeof item === 'string' ? item : (item?.src || item?.file || item?.url || '');
@@ -920,16 +1669,12 @@
                     }
                 });
             }
-
-            // 將整理好的媒體陣列存進該章節物件，供燈箱左右切換讀取
             ch._mediaItems = items;
 
-            // 3. 若無任何媒體檔案，顯示粉色預留提示框
             if (items.length === 0) {
                 return ch.mediaPlaceholder ? `<div class="photo-placeholder">${ch.mediaPlaceholder}</div>` : '';
             }
 
-            // 4. 決定排版樣式 class (auto 會依張數自動對應)
             const layout = ch.mediaLayout || 'auto';
             let layoutClass = `layout-${layout}`;
             if (layout === 'auto') {
@@ -958,11 +1703,8 @@
             return `<div class="media-gallery ${layoutClass}">${itemsHTML}</div>`;
         }
 
-        // 生成莫蘭迪色 Travelpayouts 預訂按鈕 HTML（相容單筆欄位與多筆清單，未填寫時完全隱形）
         function buildAffiliateHTML(ch) {
             const links = [];
-
-            // 1. 讀取單筆推薦預訂欄位 (affiliateText + affiliateUrl)
             if (ch.affiliateUrl && ch.affiliateUrl.trim() !== '') {
                 links.push({
                     text: (ch.affiliateText && ch.affiliateText.trim() !== '')
@@ -971,8 +1713,6 @@
                     url: ch.affiliateUrl.trim()
                 });
             }
-
-            // 2. 讀取多筆推薦預訂清單 (affiliateLinks: [{text, url}, ...])
             if (Array.isArray(ch.affiliateLinks)) {
                 ch.affiliateLinks.forEach(item => {
                     if (item && item.url && item.url.trim() !== '') {
@@ -985,11 +1725,8 @@
                     }
                 });
             }
-
-            // 3. 若該章節沒有設定任何預訂連結，回傳空字串（完全不佔畫面空間）
             if (links.length === 0) return '';
 
-            // 4. 產生莫蘭迪色膠囊按鈕群組 HTML
             const buttonsHTML = links.map(link => `
                 <a href="${link.url}" target="_blank" rel="noopener sponsored" class="affiliate-btn">
                     <span>${link.text}</span>
@@ -1025,7 +1762,6 @@
             document.querySelectorAll('.auto-video').forEach(v => videoObserver.observe(v));
         }
 
-        // 開啟放大燈箱（載入指定章節的媒體清單與當前索引）
         function openLightbox(chIndex, itemIdx = 0) {
             const ch = currentChaptersList[chIndex];
             if (!ch || !Array.isArray(ch._mediaItems) || ch._mediaItems.length === 0) return;
@@ -1036,7 +1772,6 @@
             document.getElementById('lightbox-overlay').style.display = 'flex';
         }
 
-        // 更新燈箱顯示內容（自動判斷圖片或影片、更新頁碼圖說與左右按鈕顯示狀態）
         function updateLightboxContent() {
             const item = lightboxItems[lightboxIndex];
             if (!item) return;
@@ -1047,12 +1782,10 @@
             const nextBtn = document.getElementById('lightbox-next');
             const infoEl = document.getElementById('lightbox-info');
 
-            // 若該章節只有 1 個檔案則隱藏左右按鈕，多於 1 個才顯示
             const hasMultiple = lightboxItems.length > 1;
             prevBtn.style.display = hasMultiple ? 'flex' : 'none';
             nextBtn.style.display = hasMultiple ? 'flex' : 'none';
 
-            // 顯示頁碼與圖說（例如：1 / 4 ｜ 沒吃到的鴨to葱）
             const countText = `${lightboxIndex + 1} / ${lightboxItems.length}`;
             infoEl.textContent = item.caption ? `${countText} ｜ ${item.caption}` : countText;
             infoEl.style.display = (hasMultiple || item.caption) ? 'block' : 'none';
@@ -1073,20 +1806,17 @@
             }
         }
 
-        // 左右切換同一章節的上/下一張照片或影片（頭尾自動循環）
         function stepLightbox(dir) {
             if (lightboxItems.length <= 1) return;
             lightboxIndex = (lightboxIndex + dir + lightboxItems.length) % lightboxItems.length;
             updateLightboxContent();
         }
 
-        // 點擊燈箱黑底關閉（若剛完成手指滑動則忽略此次點擊，避免誤關）
         function handleOverlayClick() {
             if (justSwiped) return;
             closeLightbox();
         }
 
-        // 關閉放大燈箱並停止燈箱內的影片播放
         function closeLightbox() {
             const overlay = document.getElementById('lightbox-overlay');
             const videoEl = document.getElementById('lightbox-video');
@@ -1095,24 +1825,14 @@
             overlay.style.display = 'none';
         }
 
-        // 監聽鍵盤左右方向鍵與 Esc 鍵操作燈箱
         document.addEventListener('keydown', (e) => {
             const overlay = document.getElementById('lightbox-overlay');
             if (!overlay || overlay.style.display !== 'flex') return;
-
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                stepLightbox(-1);
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                stepLightbox(1);
-            } else if (e.key === 'Escape') {
-                e.preventDefault();
-                closeLightbox();
-            }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); stepLightbox(-1); }
+            else if (e.key === 'ArrowRight') { e.preventDefault(); stepLightbox(1); }
+            else if (e.key === 'Escape') { e.preventDefault(); closeLightbox(); }
         });
 
-        // 監聽手機版燈箱手指左右滑動（Touch Swipe）切換上/下一張
         const lightboxOverlayEl = document.getElementById('lightbox-overlay');
         lightboxOverlayEl.addEventListener('touchstart', (e) => {
             if (e.touches.length === 1) {
@@ -1123,25 +1843,92 @@
 
         lightboxOverlayEl.addEventListener('touchend', (e) => {
             if (lightboxItems.length <= 1 || e.changedTouches.length === 0) return;
-
             const dx = e.changedTouches[0].clientX - touchStartX;
             const dy = e.changedTouches[0].clientY - touchStartY;
-
-            // 確認為水平滑動（水平距離大於 45px 且大於垂直距離）
             if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
                 justSwiped = true;
                 setTimeout(() => { justSwiped = false; }, 300);
-
-                if (dx < 0) {
-                    stepLightbox(1);  // 手指往左滑 ➔ 下一張
-                } else {
-                    stepLightbox(-1); // 手指往右滑 ➔ 上一張
-                }
+                if (dx < 0) stepLightbox(1);
+                else stepLightbox(-1);
             }
         }, { passive: true });
 
-        /* === 8. 渲染日記內容、地圖節點綁定與滾動監聽 === */
-        // 同步切換右側章節卡片與左側地圖圓點的 Active 高亮狀態
+        /* ==============================================================
+           9. 輔助解析器：自動推算站點分類、時間、車資與景點介紹摘要
+           ============================================================== */
+        function stripHtmlText(html) {
+            const div = document.createElement('div');
+            div.innerHTML = html || '';
+            return (div.textContent || div.innerText || '').trim();
+        }
+
+        function classifyChapterMeta(ch, idxInDay, prevCh) {
+            const title = ch.title || '';
+            const plain = stripHtmlText(ch.content || '');
+            const combined = `${title} ${plain}`;
+
+            // 1. 判定印章與分類標籤
+            let stampChar = '景';
+            let stampClass = 'spot';
+            let categoryLabel = ch.categoryLabel || '經典必訪';
+
+            if (/飯店|住宿|御宿野乃|Hotel|泡湯/i.test(title) && !/五十番/.test(title)) {
+                stampChar = '住';
+                stampClass = 'hotel';
+                categoryLabel = ch.categoryLabel || '溫泉住宿';
+            } else if (/午餐|晚餐|料理|牛たん|牛舌|燒肉|真都|平田牧場|五十番|伊豆の華|音茶屋|カフェ|咖啡|甜點/i.test(title)) {
+                stampChar = '食';
+                stampClass = 'food';
+                categoryLabel = ch.categoryLabel || '在地美饌';
+            } else if (/機場|新幹線|車站|轉乘|啟程|賦歸|Skyliner/i.test(title)) {
+                stampChar = '驛';
+                stampClass = 'transit';
+                categoryLabel = ch.categoryLabel || '交通樞紐';
+            } else if (/神社|八幡宮|山寺|立石寺|瑞巖寺|円通院|五大堂|瑞鳳殿/i.test(title)) {
+                categoryLabel = ch.categoryLabel || '歷史古剎';
+            } else if (/樹冰|藏王|銀山|松島|狐狸村|鐵塔|展望台/i.test(title)) {
+                categoryLabel = ch.categoryLabel || '名勝絕景';
+            }
+
+            // 2. 推算時間 (若 JSON 有 ch.time 則優先使用)
+            const defaultHours = ['09:00', '11:00', '12:30', '14:30', '16:30', '18:30', '20:30'];
+            const timeStr = ch.time || defaultHours[Math.min(idxInDay, defaultHours.length - 1)];
+
+            // 3. 推算與上一站的移動時間與車資
+            let transitInfo = null;
+            if (prevCh && prevCh.lat && prevCh.lng && ch.lat && ch.lng) {
+                const distKm = getDistanceKm(prevCh.lat, prevCh.lng, ch.lat, ch.lng);
+                const mode = resolveTransportMode(ch, distKm);
+                const modeMap = {
+                    flight: { icon: '✈️', name: '航班飛行', mins: 210, cost: 8500 },
+                    hsr:    { icon: '🚄', name: '新幹線', mins: Math.max(45, Math.round(distKm * 0.45)), cost: Math.round(distKm * 32) },
+                    train:  { icon: '🚃', name: 'JR／電車', mins: Math.max(20, Math.round(distKm * 1.1)), cost: Math.max(240, Math.round(distKm * 22)) },
+                    metro:  { icon: '🚇', name: '地鐵移動', mins: 18, cost: 210 },
+                    ropeway:{ icon: '🚡', name: '山岳纜車', mins: 20, cost: 3800 },
+                    boat:   { icon: '⛴️', name: '觀光遊船', mins: 50, cost: 1500 },
+                    bus:    { icon: '🚌', name: '路線巴士／接駁', mins: Math.max(20, Math.round(distKm * 1.6)), cost: Math.max(500, Math.round(distKm * 45)) },
+                    drive:  { icon: '🚕', name: '計程車／自駕', mins: Math.max(15, Math.round(distKm * 1.3)), cost: Math.max(1200, Math.round(distKm * 300)) },
+                    walk:   { icon: '🚶', name: '漫步前往', mins: Math.max(6, Math.round(distKm * 12)), cost: 0 }
+                };
+                const picked = modeMap[mode] || modeMap.bus;
+                const prevClean = (prevCh.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
+                const currClean = (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
+                transitInfo = {
+                    icon: picked.icon,
+                    modeName: picked.name,
+                    routeText: `${prevClean.slice(0, 8)} → ${currClean.slice(0, 8)}`,
+                    mins: ch.transitMins !== undefined ? Number(ch.transitMins) : picked.mins,
+                    cost: ch.transitCost !== undefined ? Number(ch.transitCost) : picked.cost
+                };
+            }
+
+            // 4. 萃取「景點介紹／攻略備註」文字（優先讀 ch.intro，若無則結合內文與提示框）
+            const introText = ch.intro || plain;
+
+            return { stampChar, stampClass, categoryLabel, timeStr, transitInfo, introText };
+        }
+
+        /* === 10. 渲染日記內容、行程手風琴卡與地圖節點 === */
         function setActiveChapter(activeSection, activeMarker) {
             document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
             if (activeSection) activeSection.classList.add('active');
@@ -1153,15 +1940,36 @@
             }
         }
 
-        // 渲染指定天數或全部天數的日記與地圖路線
+        function jumpToJournalChapter(chIndex, sectionId) {
+            switchRightView('view-journal');
+            setTimeout(() => {
+                const sec = document.getElementById(sectionId);
+                if (sec) {
+                    setActiveChapter(sec);
+                    transitionToChapter(chIndex);
+                    const topNav = document.querySelector('.top-nav');
+                    const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
+                    const targetY = window.pageYOffset + sec.getBoundingClientRect().top - navBottom - 20;
+                    window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+                }
+            }, 80);
+        }
+
+        function focusSpotOnMap(chIndex) {
+            transitionToChapter(chIndex);
+        }
+
         function renderDay(dayKey) {
             const contentDiv = document.getElementById('content');
+            const itinDiv = document.getElementById('itinerary-content');
             contentDiv.innerHTML = '';
+            itinDiv.innerHTML = '';
             if (observer) observer.disconnect();
 
             markersLayer.clearLayers();
             baseRouteLayer.clearLayers();
             activeRouteLayer.clearLayers();
+            exploreStampsLayer.clearLayers();
             chapterMarkers.clear();
 
             const dotIcon = L.divIcon({
@@ -1174,13 +1982,15 @@
             currentChaptersList = [];
             currentActiveIndex = 0;
             const simpleLatLngs = [];
+            let spotCount = 0;
+            let hotelCount = 0;
 
             const daysToRender = dayKey === 'ALL'
                 ? normalizedDays
                 : normalizedDays.filter(d => d.day === dayKey);
 
             daysToRender.forEach(dayObj => {
-                // 建立每日橫幅 (Day Banner)
+                // --- A. 渲染原本的「遊記圖文」視角 ---
                 const banner = document.createElement('div');
                 banner.className = 'day-banner';
                 const fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
@@ -1193,16 +2003,30 @@
                 `;
                 contentDiv.appendChild(banner);
 
-                // 建立該日的所有章節卡片與地圖標記
-                (dayObj.chapters || []).forEach(ch => {
+                // --- B. 準備「行程＆景點介紹」視角的單日容器 (復刻附圖三) ---
+                let dayTotalTransitMins = 0;
+                let dayTotalTransitCost = 0;
+                const dayItinCardsHTML = [];
+                const cleanSpotNames = [];
+
+                (dayObj.chapters || []).forEach((ch, idxInDay) => {
                     const chIndex = currentChaptersList.length;
                     currentChaptersList.push(ch);
 
+                    const prevCh = idxInDay > 0 ? dayObj.chapters[idxInDay - 1] : null;
+                    const meta = classifyChapterMeta(ch, idxInDay, prevCh);
+
+                    if (meta.stampChar === '住') hotelCount++;
+                    else spotCount++;
+
+                    const cleanTitle = (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
+                    cleanSpotNames.push(cleanTitle);
+
+                    // 1. 建立遊記章節卡片
                     const section = document.createElement('section');
                     section.className = `chapter ${chIndex === 0 ? 'active' : ''}`;
                     section.id = `section-${ch.id}`;
                     section.setAttribute('data-index', chIndex);
-                    // 組合章節卡片內容（標題 + 多媒體畫廊 + 內文 + 莫蘭迪色預訂按鈕）
                     section.innerHTML = `
                         <h2>${ch.title}</h2>
                         ${buildMediaHTML(ch, chIndex)}
@@ -1211,6 +2035,50 @@
                     `;
                     contentDiv.appendChild(section);
 
+                    // 2. 累積交通時間與花費，並建立點對點交通列 + 景點介紹手風琴卡
+                    if (meta.transitInfo && meta.transitInfo.mins < 180) {
+                        dayTotalTransitMins += meta.transitInfo.mins;
+                        dayTotalTransitCost += meta.transitInfo.cost;
+                        dayItinCardsHTML.push(`
+                            <div class="itin-transit-row">
+                                <div class="itin-transit-left">
+                                    <span class="itin-transit-icon">${meta.transitInfo.icon}</span>
+                                    <span>${meta.transitInfo.modeName}｜${meta.transitInfo.routeText}</span>
+                                </div>
+                                <div class="itin-transit-right">
+                                    ${meta.transitInfo.mins} 分 &nbsp; ¥${meta.transitInfo.cost.toLocaleString()}
+                                </div>
+                            </div>
+                        `);
+                    }
+
+                    const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanTitle)}&query_place_id=${ch.lat},${ch.lng}`;
+                    const isFirstOpen = idxInDay === 0 ? 'open' : '';
+
+                    dayItinCardsHTML.push(`
+                        <div class="spot-intro-card ${isFirstOpen}" id="itin-card-${ch.id}">
+                            <div class="spot-card-header" onclick="this.parentElement.classList.toggle('open'); focusSpotOnMap(${chIndex});">
+                                <div class="spot-header-left">
+                                    <span class="spot-time-box">${meta.timeStr}</span>
+                                    <span class="spot-cat-pill">${meta.categoryLabel}</span>
+                                    <span class="spot-title-text">${cleanTitle}</span>
+                                </div>
+                                <span class="spot-toggle-arrow">▶</span>
+                            </div>
+                            <div class="spot-card-body">
+                                <div class="spot-intro-label">簡介／攻略備註</div>
+                                <div class="spot-intro-text">${meta.introText}</div>
+                                <div class="spot-action-pills">
+                                    <a href="${gmapUrl}" target="_blank" rel="noopener" class="spot-pill-btn">🗺️ Google 地圖導航</a>
+                                    <button type="button" class="spot-pill-btn loc" onclick="focusSpotOnMap(${chIndex})">📍 定位至左側地圖</button>
+                                    <button type="button" class="spot-pill-btn loc" onclick="jumpToJournalChapter(${chIndex}, 'section-${ch.id}')">📖 閱讀實拍遊記與照片</button>
+                                </div>
+                                ${buildAffiliateHTML(ch)}
+                            </div>
+                        </div>
+                    `);
+
+                    // 3. 建立地圖圓點標記 (路線模式) 與 東方方章標記 (尋訪模式)
                     if (ch.lat && ch.lng) {
                         simpleLatLngs.push([ch.lat, ch.lng]);
                         const marker = L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
@@ -1221,41 +2089,90 @@
                             className: 'marker-tooltip'
                         });
 
-                        // 點擊地圖圓點：鎖定滾動監聽並平滑捲動至對應章節卡片
                         marker.on('click', () => {
                             isClickScrolling = true;
                             clearTimeout(scrollUnlockTimer);
-
                             setActiveChapter(section, marker);
                             transitionToChapter(chIndex);
 
-                            const topNav = document.querySelector('.top-nav');
-                            const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
-                            const targetY = window.pageYOffset + section.getBoundingClientRect().top - navBottom - 20;
-                            window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
-
+                            const journalView = document.getElementById('view-journal');
+                            if (journalView.classList.contains('active')) {
+                                const topNav = document.querySelector('.top-nav');
+                                const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
+                                const targetY = window.pageYOffset + section.getBoundingClientRect().top - navBottom - 20;
+                                window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+                            } else {
+                                const itinCard = document.getElementById(`itin-card-${ch.id}`);
+                                if (itinCard) {
+                                    itinCard.classList.add('open');
+                                    itinCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }
                             scrollUnlockTimer = setTimeout(() => { isClickScrolling = false; }, 950);
                         });
 
                         chapterMarkers.set(section, marker);
+
+                        // 尋訪模式印章標記
+                        const stampIcon = L.divIcon({
+                            className: 'stamp-marker',
+                            html: `<div class="stamp-box ${meta.stampClass}">${meta.stampChar}</div>`,
+                            iconSize: [26, 26],
+                            iconAnchor: [13, 13]
+                        });
+                        const stampMarker = L.marker([ch.lat, ch.lng], { icon: stampIcon }).addTo(exploreStampsLayer);
+                        stampMarker.bindTooltip(`[${meta.stampChar}] ${cleanTitle}`, {
+                            direction: 'top',
+                            offset: [0, -12],
+                            className: 'marker-tooltip'
+                        });
+                        stampMarker.on('click', () => marker.fire('click'));
                     }
                 });
+
+                // 組裝當日「行程＆景點介紹」區塊
+                const hours = Math.floor(dayTotalTransitMins / 60);
+                const mins = dayTotalTransitMins % 60;
+                const timeSumStr = hours > 0 ? `${hours} 時 ${mins} 分` : `${mins} 分`;
+
+                const dayItinBlock = document.createElement('div');
+                dayItinBlock.className = 'itinerary-day-block';
+                dayItinBlock.innerHTML = `
+                    <div class="itin-day-header">
+                        <h3 class="itin-day-title">${dayObj.day}｜${dayObj.dayTitle || ''}</h3>
+                        <div class="itin-day-sub">
+                            <span>📅 ${ cleanSpotNames.slice(0, 4).join(' · ') }</span>
+                        </div>
+                    </div>
+                    <div class="itin-summary-box">
+                        <div class="itin-sum-col">
+                            <div class="itin-sum-label">當日區域移動時間</div>
+                            <div class="itin-sum-val">${timeSumStr}</div>
+                        </div>
+                        <div class="itin-sum-col">
+                            <div class="itin-sum-label">預估區域交通花費</div>
+                            <div class="itin-sum-val cost">¥${dayTotalTransitCost.toLocaleString()}</div>
+                        </div>
+                    </div>
+                    ${dayItinCardsHTML.join('')}
+                `;
+                itinDiv.appendChild(dayItinBlock);
             });
 
-            // 繪製底層全天淺色參考虛線
+            // 更新地圖左上角統計膠囊
+            document.getElementById('map-stats-pill').textContent = `${daysToRender.length} 日行跡・${spotCount} 處尋訪・${hotelCount} 處住宿`;
+
             if (simpleLatLngs.length > 1) {
                 L.polyline(simpleLatLngs, {
                     color: '#C4A99E', weight: 2, opacity: 0.45, dashArray: '5, 10'
                 }).addTo(baseRouteLayer);
             }
 
-            // 預設聚焦於第一個章節
             if (currentChaptersList.length > 0) {
                 setActiveChapter(document.querySelector('.chapter'));
                 transitionToChapter(0);
             }
 
-            // 監聽右側文章滾動，自動觸發小狐狸移動與地圖飛行
             observer = new IntersectionObserver((entries) => {
                 if (isClickScrolling) return;
                 entries.forEach(entry => {
@@ -1270,6 +2187,371 @@
 
             document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
             initVideoAutoplay();
+        }
+
+        /* ==============================================================
+           11. 📡 資訊情報站引擎 (即時氣象 API + 重新整理按鈕 + 雷達與剪報)
+           ============================================================== */
+        async function refreshInfoStation(isManualClick = false) {
+            const refreshBtn = document.getElementById('btn-refresh-info');
+            if (refreshBtn && isManualClick) {
+                refreshBtn.textContent = '↻ 連線更新中...';
+            }
+
+            document.getElementById('info-trip-code').textContent = `${tripId.toUpperCase()} ・ 旅の速報`;
+            document.getElementById('info-station-title').textContent = `${(rawTripData.tripTitle || '旅途').split('｜').pop().trim()}情報手帳`;
+
+            const now = new Date();
+            const timeStr = new Intl.DateTimeFormat('zh-TW', {
+                timeZone: 'Asia/Tokyo',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            }).format(now);
+            document.getElementById('info-update-time').textContent = `更新：日本時間 ${timeStr}`;
+
+            // 為每一天取代表座標並呼叫 Open-Meteo 抓取即時溫度、降雨機率與最大風速
+            const dayRepresentativeCoords = normalizedDays.map((d, idx) => {
+                const validChs = (d.chapters || []).filter(c => c.lat && c.lng && c.lat > 26);
+                const picked = validChs[Math.floor(validChs.length / 2)] || d.chapters?.[0] || { lat: 38.2682, lng: 140.8694, title: d.day };
+                const cleanLoc = (picked.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '').slice(0, 6);
+                return {
+                    dayKey: d.day,
+                    dayCode: `D${String(idx + 1).padStart(2, '0')}`,
+                    dayTitle: d.dayTitle || d.day,
+                    locName: cleanLoc,
+                    lat: picked.lat,
+                    lng: picked.lng
+                };
+            });
+
+            await Promise.all(dayRepresentativeCoords.map(async (item) => {
+                try {
+                    const url = `https://api.open-meteo.com/v1/forecast?latitude=${item.lat}&longitude=${item.lng}&current=temperature_2m,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=1`;
+                    const res = await fetch(url);
+                    const wData = await res.json();
+                    if (wData && wData.current) {
+                        const maxT = Math.round(wData.daily?.temperature_2m_max?.[0] ?? wData.current.temperature_2m);
+                        const minT = Math.round(wData.daily?.temperature_2m_min?.[0] ?? wData.current.temperature_2m - 4);
+                        const rainProb = wData.daily?.precipitation_probability_max?.[0] ?? 10;
+                        const wind = Math.round(wData.current.wind_speed_10m || 8);
+                        liveWeatherByDay[item.dayCode] = { ...item, maxT, minT, rainProb, wind };
+                    }
+                } catch (e) {
+                    liveWeatherByDay[item.dayCode] = { ...item, maxT: 8, minT: 0, rainProb: 20, wind: 12 };
+                }
+            }));
+
+            // 1. 渲染「30 秒情報速讀：出發前先看這五件事」
+            const d1W = liveWeatherByDay['D01'] || { locName: '山形', maxT: 6, minT: -2, rainProb: 20, wind: 12 };
+            const d2W = liveWeatherByDay['D02'] || { locName: '藏王', maxT: -3, minT: -9, rainProb: 30, wind: 25 };
+            const quickFiveEl = document.getElementById('info-quick-five');
+            quickFiveEl.innerHTML = `
+                <li><span>☀️</span><div><strong>【${d1W.locName} D01 即時氣象】</strong>氣溫 ${d1W.maxT}~${d1W.minT}°C，降雨/降雪機率 ${d1W.rainProb}%，風速最高 ${d1W.wind} km/h。</div></li>
+                <li><span>🚡</span><div><strong>【${d2W.locName} D02 山岳風速監測】</strong>氣溫 ${d2W.maxT}~${d2W.minT}°C，目前風速 ${d2W.wind} km/h（藏王纜車遇強風可能暫停運行，出發前請再次點擊右上角重新整理）。</div></li>
+                <li><span>🚃</span><div><strong>【交通實測提醒】</strong>冬季「藏王樹冰套票」山交巴士窗口常因暴雪停售，實測直接排隊刷 Suica 上車＋到藏王山麓站買纜車票最順暢！</div></li>
+                <li><span>🦊</span><div><strong>【園區閉園與末班車注意】</strong>宮城藏王狐狸村冬季 16:00 閉園、銀山溫泉傍晚實施入場管制，請務必於上午排程出發。</div></li>
+                <li><span>🔋</span><div><strong>【極端低溫防凍對策】</strong>山寺階梯與藏王山頂極滑需備簡易冰爪；零下低溫手機易瞬間關機，建議貼暖暖包並隨身攜帶行動電源。</div></li>
+            `;
+
+            // 2. 渲染「九天行程影響雷達 (D01~D09)」
+            const radarGrid = document.getElementById('info-radar-grid');
+            radarGrid.innerHTML = dayRepresentativeCoords.map(item => {
+                const w = liveWeatherByDay[item.dayCode] || { maxT: 6, minT: 0, rainProb: 20, wind: 10 };
+                const isWarn = w.wind >= 25 || w.rainProb >= 60 || w.minT <= -5;
+                const statusText = isWarn
+                    ? `⚠️ ${w.maxT}~${w.minT}°C｜風速 ${w.wind}km/h 注意`
+                    : `✔ ${w.maxT}~${w.minT}°C｜降雨 ${w.rainProb}%`;
+                return `
+                    <div class="radar-cell ${isWarn ? 'warn' : ''}" onclick="selectDayFromRadar('${item.dayKey}')">
+                        <div class="radar-day-num">${item.dayCode}・${item.locName}</div>
+                        <div class="radar-day-status">${statusText}</div>
+                    </div>
+                `;
+            }).join('');
+
+            // 3. 整理並渲染「情報剪報」
+            buildInfoClippingsData(dayRepresentativeCoords);
+            if (refreshBtn && isManualClick) {
+                refreshBtn.textContent = '✔ 已更新最新情報';
+                setTimeout(() => { refreshBtn.textContent = '↻ 重新整理'; }, 1800);
+            }
+        }
+
+        function selectDayFromRadar(dayKey) {
+            switchRightView('view-itinerary');
+            const tabs = document.querySelectorAll('.day-tab');
+            tabs.forEach(b => {
+                if (b.textContent === dayKey) b.click();
+            });
+        }
+
+        function buildInfoClippingsData(dayCoords) {
+            allInfoClippings = [];
+            const regionsSet = new Set();
+
+            // 動態加入各日即時氣象速報
+            dayCoords.forEach(item => {
+                const w = liveWeatherByDay[item.dayCode];
+                if (w) {
+                    regionsSet.add(item.locName);
+                    allInfoClippings.push({
+                        category: '天氣',
+                        region: item.locName,
+                        tag: `${item.dayCode} 即時氣象`,
+                        title: `【${item.locName}】即時氣溫 ${w.maxT}~${w.minT}°C，降雨機率 ${w.rainProb}%，風速 ${w.wind} km/h`,
+                        desc: `對應行程：${item.dayTitle}。請依當日溫差與風速適時調整防風保暖穿搭。`
+                    });
+                }
+            });
+
+            // 自動從各章節內文萃取交通、防災、活動提醒
+            normalizedDays.forEach(dayObj => {
+                (dayObj.chapters || []).forEach(ch => {
+                    const plain = stripHtmlText(ch.content || '');
+                    const cleanSpot = (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
+                    const locShort = cleanSpot.slice(0, 4);
+                    regionsSet.add(locShort);
+
+                    if (/新幹線|巴士|JR|仙石線|Skyliner|套票|預約/.test(plain)) {
+                        allInfoClippings.push({
+                            category: '交通',
+                            region: locShort,
+                            tag: `${dayObj.day} 交通情報`,
+                            title: `[交通動線] ${cleanSpot}`,
+                            desc: plain.slice(0, 110) + (plain.length > 110 ? '…' : '')
+                        });
+                    }
+                    if (/祭|限定|點燈|御朱印|風景印/.test(plain)) {
+                        allInfoClippings.push({
+                            category: '活動',
+                            region: locShort,
+                            tag: `${dayObj.day} 限定體驗`,
+                            title: `[期間活動＆紀念章] ${cleanSpot}`,
+                            desc: plain.slice(0, 110) + (plain.length > 110 ? '…' : '')
+                        });
+                    }
+                    if (/注意|警告|管制|小心|防滑|冰爪|暖暖包/.test(plain)) {
+                        allInfoClippings.push({
+                            category: '防災',
+                            region: locShort,
+                            tag: `${dayObj.day} 安全防雷`,
+                            title: `[旅途安全提醒] ${cleanSpot}`,
+                            desc: plain.slice(0, 110) + (plain.length > 110 ? '…' : '')
+                        });
+                    }
+                });
+            });
+
+            const regSelect = document.getElementById('clip-region-select');
+            regSelect.innerHTML = `<option value="ALL">全部地區</option>` +
+                Array.from(regionsSet).map(r => `<option value="${r}">${r}</option>`).join('');
+
+            filterInfoClippings();
+        }
+
+        function filterInfoClippings() {
+            const reg = document.getElementById('clip-region-select').value;
+            const kw = (document.getElementById('clip-search-input').value || '').trim().toLowerCase();
+
+            const filtered = allInfoClippings.filter(item => {
+                const matchCat = currentClipCategory === 'ALL' || item.category === currentClipCategory;
+                const matchReg = reg === 'ALL' || item.region === reg;
+                const matchKw = !kw || item.title.toLowerCase().includes(kw) || item.desc.toLowerCase().includes(kw);
+                return matchCat && matchReg && matchKw;
+            });
+
+            const listEl = document.getElementById('info-clippings-list');
+            if (filtered.length === 0) {
+                listEl.innerHTML = `<div style="text-align:center; padding: 24px; color:#718096; font-size:0.88rem;">目前沒有符合篩選條件的情報剪報</div>`;
+                return;
+            }
+
+            listEl.innerHTML = filtered.map(item => `
+                <div class="clip-item">
+                    <div class="clip-item-top">
+                        <span>📌 分類：${item.category} ｜ 地區：${item.region}</span>
+                        <span>${item.tag}</span>
+                    </div>
+                    <div class="clip-item-title">${item.title}</div>
+                    <div class="clip-item-desc">${item.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('#clip-cat-pills .clip-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#clip-cat-pills .clip-pill').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentClipCategory = btn.getAttribute('data-cat');
+                filterInfoClippings();
+            });
+        });
+
+        /* ==============================================================
+           12. 🎫 文牒・盤纏・舟車・佳餚 自動萃取與渲染引擎 (復刻第一組圖 4～7)
+           ============================================================== */
+        function renderPackAndBudgetViews() {
+            const vouchers = [];
+            const transits = [];
+            const foods = [];
+            let totalSpotCount = 0;
+
+            normalizedDays.forEach((dayObj, dIdx) => {
+                (dayObj.chapters || []).forEach((ch, cIdx) => {
+                    totalSpotCount++;
+                    const prevCh = cIdx > 0 ? dayObj.chapters[cIdx - 1] : null;
+                    const meta = classifyChapterMeta(ch, cIdx, prevCh);
+                    const cleanTitle = (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
+
+                    // 萃取文牒（機票、住宿、特殊門票）
+                    if (meta.stampChar === '住' || /機場|纜車|遊船|敘宴|劇場/.test(cleanTitle)) {
+                        const vType = meta.stampChar === '住' ? 'hotel' : (/機場/.test(cleanTitle) ? 'flight' : 'spot');
+                        const vBadge = meta.stampChar === '住' ? '住宿憑證' : (/機場/.test(cleanTitle) ? meta.timeStr : '門票／預約');
+                        vouchers.push({
+                            day: dayObj.day,
+                            dayNum: dIdx + 1,
+                            type: vType,
+                            title: cleanTitle,
+                            sub: `${dayObj.day} ・ ${dayObj.dayTitle || ''}`,
+                            badge: vBadge
+                        });
+                    }
+
+                    // 萃取舟車段次
+                    if (meta.transitInfo) {
+                        transits.push({
+                            day: dayObj.day,
+                            time: meta.timeStr,
+                            ...meta.transitInfo
+                        });
+                    }
+
+                    // 萃取佳餚名單
+                    if (meta.stampChar === '食') {
+                        foods.push({
+                            day: dayObj.day,
+                            title: cleanTitle,
+                            desc: meta.introText.slice(0, 65) + '…'
+                        });
+                    }
+                });
+            });
+
+            // 1. 渲染文牒 (圖4)
+            const vContainer = document.getElementById('pack-vouchers');
+            vContainer.innerHTML = `
+                <div style="margin-bottom: 12px; font-size: 0.86rem; color: var(--text-light);">
+                    自動彙整本趟旅程的航班、入住飯店與重要票券憑證（共 ${vouchers.length} 份文牒）：
+                </div>
+                ${vouchers.map(v => `
+                    <div class="voucher-card">
+                        <div class="voucher-left ${v.type}">
+                            <span style="font-size: 0.72rem; opacity: 0.85;">${v.day}</span>
+                            <strong style="font-size: 1rem;">${v.type === 'hotel' ? '宿' : (v.type === 'flight' ? '飛' : '券')}</strong>
+                        </div>
+                        <div class="voucher-body">
+                            <div>
+                                <div class="voucher-title">${v.title}</div>
+                                <div class="voucher-sub">${v.sub}</div>
+                            </div>
+                            <div class="voucher-badge">${v.badge}</div>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+
+            // 2. 渲染盤纏記帳 (圖5)
+            const bContainer = document.getElementById('pack-budget');
+            const bData = rawTripData.budget || {
+                currency: 'JPY',
+                total: 160000,
+                categories: [
+                    { name: '交通（新幹線／JR／巴士／纜車）', amount: 48500, pct: 38 },
+                    { name: '住宿（溫泉飯店＆商務旅館）', amount: 45000, pct: 35 },
+                    { name: '餐飲（A5仙台牛／牛舌／特色料理）', amount: 24800, pct: 19 },
+                    { name: '門票與體驗（狐狸村／遊船／念珠）', amount: 9800, pct: 8 }
+                ]
+            };
+            const spent = bData.categories.reduce((acc, c) => acc + c.amount, 0);
+            bContainer.innerHTML = `
+                <div class="budget-card">
+                    <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                        <div>
+                            <div style="font-size:0.78rem; color:var(--text-light);">旅途行跡統計</div>
+                            <div style="font-size:1.5rem; font-weight:700; color:#3B4D54;">${normalizedDays.length} 天 ・ ${totalSpotCount} 處打卡</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:0.78rem; color:var(--text-light);">預估總花費 (${bData.currency})</div>
+                            <div style="font-size:1.25rem; font-weight:700; color:#B84A39;">¥${spent.toLocaleString()}</div>
+                        </div>
+                    </div>
+                    <div class="budget-bar-wrap">
+                        <div class="budget-bar-fill" style="width: ${Math.min(100, Math.round((spent / bData.total) * 100))}%;"></div>
+                    </div>
+                    <div style="font-size: 0.82rem; color: var(--text-light); margin-bottom: 16px;">
+                        預算上限：¥${bData.total.toLocaleString()} ｜ 剩餘彈性預算：¥${Math.max(0, bData.total - spent).toLocaleString()}
+                    </div>
+                    ${bData.categories.map(cat => `
+                        <div class="budget-cat-row">
+                            <div class="budget-cat-top">
+                                <span>${cat.name}</span>
+                                <span>¥${cat.amount.toLocaleString()}</span>
+                            </div>
+                            <div class="budget-bar-wrap" style="height:6px; margin:4px 0;">
+                                <div class="budget-bar-fill" style="width:${cat.pct}%; background:#C4A99E;"></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // 3. 渲染舟車段次 (圖6)
+            const tContainer = document.getElementById('pack-transit');
+            tContainer.innerHTML = `
+                <div style="margin-bottom: 12px; font-size: 0.86rem; color: var(--text-light);">
+                    飛機、新幹線、JR 與巴士跨區移動段次總表（共 ${transits.length} 段）：
+                </div>
+                ${transits.map(t => `
+                    <div class="voucher-card">
+                        <div class="voucher-left" style="background:#7A6258;">
+                            <span style="font-size:0.72rem;">${t.day}</span>
+                            <strong style="font-size:1.1rem;">${t.icon}</strong>
+                        </div>
+                        <div class="voucher-body">
+                            <div>
+                                <div class="voucher-title">${t.time} ｜ ${t.routeText}</div>
+                                <div class="voucher-sub">${t.modeName} ・ 預估耗時 ${t.mins} 分鐘</div>
+                            </div>
+                            <div class="voucher-badge">¥${t.cost.toLocaleString()}</div>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+
+            // 4. 渲染佳餚清單 (圖7)
+            const fContainer = document.getElementById('pack-food');
+            fContainer.innerHTML = `
+                <div style="margin-bottom: 12px; font-size: 0.86rem; color: var(--text-light);">
+                    旅途中品嚐過的好味道與私房餐館紀錄（共 ${foods.length} 處）：
+                </div>
+                ${foods.map((f, i) => `
+                    <div class="voucher-card">
+                        <div class="voucher-left spot">
+                            <span style="font-size:0.72rem;">${f.day}</span>
+                            <strong style="font-size:0.95rem;">#${i + 1}</strong>
+                        </div>
+                        <div class="voucher-body">
+                            <div>
+                                <div class="voucher-title">🍱 ${f.title}</div>
+                                <div class="voucher-sub">${f.desc}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
         }
     </script>
 </body>
