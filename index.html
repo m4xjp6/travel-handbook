@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</title>
 
-    <!-- 👇 Travelpayouts Drive 腳本 (正確放置於 <head> 內) 👇 -->
+    <!-- 👇 Travelpayouts Drive 腳本 👇 -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
         (function () {
             var script = document.createElement("script");
@@ -15,35 +15,30 @@
             document.head.appendChild(script);
         })();
     </script>
-    <!-- 👆 Travelpayouts Drive 腳本結束 👆 -->
 
-    <!-- 引入 Google Fonts 優雅襯線與黑體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-
-    <!-- 引入 Netlify Identity Widget 套件 -->
     <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
-        /* === 1. 全域色彩變數與基礎頁面設定 === */
+        /* === 1. 全域色彩變數與基礎設定 === */
         :root {
-            --bg-color: #FDFBF7;          /* 手帳米白底色 */
-            --accent-brown: #C4A99E;      /* 主題奶茶棕 */
-            --accent-brown-dark: #a6897c; /* 深奶茶棕 */
-            --accent-pink: #E5D1C7;       /* 藕粉底色 */
-            --accent-gold: #F3D999;       /* 暖陽奶油黃 */
-            --accent-sage: #D8E2D5;       /* 溫潤鼠尾草綠 */
-            --text-main: #7A6258;         /* 主要內文深可可棕 */
-            --text-light: #9E887E;        /* 次要內文淺可可棕 */
-            --callout-bg: #F5EFE6;        /* 溫潤米杏色提示框底色 */
+            --bg-color: #FDFBF7;
+            --accent-brown: #C4A99E;
+            --accent-brown-dark: #a6897c;
+            --accent-pink: #E5D1C7;
+            --accent-gold: #F3D999;
+            --accent-sage: #D8E2D5;
+            --text-main: #7A6258;
+            --text-light: #9E887E;
+            --callout-bg: #F5EFE6;
             --border-soft: rgba(196, 169, 158, 0.35);
         }
-
         body {
             margin: 0;
             padding: 32px 24px 90px;
-            font-family: 'Noto Sans TC', 'PingFang TC', 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             max-width: 1060px;
@@ -51,9 +46,8 @@
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
         }
-
         h1 {
-            font-family: 'Noto Serif TC', 'PingFang TC', serif;
+            font-family: 'Noto Serif TC', serif;
             color: var(--accent-brown-dark);
             text-align: center;
             font-size: 1.85rem;
@@ -62,19 +56,14 @@
             margin: 0 0 18px 0;
         }
 
-        /* === 2. 頂部四大主功能分頁切換列（整排無底色，僅選中按鈕有底色） === */
+        /* === 2. 頂部四大分頁導覽列（整排無底色，僅選中顯示底色） === */
         .main-nav-tabs {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
-            background: transparent;
-            padding: 0;
-            border: none;
-            box-shadow: none;
             margin-bottom: 28px;
         }
-
         .main-tab-btn {
             font-family: inherit;
             background: transparent;
@@ -85,21 +74,14 @@
             font-size: 0.94rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.22s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            transition: all 0.2s ease;
             white-space: nowrap;
         }
-
         .main-tab-btn:hover {
             color: var(--accent-brown-dark);
             border-color: var(--border-soft);
             background: rgba(245, 239, 230, 0.5);
         }
-
-        /* 選中時才顯示專屬底色與陰影 */
         .main-tab-btn.active {
             background: var(--accent-brown);
             color: white;
@@ -107,44 +89,31 @@
             box-shadow: 0 4px 12px rgba(196, 169, 158, 0.42);
             font-weight: 700;
         }
-
-        .tab-view-panel {
-            display: none;
-            animation: fadeInView 0.28s ease;
-        }
-
-        .tab-view-panel.active {
-            display: block;
-        }
-
-        @keyframes fadeInView {
-            from { opacity: 0; transform: translateY(6px); }
+        .tab-view-panel { display: none; animation: fadeIn 0.25s ease; }
+        .tab-view-panel.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .section-header-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 0 0 16px 0;
+            margin-bottom: 16px;
             padding-bottom: 10px;
             border-bottom: 1.5px solid var(--border-soft);
             flex-wrap: wrap;
             gap: 8px;
         }
-
         .section-title {
-            font-family: 'Noto Serif TC', 'PingFang TC', serif;
+            font-family: 'Noto Serif TC', serif;
             color: var(--accent-brown-dark);
             font-size: 1.3rem;
             font-weight: 700;
             margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        /* === 3. 分頁一：未出發的旅程 & 動態天氣繪本插畫 === */
+        /* === 3. 未出發的旅程 ＆ 動態天氣繪本插畫 === */
         .dest-clock-pill {
             background: var(--callout-bg);
             border: 1px solid var(--border-soft);
@@ -153,9 +122,7 @@
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 0.03em;
         }
-
         .upcoming-container {
             max-width: 680px;
             margin: 0 auto;
@@ -163,826 +130,213 @@
             flex-direction: column;
             gap: 16px;
         }
-
         .upcoming-main-card {
             background: white;
             border: 2px solid var(--accent-brown);
             border-radius: 18px;
             overflow: hidden;
             box-shadow: 0 6px 22px rgba(196, 169, 158, 0.18);
-            display: flex;
-            flex-direction: column;
         }
-
-        /* 動態天氣繪本插畫容器 */
         .upcoming-illustration {
             position: relative;
             width: 100%;
             height: 165px;
-            background: linear-gradient(180deg, #EFE6DD 0%, #FDFBF7 100%);
             border-bottom: 1.5px solid var(--border-soft);
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
             transition: background 0.6s ease;
         }
-
-        /* 依當地天氣切換天空背景色 */
-        .upcoming-illustration.weather-sunny {
-            background: linear-gradient(180deg, #EDE2D5 0%, #FDFBF7 100%);
-        }
-        .upcoming-illustration.weather-cloudy {
-            background: linear-gradient(180deg, #E2DFDB 0%, #F7F4F0 100%);
-        }
-        .upcoming-illustration.weather-rainy {
-            background: linear-gradient(180deg, #CED6DC 0%, #ECEAE6 100%);
-        }
-        .upcoming-illustration.weather-snowy {
-            background: linear-gradient(180deg, #D8E2EA 0%, #F8FAFC 100%);
-        }
-        .upcoming-illustration.weather-night {
-            background: linear-gradient(180deg, #3E4A59 0%, #6E7B8B 100%);
-        }
-
-        .upcoming-illustration svg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: relative;
-            z-index: 2;
-        }
+        .upcoming-illustration.weather-sunny { background: linear-gradient(180deg, #EDE2D5 0%, #FDFBF7 100%); }
+        .upcoming-illustration.weather-cloudy { background: linear-gradient(180deg, #E2DFDB 0%, #F7F4F0 100%); }
+        .upcoming-illustration.weather-rainy { background: linear-gradient(180deg, #CED6DC 0%, #ECEAE6 100%); }
+        .upcoming-illustration.weather-snowy { background: linear-gradient(180deg, #D8E2EA 0%, #F8FAFC 100%); }
+        .upcoming-illustration.weather-night { background: linear-gradient(180deg, #3E4A59 0%, #6E7B8B 100%); }
+        .upcoming-illustration svg { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; }
 
         .upcoming-status-badge {
             position: absolute;
-            top: 12px;
-            left: 14px;
+            top: 12px; left: 14px;
             background: rgba(166, 137, 124, 0.92);
             color: white;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.78rem;
             font-weight: 600;
-            letter-spacing: 0.05em;
-            backdrop-filter: blur(4px);
             z-index: 5;
         }
-
-        /* 右上角即時天氣膠囊（支援點擊切換預覽不同天氣動畫） */
         .live-weather-pill {
             position: absolute;
-            top: 12px;
-            right: 14px;
-            background: rgba(255, 255, 255, 0.88);
+            top: 12px; right: 14px;
+            background: rgba(255, 255, 255, 0.9);
             color: var(--text-main);
             border: 1px solid var(--border-soft);
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.78rem;
             font-weight: 600;
-            backdrop-filter: blur(4px);
             z-index: 5;
             cursor: pointer;
             user-select: none;
-            transition: transform 0.2s, background 0.2s;
         }
-
-        .live-weather-pill:hover {
-            transform: scale(1.03);
-            background: white;
-        }
-
-        /* 動態天氣粒子特效層（雨滴、雪花、星光） */
-        .weather-particles {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 3;
-            overflow: hidden;
-        }
-
+        .weather-particles { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; }
         .raindrop {
-            position: absolute;
-            top: -20px;
-            width: 1.8px;
-            height: 15px;
+            position: absolute; top: -20px; width: 1.8px; height: 15px;
             background: linear-gradient(transparent, rgba(105, 135, 165, 0.75));
-            border-radius: 2px;
             animation: rainFall linear infinite;
         }
-
         @keyframes rainFall {
             0% { transform: translateY(-10px) translateX(0) rotate(12deg); opacity: 0; }
             20% { opacity: 0.85; }
             100% { transform: translateY(185px) translateX(-28px) rotate(12deg); opacity: 0.2; }
         }
-
         .snowflake {
-            position: absolute;
-            top: -12px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.9;
-            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+            position: absolute; top: -12px; background: white; border-radius: 50%;
+            box-shadow: 0 0 4px rgba(255,255,255,0.8);
             animation: snowFall linear infinite;
         }
-
         @keyframes snowFall {
             0% { transform: translateY(-10px) translateX(0); opacity: 0; }
             20% { opacity: 0.95; }
             50% { transform: translateY(85px) translateX(12px); }
             100% { transform: translateY(180px) translateX(-8px); opacity: 0.3; }
         }
-
         .star-dot {
-            position: absolute;
-            background: #FFF8DC;
-            border-radius: 50%;
+            position: absolute; background: #FFF8DC; border-radius: 50%;
             animation: twinkleStar ease-in-out infinite alternate;
         }
-
         @keyframes twinkleStar {
             0% { opacity: 0.25; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1.25); }
         }
+        .svg-cloud-anim { animation: floatCloud 4.5s ease-in-out infinite alternate; }
+        .svg-sun-anim { transform-origin: 95px 52px; animation: pulseSun 3s ease-in-out infinite alternate; }
+        @keyframes floatCloud { 0% { transform: translateX(-6px); } 100% { transform: translateX(8px); } }
+        @keyframes pulseSun { 0% { transform: scale(0.96); opacity: 0.82; } 100% { transform: scale(1.05); opacity: 0.96; } }
 
-        @keyframes floatCloud {
-            0% { transform: translateX(-6px); }
-            100% { transform: translateX(8px); }
-        }
-
-        @keyframes pulseSun {
-            0% { transform: scale(0.96); opacity: 0.82; }
-            100% { transform: scale(1.05); opacity: 0.96; }
-        }
-
-        .svg-cloud-anim {
-            animation: floatCloud 4.5s ease-in-out infinite alternate;
-        }
-
-        .svg-sun-anim {
-            transform-origin: 95px 52px;
-            animation: pulseSun 3s ease-in-out infinite alternate;
-        }
-
-        .upcoming-body {
-            padding: 18px 22px 20px;
-        }
-
-        .upcoming-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
+        .upcoming-body { padding: 18px 22px 20px; }
+        .upcoming-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
         .up-tag {
-            padding: 3px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border: 1.5px solid var(--accent-brown);
+            padding: 3px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+            border: 1.5px solid var(--accent-brown); background: #F9EBE6; color: var(--accent-brown-dark);
         }
-
-        .up-tag.route {
-            background: #F9EBE6;
-            color: var(--accent-brown-dark);
-        }
-
-        .up-tag.members {
-            background: var(--accent-sage);
-            color: var(--text-main);
-            border-color: #B8C9B4;
-        }
-
-        .upcoming-title {
-            font-family: 'Noto Serif TC', 'PingFang TC', serif;
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: var(--accent-brown-dark);
-            margin: 0 0 4px 0;
-        }
-
-        .upcoming-subtitle {
-            font-size: 0.88rem;
-            color: var(--text-light);
-            margin: 0 0 14px 0;
-            line-height: 1.5;
-        }
-
-        .countdown-boxes {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .cd-box {
-            border: 1.5px solid var(--accent-brown);
-            border-radius: 12px;
-            padding: 10px 6px;
-            text-align: center;
-            background: var(--bg-color);
-        }
-
-        .cd-box.highlight {
-            background: var(--accent-gold);
-            border-color: #D8B86A;
-        }
-
-        .cd-num {
-            display: block;
-            font-size: 1.55rem;
-            font-weight: 700;
-            color: var(--text-main);
-            line-height: 1.2;
-        }
-
-        .cd-label {
-            display: block;
-            font-size: 0.76rem;
-            color: var(--text-light);
-            margin-top: 2px;
-            font-weight: 600;
-        }
-
-        .countdown-note {
-            font-size: 0.82rem;
-            color: var(--text-light);
-            margin: 0;
-        }
+        .up-tag.members { background: var(--accent-sage); color: var(--text-main); border-color: #B8C9B4; }
+        .upcoming-title { font-family: 'Noto Serif TC', serif; font-size: 1.45rem; font-weight: 700; color: var(--accent-brown-dark); margin: 0 0 4px 0; }
+        .upcoming-subtitle { font-size: 0.88rem; color: var(--text-light); margin: 0 0 14px 0; line-height: 1.5; }
+        .countdown-boxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
+        .cd-box { border: 1.5px solid var(--accent-brown); border-radius: 12px; padding: 10px 6px; text-align: center; background: var(--bg-color); }
+        .cd-box.highlight { background: var(--accent-gold); border-color: #D8B86A; }
+        .cd-num { display: block; font-size: 1.55rem; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+        .cd-label { display: block; font-size: 0.76rem; color: var(--text-light); margin-top: 2px; font-weight: 600; }
+        .countdown-note { font-size: 0.82rem; color: var(--text-light); margin: 0; }
 
         .memo-card {
             background: linear-gradient(135deg, #F9EFEA 0%, #F5EFE6 100%);
             border: 1.5px solid var(--accent-brown);
             border-radius: 16px;
             padding: 16px 20px;
-            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.12);
         }
-
-        .memo-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .memo-badge {
-            background: var(--accent-brown);
-            color: white;
-            padding: 3px 12px;
-            border-radius: 16px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .memo-tag {
-            font-size: 0.85rem;
-            color: var(--text-main);
-            font-weight: 600;
-        }
-
+        .memo-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .memo-badge { background: var(--accent-brown); color: white; padding: 3px 12px; border-radius: 16px; font-size: 0.8rem; font-weight: 600; }
         .upcoming-action-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            background: white;
-            color: var(--accent-brown-dark);
-            border: 1.5px solid var(--accent-brown);
-            padding: 12px 18px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-size: 0.92rem;
-            font-weight: 600;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            background: white; color: var(--accent-brown-dark); border: 1.5px solid var(--accent-brown);
+            padding: 12px 18px; border-radius: 14px; text-decoration: none; font-size: 0.92rem; font-weight: 600;
             transition: all 0.2s ease;
-            text-align: center;
         }
+        .upcoming-action-btn:hover { background: var(--accent-brown); color: white; }
 
-        .upcoming-action-btn:hover {
-            background: var(--accent-brown);
-            color: white;
-        }
-
-        /* === 4. 分頁四：智能行程規劃器（含時間軸＆合理餐期與營業時間） === */
+        /* === 4. 智能行程規劃器 === */
         .planner-box {
-            background: white;
-            border: 1.5px solid var(--border-soft);
-            border-radius: 18px;
-            padding: 24px 26px;
-            box-shadow: 0 4px 20px rgba(196, 169, 158, 0.14);
+            background: white; border: 1.5px solid var(--border-soft); border-radius: 18px;
+            padding: 24px 26px; box-shadow: 0 4px 20px rgba(196, 169, 158, 0.14);
         }
-
-        .planner-desc {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin: 0 0 20px 0;
-            line-height: 1.65;
+        .planner-desc { font-size: 0.9rem; color: var(--text-light); margin: 0 0 20px 0; line-height: 1.65; }
+        .planner-controls { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 18px; }
+        .planner-field { display: flex; flex-direction: column; gap: 6px; }
+        .planner-field label { font-size: 0.86rem; font-weight: 600; color: var(--accent-brown-dark); }
+        .planner-select, .planner-input {
+            font-family: inherit; color: var(--text-main); background: var(--bg-color);
+            border: 1.5px solid var(--accent-brown); border-radius: 12px; padding: 10px 14px;
+            font-size: 0.92rem; font-weight: 500; outline: none; width: 100%; box-sizing: border-box;
         }
-
-        .planner-controls {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-bottom: 18px;
-        }
-
-        .planner-field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .planner-field label {
-            font-size: 0.86rem;
-            font-weight: 600;
-            color: var(--accent-brown-dark);
-        }
-
-        .planner-select,
-        .planner-input {
-            font-family: inherit;
-            color: var(--text-main);
-            background-color: var(--bg-color);
-            border: 1.5px solid var(--accent-brown);
-            border-radius: 12px;
-            padding: 10px 14px;
-            font-size: 0.92rem;
-            font-weight: 500;
-            outline: none;
-            transition: border-color 0.2s;
-            box-sizing: border-box;
-            width: 100%;
-        }
-
-        .planner-select:focus,
-        .planner-input:focus {
-            border-color: var(--accent-brown-dark);
-            background-color: white;
-        }
-
-        .days-input-wrap {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .days-input-suffix {
-            position: absolute;
-            right: 14px;
-            font-size: 0.88rem;
-            color: var(--text-light);
-            font-weight: 600;
-            pointer-events: none;
-        }
-
+        .days-input-wrap { position: relative; display: flex; align-items: center; }
+        .days-input-suffix { position: absolute; right: 14px; font-size: 0.88rem; color: var(--text-light); font-weight: 600; pointer-events: none; }
         .planner-submit-btn {
-            font-family: inherit;
-            width: 100%;
-            background: var(--accent-brown);
-            color: white;
-            border: 1.5px solid var(--accent-brown);
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-size: 0.96rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            font-family: inherit; width: 100%; background: var(--accent-brown); color: white;
+            border: 1.5px solid var(--accent-brown); padding: 12px 24px; border-radius: 12px;
+            font-size: 0.96rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
         }
+        .planner-submit-btn:hover { background: var(--accent-brown-dark); }
 
-        .planner-submit-btn:hover {
-            background: var(--accent-brown-dark);
-            border-color: var(--accent-brown-dark);
-            transform: translateY(-1px);
+        #planner-result { display: none; margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--accent-brown); }
+        .season-alert-card, .festival-alert-card {
+            background: var(--callout-bg); border-left: 4px solid var(--accent-brown-dark);
+            border-radius: 10px; padding: 14px 18px; margin-bottom: 14px; font-size: 0.9rem; line-height: 1.65;
         }
-
-        #planner-result {
-            display: none;
-            margin-top: 24px;
-            padding-top: 22px;
-            border-top: 1px dashed var(--accent-brown);
-        }
-
-        .season-alert-card {
-            background: var(--callout-bg);
-            border-left: 4px solid var(--accent-brown-dark);
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin-bottom: 14px;
-            font-size: 0.9rem;
-            line-height: 1.65;
-        }
-
-        .festival-alert-card {
-            background: #F4F7F2;
-            border-left: 4px solid #8FA889;
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin-bottom: 18px;
-            font-size: 0.9rem;
-            line-height: 1.65;
-        }
-
-        .alert-title {
-            font-weight: 700;
-            color: var(--accent-brown-dark);
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .generated-days-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .gen-day-card {
-            background: var(--bg-color);
-            border: 1.5px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 18px 20px;
-            transition: box-shadow 0.2s;
-        }
-
-        .gen-day-card:hover {
-            box-shadow: 0 5px 16px rgba(196, 169, 158, 0.18);
-        }
-
-        .gen-day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .gen-day-badges {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .gen-badge-num {
-            background: var(--accent-brown);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 14px;
-            font-size: 0.82rem;
-            font-weight: 700;
-        }
-
-        .gen-badge-zone {
-            background: var(--accent-sage);
-            color: var(--text-main);
-            padding: 3px 10px;
-            border-radius: 14px;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
-
-        .gen-stars {
-            color: #D4A853;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .gen-day-title {
-            font-family: 'Noto Serif TC', 'PingFang TC', serif;
-            font-size: 1.12rem;
-            font-weight: 700;
-            color: var(--accent-brown-dark);
-            margin: 0 0 12px 0;
-        }
-
-        /* 智能路徑時間軸 */
-        .smart-route-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .smart-spot-item {
-            background: white;
-            border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 11px 14px;
-        }
-
-        .smart-spot-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .smart-spot-name {
-            font-weight: 700;
-            color: var(--accent-brown-dark);
-            font-size: 0.93rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .spot-time-badge {
-            background: #F5EFE6;
-            border: 1px solid var(--accent-brown);
-            color: var(--accent-brown-dark);
-            padding: 2px 8px;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            letter-spacing: 0.03em;
-        }
-
-        .smart-spot-tag {
-            font-size: 0.75rem;
-            background: #F5EFE6;
-            color: var(--text-light);
-            padding: 2px 9px;
-            border-radius: 10px;
-            font-weight: 600;
-        }
-
-        .smart-spot-desc {
-            font-size: 0.83rem;
-            color: var(--text-main);
-            margin: 6px 0 0 0;
-            line-height: 1.5;
-        }
-
-        .smart-route-connector {
-            font-size: 0.78rem;
-            color: var(--text-light);
-            padding-left: 16px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .gen-day-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            font-size: 0.82rem;
-            color: var(--text-light);
-            padding-top: 8px;
-            border-top: 1px solid #EFEAE4;
-        }
-
-        .gen-read-link {
-            color: var(--accent-brown-dark);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .gen-read-link:hover {
-            text-decoration: underline;
-        }
-
-        .planner-footer-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 18px;
-            flex-wrap: wrap;
-        }
-
+        .festival-alert-card { background: #F4F7F2; border-left-color: #8FA889; }
+        .alert-title { font-weight: 700; color: var(--accent-brown-dark); margin-bottom: 4px; }
+        .generated-days-list { display: flex; flex-direction: column; gap: 16px; }
+        .gen-day-card { background: var(--bg-color); border: 1.5px solid var(--border-soft); border-radius: 16px; padding: 18px 20px; }
+        .gen-day-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+        .gen-badge-num { background: var(--accent-brown); color: white; padding: 4px 12px; border-radius: 14px; font-size: 0.82rem; font-weight: 700; }
+        .gen-badge-zone { background: var(--accent-sage); color: var(--text-main); padding: 3px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; margin-left: 6px; }
+        .gen-stars { color: #D4A853; font-size: 0.85rem; font-weight: 600; }
+        .gen-day-title { font-family: 'Noto Serif TC', serif; font-size: 1.12rem; font-weight: 700; color: var(--accent-brown-dark); margin: 0 0 12px 0; }
+        .smart-route-timeline { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .smart-spot-item { background: white; border: 1px solid var(--border-soft); border-radius: 12px; padding: 11px 14px; }
+        .smart-spot-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .smart-spot-name { font-weight: 700; color: var(--accent-brown-dark); font-size: 0.93rem; display: flex; align-items: center; gap: 6px; }
+        .spot-time-badge { background: #F5EFE6; border: 1px solid var(--accent-brown); color: var(--accent-brown-dark); padding: 2px 8px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
+        .smart-spot-tag { font-size: 0.75rem; background: #F5EFE6; color: var(--text-light); padding: 2px 9px; border-radius: 10px; font-weight: 600; }
+        .smart-spot-desc { font-size: 0.83rem; color: var(--text-main); margin: 6px 0 0 0; line-height: 1.5; }
+        .smart-route-connector { font-size: 0.78rem; color: var(--text-light); padding-left: 16px; }
+        .gen-day-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 0.82rem; color: var(--text-light); padding-top: 8px; border-top: 1px solid #EFEAE4; }
+        .gen-read-link { color: var(--accent-brown-dark); text-decoration: none; font-weight: 600; }
+        .planner-footer-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
         .planner-secondary-btn {
-            font-family: inherit;
-            background: white;
-            color: var(--accent-brown-dark);
-            border: 1.5px solid var(--accent-brown);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
+            font-family: inherit; background: white; color: var(--accent-brown-dark);
+            border: 1.5px solid var(--accent-brown); padding: 8px 16px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none;
         }
+        .planner-secondary-btn:hover { background: var(--accent-pink); color: white; }
 
-        .planner-secondary-btn:hover {
-            background: var(--accent-pink);
-            color: white;
+        /* === 5. 已完成書櫃與篩選器 === */
+        .filter-section { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
+        .filter-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; }
+        #country-filters { display: none; padding-top: 4px; }
+        .filter-btn, .country-btn {
+            font-family: inherit; border: 1.5px solid var(--accent-brown); background: white;
+            color: var(--accent-brown-dark); padding: 7px 16px; border-radius: 20px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
         }
-
-        /* === 5. 分頁三：已完成的旅程（七大洲與國家雙層篩選） === */
-        .filter-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(196, 169, 158, 0.3);
-        }
-
-        .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-        }
-
-        #country-filters {
-            display: none;
-            padding-top: 4px;
-        }
-
-        .filter-btn,
-        .country-btn {
-            font-family: inherit;
-            border: 1.5px solid var(--accent-brown);
-            background: white;
-            color: var(--accent-brown-dark);
-            padding: 7px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
-        }
-
-        .country-btn {
-            padding: 5px 14px;
-            border-radius: 16px;
-            font-size: 0.85rem;
-        }
-
-        .filter-btn:hover,
-        .country-btn:hover {
-            background: var(--accent-pink);
-            border-color: var(--accent-pink);
-            color: white;
-        }
-
-        .filter-btn.active {
-            background: var(--accent-brown);
-            border-color: var(--accent-brown);
-            color: white;
-            box-shadow: 0 2px 8px rgba(196, 169, 158, 0.45);
-        }
-
-        .country-btn.active {
-            background: var(--accent-brown-dark);
-            border-color: var(--accent-brown-dark);
-            color: white;
-            box-shadow: 0 2px 8px rgba(166, 137, 124, 0.45);
-        }
-
-        .callout {
-            padding: 14px 20px;
-            border-radius: 10px;
-            margin-bottom: 28px;
-            font-size: 0.92rem;
-            background-color: var(--callout-bg);
-            border-left: 4px solid var(--accent-brown);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
-        }
-
-        .grid-container.single-card {
-            grid-template-columns: minmax(0, 560px);
-            justify-content: center;
-        }
-
-        .trip-card {
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 4px 18px rgba(196, 169, 158, 0.18);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
-            color: var(--text-main);
-            display: block;
-        }
-
-        .trip-card[data-status="draft"] {
-            display: none !important;
-        }
-
-        .trip-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(196, 169, 158, 0.32);
-        }
-
-        .cover-collage {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            width: 100%;
-            aspect-ratio: 9 / 4;
-        }
-        .cover-collage div {
-            min-width: 0;
-            border-right: 2px solid white;
-            background-color: var(--accent-brown);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-        }
+        .country-btn { padding: 5px 14px; font-size: 0.85rem; }
+        .filter-btn.active, .country-btn.active { background: var(--accent-brown); color: white; }
+        .callout { padding: 14px 20px; border-radius: 10px; margin-bottom: 28px; font-size: 0.92rem; background: var(--callout-bg); border-left: 4px solid var(--accent-brown); line-height: 1.6; }
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+        .grid-container.single-card { grid-template-columns: minmax(0, 560px); justify-content: center; }
+        .trip-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 18px rgba(196, 169, 158, 0.18); transition: transform 0.3s; text-decoration: none; color: var(--text-main); display: block; }
+        .trip-card[data-status="draft"] { display: none !important; }
+        .trip-card:hover { transform: translateY(-5px); }
+        .cover-collage { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; aspect-ratio: 9 / 4; }
+        .cover-collage div { border-right: 2px solid white; background: var(--accent-brown); overflow: hidden; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.85rem; }
         .cover-collage div:last-child { border-right: none; }
-        .cover-collage img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-        .trip-card:hover .cover-collage img { transform: scale(1.04); }
-
+        .cover-collage img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .card-content { padding: 20px 24px; }
-        .card-content h3 {
-            font-family: 'Noto Serif TC', 'PingFang TC', serif;
-            margin: 0 0 12px 0;
-            color: var(--accent-brown-dark);
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 0.03em;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            color: var(--text-main);
-        }
-        th, td {
-            padding: 8px 4px;
-            text-align: left;
-            border-bottom: 1px solid #f0ebe6;
-            color: var(--text-main);
-        }
+        .card-content h3 { font-family: 'Noto Serif TC', serif; margin: 0 0 12px 0; color: var(--accent-brown-dark); font-size: 1.2rem; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 8px 4px; text-align: left; border-bottom: 1px solid #f0ebe6; }
         tr:last-child th, tr:last-child td { border-bottom: none; }
         th { color: var(--text-light); width: 22%; font-weight: 500; }
-
-        .status-empty-box {
-            text-align: center;
-            padding: 52px 24px;
-            background: white;
-            border: 1.5px dashed var(--accent-brown);
-            border-radius: 18px;
-            color: var(--text-light);
-            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.1);
-            max-width: 620px;
-            margin: 12px auto;
-        }
-
-        /* === 6. 右下角管理手帳懸浮按鈕 === */
+        .status-empty-box { text-align: center; padding: 52px 24px; background: white; border: 1.5px dashed var(--accent-brown); border-radius: 18px; color: var(--text-light); max-width: 620px; margin: 12px auto; }
         .admin-fab {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background-color: var(--accent-brown);
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            z-index: 1000;
-            transition: background-color 0.2s, transform 0.2s;
+            position: fixed; bottom: 24px; right: 24px; background: var(--accent-brown); color: white;
+            text-decoration: none; padding: 12px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5); z-index: 1000;
         }
-        .admin-fab:hover {
-            background-color: var(--accent-brown-dark);
-            transform: translateY(-2px);
-        }
-
-        /* === 7. 手機版 RWD 響應式配置 === */
         @media (max-width: 768px) {
             body { padding: 20px 14px 80px; }
-            h1 { font-size: 1.42rem; margin-bottom: 14px; }
-            .main-nav-tabs { gap: 8px; }
+            h1 { font-size: 1.42rem; }
             .main-tab-btn { padding: 8px 14px; font-size: 0.85rem; }
-            .planner-controls { grid-template-columns: 1fr; gap: 12px; }
-            .planner-box { padding: 18px 16px; }
-            .grid-container { grid-template-columns: 1fr; gap: 20px; }
-            .filter-btn { padding: 6px 13px; font-size: 0.85rem; }
-            .country-btn { padding: 5px 12px; font-size: 0.8rem; }
+            .planner-controls, .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -990,9 +344,7 @@
 
     <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
 
-    <!-- =================================================================
-         🌟 頂部四大主功能切換按鈕（整排無底色，僅選中按鈕有底色）
-         ================================================================= -->
+    <!-- 頂部四大主功能切換按鈕 -->
     <nav class="main-nav-tabs" aria-label="手帳主選單">
         <button type="button" class="main-tab-btn active" data-target="tab-upcoming">未出發的旅程</button>
         <button type="button" class="main-tab-btn" data-target="tab-ongoing">進行中的旅程</button>
@@ -1000,67 +352,48 @@
         <button type="button" class="main-tab-btn" data-target="tab-planner">行程規劃</button>
     </nav>
 
-    <!-- =================================================================
-         ✈️ 分頁 1：未出發的旅程（含目的地即時動態天氣繪本插畫）
-         ================================================================= -->
+    <!-- ✈️ 分頁 1：未出發的旅程（自動連動尚未開始的 itinerary/*.json） -->
     <section class="tab-view-panel active" id="tab-upcoming">
         <div class="section-header-bar">
             <h2 class="section-title">✈️ 未出發・期待倒數</h2>
-            <div class="dest-clock-pill" id="dest-clock">當地時間讀取中...</div>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <select id="upcoming-trip-switcher" class="planner-select" style="display:none; width:auto; padding:4px 10px; font-size:0.82rem;"></select>
+                <div class="dest-clock-pill" id="dest-clock">當地時間讀取中...</div>
+            </div>
         </div>
 
         <div class="upcoming-container" id="upcoming-content-wrap">
-            <!-- 繪本風主卡片＋即時天氣動態插畫＋天時分秒倒數 -->
             <div class="upcoming-main-card">
                 <div class="upcoming-illustration weather-sunny" id="up-weather-stage">
                     <span class="upcoming-status-badge" id="up-status-badge">籌備倒數中</span>
                     <span class="live-weather-pill" id="live-weather-pill" title="點擊可切換預覽：晴天／下雨／飄雪／夜空動態">🌤️ 當地天氣連線中...</span>
-
-                    <!-- 動態雨滴／雪花／星光粒子層 -->
                     <div class="weather-particles" id="weather-particles"></div>
 
-                    <!-- 可隨天氣變化的動態繪本 SVG -->
-                    <svg viewBox="0 0 600 180" fill="none" xmlns="http://www.w3.org/2000/svg" id="weather-svg">
-                        <!-- 1. 晴天太陽 (Sunny) -->
+                    <svg viewBox="0 0 600 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="svg-sun-group" class="svg-sun-anim">
                             <circle cx="95" cy="52" r="26" fill="#F3D999" opacity="0.35"/>
                             <circle cx="95" cy="52" r="20" fill="#F3D999" opacity="0.95"/>
                         </g>
-
-                        <!-- 2. 夜空彎月 (Night, 預設隱藏) -->
                         <g id="svg-moon-group" style="display: none;">
                             <path d="M105 36 A20 20 0 1 0 122 65 A16 16 0 1 1 105 36 Z" fill="#F3D999" opacity="0.95"/>
                         </g>
-
-                        <!-- 3. 雲層群組 (依晴/陰/雨動態調整透明度與顏色) -->
                         <g id="svg-clouds-group" class="svg-cloud-anim" opacity="0.55">
                             <path id="cloud-path-1" d="M68 68 C68 58 78 52 88 55 C94 46 110 46 116 55 C125 54 132 61 132 70 C132 78 124 82 115 82 L78 82 C71 82 68 76 68 68 Z" fill="#FFFFFF"/>
                             <path id="cloud-path-2" d="M270 52 C270 43 279 38 288 41 C294 33 308 33 314 41 C322 40 328 46 328 54 C328 61 321 65 312 65 L280 65 C273 65 270 59 270 52 Z" fill="#FFFFFF" opacity="0.85"/>
                         </g>
-
-                        <!-- 遠山與大地草坡 (雪天時自動變白雪坡) -->
                         <path id="svg-hill" d="M0 155 Q150 120 320 150 T600 135 L600 180 L0 180 Z" fill="#D8E2D5" opacity="0.78"/>
-                        <path id="svg-mountain" d="M180 155 L250 65 L320 155 Z" fill="#C4A99E" opacity="0.48"/>
+                        <path d="M180 155 L250 65 L320 155 Z" fill="#C4A99E" opacity="0.48"/>
                         <path d="M225 97 L250 65 L275 97 L262 103 L250 93 L238 103 Z" fill="#FDFBF7"/>
-
-                        <!-- 下雨專屬：地面水窪漣漪與小紅傘 (預設隱藏) -->
                         <g id="svg-rain-extras" style="display: none;">
                             <ellipse cx="145" cy="166" rx="22" ry="3.5" fill="#9BB0C1" opacity="0.65"/>
                             <ellipse cx="295" cy="168" rx="18" ry="3" fill="#9BB0C1" opacity="0.55"/>
-                            <!-- 可愛繪本小紅傘 -->
                             <path d="M286 144 C286 131 310 131 310 144 Z" fill="#D98A82" stroke="#7A6258" stroke-width="1.8"/>
                             <line x1="298" y1="144" x2="298" y2="157" stroke="#7A6258" stroke-width="1.8"/>
-                            <path d="M298 157 Q298 161 294 160" stroke="#7A6258" stroke-width="1.8" fill="none"/>
                         </g>
-
-                        <!-- 飄雪專屬：可愛小雪人 (預設隱藏) -->
                         <g id="svg-snow-extras" style="display: none;">
                             <circle cx="150" cy="154" r="9" fill="#FFFFFF" stroke="#7A6258" stroke-width="1.8"/>
                             <circle cx="150" cy="140" r="6.5" fill="#FFFFFF" stroke="#7A6258" stroke-width="1.8"/>
-                            <path d="M144 146 Q150 149 156 146" stroke="#D98A82" stroke-width="3" stroke-linecap="round"/>
                         </g>
-
-                        <!-- 繪本風地標塔與發光窗戶 -->
                         <rect x="420" y="75" width="38" height="80" rx="4" fill="#E5D1C7" stroke="#7A6258" stroke-width="2"/>
                         <rect x="428" y="60" width="22" height="15" rx="2" fill="#F3D999" stroke="#7A6258" stroke-width="2"/>
                         <line x1="439" y1="42" x2="439" y2="60" stroke="#7A6258" stroke-width="2.5"/>
@@ -1070,16 +403,12 @@
                             <rect x="428" y="104" width="8" height="10" rx="1.5" fill="#FFF3B0"/>
                             <rect x="442" y="104" width="8" height="10" rx="1.5" fill="#FFF3B0"/>
                         </g>
-
-                        <!-- 繪本風小電車與車頭暖光 -->
                         <path id="svg-headlight" d="M330 144 L292 135 L292 155 Z" fill="#FFF3B0" opacity="0" />
                         <rect x="330" y="132" width="68" height="24" rx="8" fill="#F3D999" stroke="#7A6258" stroke-width="2"/>
                         <rect x="340" y="137" width="18" height="9" rx="2" fill="#FDFBF7" stroke="#7A6258" stroke-width="1.5"/>
                         <rect x="364" y="137" width="18" height="9" rx="2" fill="#FDFBF7" stroke="#7A6258" stroke-width="1.5"/>
                         <circle cx="346" cy="158" r="6" fill="#7A6258"/>
                         <circle cx="382" cy="158" r="6" fill="#7A6258"/>
-
-                        <!-- 飛翔客機 -->
                         <g transform="translate(145, 28)">
                             <path d="M10 18 L52 12 C58 11 62 15 56 19 L14 25 Z" fill="#FDFBF7" stroke="#7A6258" stroke-width="2"/>
                             <path d="M26 15 L18 4 L26 3 L38 14 Z" fill="#E5D1C7" stroke="#7A6258" stroke-width="1.8"/>
@@ -1090,60 +419,46 @@
 
                 <div class="upcoming-body">
                     <div class="upcoming-tags">
-                        <span class="up-tag route" id="up-route-tag">吉隆坡・馬六甲・新加坡</span>
+                        <span class="up-tag" id="up-route-tag">吉隆坡・馬六甲・新加坡</span>
                         <span class="up-tag members" id="up-member-tag">春季漫旅・11天10夜</span>
                     </div>
                     <h3 class="upcoming-title" id="up-title">南洋星馬春季漫旅</h3>
-                    <p class="upcoming-subtitle" id="up-date-text">2027.04.07 (三) — 04.17 (六) ・ 吉隆坡敘宴、又見馬六甲、星耀樟宜</p>
+                    <!-- 藍框：已更新為 2027/04/07 - 2027/04/17 -->
+                    <p class="upcoming-subtitle" id="up-date-text">2027.04.07 (三) — 2027.04.17 (六) ・ 吉隆坡敘宴、又見馬六甲、星耀樟宜</p>
 
                     <div class="countdown-boxes">
-                        <div class="cd-box highlight">
-                            <span class="cd-num" id="cd-days">00</span>
-                            <span class="cd-label">天</span>
-                        </div>
-                        <div class="cd-box">
-                            <span class="cd-num" id="cd-hours">00</span>
-                            <span class="cd-label">時</span>
-                        </div>
-                        <div class="cd-box">
-                            <span class="cd-num" id="cd-mins">00</span>
-                            <span class="cd-label">分</span>
-                        </div>
-                        <div class="cd-box">
-                            <span class="cd-num" id="cd-secs">00</span>
-                            <span class="cd-label">秒</span>
-                        </div>
+                        <div class="cd-box highlight"><span class="cd-num" id="cd-days">00</span><span class="cd-label">天</span></div>
+                        <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">時</span></div>
+                        <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">分</span></div>
+                        <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">秒</span></div>
                     </div>
                     <p class="countdown-note" id="up-note-text">距離展開 南洋星馬春季漫旅 倒數計時中</p>
                 </div>
             </div>
 
-            <!-- 旅途重點與行前備忘卡 -->
             <div class="memo-card">
                 <div class="memo-card-header">
                     <span class="memo-badge">🧳 旅途重點與行前備忘</span>
-                    <span class="memo-tag" id="up-vehicle-tag">跨國雙城慢旅</span>
+                    <span style="font-size:0.85rem; font-weight:600;" id="up-vehicle-tag">跨國雙城慢旅</span>
                 </div>
-                <div style="font-size: 0.88rem; line-height: 1.7; color: var(--text-main);" id="up-memo-list">
+                <div style="font-size: 0.88rem; line-height: 1.7;" id="up-memo-list">
                     • <strong>簽證與入境：</strong>馬來西亞 MDAC 電子入境卡（出發前3天內填寫）、新加坡 SG Arrival Card。<br>
                     • <strong>核心體驗：</strong>吉隆坡敘宴沉浸式宮廷宴、又見馬六甲劇場、星耀樟宜雨漩渦。
                 </div>
             </div>
 
-            <a href="journal.html?trip=malaysia_2027" class="upcoming-action-btn" id="up-link-btn">
-                📖 搶先查看／編輯這本預備手帳 ➔
+            <!-- 綠框：直接連動至該趟旅程的「📅 行程安排」視角 -->
+            <a href="journal.html?trip=malaysia_2027&view=itinerary" class="upcoming-action-btn" id="up-link-btn">
+                📅 前往查看／編輯這份行程安排 ➔
             </a>
         </div>
     </section>
 
-    <!-- =================================================================
-         🟢 分頁 2：進行中的旅程
-         ================================================================= -->
+    <!-- 🟢 分頁 2：進行中的旅程 -->
     <section class="tab-view-panel" id="tab-ongoing">
         <div class="section-header-bar">
             <h2 class="section-title">🟢 進行中的旅程・即時手帳</h2>
         </div>
-
         <div id="ongoing-container">
             <div class="status-empty-box" id="ongoing-empty">
                 <div style="font-size: 2rem; margin-bottom: 8px;">🍵</div>
@@ -1151,7 +466,7 @@
                     目前沒有正在進行中的旅程
                 </div>
                 <p style="margin: 0 0 18px 0; font-size: 0.9rem; line-height: 1.6;">
-                    當下一趟旅程（<span id="ongoing-next-name">南洋星馬春季漫旅</span>）出發時間一到，<br>這裡就會自動切換為旅途實戰模式！
+                    當下一趟旅程（<span id="ongoing-next-name">南洋星馬春季漫旅</span>）於 <span id="ongoing-next-date">2027/04/07</span> 出發時，<br>這裡就會自動切換為旅途實戰模式！
                 </p>
                 <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
                     <button type="button" class="planner-secondary-btn" onclick="switchMainTab('tab-upcoming')">查看未出發倒數</button>
@@ -1161,9 +476,7 @@
         </div>
     </section>
 
-    <!-- =================================================================
-         📚 分頁 3：已完成的旅程
-         ================================================================= -->
+    <!-- 📚 分頁 3：已完成的旅程 -->
     <section class="tab-view-panel" id="tab-completed">
         <div class="section-header-bar">
             <h2 class="section-title">📚 已完成的旅行手帳書櫃</h2>
@@ -1180,7 +493,6 @@
                 <button type="button" class="filter-btn" data-continent="大洋洲">大洋洲</button>
                 <button type="button" class="filter-btn" data-continent="南極洲">南極洲</button>
             </div>
-
             <div class="filter-row" id="country-filters">
                 <button type="button" class="country-btn" data-continent="亞洲" data-country="台灣">台灣</button>
                 <button type="button" class="country-btn" data-continent="亞洲" data-country="日本">日本</button>
@@ -1197,8 +509,14 @@
         </div>
 
         <div class="grid-container" id="cards-grid">
-            <!-- 卡片 1：南洋星馬 -->
-            <a href="journal.html?trip=malaysia_2027" class="trip-card" data-trip-id="malaysia_2027" data-continent="亞洲" data-country="馬來西亞,新加坡" data-status="draft">
+            <!-- 卡片 1：南洋星馬（未出發，於已完成書櫃隱藏，由首頁未出發自動讀取展示） -->
+            <a href="journal.html?trip=malaysia_2027&view=itinerary" class="trip-card"
+               data-trip-id="malaysia_2027"
+               data-continent="亞洲"
+               data-country="馬來西亞,新加坡"
+               data-start="2027-04-07"
+               data-end="2027-04-17"
+               data-status="draft">
                 <div class="cover-collage">
                     <div><img src="media/malaysia_2027/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
                     <div><img src="media/malaysia_2027/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
@@ -1207,7 +525,7 @@
                 <div class="card-content">
                     <h3>南洋星馬春季漫旅</h3>
                     <table>
-                        <tr><th>天數</th><td>11 天 10 夜</td></tr>
+                        <tr><th>日期</th><td>2027/04/07 — 04/17 (11天10夜)</td></tr>
                         <tr><th>重點</th><td>吉隆坡敘宴、又見馬六甲、星耀樟宜</td></tr>
                         <tr><th>季節</th><td>2027 春季</td></tr>
                     </table>
@@ -1215,7 +533,12 @@
             </a>
 
             <!-- 卡片 2：日本東北 -->
-            <a href="journal.html?trip=tohoku_2026" class="trip-card" data-trip-id="tohoku_2026" data-continent="亞洲" data-country="日本">
+            <a href="journal.html?trip=tohoku_2026" class="trip-card"
+               data-trip-id="tohoku_2026"
+               data-continent="亞洲"
+               data-country="日本"
+               data-start="2026-01-28"
+               data-end="2026-02-05">
                 <div class="cover-collage">
                     <div><img src="media/tohoku_2026/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
                     <div><img src="media/tohoku_2026/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
@@ -1237,49 +560,37 @@
         </div>
     </section>
 
-    <!-- =================================================================
-         🧭 分頁 4：互動式智能行程規劃（含時間標註、營業時間與餐期合理化）
-         ================================================================= -->
+    <!-- 🧭 分頁 4：互動式智能行程規劃（直接連動 itinerary/*.json） -->
     <section class="tab-view-panel" id="tab-planner">
         <div class="planner-box">
             <div class="section-header-bar">
                 <h2 class="section-title">🧭 智能實測行程規劃器</h2>
-                <span style="font-size: 0.82rem; color: var(--text-light);">★ 結合地理順路、營業時間與合理餐期的時間軸排程</span>
+                <span style="font-size: 0.82rem; color: var(--text-light);">★ 連動 itinerary/*.json，結合營業時間與合理餐期排程</span>
             </div>
             <p class="planner-desc">
-                選擇目的地國家、想去的地區（可不選）並輸入天數，系統會自動從我造訪過的<strong>經典景點與私房美食池</strong>中，依據<strong>「戶外景點排白天、正餐分開不連吃、飯店泡湯排夜晚」</strong>的真實旅遊邏輯，為您編排附帶時間軸的全新行程！
+                選擇目的地國家、地區（可不選）並輸入天數，系統會自動從我造訪過的<strong>經典景點與私房美食池</strong>中，依據<strong>「戶外景點排白天、正餐分開不連吃、飯店泡湯排夜晚」</strong>的旅遊邏輯，為您編排附帶時間軸的全新行程！
             </p>
 
             <div class="planner-controls">
-                <!-- 1. 國家選擇 -->
                 <div class="planner-field">
                     <label for="plan-country">1. 選擇目的地國家</label>
                     <select id="plan-country" class="planner-select">
                         <option value="日本">日本</option>
                     </select>
                 </div>
-
-                <!-- 2. 地區選擇（分開選擇，可不選） -->
                 <div class="planner-field">
                     <label for="plan-region">2. 選擇地區（選填・可不選）</label>
                     <select id="plan-region" class="planner-select">
                         <option value="ALL">不限地區（全區經典智能串聯）</option>
-                        <option value="山形">山形地區（藏王樹冰・銀山溫泉・山寺）</option>
-                        <option value="宮城">宮城地區（仙台市區・松島三景・藏王狐狸村）</option>
-                        <option value="東京">東京地區（上野・谷中銀座・東京鐵塔）</option>
                     </select>
                 </div>
-
-                <!-- 3. 天數自由輸入 -->
                 <div class="planner-field">
                     <label for="plan-days">3. 預計旅遊天數（自由填入）</label>
                     <div class="days-input-wrap">
-                        <input type="number" id="plan-days" class="planner-input" min="1" max="14" value="4" placeholder="請輸入天數，如 4">
+                        <input type="number" id="plan-days" class="planner-input" min="1" max="14" value="4">
                         <span class="days-input-suffix">天</span>
                     </div>
                 </div>
-
-                <!-- 4. 出發月份（選填） -->
                 <div class="planner-field">
                     <label for="plan-month">4. 預計出發月份（選填・防踩雷）</label>
                     <select id="plan-month" class="planner-select">
@@ -1287,227 +598,229 @@
                         <option value="1">1 月（冬季・深雪／樹冰／松焚祭）</option>
                         <option value="2">2 月（冬季・樹冰全盛期／雪燈祭）</option>
                         <option value="3">3 月（初春・殘雪與早春漫步）</option>
-                        <option value="4">4 月（春季・東北櫻花百選季）</option>
-                        <option value="5">5 月（春季・新綠氣候最舒適）</option>
-                        <option value="6">6 月（初夏・繡球花與清爽避暑）</option>
-                        <option value="7">7 月（夏季・綠意峽谷與夏日祭典）</option>
-                        <option value="8">8 月（夏季・仙台七夕祭／東北大祭）</option>
-                        <option value="9">9 月（初秋・藏王初秋微涼漫遊）</option>
-                        <option value="10">10 月（秋季・高山楓紅與松島夜楓）</option>
-                        <option value="11">11 月（晚秋・円通院紅葉點燈季）</option>
-                        <option value="12">12 月（初冬・初雪溫泉與聖誕燈飾）</option>
+                        <option value="4">4 月（春季・櫻花季）</option>
+                        <option value="5">5 月（春季・新綠舒適氣候）</option>
+                        <option value="6">6 月（初夏・清爽避暑）</option>
+                        <option value="7">7 月（夏季・綠意峽谷）</option>
+                        <option value="8">8 月（夏季・仙台七夕祭）</option>
+                        <option value="9">9 月（初秋・微涼漫遊）</option>
+                        <option value="10">10 月（秋季・高山楓紅與夜楓）</option>
+                        <option value="11">11 月（晚秋・紅葉點燈季）</option>
+                        <option value="12">12 月（初冬・初雪溫泉）</option>
                     </select>
                 </div>
             </div>
 
             <button type="button" class="planner-submit-btn" id="generate-plan-btn">✨ 智能規劃最適合的新行程</button>
 
-            <!-- 智能規劃結果區 -->
             <div id="planner-result">
                 <div id="season-alert-container"></div>
                 <div id="festival-alert-container"></div>
                 <div class="generated-days-list" id="generated-days-list"></div>
-
                 <div class="planner-footer-actions">
                     <button type="button" class="planner-secondary-btn" id="copy-plan-link-btn">📤 複製這份專屬行程連結</button>
-                    <a href="journal.html?trip=tohoku_2026" class="planner-secondary-btn" style="text-decoration: none;">🗺️ 開啟原版完整地圖手帳</a>
+                    <a href="journal.html?trip=tohoku_2026&view=itinerary" id="planner-journal-link" class="planner-secondary-btn">📅 查看完整行程安排與地圖</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 右下角管理手帳按鈕 -->
     <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
 
     <script>
-        /* =========================================================================
-           PART 0：頂部四大主功能分頁切換控制
-           ========================================================================= */
-        const mainTabBtns = document.querySelectorAll('.main-tab-btn');
-        const tabPanels = document.querySelectorAll('.tab-view-panel');
-
+        /* === PART 0：分頁切換 === */
         function switchMainTab(targetId) {
-            mainTabBtns.forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-target') === targetId);
-            });
-            tabPanels.forEach(panel => {
-                panel.classList.toggle('active', panel.id === targetId);
-            });
+            document.querySelectorAll('.main-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.target === targetId));
+            document.querySelectorAll('.tab-view-panel').forEach(p => p.classList.toggle('active', p.id === targetId));
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        document.querySelectorAll('.main-tab-btn').forEach(b => b.addEventListener('click', () => switchMainTab(b.dataset.target)));
 
-        mainTabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                switchMainTab(btn.getAttribute('data-target'));
-            });
-        });
-
-        /* =========================================================================
-           PART 1：未出發 & 進行中旅程設定 ＋ 目的地即時天氣動態繪本引擎
-           ========================================================================= */
-        const UPCOMING_TRIP_CONFIG = {
-            enabled: true,
-            tripId: "malaysia_2027",
-            title: "南洋星馬春季漫旅",
-            routeTag: "吉隆坡・馬六甲・新加坡",
-            memberTag: "春季漫旅・11天10夜",
-            dateSubTitle: "2027.03.20 (六) — 03.30 (二) ・ 吉隆坡敘宴、又見馬六甲、星耀樟宜",
-            departureISO: "2027-03-20T08:15:00+08:00",
-            returnISO: "2027-03-30T22:00:00+08:00",
-            timezone: "Asia/Kuala_Lumpur",
-            timezoneLabel: "星馬時間",
-            weatherCity: "吉隆坡",
-            lat: 3.1390,
-            lng: 101.6869
+        /* === PART 1：自動探索並連動 itinerary/[location_year].json === */
+        // 內建未來旅程預設基底（當您新增 itinerary/malaysia_2027.json 後，系統會自動讀取 JSON 覆蓋此設定）
+        const DEFAULT_UPCOMING_META = {
+            malaysia_2027: {
+                tripId: "malaysia_2027",
+                tripTitle: "南洋星馬春季漫旅",
+                routeTag: "吉隆坡・馬六甲・新加坡",
+                memberTag: "春季漫旅・11天10夜",
+                startDate: "2027-04-07",
+                endDate: "2027-04-17",
+                dateSubTitle: "2027.04.07 (三) — 2027.04.17 (六) ・ 吉隆坡敘宴、又見馬六甲、星耀樟宜",
+                timezone: "Asia/Kuala_Lumpur",
+                timezoneLabel: "星馬時間",
+                weatherCity: "吉隆坡",
+                lat: 3.1390,
+                lng: 101.6869,
+                vehicleTag: "跨國雙城慢旅",
+                memoHtml: "• <strong>簽證與入境：</strong>馬來西亞 MDAC 電子入境卡（出發前3天內填寫）、新加坡 SG Arrival Card。<br>• <strong>核心體驗：</strong>吉隆坡敘宴沉浸式宮廷宴、又見馬六甲劇場、星耀樟宜雨漩渦。"
+            }
         };
 
+        let activeUpcomingTrip = { ...DEFAULT_UPCOMING_META.malaysia_2027 };
+        let upcomingTripsPool = [];
         let currentWeatherModeIndex = 0;
         let liveDetectedWeather = { mode: 'sunny', temp: 29, desc: '晴時多雲' };
         const WEATHER_PREVIEW_MODES = [
             { key: 'LIVE', label: '即時天氣' },
-            { key: 'rainy', label: '🌧️ 下雨動態預覽', temp: 26, desc: '午後陣雨' },
-            { key: 'sunny', label: '☀️ 晴朗動態預覽', temp: 30, desc: '陽光普照' },
-            { key: 'snowy', label: '❄️ 飄雪動態預覽', temp: -3, desc: '冬日瑞雪' },
-            { key: 'night', label: '🌙 夜空動態預覽', temp: 25, desc: '星夜微風' }
+            { key: 'rainy', label: '🌧️ 下雨動態預覽', temp: 26 },
+            { key: 'sunny', label: '☀️ 晴朗動態預覽', temp: 30 },
+            { key: 'snowy', label: '❄️ 飄雪動態預覽', temp: -3 },
+            { key: 'night', label: '🌙 夜空動態預覽', temp: 25 }
         ];
 
-        // 根據天氣狀態渲染繪本插畫與動態粒子（雨滴、雪花、星光、烏雲、小紅傘）
+        // 自動探索所有已知與新增的 itinerary/*.json 檔案
+        async function discoverAllItineraryTrips() {
+            const tripIds = new Set(['malaysia_2027', 'tohoku_2026']);
+            document.querySelectorAll('.trip-card[data-trip-id]').forEach(el => tripIds.add(el.dataset.tripId));
+
+            // 若託管於 GitHub Pages (*.github.io)，自動掃描儲存庫 itinerary/ 資料夾下新上傳的任何 .json 檔案！
+            if (location.hostname.endsWith('github.io')) {
+                try {
+                    const owner = location.hostname.split('.')[0];
+                    const repo = location.pathname.split('/').filter(Boolean)[0] || `${owner}.github.io`;
+                    const apiRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/itinerary`);
+                    if (apiRes.ok) {
+                        const files = await apiRes.json();
+                        files.forEach(f => {
+                            if (f.name && f.name.endsWith('.json')) tripIds.add(f.name.replace('.json', ''));
+                        });
+                    }
+                } catch (e) {}
+            }
+
+            const now = new Date();
+            const upcomingList = [];
+
+            for (const id of tripIds) {
+                let itinData = null;
+                try {
+                    const res = await fetch(`itinerary/${id}.json?t=${Date.now()}`, { cache: 'no-store' });
+                    if (res.ok) itinData = await res.json();
+                } catch (e) {}
+
+                const cardEl = document.querySelector(`.trip-card[data-trip-id="${id}"]`);
+                const fallback = DEFAULT_UPCOMING_META[id] || {};
+                const startDate = itinData?.startDate || cardEl?.dataset.start || fallback.startDate || null;
+                const endDate = itinData?.endDate || cardEl?.dataset.end || fallback.endDate || null;
+
+                if (startDate) {
+                    const startObj = new Date(`${startDate}T00:00:00`);
+                    const endObj = endDate ? new Date(`${endDate}T23:59:59`) : new Date(startObj.getTime() + 864000000);
+
+                    // 若時間還沒開始（或正在進行中），自動納入首頁動態倒數池
+                    if (now <= endObj) {
+                        const firstSpot = itinData?.days?.[0]?.spots?.[0];
+                        const regions = itinData?.days ? [...new Set(itinData.days.map(d => (d.region || '').replace('地區', '')).filter(Boolean))] : [];
+                        const daysCount = itinData?.days?.length || 11;
+
+                        upcomingList.push({
+                            tripId: id,
+                            tripTitle: (itinData?.tripTitle || fallback.tripTitle || id).split('｜').pop().trim(),
+                            routeTag: itinData?.routeTag || (regions.length ? regions.join('・') : fallback.routeTag || '精彩慢旅'),
+                            memberTag: itinData?.memberTag || fallback.memberTag || `${daysCount}天${Math.max(1, daysCount - 1)}夜`,
+                            startDate,
+                            endDate: endDate || startDate,
+                            dateSubTitle: itinData?.dateSubTitle || fallback.dateSubTitle || `${startDate.replace(/-/g, '.')} — ${(endDate || '').replace(/-/g, '.')}`,
+                            timezone: itinData?.timezone || fallback.timezone || 'Asia/Tokyo',
+                            timezoneLabel: itinData?.timezoneLabel || fallback.timezoneLabel || '當地時間',
+                            weatherCity: itinData?.weatherCity || regions[0] || fallback.weatherCity || '目的地',
+                            lat: firstSpot?.lat || fallback.lat || 3.1390,
+                            lng: firstSpot?.lng || fallback.lng || 101.6869,
+                            vehicleTag: itinData?.vehicleTag || fallback.vehicleTag || '專屬行程規劃',
+                            memoHtml: itinData?.memoHtml || fallback.memoHtml || '• 點擊下方按鈕即可直接進入「行程安排」查看每日路線、票券憑證與預估花費。'
+                        });
+                    }
+                }
+            }
+
+            // 依出發時間由近到遠排序
+            upcomingList.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+            upcomingTripsPool = upcomingList;
+
+            if (upcomingTripsPool.length > 0) {
+                activeUpcomingTrip = upcomingTripsPool[0];
+            }
+
+            // 若有多筆未出發旅程，顯示下拉切換器
+            const switcher = document.getElementById('upcoming-trip-switcher');
+            if (upcomingTripsPool.length > 1) {
+                switcher.style.display = 'inline-block';
+                switcher.innerHTML = upcomingTripsPool.map((t, i) => `<option value="${i}">切換旅程：${t.tripTitle}</option>`).join('');
+                switcher.onchange = () => {
+                    activeUpcomingTrip = upcomingTripsPool[Number(switcher.value)];
+                    renderActiveUpcomingTrip();
+                };
+            }
+
+            renderActiveUpcomingTrip();
+        }
+
         function applyIllustrationWeather(mode, cityText, tempText, descText, isPreview = false) {
             const stage = document.getElementById('up-weather-stage');
             const particles = document.getElementById('weather-particles');
             const pill = document.getElementById('live-weather-pill');
 
-            const sunGroup = document.getElementById('svg-sun-group');
-            const moonGroup = document.getElementById('svg-moon-group');
-            const cloudsGroup = document.getElementById('svg-clouds-group');
-            const cloud1 = document.getElementById('cloud-path-1');
-            const cloud2 = document.getElementById('cloud-path-2');
-            const hill = document.getElementById('svg-hill');
-            const rainExtras = document.getElementById('svg-rain-extras');
-            const snowExtras = document.getElementById('svg-snow-extras');
-            const towerLights = document.getElementById('svg-tower-lights');
-            const headlight = document.getElementById('svg-headlight');
-
             stage.className = `upcoming-illustration weather-${mode}`;
             particles.innerHTML = '';
 
-            // 預設狀態重置
-            sunGroup.style.display = 'block';
-            moonGroup.style.display = 'none';
-            rainExtras.style.display = 'none';
-            snowExtras.style.display = 'none';
-            cloud1.setAttribute('fill', '#FFFFFF');
-            cloud2.setAttribute('fill', '#FFFFFF');
-            cloudsGroup.setAttribute('opacity', '0.6');
-            hill.setAttribute('fill', '#D8E2D5');
-            towerLights.setAttribute('opacity', '0.35');
-            headlight.setAttribute('opacity', '0');
+            document.getElementById('svg-sun-group').style.display = (mode === 'sunny' || mode === 'cloudy') ? 'block' : 'none';
+            document.getElementById('svg-moon-group').style.display = mode === 'night' ? 'block' : 'none';
+            document.getElementById('svg-rain-extras').style.display = mode === 'rainy' ? 'block' : 'none';
+            document.getElementById('svg-snow-extras').style.display = mode === 'snowy' ? 'block' : 'none';
 
-            let icon = '☀️';
+            const c1 = document.getElementById('cloud-path-1'), c2 = document.getElementById('cloud-path-2');
+            c1.setAttribute('fill', mode === 'rainy' ? '#98A6B3' : '#FFFFFF');
+            c2.setAttribute('fill', mode === 'rainy' ? '#8796A5' : '#FFFFFF');
+            document.getElementById('svg-clouds-group').setAttribute('opacity', mode === 'night' ? '0.2' : (mode === 'sunny' ? '0.55' : '0.92'));
+            document.getElementById('svg-hill').setAttribute('fill', mode === 'snowy' ? '#FFFFFF' : '#D8E2D5');
+            document.getElementById('svg-tower-lights').setAttribute('opacity', (mode === 'night' || mode === 'rainy') ? '0.95' : '0.35');
+            document.getElementById('svg-headlight').setAttribute('opacity', (mode === 'night' || mode === 'rainy') ? '0.7' : '0');
 
-            if (mode === 'rainy') {
-                icon = '🌧️';
-                sunGroup.style.display = 'none';
-                rainExtras.style.display = 'block';
-                cloud1.setAttribute('fill', '#98A6B3');
-                cloud2.setAttribute('fill', '#8796A5');
-                cloudsGroup.setAttribute('opacity', '0.95');
-                hill.setAttribute('fill', '#C3D0C8');
-                towerLights.setAttribute('opacity', '0.9');
-                headlight.setAttribute('opacity', '0.65');
-
-                // 產生 26 道動態飄落雨滴
-                for (let i = 0; i < 26; i++) {
-                    const drop = document.createElement('div');
-                    drop.className = 'raindrop';
-                    drop.style.left = `${Math.random() * 100}%`;
-                    drop.style.animationDuration = `${0.65 + Math.random() * 0.45}s`;
-                    drop.style.animationDelay = `${Math.random() * 1.2}s`;
-                    particles.appendChild(drop);
+            const count = mode === 'rainy' ? 24 : (mode === 'snowy' ? 22 : (mode === 'night' ? 16 : 0));
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                if (mode === 'rainy') {
+                    el.className = 'raindrop';
+                    el.style.left = `${Math.random() * 100}%`;
+                    el.style.animationDuration = `${0.65 + Math.random() * 0.4}s`;
+                    el.style.animationDelay = `${Math.random() * 1.2}s`;
+                } else if (mode === 'snowy') {
+                    el.className = 'snowflake';
+                    const s = 4 + Math.random() * 4;
+                    el.style.width = el.style.height = `${s}px`;
+                    el.style.left = `${Math.random() * 100}%`;
+                    el.style.animationDuration = `${2.2 + Math.random() * 1.5}s`;
+                    el.style.animationDelay = `${Math.random() * 2}s`;
+                } else {
+                    el.className = 'star-dot';
+                    const s = 2 + Math.random() * 2.5;
+                    el.style.width = el.style.height = `${s}px`;
+                    el.style.left = `${Math.random() * 95}%`;
+                    el.style.top = `${8 + Math.random() * 55}%`;
+                    el.style.animationDuration = `${1.2 + Math.random() * 1.4}s`;
                 }
-            } else if (mode === 'snowy') {
-                icon = '❄️';
-                sunGroup.style.display = 'none';
-                snowExtras.style.display = 'block';
-                cloud1.setAttribute('fill', '#E6EEF4');
-                cloud2.setAttribute('fill', '#D5E1EC');
-                cloudsGroup.setAttribute('opacity', '0.9');
-                hill.setAttribute('fill', '#FFFFFF');
-                towerLights.setAttribute('opacity', '0.85');
-                headlight.setAttribute('opacity', '0.55');
-
-                // 產生 24 顆動態飄落雪花
-                for (let i = 0; i < 24; i++) {
-                    const flake = document.createElement('div');
-                    flake.className = 'snowflake';
-                    const size = 4 + Math.random() * 4;
-                    flake.style.width = `${size}px`;
-                    flake.style.height = `${size}px`;
-                    flake.style.left = `${Math.random() * 100}%`;
-                    flake.style.animationDuration = `${2.2 + Math.random() * 1.8}s`;
-                    flake.style.animationDelay = `${Math.random() * 2}s`;
-                    particles.appendChild(flake);
-                }
-            } else if (mode === 'night') {
-                icon = '🌙';
-                sunGroup.style.display = 'none';
-                moonGroup.style.display = 'block';
-                cloudsGroup.setAttribute('opacity', '0.22');
-                hill.setAttribute('fill', '#97A89E');
-                towerLights.setAttribute('opacity', '1');
-                headlight.setAttribute('opacity', '0.75');
-
-                // 產生 18 顆閃爍星光
-                for (let i = 0; i < 18; i++) {
-                    const star = document.createElement('div');
-                    star.className = 'star-dot';
-                    const size = 2 + Math.random() * 2.5;
-                    star.style.width = `${size}px`;
-                    star.style.height = `${size}px`;
-                    star.style.left = `${Math.random() * 95}%`;
-                    star.style.top = `${8 + Math.random() * 55}%`;
-                    star.style.animationDuration = `${1.2 + Math.random() * 1.5}s`;
-                    star.style.animationDelay = `${Math.random() * 1.5}s`;
-                    particles.appendChild(star);
-                }
-            } else if (mode === 'cloudy') {
-                icon = '⛅';
-                cloudsGroup.setAttribute('opacity', '0.92');
+                particles.appendChild(el);
             }
 
-            pill.textContent = isPreview
-                ? `${descText}（點擊切換）`
-                : `${icon} ${cityText}即時：${tempText}°C ${descText}`;
+            const icons = { sunny: '☀️', cloudy: '⛅', rainy: '🌧️', snowy: '❄️', night: '🌙' };
+            pill.textContent = isPreview ? `${descText}（點擊切換）` : `${icons[mode] || '☀️'} ${cityText}即時：${tempText}°C ${descText}`;
         }
 
         async function fetchDestinationLiveWeather() {
-            const { lat, lng, weatherCity } = UPCOMING_TRIP_CONFIG;
+            const { lat, lng, weatherCity } = activeUpcomingTrip;
             try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day&timezone=auto`;
-                const res = await fetch(url);
+                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day&timezone=auto`);
                 const data = await res.json();
-                if (data && data.current) {
+                if (data?.current) {
                     const temp = Math.round(data.current.temperature_2m);
                     const code = data.current.weather_code;
                     const isDay = data.current.is_day === 1;
-
-                    let mode = 'sunny';
-                    let desc = '晴朗';
-
-                    if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].includes(code)) {
-                        mode = 'rainy';
-                        desc = code >= 95 ? '雷陣雨' : '降雨中';
-                    } else if ([71, 73, 75, 77, 85, 86].includes(code)) {
-                        mode = 'snowy';
-                        desc = '降雪中';
-                    } else if (!isDay) {
-                        mode = 'night';
-                        desc = code <= 1 ? '星夜晴朗' : '夜間多雲';
-                    } else if ([2, 3, 45, 48].includes(code)) {
-                        mode = 'cloudy';
-                        desc = '多雲微風';
-                    }
-
+                    let mode = 'sunny', desc = '晴時多雲';
+                    if ([51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(code)) { mode = 'rainy'; desc = code >= 95 ? '雷陣雨' : '降雨中'; }
+                    else if ([71, 73, 75, 77, 85, 86].includes(code)) { mode = 'snowy'; desc = '降雪中'; }
+                    else if (!isDay) { mode = 'night'; desc = '星夜微風'; }
+                    else if ([2, 3, 45, 48].includes(code)) { mode = 'cloudy'; desc = '多雲微風'; }
                     liveDetectedWeather = { mode, temp, desc };
                     applyIllustrationWeather(mode, weatherCity, temp, desc, false);
                 }
@@ -1516,751 +829,285 @@
             }
         }
 
-        function initUpcomingAndOngoingTrip() {
-            document.getElementById('up-title').textContent = UPCOMING_TRIP_CONFIG.title;
-            document.getElementById('up-route-tag').textContent = UPCOMING_TRIP_CONFIG.routeTag;
-            document.getElementById('up-member-tag').textContent = UPCOMING_TRIP_CONFIG.memberTag;
-            document.getElementById('up-date-text').textContent = UPCOMING_TRIP_CONFIG.dateSubTitle;
-            document.getElementById('up-link-btn').href = `journal.html?trip=${UPCOMING_TRIP_CONFIG.tripId}`;
-            document.getElementById('ongoing-next-name').textContent = UPCOMING_TRIP_CONFIG.title;
-
-            // 點擊右上角天氣膠囊可循環預覽不同天氣動畫
-            document.getElementById('live-weather-pill').addEventListener('click', () => {
-                currentWeatherModeIndex = (currentWeatherModeIndex + 1) % WEATHER_PREVIEW_MODES.length;
-                const picked = WEATHER_PREVIEW_MODES[currentWeatherModeIndex];
-                if (picked.key === 'LIVE') {
-                    applyIllustrationWeather(
-                        liveDetectedWeather.mode,
-                        UPCOMING_TRIP_CONFIG.weatherCity,
-                        liveDetectedWeather.temp,
-                        liveDetectedWeather.desc,
-                        false
-                    );
-                } else {
-                    applyIllustrationWeather(picked.key, UPCOMING_TRIP_CONFIG.weatherCity, picked.temp, picked.label, true);
-                }
-            });
-
+        function renderActiveUpcomingTrip() {
+            const t = activeUpcomingTrip;
+            document.getElementById('up-title').textContent = t.tripTitle;
+            document.getElementById('up-route-tag').textContent = t.routeTag;
+            document.getElementById('up-member-tag').textContent = t.memberTag;
+            document.getElementById('up-date-text').textContent = t.dateSubTitle;
+            document.getElementById('up-vehicle-tag').textContent = t.vehicleTag;
+            document.getElementById('up-memo-list').innerHTML = t.memoHtml;
+            // 綠框：直接連動至 journal.html 的行程安排視角 (view=itinerary)
+            document.getElementById('up-link-btn').href = `journal.html?trip=${t.tripId}&view=itinerary`;
+            document.getElementById('ongoing-next-name').textContent = t.tripTitle;
+            document.getElementById('ongoing-next-date').textContent = t.startDate.replace(/-/g, '/');
             fetchDestinationLiveWeather();
-
-            function updateClockAndCountdown() {
-                const now = new Date();
-
-                try {
-                    const timeStr = new Intl.DateTimeFormat('zh-TW', {
-                        timeZone: UPCOMING_TRIP_CONFIG.timezone,
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                        hour12: false
-                    }).format(now);
-                    document.getElementById('dest-clock').textContent = `🕒 ${UPCOMING_TRIP_CONFIG.timezoneLabel} ${timeStr}`;
-                } catch (e) {
-                    document.getElementById('dest-clock').textContent = `🕒 ${UPCOMING_TRIP_CONFIG.timezoneLabel}`;
-                }
-
-                const depTime = new Date(UPCOMING_TRIP_CONFIG.departureISO);
-                const retTime = new Date(UPCOMING_TRIP_CONFIG.returnISO);
-                const diffMs = depTime - now;
-
-                const badgeEl = document.getElementById('up-status-badge');
-                const noteEl = document.getElementById('up-note-text');
-
-                if (diffMs > 0) {
-                    const totalSecs = Math.floor(diffMs / 1000);
-                    const days = Math.floor(totalSecs / 86400);
-                    const hours = Math.floor((totalSecs % 86400) / 3600);
-                    const mins = Math.floor((totalSecs % 3600) / 60);
-                    const secs = totalSecs % 60;
-
-                    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-                    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-                    document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
-                    document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
-                    badgeEl.textContent = `距離出發還有 ${days} 天`;
-                    noteEl.textContent = `距離展開 ${UPCOMING_TRIP_CONFIG.title} 倒數計時中`;
-                } else if (now <= retTime) {
-                    const currentDayNum = Math.floor((now - depTime) / 86400000) + 1;
-                    document.getElementById('cd-days').textContent = `D${currentDayNum}`;
-                    document.getElementById('cd-hours').textContent = '旅';
-                    document.getElementById('cd-mins').textContent = '途';
-                    document.getElementById('cd-secs').textContent = '中';
-                    badgeEl.textContent = `🟢 旅途進行中・Day ${String(currentDayNum).padStart(2, '0')}`;
-                    noteEl.textContent = `正在享受 ${UPCOMING_TRIP_CONFIG.title} 的美好時光！`;
-
-                    const ongoingContainer = document.getElementById('ongoing-container');
-                    const upcomingWrap = document.getElementById('upcoming-content-wrap');
-                    if (ongoingContainer && upcomingWrap && document.getElementById('ongoing-empty')) {
-                        ongoingContainer.innerHTML = '';
-                        ongoingContainer.appendChild(upcomingWrap.cloneNode(true));
-                    }
-                } else {
-                    document.getElementById('cd-days').textContent = '00';
-                    document.getElementById('cd-hours').textContent = '00';
-                    document.getElementById('cd-mins').textContent = '00';
-                    document.getElementById('cd-secs').textContent = '00';
-                    badgeEl.textContent = '✨ 旅程圓滿完成';
-                    noteEl.textContent = '這段旅程已收錄至已完成的手帳書櫃';
-                }
-            }
-
             updateClockAndCountdown();
-            setInterval(updateClockAndCountdown, 1000);
         }
 
-        /* =========================================================================
-           PART 2：智能行程規劃引擎（結合地理生活圈＋營業時間＋正餐不連吃＋時間軸推算）
-           ========================================================================= */
-        const COUNTRY_REGIONS_MAP = {
-            "日本": [
-                { value: "ALL", label: "不限地區（全區經典智能串聯）" },
-                { value: "山形", label: "山形地區（藏王樹冰・銀山溫泉・山寺）" },
-                { value: "宮城", label: "宮城地區（仙台市區・松島三景・藏王狐狸村）" },
-                { value: "東京", label: "東京地區（上野・谷中銀座・東京鐵塔）" }
-            ]
-        };
+        function updateClockAndCountdown() {
+            const now = new Date();
+            const t = activeUpcomingTrip;
+            try {
+                const timeStr = new Intl.DateTimeFormat('zh-TW', {
+                    timeZone: t.timezone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+                }).format(now);
+                document.getElementById('dest-clock').textContent = `🕒 ${t.timezoneLabel} ${timeStr}`;
+            } catch (e) {}
 
-        const COUNTRY_TRIPS_MAP = {
-            "日本": ["tohoku_2026"]
-        };
+            const depTime = new Date(`${t.startDate}T08:00:00+08:00`);
+            const retTime = new Date(`${t.endDate}T23:59:59+08:00`);
+            const diffMs = depTime - now;
 
-        const SEASONAL_PRECAUTIONS = {
-            "日本": {
-                "winter": {
-                    label: "❄️ 冬季出發（12月～2月）實測防踩雷重點",
-                    tips: [
-                        "<strong>藏王樹冰交通注意：</strong>冬季「藏王樹冰套票」山交巴士窗口常因暴雪可能停駛而暫停販售，實測直接排隊刷 Suica 上車＋到藏王山麓站買纜車票最順暢！",
-                        "<strong>雪地防滑與防凍：</strong>山寺石階與藏王山頂極滑，務必攜帶「簡易冰爪」；零下 10 度手機極易凍關機，請貼暖暖包並備妥行動電源。",
-                        "<strong>銀山溫泉冬季管制：</strong>冬季傍晚點燈時段實施入場與接駁巴士總量管制，非住客務必留意末班車時間。"
-                    ]
-                },
-                "spring": {
-                    label: "🌸 春季出發（3月～5月）實測換季提醒",
-                    tips: [
-                        "<strong>景觀季節轉換：</strong>春季非藏王樹冰季（樹冰約於 3 月上旬結束），建議將藏王調整為溫泉巡禮，重心放在松島遊船、山寺新綠與仙台古剎。",
-                        "<strong>早晚溫差極大：</strong>東北 3～4 月仍有機會遇到春雪或強風，採「洋蔥式穿法」並隨身攜帶防風外套最保險。"
-                    ]
-                },
-                "summer": {
-                    label: "🌿 夏季出發（6月～8月）實測防曬與祭典提醒",
-                    tips: [
-                        "<strong>避暑與防蚊：</strong>山寺與松島綠意盎然，爬山寺階梯請備妥飲水與防蚊液；藏王則是涼爽的高山避暑勝地。",
-                        "<strong>夏日祭典旺季：</strong>8 月上旬適逢東北四大祭（如仙台七夕祭 8/6～8/8），仙台市區飯店建議提早預訂。"
-                    ]
-                },
-                "autumn": {
-                    label: "🍁 秋季出發（9月～11月）實測賞楓與日照提醒",
-                    tips: [
-                        "<strong>日落時間提早：</strong>10～11 月東北約 16:30 就開始天黑，前往山寺、狐狸村或銀山溫泉請務必於上午出發！",
-                        "<strong>高山與平地楓期差：</strong>藏王纜車紅葉約在 10 月中旬最美，松島與仙台市區紅葉則落在 10 月下旬至 11 月中旬。"
-                    ]
+            const badgeEl = document.getElementById('up-status-badge');
+            const noteEl = document.getElementById('up-note-text');
+
+            if (diffMs > 0) {
+                const s = Math.floor(diffMs / 1000);
+                const d = Math.floor(s / 86400);
+                document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+                document.getElementById('cd-hours').textContent = String(Math.floor((s % 86400) / 3600)).padStart(2, '0');
+                document.getElementById('cd-mins').textContent = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+                document.getElementById('cd-secs').textContent = String(s % 60).padStart(2, '0');
+                badgeEl.textContent = `距離出發還有 ${d} 天`;
+                noteEl.textContent = `距離展開 ${t.tripTitle}（${t.startDate.replace(/-/g, '/')} 出發）倒數計時中`;
+            } else if (now <= retTime) {
+                const curDay = Math.floor((now - depTime) / 86400000) + 1;
+                document.getElementById('cd-days').textContent = `D${curDay}`;
+                document.getElementById('cd-hours').textContent = '旅';
+                document.getElementById('cd-mins').textContent = '途';
+                document.getElementById('cd-secs').textContent = '中';
+                badgeEl.textContent = `🟢 旅途進行中・Day ${String(curDay).padStart(2, '0')}`;
+                noteEl.textContent = `正在享受 ${t.tripTitle} 的美好時光！`;
+
+                const ongoingContainer = document.getElementById('ongoing-container');
+                const upcomingWrap = document.getElementById('upcoming-content-wrap');
+                if (ongoingContainer && upcomingWrap && document.getElementById('ongoing-empty')) {
+                    ongoingContainer.innerHTML = '';
+                    ongoingContainer.appendChild(upcomingWrap.cloneNode(true));
                 }
             }
-        };
-
-        const FESTIVAL_NOTES_RULES = [
-            {
-                keywords: ["大崎八幡宮", "松焚祭"],
-                months: [1],
-                badge: "🔥 1月14日限定・千年國寶祭典",
-                note: "<strong>大崎八幡宮「松焚祭（どんと祭）」：</strong>每年 <strong>1 月 14 日晚間</strong> 舉行，境內會燃起神聖的「御神火」並有傳統白裝束「裸參拜」隊伍。"
-            },
-            {
-                keywords: ["藏王", "樹冰"],
-                months: [12, 1, 2, 3],
-                badge: "❄️ 12月下旬～2月下旬限定・藏王樹冰＆夜間點燈",
-                note: "<strong>藏王樹冰（Snow Monsters）：</strong>樹冰奇景為冬季限定（全盛期為 <strong>1 月下旬至 2 月中旬</strong>），特定夜晚還有「樹冰幻想迴廊」點燈。"
-            },
-            {
-                keywords: ["円通院", "松島", "瑞巖寺"],
-                months: [10, 11],
-                badge: "🍁 10月下旬～11月下旬限定・松島円通院紅葉點燈",
-                note: "<strong>松島円通院夜楓：</strong>每年 <strong>10 月下旬至 11 月下旬</strong> 舉辦期間限定夜間紅葉點燈，心字池倒映楓紅如鏡面般夢幻。"
-            },
-            {
-                keywords: ["仙台", "瑞鳳殿"],
-                months: [8],
-                badge: "🎋 8月6日～8月8日限定・仙台七夕祭",
-                note: "<strong>仙台七夕祭＆瑞鳳殿竹燈夜：</strong>每年 <strong>8 月 6 日至 8 日</strong> 仙台商店街會掛滿巨型和紙吹流，瑞鳳殿也會同步舉辦竹燈夜間參拜。"
-            }
-        ];
-
-        const loadedTripDataCache = {};
-
-        function stripHtml(html) {
-            const tmp = document.createElement('div');
-            tmp.innerHTML = html || '';
-            return (tmp.textContent || tmp.innerText || '').trim();
         }
+
+        document.getElementById('live-weather-pill').addEventListener('click', () => {
+            currentWeatherModeIndex = (currentWeatherModeIndex + 1) % WEATHER_PREVIEW_MODES.length;
+            const picked = WEATHER_PREVIEW_MODES[currentWeatherModeIndex];
+            if (picked.key === 'LIVE') {
+                applyIllustrationWeather(liveDetectedWeather.mode, activeUpcomingTrip.weatherCity, liveDetectedWeather.temp, liveDetectedWeather.desc, false);
+            } else {
+                applyIllustrationWeather(picked.key, activeUpcomingTrip.weatherCity, picked.temp, picked.label, true);
+            }
+        });
+
+        /* === PART 2：輕量化智能行程規劃引擎（直接讀取 itinerary/*.json 結構化欄位） === */
+        const COUNTRY_TRIPS_MAP = { "日本": ["tohoku_2026"] };
+        const loadedItineraryCache = {};
 
         function getDistanceKm(lat1, lng1, lat2, lng2) {
-            const R = 6371;
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLng = (lng2 - lng1) * Math.PI / 180;
-            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+            const R = 6371, dLat = (lat2 - lat1) * Math.PI / 180, dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         }
 
-        function formatMinutesToHHMM(totalMinutes) {
-            const rounded = Math.round(totalMinutes / 15) * 15;
-            const h = Math.floor(rounded / 60) % 24;
-            const m = rounded % 60;
-            return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+        function formatMins(m) {
+            const r = Math.round(m / 15) * 15;
+            return `${String(Math.floor(r / 60) % 24).padStart(2, '0')}:${String(r % 60).padStart(2, '0')}`;
         }
 
-        // 核心分類器：同時判定「地區生活圈」與「營業時間／餐期屬性 (slotType)」
-        function analyzeSpotSemantics(ch, dayTitle) {
-            const lat = Number(ch.lat) || 0;
-            const lng = Number(ch.lng) || 0;
-            const title = ch.title || '';
-            const plain = stripHtml(ch.content || '');
-            const fullText = `${title} ${dayTitle} ${plain}`;
-
-            // 1. 過濾純機場／長途轉乘／純車站過卡節點
-            if (lat < 26) return { region: "SKIP" };
-            if (
-                title.includes("成田機場") ||
-                title.includes("羽田機場") ||
-                title.includes("新幹線翼號") ||
-                title.includes("大石田車站轉乘") ||
-                title.includes("賦歸")
-            ) {
-                return { region: "SKIP" };
-            }
-
-            // 2. 判定所屬地區與地理生活圈 (zoneKey)
-            let region = "宮城";
-            let zoneKey = "SENDAI_CITY";
-            let clusterName = "仙台城下町與國寶古剎圈";
-
-            if (lat < 36.5 || fullText.includes("東京") || fullText.includes("上野") || fullText.includes("谷中") || fullText.includes("日暮里") || fullText.includes("淺草")) {
-                region = "東京";
-                zoneKey = "TOKYO_CITY";
-                clusterName = "東京下町與都會經典圈";
-            } else if (title.includes("銀山") || title.includes("伊豆の華") || title.includes("能登屋") || title.includes("白銀瀑布")) {
-                region = "山形";
-                zoneKey = "YAMAGATA_GINZAN";
-                clusterName = "銀山溫泉大正浪漫圈";
-            } else if ((title.includes("藏王") || title.includes("音茶屋") || title.includes("山頂展望台")) && !title.includes("狐狸")) {
-                region = "山形";
-                zoneKey = "YAMAGATA_ZAO";
-                clusterName = "藏王樹冰與溫泉山岳圈";
-            } else if (title.includes("山寺") || title.includes("立石寺") || (lng < 140.55 && lat >= 38.0)) {
-                region = "山形";
-                zoneKey = "YAMAGATA_CITY";
-                clusterName = "山形市區與山寺古剎圈";
-            } else if (title.includes("松島") || title.includes("五大堂") || title.includes("瑞巖寺") || title.includes("円通院")) {
-                region = "宮城";
-                zoneKey = "MIYAGI_MATSUSHIMA";
-                clusterName = "日本三景松島灣海岸圈";
-            } else if (title.includes("狐狸")) {
-                region = "宮城";
-                zoneKey = "MIYAGI_FOX_SENDAI";
-                clusterName = "白石藏王狐狸村與仙台圈";
-            }
-
-            // 3. 判定時間段與餐期屬性 (slotType) 與建議停留分鐘數 (stayMins)
-            // slotType 分為：MORNING_MUST, DAY_SIGHT, MEAL_LUNCH_ONLY, MEAL_DINNER_ONLY, MEAL_FLEX, EVENING_SIGHT, HOTEL_NIGHT
-            let slotType = "DAY_SIGHT";
-            let stayMins = 75;
-            let roleLabel = "日間景點";
-
-            // (A) 飯店入住／夜晚泡湯（必須排在每天最後一站 20:30 後）
-            if (
-                (title.includes("御宿野乃") || title.includes("泡湯") || title.includes("住宿")) &&
-                !title.includes("五十番")
-            ) {
-                slotType = "HOTEL_NIGHT";
-                stayMins = 90;
-                roleLabel = "夜晚泡湯＆住宿";
-            }
-            // (B) 晚餐限定餐廳（如：創作料理 真都 16:00 才營業、山形牛燒肉及夜景、五十番晚餐）
-            else if (
-                title.includes("真都") ||
-                title.includes("山形牛燒肉") ||
-                title.includes("五十番")
-            ) {
-                slotType = "MEAL_DINNER_ONLY";
-                stayMins = 90;
-                roleLabel = "精選晚餐";
-            }
-            // (C) 景區內午餐限定餐廳（如：藏王音茶屋咖哩、銀山溫泉伊豆の華蕎麥麵）
-            else if (title.includes("音茶屋") || title.includes("伊豆の華")) {
-                slotType = "MEAL_LUNCH_ONLY";
-                stayMins = 75;
-                roleLabel = "景區午餐";
-            }
-            // (D) 彈性正餐餐廳（牛たん料理 閣、平田牧場等，可排午餐或晚餐，但同日絕不連吃兩頓正餐）
-            else if (
-                title.includes("牛たん") ||
-                title.includes("牛舌") ||
-                title.includes("平田牧場") ||
-                title.includes("午餐") ||
-                title.includes("晚餐") ||
-                title.includes("饗宴")
-            ) {
-                slotType = "MEAL_FLEX";
-                stayMins = 80;
-                roleLabel = "在地美饌";
-            }
-            // (E) 夜間景觀／展望台夜景（排在傍晚或晚餐前後 17:30～20:00）
-            else if (title.includes("夜景") || title.includes("東京鐵塔")) {
-                slotType = "EVENING_SIGHT";
-                stayMins = 75;
-                roleLabel = "夜間絕景";
-            }
-            // (F) 必須上午／早鳥造訪的遠距或早閉園景點（如：藏王狐狸村、藏王纜車、山寺、銀山溫泉街、松島遊船）
-            else if (
-                title.includes("狐狸村") ||
-                title.includes("藏王纜車") ||
-                title.includes("山寺") ||
-                title.includes("立石寺") ||
-                title.includes("銀山溫泉街") ||
-                title.includes("遊船")
-            ) {
-                slotType = "MORNING_MUST";
-                stayMins = 105;
-                roleLabel = "上午必訪（避開下午閉園）";
-            }
-
-            return { region, zoneKey, clusterName, slotType, stayMins, roleLabel };
-        }
-
-        async function loadClassicSpotsPool(country) {
+        // 直接結合 itinerary/*.json 與 data/*.json 的座標，免除繁瑣字串解析
+        async function loadStructuredSpotsPool(country) {
             const tripIds = COUNTRY_TRIPS_MAP[country] || [];
-            const spotsPool = [];
+            const pool = [];
 
-            for (const tripId of tripIds) {
-                if (!loadedTripDataCache[tripId]) {
-                    try {
-                        const res = await fetch(`data/${tripId}.json`);
-                        if (res.ok) loadedTripDataCache[tripId] = await res.json();
-                    } catch (e) {
-                        console.warn('無法載入旅程資料：', tripId);
-                    }
+            for (const id of tripIds) {
+                if (!loadedItineraryCache[id]) {
+                    const [itinRes, dataRes] = await Promise.all([
+                        fetch(`itinerary/${id}.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+                        fetch(`data/${id}.json`).then(r => r.ok ? r.json() : null).catch(() => null)
+                    ]);
+                    loadedItineraryCache[id] = { itin: itinRes, data: dataRes };
                 }
-                const data = loadedTripDataCache[tripId];
-                if (!data || !Array.isArray(data.days)) continue;
 
-                data.days.forEach((dayObj) => {
-                    const dayStars = (dayObj.stars !== undefined && dayObj.stars !== null) ? Number(dayObj.stars) : 5;
-                    (dayObj.chapters || []).forEach((ch) => {
-                        const meta = analyzeSpotSemantics(ch, dayObj.dayTitle || '');
-                        if (meta.region === "SKIP") return;
+                const { itin, data } = loadedItineraryCache[id];
+                const coordMap = new Map();
+                (data?.days || []).forEach(d => (d.chapters || []).forEach(c => coordMap.set(c.id, { lat: c.lat, lng: c.lng, stars: d.stars || 5 })));
 
-                        let cleanName = (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
-                        if (cleanName.includes("山形大都會飯店與五十番中華料理")) {
-                            cleanName = "山形五十番飯店（鍋氣炒飯＆中華料理）";
+                (itin?.days || []).forEach(d => {
+                    const regionClean = (d.region || '主要地區').replace('地區', '');
+                    (d.spots || []).forEach(sp => {
+                        const coord = coordMap.get(sp.id) || { lat: 38.268, lng: 140.869, stars: 5 };
+                        if (coord.lat < 26 || /小港機場|成田國際機場|新幹線|大石田站/.test(sp.spotName)) return;
+
+                        let slotType = 'DAY_SIGHT', stayMins = 75, role = sp.categoryLabel || '經典必訪';
+                        if (sp.categoryLabel === '溫泉住宿' || /御宿野乃|飯店/.test(sp.spotName) && !sp.isFood) {
+                            slotType = 'HOTEL_NIGHT'; stayMins = 90; role = '♨️ 夜晚泡湯＆住宿';
+                        } else if (sp.isFood) {
+                            const h = parseInt((sp.time || '12:00').split(':')[0], 10);
+                            slotType = h >= 17 ? 'MEAL_DINNER' : (h <= 14 ? 'MEAL_LUNCH' : 'MEAL_FLEX');
+                            stayMins = 80; role = '🍱 在地美饌';
+                        } else if (/狐狸村|藏王纜車|山頂|銀山溫泉|遊船/.test(sp.spotName)) {
+                            slotType = 'MORNING_MUST'; stayMins = 100; role = '🌅 上午優先（避開下午閉園）';
+                        } else if (/鐵塔|夜景/.test(sp.spotName)) {
+                            slotType = 'EVENING_SIGHT'; stayMins = 75; role = '🌇 傍晚／夜景';
                         }
 
-                        const plainContent = stripHtml(ch.content || '');
-                        const shortHighlight = plainContent.length > 82
-                            ? plainContent.slice(0, 82) + '…'
-                            : plainContent;
-
-                        spotsPool.push({
-                            id: ch.id,
-                            name: cleanName || ch.title,
-                            lat: Number(ch.lat),
-                            lng: Number(ch.lng),
-                            region: meta.region,
-                            zoneKey: meta.zoneKey,
-                            cluster: meta.clusterName,
-                            slotType: meta.slotType,
-                            stayMins: meta.stayMins,
-                            roleLabel: meta.roleLabel,
-                            stars: (ch.stars !== undefined && ch.stars !== null) ? Number(ch.stars) : dayStars,
-                            isFieldTest: Boolean(dayObj.isFieldTest),
-                            highlight: shortHighlight,
-                            fullText: `${ch.title} ${plainContent}`,
-                            tripId: tripId,
-                            sourceDay: dayObj.day
+                        pool.push({
+                            id: sp.id,
+                            name: sp.spotName,
+                            lat: Number(coord.lat),
+                            lng: Number(coord.lng),
+                            region: regionClean,
+                            slotType,
+                            stayMins,
+                            roleLabel: role,
+                            stars: coord.stars,
+                            highlight: (sp.intro || '').slice(0, 80) + '…',
+                            tripId: id,
+                            sourceDay: d.day
                         });
                     });
                 });
             }
-            return spotsPool;
+            return pool;
         }
 
-        // 在同一時段群組內以最近鄰排順路動線
-        function sortGroupByNearest(spots, startCoord = null) {
-            if (spots.length <= 1) return [...spots];
-            const remaining = [...spots];
-            const ordered = [];
-
-            if (startCoord) {
-                let nearestIdx = 0;
-                let minDist = Infinity;
-                remaining.forEach((s, idx) => {
-                    const d = getDistanceKm(startCoord.lat, startCoord.lng, s.lat, s.lng);
-                    if (d < minDist) { minDist = d; nearestIdx = idx; }
-                });
-                ordered.push(remaining.splice(nearestIdx, 1)[0]);
-            } else {
-                ordered.push(remaining.shift());
-            }
-
-            while (remaining.length > 0) {
-                const last = ordered[ordered.length - 1];
-                let nearestIdx = 0;
-                let minDist = Infinity;
-                remaining.forEach((s, idx) => {
-                    const d = getDistanceKm(last.lat, last.lng, s.lat, s.lng);
-                    if (d < minDist) { minDist = d; nearestIdx = idx; }
-                });
-                ordered.push(remaining.splice(nearestIdx, 1)[0]);
-            }
-            return ordered;
+        async function updateRegionOptions() {
+            const country = document.getElementById('plan-country').value;
+            const spots = await loadStructuredSpotsPool(country);
+            const regions = [...new Set(spots.map(s => s.region))];
+            const regSelect = document.getElementById('plan-region');
+            regSelect.innerHTML = `<option value="ALL">不限地區（全區經典智能串聯）</option>` +
+                regions.map(r => `<option value="${r}">${r}地區</option>`).join('');
         }
 
-        // 核心排程演算法：組裝單日合理作息（上午景點 ➔ 1頓午餐 ➔ 下午景點 ➔ 1頓晚餐 ➔ 夜晚泡湯/夜景）並標註時間
-        function buildLogicalDayTimeline(dayCandidates) {
-            const morningMusts = dayCandidates.filter(s => s.slotType === 'MORNING_MUST');
-            const daySights = dayCandidates.filter(s => s.slotType === 'DAY_SIGHT');
-            const lunchOnly = dayCandidates.filter(s => s.slotType === 'MEAL_LUNCH_ONLY');
-            const dinnerOnly = dayCandidates.filter(s => s.slotType === 'MEAL_DINNER_ONLY');
-            const flexMeals = dayCandidates.filter(s => s.slotType === 'MEAL_FLEX');
-            const eveningSights = dayCandidates.filter(s => s.slotType === 'EVENING_SIGHT');
-            const hotelNights = dayCandidates.filter(s => s.slotType === 'HOTEL_NIGHT');
+        function buildSingleDaySchedule(candidates) {
+            const mornings = candidates.filter(s => s.slotType === 'MORNING_MUST');
+            const sights = candidates.filter(s => s.slotType === 'DAY_SIGHT');
+            const lunches = candidates.filter(s => s.slotType === 'MEAL_LUNCH' || s.slotType === 'MEAL_FLEX');
+            const dinners = candidates.filter(s => s.slotType === 'MEAL_DINNER');
+            const evenings = candidates.filter(s => s.slotType === 'EVENING_SIGHT');
+            const hotels = candidates.filter(s => s.slotType === 'HOTEL_NIGHT');
 
-            // 1. 決定午餐（最多 1 間）與晚餐（最多 1 間），絕不連排兩頓正餐！
-            let chosenLunch = lunchOnly.shift() || null;
-            let chosenDinner = dinnerOnly.shift() || null;
+            const chosenLunch = lunches.shift() || null;
+            let chosenDinner = dinners.shift() || (lunches.length > 0 ? lunches.shift() : null);
+            if (chosenLunch && chosenDinner && chosenLunch.id === chosenDinner.id) chosenDinner = null;
 
-            if (!chosenLunch && flexMeals.length > 0) {
-                // 若還沒選晚餐且只有 1 間彈性餐廳，若無其他晚餐則留給晚餐或午餐皆可；若有 2 間則 1 午 1 晚
-                if (!chosenDinner && flexMeals.length === 1) {
-                    chosenDinner = flexMeals.shift();
-                } else {
-                    chosenLunch = flexMeals.shift();
+            const daySights = [...mornings, ...sights].slice(0, 3);
+            const amSpots = daySights.slice(0, Math.min(2, Math.ceil(daySights.length / 2)));
+            const pmSpots = daySights.slice(amSpots.length);
+
+            // 防止吃完午餐馬上吃晚餐（中間必須有下午景點隔開）
+            const finalLunch = (chosenLunch && chosenDinner && pmSpots.length === 0) ? null : chosenLunch;
+
+            const stops = [];
+            let clock = 9 * 60 + 30;
+            const pushStop = (sp, minW, maxW, badge) => {
+                if (!sp) return;
+                if (stops.length > 0) {
+                    const prev = stops[stops.length - 1];
+                    const dist = getDistanceKm(prev.lat, prev.lng, sp.lat, sp.lng);
+                    clock += prev.stayMins + (dist < 1.5 ? 15 : Math.min(60, Math.max(20, Math.round(dist * 1.3))));
                 }
-            }
-            if (!chosenDinner && flexMeals.length > 0) {
-                chosenDinner = flexMeals.shift();
-            }
+                if (minW && clock < minW) clock = minW;
+                if (maxW && clock > maxW) clock = maxW;
+                stops.push({ ...sp, timeStr: formatMins(clock), displayRole: badge || sp.roleLabel });
+            };
 
-            // 2. 安排白天的所有景點（優先放 MORNING_MUST 在最前面，接著排順路的 DAY_SIGHT）
-            const allDaytimeSights = [
-                ...sortGroupByNearest(morningMusts),
-                ...sortGroupByNearest(daySights, morningMusts[0] || null)
-            ].slice(0, 4); // 每日白天景點控制在 2～4 個，步調最舒適
-
-            // 切分為「上午景點（午餐前 1～2 站）」與「下午景點（午餐後 1～2 站）」
-            let morningSpots = [];
-            let afternoonSpots = [];
-            if (allDaytimeSights.length <= 1) {
-                morningSpots = allDaytimeSights;
-            } else if (allDaytimeSights.length === 2) {
-                morningSpots = [allDaytimeSights[0]];
-                afternoonSpots = [allDaytimeSights[1]];
-            } else {
-                morningSpots = allDaytimeSights.slice(0, 2);
-                afternoonSpots = allDaytimeSights.slice(2);
-            }
-
-            // 若同時有午餐與晚餐，確保中間一定要有下午景點隔開；若當天沒有下午景點，則只保留其中一頓正餐，避免吃完午餐立刻吃晚餐！
-            if (chosenLunch && chosenDinner && afternoonSpots.length === 0) {
-                chosenLunch = null;
-            }
-
-            // 3. 依自然時間軸順序組裝並計算每站抵達時間 (HH:MM)
-            const scheduledStops = [];
-            let currentClockMins = 9 * 60 + 30; // 預設 09:30 開啟一天的旅程
-
-            function appendStopWithTime(spot, minStartWindow, maxStartWindow, customBadge = null) {
-                if (!spot) return;
-                if (scheduledStops.length > 0) {
-                    const prev = scheduledStops[scheduledStops.length - 1];
-                    const distKm = getDistanceKm(prev.lat, prev.lng, spot.lat, spot.lng);
-                    const travelMins = distKm < 1.5 ? 15 : Math.min(75, Math.max(20, Math.round(distKm * 1.4)));
-                    currentClockMins += prev.stayMins + travelMins;
-                }
-                if (minStartWindow && currentClockMins < minStartWindow) {
-                    currentClockMins = minStartWindow;
-                }
-                if (maxStartWindow && currentClockMins > maxStartWindow) {
-                    currentClockMins = maxStartWindow;
-                }
-
-                scheduledStops.push({
-                    ...spot,
-                    timeStr: formatMinutesToHHMM(currentClockMins),
-                    displayRole: customBadge || spot.roleLabel
-                });
-            }
-
-            // (1) 上午景點 (09:00 ~ 11:45)
-            if (morningSpots.length > 1) currentClockMins = 9 * 60; // 若上午有2站，提早於 09:00 出發
-            morningSpots.forEach(s => appendStopWithTime(s, 9 * 60, 11 * 60 + 30));
-
-            // (2) 午餐時段 (鎖定 12:00 ~ 13:15 之間開動)
-            if (chosenLunch) {
-                appendStopWithTime(chosenLunch, 12 * 60, 13 * 60 + 15, "🍽️ 午餐時光");
-            }
-
-            // (3) 下午景點 (鎖定 13:45 ~ 16:15 之間，確保閉園前造訪)
-            afternoonSpots.forEach(s => appendStopWithTime(s, 13 * 60 + 45, 16 * 60 + 15));
-
-            // (4) 傍晚夜景／散步 (若有，排在 17:00 ~ 18:00)
-            if (eveningSights.length > 0) {
-                appendStopWithTime(eveningSights[0], 17 * 60, 18 * 60, "🌇 傍晚／夜景");
-            }
-
-            // (5) 晚餐時段 (鎖定 18:00 ~ 19:30 之間開動)
-            if (chosenDinner) {
-                appendStopWithTime(chosenDinner, 18 * 60, 19 * 60 + 30, "🥂 晚餐饗宴");
-            }
-
-            // (6) 夜晚飯店泡湯／休息 (鎖定在全天最後一站 20:15 ~ 21:00)
-            if (hotelNights.length > 0) {
-                appendStopWithTime(hotelNights[0], 20 * 60 + 15, 21 * 60 + 15, "♨️ 夜晚泡湯＆住宿");
-            }
-
-            return scheduledStops;
-        }
-
-        function getSeasonKey(monthVal) {
-            const m = parseInt(monthVal, 10);
-            if (isNaN(m)) return null;
-            if (m === 12 || m === 1 || m === 2) return 'winter';
-            if (m >= 3 && m <= 5) return 'spring';
-            if (m >= 6 && m <= 8) return 'summer';
-            return 'autumn';
+            if (amSpots.length > 1) clock = 9 * 60;
+            amSpots.forEach(s => pushStop(s, 9 * 60, 11 * 60 + 30));
+            if (finalLunch) pushStop(finalLunch, 12 * 60, 13 * 60 + 15, '🍽️ 午餐時光');
+            pmSpots.forEach(s => pushStop(s, 13 * 60 + 45, 16 * 60 + 15));
+            if (evenings[0]) pushStop(evenings[0], 17 * 60, 18 * 60, '🌇 傍晚夜景');
+            if (chosenDinner) pushStop(chosenDinner, 18 * 60, 19 * 60 + 30, '🥂 晚餐饗宴');
+            if (hotels[0]) pushStop(hotels[0], 20 * 60 + 30, 21 * 60 + 15, '♨️ 夜晚泡湯＆住宿');
+            return stops;
         }
 
         async function generateSmartItinerary() {
             const country = document.getElementById('plan-country').value;
             const region = document.getElementById('plan-region').value;
-            const rawDays = parseInt(document.getElementById('plan-days').value, 10);
-            const targetDays = Math.min(Math.max(isNaN(rawDays) ? 4 : rawDays, 1), 14);
-            document.getElementById('plan-days').value = targetDays;
+            const targetDays = Math.min(Math.max(parseInt(document.getElementById('plan-days').value, 10) || 4, 1), 14);
             const monthVal = document.getElementById('plan-month').value;
 
-            const allSpots = await loadClassicSpotsPool(country);
-            if (allSpots.length === 0) return;
-
-            let filteredSpots = region === 'ALL'
-                ? [...allSpots]
-                : allSpots.filter(s => s.region === region);
-
-            if (filteredSpots.length === 0) filteredSpots = [...allSpots];
-
-            // 將景點依「地理生活圈 (zoneKey)」分群，避免同一天跨縣市折返跑，並讓正餐均勻分配到不同天
-            const zoneOrder = [
-                "YAMAGATA_ZAO",
-                "YAMAGATA_GINZAN",
-                "YAMAGATA_CITY",
-                "MIYAGI_FOX_SENDAI",
-                "MIYAGI_MATSUSHIMA",
-                "SENDAI_CITY",
-                "TOKYO_CITY"
-            ];
-
-            // 整理出有景點的生活圈佇列
-            const zoneBuckets = {};
-            filteredSpots.forEach(s => {
-                if (!zoneBuckets[s.zoneKey]) zoneBuckets[s.zoneKey] = [];
-                zoneBuckets[s.zoneKey].push(s);
+            const allSpots = await loadStructuredSpotsPool(country);
+            const filtered = region === 'ALL' ? allSpots : allSpots.filter(s => s.region.includes(region));
+            const byDayGroups = {};
+            filtered.forEach(s => {
+                if (!byDayGroups[s.sourceDay]) byDayGroups[s.sourceDay] = [];
+                byDayGroups[s.sourceDay].push(s);
             });
 
-            // 若仙台地區有過多正餐（例如「牛たん料理 閣」與「創作料理 真都」都在仙台市區），自動將其中一間分配給「狐狸村＋仙台圈」或「松島＋仙台圈」，讓每天都能吃到一頓不同的仙台大餐且不重複！
-            if (zoneBuckets["SENDAI_CITY"]) {
-                const sendaiMeals = zoneBuckets["SENDAI_CITY"].filter(s => s.slotType.startsWith("MEAL_"));
-                if (sendaiMeals.length >= 2) {
-                    if (zoneBuckets["MIYAGI_FOX_SENDAI"]) {
-                        const movedMeal = sendaiMeals[0];
-                        zoneBuckets["SENDAI_CITY"] = zoneBuckets["SENDAI_CITY"].filter(s => s.id !== movedMeal.id);
-                        zoneBuckets["MIYAGI_FOX_SENDAI"].push(movedMeal);
-                    }
-                    if (sendaiMeals.length >= 3 && zoneBuckets["MIYAGI_MATSUSHIMA"]) {
-                        const movedMeal2 = sendaiMeals[1];
-                        zoneBuckets["SENDAI_CITY"] = zoneBuckets["SENDAI_CITY"].filter(s => s.id !== movedMeal2.id);
-                        zoneBuckets["MIYAGI_MATSUSHIMA"].push(movedMeal2);
-                    }
-                }
-            }
-
-            // 依生活圈組合成每日候選池
-            const activeZones = zoneOrder.filter(z => zoneBuckets[z] && zoneBuckets[z].length > 0);
-            const newDaysPlan = [];
-            const actualDaysCount = Math.min(targetDays, Math.max(1, activeZones.length));
-
-            for (let d = 0; d < actualDaysCount; d++) {
-                const startZ = Math.floor((d * activeZones.length) / actualDaysCount);
-                const endZ = Math.floor(((d + 1) * activeZones.length) / actualDaysCount);
-                const pickedZoneKeys = activeZones.slice(startZ, Math.max(startZ + 1, endZ));
-
-                let dayCandidates = [];
-                pickedZoneKeys.forEach(zk => {
-                    dayCandidates.push(...(zoneBuckets[zk] || []));
-                });
-
-                const scheduledStops = buildLogicalDayTimeline(dayCandidates);
-                if (scheduledStops.length === 0) continue;
-
-                const clusters = [...new Set(scheduledStops.map(s => s.cluster))];
-                const regions = [...new Set(scheduledStops.map(s => s.region))];
-                const mainClusterTitle = clusters.slice(0, 2).join(' × ');
-                const highlightNames = scheduledStops.slice(0, 2).map(s => s.name.split('（')[0].split('與')[0]).join('・');
-
-                newDaysPlan.push({
-                    dayNum: newDaysPlan.length + 1,
-                    regionBadge: regions.join('・') + '地區',
-                    themeTitle: `${mainClusterTitle}｜${highlightNames}順路漫遊`,
-                    stars: Math.round(scheduledStops.reduce((acc, s) => acc + s.stars, 0) / scheduledStops.length),
-                    spots: scheduledStops
-                });
-            }
-
-            // 渲染季節注意事項
-            const seasonContainer = document.getElementById('season-alert-container');
-            const seasonKey = getSeasonKey(monthVal);
-            if (seasonKey && SEASONAL_PRECAUTIONS[country] && SEASONAL_PRECAUTIONS[country][seasonKey]) {
-                const sInfo = SEASONAL_PRECAUTIONS[country][seasonKey];
-                seasonContainer.innerHTML = `
-                    <div class="season-alert-card">
-                        <div class="alert-title">${sInfo.label}</div>
-                        <ul style="margin: 6px 0 0 0; padding-left: 20px;">
-                            ${sInfo.tips.map(t => `<li style="margin-bottom: 4px;">${t}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            } else {
-                seasonContainer.innerHTML = `
-                    <div class="season-alert-card">
-                        <div class="alert-title">💡 隨意走走・跨季節通用防踩雷提醒</div>
-                        <div>您目前未鎖定出發月份：本路線涵蓋<strong>冬季限定雪景（1～2月藏王樹冰、銀山雪景）</strong>與<strong>四季皆宜的經典名勝（松島遊船、山寺、仙台古剎）</strong>。秋冬日落較早（約16:30天黑），智能行程已將早閉園景點全數排於上午至下午時段！</div>
-                    </div>
-                `;
-            }
-
-            // 偵測節慶與期間限定活動提醒
-            const festivalContainer = document.getElementById('festival-alert-container');
-            const fullPlanText = newDaysPlan.map(d => d.spots.map(s => s.fullText).join(' ')).join(' ');
-            const matchedFestivals = [];
-
-            FESTIVAL_NOTES_RULES.forEach(rule => {
-                if (rule.keywords.some(kw => fullPlanText.includes(kw))) {
-                    const isExactMonth = monthVal !== 'ANY' && rule.months.includes(parseInt(monthVal, 10));
-                    matchedFestivals.push({ ...rule, isExactMonth });
-                }
+            const dayKeys = Object.keys(byDayGroups).slice(0, targetDays);
+            const plans = dayKeys.map((dk, idx) => {
+                const stops = buildSingleDaySchedule(byDayGroups[dk]);
+                const regName = stops[0]?.region || '精選';
+                const names = stops.slice(0, 2).map(s => s.name.split('（')[0].split(' ')[0]).join('・');
+                return {
+                    dayNum: idx + 1,
+                    regionBadge: `${regName}地區`,
+                    themeTitle: `${regName}經典順路漫遊｜${names}`,
+                    spots: stops
+                };
             });
 
-            if (matchedFestivals.length > 0) {
-                festivalContainer.innerHTML = `
-                    <div class="festival-alert-card">
-                        <div class="alert-title">🎉 行程內含「節慶＆期間限定活動」特別備註</div>
-                        <ul style="margin: 6px 0 0 0; padding-left: 20px;">
-                            ${matchedFestivals.map(f => `
-                                <li style="margin-bottom: 6px;">
-                                    <span style="background: #D8E2D5; padding: 1px 8px; border-radius: 10px; font-size: 0.78rem; font-weight: 700; margin-right: 6px;">
-                                        ${f.isExactMonth ? '🌟 您選的月份正逢此活動！' : f.badge}
-                                    </span>
-                                    ${f.note}
-                                </li>
-                            `).join('')}
-                        </ul>
+            const m = parseInt(monthVal, 10);
+            const isWinter = [12, 1, 2].includes(m);
+            document.getElementById('season-alert-container').innerHTML = `
+                <div class="season-alert-card">
+                    <div class="alert-title">${isWinter ? '❄️ 冬季出發實測防踩雷重點' : '💡 跨季節與營業時間防踩雷提醒'}</div>
+                    <div>• <strong>營業時間最佳化：</strong>已將藏王狐狸村（16:00閉園）、藏王纜車與銀山溫泉排於日間時段，並將兩頓正餐以景點隔開不連吃。<br>
+                    • <strong>冬季與山岳注意：</strong>12～2月造訪藏王與銀山溫泉請備妥簡易冰爪、手機貼暖暖包防凍，並留意傍晚末班接駁巴士時間。</div>
+                </div>
+            `;
+
+            document.getElementById('festival-alert-container').innerHTML = `
+                <div class="festival-alert-card">
+                    <div class="alert-title">🎉 期間限定活動提醒</div>
+                    <div>• <strong>1月14日限定：</strong>大崎八幡宮「松焚祭（どんと祭）」御神火與裸參拜。<br>
+                    • <strong>12月下旬～2月下旬：</strong>藏王樹冰全盛期與夜間幻想迴廊點燈。</div>
+                </div>
+            `;
+
+            document.getElementById('generated-days-list').innerHTML = plans.map(p => `
+                <div class="gen-day-card">
+                    <div class="gen-day-header">
+                        <div>
+                            <span class="gen-badge-num">智能規劃 Day ${String(p.dayNum).padStart(2, '0')}</span>
+                            <span class="gen-badge-zone">${p.regionBadge}</span>
+                        </div>
+                        <span class="gen-stars">經典推薦指數 ★★★★★</span>
                     </div>
-                `;
-            } else {
-                festivalContainer.innerHTML = '';
-            }
-
-            // 渲染附帶時間軸的智能行程卡片
-            const listEl = document.getElementById('generated-days-list');
-            listEl.innerHTML = newDaysPlan.map(dayPlan => {
-                const starStr = '★'.repeat(dayPlan.stars) + '☆'.repeat(Math.max(0, 5 - dayPlan.stars));
-
-                const timelineHtml = dayPlan.spots.map((spot, idx) => {
-                    let connectorHtml = '';
-                    if (idx < dayPlan.spots.length - 1) {
-                        const nextSpot = dayPlan.spots[idx + 1];
-                        const distKm = getDistanceKm(spot.lat, spot.lng, nextSpot.lat, nextSpot.lng);
-                        const distText = distKm < 1.5
-                            ? `🚶 順路步行／市區短程移動（約 ${Math.max(0.3, distKm).toFixed(1)} km）`
-                            : `🚌 順路跨區移動（直線距離約 ${distKm.toFixed(1)} km）`;
-                        connectorHtml = `<div class="smart-route-connector">⇣ ${distText}</div>`;
-                    }
-
-                    return `
-                        <div class="smart-spot-item">
-                            <div class="smart-spot-top">
-                                <span class="smart-spot-name">
-                                    <span class="spot-time-badge">${spot.timeStr}</span>
-                                    📍 第 ${idx + 1} 站｜${spot.name}
-                                </span>
-                                <span class="smart-spot-tag">${spot.displayRole}・原載於 ${spot.sourceDay}</span>
-                            </div>
-                            <p class="smart-spot-desc">${spot.highlight}</p>
-                        </div>
-                        ${connectorHtml}
-                    `;
-                }).join('');
-
-                return `
-                    <div class="gen-day-card">
-                        <div class="gen-day-header">
-                            <div class="gen-day-badges">
-                                <span class="gen-badge-num">智能規劃 Day ${String(dayPlan.dayNum).padStart(2, '0')}</span>
-                                <span class="gen-badge-zone">${dayPlan.regionBadge}</span>
-                            </div>
-                            <span class="gen-stars">經典推薦指數 ${starStr}</span>
-                        </div>
-                        <h4 class="gen-day-title">${dayPlan.themeTitle}</h4>
-                        <div class="smart-route-timeline">${timelineHtml}</div>
-                        <div class="gen-day-footer">
-                            <span>已依營業時間、合理餐期與地理座標最佳化當日 ${dayPlan.spots.length} 個站點</span>
-                            <a href="journal.html?trip=${dayPlan.spots[0].tripId}" class="gen-read-link">📖 查看這些景點的實拍遊記與避坑細節 ➔</a>
-                        </div>
+                    <h4 class="gen-day-title">${p.themeTitle}</h4>
+                    <div class="smart-route-timeline">
+                        ${p.spots.map((sp, i) => {
+                            let conn = '';
+                            if (i < p.spots.length - 1) {
+                                const d = getDistanceKm(sp.lat, sp.lng, p.spots[i + 1].lat, p.spots[i + 1].lng);
+                                conn = `<div class="smart-route-connector">⇣ ${d < 1.5 ? `🚶 順路步行（約 ${Math.max(0.3, d).toFixed(1)} km）` : `🚌 順路移動（約 ${d.toFixed(1)} km）`}</div>`;
+                            }
+                            return `
+                                <div class="smart-spot-item">
+                                    <div class="smart-spot-top">
+                                        <span class="smart-spot-name"><span class="spot-time-badge">${sp.timeStr}</span> 📍 第 ${i + 1} 站｜${sp.name}</span>
+                                        <span class="smart-spot-tag">${sp.displayRole}・${sp.sourceDay}</span>
+                                    </div>
+                                    <p class="smart-spot-desc">${sp.highlight}</p>
+                                </div>
+                                ${conn}
+                            `;
+                        }).join('')}
                     </div>
-                `;
-            }).join('');
+                    <div class="gen-day-footer">
+                        <span>已依營業時間與合理餐期最佳化當日 ${p.spots.length} 個站點</span>
+                        <a href="journal.html?trip=${p.spots[0]?.tripId || 'tohoku_2026'}&view=itinerary" class="gen-read-link">📅 查看詳細行程安排與注意事項 ➔</a>
+                    </div>
+                </div>
+            `).join('');
 
             document.getElementById('planner-result').style.display = 'block';
         }
 
-        function initPlanner() {
-            const countrySelect = document.getElementById('plan-country');
-            const regionSelect = document.getElementById('plan-region');
-
-            countrySelect.addEventListener('change', () => {
-                const regions = COUNTRY_REGIONS_MAP[countrySelect.value] || [];
-                regionSelect.innerHTML = regions.map(r => `<option value="${r.value}">${r.label}</option>`).join('');
-            });
-
-            document.getElementById('generate-plan-btn').addEventListener('click', generateSmartItinerary);
-
-            document.getElementById('copy-plan-link-btn').addEventListener('click', () => {
-                const c = encodeURIComponent(countrySelect.value);
-                const r = encodeURIComponent(regionSelect.value);
-                const d = encodeURIComponent(document.getElementById('plan-days').value);
-                const m = encodeURIComponent(document.getElementById('plan-month').value);
-                const shareUrl = `${window.location.origin}${window.location.pathname}?tab=planner&planCountry=${c}&planRegion=${r}&planDays=${d}&planMonth=${m}`;
-
-                navigator.clipboard.writeText(shareUrl).then(() => {
-                    const btn = document.getElementById('copy-plan-link-btn');
-                    const oldText = btn.textContent;
-                    btn.textContent = '✔ 已複製專屬行程連結！';
-                    setTimeout(() => { btn.textContent = oldText; }, 2200);
-                });
-            });
-
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('tab') === 'planner' || params.has('planDays') || params.has('planRegion')) {
-                switchMainTab('tab-planner');
-                if (params.get('planCountry')) countrySelect.value = params.get('planCountry');
-                if (params.get('planRegion')) regionSelect.value = params.get('planRegion');
-                if (params.get('planDays')) document.getElementById('plan-days').value = params.get('planDays');
-                if (params.get('planMonth')) document.getElementById('plan-month').value = params.get('planMonth');
-                generateSmartItinerary();
-            }
-        }
-
-        /* =========================================================================
-           PART 3：已完成旅程的七大洲與國家雙層篩選邏輯
-           ========================================================================= */
+        /* === PART 3：已完成書櫃篩選器 === */
         const continentBtns = document.querySelectorAll('#continent-filters .filter-btn');
         const countryRow = document.getElementById('country-filters');
         const countryBtns = document.querySelectorAll('#country-filters .country-btn');
@@ -2268,87 +1115,54 @@
         const publishedCards = Array.from(document.querySelectorAll('.trip-card:not([data-status="draft"])'));
         const emptyState = document.getElementById('empty-state');
 
-        let currentContinent = 'ALL';
-        let currentCountry = null;
-
+        let currentContinent = 'ALL', currentCountry = null;
         const activeCountries = new Set();
-        publishedCards.forEach(card => {
-            (card.getAttribute('data-country') || '')
-                .split(',')
-                .map(s => s.trim())
-                .filter(Boolean)
-                .forEach(c => activeCountries.add(c));
-        });
-
-        function updateCountryRowVisibility() {
-            if (currentContinent === 'ALL') {
-                countryRow.style.display = 'none';
-                return;
-            }
-            let hasCountriesForContinent = false;
-            countryBtns.forEach(btn => {
-                const btnContinent = (btn.getAttribute('data-continent') || '').trim();
-                const btnCountry = (btn.getAttribute('data-country') || '').trim();
-                if (btnContinent === currentContinent && activeCountries.has(btnCountry)) {
-                    btn.style.display = 'inline-block';
-                    hasCountriesForContinent = true;
-                } else {
-                    btn.style.display = 'none';
-                }
-            });
-            countryRow.style.display = hasCountriesForContinent ? 'flex' : 'none';
-        }
+        publishedCards.forEach(c => (c.dataset.country || '').split(',').map(s => s.trim()).filter(Boolean).forEach(x => activeCountries.add(x)));
 
         function applyFilter() {
-            let visibleCount = 0;
+            let count = 0;
             publishedCards.forEach(card => {
-                const cardContinent = (card.getAttribute('data-continent') || '').trim();
-                const cardCountries = (card.getAttribute('data-country') || '').split(',').map(s => s.trim());
-                const matchContinent = (currentContinent === 'ALL') || (cardContinent === currentContinent);
-                const matchCountry = !currentCountry || cardCountries.includes(currentCountry);
-
-                if (matchContinent && matchCountry) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
+                const matchCont = currentContinent === 'ALL' || card.dataset.continent === currentContinent;
+                const matchCtry = !currentCountry || (card.dataset.country || '').split(',').map(s => s.trim()).includes(currentCountry);
+                card.style.display = (matchCont && matchCtry) ? 'block' : 'none';
+                if (matchCont && matchCtry) count++;
             });
-            cardsGrid.classList.toggle('single-card', visibleCount === 1);
-            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+            cardsGrid.classList.toggle('single-card', count === 1);
+            emptyState.style.display = count === 0 ? 'block' : 'none';
         }
 
-        continentBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const selected = btn.getAttribute('data-continent');
-                currentContinent = (currentContinent === selected && !currentCountry && selected !== 'ALL') ? 'ALL' : selected;
-                currentCountry = null;
-
-                continentBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-continent') === currentContinent));
-                countryBtns.forEach(b => b.classList.remove('active'));
-
-                updateCountryRowVisibility();
-                applyFilter();
+        continentBtns.forEach(btn => btn.addEventListener('click', () => {
+            const sel = btn.dataset.continent;
+            currentContinent = (currentContinent === sel && !currentCountry && sel !== 'ALL') ? 'ALL' : sel;
+            currentCountry = null;
+            continentBtns.forEach(b => b.classList.toggle('active', b.dataset.continent === currentContinent));
+            countryBtns.forEach(b => {
+                b.classList.remove('active');
+                b.style.display = (currentContinent !== 'ALL' && b.dataset.continent === currentContinent && activeCountries.has(b.dataset.country)) ? 'inline-block' : 'none';
             });
-        });
+            countryRow.style.display = currentContinent === 'ALL' ? 'none' : 'flex';
+            applyFilter();
+        }));
 
-        countryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const selectedCountry = btn.getAttribute('data-country');
-                if (currentCountry === selectedCountry) {
-                    currentCountry = null;
-                    countryBtns.forEach(b => b.classList.remove('active'));
-                } else {
-                    currentCountry = selectedCountry;
-                    countryBtns.forEach(b => b.classList.toggle('active', b === btn));
-                }
-                applyFilter();
-            });
-        });
+        countryBtns.forEach(btn => btn.addEventListener('click', () => {
+            currentCountry = currentCountry === btn.dataset.country ? null : btn.dataset.country;
+            countryBtns.forEach(b => b.classList.toggle('active', b.dataset.country === currentCountry));
+            applyFilter();
+        }));
 
         // 初始化執行
-        initUpcomingAndOngoingTrip();
-        initPlanner();
+        discoverAllItineraryTrips();
+        setInterval(updateClockAndCountdown, 1000);
+        updateRegionOptions();
+        document.getElementById('generate-plan-btn').addEventListener('click', generateSmartItinerary);
+        document.getElementById('copy-plan-link-btn').addEventListener('click', () => {
+            const url = `${location.origin}${location.pathname}?tab=planner&planRegion=${encodeURIComponent(document.getElementById('plan-region').value)}&planDays=${document.getElementById('plan-days').value}&planMonth=${document.getElementById('plan-month').value}`;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('copy-plan-link-btn');
+                btn.textContent = '✔ 已複製專屬行程連結！';
+                setTimeout(() => btn.textContent = '📤 複製這份專屬行程連結', 2000);
+            });
+        });
         applyFilter();
     </script>
 </body>
