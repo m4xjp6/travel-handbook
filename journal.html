@@ -139,7 +139,7 @@
             white-space: nowrap;
         }
 
-        /* 頂部四大功能模式列（順序：行程安排 > 資訊情報 > 票券蒐集 > 圖文遊記） */
+        /* 頂部四大功能模式列（順序：行程安排 > 資訊情報 > 票券蒐集 > 圖文遊記，無底框僅選中有底色） */
         .view-mode-bar {
             display: flex;
             gap: 8px;
@@ -630,7 +630,6 @@
             display: block;
         }
 
-        /* 分離標註：📘 景點介紹 vs ⚠️ 注意事項 */
         .spot-sub-block {
             margin-top: 12px;
             padding: 11px 14px;
@@ -654,6 +653,8 @@
             margin-bottom: 4px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 5px;
         }
         .spot-sub-block.intro-block .spot-sub-title { color: #3B6E4C; }
@@ -695,7 +696,7 @@
         }
 
         /* ==============================================================
-           8. 模組二：📡 資訊情報 (結束自動停止更新、連動 Weather/Windy、緊急新聞快訊)
+           8. 模組二：📡 資訊情報
            ============================================================== */
         .info-station-header {
             background: linear-gradient(135deg, #EBF3F9 0%, #F5F9FC 100%);
@@ -814,7 +815,6 @@
         }
         .quick-read-list li:last-child { border-bottom: none; }
 
-        /* 每日行程天氣與風速影響雷達（點擊直連真實氣象網站 Weather.com & Windy） */
         .radar-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -879,11 +879,8 @@
             text-decoration: none;
             transition: background 0.2s;
         }
-        .radar-ext-a:hover {
-            background: #BEE3F8;
-        }
+        .radar-ext-a:hover { background: #BEE3F8; }
 
-        /* 情報剪報篩選與緊急快訊列表 */
         .clip-filter-pills {
             display: flex;
             flex-wrap: wrap;
@@ -962,7 +959,7 @@
         }
 
         /* ==============================================================
-           9. 模組三：🎫 票券蒐集 (全面可收合手風琴、擬真住宿憑證、時刻表連結)
+           9. 模組三：🎫 票券蒐集 (起訖含轉乘、預估花費細項、美食純店名+AI預覽+潛規則)
            ============================================================== */
         .pack-sub-tabs {
             display: grid;
@@ -1017,7 +1014,6 @@
             color: white;
         }
 
-        /* 可收合票券與憑證手風琴外框 */
         .collapsible-ticket-card {
             background: white;
             border-radius: 14px;
@@ -1112,7 +1108,7 @@
             display: block;
         }
 
-        /* 擬真飯店住宿確認憑證樣式 (Hotel Confirmation Voucher) */
+        /* 擬真飯店住宿確認憑證樣式 */
         .hotel-voucher-paper {
             background: #FFFFFF;
             border: 1.5px solid #C8B6A6;
@@ -1189,7 +1185,6 @@
             opacity: 0.75;
         }
 
-        /* 時刻表與票券行動按鈕 */
         .timetable-link-btn {
             display: inline-flex;
             align-items: center;
@@ -1209,12 +1204,14 @@
             color: white;
         }
 
+        /* 旅途預估花費與下方細項明細列表 */
         .budget-card {
             background: white;
             border-radius: 16px;
             padding: 20px;
             border: 1px solid var(--border-soft);
             margin-bottom: 16px;
+            box-shadow: 0 3px 12px rgba(196, 169, 158, 0.1);
         }
         .budget-bar-wrap {
             height: 8px;
@@ -1237,7 +1234,103 @@
             margin-bottom: 4px;
         }
 
-        /* === 10. 地圖標記、尋訪方章、路線方向箭頭與專屬旅程頭貼角色 === */
+        .expense-detail-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 20px;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 3px 12px rgba(196, 169, 158, 0.1);
+        }
+        .expense-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+        .expense-filter-btn {
+            font-family: inherit;
+            border: 1px solid var(--border-soft);
+            background: #FAF7F2;
+            color: var(--text-dark);
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .expense-filter-btn.active {
+            background: var(--accent-brown-dark);
+            border-color: var(--accent-brown-dark);
+            color: white;
+        }
+        .expense-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border-bottom: 1px dashed #EAE3DC;
+            font-size: 0.86rem;
+            gap: 10px;
+        }
+        .expense-item-row:last-child { border-bottom: none; }
+        .expense-item-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .expense-cat-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: #F3ECE3;
+            color: #6E5A4F;
+            white-space: nowrap;
+        }
+        .expense-cat-tag.交通 { background: #EBF3F9; color: #2B5B84; }
+        .expense-cat-tag.住宿 { background: #F2EFE9; color: #5B4B49; }
+        .expense-cat-tag.餐飲 { background: #FDF3EB; color: #9C4A32; }
+        .expense-cat-tag.門票 { background: #EDF7ED; color: #2E6B3E; }
+        .expense-day-tag {
+            font-size: 0.74rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        .expense-item-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .expense-item-amount {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            color: #B84A39;
+            white-space: nowrap;
+        }
+
+        /* 佳餚美食紀錄專屬色塊 (藍框美味預覽 + 綠框用餐潛規則) */
+        .food-review-box {
+            padding: 10px 14px;
+            background: #F2F7FA;
+            border-left: 3.5px solid #3B82F6;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.86rem;
+            line-height: 1.65;
+            color: #2C3E50;
+        }
+        .food-policy-box {
+            padding: 10px 14px;
+            background: #F3FAF4;
+            border-left: 3.5px solid #38A169;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            line-height: 1.65;
+            color: #274E37;
+        }
+
+        /* === 10. 地圖標記、尋訪方章、路線方向箭頭與專屬旅程頭貼 === */
         .custom-marker { background: transparent; border: none; }
         .custom-marker .marker-dot {
             width: 16px;
@@ -1349,6 +1442,7 @@
             .affiliate-btn { width: 100%; justify-content: center; box-sizing: border-box; }
             .radar-grid { grid-template-columns: repeat(2, 1fr); }
             .clip-search-row { grid-template-columns: 1fr; }
+            .pack-sub-tabs { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -1395,20 +1489,18 @@
                 <div class="info-station-header">
                     <span class="info-tag-pill" id="info-trip-code">TRIP LIVE ・ 旅の速報</span>
                     <h2 class="info-station-title" id="info-station-title">旅途即時情報手帳</h2>
-                    <p class="info-station-sub">掌握出發前與旅途中的即時天氣、JR/巴士運行快訊、防災預警與重要新聞。</p>
+                    <p class="info-station-sub">掌握出發前與旅途中的即時天氣、交通運行快訊、防災預警與重要新聞。</p>
                     <div class="info-status-bar">
                         <span><span class="info-live-dot" id="info-live-dot"></span><span id="info-conn-label">即時連線</span> ｜ <span id="info-update-time">更新：讀取中...</span></span>
                         <button type="button" class="info-refresh-btn" id="btn-refresh-info" onclick="refreshInfoStation(true)">↻ 重新整理</button>
                     </div>
                 </div>
 
-                <!-- 30 秒情報速讀 -->
                 <div class="info-card-panel">
                     <h3 class="info-panel-title">⚡ 30 秒情報速讀：出發前與旅途中先看這五件事</h3>
                     <ul class="quick-read-list" id="info-quick-five"></ul>
                 </div>
 
-                <!-- 每日行程天氣與風速影響雷達 (點擊直連 Weather.com / Windy) -->
                 <div class="info-card-panel">
                     <h3 class="info-panel-title">
                         <span>🧭 每日行程天氣與風速影響雷達</span>
@@ -1420,7 +1512,6 @@
                     </div>
                 </div>
 
-                <!-- 情報剪報（累積制去重、旅程結束自動停止新增、標準地區過濾） -->
                 <div class="info-card-panel">
                     <h3 class="info-panel-title">
                         <span>📰 緊急快訊與情報剪報（累積封存制）</span>
@@ -1443,12 +1534,12 @@
                 </div>
             </div>
 
-            <!-- 視角 3：🎫 票券蒐集 (全面可收合手風琴、擬真住宿憑證、時刻表連結) -->
+            <!-- 視角 3：🎫 票券蒐集 (含：票券與住宿憑證、交通時刻與段次、旅途預估花費、佳餚美食紀錄) -->
             <div id="view-pack" class="view-section">
                 <div class="pack-sub-tabs">
                     <button type="button" class="pack-sub-btn active" onclick="switchPackSubTab('pack-vouchers', this)">🎫 票券與住宿憑證</button>
                     <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-transit', this)">🚄 交通時刻與段次</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 旅途盤纏帳目</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 旅途預估花費</button>
                     <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 佳餚美食紀錄</button>
                 </div>
 
@@ -1476,25 +1567,19 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        /* === 1. 全域狀態變數與不同旅程專屬頭貼設定 === */
+        /* ==============================================================
+           1. 全域狀態與雙檔案動態載入引擎 (data/[tripId].json + itinerary/[tripId].json)
+           ============================================================== */
         const urlParams = new URLSearchParams(window.location.search);
         const tripId = urlParams.get('trip') || 'tohoku_2026';
 
-        // 不同旅程的預設專屬頭貼與預設結束日期（亦可直接在 JSON 最外層設定 "avatar" 與 "endDate" 覆蓋）
-        const TRIP_PRESETS = {
-            tohoku_2026: {
-                avatar: '🦊',          // 日本東北：小狐狸
-                endDate: '2026-01-17'  // 已結束的旅程會自動停止更新情報站並封存剪報
-            },
-            malaysia_2027: {
-                avatar: '🦁',          // 南洋星馬：魚尾獅
-                endDate: '2027-04-17'
-            }
-        };
-
-        let rawTripData = {};
-        let currentTripAvatar = TRIP_PRESETS[tripId]?.avatar || '✈️';
-        let currentTripEndDate = TRIP_PRESETS[tripId]?.endDate || null;
+        let rawJournalData = {};
+        let rawItineraryData = {};
+        let currentTripAvatar = '🦊';
+        let currentTripEndDate = null;
+        let currentTripTimezone = 'Asia/Tokyo';
+        let currentCurrencyCode = 'JPY';
+        let currentCurrencySymbol = '¥';
 
         let map = null;
         let baseRouteLayer = null;
@@ -1526,6 +1611,7 @@
         let liveWeatherByDay = {};
         let allInfoClippings = [];
         let currentClipCategory = 'ALL';
+        let allExpenseDetails = [];
 
         const CURVE_MODES = {
             flight: 0.22,
@@ -1536,57 +1622,109 @@
             ropeway: 0.04
         };
 
-        /* === 2. 讀取旅程 JSON 資料並初始化所有模組 === */
-        fetch(`data/${tripId}.json?t=${Date.now()}`, { cache: 'no-store' })
-            .then(res => {
-                if (!res.ok) throw new Error('找不到該旅程的資料檔');
-                return res.json();
-            })
-            .then(data => {
-                rawTripData = data;
-                document.title = data.tripTitle || '電子旅行手帳';
-                document.getElementById('trip-title').textContent = data.tripTitle || '';
+        /* ==============================================================
+           2. 同步讀取 data/*.json (遊記) 與 itinerary/*.json (行程情報) 並自動縫合
+           ============================================================== */
+        Promise.all([
+            fetch(`data/${tripId}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null),
+            fetch(`itinerary/${tripId}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null)
+        ]).then(([journalJson, itinJson]) => {
+            if (!journalJson && !itinJson) {
+                throw new Error(`找不到 data/${tripId}.json 或 itinerary/${tripId}.json 資料檔`);
+            }
 
-                // 1. 決定該旅程專屬地圖移動頭貼 (支援 JSON 的 avatar 欄位或 TRIP_PRESETS)
-                if (data.avatar && data.avatar.trim() !== '') {
-                    currentTripAvatar = data.avatar.trim();
-                } else if (TRIP_PRESETS[tripId]?.avatar) {
-                    currentTripAvatar = TRIP_PRESETS[tripId].avatar;
-                }
+            rawJournalData = journalJson || {};
+            rawItineraryData = itinJson || {};
 
-                // 2. 決定該旅程結束日期 (用來控制情報站是否顯示「旅程已結束」與停止新增剪報)
-                if (data.endDate) {
-                    currentTripEndDate = data.endDate;
-                } else if (Array.isArray(data.days) && data.days.length > 0) {
-                    const lastDayDate = data.days[data.days.length - 1].date;
-                    if (lastDayDate) currentTripEndDate = lastDayDate;
-                }
+            // 1. 讀取全域設定 (優先採用 itinerary/*.json 設定，次之採用 data/*.json)
+            const mainTitle = rawItineraryData.tripTitle || rawJournalData.tripTitle || '電子旅行手帳';
+            document.title = mainTitle;
+            document.getElementById('trip-title').textContent = mainTitle;
 
-                if (Array.isArray(data.days) && data.days.length > 0) {
-                    normalizedDays = data.days;
-                } else if (Array.isArray(data.chapters)) {
-                    const grouped = {};
-                    data.chapters.forEach(ch => {
-                        const d = ch.day || 'Day 01';
-                        if (!grouped[d]) {
-                            grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
-                        }
-                        grouped[d].chapters.push(ch);
+            currentTripAvatar = rawItineraryData.avatar || rawJournalData.avatar || (tripId.includes('malaysia') ? '🦁' : '🦊');
+            currentTripEndDate = rawItineraryData.endDate || rawJournalData.endDate || null;
+            currentTripTimezone = rawItineraryData.timezone || (tripId.includes('malaysia') ? 'Asia/Kuala_Lumpur' : 'Asia/Tokyo');
+            currentCurrencyCode = rawItineraryData.currency || rawJournalData.currency || 'JPY';
+            currentCurrencySymbol = rawItineraryData.currencySymbol || (currentCurrencyCode === 'TWD' ? 'NT$' : (currentCurrencyCode === 'MYR' ? 'RM' : (currentCurrencyCode === 'SGD' ? 'S$' : '¥')));
+
+            // 2. 建立 itinerary 站點索引表 (依 id 與 day 快速對應)
+            const itinSpotMapById = new Map();
+            const itinDayRegionMap = new Map();
+            if (Array.isArray(rawItineraryData.days)) {
+                rawItineraryData.days.forEach(d => {
+                    if (d.day && d.region) itinDayRegionMap.set(d.day, d.region);
+                    (d.spots || []).forEach(sp => {
+                        if (sp.id) itinSpotMapById.set(sp.id, { ...sp, dayRegion: d.region || '' });
                     });
-                    normalizedDays = Object.values(grouped);
-                }
+                });
+            }
 
-                initMap(normalizedDays);
-                buildDayTabs();
-                renderDay('ALL');
-                renderPackAndBudgetViews();
-                refreshInfoStation(false);
-            })
-            .catch(error => {
-                document.getElementById('itinerary-content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
+            // 3. 將遊記 days 與行程 spots 無縫合體
+            let baseDays = [];
+            if (Array.isArray(rawJournalData.days) && rawJournalData.days.length > 0) {
+                baseDays = rawJournalData.days;
+            } else if (Array.isArray(rawJournalData.chapters)) {
+                const grouped = {};
+                rawJournalData.chapters.forEach(ch => {
+                    const d = ch.day || 'Day 01';
+                    if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: ch.isFieldTest || false, chapters: [] };
+                    grouped[d].chapters.push(ch);
+                });
+                baseDays = Object.values(grouped);
+            } else if (Array.isArray(rawItineraryData.days)) {
+                // 若未來新旅程先建了 itinerary/*.json 尚未寫 data/*.json，也能直接顯示！
+                baseDays = rawItineraryData.days.map(d => ({
+                    day: d.day,
+                    dayTitle: d.dayTitle || d.region || d.day,
+                    isFieldTest: false,
+                    chapters: (d.spots || []).map(sp => ({
+                        id: sp.id,
+                        lat: sp.lat || 35.6895,
+                        lng: sp.lng || 139.6917,
+                        zoom: 14,
+                        title: sp.spotName || sp.id,
+                        content: sp.intro || ''
+                    }))
+                }));
+            }
+
+            normalizedDays = baseDays.map((dayObj, dIdx) => {
+                const itinDayObj = Array.isArray(rawItineraryData.days) ? rawItineraryData.days[dIdx] : null;
+                const dayRegion = dayObj.region || itinDayRegionMap.get(dayObj.day) || itinDayObj?.region || '主要旅遊地區';
+
+                const mergedChapters = (dayObj.chapters || []).map((ch, cIdx) => {
+                    const matchedSpot = itinSpotMapById.get(ch.id) || itinDayObj?.spots?.[cIdx] || {};
+                    return {
+                        ...ch,
+                        ...matchedSpot,
+                        // 保留遊記原有的標題、座標、內文與媒體清單
+                        id: ch.id || matchedSpot.id || `d${dIdx + 1}-ch${cIdx + 1}`,
+                        lat: ch.lat !== undefined ? ch.lat : matchedSpot.lat,
+                        lng: ch.lng !== undefined ? ch.lng : matchedSpot.lng,
+                        zoom: ch.zoom || matchedSpot.zoom || 14,
+                        title: ch.title || matchedSpot.spotName || '',
+                        content: ch.content || matchedSpot.intro || '',
+                        dayRegion: dayRegion
+                    };
+                });
+
+                return {
+                    ...dayObj,
+                    region: dayRegion,
+                    chapters: mergedChapters
+                };
             });
 
-        /* === 3. 右側四大視角切換與左側地圖「路線／尋訪」切換 === */
+            initMap(normalizedDays);
+            buildDayTabs();
+            renderDay('ALL');
+            renderPackAndBudgetViews();
+            refreshInfoStation(false);
+        }).catch(error => {
+            document.getElementById('itinerary-content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
+        });
+
+        /* === 3. 視角切換與地圖模式控制 === */
         function switchRightView(viewId) {
             document.querySelectorAll('.view-mode-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-view') === viewId);
@@ -1627,7 +1765,7 @@
             }
         }
 
-        /* === 4. 初始化 Leaflet 地圖與專屬頭貼產生器 === */
+        /* === 4. 地圖初始化、全球交通模式判別與移動頭貼動畫 === */
         function initMap(daysData) {
             const firstCh = daysData?.[0]?.chapters?.[0];
             const startLat = firstCh?.lat || 35.6895;
@@ -1653,7 +1791,6 @@
             return avatarVal || '🦊';
         }
 
-        /* === 5. 距離計算、交通方式判別與路線座標產生 === */
         function getDistanceKm(lat1, lng1, lat2, lng2) {
             const R = 6371;
             const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -1669,25 +1806,25 @@
             const modeAliases = {
                 flight: ['flight', 'airplane', 'plane', '飛機', '航班'],
                 hsr: ['hsr', 'shinkansen', '高鐵', '新幹線'],
-                train: ['train', 'jr', '火車', '台鐵'],
-                metro: ['metro', 'mrt', 'subway', '捷運', '地鐵'],
+                train: ['train', 'jr', 'ktm', '火車', '台鐵', '鐵道'],
+                metro: ['metro', 'mrt', 'subway', 'lrt', '捷運', '地鐵', '輕軌'],
                 boat: ['boat', 'ferry', '遊船', '渡輪'],
                 ropeway: ['ropeway', 'cable_car', '纜車'],
                 walk: ['walk', 'foot', '步行', '散步'],
-                drive: ['drive', 'car', '自駕', '計程車'],
-                bus: ['bus', '巴士', '公車']
+                drive: ['drive', 'car', 'taxi', '自駕', '計程車'],
+                bus: ['bus', '巴士', '公車', '客運']
             };
             for (const [stdMode, aliases] of Object.entries(modeAliases)) {
                 if (aliases.includes(raw)) return stdMode;
             }
 
-            const text = `${currCh.title || ''} ${currCh.content || ''}`;
+            const text = `${currCh.title || ''} ${currCh.spotName || ''} ${currCh.routeFromTo || ''}`;
             if (distKm > 250 || /直飛|航班|班機|起飛|降落/.test(text)) return 'flight';
             if (/遊船|觀光船|渡輪|乘船/.test(text)) return 'boat';
-            if (/纜車|山頂站/.test(currCh.title || '')) return 'ropeway';
-            if (/新幹線|高鐵/.test(currCh.title || '')) return 'hsr';
-            if (/JR|仙石線|奧羽本線|電鐵|Skyliner|火車|台鐵/i.test(currCh.title || '')) return 'train';
-            if (/地鐵|捷運|Metro/i.test(currCh.title || '')) return 'metro';
+            if (/纜車|山頂站/.test(text)) return 'ropeway';
+            if (/新幹線|高鐵/.test(text)) return 'hsr';
+            if (/JR|仙石線|奧羽本線|電鐵|Skyliner|火車|台鐵/i.test(text)) return 'train';
+            if (/地鐵|捷運|Metro|MRT/i.test(text)) return 'metro';
             return distKm <= 3.5 ? 'walk' : 'bus';
         }
 
@@ -1748,7 +1885,6 @@
             return fallbackCoords;
         }
 
-        /* === 6. 繪製當前移動路線與旅人頭貼移動動畫 === */
         function drawActiveArrowRoute(coords) {
             activeRouteLayer.clearLayers();
             if (!coords || coords.length < 2) return;
@@ -1875,7 +2011,6 @@
             currentActiveIndex = newIndex;
         }
 
-        /* === 7. 天數導覽列建立與切換 (Day Tabs) === */
         function buildDayTabs() {
             const tabsContainer = document.getElementById('day-tabs');
             tabsContainer.innerHTML = '';
@@ -1900,7 +2035,7 @@
             });
         }
 
-        /* === 8. 多媒體畫廊、預訂按鈕與燈箱功能 === */
+        /* === 5. 多媒體畫廊、預訂按鈕與燈箱功能 === */
         function isMediaFile(str) {
             if (!str || typeof str !== 'string') return false;
             const clean = str.trim();
@@ -2116,7 +2251,7 @@
         }, { passive: true });
 
         /* ==============================================================
-           9. 輔助解析器：自動拆解「景點介紹」與「注意事項」、標準地區與官方時刻表
+           6. 萬用章節解析器 (優先讀取 itinerary/*.json 欄位，未填時自動提供通用備援)
            ============================================================== */
         function stripHtmlText(html) {
             const div = document.createElement('div');
@@ -2124,179 +2259,107 @@
             return (div.textContent || div.innerText || '').trim();
         }
 
-        // 將章節內容智慧拆解為「📘 景點介紹 (introText)」與「⚠️ 注意事項 (noteText)」
-        function extractIntroAndNote(ch) {
-            let introText = (ch.intro || '').trim();
-            let noteText = (ch.note || '').trim();
-
-            if (!introText || !noteText) {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = ch.content || '';
-
-                // 抓取所有 callout-box 提示框作為「注意事項」
-                const callouts = tempDiv.querySelectorAll('.callout-box');
-                const extractedNotes = [];
-                callouts.forEach(box => {
-                    const titleEl = box.querySelector('.callout-title');
-                    const titleStr = titleEl ? `【${titleEl.textContent.trim()}】` : '';
-                    if (titleEl) titleEl.remove();
-                    const iconEl = box.querySelector('.callout-icon');
-                    if (iconEl) iconEl.remove();
-                    const bodyStr = (box.textContent || '').trim().replace(/\s+/g, ' ');
-                    if (titleStr || bodyStr) {
-                        extractedNotes.push(`${titleStr}${bodyStr}`);
-                    }
-                    box.remove();
-                });
-
-                const mainParagraphText = (tempDiv.textContent || '').trim();
-                if (!introText) introText = mainParagraphText || stripHtmlText(ch.content || '');
-                if (!noteText && extractedNotes.length > 0) {
-                    noteText = extractedNotes.join('\n\n');
-                }
-            }
-
-            return { introText, noteText };
-        }
-
-        // 依經緯度與內容歸納「標準大地區名稱」（避免情報剪報下拉選單出現景點或車站名）
-        function resolveStandardRegion(lat, lng, text = '') {
-            if (lat < 26) return '台灣（出發地）';
-            if (lat < 36.5 || /東京|成田|上野|谷中|日暮里|淺草|Skyliner/i.test(text)) return '東京・關東地區';
-            if (/銀山|大石田|藏王溫泉|藏王纜車|山寺|立石寺|山形|音茶屋|五十番/i.test(text) || (lng < 140.55 && lat >= 37.8)) {
-                return '山形地區';
-            }
-            if (/仙台|松島|狐狸村|瑞巖寺|円通院|五大堂|瑞鳳殿|大崎八幡宮|白石/i.test(text) || lat >= 37.8) {
-                return '宮城・仙台地區';
-            }
-            if (lat >= 1 && lat <= 7) return '星馬地區';
-            return '日本東北地區';
-        }
-
-        // 自動匹配各大交通工具的官方時刻表網址與對號座時間資訊
-        function resolveTransitTimetableInfo(ch, mode, defaultTimeStr) {
-            const title = ch.title || '';
-            const content = stripHtmlText(ch.content || '');
-            const full = `${title} ${content}`;
-
-            let timeRange = ch.flightTime || ch.scheduleTime || defaultTimeStr;
-            let seatType = ch.seatType || '';
-            let timetableUrl = ch.timetableUrl || '';
-            let timetableLabel = '查看官方時刻表';
-
-            if (/小港機場|FD234|直飛成田/i.test(full)) {
-                timeRange = ch.flightTime || '08:05 高雄起飛 ➔ 12:30 成田抵達 (AirAsia FD234)';
-                seatType = '✈️ 國際航班（指定劃位）';
-                timetableUrl = timetableUrl || 'https://www.kia.gov.tw/InstantScheduleC001110.aspx';
-                timetableLabel = '小港機場航班時刻表';
-            } else if (/Skyliner/i.test(full)) {
-                timeRange = ch.scheduleTime || (/返回機場|賦歸/i.test(full) ? '10:00 京成上野發 ➔ 10:41 成田機場著' : '13:00 成田機場發 ➔ 13:41 京成上野著');
-                seatType = '💺 全車對號指定席 (Skyliner)';
-                timetableUrl = timetableUrl || 'https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/traffic/skyliner.php';
-                timetableLabel = '京成 Skyliner 官方時刻表';
-            } else if (/新幹線|翼號|Tsubasa/i.test(full)) {
-                timeRange = ch.scheduleTime || '16:06 上野發 ➔ 18:43 山形著 (山形新幹線 翼號)';
-                seatType = '💺 對號指定席 (JR 新幹線)';
-                timetableUrl = timetableUrl || 'https://www.jreast-timetable.jp/';
-                timetableLabel = 'JR 東日本新幹線時刻表';
-            } else if (/山交巴士|藏王纜車/i.test(full)) {
-                timeRange = ch.scheduleTime || '07:40 山形站前1號月台發 ➔ 08:25 藏王溫泉著';
-                seatType = '🚌 路線巴士（排隊依序入座）';
-                timetableUrl = timetableUrl || 'https://www.yamakobus.jp/busroute/regular/zao-onsen/';
-                timetableLabel = '山交巴士（山形—藏王）時刻表';
-            } else if (/大石田|銀山溫泉/i.test(full)) {
-                timeRange = ch.scheduleTime || '09:18 山形發 (JR奧羽本線) ➔ 大石田轉乘銀山接駁巴士';
-                seatType = '🚃 JR 自由席 ＋ 溫泉接駁巴士';
-                timetableUrl = timetableUrl || 'https://www.hanagasa-bus-taisei.co.jp/base.html';
-                timetableLabel = '銀山溫泉花笠巴士時刻表';
-            } else if (/仙石線|松島/i.test(full)) {
-                timeRange = ch.scheduleTime || '08:30 JR 仙台站發 ➔ 09:10 松島海岸站著';
-                seatType = '🚃 JR 仙石線（區間自由席）';
-                timetableUrl = timetableUrl || 'https://www.jreast-timetable.jp/';
-                timetableLabel = 'JR 仙石線官方時刻表';
-            } else if (/遊船/i.test(full)) {
-                timeRange = ch.scheduleTime || '10:00 松島灣仁王丸號出航（航程約 50 分鐘）';
-                seatType = '⛴️ 觀光船班（定時出航）';
-                timetableUrl = timetableUrl || 'https://www.matsushima.or.jp/cruise/timetable/';
-                timetableLabel = '松島島巡り觀光船時刻表';
-            } else if (/成田機場.*中華料理|賦歸|回程/i.test(full) && mode === 'flight') {
-                timeRange = ch.flightTime || '13:35 東京成田起飛 ➔ 17:10 高雄小港抵達';
-                seatType = '✈️ 國際航班（指定劃位）';
-                timetableUrl = timetableUrl || 'https://www.narita-airport.jp/ch2/flight/flight-search/';
-                timetableLabel = '成田機場航班時刻表';
-            } else {
-                seatType = (mode === 'hsr' || mode === 'flight') ? '💺 對號指定席' : '🚌 依班次運行';
-                timetableUrl = timetableUrl || 'https://www.jreast-timetable.jp/';
-                timetableLabel = '查看路線時刻表';
-            }
-
-            return { timeRange, seatType, timetableUrl, timetableLabel };
+        function alignToNextDepartureTime(rawTimeStr, fallbackTime = '09:30') {
+            if (!rawTimeStr) return fallbackTime;
+            const match = rawTimeStr.match(/(\d{1,2}):(\d{2})/);
+            if (!match) return rawTimeStr;
+            return `${String(parseInt(match[1], 10)).padStart(2, '0')}:${match[2]}`;
         }
 
         function classifyChapterMeta(ch, idxInDay, prevCh) {
-            const title = ch.title || '';
-            const { introText, noteText } = extractIntroAndNote(ch);
+            const rawTitle = ch.title || '';
+            const cleanFromTitle = rawTitle.replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '').trim();
+            const pureName = (ch.spotName && ch.spotName.trim() !== '') ? ch.spotName.trim() : cleanFromTitle;
 
+            const defaultHours = ['08:30', '10:30', '12:30', '14:30', '16:30', '18:30', '20:30'];
+            const timeStr = ch.time || defaultHours[Math.min(idxInDay, defaultHours.length - 1)];
+            const categoryLabel = ch.categoryLabel || '經典必訪';
+
+            // 尋訪印章判定 (景 / 食 / 住 / 驛)
             let stampChar = '景';
             let stampClass = 'spot';
-            let categoryLabel = ch.categoryLabel || '經典必訪';
-
-            if (/飯店|住宿|御宿野乃|Hotel|泡湯/i.test(title) && !/五十番/.test(title)) {
+            if (categoryLabel.includes('住宿') || /飯店|住宿|御宿野乃|Hotel|APA/i.test(pureName)) {
                 stampChar = '住';
                 stampClass = 'hotel';
-                categoryLabel = ch.categoryLabel || '溫泉住宿';
-            } else if (/午餐|晚餐|料理|牛たん|牛舌|燒肉|真都|平田牧場|五十番|伊豆の華|音茶屋|カフェ|咖啡|甜點/i.test(title)) {
+            } else if (ch.isFood || categoryLabel.includes('美饌') || /餐廳|料理|牛たん|牛舌|燒肉|真都|平田牧場|五十番|伊豆の華|音茶屋|山頭火|民福|謝朋殿|肉の|カフェ|咖啡/i.test(pureName)) {
                 stampChar = '食';
                 stampClass = 'food';
-                categoryLabel = ch.categoryLabel || '在地美饌';
-            } else if (/機場|新幹線|車站|轉乘|啟程|賦歸|Skyliner/i.test(title)) {
+            } else if (categoryLabel.includes('交通') || /機場|新幹線|車站|轉乘|Skyliner/i.test(pureName)) {
                 stampChar = '驛';
                 stampClass = 'transit';
-                categoryLabel = ch.categoryLabel || '交通樞紐';
-            } else if (/神社|八幡宮|山寺|立石寺|瑞巖寺|円通院|五大堂|瑞鳳殿/i.test(title)) {
-                categoryLabel = ch.categoryLabel || '歷史古剎';
-            } else if (/樹冰|藏王|銀山|松島|狐狸村|鐵塔|展望台/i.test(title)) {
-                categoryLabel = ch.categoryLabel || '名勝絕景';
             }
 
-            const defaultHours = ['09:00', '11:00', '12:30', '14:30', '16:30', '18:30', '20:30'];
-            const timeStr = ch.time || defaultHours[Math.min(idxInDay, defaultHours.length - 1)];
+            // 景點介紹與注意事項 (優先讀取 itinerary/*.json 的 intro 與 note；若新旅程尚未填寫則提供通用客觀導覽)
+            const introText = (ch.intro && ch.intro.trim() !== '')
+                ? ch.intro.trim()
+                : `【${pureName}】為本段行程之重要參訪據點（座標：${Number(ch.lat).toFixed(4)}, ${Number(ch.lng).toFixed(4)}）。建議搭配左側互動地圖確認周邊動線與停留時間。`;
 
+            const noteText = (ch.note && ch.note.trim() !== '')
+                ? ch.note.trim()
+                : `• 出發前建議確認【${pureName}】之最新官方營業時間與公休日。\n• 若涉及門票、交通票券或熱門時段入場，建議提前完成預約並預留轉乘緩衝時間。`;
+
+            // 交通段次與時刻表資訊
             let transitInfo = null;
-            if (prevCh && prevCh.lat && prevCh.lng && ch.lat && ch.lng) {
-                const distKm = getDistanceKm(prevCh.lat, prevCh.lng, ch.lat, ch.lng);
+            const hasExplicitTransit = Boolean(ch.routeFromTo || ch.transitMins !== undefined || ch.transitCost !== undefined);
+            if ((prevCh && prevCh.lat && prevCh.lng && ch.lat && ch.lng) || hasExplicitTransit) {
+                const distKm = (prevCh && prevCh.lat && ch.lat) ? getDistanceKm(prevCh.lat, prevCh.lng, ch.lat, ch.lng) : 10;
                 const mode = resolveTransportMode(ch, distKm);
                 const modeMap = {
                     flight: { icon: '✈️', name: '國際航班', mins: 210, cost: 8500 },
-                    hsr:    { icon: '🚄', name: 'JR 新幹線', mins: Math.max(45, Math.round(distKm * 0.45)), cost: Math.round(distKm * 32) },
-                    train:  { icon: '🚃', name: 'JR／特急電車', mins: Math.max(20, Math.round(distKm * 1.1)), cost: Math.max(240, Math.round(distKm * 22)) },
-                    metro:  { icon: '🚇', name: '地鐵移動', mins: 18, cost: 210 },
+                    hsr:    { icon: '🚄', name: '高速鐵路／新幹線', mins: Math.max(45, Math.round(distKm * 0.45)), cost: Math.round(distKm * 32) },
+                    train:  { icon: '🚃', name: '鐵道列車', mins: Math.max(20, Math.round(distKm * 1.1)), cost: Math.max(240, Math.round(distKm * 22)) },
+                    metro:  { icon: '🚇', name: '地鐵／捷運', mins: 18, cost: 210 },
                     ropeway:{ icon: '🚡', name: '山岳纜車', mins: 20, cost: 3800 },
                     boat:   { icon: '⛴️', name: '觀光遊船', mins: 50, cost: 1500 },
-                    bus:    { icon: '🚌', name: '路線巴士／接駁', mins: Math.max(20, Math.round(distKm * 1.6)), cost: Math.max(500, Math.round(distKm * 45)) },
+                    bus:    { icon: '🚌', name: '路線／高速巴士', mins: Math.max(20, Math.round(distKm * 1.6)), cost: Math.max(500, Math.round(distKm * 45)) },
                     drive:  { icon: '🚕', name: '計程車／專車', mins: Math.max(15, Math.round(distKm * 1.3)), cost: Math.max(1200, Math.round(distKm * 300)) },
-                    walk:   { icon: '🚶', name: '漫步前往', mins: Math.max(6, Math.round(distKm * 12)), cost: 0 }
+                    walk:   { icon: '🚶', name: '漫步前往', mins: Math.max(5, Math.round(distKm * 12)), cost: 0 }
                 };
                 const picked = modeMap[mode] || modeMap.bus;
-                const prevClean = (prevCh.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
-                const currClean = (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
-                const ttInfo = resolveTransitTimetableInfo(ch, mode, timeStr);
+                const prevPure = prevCh ? (prevCh.spotName || (prevCh.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '')).trim() : '起始站';
+                const routeText = (ch.routeFromTo && ch.routeFromTo.trim() !== '') ? ch.routeFromTo.trim() : `${prevPure} → ${pureName}`;
+                const alignedClock = alignToNextDepartureTime(timeStr);
 
                 transitInfo = {
                     mode,
                     icon: picked.icon,
                     modeName: picked.name,
-                    routeText: `${prevClean.slice(0, 9)} → ${currClean.slice(0, 9)}`,
+                    routeText,
+                    alignedClock,
+                    timeRange: ch.scheduleTime || `${alignedClock} 發車`,
+                    seatType: ch.seatType || ((mode === 'hsr' || mode === 'flight') ? '💺 對號指定席' : '🚌 依班次運行'),
                     mins: ch.transitMins !== undefined ? Number(ch.transitMins) : picked.mins,
                     cost: ch.transitCost !== undefined ? Number(ch.transitCost) : picked.cost,
-                    ...ttInfo
+                    timetableUrl: ch.timetableUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(pureName)}`,
+                    timetableLabel: ch.timetableLabel || '查看時刻表與路線'
                 };
             }
 
-            return { stampChar, stampClass, categoryLabel, timeStr, transitInfo, introText, noteText };
+            // 美食紀錄與預約潛規則
+            const isFoodSpot = Boolean(ch.isFood || stampChar === '食');
+            const foodReview = (ch.foodReview && ch.foodReview.trim() !== '')
+                ? ch.foodReview.trim()
+                : `🤖 【AI 美味預覽（用餐後可從後台更新）】「${pureName}」匯聚在地代表性風味料理與嚴選食材，待實際品嚐後可直接從 /admin/ 後台更新您的實測心得！`;
+            const foodPolicy = (ch.foodPolicy && ch.foodPolicy.trim() !== '')
+                ? ch.foodPolicy.trim()
+                : `• 建議留意熱門時段是否需事先預約、店內是否設有每人低消一份餐點或飲品規定，以及現場支援之支付方式。`;
+
+            return {
+                stampChar,
+                stampClass,
+                pureName,
+                categoryLabel,
+                timeStr,
+                transitInfo,
+                introText,
+                noteText,
+                isFoodSpot,
+                foodReview,
+                foodPolicy
+            };
         }
 
-        /* === 10. 渲染日記內容、行程手風琴卡（分離介紹與注意事項）與地圖節點 === */
+        /* === 7. 渲染行程安排與圖文遊記 === */
         function setActiveChapter(activeSection, activeMarker) {
             document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
             if (activeSection) activeSection.classList.add('active');
@@ -2317,7 +2380,7 @@
                     transitionToChapter(chIndex);
                     const topNav = document.querySelector('.top-nav');
                     const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
-                    const targetY = window.pageYOffset + sec.getBoundingClientRect().top - navBottom - 20;
+                    const targetY = window.pageYOffset + section.getBoundingClientRect().top - navBottom - 20;
                     window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
                 }
             }, 80);
@@ -2385,8 +2448,7 @@
                     if (meta.stampChar === '住') hotelCount++;
                     else spotCount++;
 
-                    const cleanTitle = (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
-                    cleanSpotNames.push(cleanTitle);
+                    cleanSpotNames.push(meta.pureName);
 
                     // 1. 建立圖文遊記章節卡片
                     const section = document.createElement('section');
@@ -2401,8 +2463,8 @@
                     `;
                     contentDiv.appendChild(section);
 
-                    // 2. 累積交通時間與花費
-                    if (meta.transitInfo && meta.transitInfo.mins < 180) {
+                    // 2. 累積交通時間與花費 (排除長途國際班機時間，呈現當日區域移動)
+                    if (meta.transitInfo && idxInDay > 0 && meta.transitInfo.mode !== 'flight') {
                         dayTotalTransitMins += meta.transitInfo.mins;
                         dayTotalTransitCost += meta.transitInfo.cost;
                         dayItinCardsHTML.push(`
@@ -2412,29 +2474,14 @@
                                     <span>${meta.transitInfo.modeName}｜${meta.transitInfo.routeText}</span>
                                 </div>
                                 <div class="itin-transit-right">
-                                    ${meta.transitInfo.mins} 分 &nbsp; ¥${meta.transitInfo.cost.toLocaleString()}
+                                    ${meta.transitInfo.mins} 分 &nbsp; ${currentCurrencySymbol}${meta.transitInfo.cost.toLocaleString()}
                                 </div>
                             </div>
                         `);
                     }
 
-                    const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cleanTitle)}&query_place_id=${ch.lat},${ch.lng}`;
+                    const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(meta.pureName)}&query_place_id=${ch.lat},${ch.lng}`;
                     const isFirstOpen = idxInDay === 0 ? 'open' : '';
-
-                    // 分離顯示「📘 景點介紹」與「⚠️ 注意事項＆攻略備註」
-                    const introBlockHTML = meta.introText ? `
-                        <div class="spot-sub-block intro-block">
-                            <div class="spot-sub-title">📘 景點介紹</div>
-                            <p class="spot-sub-text">${meta.introText}</p>
-                        </div>
-                    ` : '';
-
-                    const noteBlockHTML = meta.noteText ? `
-                        <div class="spot-sub-block note-block">
-                            <div class="spot-sub-title">⚠️ 注意事項＆攻略備註</div>
-                            <p class="spot-sub-text">${meta.noteText}</p>
-                        </div>
-                    ` : '';
 
                     dayItinCardsHTML.push(`
                         <div class="spot-intro-card ${isFirstOpen}" id="itin-card-${ch.id}">
@@ -2442,13 +2489,19 @@
                                 <div class="spot-header-left">
                                     <span class="spot-time-box">${meta.timeStr}</span>
                                     <span class="spot-cat-pill">${meta.categoryLabel}</span>
-                                    <span class="spot-title-text">${cleanTitle}</span>
+                                    <span class="spot-title-text">${meta.pureName}</span>
                                 </div>
                                 <span class="spot-toggle-arrow">▶</span>
                             </div>
                             <div class="spot-card-body">
-                                ${introBlockHTML}
-                                ${noteBlockHTML}
+                                <div class="spot-sub-block intro-block">
+                                    <div class="spot-sub-title"><span>📘 景點介紹</span></div>
+                                    <p class="spot-sub-text">${meta.introText}</p>
+                                </div>
+                                <div class="spot-sub-block note-block">
+                                    <div class="spot-sub-title"><span>⚠️ 注意事項＆攻略備註</span></div>
+                                    <p class="spot-sub-text">${meta.noteText}</p>
+                                </div>
                                 <div class="spot-action-pills">
                                     <a href="${gmapUrl}" target="_blank" rel="noopener" class="spot-pill-btn">🗺️ Google 地圖導航</a>
                                     <button type="button" class="spot-pill-btn loc" onclick="focusSpotOnMap(${chIndex})">📍 定位至左側地圖</button>
@@ -2459,12 +2512,11 @@
                         </div>
                     `);
 
-                    // 3. 建立地圖圓點標記與尋訪印章標記
                     if (ch.lat && ch.lng) {
                         simpleLatLngs.push([ch.lat, ch.lng]);
                         const marker = L.marker([ch.lat, ch.lng], { icon: dotIcon }).addTo(markersLayer);
 
-                        marker.bindTooltip(`${dayObj.day}｜${ch.title}`, {
+                        marker.bindTooltip(`${dayObj.day}｜${meta.pureName}`, {
                             direction: 'top',
                             offset: [0, -10],
                             className: 'marker-tooltip'
@@ -2501,7 +2553,7 @@
                             iconAnchor: [13, 13]
                         });
                         const stampMarker = L.marker([ch.lat, ch.lng], { icon: stampIcon }).addTo(exploreStampsLayer);
-                        stampMarker.bindTooltip(`[${meta.stampChar}] ${cleanTitle}`, {
+                        stampMarker.bindTooltip(`[${meta.stampChar}] ${meta.pureName}`, {
                             direction: 'top',
                             offset: [0, -12],
                             className: 'marker-tooltip'
@@ -2530,7 +2582,7 @@
                         </div>
                         <div class="itin-sum-col">
                             <div class="itin-sum-label">預估區域交通花費</div>
-                            <div class="itin-sum-val cost">¥${dayTotalTransitCost.toLocaleString()}</div>
+                            <div class="itin-sum-val cost">${currentCurrencySymbol}${dayTotalTransitCost.toLocaleString()}</div>
                         </div>
                     </div>
                     ${dayItinCardsHTML.join('')}
@@ -2538,7 +2590,7 @@
                 itinDiv.appendChild(dayItinBlock);
             });
 
-            document.getElementById('map-stats-pill').textContent = `${daysToRender.length} 日行跡・${spotCount} 處尋訪・${hotelCount} 晚住宿`;
+            document.getElementById('map-stats-pill').textContent = `${daysToRender.length} 日行跡・${spotCount} 處尋訪・${hotelCount} 處住宿點`;
 
             if (simpleLatLngs.length > 1) {
                 L.polyline(simpleLatLngs, {
@@ -2568,7 +2620,7 @@
         }
 
         /* ==============================================================
-           11. 📡 資訊情報引擎 (結束自動凍結、Weather/Windy直連、累積去重緊急快訊)
+           8. 📡 資訊情報引擎 (讀取 itinerary/*.json 的 urgentNews 與 endDate)
            ============================================================== */
         function isTripAlreadyEnded() {
             if (!currentTripEndDate) return false;
@@ -2584,10 +2636,10 @@
             const updateTimeEl = document.getElementById('info-update-time');
             const archiveBadge = document.getElementById('clip-archive-badge');
 
+            const mainTitle = rawItineraryData.tripTitle || rawJournalData.tripTitle || '旅途';
             document.getElementById('info-trip-code').textContent = `${tripId.toUpperCase()} ・ 旅の速報`;
-            document.getElementById('info-station-title').textContent = `${(rawTripData.tripTitle || '旅途').split('｜').pop().trim()}情報手帳`;
+            document.getElementById('info-station-title').textContent = `${mainTitle.split('｜').pop().trim()}情報手帳`;
 
-            // 若已過旅程結束日期：按鈕顯示「旅程已結束」並鎖定不再更新
             if (ended) {
                 liveDot.classList.add('ended');
                 connLabel.textContent = '歷史封存';
@@ -2601,19 +2653,23 @@
                 refreshBtn.disabled = false;
                 if (refreshBtn && isManualClick) refreshBtn.textContent = '↻ 連線更新中...';
                 const now = new Date();
-                const timeStr = new Intl.DateTimeFormat('zh-TW', {
-                    timeZone: 'Asia/Tokyo',
-                    month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false
-                }).format(now);
-                updateTimeEl.textContent = `更新：日本時間 ${timeStr}`;
+                let timeStr = '';
+                try {
+                    timeStr = new Intl.DateTimeFormat('zh-TW', {
+                        timeZone: currentTripTimezone,
+                        month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false
+                    }).format(now);
+                } catch (e) {
+                    timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')}`;
+                }
+                updateTimeEl.textContent = `更新：當地時間 ${timeStr}`;
                 if (archiveBadge) archiveBadge.textContent = `🟢 旅途累積模式（自動過濾重複快訊）`;
             }
 
-            // 取得每一天在日本目的地的代表座標與標準地區名稱
             const dayRepresentativeCoords = normalizedDays.map((d, idx) => {
-                const validChs = (d.chapters || []).filter(c => c.lat && c.lng && c.lat > 26);
-                const picked = validChs[Math.floor(validChs.length / 2)] || d.chapters?.[0] || { lat: 38.2682, lng: 140.8694, title: d.day };
-                const stdRegion = resolveStandardRegion(picked.lat, picked.lng, `${d.dayTitle} ${picked.title}`);
+                const validChs = (d.chapters || []).filter(c => c.lat && c.lng && !(c.lat < 25.5 && c.lat > 21.5 && c.lng > 119.5 && c.lng < 122.5));
+                const picked = validChs[Math.floor(validChs.length / 2)] || d.chapters?.[0] || { lat: 35.6895, lng: 139.6917 };
+                const stdRegion = d.region || '主要旅遊地區';
                 const shortArea = stdRegion.replace('地區', '');
                 return {
                     dayKey: d.day,
@@ -2626,7 +2682,6 @@
                 };
             });
 
-            // 抓取氣象數據供雷達格顯示
             await Promise.all(dayRepresentativeCoords.map(async (item) => {
                 try {
                     const url = `https://api.open-meteo.com/v1/forecast?latitude=${item.lat}&longitude=${item.lng}&current=temperature_2m,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=1`;
@@ -2640,31 +2695,35 @@
                         liveWeatherByDay[item.dayCode] = { ...item, maxT, minT, rainProb, wind };
                     }
                 } catch (e) {
-                    liveWeatherByDay[item.dayCode] = { ...item, maxT: 8, minT: 0, rainProb: 20, wind: 12 };
+                    liveWeatherByDay[item.dayCode] = { ...item, maxT: 15, minT: 8, rainProb: 20, wind: 10 };
                 }
             }));
 
-            // 1. 渲染「30 秒情報速讀」
-            const d1W = liveWeatherByDay['D01'] || { locName: '山形', maxT: 6, minT: -2, rainProb: 20, wind: 12 };
-            const d2W = liveWeatherByDay['D02'] || { locName: '藏王', maxT: -3, minT: -9, rainProb: 30, wind: 25 };
-            document.getElementById('info-quick-five').innerHTML = `
-                <li><span>🚨</span><div><strong>【JR 東日本運行快訊】</strong>東北・山形新幹線「翼號」遇強風或大雪時可能於福島—山形區間實施減速運轉，搭車前請留意站內電子告示。</div></li>
-                <li><span>🚡</span><div><strong>【${d2W.locName}山岳風速與纜車預警】</strong>氣溫 ${d2W.maxT}~${d2W.minT}°C，風速 ${d2W.wind} km/h（藏王纜車當風速超過 15m/s 將暫停運行）。</div></li>
-                <li><span>🚌</span><div><strong>【山交巴士現場票務通報】</strong>冬季「藏王樹冰套票」窗口若因天候停售，可直接排隊刷 Suica 上車並於山麓站購買纜車票。</div></li>
-                <li><span>⚠️</span><div><strong>【銀山溫泉冬季交通管制】</strong>銀山溫泉每日 16:00 後實施冬季入場與末班接駁巴士總量管制，一日遊旅客請留意下山末班車時間。</div></li>
-                <li><span>❄️</span><div><strong>【日本氣象廳路面結冰提醒】</strong>山寺石階與藏王溫泉街早晚路面結冰（ブラックアイスバーン），步行務必穿戴簡易冰爪。</div></li>
-            `;
+            // 1. 渲染 30 秒情報速讀 (優先從 itinerary/*.json 的 urgentNews 提取前 3 則重點 + 2 則即時氣象)
+            const d1W = liveWeatherByDay['D01'] || { locName: '首站', maxT: 12, minT: 4, rainProb: 20, wind: 10 };
+            const d2W = liveWeatherByDay['D02'] || d1W;
+            const newsPool = Array.isArray(rawItineraryData.urgentNews) ? rawItineraryData.urgentNews : [];
 
-            // 2. 渲染「每日行程天氣與風速影響雷達」（點擊直連 The Weather Channel 與 Windy）
+            const quickItemsHTML = [
+                `<li><span>☀️</span><div><strong>【${d1W.locName} D01 即時氣象】</strong>氣溫 ${d1W.maxT}~${d1W.minT}°C，降雨/降雪機率 ${d1W.rainProb}%，最大風速 ${d1W.wind} km/h。</div></li>`,
+                `<li><span>🌬️</span><div><strong>【${d2W.locName} D02 風速與戶外監測】</strong>氣溫 ${d2W.maxT}~${d2W.minT}°C，目前風速 ${d2W.wind} km/h（若有纜車或遊船行程請留意強風停駛基準）。</div></li>`
+            ];
+
+            newsPool.slice(0, 3).forEach(n => {
+                quickItemsHTML.push(`<li><span>🚨</span><div><strong>${n.title}：</strong>${n.desc}</div></li>`);
+            });
+
+            document.getElementById('info-quick-five').innerHTML = quickItemsHTML.join('');
+
+            // 2. 渲染每日行程天氣與風速影響雷達 (點擊直連 The Weather Channel 與 Windy)
             const radarGrid = document.getElementById('info-radar-grid');
             radarGrid.innerHTML = dayRepresentativeCoords.map(item => {
-                const w = liveWeatherByDay[item.dayCode] || { maxT: 6, minT: 0, rainProb: 20, wind: 10 };
-                const isWarn = w.wind >= 20 || w.rainProb >= 60 || w.minT <= -3;
+                const w = liveWeatherByDay[item.dayCode] || { maxT: 12, minT: 5, rainProb: 20, wind: 10 };
+                const isWarn = w.wind >= 20 || w.rainProb >= 60 || w.minT <= 0;
                 const statusText = isWarn
                     ? `⚠️ ${w.maxT}~${w.minT}°C｜風速 ${w.wind}km/h`
                     : `☀️ ${w.maxT}~${w.minT}°C｜風速 ${w.wind}km/h`;
 
-                // 真實外部氣象網址 (The Weather Channel 座標預報 & Windy 座標風速雷達)
                 const weatherChannelUrl = `https://weather.com/zh-TW/weather/today/l/${item.lat},${item.lng}`;
                 const windyUrl = `https://www.windy.com/${item.lat}/${item.lng}?wind,${item.lat},${item.lng},11`;
 
@@ -2682,7 +2741,7 @@
                 `;
             }).join('');
 
-            // 3. 處理「緊急快訊與情報剪報」（累積去重制 ＋ 結束後停止新增）
+            // 3. 累積式情報剪報
             await updateAndRenderCumulativeClippings(dayRepresentativeCoords, ended);
 
             if (refreshBtn && isManualClick && !ended) {
@@ -2691,83 +2750,26 @@
             }
         }
 
-        // 累積式情報剪報引擎：過濾重複、儲存於 localStorage，若旅程已結束則不再新增
         async function updateAndRenderCumulativeClippings(dayCoords, isEnded) {
-            const storageKey = `flaneur_clippings_archive_v2_${tripId}`;
+            const storageKey = `flaneur_clippings_archive_v4_${tripId}`;
             let savedArchive = [];
             try {
                 const raw = localStorage.getItem(storageKey);
                 if (raw) savedArchive = JSON.parse(raw);
             } catch (e) {}
 
-            // 預設緊急新聞與交通防災快訊基底（確保剪報內容皆為緊急需要注意的新聞／交通／防災快訊）
-            const baselineUrgentNews = [
-                {
-                    id: 'news-jr-tsubasa',
-                    category: '交通',
-                    region: '山形地區',
-                    urgent: true,
-                    tag: 'JR 東日本運行快訊',
-                    title: '【運行情報】山形新幹線「翼號 (Tsubasa)」冬季風雪區間運轉提醒',
-                    desc: '受奧羽山脈強風與降雪影響，福島至山形、新庄區間偶有短暫延誤或列車解聯作業調整，轉乘預留時間建議至少 25 分鐘以上。'
-                },
-                {
-                    id: 'news-zao-ropeway',
-                    category: '天氣',
-                    region: '山形地區',
-                    urgent: true,
-                    tag: '山岳索道緊急快訊',
-                    title: '【氣象警報】藏王纜車（山麓線・山頂線）強風與濃霧運行基準通報',
-                    desc: '藏王地藏山頂站海拔達 1,661 公尺，當瞬間風速達 15m/s 以上時纜車將實施減速或臨時停駛，上山前請務必確認山麓站即時廣播。'
-                },
-                {
-                    id: 'news-ginzan-entry',
-                    category: '防災',
-                    region: '山形地區',
-                    urgent: true,
-                    tag: '地方觀光局公告',
-                    title: '【管制快訊】銀山溫泉冬季傍晚入場總量管制與大正浪漫接駁巴士末班車提醒',
-                    desc: '為維護冬季積雪安全與防止道路雍塞，銀山溫泉街於冬季點燈時段實施非住客交通管制，自大石田站轉乘之旅客請嚴格留意回程末班車時刻。'
-                },
-                {
-                    id: 'news-sendai-sengoku',
-                    category: '交通',
-                    region: '宮城・仙台地區',
-                    urgent: false,
-                    tag: 'JR 仙石線速報',
-                    title: '【鐵道快訊】JR 仙石線（仙台—松島海岸）強風區間與班次接續提醒',
-                    desc: '仙石線沿松島灣海岸行駛，冬季海風強勁時列車可能微幅誤點；前往松島遊船碼頭請使用松島海岸站檢票口。'
-                },
-                {
-                    id: 'news-fox-village',
-                    category: '防災',
-                    region: '宮城・仙台地區',
-                    urgent: true,
-                    tag: '園區安全快訊',
-                    title: '【園區快訊】宮城藏王狐狸村冬季閉園時間提早（16:00）與園內安全須知',
-                    desc: '冬季日落提早，園區最終入場時間為 15:30；若遇暴風雪天氣，抱狐狸體驗可能臨時取消，且園內禁止穿戴垂墜吊飾或塑膠袋以免狐狸誤咬。'
-                },
-                {
-                    id: 'news-keisei-skyliner',
-                    category: '快訊',
-                    region: '東京・關東地區',
-                    urgent: false,
-                    tag: '京成電鐵旅客快訊',
-                    title: '【乘車快訊】成田機場 Skyliner 電子憑證兌換與月台乘車動線提醒',
-                    desc: '持網購 QR Code 旅客須先至成田機場 B1 售票機或 Skyliner 服務櫃檯兌換實體指定席車票，切勿直接持憑證進站。'
-                }
-            ];
-
-            // 若歷史庫為空，先寫入基準緊急快訊
-            if (savedArchive.length === 0) {
-                savedArchive = [...baselineUrgentNews];
+            const baseNewsFromItin = Array.isArray(rawItineraryData.urgentNews) ? rawItineraryData.urgentNews : [];
+            if (savedArchive.length === 0 && baseNewsFromItin.length > 0) {
+                savedArchive = [...baseNewsFromItin];
+            } else if (baseNewsFromItin.length > 0) {
+                const existingIds = new Set(savedArchive.map(i => i.id));
+                baseNewsFromItin.forEach(item => {
+                    if (!existingIds.has(item.id)) savedArchive.push(item);
+                });
             }
 
-            // 只有在「旅程尚未結束」時，才允許繼續新增即時氣象警報與最新新聞快訊（且自動去重）
             if (!isEnded) {
                 const existingIds = new Set(savedArchive.map(item => item.id));
-
-                // 檢查當下是否有強風、低溫或高降雨機率，若有則產生新的氣象警報快訊（相同 ID 不重複加）
                 dayCoords.forEach(item => {
                     const w = liveWeatherByDay[item.dayCode];
                     if (!w) return;
@@ -2782,25 +2784,27 @@
                             tag: `${item.dayCode} 即時氣象快訊`,
                             title: `【${item.stdRegion}氣象速報】今日氣溫 ${w.maxT}~${w.minT}°C・降雨/雪機率 ${w.rainProb}%・最大風速 ${w.wind} km/h`,
                             desc: isSevere
-                                ? `⚠️ 監測到低溫或較強陣風，前往戶外景區與搭乘跨區鐵道請留意最新運行狀態。`
+                                ? `⚠️ 監測到低溫或較強陣風，前往戶外景區與搭乘跨區交通請留意最新運行狀態。`
                                 : `目前 ${item.stdRegion} 氣候穩定，適合按原訂計畫展開戶外行程。`
                         });
                         existingIds.add(alertId);
                     }
                 });
-
                 try {
-                    localStorage.setItem(storageKey, JSON.stringify(savedArchive.slice(0, 30)));
+                    localStorage.setItem(storageKey, JSON.stringify(savedArchive.slice(0, 35)));
                 } catch (e) {}
             }
 
             allInfoClippings = savedArchive;
 
-            // 建立「地區下拉選單」：只顯示標準大地區名稱（絕不顯示景點或巴士站名！）
-            const standardRegions = ['山形地區', '宮城・仙台地區', '東京・關東地區'];
+            // 地區下拉選單：僅取乾淨的大地區名稱
+            const regionSet = new Set();
+            normalizedDays.forEach(d => { if (d.region) regionSet.add(d.region); });
+            savedArchive.forEach(i => { if (i.region) regionSet.add(i.region); });
+
             const regSelect = document.getElementById('clip-region-select');
             regSelect.innerHTML = `<option value="ALL">全部地區</option>` +
-                standardRegions.map(r => `<option value="${r}">${r}</option>`).join('');
+                Array.from(regionSet).map(r => `<option value="${r}">${r}</option>`).join('');
 
             filterInfoClippings();
         }
@@ -2829,7 +2833,7 @@
                             ${item.urgent ? '<span class="clip-urgent-badge">🚨 緊急注意</span> ' : ''}
                             📌 分類：${item.category} ｜ 地區：<strong>${item.region}</strong>
                         </span>
-                        <span>${item.tag}</span>
+                        <span>${item.tag || ''}</span>
                     </div>
                     <div class="clip-item-title">${item.title}</div>
                     <div class="clip-item-desc">${item.desc}</div>
@@ -2847,42 +2851,8 @@
         });
 
         /* ==============================================================
-           12. 🎫 票券蒐集引擎 (可收合手風琴、同名連續住宿智慧合併、擬真憑證、時刻表連結)
+           9. 🎫 票券蒐集引擎 (全面讀取 itinerary/*.json 並支援同名連續住宿自動合併)
            ============================================================== */
-        // 標準化飯店名稱（讓「仙台御宿野乃溫泉與宵夜拉麵」與「仙台御宿野乃溫泉飯店泡湯」自動識別為同一家飯店！）
-        function normalizeHotelKey(rawTitle, rawContent = '') {
-            const combined = `${rawTitle} ${rawContent}`;
-            if (/御宿野乃|Onyado Nono/i.test(combined)) {
-                return {
-                    key: 'ONYADO_NONO_SENDAI',
-                    officialName: '仙台御宿野乃天然溫泉飯店 (Onyado Nono Sendai)',
-                    address: '宮城縣仙台市青葉區本町 2-2-5（廣瀨通站東2出口步行 1 分鐘）',
-                    roomType: '禁菸雙人房（全館榻榻米鋪設）',
-                    mealPlan: '含豐盛海鮮日式早餐 ＋ 免費宵夜醬油拉麵 ＆ 頂樓天然溫泉大浴場',
-                    defaultBookingId: 'NONO-SD-202601'
-                };
-            }
-            if (/山形大都會|Metropolitan Yamagata/i.test(combined)) {
-                return {
-                    key: 'METROPOLITAN_YAMAGATA',
-                    officialName: '山形大都會飯店 (Hotel Metropolitan Yamagata)',
-                    address: '山形縣山形市香澄町 1-1-1（JR 山形站東口直結・步行 0 分鐘）',
-                    roomType: '本館舒適雙人房 (Standard Double)',
-                    mealPlan: '車站直結免吹風淋雪・鄰近山形五十番中華料理',
-                    defaultBookingId: 'METRO-YM-202601'
-                };
-            }
-            const clean = rawTitle.replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '').trim();
-            return {
-                key: clean.slice(0, 6),
-                officialName: clean,
-                address: '詳見 Google 地圖定位',
-                roomType: '標準客房',
-                mealPlan: '依訂單方案為準',
-                defaultBookingId: `HTL-${Math.floor(100000 + Math.random() * 900000)}`
-            };
-        }
-
         function toggleAllTicketsInPanel(panelId, expand) {
             const container = document.getElementById(panelId);
             if (!container) return;
@@ -2891,137 +2861,131 @@
             });
         }
 
+        function filterExpenseItems(cat, btnEl) {
+            document.querySelectorAll('.expense-filter-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+            const listEl = document.getElementById('expense-items-container');
+            if (!listEl) return;
+
+            const filtered = cat === 'ALL'
+                ? allExpenseDetails
+                : allExpenseDetails.filter(item => item.category === cat);
+
+            listEl.innerHTML = filtered.map(item => `
+                <div class="expense-item-row">
+                    <div class="expense-item-left">
+                        <span class="expense-cat-tag ${item.category}">${item.categoryIcon} ${item.category}</span>
+                        ${item.day ? `<span class="expense-day-tag">${item.day}</span>` : ''}
+                        <span class="expense-item-title">${item.title}</span>
+                    </div>
+                    <div class="expense-item-amount">${currentCurrencySymbol}${Number(item.amount).toLocaleString()}</div>
+                </div>
+            `).join('');
+        }
+
         function renderPackAndBudgetViews() {
             const transportTickets = [];
             const rawHotelEntries = [];
             const transits = [];
             const foods = [];
+            const autoExpenses = [];
             let totalSpotCount = 0;
 
-            // 1. 若 JSON 後台有手動設定 hotelVouchers，優先載入並支援同名連續住宿合併
-            if (Array.isArray(rawTripData.hotelVouchers) && rawTripData.hotelVouchers.length > 0) {
-                rawTripData.hotelVouchers.forEach((hv, idx) => {
-                    const norm = normalizeHotelKey(hv.hotelName || '');
-                    rawHotelEntries.push({
-                        key: norm.key,
-                        officialName: hv.hotelName || norm.officialName,
-                        dayStart: hv.checkIn || `訂單 ${idx + 1}`,
-                        dayEnd: hv.checkOut || '',
-                        dayIndex: idx + 1,
-                        nights: Number(hv.nights) || 1,
-                        bookingId: hv.bookingId || norm.defaultBookingId,
-                        roomType: hv.roomType || norm.roomType,
-                        mealPlan: hv.mealPlan || norm.mealPlan,
-                        address: hv.address || norm.address,
-                        note: hv.note || ''
-                    });
+            // 1. 讀取 itinerary/*.json 的 hotelVouchers
+            const hvSource = Array.isArray(rawItineraryData.hotelVouchers) ? rawItineraryData.hotelVouchers : [];
+            hvSource.forEach((hv, idx) => {
+                const nameClean = (hv.hotelName || '').trim();
+                rawHotelEntries.push({
+                    key: nameClean.split('(')[0].trim(),
+                    officialName: nameClean,
+                    dayStart: hv.checkIn || `Day 0${idx + 1}`,
+                    dayEnd: hv.checkOut || '',
+                    nights: Number(hv.nights) || 1,
+                    bookingId: hv.bookingId || `HTL-0${idx + 1}`,
+                    roomType: hv.roomType || '標準雙人房',
+                    mealPlan: hv.mealPlan || '依訂單方案為準',
+                    address: hv.address || '',
+                    estNightCost: Number(hv.estNightCost) || 6500
                 });
-            }
+            });
 
-            // 2. 掃描每日章節，萃取航班、對號交通、門票、舟車、佳餚，以及自動偵測住宿
-            normalizedDays.forEach((dayObj, dIdx) => {
-                const dayNum = dIdx + 1;
+            // 2. 掃描所有章節站點，萃取重要交通票券、舟車段次與佳餚清單
+            normalizedDays.forEach((dayObj) => {
                 (dayObj.chapters || []).forEach((ch, cIdx) => {
                     totalSpotCount++;
                     const prevCh = cIdx > 0 ? dayObj.chapters[cIdx - 1] : null;
                     const meta = classifyChapterMeta(ch, cIdx, prevCh);
-                    const cleanTitle = (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '');
-                    const plainContent = stripHtmlText(ch.content || '');
 
-                    // (A) 自動偵測住宿（若未在後台手動填 hotelVouchers，則從章節自動抓取並準備合併）
-                    if (
-                        (!Array.isArray(rawTripData.hotelVouchers) || rawTripData.hotelVouchers.length === 0) &&
-                        (meta.stampChar === '住' || /大都會飯店|御宿野乃/i.test(`${cleanTitle} ${plainContent}`))
-                    ) {
-                        const norm = normalizeHotelKey(cleanTitle, plainContent);
-                        rawHotelEntries.push({
-                            key: norm.key,
-                            officialName: norm.officialName,
-                            dayStart: dayObj.day,
-                            dayEnd: `Day ${String(dayNum + 1).padStart(2, '0')}`,
-                            dayIndex: dayNum,
-                            nights: 1,
-                            bookingId: `${norm.defaultBookingId}-D${dayNum}`,
-                            roomType: norm.roomType,
-                            mealPlan: norm.mealPlan,
-                            address: norm.address,
-                            note: meta.noteText || meta.introText
-                        });
-                    }
-
-                    // (B) 萃取航班、對號座車票與重要門票
-                    if (/機場|Skyliner|新幹線|翼號|山交巴士|藏王纜車|遊船|狐狸村/i.test(cleanTitle)) {
-                        const isFlight = /機場/i.test(cleanTitle) && (/出發|起飛|中華料理|賦歸/i.test(cleanTitle));
-                        const modeGuess = isFlight ? 'flight' : resolveTransportMode(ch, 50);
-                        const tt = resolveTransitTimetableInfo(ch, modeGuess, meta.timeStr);
-
+                    // (A) 萃取重要票券 (航班、指定席鐵道、纜車、遊船、門票)
+                    if (meta.stampChar === '驛' || /機場|Skyliner|新幹線|翼號|纜車|遊船|狐狸村|動物園|鐵塔/i.test(meta.pureName)) {
+                        const isFlight = /機場/i.test(meta.pureName) && /航班|起飛|KHH|NRT/i.test(`${meta.pureName} ${meta.transitInfo?.seatType || ''}`);
                         transportTickets.push({
                             day: dayObj.day,
-                            type: isFlight ? 'flight' : (/纜車|遊船|狐狸村/.test(cleanTitle) ? 'spot' : 'transit'),
-                            leftLabel: isFlight ? '飛' : (/纜車|遊船|狐狸村/.test(cleanTitle) ? '券' : '座'),
-                            title: cleanTitle,
-                            timeRange: tt.timeRange,
-                            seatType: tt.seatType,
-                            timetableUrl: tt.timetableUrl,
-                            timetableLabel: tt.timetableLabel,
-                            intro: meta.introText,
+                            type: isFlight ? 'flight' : (meta.stampChar === '驛' ? 'transit' : 'spot'),
+                            leftLabel: isFlight ? '飛' : (meta.stampChar === '驛' ? '座' : '券'),
+                            title: meta.transitInfo ? meta.transitInfo.routeText : meta.pureName,
+                            seatType: meta.transitInfo ? meta.transitInfo.seatType : meta.categoryLabel,
+                            alignedClock: meta.timeStr,
+                            timeRange: meta.transitInfo ? meta.transitInfo.timeRange : meta.timeStr,
+                            timetableUrl: meta.transitInfo ? meta.transitInfo.timetableUrl : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(meta.pureName)}`,
+                            timetableLabel: meta.transitInfo ? meta.transitInfo.timetableLabel : '查看時刻表與官網',
                             note: meta.noteText
                         });
                     }
 
-                    // (C) 萃取舟車段次（全部附上時刻表超連結）
-                    if (meta.transitInfo) {
+                    // (B) 萃取交通時刻與段次 (排除步行 0 元且無特別路線之短程移動，保留所有實際交通段)
+                    if (meta.transitInfo && (meta.transitInfo.cost > 0 || meta.transitInfo.mode !== 'walk')) {
                         transits.push({
                             day: dayObj.day,
-                            time: meta.timeStr,
                             ...meta.transitInfo
                         });
+
+                        if (meta.transitInfo.cost > 0) {
+                            autoExpenses.push({
+                                category: '交通',
+                                categoryIcon: '🚄',
+                                day: dayObj.day,
+                                title: `車資｜${meta.transitInfo.routeText}`,
+                                amount: meta.transitInfo.cost
+                            });
+                        }
                     }
 
-                    // (D) 萃取佳餚清單
-                    if (meta.stampChar === '食') {
+                    // (C) 萃取佳餚美食紀錄 (抬頭只列純店名 spotName)
+                    if (meta.isFoodSpot) {
+                        const isCustomReview = Boolean(ch.foodReview && !ch.foodReview.includes('【AI 美味預覽'));
                         foods.push({
                             day: dayObj.day,
                             time: meta.timeStr,
-                            title: cleanTitle,
-                            intro: meta.introText,
-                            note: meta.noteText
+                            pureRestaurantName: meta.pureName,
+                            foodReview: meta.foodReview,
+                            foodReviewIsCustom: isCustomReview,
+                            foodPolicy: meta.foodPolicy
                         });
                     }
                 });
             });
 
-            // 3. 執行「同名且連續住宿智慧合併演算法」(Consecutive Hotel Merger)
+            // 3. 同名且日期相連之飯店自動合併成單一住宿憑證
             const mergedHotels = [];
             rawHotelEntries.forEach(entry => {
                 const last = mergedHotels[mergedHotels.length - 1];
-                // 只要與上一筆是同一間飯店（key 相同）且天數連續（或同為連續訂單），就自動合併成一張憑證！
-                if (last && last.key === entry.key && (entry.dayIndex - last.lastDayIndex <= 2)) {
+                if (last && last.key === entry.key && (!last.dayEnd || last.dayEnd === entry.dayStart)) {
                     last.totalNights += entry.nights;
-                    last.dayEnd = entry.dayEnd || `Day ${String(entry.dayIndex + 1).padStart(2, '0')}`;
-                    last.lastDayIndex = entry.dayIndex;
-                    if (!last.bookingIds.includes(entry.bookingId)) {
+                    last.dayEnd = entry.dayEnd;
+                    if (entry.bookingId && !last.bookingIds.includes(entry.bookingId)) {
                         last.bookingIds.push(entry.bookingId);
                     }
                 } else {
                     mergedHotels.push({
                         ...entry,
-                        lastDayIndex: entry.dayIndex,
                         totalNights: entry.nights,
                         bookingIds: [entry.bookingId]
                     });
                 }
             });
 
-            // 針對山形大都會飯店（Day 01 入住、Day 03 退房，共 2 晚）自動校正連續晚數顯示
-            mergedHotels.forEach((h, i) => {
-                if (h.key === 'METROPOLITAN_YAMAGATA' && h.totalNights === 1 && mergedHotels[i + 1]?.dayStart === 'Day 03') {
-                    h.totalNights = 2;
-                    h.dayEnd = 'Day 03';
-                }
-            });
-
-            // 4. 渲染「🎫 票券與住宿憑證」（預設全部為縮合狀態，點擊才展開）
+            // 4. 渲染「🎫 票券與住宿憑證」
             const vContainer = document.getElementById('pack-vouchers');
             const hotelsHTML = mergedHotels.map(h => `
                 <div class="collapsible-ticket-card">
@@ -3033,7 +2997,7 @@
                         <div class="ticket-head-main">
                             <div>
                                 <div class="ticket-head-title">🏨 ${h.officialName}</div>
-                                <div class="ticket-head-sub">入住區間：${h.dayStart} ➔ ${h.dayEnd}（已自動彙整連續住宿）</div>
+                                <div class="ticket-head-sub">入住區間：${h.dayStart} ➔ ${h.dayEnd}（連續住宿已自動彙整）</div>
                             </div>
                             <div class="ticket-head-right">
                                 <span class="ticket-time-pill reserved">🌙 連續 ${h.totalNights} 晚</span>
@@ -3060,7 +3024,7 @@
                             </div>
                             <table class="hv-info-table">
                                 <tr><th>飯店名稱</th><td><strong>${h.officialName}</strong></td></tr>
-                                <tr><th>彙整訂單編號</th><td>${h.bookingIds.join(' ／ ')}（共 ${h.bookingIds.length} 筆連續訂單合併）</td></tr>
+                                <tr><th>彙整訂單編號</th><td>${h.bookingIds.join(' ／ ')}（共 ${h.bookingIds.length} 筆訂單彙整）</td></tr>
                                 <tr><th>預訂房型</th><td>${h.roomType}</td></tr>
                                 <tr><th>專案與設施</th><td>${h.mealPlan}</td></tr>
                                 <tr><th>地址與交通</th><td>${h.address}</td></tr>
@@ -3087,16 +3051,16 @@
                                 <div class="ticket-head-sub">${t.seatType}</div>
                             </div>
                             <div class="ticket-head-right">
-                                <span class="ticket-time-pill">${t.timeRange.split('(')[0].trim()}</span>
+                                <span class="ticket-time-pill">${t.alignedClock}</span>
                                 <span class="ticket-arrow">▶</span>
                             </div>
                         </div>
                     </div>
                     <div class="ticket-detail-body">
                         <div style="font-size:0.86rem; line-height:1.65; color:var(--text-dark); margin-bottom:10px;">
-                            <div><strong>🕒 航班／發車時間：</strong>${t.timeRange}</div>
+                            <div><strong>🕒 航班／班次時刻：</strong>${t.timeRange}</div>
                             <div><strong>💺 席次／票種性質：</strong>${t.seatType}</div>
-                            ${t.note ? `<div style="margin-top:6px; padding:8px 12px; background:#FFF9F2; border-left:3px solid #D97724; border-radius:6px;"><strong>⚠️ 乘車／兌票注意：</strong>${t.note}</div>` : ''}
+                            ${t.note ? `<div style="margin-top:6px; padding:8px 12px; background:#FFF9F2; border-left:3px solid #D97724; border-radius:6px; white-space:pre-line;"><strong>⚠️ 乘車／兌票注意：</strong>\n${t.note}</div>` : ''}
                         </div>
                         <div style="display:flex; justify-content:flex-end;">
                             <a href="${t.timetableUrl}" target="_blank" rel="noopener" class="timetable-link-btn">🕒 ${t.timetableLabel} ↗</a>
@@ -3119,11 +3083,11 @@
                 ${transportVouchersHTML}
             `;
 
-            // 5. 渲染「🚄 交通時刻與段次」（全部可收合＋附時刻表超連結）
+            // 5. 渲染「🚄 交通時刻與段次」
             const tContainer = document.getElementById('pack-transit');
             tContainer.innerHTML = `
                 <div class="pack-toolbar">
-                    <span>飛機、新幹線對號座與路線巴士段次（點擊展開官方時刻表連結）：</span>
+                    <span>呈現「起始站 →（中間轉乘）→ 目的站」與相近發車時刻（點擊展開時刻表連結）：</span>
                     <div>
                         <button type="button" class="pack-toggle-all-btn" onclick="toggleAllTicketsInPanel('pack-transit', true)">全部展開</button>
                         <button type="button" class="pack-toggle-all-btn" onclick="toggleAllTicketsInPanel('pack-transit', false)">全部收合</button>
@@ -3142,16 +3106,17 @@
                                     <div class="ticket-head-sub">${t.modeName} ・ ${t.seatType}</div>
                                 </div>
                                 <div class="ticket-head-right">
-                                    <span class="ticket-time-pill">${t.time}（約 ${t.mins}分）</span>
+                                    <span class="ticket-time-pill">${t.alignedClock}（約 ${t.mins}分）</span>
                                     <span class="ticket-arrow">▶</span>
                                 </div>
                             </div>
                         </div>
                         <div class="ticket-detail-body">
                             <div style="font-size:0.86rem; line-height:1.65; margin-bottom:10px;">
-                                <div><strong>🕒 班次時間與區間：</strong>${t.timeRange}</div>
+                                <div><strong>📍 完整起訖與轉乘動線：</strong>${t.routeText}</div>
+                                <div><strong>🕒 班次時刻說明：</strong>${t.timeRange}</div>
                                 <div><strong>💺 座位性質：</strong>${t.seatType}</div>
-                                <div><strong>💰 預估車資：</strong>¥${t.cost.toLocaleString()}</div>
+                                <div><strong>💰 預估單程車資：</strong>${currentCurrencySymbol}${t.cost.toLocaleString()}</div>
                             </div>
                             <div style="display:flex; justify-content:flex-end;">
                                 <a href="${t.timetableUrl}" target="_blank" rel="noopener" class="timetable-link-btn">🕒 ${t.timetableLabel} ↗</a>
@@ -3161,19 +3126,36 @@
                 `).join('')}
             `;
 
-            // 6. 渲染「💰 旅途盤纏帳目」
+            // 6. 渲染「💰 旅途預估花費」
             const bContainer = document.getElementById('pack-budget');
-            const bData = rawTripData.budget || {
-                currency: 'JPY',
-                total: 160000,
-                categories: [
-                    { name: '交通（新幹線／Skyliner／巴士／纜車）', amount: 48500, pct: 38 },
-                    { name: '住宿（山形大都會 2 晚＋仙台御宿野乃 4 晚等）', amount: 45000, pct: 35 },
-                    { name: '餐飲（A5仙台牛／閣牛舌／平田牧場／五十番）', amount: 24800, pct: 19 },
-                    { name: '門票與體驗（狐狸村／松島遊船／円通院念珠）', amount: 9800, pct: 8 }
-                ]
-            };
-            const spent = bData.categories.reduce((acc, c) => acc + c.amount, 0);
+            const rawExpenseList = Array.isArray(rawItineraryData.expenseItems) && rawItineraryData.expenseItems.length > 0
+                ? rawItineraryData.expenseItems
+                : autoExpenses;
+
+            allExpenseDetails = rawExpenseList.map(item => ({
+                category: item.category || '交通',
+                categoryIcon: item.category === '住宿' ? '🏨' : (item.category === '餐飲' ? '🍽️' : (item.category === '門票' ? '🎟️' : '🚄')),
+                day: item.day || '',
+                title: item.title,
+                amount: Number(item.amount) || 0
+            }));
+
+            const sumByCat = { 交通: 0, 住宿: 0, 餐飲: 0, 門票: 0 };
+            allExpenseDetails.forEach(item => {
+                if (sumByCat[item.category] !== undefined) sumByCat[item.category] += item.amount;
+                else sumByCat['交通'] += item.amount;
+            });
+
+            const totalEstimated = Object.values(sumByCat).reduce((a, b) => a + b, 0);
+            const budgetCap = Number(rawItineraryData.budgetTotal) || Math.max(160000, Math.ceil(totalEstimated * 1.15 / 10000) * 10000);
+
+            const catSummaryRows = [
+                { name: '🚄 交通車資（航班／新幹線／JR／巴士）', amount: sumByCat['交通'] },
+                { name: '🏨 住宿預估（各飯店連續住宿合計）', amount: sumByCat['住宿'] },
+                { name: '🍽️ 餐飲預估（特色正餐與在地美食）', amount: sumByCat['餐飲'] },
+                { name: '🎟️ 門票與體驗（纜車／遊船／園區門票）', amount: sumByCat['門票'] }
+            ];
+
             bContainer.innerHTML = `
                 <div class="budget-card">
                     <div style="display:flex; justify-content:space-between; align-items:baseline;">
@@ -3182,42 +3164,61 @@
                             <div style="font-size:1.5rem; font-weight:700; color:#3B4D54;">${normalizedDays.length} 天 ・ ${totalSpotCount} 處打卡</div>
                         </div>
                         <div style="text-align:right;">
-                            <div style="font-size:0.78rem; color:var(--text-light);">預估總花費 (${bData.currency})</div>
-                            <div style="font-size:1.25rem; font-weight:700; color:#B84A39;">¥${spent.toLocaleString()}</div>
+                            <div style="font-size:0.78rem; color:var(--text-light);">旅途預估總花費 (${currentCurrencyCode})</div>
+                            <div style="font-size:1.3rem; font-weight:700; color:#B84A39;">${currentCurrencySymbol}${totalEstimated.toLocaleString()}</div>
                         </div>
                     </div>
                     <div class="budget-bar-wrap">
-                        <div class="budget-bar-fill" style="width: ${Math.min(100, Math.round((spent / bData.total) * 100))}%;"></div>
+                        <div class="budget-bar-fill" style="width: ${Math.min(100, Math.round((totalEstimated / budgetCap) * 100))}%;"></div>
                     </div>
                     <div style="font-size: 0.82rem; color: var(--text-light); margin-bottom: 16px;">
-                        預算上限：¥${bData.total.toLocaleString()} ｜ 剩餘彈性預算：¥${Math.max(0, bData.total - spent).toLocaleString()}
+                        預估預算上限：${currentCurrencySymbol}${budgetCap.toLocaleString()} ｜ 預留彈性空間：${currentCurrencySymbol}${Math.max(0, budgetCap - totalEstimated).toLocaleString()}
                     </div>
-                    ${bData.categories.map(cat => `
-                        <div class="budget-cat-row">
-                            <div class="budget-cat-top">
-                                <span>${cat.name}</span>
-                                <span>¥${cat.amount.toLocaleString()}</span>
+                    ${catSummaryRows.map(cat => {
+                        const pct = totalEstimated > 0 ? Math.round((cat.amount / totalEstimated) * 100) : 0;
+                        return `
+                            <div class="budget-cat-row">
+                                <div class="budget-cat-top">
+                                    <span>${cat.name}</span>
+                                    <span>${currentCurrencySymbol}${cat.amount.toLocaleString()} (${pct}%)</span>
+                                </div>
+                                <div class="budget-bar-wrap" style="height:6px; margin:4px 0;">
+                                    <div class="budget-bar-fill" style="width:${pct}%; background:#C4A99E;"></div>
+                                </div>
                             </div>
-                            <div class="budget-bar-wrap" style="height:6px; margin:4px 0;">
-                                <div class="budget-bar-fill" style="width:${cat.pct}%; background:#C4A99E;"></div>
-                            </div>
-                        </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
+                </div>
+
+                <div class="expense-detail-panel">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+                        <h4 style="margin:0; font-size:0.98rem; color:#3B4D54;">📋 預估花費細項明細（共 ${allExpenseDetails.length} 筆）</h4>
+                        <span style="font-size:0.76rem; color:var(--text-light);">＊可於 /admin/ 後台「行程規劃」直接修改細項金額</span>
+                    </div>
+                    <div class="expense-filter-bar">
+                        <button type="button" class="expense-filter-btn active" onclick="filterExpenseItems('ALL', this)">全部細項 (${allExpenseDetails.length})</button>
+                        <button type="button" class="expense-filter-btn" onclick="filterExpenseItems('交通', this)">🚄 交通車資</button>
+                        <button type="button" class="expense-filter-btn" onclick="filterExpenseItems('住宿', this)">🏨 住宿費用</button>
+                        <button type="button" class="expense-filter-btn" onclick="filterExpenseItems('餐飲', this)">🍽️ 餐飲預估</button>
+                        <button type="button" class="expense-filter-btn" onclick="filterExpenseItems('門票', this)">🎟️ 門票體驗</button>
+                    </div>
+                    <div id="expense-items-container"></div>
                 </div>
             `;
+            filterExpenseItems('ALL', bContainer.querySelector('.expense-filter-btn'));
 
-            // 7. 渲染「🍱 佳餚美食紀錄」（同樣改為可收合手風琴）
+            // 7. 渲染「🍱 佳餚美食紀錄」
             const fContainer = document.getElementById('pack-food');
             fContainer.innerHTML = `
                 <div class="pack-toolbar">
-                    <span>旅途中品嚐過的好味道（點擊展開餐廳介紹與注意事項）：</span>
+                    <span>旅途美食清單（抬頭僅列純店名；預設提供 AI 菜色預覽與預約潛規則，用餐後可從後台更新）：</span>
                     <div>
                         <button type="button" class="pack-toggle-all-btn" onclick="toggleAllTicketsInPanel('pack-food', true)">全部展開</button>
                         <button type="button" class="pack-toggle-all-btn" onclick="toggleAllTicketsInPanel('pack-food', false)">全部收合</button>
                     </div>
                 </div>
                 ${foods.map((f, i) => `
-                    <div class="collapsible-ticket-card">
+                    <div class="collapsible-ticket-card ${i < 2 ? 'open' : ''}">
                         <div class="ticket-summary-head" onclick="this.parentElement.classList.toggle('open')">
                             <div class="ticket-left-strip spot">
                                 <span style="font-size:0.7rem;">${f.day}</span>
@@ -3225,18 +3226,27 @@
                             </div>
                             <div class="ticket-head-main">
                                 <div>
-                                    <div class="ticket-head-title">🍱 ${f.title}</div>
-                                    <div class="ticket-head-sub">用餐時段：${f.time}</div>
+                                    <div class="ticket-head-title">🍱 ${f.pureRestaurantName}</div>
+                                    <div class="ticket-head-sub">預計用餐時段：${f.time}</div>
                                 </div>
                                 <div class="ticket-head-right">
+                                    <span class="ticket-time-pill">${f.foodReviewIsCustom ? '✨ 已更新實測' : '🤖 AI 預覽'}</span>
                                     <span class="ticket-arrow">▶</span>
                                 </div>
                             </div>
                         </div>
                         <div class="ticket-detail-body">
-                            <div style="font-size:0.86rem; line-height:1.65;">
-                                <div><strong>📘 美味紀錄：</strong>${f.intro}</div>
-                                ${f.note ? `<div style="margin-top:6px; padding:8px 12px; background:#FFF9F2; border-left:3px solid #D97724; border-radius:6px;"><strong>⚠️ 用餐／預約注意：</strong>${f.note}</div>` : ''}
+                            <div class="food-review-box">
+                                <div style="font-weight:700; margin-bottom:4px; color:#1E40AF;">
+                                    📘 美味紀錄 ${f.foodReviewIsCustom ? '（✏️ 後台實測更新）' : '（🤖 預設 AI 招牌菜色預覽・用餐後可從後台更新）'}
+                                </div>
+                                <div style="white-space:pre-line;">${f.foodReview}</div>
+                            </div>
+                            <div class="food-policy-box">
+                                <div style="font-weight:700; margin-bottom:4px; color:#22543D;">
+                                    ⚠️ 用餐／預約注意（🌐 網路查詢公告規定・低消與行業潛規則）
+                                </div>
+                                <div style="white-space:pre-line;">${f.foodPolicy}</div>
                             </div>
                         </div>
                     </div>
