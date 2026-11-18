@@ -9,59 +9,92 @@
   "budgetTotal": 35000,
   "hotelVouchers": [
     {
-      "hotelName": "吉隆坡中央車站精選旅宿 (KL Sentral Transit Hotel)",
+      "hotelName": "吉隆坡艾美酒店 (Le Méridien Kuala Lumpur)",
       "checkIn": "Day 01",
       "checkOut": "Day 02",
       "nights": 1,
-      "bookingId": "KUL-ST-20270407",
-      "roomType": "標準禁菸雙人房 (Standard Double)",
-      "mealPlan": "鄰近吉隆坡中央車站 (KL Sentral)・便於隔日一早搭乘 ETS 前往怡保",
-      "address": "Brickfields, 50470 Kuala Lumpur, Malaysia（KL Sentral 步行約 5 分鐘）",
-      "estNightCost": 1150
+      "bookingId": "AGODA：1773232447",
+      "roomType": "標準禁菸雙人房 (Classic / Deluxe Room)",
+      "mealPlan": "吉隆坡中央車站 (KL Sentral) 直結・隔日一早下樓即達 ETS 電動列車月台",
+      "address": "2, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur",
+      "estNightCost": 3417
     },
     {
-      "hotelName": "怡保舊街場精品旅宿 (Ipoh Old Town Boutique Hotel)",
+      "hotelName": "薩朗柏羅傳承飯店&活動大廳 (快樂窩遺產住宿旅館) (Sarang Paloh Heritage Stay & Event Hall)",
       "checkIn": "Day 02",
       "checkOut": "Day 03",
       "nights": 1,
-      "bookingId": "IPH-OT-20270408",
-      "roomType": "復古南洋雙人房 (Heritage Double)",
-      "mealPlan": "鄰近怡保火車站與二奶巷・退房後可寄放行李至傍晚 18:00 領取",
-      "address": "Jalan Sultan Yusuf, 30000 Ipoh, Perak, Malaysia",
-      "estNightCost": 1150
+      "bookingId": "Booking.com：5606964957",
+      "roomType": "南洋古蹟雙人房 (Heritage Room)",
+      "mealPlan": "座落怡保舊街場核心區・Day 03 退房後可寄放行李至 18:00 領取",
+      "address": "16, Jalan Sultan Iskandar, 30000 Ipoh, Perak",
+      "estNightCost": 1500
     },
     {
-      "hotelName": "吉隆坡市中心商務飯店 (Kuala Lumpur City Centre Hotel)",
+      "hotelName": "吉隆坡中央車站雅樂軒飯店 - 萬豪旗下 (Aloft by Marriott Kuala Lumpur Sentral)",
       "checkIn": "Day 03",
+      "checkOut": "Day 04",
+      "nights": 1,
+      "bookingId": "AGODA：1775706697",
+      "roomType": "雅樂軒雙人房 (Aloft Room)",
+      "mealPlan": "KL Sentral 車站與 NU Sentral 商場空橋直結",
+      "address": "No. 5, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur",
+      "estNightCost": 2500
+    },
+    {
+      "hotelName": "吉隆坡中央車站雅樂軒飯店 - 萬豪旗下 (Aloft by Marriott Kuala Lumpur Sentral)",
+      "checkIn": "Day 04",
       "checkOut": "Day 06",
-      "nights": 3,
-      "bookingId": "KUL-CC-20270409",
-      "roomType": "高樓層雙人房 (Superior Room)",
-      "mealPlan": "鄰近捷運站與成功時代廣場・串聯黑風洞、茨廠街與 TBS 巴士總站",
-      "address": "Bukit Bintang, 55100 Kuala Lumpur, Malaysia",
-      "estNightCost": 1200
-    },
-    {
-      "hotelName": "馬六甲河畔文化旅宿 (Melaka Riverfront Heritage Hotel)",
-      "checkIn": "Day 06",
-      "checkOut": "Day 08",
       "nights": 2,
-      "bookingId": "MKZ-RV-20270412",
-      "roomType": "娘惹風情雙人房 (Peranakan Double)",
-      "mealPlan": "步行可達荷蘭紅屋、雞場街與馬六甲河遊船碼頭",
-      "address": "Jalan Tun Tan Cheng Lock, 75200 Melaka, Malaysia",
-      "estNightCost": 1350
+      "bookingId": "AGODA：1775708211",
+      "roomType": "雅樂軒雙人房（續住訂單・自動合併）",
+      "mealPlan": "KL Sentral 車站與 NU Sentral 商場空橋直結",
+      "address": "No. 5, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur",
+      "estNightCost": 2500
     },
     {
-      "hotelName": "新加坡牛車水／市中心精品飯店 (Singapore Chinatown Hotel)",
+      "hotelName": "麻六甲假日酒店 (Holiday Inn Melaka by IHG)",
+      "checkIn": "Day 06",
+      "checkOut": "Day 07",
+      "nights": 1,
+      "bookingId": "AGODA：1775741487",
+      "roomType": "高級雙人房 (Standard / Superior Room)",
+      "mealPlan": "緊鄰馬六甲海峽海濱與英雄廣場",
+      "address": "Jalan Syed Abdul Aziz, 75000 Melaka, Malaysia",
+      "estNightCost": 2200
+    },
+    {
+      "hotelName": "麻六甲假日酒店 (Holiday Inn Melaka by IHG)",
+      "checkIn": "Day 07",
+      "checkOut": "Day 08",
+      "nights": 1,
+      "bookingId": "TRIP.COM：1616333445780639",
+      "roomType": "高級雙人房（續住訂單・自動合併）",
+      "mealPlan": "緊鄰馬六甲海峽海濱與英雄廣場",
+      "address": "Jalan Syed Abdul Aziz, 75000 Melaka, Malaysia",
+      "estNightCost": 2200
+    },
+    {
+      "hotelName": "悅樂武吉士酒店 (Village Hotel Bugis)",
       "checkIn": "Day 08",
+      "checkOut": "Day 09",
+      "nights": 1,
+      "bookingId": "官網：6254SG083632",
+      "roomType": "高級雙人房 (Superior Room)",
+      "mealPlan": "位於武吉士與甘榜格南核心區・武吉士地鐵站步行約 5 分鐘",
+      "address": "390 Victoria Street, Singapore 188061",
+      "estNightCost": 4500
+    },
+    {
+      "hotelName": "悅樂武吉士酒店 (Village Hotel Bugis)",
+      "checkIn": "Day 09",
       "checkOut": "Day 11",
-      "nights": 3,
-      "bookingId": "SIN-CT-20270414",
-      "roomType": "精緻雙人房 (Deluxe Double)",
-      "mealPlan": "下樓即達牛車水街區與地鐵站・直通濱海灣與樟宜機場線",
-      "address": "Chinatown, Singapore 059413（牛車水地鐵站步行約 3 分鐘）",
-      "estNightCost": 2800
+      "nights": 2,
+      "bookingId": "AGODA：1776346496",
+      "roomType": "高級雙人房（續住訂單・自動合併）",
+      "mealPlan": "位於武吉士與甘榜格南核心區・武吉士地鐵站步行約 5 分鐘",
+      "address": "390 Victoria Street, Singapore 188061",
+      "estNightCost": 4500
     }
   ],
   "expenseItems": [
@@ -74,7 +107,11 @@
     { "category": "交通", "day": "Day 01", "title": "車資｜高雄小港機場 (KHH) → 吉隆坡國際機場 (KUL) 亞洲航空（單程含20kg行李）", "amount": 4138 },
     { "category": "交通", "day": "Day 01", "title": "車資｜吉隆坡國際機場 (KUL) → 吉隆坡市區交通預估（約 RM100）", "amount": 750 },
     { "category": "餐飲", "day": "Day 01", "title": "餐飲｜家鄉海南咖啡 Hometown Hainan Coffee（約 RM40）", "amount": 300 },
-    { "category": "住宿", "day": "Day 01–04", "title": "住宿｜吉隆坡＆怡保第一階段旅宿先購預估", "amount": 3417 },
+    { "category": "住宿", "day": "Day 01–02", "title": "住宿｜吉隆坡艾美酒店 Le Méridien Kuala Lumpur（1 晚・AGODA：1773232447）", "amount": 3417 },
+    { "category": "住宿", "day": "Day 02–03", "title": "住宿｜怡保 薩朗柏羅傳承飯店 Sarang Paloh Heritage Stay（1 晚・Booking：5606964957）", "amount": 1500 },
+    { "category": "住宿", "day": "Day 03–06", "title": "住宿｜吉隆坡中央車站雅樂軒飯店 Aloft KL Sentral（連續 3 晚・AGODA 雙訂單）", "amount": 7500 },
+    { "category": "住宿", "day": "Day 06–08", "title": "住宿｜麻六甲假日酒店 Holiday Inn Melaka by IHG（連續 2 晚・AGODA＋TRIP.COM）", "amount": 4400 },
+    { "category": "住宿", "day": "Day 08–11", "title": "住宿｜新加坡 悅樂武吉士酒店 Village Hotel Bugis（連續 3 晚・官網＋AGODA）", "amount": 13500 }
     { "category": "交通", "day": "Day 02", "title": "車資｜吉隆坡 → 怡保 KTMB ETS 電動列車對號座", "amount": 350 },
     { "category": "餐飲", "day": "Day 02", "title": "餐飲｜南香茶餐室（正宗怡保白咖啡＆蛋撻）", "amount": 180 },
     { "category": "餐飲", "day": "Day 02", "title": "餐飲｜安記芽菜雞沙河粉（招牌滑雞＆怡保芽菜）", "amount": 250 },
