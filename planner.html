@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 【✏️ 文字修改】瀏覽器分頁標題 -->
+    <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 智能行程規劃器</title>
+
+    <!-- 【⚙️ 功能設定】Travelpayouts 自動分潤腳本 -->
+    <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
+        (function () {
+            var script = document.createElement("script");
+            script.async = 1;
+            script.setAttribute("data-cmp-ab", "2");
+            script.src = 'https://emrld.ltd/NTk5Njg0.js?t=599684';
+            document.head.appendChild(script);
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =================================================================
+           【🎨 顏色修改區】全站共用溫潤奶茶色調色盤
+           ================================================================= */
+        :root {
+            --bg-color: #FDFBF7;          /* 網頁米白底色 */
+            --accent-brown: #C4A99E;      /* 主題奶茶棕（選中按鈕、主按鈕底色） */
+            --accent-brown-dark: #a6897c; /* 深奶茶棕（標題、強調文字色） */
+            --accent-pink: #E5D1C7;       /* 柔和藕粉（次要按鈕懸停底色） */
+            --accent-sage: #D8E2D5;       /* 鼠尾草綠（地區標籤、節慶標籤底色） */
+            --text-main: #7A6258;         /* 主要內文深可可棕 */
+            --text-light: #9E887E;        /* 次要說明淺可可棕 */
+            --callout-bg: #F5EFE6;        /* 季節防踩雷提示框米杏底色 */
+            --border-soft: rgba(196, 169, 158, 0.35);
+        }
+
+        body {
+            margin: 0;
+            padding: 32px 24px 90px;
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            max-width: 1060px;
+            margin-inline: auto;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1 {
+            font-family: 'Noto Serif TC', serif;
+            color: var(--accent-brown-dark);
+            text-align: center;
+            font-size: 1.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin: 0 0 18px 0;
+        }
+
+        /* 頂部四大導覽列（整排無底框，僅選中按鈕有奶茶棕底色） */
+        .main-nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .main-tab-btn {
+            font-family: inherit;
+            background: transparent;
+            color: var(--text-main);
+            border: 1.5px solid transparent;
+            padding: 9px 20px;
+            border-radius: 24px;
+            font-size: 0.94rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .main-tab-btn:hover {
+            color: var(--accent-brown-dark);
+            border-color: var(--border-soft);
+            background: rgba(245, 239, 230, 0.5);
+        }
+        .main-tab-btn.active {
+            background: var(--accent-brown);
+            color: white;
+            border-color: var(--accent-brown);
+            box-shadow: 0 4px 12px rgba(196, 169, 158, 0.42);
+            font-weight: 700;
+        }
+
+        /* 規劃器主卡片與表單控制項 */
+        .planner-box {
+            background: white;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 24px 26px;
+            box-shadow: 0 4px 20px rgba(196, 169, 158, 0.14);
+        }
+        .section-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border-soft);
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .section-title {
+            font-family: 'Noto Serif TC', serif;
+            color: var(--accent-brown-dark);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .planner-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0 0 20px 0;
+            line-height: 1.65;
+        }
+        .planner-controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+        .planner-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .planner-field label {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--accent-brown-dark);
+        }
+        .planner-select, .planner-input {
+            font-family: inherit;
+            color: var(--text-main);
+            background: var(--bg-color);
+            border: 1.5px solid var(--accent-brown);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .days-input-wrap { position: relative; display: flex; align-items: center; }
+        .days-input-suffix { position: absolute; right: 14px; font-size: 0.88rem; color: var(--text-light); font-weight: 600; pointer-events: none; }
+
+        .planner-submit-btn {
+            font-family: inherit;
+            width: 100%;
+            background: var(--accent-brown);
+            color: white;
+            border: 1.5px solid var(--accent-brown);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.96rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .planner-submit-btn:hover { background: var(--accent-brown-dark); }
+
+        /* 規劃結果與季節／節慶提示框樣式 */
+        #planner-result {
+            display: none;
+            margin-top: 24px;
+            padding-top: 22px;
+            border-top: 1px dashed var(--accent-brown);
+        }
+        .season-alert-card {
+            background: var(--callout-bg);
+            border-left: 4px solid var(--accent-brown-dark);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+        .festival-alert-card {
+            background: #F4F7F2; /* 節慶提醒框淺綠底色 */
+            border-left: 4px solid #8FA889;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+        .alert-title {
+            font-weight: 700;
+            color: var(--accent-brown-dark);
+            margin-bottom: 4px;
+        }
+
+        /* 每日生成行程卡片與時間軸樣式 */
+        .generated-days-list { display: flex; flex-direction: column; gap: 16px; }
+        .gen-day-card {
+            background: var(--bg-color);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 18px 20px;
+        }
+        .gen-day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .gen-badge-num {
+            background: var(--accent-brown);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 14px;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+        .gen-badge-zone {
+            background: var(--accent-sage);
+            color: var(--text-main);
+            padding: 3px 10px;
+            border-radius: 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+        .gen-stars { color: #D4A853; font-size: 0.85rem; font-weight: 600; }
+        .gen-day-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--accent-brown-dark);
+            margin: 0 0 12px 0;
+        }
+        .smart-route-timeline { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .smart-spot-item {
+            background: white;
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 11px 14px;
+        }
+        .smart-spot-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .smart-spot-name {
+            font-weight: 700;
+            color: var(--accent-brown-dark);
+            font-size: 0.93rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .spot-time-badge {
+            background: #F5EFE6;
+            border: 1px solid var(--accent-brown);
+            color: var(--accent-brown-dark);
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .smart-spot-tag {
+            font-size: 0.75rem;
+            background: #F5EFE6;
+            color: var(--text-light);
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        .smart-spot-desc { font-size: 0.83rem; color: var(--text-main); margin: 6px 0 0 0; line-height: 1.5; }
+        .smart-route-connector { font-size: 0.78rem; color: var(--text-light); padding-left: 16px; }
+        .gen-day-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            padding-top: 8px;
+            border-top: 1px solid #EFEAE4;
+        }
+        .gen-read-link { color: var(--accent-brown-dark); text-decoration: none; font-weight: 600; }
+        .planner-footer-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+        .planner-secondary-btn {
+            font-family: inherit;
+            background: white;
+            color: var(--accent-brown-dark);
+            border: 1.5px solid var(--accent-brown);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .planner-secondary-btn:hover { background: var(--accent-pink); color: white; }
+
+        .admin-fab {
+            position: fixed; bottom: 24px; right: 24px; background: var(--accent-brown); color: white;
+            text-decoration: none; padding: 12px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5); z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 20px 14px 80px; }
+            h1 { font-size: 1.42rem; }
+            .main-tab-btn { padding: 8px 14px; font-size: 0.85rem; }
+            .planner-controls { grid-template-columns: 1fr; }
+            .planner-box { padding: 18px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
+
+    <!-- 頂部導覽列：前三個按鈕連回首頁對應分頁，第四個為當前頁面 -->
+    <nav class="main-nav-tabs" aria-label="手帳主選單">
+        <a href="index.html?tab=tab-upcoming" class="main-tab-btn">未來旅程</a>
+        <a href="index.html?tab=tab-ongoing" class="main-tab-btn">旅途連載</a>
+        <a href="index.html?tab=tab-completed" class="main-tab-btn">歸檔風景</a>
+        <a href="planner.html" class="main-tab-btn active">漫遊提案</a>
+    </nav>
+
+    <section class="planner-box">
+        <div class="section-header-bar">
+            <h2 class="section-title">🧭 智能行程規劃器</h2>
+            <span style="font-size: 0.82rem; color: var(--text-light);">★ 自動連動各國 1～12 月氣候特徵、營業時間與合理餐期</span>
+        </div>
+        <p class="planner-desc">
+            選擇目的地國家、地區（可不選）、預計天數與出發月份，系統會自動切換該國專屬的<strong>1～12 月氣候與節慶特徵</strong>，並從我實際走過的經典景點池中，依<strong>「戶外景點排白天、正餐分開不連吃、住宿泡湯排夜晚」</strong>的邏輯編排全新時間軸行程！
+        </p>
+
+        <div class="planner-controls">
+            <!-- 1. 國家選擇（由下方 COUNTRY_CLIMATE_DB 自動生成選項） -->
+            <div class="planner-field">
+                <label for="plan-country">1. 選擇目的地國家</label>
+                <select id="plan-country" class="planner-select"></select>
+            </div>
+
+            <!-- 2. 地區選擇（隨國家自動讀取 itinerary/*.json 內的地區） -->
+            <div class="planner-field">
+                <label for="plan-region">2. 選擇地區（選填・可不選）</label>
+                <select id="plan-region" class="planner-select">
+                    <option value="ALL">不限地區（全區經典智能串聯）</option>
+                </select>
+            </div>
+
+            <!-- 3. 天數自由填入 -->
+            <div class="planner-field">
+                <label for="plan-days">3. 預計旅遊天數（自由填入）</label>
+                <div class="days-input-wrap">
+                    <input type="number" id="plan-days" class="planner-input" min="1" max="14" value="4">
+                    <span class="days-input-suffix">天</span>
+                </div>
+            </div>
+
+            <!-- 4. 出發月份（隨所選國家自動切換當地 1～12 月特徵！） -->
+            <div class="planner-field">
+                <label for="plan-month">4. 預計出發月份（選填・自動切換當地氣候與節慶）</label>
+                <select id="plan-month" class="planner-select"></select>
+            </div>
+        </div>
+
+        <button type="button" class="planner-submit-btn" id="generate-plan-btn">✨ 智能規劃最適合的新行程</button>
+
+        <div id="planner-result">
+            <div id="season-alert-container"></div>
+            <div id="festival-alert-container"></div>
+            <div class="generated-days-list" id="generated-days-list"></div>
+            <div class="planner-footer-actions">
+                <button type="button" class="planner-secondary-btn" id="copy-plan-link-btn">📤 複製這份專屬行程連結</button>
+                <a href="journal.html?trip=tohoku_2026&view=itinerary" id="planner-journal-link" class="planner-secondary-btn">📅 查看完整行程安排與地圖</a>
+            </div>
+        </div>
+    </section>
+
+    <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
+
+    <script>
+        /* =========================================================================
+           【⚙️ 新增國家修改區】各國 1～12 月氣候特徵、季節防踩雷與節慶資料庫
+           💡 未來去完新國家要新增時，只要複製其中一個國家的區塊貼在下方即可！
+           ========================================================================= */
+        const GLOBAL_DEFAULT_MONTHS = {
+            "ANY": "不限月份（隨意走走・含當地節慶與季節提醒）",
+            "1": "1 月（新年假期・北半球寒冬／南洋避寒慢旅）",
+            "2": "2 月（農曆春節・冬末初春／節慶旅遊旺季）",
+            "3": "3 月（換季時分・早春回暖／日夜溫差注意）",
+            "4": "4 月（春暖花開・兒童清明連假／舒爽漫遊）",
+            "5": "5 月（晚春初夏・氣候最宜人／雨季前夕）",
+            "6": "6 月（初夏時節・端午連假／避暑與防曬）",
+            "7": "7 月（盛夏酷暑・暑期旅遊旺季／親水避暑）",
+            "8": "8 月（仲夏假期・各地夏日慶典／留意午後雷雨）",
+            "9": "9 月（夏末初秋・微涼換季／中秋連假漫遊）",
+            "10": "10 月（秋高氣爽・雙十連假／秋遊舒適季節）",
+            "11": "11 月（深秋時節・涼意漸濃／避開人潮慢旅）",
+            "12": "12 月（歲末節慶・初冬保暖／聖誕跨年氛圍）"
+        };
+
+        const COUNTRY_CLIMATE_DB = {
+            /* -------------------- 國家 1：日本 -------------------- */
+            "日本": {
+                trips: ["tohoku_2026"], /* 對應 itinerary/ 與 data/ 下的檔名 */
+                months: {
+                    "ANY": "不限月份（隨意走走・含日本祭典與四季提醒）",
+                    "1": "1 月（深冬追雪・藏王樹冰／大崎八幡宮松焚祭）",
+                    "2": "2 月（樹冰全盛期・銀山溫泉雪景／各地雪燈祭）",
+                    "3": "3 月（早春換季・殘雪溫泉／東京早櫻盛開）",
+                    "4": "4 月（春季賞櫻・東北櫻花百選／氣候回暖）",
+                    "5": "5 月（新綠慢旅・黃金週連假／氣候最乾爽舒適）",
+                    "6": "6 月（初夏梅雨・紫陽花季／東北清爽避暑）",
+                    "7": "7 月（盛夏綠意・山寺峽谷避暑／夏日花火大會）",
+                    "8": "8 月（東北大祭・仙台七夕祭 8/6-8/8／睡魔祭）",
+                    "9": "9 月（初秋微涼・藏王山岳初秋漫步／秋味海鮮）",
+                    "10": "10 月（秋季賞楓・藏王纜車紅葉／松島夜楓點燈）",
+                    "11": "11 月（晚秋銀杏・松島円通院夜楓／東京銀杏並木）",
+                    "12": "12 月（初冬瑞雪・粉雪溫泉開季／東京聖誕燈飾）"
+                },
+                precautions: {
+                    winter: {
+                        title: "❄️ 日本冬季出發（12月～2月）實測防踩雷重點",
+                        tips: [
+                            "<strong>藏王樹冰交通注意：</strong>冬季「藏王樹冰套票」山交巴士窗口常因暴雪停售，實測直接排隊刷 Suica 上車＋到藏王山麓站買纜車票最順暢！",
+                            "<strong>雪地防滑與防凍：</strong>山寺石階與藏王山頂極滑，務必攜帶「簡易冰爪」；零下 10 度手機極易凍關機，請貼暖暖包並隨身帶行動電源。",
+                            "<strong>銀山溫泉冬季管制：</strong>冬季傍晚點燈時段實施入場與接駁巴士總量管制，一日遊旅客務必留意大石田末班車。"
+                        ]
+                    },
+                    spring: {
+                        title: "🌸 日本春季出發（3月～5月）實測換季提醒",
+                        tips: [
+                            "<strong>景觀季節轉換：</strong>春季非藏王樹冰季（樹冰約於 3 月上旬結束），建議將重心放在松島遊船、山寺新綠與仙台古剎巡禮。",
+                            "<strong>早晚溫差極大：</strong>日本東北 3～4 月仍有機會遇到春雪或強風，採「洋蔥式穿法」並隨身攜帶防風外套最保險。"
+                        ]
+                    },
+                    summer: {
+                        title: "🌿 日本夏季出發（6月～8月）實測防曬與祭典提醒",
+                        tips: [
+                            "<strong>避暑與防蚊：</strong>松島與山寺綠意盎然，爬階梯請備妥飲水與防蚊液；藏王山岳則是極為涼爽的避暑勝地。",
+                            "<strong>東北大祭訂房提醒：</strong>8 月上旬適逢東北四大祭（如仙台七夕祭 8/6～8/8），仙台市區飯店建議提早 4～6 個月預訂。"
+                        ]
+                    },
+                    autumn: {
+                        title: "🍁 日本秋季出發（9月～11月）實測賞楓與日照提醒",
+                        tips: [
+                            "<strong>日落時間提早：</strong>10～11 月日本東北約 16:30 即天黑，前往狐狸村、山寺或銀山溫泉請務必排於上午出發！",
+                            "<strong>高山與平地楓期差：</strong>藏王山岳紅葉約在 10 月中旬最美，松島與仙台市區紅葉則落在 10 月下旬至 11 月中旬。"
+                        ]
+                    },
+                    default: {
+                        title: "💡 日本跨季節通用防踩雷提醒",
+                        tips: [
+                            "<strong>營業時間最佳化：</strong>已自動將藏王狐狸村（16:00閉園）、藏王纜車與銀山溫泉排於日間時段，並將兩頓正餐以景點隔開不連吃。",
+                            "<strong>四季景觀差異：</strong>1～2 月可賞藏王樹冰與銀山雪景；春秋季則適合漫遊松島灣遊船、瑞巖寺與東京下町谷中銀座。"
+                        ]
+                    }
+                },
+                festivals: [
+                    { months: [1], keywords: ["大崎八幡宮", "松焚祭", "仙台"], badge: "🔥 1月14日限定・千年國寶祭典", note: "<strong>大崎八幡宮「松焚祭（どんと祭）」：</strong>每年 1 月 14 日晚間舉行，境內燃起神聖「御神火」並有傳統白裝束「裸參拜」隊伍。" },
+                    { months: [12, 1, 2, 3], keywords: ["藏王", "樹冰"], badge: "❄️ 12月下旬～2月下旬限定・藏王樹冰", note: "<strong>藏王樹冰（Snow Monsters）：</strong>全盛期為 1 月下旬至 2 月中旬，特定夜晚還有「樹冰幻想迴廊」點燈。" },
+                    { months: [10, 11], keywords: ["松島", "瑞巖寺", "円通院"], badge: "🍁 10月下旬～11月下旬限定・松島夜楓", note: "<strong>松島円通院紅葉點燈：</strong>每年 10 月下旬至 11 月下旬舉辦夜間紅葉點燈，心字池倒映楓紅如鏡面般夢幻。" },
+                    { months: [8], keywords: ["仙台", "一番町"], badge: "🎋 8月6日～8月8日限定・仙台七夕祭", note: "<strong>仙台七夕祭：</strong>每年 8 月 6 日至 8 日仙台拱廊街掛滿巨型和紙吹流，瑞鳳殿亦同步舉辦幻想竹燈夜。" }
+                ]
+            },
+
+            /* -------------------- 國家 2：馬來西亞・新加坡（已預先建置，待上傳 JSON 即自動啟用） -------------------- */
+            "馬來西亞・新加坡": {
+                trips: ["malaysia_2027"],
+                months: {
+                    "ANY": "不限月份（隨意走走・含星馬乾雨季與節慶提醒）",
+                    "1": "1 月（熱帶微涼季・農曆春節年貨街／牛車水點燈）",
+                    "2": "2 月（春節與大寶森節・黑風洞慶典／避寒慢旅）",
+                    "3": "3 月（春季乾爽期・齋戒月夜市美食／氣候穩定）",
+                    "4": "4 月（春季漫旅首選・開齋節慶典／少雨舒適期）",
+                    "5": "5 月（初夏陽光季・衛塞節慶典／室內外溫差注意）",
+                    "6": "6 月（仲夏購物季・星馬年中大促銷／榴槤產季開跑）",
+                    "7": "7 月（盛夏美食季・貓山王榴槤全盛期／濱海灣活動）",
+                    "8": "8 月（國慶月慶典・8/9 新加坡國慶煙火／8/31 大馬國慶）",
+                    "9": "9 月（夏末漫遊・F1 新加坡夜間大獎賽／中秋燈會）",
+                    "10": "10 月（印度屠妖節・小印度璀璨燈飾／午後陣雨注意）",
+                    "11": "11 月（東北季風雨季・室內博物館與星耀樟宜慢遊）",
+                    "12": "12 月（歲末熱帶聖誕・烏節路聖誕燈海／跨年煙火）"
+                },
+                precautions: {
+                    default: {
+                        title: "🌴 馬來西亞＆新加坡出發實測防踩雷重點",
+                        tips: [
+                            "<strong>雙國電子入境卡必填：</strong>入境馬來西亞前 3 天內須線上填妥「MDAC 電子入境卡」；入境新加坡前 3 天內須填妥「SG Arrival Card」（皆為免費官方系統）。",
+                            "<strong>清真寺服裝與冷氣房溫差：</strong>參訪粉紅清真寺或國家清真寺須穿著長褲長袖並包頭巾（現場可借長袍）；星馬商場與劇院冷氣極強，務必隨身攜帶薄外套。",
+                            "<strong>午後雷陣雨與防曬：</strong>熱帶氣候常有短暫午後雷陣雨，建議將戶外街區（如馬六甲荷蘭紅屋、黑風洞）排在上午，下午安排室內體驗或宮廷宴。"
+                        ]
+                    }
+                },
+                festivals: [
+                    { months: [3, 4], keywords: ["吉隆坡", "馬六甲", "清真寺"], badge: "🌙 3～4月限定・齋戒月市集與開齋節", note: "<strong>開齋節（Hari Raya Aidilfitri）：</strong>伊斯蘭重要節慶，傍晚可體驗極具特色的齋戒月美食市集（Bazaar Ramadan），開齋節期間皇宮與商場皆有華麗裝飾。" },
+                    { months: [1, 2], keywords: ["吉隆坡", "新加坡", "馬六甲"], badge: "🏮 1～2月限定・農曆春節與大寶森節", note: "<strong>華人春節＆印度大寶森節：</strong>吉隆坡茨廠街、馬六甲雞場街與新加坡牛車水年味極濃，黑風洞於大寶森節更有盛大遊行。" },
+                    { months: [8], keywords: ["新加坡", "吉隆坡"], badge: "🎆 8月限定・新加坡＆馬來西亞國慶月", note: "<strong>星馬國慶煙火：</strong>8 月 9 日新加坡濱海灣與 8 月 31 日吉隆坡獨立廣場皆有盛大國慶閱兵與煙火匯演。" }
+                ]
+            }
+        };
+
+        const loadedItineraryCache = {};
+
+        /* === PART 1：初始化國家選單、地區選單與動態月份選單 === */
+        function initCountryAndMonthSelects() {
+            const countrySelect = document.getElementById('plan-country');
+            const countries = Object.keys(COUNTRY_CLIMATE_DB);
+            countrySelect.innerHTML = countries.map(c => `<option value="${c}">${c}</option>`).join('');
+
+            countrySelect.addEventListener('change', () => {
+                updateMonthDropdownByCountry();
+                updateRegionOptionsByCountry();
+            });
+
+            updateMonthDropdownByCountry();
+            updateRegionOptionsByCountry();
+        }
+
+        // 當切換國家時，自動將第 4 步的「1～12 月份選單」替換為該國專屬特徵（若無則退回全球通用版）
+        function updateMonthDropdownByCountry() {
+            const country = document.getElementById('plan-country').value;
+            const monthSelect = document.getElementById('plan-month');
+            const prevVal = monthSelect.value || 'ANY';
+            const monthDict = COUNTRY_CLIMATE_DB[country]?.months || GLOBAL_DEFAULT_MONTHS;
+
+            const orderKeys = ['ANY', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+            monthSelect.innerHTML = orderKeys.map(k => {
+                const label = monthDict[k] || GLOBAL_DEFAULT_MONTHS[k];
+                return `<option value="${k}">${label}</option>`;
+            }).join('');
+
+            if (orderKeys.includes(prevVal)) monthSelect.value = prevVal;
+        }
+
+        function getDistanceKm(lat1, lng1, lat2, lng2) {
+            const R = 6371, dLat = (lat2 - lat1) * Math.PI / 180, dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        function formatMins(m) {
+            const r = Math.round(m / 15) * 15;
+            return `${String(Math.floor(r / 60) % 24).padStart(2, '0')}:${String(r % 60).padStart(2, '0')}`;
+        }
+
+        /* === PART 2：讀取 itinerary/*.json 並執行營業時間＆餐期合理化排程 === */
+        async function loadStructuredSpotsPool(country) {
+            const tripIds = COUNTRY_CLIMATE_DB[country]?.trips || [];
+            const pool = [];
+
+            for (const id of tripIds) {
+                if (!loadedItineraryCache[id]) {
+                    const [itinRes, dataRes] = await Promise.all([
+                        fetch(`itinerary/${id}.json?t=${Date.now()}`).then(r => r.ok ? r.json() : null).catch(() => null),
+                        fetch(`data/${id}.json?t=${Date.now()}`).then(r => r.ok ? r.json() : null).catch(() => null)
+                    ]);
+                    loadedItineraryCache[id] = { itin: itinRes, data: dataRes };
+                }
+
+                const { itin, data } = loadedItineraryCache[id];
+                const coordMap = new Map();
+                (data?.days || []).forEach(d => (d.chapters || []).forEach(c => coordMap.set(c.id, { lat: c.lat, lng: c.lng, stars: d.stars || 5 })));
+
+                (itin?.days || []).forEach(d => {
+                    const regionClean = (d.region || '主要地區').replace('地區', '');
+                    (d.spots || []).forEach(sp => {
+                        const coord = coordMap.get(sp.id) || { lat: sp.lat || 38.268, lng: sp.lng || 140.869, stars: 5 };
+                        if (/小港機場|成田國際機場|新幹線|大石田站/.test(sp.spotName)) return;
+
+                        let slotType = 'DAY_SIGHT', stayMins = 75, role = sp.categoryLabel || '經典必訪';
+                        if (sp.categoryLabel === '溫泉住宿' || (/御宿野乃|飯店/.test(sp.spotName) && !sp.isFood)) {
+                            slotType = 'HOTEL_NIGHT'; stayMins = 90; role = '♨️ 夜晚泡湯＆住宿';
+                        } else if (sp.isFood) {
+                            const h = parseInt((sp.time || '12:00').split(':')[0], 10);
+                            slotType = h >= 17 ? 'MEAL_DINNER' : (h <= 14 ? 'MEAL_LUNCH' : 'MEAL_FLEX');
+                            stayMins = 80; role = '🍱 在地美饌';
+                        } else if (/狐狸村|藏王纜車|山頂|銀山溫泉|遊船/.test(sp.spotName)) {
+                            slotType = 'MORNING_MUST'; stayMins = 100; role = '🌅 上午優先（避開下午閉園）';
+                        } else if (/鐵塔|夜景|敘宴|劇場/.test(sp.spotName)) {
+                            slotType = 'EVENING_SIGHT'; stayMins = 85; role = '🌇 傍晚／夜間體驗';
+                        }
+
+                        pool.push({
+                            id: sp.id,
+                            name: sp.spotName,
+                            lat: Number(coord.lat),
+                            lng: Number(coord.lng),
+                            region: regionClean,
+                            slotType,
+                            stayMins,
+                            roleLabel: role,
+                            stars: coord.stars,
+                            highlight: (sp.intro || '').slice(0, 82) + '…',
+                            tripId: id,
+                            sourceDay: d.day
+                        });
+                    });
+                });
+            }
+            return pool;
+        }
+
+        async function updateRegionOptionsByCountry() {
+            const country = document.getElementById('plan-country').value;
+            const spots = await loadStructuredSpotsPool(country);
+            const regions = [...new Set(spots.map(s => s.region))];
+            const regSelect = document.getElementById('plan-region');
+            regSelect.innerHTML = `<option value="ALL">不限地區（全區經典智能串聯）</option>` +
+                regions.map(r => `<option value="${r}">${r}地區</option>`).join('');
+        }
+
+        function buildSingleDaySchedule(candidates) {
+            const mornings = candidates.filter(s => s.slotType === 'MORNING_MUST');
+            const sights = candidates.filter(s => s.slotType === 'DAY_SIGHT');
+            const lunches = candidates.filter(s => s.slotType === 'MEAL_LUNCH' || s.slotType === 'MEAL_FLEX');
+            const dinners = candidates.filter(s => s.slotType === 'MEAL_DINNER');
+            const evenings = candidates.filter(s => s.slotType === 'EVENING_SIGHT');
+            const hotels = candidates.filter(s => s.slotType === 'HOTEL_NIGHT');
+
+            const chosenLunch = lunches.shift() || null;
+            let chosenDinner = dinners.shift() || (lunches.length > 0 ? lunches.shift() : null);
+            if (chosenLunch && chosenDinner && chosenLunch.id === chosenDinner.id) chosenDinner = null;
+
+            const daySights = [...mornings, ...sights].slice(0, 3);
+            const amSpots = daySights.slice(0, Math.min(2, Math.ceil(daySights.length / 2)));
+            const pmSpots = daySights.slice(amSpots.length);
+
+            // 確保午餐與晚餐之間必有下午景點隔開，絕不連吃兩頓正餐
+            const finalLunch = (chosenLunch && chosenDinner && pmSpots.length === 0) ? null : chosenLunch;
+
+            const stops = [];
+            let clock = 9 * 60 + 30;
+            const pushStop = (sp, minW, maxW, badge) => {
+                if (!sp) return;
+                if (stops.length > 0) {
+                    const prev = stops[stops.length - 1];
+                    const dist = getDistanceKm(prev.lat, prev.lng, sp.lat, sp.lng);
+                    clock += prev.stayMins + (dist < 1.5 ? 15 : Math.min(60, Math.max(20, Math.round(dist * 1.3))));
+                }
+                if (minW && clock < minW) clock = minW;
+                if (maxW && clock > maxW) clock = maxW;
+                stops.push({ ...sp, timeStr: formatMins(clock), displayRole: badge || sp.roleLabel });
+            };
+
+            if (amSpots.length > 1) clock = 9 * 60;
+            amSpots.forEach(s => pushStop(s, 9 * 60, 11 * 60 + 30));
+            if (finalLunch) pushStop(finalLunch, 12 * 60, 13 * 60 + 15, '🍽️ 午餐時光');
+            pmSpots.forEach(s => pushStop(s, 13 * 60 + 45, 16 * 60 + 15));
+            if (evenings[0]) pushStop(evenings[0], 17 * 60, 18 * 60, '🌇 傍晚／夜間體驗');
+            if (chosenDinner) pushStop(chosenDinner, 18 * 60, 19 * 60 + 30, '🥂 晚餐饗宴');
+            if (hotels[0]) pushStop(hotels[0], 20 * 60 + 30, 21 * 60 + 15, '♨️ 夜晚泡湯＆住宿');
+            return stops;
+        }
+
+        function getSeasonKey(monthVal) {
+            const m = parseInt(monthVal, 10);
+            if (isNaN(m)) return 'default';
+            if ([12, 1, 2].includes(m)) return 'winter';
+            if ([3, 4, 5].includes(m)) return 'spring';
+            if ([6, 7, 8].includes(m)) return 'summer';
+            return 'autumn';
+        }
+
+        async function generateSmartItinerary() {
+            const country = document.getElementById('plan-country').value;
+            const region = document.getElementById('plan-region').value;
+            const targetDays = Math.min(Math.max(parseInt(document.getElementById('plan-days').value, 10) || 4, 1), 14);
+            document.getElementById('plan-days').value = targetDays;
+            const monthVal = document.getElementById('plan-month').value;
+
+            const allSpots = await loadStructuredSpotsPool(country);
+            const listEl = document.getElementById('generated-days-list');
+
+            if (allSpots.length === 0) {
+                document.getElementById('season-alert-container').innerHTML = `
+                    <div class="season-alert-card">
+                        <div class="alert-title">✨ 這個國家的實測景點池正在建構中</div>
+                        <div>待上傳該國家的 itinerary/location_year.json 檔案後，即可立即啟用智能路徑規劃！</div>
+                    </div>
+                `;
+                document.getElementById('festival-alert-container').innerHTML = '';
+                listEl.innerHTML = '';
+                document.getElementById('planner-result').style.display = 'block';
+                return;
+            }
+
+            const filtered = region === 'ALL' ? allSpots : allSpots.filter(s => s.region.includes(region));
+            const byDayGroups = {};
+            (filtered.length ? filtered : allSpots).forEach(s => {
+                if (!byDayGroups[s.sourceDay]) byDayGroups[s.sourceDay] = [];
+                byDayGroups[s.sourceDay].push(s);
+            });
+
+            const dayKeys = Object.keys(byDayGroups).slice(0, targetDays);
+            const plans = dayKeys.map((dk, idx) => {
+                const stops = buildSingleDaySchedule(byDayGroups[dk]);
+                const regName = stops[0]?.region || '精選';
+                const names = stops.slice(0, 2).map(s => s.name.split('（')[0].split(' ')[0]).join('・');
+                return {
+                    dayNum: idx + 1,
+                    regionBadge: `${regName}地區`,
+                    themeTitle: `${regName}經典順路漫遊｜${names}`,
+                    spots: stops
+                };
+            });
+
+            // 1. 渲染該國專屬季節防踩雷提醒
+            const countryCfg = COUNTRY_CLIMATE_DB[country] || {};
+            const sKey = getSeasonKey(monthVal);
+            const pObj = countryCfg.precautions?.[sKey] || countryCfg.precautions?.default || {
+                title: `💡 ${country}出發防踩雷提醒`,
+                tips: ["已自動依各景點營業時間與地理位置排定順路動線，並將正餐時段錯開。"]
+            };
+
+            document.getElementById('season-alert-container').innerHTML = `
+                <div class="season-alert-card">
+                    <div class="alert-title">${pObj.title}</div>
+                    <ul style="margin:6px 0 0 0; padding-left:20px;">
+                        ${pObj.tips.map(t => `<li style="margin-bottom:4px;">${t}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+            // 2. 渲染該國專屬節慶與期間限定提醒
+            const fullPlanText = plans.map(d => d.spots.map(s => s.name).join(' ')).join(' ');
+            const matchedFestivals = (countryCfg.festivals || []).filter(f =>
+                f.keywords.some(kw => fullPlanText.includes(kw))
+            );
+
+            if (matchedFestivals.length > 0) {
+                document.getElementById('festival-alert-container').innerHTML = `
+                    <div class="festival-alert-card">
+                        <div class="alert-title">🎉 行程內含「${country}節慶＆期間限定活動」特別備註</div>
+                        <ul style="margin:6px 0 0 0; padding-left:20px;">
+                            ${matchedFestivals.map(f => {
+                                const isExact = monthVal !== 'ANY' && f.months.includes(parseInt(monthVal, 10));
+                                return `<li style="margin-bottom:6px;">
+                                    <span style="background:#D8E2D5; padding:1px 8px; border-radius:10px; font-size:0.78rem; font-weight:700; margin-right:6px;">
+                                        ${isExact ? '🌟 您選的月份正逢此活動！' : f.badge}
+                                    </span>
+                                    ${f.note}
+                                </li>`;
+                            }).join('')}
+                        </ul>
+                    </div>
+                `;
+            } else {
+                document.getElementById('festival-alert-container').innerHTML = '';
+            }
+
+            // 3. 渲染每日時間軸行程卡
+            const firstTripId = plans[0]?.spots[0]?.tripId || 'tohoku_2026';
+            document.getElementById('planner-journal-link').href = `journal.html?trip=${firstTripId}&view=itinerary`;
+
+            listEl.innerHTML = plans.map(p => `
+                <div class="gen-day-card">
+                    <div class="gen-day-header">
+                        <div>
+                            <span class="gen-badge-num">智能規劃 Day ${String(p.dayNum).padStart(2, '0')}</span>
+                            <span class="gen-badge-zone">${p.regionBadge}</span>
+                        </div>
+                        <span class="gen-stars">經典推薦指數 ★★★★★</span>
+                    </div>
+                    <h4 class="gen-day-title">${p.themeTitle}</h4>
+                    <div class="smart-route-timeline">
+                        ${p.spots.map((sp, i) => {
+                            let conn = '';
+                            if (i < p.spots.length - 1) {
+                                const d = getDistanceKm(sp.lat, sp.lng, p.spots[i + 1].lat, p.spots[i + 1].lng);
+                                conn = `<div class="smart-route-connector">⇣ ${d < 1.5 ? `🚶 順路步行（約 ${Math.max(0.3, d).toFixed(1)} km）` : `🚌 順路移動（約 ${d.toFixed(1)} km）`}</div>`;
+                            }
+                            return `
+                                <div class="smart-spot-item">
+                                    <div class="smart-spot-top">
+                                        <span class="smart-spot-name"><span class="spot-time-badge">${sp.timeStr}</span> 📍 第 ${i + 1} 站｜${sp.name}</span>
+                                        <span class="smart-spot-tag">${sp.displayRole}・${sp.sourceDay}</span>
+                                    </div>
+                                    <p class="smart-spot-desc">${sp.highlight}</p>
+                                </div>
+                                ${conn}
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="gen-day-footer">
+                        <span>已依營業時間與合理餐期最佳化當日 ${p.spots.length} 個站點</span>
+                        <a href="journal.html?trip=${p.spots[0]?.tripId || firstTripId}&view=itinerary" class="gen-read-link">📅 查看詳細行程安排與注意事項 ➔</a>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('planner-result').style.display = 'block';
+        }
+
+        // 初始化與網址分享參數讀取
+        initCountryAndMonthSelects();
+        document.getElementById('generate-plan-btn').addEventListener('click', generateSmartItinerary);
+
+        document.getElementById('copy-plan-link-btn').addEventListener('click', () => {
+            const c = encodeURIComponent(document.getElementById('plan-country').value);
+            const r = encodeURIComponent(document.getElementById('plan-region').value);
+            const d = encodeURIComponent(document.getElementById('plan-days').value);
+            const m = encodeURIComponent(document.getElementById('plan-month').value);
+            const shareUrl = `${location.origin}${location.pathname}?planCountry=${c}&planRegion=${r}&planDays=${d}&planMonth=${m}`;
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                const btn = document.getElementById('copy-plan-link-btn');
+                btn.textContent = '✔ 已複製專屬行程連結！';
+                setTimeout(() => btn.textContent = '📤 複製這份專屬行程連結', 2000);
+            });
+        });
+
+        const params = new URLSearchParams(location.search);
+        if (params.has('planCountry') || params.has('planDays') || params.has('planRegion')) {
+            if (params.get('planCountry')) {
+                document.getElementById('plan-country').value = params.get('planCountry');
+                updateMonthDropdownByCountry();
+            }
+            updateRegionOptionsByCountry().then(() => {
+                if (params.get('planRegion')) document.getElementById('plan-region').value = params.get('planRegion');
+                if (params.get('planDays')) document.getElementById('plan-days').value = params.get('planDays');
+                if (params.get('planMonth')) document.getElementById('plan-month').value = params.get('planMonth');
+                generateSmartItinerary();
+            });
+        }
+    </script>
+</body>
+</html>
