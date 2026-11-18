@@ -25,7 +25,9 @@ collections:
       # --- 1. 國家與旅程全域設定 ---
       - {label: "旅程 ID (必須與遊記相同，例如: tohoku_2026)", name: "tripId", widget: "string"}
       - {label: "旅程總標題", name: "tripTitle", widget: "string"}
+      - {label: "📝 隱藏整份行程規劃 (設為草稿，打勾後不在首頁「未來旅程」倒數曝光)", name: "isDraft", widget: "boolean", default: false, required: false}
       - {label: "地圖移動專屬頭貼 (Emoji 或圖片路徑)", name: "avatar", widget: "string", default: "🦊", required: false, hint: "例如日本東北填 🦊、星馬填 🦁"}
+      - {label: "旅程出發日期 (供首頁未來旅程倒數計時使用)", name: "startDate", widget: "string", required: false, hint: "格式 YYYY-MM-DD，例如: 2027-04-07"}
       - {label: "旅程結束日期 (過期後情報站自動顯示「旅程已結束」並停止更新)", name: "endDate", widget: "string", required: false, hint: "格式 YYYY-MM-DD，例如: 2026-02-05"}
       - {label: "目的地時區", name: "timezone", widget: "string", default: "Asia/Tokyo", required: false, hint: "例如日本 Asia/Tokyo、馬來西亞 Asia/Kuala_Lumpur、台灣 Asia/Taipei"}
       - {label: "主要幣別代碼", name: "currency", widget: "string", default: "JPY", required: false, hint: "例如: JPY、TWD、MYR、SGD、EUR"}
@@ -92,12 +94,14 @@ collections:
         fields:
           - {label: "天數標籤", name: "day", widget: "string", hint: "例如: Day 01"}
           - {label: "當日所屬地區 (供情報站與篩選器使用)", name: "region", widget: "string", required: false, hint: "例如: 山形地區"}
+          - {label: "📝 隱藏這一天 (設為草稿，打勾後前端不顯示該日行程與路線)", name: "isDraft", widget: "boolean", default: false, required: false}
           - label: "當日站點清單"
             name: "spots"
             widget: "list"
             summary: "{{fields.time}} ｜ {{fields.spotName}}"
             fields:
               - {label: "對應章節 ID (與遊記的 id 相同即可自動雙向連動)", name: "id", widget: "string", hint: "例如: d1-ch1"}
+              - {label: "📝 隱藏此站點 (設為草稿，打勾後前端暫不顯示此站點)", name: "isDraft", widget: "boolean", default: false, required: false}
               - {label: "預計時間 / 班次時間", name: "time", widget: "string", required: false, hint: "例如: 09:00 或 13:00"}
               - {label: "純店名 / 站點名稱 (美食紀錄抬頭將只顯示此店名)", name: "spotName", widget: "string", hint: "例如: 山形五十番飯店 駅前店"}
               - {label: "分類小標籤", name: "categoryLabel", widget: "string", required: false, default: "經典必訪", hint: "例如: 交通樞紐、名勝絕景、在地美饌、歷史古剎、溫泉住宿"}
@@ -137,6 +141,7 @@ collections:
       # --- 旅程基本資訊 ---
       - {label: "旅程 ID (英文，例如: tohoku_2026)", name: "tripId", widget: "string"}
       - {label: "旅程總標題", name: "tripTitle", widget: "string"}
+      - {label: "📝 整本遊記設為「編輯中草稿」", name: "isDraft", widget: "boolean", default: false, required: false, hint: "打勾後，首頁「歸檔風景」書櫃會自動隱藏這本遊記卡片與對應國家按鈕，內頁僅開放行程安排"}
 
       # --- 每日行程清單 ---
       - label: "天數日記列表"
@@ -146,6 +151,7 @@ collections:
         fields:
           - {label: "天數標籤", name: "day", widget: "string", hint: "例如: Day 01"}
           - {label: "當日主題標題", name: "dayTitle", widget: "string", hint: "例如: 走進日本三景的水墨畫！"}
+          - {label: "📝 單日設為「編輯中草稿」 (還沒寫完先隱藏)", name: "isDraft", widget: "boolean", default: false, required: false, hint: "打勾後，內頁會自動隱藏這一天的 Day 按鈕、文章與地圖路線（網址加 &preview=1 可預覽）"}
           - {label: "是否為行程實測", name: "isFieldTest", widget: "boolean", default: false, required: false, hint: "打勾後會在前端標題自動加上【行程實測】"}
 
           # --- 單日內的各景點章節 ---
@@ -155,6 +161,7 @@ collections:
             summary: "{{fields.title}}"
             fields:
               - {label: "章節 ID", name: "id", widget: "string"}
+              - {label: "📝 單一章節設為「編輯中草稿」 (暫時隱藏此景點)", name: "isDraft", widget: "boolean", default: false, required: false, hint: "打勾後，僅隱藏此章節與其地圖標記，不影響同日其他章節"}
               - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float"}
               - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
               - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
