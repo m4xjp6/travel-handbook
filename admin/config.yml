@@ -21,6 +21,42 @@ collections:
       # --- 旅程基本資訊 ---
       - {label: "旅程 ID (英文，例如: tohoku_2026)", name: "tripId", widget: "string"}
       - {label: "旅程總標題", name: "tripTitle", widget: "string"}
+      - {label: "地圖移動頭貼 (選填，例如: 🦊、🦁、⛄ 或圖片路徑)", name: "avatar", widget: "string", required: false, default: "🦊"}
+      - {label: "旅程結束日期 (選填，格式 YYYY-MM-DD，過期後情報站自動停止更新)", name: "endDate", widget: "string", required: false, hint: "例如: 2026-02-05"}
+
+      # --- 旅途預估花費設定 (選填，未填寫時系統會自動依章節推算) ---
+      - {label: "主要幣別 (選填，預設 JPY)", name: "currency", widget: "string", required: false, default: "JPY", hint: "例如: JPY、TWD、MYR、SGD"}
+      - {label: "預估總預算上限 (選填)", name: "budgetTotal", widget: "number", value_type: "int", required: false, default: 160000}
+      - label: "💰 自訂預估花費細項 (選填，若留空則自動由各章節生成車資與餐宿明細)"
+        name: "expenseItems"
+        widget: "list"
+        required: false
+        summary: "[{{fields.category}}] {{fields.title}} ｜ ${{fields.amount}}"
+        fields:
+          - label: "花費分類"
+            name: "category"
+            widget: "select"
+            options: ["交通", "住宿", "餐飲", "門票"]
+            default: "交通"
+          - {label: "天數標籤", name: "day", widget: "string", required: false, hint: "例如: Day 01"}
+          - {label: "細項名稱 (例如: 車資 成田機場 → 京成上野)", name: "title", widget: "string"}
+          - {label: "預估金額", name: "amount", widget: "number", value_type: "int", default: 0}
+
+      # --- 住宿確認憑證清單 (選填，同名且日期相連會自動合併成一張憑證) ---
+      - label: "🏨 住宿確認憑證清單 (選填，同名且連續住宿會自動合併)"
+        name: "hotelVouchers"
+        widget: "list"
+        required: false
+        summary: "{{fields.hotelName}} ({{fields.checkIn}} ➔ {{fields.checkOut}})"
+        fields:
+          - {label: "飯店名稱", name: "hotelName", widget: "string"}
+          - {label: "入住日期/天數", name: "checkIn", widget: "string", hint: "例如: Day 03"}
+          - {label: "退房日期/天數", name: "checkOut", widget: "string", hint: "例如: Day 07"}
+          - {label: "住宿晚數", name: "nights", widget: "number", value_type: "int", default: 1}
+          - {label: "訂單編號", name: "bookingId", widget: "string", required: false}
+          - {label: "預訂房型", name: "roomType", widget: "string", required: false}
+          - {label: "餐食與設施方案", name: "mealPlan", widget: "string", required: false}
+          - {label: "地址與交通方式", name: "address", widget: "string", required: false}
 
       # --- 每日行程清單 ---
       - label: "天數日記列表"
@@ -43,8 +79,8 @@ collections:
               - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
               - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
 
-              # --- 交通方式 (對應 journal.html 的 resolveTransportMode 與 CURVE_MODES) ---
-              - label: "抵達本站的交通方式 (小狐狸移動與路線繪製用)"
+              # --- 交通方式與時刻表設定 ---
+              - label: "抵達本站的交通方式 (移動與路線繪製用)"
                 name: "transport"
                 widget: "select"
                 default: "walk"
@@ -61,8 +97,22 @@ collections:
                   - { label: "✈️ 飛機 / 國內外航班 (Flight)", value: "flight" }
 
               - {label: "標題", name: "title", widget: "string", hint: "格式：01. 動作/亮點｜地點與細節"}
+              - {label: "純店名或地標名稱 (選填，美食紀錄與地圖將優先顯示此名稱)", name: "spotName", widget: "string", required: false, hint: "例如：山形五十番飯店 駅前店"}
+              - {label: "預計時間 / 班次時間 (選填)", name: "time", widget: "string", required: false, hint: "例如：08:05 或 13:30"}
+              - {label: "交通起訖與轉乘站 (選填，格式：起始站 → 轉乘站 → 目的站)", name: "routeFromTo", widget: "string", required: false, hint: "例如：JR 山形站 → 大石田站 (轉乘巴士) → 銀山溫泉"}
+              - {label: "座位性質 / 航班編號 (選填)", name: "seatType", widget: "string", required: false, hint: "例如：💺 對號指定席 (JR 新幹線)"}
+              - {label: "預估單程車資 (選填，數字)", name: "transitCost", widget: "number", value_type: "int", required: false}
+              - {label: "官方時刻表網址 (選填)", name: "timetableUrl", widget: "string", required: false}
 
-              # --- 多媒體畫廊排版選項 (對應 journal.html 的 .layout-* CSS) ---
+              # --- 行程安排：手動更新景點介紹與注意事項 (未填寫時預設帶入網路整合資料) ---
+              - {label: "📘 行程安排：景點介紹 (選填，未填寫則預設顯示網路整合資料)", name: "intro", widget: "text", required: false}
+              - {label: "⚠️ 行程安排：注意事項 (選填，未填寫則預設顯示網路整合攻略)", name: "note", widget: "text", required: false}
+
+              # --- 佳餚美食紀錄：手動更新美味紀錄與預約潛規則 (未填寫時預設顯示 AI 預覽與網路潛規則) ---
+              - {label: "🍱 美食紀錄：實測美味紀錄 (選填，未填寫則預設顯示 AI 餐點特色預覽，用餐後可更新)", name: "foodReview", widget: "text", required: false}
+              - {label: "⚠️ 美食紀錄：用餐／預約注意與潛規則 (選填，未填寫則預設顯示網路查詢之預約、低消、服裝等規定)", name: "foodPolicy", widget: "text", required: false}
+
+              # --- 多媒體畫廊排版選項 ---
               - label: "照片排版樣式"
                 name: "mediaLayout"
                 widget: "select"
@@ -79,7 +129,7 @@ collections:
                   - { label: "🎠 橫向滑動輪播 (IG風，適合多張照片)", value: "carousel" }
                   - { label: "🖼️ 單欄垂直大圖堆疊", value: "stack" }
 
-              # --- 媒體檔案與文字內容 ---
+              # --- 媒體檔案與遊記內文 ---
               - label: "單張主圖/影片 或 佔位提示文字 (相容舊資料)"
                 name: "mediaPlaceholder"
                 widget: "file"
@@ -104,17 +154,15 @@ collections:
                     widget: "string"
                     required: false
 
-              - {label: "內文", name: "content", widget: "text"}
+              - {label: "圖文遊記內文", name: "content", widget: "text"}
 
-              # --- Travelpayouts 聯盟行銷預訂按鈕 (對應 journal.html 的 buildAffiliateHTML 與 .affiliate-btn) ---
-              - {label: "推薦預訂按鈕文字 (選填)", name: "affiliateText", widget: "string", required: false, hint: "例如：🚐 預約同款：KKday 高雄小港機場專車接送（若留空則顯示預設文字）"}
-              - {label: "Travelpayouts 分潤網址 (選填)", name: "affiliateUrl", widget: "string", required: false, hint: "貼上分潤短網址或原始商品網址；若未填寫網址，前端不會顯示按鈕"}
-
-              - label: "多筆推薦預訂按鈕 (選填，同章節有多個預訂連結時使用)"
+              # --- Travelpayouts 聯盟行銷預訂按鈕 ---
+              - {label: "推薦預訂按鈕文字 (選填)", name: "affiliateText", widget: "string", required: false}
+              - {label: "Travelpayouts 分潤網址 (選填)", name: "affiliateUrl", widget: "string", required: false}
+              - label: "多筆推薦預訂按鈕 (選填)"
                 name: "affiliateLinks"
                 widget: "list"
                 required: false
-                hint: "點擊 Add 可在同一章節下方並排顯示多顆莫蘭迪色預訂按鈕（例如同時放 Agoda 與 Booking.com 查房價）"
                 fields:
-                  - {label: "按鈕文字", name: "text", widget: "string", hint: "例如：🏨 Agoda 查房價"}
-                  - {label: "分潤網址", name: "url", widget: "string", hint: "貼上分潤短網址或原始商品網址"}
+                  - {label: "按鈕文字", name: "text", widget: "string"}
+                  - {label: "分潤網址", name: "url", widget: "string"}
