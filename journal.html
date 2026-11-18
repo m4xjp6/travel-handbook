@@ -224,9 +224,11 @@
             align-items: center;
             gap: 8px;
             margin-bottom: 8px;
+            flex-wrap: wrap;
         }
         .day-banner .day-badge,
-        .day-banner .field-test-badge {
+        .day-banner .field-test-badge,
+        .day-banner .draft-preview-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -241,11 +243,25 @@
             font-weight: bold;
             line-height: 1;
         }
+        .day-banner .draft-preview-badge {
+            background: rgba(184, 74, 57, 0.85);
+        }
         .day-banner h1 {
             margin: 0;
             font-size: 1.25rem;
             font-weight: 600;
             line-height: 1.5;
+        }
+
+        .draft-empty-box {
+            text-align: center;
+            padding: 48px 24px;
+            background: white;
+            border: 1.5px dashed var(--accent-brown);
+            border-radius: 18px;
+            color: var(--text-light);
+            margin: 20px 0;
+            line-height: 1.7;
         }
 
         .chapter {
@@ -1472,7 +1488,7 @@
                     <button type="button" class="view-mode-btn active" data-view="view-itinerary" onclick="switchRightView('view-itinerary')">📅 行程安排</button>
                     <button type="button" class="view-mode-btn" data-view="view-info" onclick="switchRightView('view-info')">📡 資訊情報</button>
                     <button type="button" class="view-mode-btn" data-view="view-pack" onclick="switchRightView('view-pack')">🎫 票券蒐集</button>
-                    <button type="button" class="view-mode-btn" data-view="view-journal" onclick="switchRightView('view-journal')">📖 圖文遊記</button>
+                    <button type="button" class="view-mode-btn" id="btn-view-journal" data-view="view-journal" onclick="switchRightView('view-journal')">📖 圖文遊記</button>
                 </div>
 
                 <!-- 天數篩選列 -->
@@ -1514,7 +1530,7 @@
 
                 <div class="info-card-panel">
                     <h3 class="info-panel-title">
-                        <span>📰 緊急快訊與情報剪報（累積封存制）</span>
+                        <span>📰 緊急快訊與情報剪報</span>
                         <span id="clip-archive-badge" style="font-size:0.75rem; font-weight:600; color:#4A7696;"></span>
                     </h3>
                     <div class="clip-filter-pills" id="clip-cat-pills">
@@ -1537,10 +1553,10 @@
             <!-- 視角 3：🎫 票券蒐集 (含：票券與住宿憑證、交通時刻與段次、旅途預估花費、佳餚美食紀錄) -->
             <div id="view-pack" class="view-section">
                 <div class="pack-sub-tabs">
-                    <button type="button" class="pack-sub-btn active" onclick="switchPackSubTab('pack-vouchers', this)">🎫 票券與住宿憑證</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-transit', this)">🚄 交通時刻與段次</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 旅途預估花費</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 佳餚美食紀錄</button>
+                    <button type="button" class="pack-sub-btn active" onclick="switchPackSubTab('pack-vouchers', this)">🎫 票券住宿憑證</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-transit', this)">🚄 交通班次時刻</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 旅途預算花費</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 在地美食紀錄</button>
                 </div>
 
                 <div id="pack-vouchers" class="pack-panel active"></div>
@@ -1572,9 +1588,12 @@
            ============================================================== */
         const urlParams = new URLSearchParams(window.location.search);
         const tripId = urlParams.get('trip') || 'tohoku_2026';
+        // 作者預覽模式：網址加上 &preview=1 即可預覽標記為 isDraft: true 的草稿天數與章節
+        const isPreviewMode = urlParams.get('preview') === '1' || urlParams.get('preview') === 'true';
 
         let rawJournalData = {};
         let rawItineraryData = {};
+        let isWholeJournalDraft = false;
         let currentTripAvatar = '🦊';
         let currentTripEndDate = null;
         let currentTripTimezone = 'Asia/Tokyo';
@@ -1622,6 +1641,12 @@
             ropeway: 0.04
         };
 
+        // 判斷單一物件（Day 或 Chapter）是否被標記為草稿
+        function isItemDraft(obj) {
+            if (!obj) return false;
+            return obj.isDraft === true || obj.hidden === true || obj.status === 'draft';
+        }
+
         /* ==============================================================
            2. 同步讀取 data/*.json (遊記) 與 itinerary/*.json (行程情報) 並自動縫合
            ============================================================== */
@@ -1636,6 +1661,14 @@
             rawJournalData = journalJson || {};
             rawItineraryData = itinJson || {};
 
+            // 檢查整本遊記 (data/[tripId].json) 是否在最外層被設為草稿
+            isWholeJournalDraft = !isPreviewMode && (
+                !journalJson ||
+                rawJournalData.isDraft === true ||
+                rawJournalData.hidden === true ||
+                rawJournalData.status === 'draft'
+            );
+
             // 1. 讀取全域設定 (優先採用 itinerary/*.json 設定，次之採用 data/*.json)
             const mainTitle = rawItineraryData.tripTitle || rawJournalData.tripTitle || '電子旅行手帳';
             document.title = mainTitle;
@@ -1647,12 +1680,12 @@
             currentCurrencyCode = rawItineraryData.currency || rawJournalData.currency || 'JPY';
             currentCurrencySymbol = rawItineraryData.currencySymbol || (currentCurrencyCode === 'TWD' ? 'NT$' : (currentCurrencyCode === 'MYR' ? 'RM' : (currentCurrencyCode === 'SGD' ? 'S$' : '¥')));
 
-            // 2. 建立 itinerary 站點索引表 (依 id 與 day 快速對應)
+            // 2. 建立 itinerary 站點與天數索引表 (優先依 day 名稱與 id 精準對應)
             const itinSpotMapById = new Map();
-            const itinDayRegionMap = new Map();
+            const itinDayMapByName = new Map();
             if (Array.isArray(rawItineraryData.days)) {
                 rawItineraryData.days.forEach(d => {
-                    if (d.day && d.region) itinDayRegionMap.set(d.day, d.region);
+                    if (d.day) itinDayMapByName.set(d.day, d);
                     (d.spots || []).forEach(sp => {
                         if (sp.id) itinSpotMapById.set(sp.id, { ...sp, dayRegion: d.region || '' });
                     });
@@ -1661,9 +1694,9 @@
 
             // 3. 將遊記 days 與行程 spots 無縫合體
             let baseDays = [];
-            if (Array.isArray(rawJournalData.days) && rawJournalData.days.length > 0) {
+            if (!isWholeJournalDraft && Array.isArray(rawJournalData.days) && rawJournalData.days.length > 0) {
                 baseDays = rawJournalData.days;
-            } else if (Array.isArray(rawJournalData.chapters)) {
+            } else if (!isWholeJournalDraft && Array.isArray(rawJournalData.chapters)) {
                 const grouped = {};
                 rawJournalData.chapters.forEach(ch => {
                     const d = ch.day || 'Day 01';
@@ -1672,10 +1705,11 @@
                 });
                 baseDays = Object.values(grouped);
             } else if (Array.isArray(rawItineraryData.days)) {
-                // 若未來新旅程先建了 itinerary/*.json 尚未寫 data/*.json，也能直接顯示！
+                // 若 data/*.json 設為整本草稿 (isDraft: true) 或尚未建立，則以 itinerary/*.json 支撐行程安排、資訊情報與票券蒐集
                 baseDays = rawItineraryData.days.map(d => ({
                     day: d.day,
                     dayTitle: d.dayTitle || d.region || d.day,
+                    isDraft: isItemDraft(d),
                     isFieldTest: false,
                     chapters: (d.spots || []).map(sp => ({
                         id: sp.id,
@@ -1683,43 +1717,66 @@
                         lng: sp.lng || 139.6917,
                         zoom: 14,
                         title: sp.spotName || sp.id,
-                        content: sp.intro || ''
+                        content: sp.intro || '',
+                        isDraft: isItemDraft(sp)
                     }))
                 }));
             }
 
-            normalizedDays = baseDays.map((dayObj, dIdx) => {
-                const itinDayObj = Array.isArray(rawItineraryData.days) ? rawItineraryData.days[dIdx] : null;
-                const dayRegion = dayObj.region || itinDayRegionMap.get(dayObj.day) || itinDayObj?.region || '主要旅遊地區';
+            const mergedDays = baseDays.map((dayObj, dIdx) => {
+                const itinDayObj = itinDayMapByName.get(dayObj.day) || (Array.isArray(rawItineraryData.days) ? rawItineraryData.days[dIdx] : null);
+                const dayRegion = dayObj.region || itinDayObj?.region || '主要旅遊地區';
+                const dayDraftFlag = isItemDraft(dayObj) || isItemDraft(itinDayObj);
 
-                const mergedChapters = (dayObj.chapters || []).map((ch, cIdx) => {
+                const rawChapters = (dayObj.chapters || []).map((ch, cIdx) => {
                     const matchedSpot = itinSpotMapById.get(ch.id) || itinDayObj?.spots?.[cIdx] || {};
+                    const chDraftFlag = isItemDraft(ch) || isItemDraft(matchedSpot);
                     return {
                         ...ch,
                         ...matchedSpot,
-                        // 保留遊記原有的標題、座標、內文與媒體清單
                         id: ch.id || matchedSpot.id || `d${dIdx + 1}-ch${cIdx + 1}`,
                         lat: ch.lat !== undefined ? ch.lat : matchedSpot.lat,
                         lng: ch.lng !== undefined ? ch.lng : matchedSpot.lng,
                         zoom: ch.zoom || matchedSpot.zoom || 14,
                         title: ch.title || matchedSpot.spotName || '',
                         content: ch.content || matchedSpot.intro || '',
-                        dayRegion: dayRegion
+                        dayRegion: dayRegion,
+                        _isDraft: chDraftFlag
                     };
                 });
+
+                // 過濾掉單一標記為草稿的章節（若開啟 ?preview=1 則保留並標示）
+                const visibleChapters = isPreviewMode
+                    ? rawChapters
+                    : rawChapters.filter(c => !c._isDraft);
 
                 return {
                     ...dayObj,
                     region: dayRegion,
-                    chapters: mergedChapters
+                    _isDraft: dayDraftFlag,
+                    chapters: visibleChapters
                 };
             });
+
+            // 過濾掉標記為 isDraft: true 的天數（若開啟 ?preview=1 則保留並顯示草稿標籤）
+            normalizedDays = isPreviewMode
+                ? mergedDays
+                : mergedDays.filter(d => !d._isDraft && d.chapters.length > 0);
 
             initMap(normalizedDays);
             buildDayTabs();
             renderDay('ALL');
             renderPackAndBudgetViews();
             refreshInfoStation(false);
+
+            // 支援網址 ?view= 參數（例如 ?view=itinerary 或 ?view=journal）
+            const requestedView = urlParams.get('view');
+            if (requestedView) {
+                const targetViewId = requestedView.startsWith('view-') ? requestedView : `view-${requestedView}`;
+                if (document.getElementById(targetViewId)) {
+                    switchRightView(targetViewId);
+                }
+            }
         }).catch(error => {
             document.getElementById('itinerary-content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${error.message}</p>`;
         });
@@ -1733,7 +1790,8 @@
                 sec.classList.toggle('active', sec.id === viewId);
             });
             const dayTabsEl = document.getElementById('day-tabs');
-            dayTabsEl.style.display = (viewId === 'view-journal' || viewId === 'view-itinerary') ? 'flex' : 'none';
+            const showDayTabs = (viewId === 'view-itinerary') || (viewId === 'view-journal' && !isWholeJournalDraft);
+            dayTabsEl.style.display = showDayTabs ? 'flex' : 'none';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -2017,7 +2075,10 @@
 
             const tabs = [
                 { key: 'ALL', label: '全部天數' },
-                ...normalizedDays.map(d => ({ key: d.day, label: d.day }))
+                ...normalizedDays.map(d => ({
+                    key: d.day,
+                    label: (isPreviewMode && d._isDraft) ? `${d.day} (草稿)` : d.day
+                }))
             ];
 
             tabs.forEach((tab, idx) => {
@@ -2289,7 +2350,7 @@
                 stampClass = 'transit';
             }
 
-            // 景點介紹與注意事項 (優先讀取 itinerary/*.json 的 intro 與 note；若新旅程尚未填寫則提供通用客觀導覽)
+            // 景點介紹與注意事項
             const introText = (ch.intro && ch.intro.trim() !== '')
                 ? ch.intro.trim()
                 : `【${pureName}】為本段行程之重要參訪據點（座標：${Number(ch.lat).toFixed(4)}, ${Number(ch.lng).toFixed(4)}）。建議搭配左側互動地圖確認周邊動線與停留時間。`;
@@ -2380,7 +2441,7 @@
                     transitionToChapter(chIndex);
                     const topNav = document.querySelector('.top-nav');
                     const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
-                    const targetY = window.pageYOffset + section.getBoundingClientRect().top - navBottom - 20;
+                    const targetY = window.pageYOffset + sec.getBoundingClientRect().top - navBottom - 20;
                     window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
                 }
             }, 80);
@@ -2420,18 +2481,48 @@
                 ? normalizedDays
                 : normalizedDays.filter(d => d.day === dayKey);
 
-            daysToRender.forEach(dayObj => {
-                const banner = document.createElement('div');
-                banner.className = 'day-banner';
-                const fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
-                banner.innerHTML = `
-                    <div class="day-banner-header">
-                        <div class="day-badge">${dayObj.day}</div>
-                        ${fieldTestBadgeHTML}
+            // 若整本遊記 (data/[tripId].json) 設為 isDraft: true，在「📖 圖文遊記」顯示溫馨提示框
+            if (isWholeJournalDraft) {
+                contentDiv.innerHTML = `
+                    <div class="draft-empty-box">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">✍️</div>
+                        <div style="font-weight: 700; color: var(--accent-brown-dark); font-size: 1.08rem; margin-bottom: 6px;">
+                            這趟旅程的圖文遊記尚在撰寫整理中
+                        </div>
+                        <p style="margin: 0 0 16px 0; font-size: 0.9rem;">
+                            目前已為您開啟「📅 行程安排」、「📡 資訊情報」與「🎫 票券蒐集」完整規劃內容！<br>
+                            待遊記完稿並將 <code>data/${tripId}.json</code> 的 <code>isDraft</code> 改為 <code>false</code> 後即可公開閱覽。
+                        </p>
                     </div>
-                    <h1>${dayObj.dayTitle || dayObj.day}</h1>
                 `;
-                contentDiv.appendChild(banner);
+            }
+
+            if (daysToRender.length === 0) {
+                itinDiv.innerHTML = `
+                    <div class="draft-empty-box">
+                        ✨ 目前尚無公開的行程天數（若正在編輯中，可於網址後方加上 <code>&preview=1</code> 預覽草稿）。
+                    </div>
+                `;
+                document.getElementById('map-stats-pill').textContent = `0 日行跡`;
+                return;
+            }
+
+            daysToRender.forEach(dayObj => {
+                if (!isWholeJournalDraft) {
+                    const banner = document.createElement('div');
+                    banner.className = 'day-banner';
+                    const fieldTestBadgeHTML = dayObj.isFieldTest ? `<span class="field-test-badge">行程實測</span>` : '';
+                    const draftBadgeHTML = (isPreviewMode && dayObj._isDraft) ? `<span class="draft-preview-badge">📝 草稿預覽</span>` : '';
+                    banner.innerHTML = `
+                        <div class="day-banner-header">
+                            <div class="day-badge">${dayObj.day}</div>
+                            ${fieldTestBadgeHTML}
+                            ${draftBadgeHTML}
+                        </div>
+                        <h1>${dayObj.dayTitle || dayObj.day}</h1>
+                    `;
+                    contentDiv.appendChild(banner);
+                }
 
                 let dayTotalTransitMins = 0;
                 let dayTotalTransitCost = 0;
@@ -2450,18 +2541,22 @@
 
                     cleanSpotNames.push(meta.pureName);
 
-                    // 1. 建立圖文遊記章節卡片
-                    const section = document.createElement('section');
-                    section.className = `chapter ${chIndex === 0 ? 'active' : ''}`;
-                    section.id = `section-${ch.id}`;
-                    section.setAttribute('data-index', chIndex);
-                    section.innerHTML = `
-                        <h2>${ch.title}</h2>
-                        ${buildMediaHTML(ch, chIndex)}
-                        <div class="chapter-body">${ch.content || ''}</div>
-                        ${buildAffiliateHTML(ch)}
-                    `;
-                    contentDiv.appendChild(section);
+                    // 1. 建立圖文遊記章節卡片（非整本草稿時才建立）
+                    let section = null;
+                    if (!isWholeJournalDraft) {
+                        section = document.createElement('section');
+                        section.className = `chapter ${chIndex === 0 ? 'active' : ''}`;
+                        section.id = `section-${ch.id}`;
+                        section.setAttribute('data-index', chIndex);
+                        const chDraftTag = (isPreviewMode && ch._isDraft) ? `<span style="font-size:0.75rem; background:#B84A39; color:#fff; padding:2px 8px; border-radius:8px; margin-left:8px; vertical-align:middle;">📝 草稿</span>` : '';
+                        section.innerHTML = `
+                            <h2>${ch.title}${chDraftTag}</h2>
+                            ${buildMediaHTML(ch, chIndex)}
+                            <div class="chapter-body">${ch.content || ''}</div>
+                            ${buildAffiliateHTML(ch)}
+                        `;
+                        contentDiv.appendChild(section);
+                    }
 
                     // 2. 累積交通時間與花費 (排除長途國際班機時間，呈現當日區域移動)
                     if (meta.transitInfo && idxInDay > 0 && meta.transitInfo.mode !== 'flight') {
@@ -2482,6 +2577,9 @@
 
                     const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(meta.pureName)}&query_place_id=${ch.lat},${ch.lng}`;
                     const isFirstOpen = idxInDay === 0 ? 'open' : '';
+                    const jumpToJournalBtnHTML = !isWholeJournalDraft
+                        ? `<button type="button" class="spot-pill-btn loc" onclick="jumpToJournalChapter(${chIndex}, 'section-${ch.id}')">📖 閱讀實拍遊記與照片</button>`
+                        : '';
 
                     dayItinCardsHTML.push(`
                         <div class="spot-intro-card ${isFirstOpen}" id="itin-card-${ch.id}">
@@ -2505,7 +2603,7 @@
                                 <div class="spot-action-pills">
                                     <a href="${gmapUrl}" target="_blank" rel="noopener" class="spot-pill-btn">🗺️ Google 地圖導航</a>
                                     <button type="button" class="spot-pill-btn loc" onclick="focusSpotOnMap(${chIndex})">📍 定位至左側地圖</button>
-                                    <button type="button" class="spot-pill-btn loc" onclick="jumpToJournalChapter(${chIndex}, 'section-${ch.id}')">📖 閱讀實拍遊記與照片</button>
+                                    ${jumpToJournalBtnHTML}
                                 </div>
                                 ${buildAffiliateHTML(ch)}
                             </div>
@@ -2525,11 +2623,11 @@
                         marker.on('click', () => {
                             isClickScrolling = true;
                             clearTimeout(scrollUnlockTimer);
-                            setActiveChapter(section, marker);
+                            if (section) setActiveChapter(section, marker);
                             transitionToChapter(chIndex);
 
                             const journalView = document.getElementById('view-journal');
-                            if (journalView.classList.contains('active')) {
+                            if (journalView.classList.contains('active') && section) {
                                 const topNav = document.querySelector('.top-nav');
                                 const navBottom = topNav ? topNav.getBoundingClientRect().bottom : 0;
                                 const targetY = window.pageYOffset + section.getBoundingClientRect().top - navBottom - 20;
@@ -2544,7 +2642,7 @@
                             scrollUnlockTimer = setTimeout(() => { isClickScrolling = false; }, 950);
                         });
 
-                        chapterMarkers.set(section, marker);
+                        if (section) chapterMarkers.set(section, marker);
 
                         const stampIcon = L.divIcon({
                             className: 'stamp-marker',
@@ -2599,24 +2697,27 @@
             }
 
             if (currentChaptersList.length > 0) {
-                setActiveChapter(document.querySelector('.chapter'));
+                const firstSec = document.querySelector('.chapter');
+                if (firstSec) setActiveChapter(firstSec);
                 transitionToChapter(0);
             }
 
-            observer = new IntersectionObserver((entries) => {
-                if (isClickScrolling) return;
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const chapter = entry.target;
-                        const newIdx = parseInt(chapter.getAttribute('data-index'), 10);
-                        setActiveChapter(chapter);
-                        if (!isNaN(newIdx)) transitionToChapter(newIdx);
-                    }
-                });
-            }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+            if (!isWholeJournalDraft) {
+                observer = new IntersectionObserver((entries) => {
+                    if (isClickScrolling) return;
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const chapter = entry.target;
+                            const newIdx = parseInt(chapter.getAttribute('data-index'), 10);
+                            setActiveChapter(chapter);
+                            if (!isNaN(newIdx)) transitionToChapter(newIdx);
+                        }
+                    });
+                }, { root: null, rootMargin: '-35% 0px -55% 0px', threshold: 0 });
 
-            document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
-            initVideoAutoplay();
+                document.querySelectorAll('.chapter').forEach(chapter => observer.observe(chapter));
+                initVideoAutoplay();
+            }
         }
 
         /* ==============================================================
@@ -2699,7 +2800,7 @@
                 }
             }));
 
-            // 1. 渲染 30 秒情報速讀 (優先從 itinerary/*.json 的 urgentNews 提取前 3 則重點 + 2 則即時氣象)
+            // 1. 渲染 30 秒情報速讀
             const d1W = liveWeatherByDay['D01'] || { locName: '首站', maxT: 12, minT: 4, rainProb: 20, wind: 10 };
             const d2W = liveWeatherByDay['D02'] || d1W;
             const newsPool = Array.isArray(rawItineraryData.urgentNews) ? rawItineraryData.urgentNews : [];
@@ -2715,7 +2816,7 @@
 
             document.getElementById('info-quick-five').innerHTML = quickItemsHTML.join('');
 
-            // 2. 渲染每日行程天氣與風速影響雷達 (點擊直連 The Weather Channel 與 Windy)
+            // 2. 渲染每日行程天氣與風速影響雷達
             const radarGrid = document.getElementById('info-radar-grid');
             radarGrid.innerHTML = dayRepresentativeCoords.map(item => {
                 const w = liveWeatherByDay[item.dayCode] || { maxT: 12, minT: 5, rainProb: 20, wind: 10 };
@@ -2797,7 +2898,6 @@
 
             allInfoClippings = savedArchive;
 
-            // 地區下拉選單：僅取乾淨的大地區名稱
             const regionSet = new Set();
             normalizedDays.forEach(d => { if (d.region) regionSet.add(d.region); });
             savedArchive.forEach(i => { if (i.region) regionSet.add(i.region); });
@@ -2916,7 +3016,6 @@
                     const prevCh = cIdx > 0 ? dayObj.chapters[cIdx - 1] : null;
                     const meta = classifyChapterMeta(ch, cIdx, prevCh);
 
-                    // (A) 萃取重要票券 (航班、指定席鐵道、纜車、遊船、門票)
                     if (meta.stampChar === '驛' || /機場|Skyliner|新幹線|翼號|纜車|遊船|狐狸村|動物園|鐵塔/i.test(meta.pureName)) {
                         const isFlight = /機場/i.test(meta.pureName) && /航班|起飛|KHH|NRT/i.test(`${meta.pureName} ${meta.transitInfo?.seatType || ''}`);
                         transportTickets.push({
@@ -2933,7 +3032,6 @@
                         });
                     }
 
-                    // (B) 萃取交通時刻與段次 (排除步行 0 元且無特別路線之短程移動，保留所有實際交通段)
                     if (meta.transitInfo && (meta.transitInfo.cost > 0 || meta.transitInfo.mode !== 'walk')) {
                         transits.push({
                             day: dayObj.day,
@@ -2951,7 +3049,6 @@
                         }
                     }
 
-                    // (C) 萃取佳餚美食紀錄 (抬頭只列純店名 spotName)
                     if (meta.isFoodSpot) {
                         const isCustomReview = Boolean(ch.foodReview && !ch.foodReview.includes('【AI 美味預覽'));
                         foods.push({
@@ -2985,7 +3082,7 @@
                 }
             });
 
-            // 4. 渲染「🎫 票券與住宿憑證」
+            // 4. 渲染「🎫 票券住宿憑證」
             const vContainer = document.getElementById('pack-vouchers');
             const hotelsHTML = mergedHotels.map(h => `
                 <div class="collapsible-ticket-card">
@@ -3083,7 +3180,7 @@
                 ${transportVouchersHTML}
             `;
 
-            // 5. 渲染「🚄 交通時刻與段次」
+            // 5. 渲染「🚄 交通班次時刻」
             const tContainer = document.getElementById('pack-transit');
             tContainer.innerHTML = `
                 <div class="pack-toolbar">
@@ -3126,7 +3223,7 @@
                 `).join('')}
             `;
 
-            // 6. 渲染「💰 旅途預估花費」
+            // 6. 渲染「💰 旅途預算花費」
             const bContainer = document.getElementById('pack-budget');
             const rawExpenseList = Array.isArray(rawItineraryData.expenseItems) && rawItineraryData.expenseItems.length > 0
                 ? rawItineraryData.expenseItems
@@ -3207,11 +3304,11 @@
             `;
             filterExpenseItems('ALL', bContainer.querySelector('.expense-filter-btn'));
 
-            // 7. 渲染「🍱 佳餚美食紀錄」
+            // 7. 渲染「🍱 在地美食紀錄」
             const fContainer = document.getElementById('pack-food');
             fContainer.innerHTML = `
                 <div class="pack-toolbar">
-                    <span>旅途美食清單（抬頭僅列純店名；預設提供 AI 菜色預覽與預約潛規則，用餐後可從後台更新）：</span>
+                    <span>旅途美食清單：</span>
                     <div>
                         <button type="button" class="pack-toggle-all-btn" onclick="toggleAllTicketsInPanel('pack-food', true)">全部展開</button>
                         <button type="button" class="pack-toggle-all-btn" onclick="toggleAllTicketsInPanel('pack-food', false)">全部收合</button>
