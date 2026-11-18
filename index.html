@@ -287,7 +287,7 @@
 
     <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
 
-    <!-- 頂部四大導覽列：第四顆「行程規劃」直接連往獨立的 planner.html -->
+    <!-- 頂部四大導覽列：第四顆「漫遊提案」直接連往獨立的 planner.html -->
     <nav class="main-nav-tabs" aria-label="手帳主選單">
         <button type="button" class="main-tab-btn active" data-target="tab-upcoming">未來旅程</button>
         <button type="button" class="main-tab-btn" data-target="tab-ongoing">旅途連載</button>
@@ -384,8 +384,8 @@
                     <span style="font-size:0.85rem; font-weight:600;" id="up-vehicle-tag">跨國雙城慢旅</span>
                 </div>
                 <div style="font-size: 0.88rem; line-height: 1.7;" id="up-memo-list">
-                    • <strong>簽證與入境：</strong>馬來西亞 MDAC 電子入境卡（出發前3天內填寫）、新加坡 SG Arrival Card。<br>
-                    • <strong>核心體驗：</strong>吉隆坡敘宴沉浸式宮廷宴、又見馬六甲劇場、星耀樟宜雨漩渦。
+- <strong>簽證與入境：</strong>馬來西亞 MDAC 電子入境卡（出發前3天內填寫）、新加坡 SG Arrival Card。<br>
+- <strong>核心體驗：</strong>吉隆坡敘宴沉浸式宮廷宴、又見馬六甲劇場、星耀樟宜雨漩渦。
                 </div>
             </div>
 
@@ -417,7 +417,7 @@
         </div>
     </section>
 
-    <!-- 🎞️ 分頁 3：已完成的旅程 -->
+    <!-- 🎞️ 分頁 3：已完成的旅程（由 data/[location_year].json 的 isDraft 欄位動態控制顯示/隱藏） -->
     <section class="tab-view-panel" id="tab-completed">
         <div class="section-header-bar">
             <h2 class="section-title">🎞️ 歸檔風景・珍藏回憶</h2>
@@ -450,13 +450,12 @@
         </div>
 
         <div class="grid-container" id="cards-grid">
-            <a href="journal.html?trip=malaysia_2027&view=itinerary" class="trip-card"
+            <a href="journal.html?trip=malaysia_2027" class="trip-card"
                data-trip-id="malaysia_2027"
                data-continent="亞洲"
                data-country="馬來西亞,新加坡"
                data-start="2027-04-07"
-               data-end="2027-04-17"
-               data-status="draft">
+               data-end="2027-04-17">
                 <div class="cover-collage">
                     <div><img src="media/malaysia_2027/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
                     <div><img src="media/malaysia_2027/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
@@ -576,6 +575,9 @@
                     if (res.ok) itinData = await res.json();
                 } catch (e) {}
 
+                // 若在 itinerary/[id].json 中將 isDraft 設為 true，則連同未來旅程倒數一起隱藏
+                if (itinData?.isDraft === true || itinData?.hidden === true) continue;
+
                 const cardEl = document.querySelector(`.trip-card[data-trip-id="${id}"]`);
                 const fallback = DEFAULT_UPCOMING_META[id] || {};
                 const startDate = itinData?.startDate || cardEl?.dataset.start || fallback.startDate || null;
@@ -625,6 +627,8 @@
                     activeUpcomingTrip = upcomingTripsPool[Number(switcher.value)];
                     renderActiveUpcomingTrip();
                 };
+            } else {
+                switcher.style.display = 'none';
             }
 
             renderActiveUpcomingTrip();
@@ -772,21 +776,55 @@
             }
         });
 
-        /* === PART 2：已完成書櫃篩選器 === */
+        /* === PART 2：已完成書櫃篩選器（自動讀取 data/[id].json 的 isDraft 狀態） === */
         const continentBtns = document.querySelectorAll('#continent-filters .filter-btn');
         const countryRow = document.getElementById('country-filters');
         const countryBtns = document.querySelectorAll('#country-filters .country-btn');
         const cardsGrid = document.getElementById('cards-grid');
-        const publishedCards = Array.from(document.querySelectorAll('.trip-card:not([data-status="draft"])'));
+        const allCards = Array.from(document.querySelectorAll('.trip-card'));
         const emptyState = document.getElementById('empty-state');
 
         let currentContinent = 'ALL', currentCountry = null;
+        let publishedCards = [];
         const activeCountries = new Set();
-        publishedCards.forEach(c => (c.dataset.country || '').split(',').map(s => s.trim()).filter(Boolean).forEach(x => activeCountries.add(x)));
+
+        // 0ms 初始防閃爍預判：尚未出發的卡片先暫時隱藏，待讀取 JSON 後依 isDraft 決定最終狀態
+        const todayNow = new Date();
+        allCards.forEach(card => {
+            if (card.dataset.start && new Date(`${card.dataset.start}T00:00:00`) > todayNow) {
+                card.dataset.status = 'draft';
+            }
+        });
+
+        function rebuildPublishedState() {
+            publishedCards = allCards.filter(c => c.dataset.status !== 'draft');
+            activeCountries.clear();
+            publishedCards.forEach(c => {
+                (c.dataset.country || '').split(',').map(s => s.trim()).filter(Boolean).forEach(x => activeCountries.add(x));
+            });
+
+            // 若當前選中的國家因隱藏卡片而不再有效，自動重置國家篩選
+            if (currentCountry && !activeCountries.has(currentCountry)) {
+                currentCountry = null;
+            }
+
+            countryBtns.forEach(b => {
+                b.classList.toggle('active', b.dataset.country === currentCountry);
+                b.style.display = (currentContinent !== 'ALL' && b.dataset.continent === currentContinent && activeCountries.has(b.dataset.country))
+                    ? 'inline-block'
+                    : 'none';
+            });
+            countryRow.style.display = currentContinent === 'ALL' ? 'none' : 'flex';
+            applyFilter();
+        }
 
         function applyFilter() {
             let count = 0;
-            publishedCards.forEach(card => {
+            allCards.forEach(card => {
+                if (card.dataset.status === 'draft') {
+                    card.style.display = 'none';
+                    return;
+                }
                 const matchCont = currentContinent === 'ALL' || card.dataset.continent === currentContinent;
                 const matchCtry = !currentCountry || (card.dataset.country || '').split(',').map(s => s.trim()).includes(currentCountry);
                 card.style.display = (matchCont && matchCtry) ? 'block' : 'none';
@@ -796,17 +834,55 @@
             emptyState.style.display = count === 0 ? 'block' : 'none';
         }
 
+        // 讀取 data/[location_year].json 中的 isDraft 欄位，自動更新歸檔書櫃的卡片顯示與國家按鈕
+        async function syncCardsWithDataJson() {
+            const now = new Date();
+            await Promise.all(allCards.map(async (card) => {
+                const id = card.dataset.tripId;
+                if (!id) return;
+
+                let dataJson = null;
+                try {
+                    const res = await fetch(`data/${id}.json?t=${Date.now()}`, { cache: 'no-store' });
+                    if (res.ok) dataJson = await res.json();
+                } catch (e) {}
+
+                let isDraft = false;
+                if (dataJson) {
+                    if (typeof dataJson.isDraft === 'boolean') {
+                        // 1. 若 JSON 最外層有明確設定 "isDraft": true / false，優先以此為準
+                        isDraft = dataJson.isDraft;
+                    } else if (dataJson.hidden === true || dataJson.status === 'draft') {
+                        isDraft = true;
+                    } else if (Array.isArray(dataJson.days)) {
+                        // 2. 若未設定最外層 isDraft，但所有天數皆標記為 isDraft 或尚無任何天數，或是出發日尚未到來，預設隱藏
+                        const visibleDays = dataJson.days.filter(d => !d.isDraft);
+                        const isFuture = card.dataset.start && new Date(`${card.dataset.start}T00:00:00`) > now;
+                        if (visibleDays.length === 0 || isFuture) {
+                            isDraft = true;
+                        }
+                    }
+                } else {
+                    // 找不到 data/[id].json 時視為尚未撰寫遊記，自動隱藏
+                    isDraft = true;
+                }
+
+                if (isDraft) {
+                    card.dataset.status = 'draft';
+                } else {
+                    delete card.dataset.status;
+                }
+            }));
+
+            rebuildPublishedState();
+        }
+
         continentBtns.forEach(btn => btn.addEventListener('click', () => {
             const sel = btn.dataset.continent;
             currentContinent = (currentContinent === sel && !currentCountry && sel !== 'ALL') ? 'ALL' : sel;
             currentCountry = null;
             continentBtns.forEach(b => b.classList.toggle('active', b.dataset.continent === currentContinent));
-            countryBtns.forEach(b => {
-                b.classList.remove('active');
-                b.style.display = (currentContinent !== 'ALL' && b.dataset.continent === currentContinent && activeCountries.has(b.dataset.country)) ? 'inline-block' : 'none';
-            });
-            countryRow.style.display = currentContinent === 'ALL' ? 'none' : 'flex';
-            applyFilter();
+            rebuildPublishedState();
         }));
 
         countryBtns.forEach(btn => btn.addEventListener('click', () => {
@@ -815,9 +891,10 @@
             applyFilter();
         }));
 
+        rebuildPublishedState();
+        syncCardsWithDataJson();
         discoverAllItineraryTrips();
         setInterval(updateClockAndCountdown, 1000);
-        applyFilter();
     </script>
 </body>
 </html>
