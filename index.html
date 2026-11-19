@@ -520,7 +520,12 @@
 
                 const endObj = new Date(`${endDate}T23:59:59+08:00`);
                 if (now <= endObj) {
-                    const firstSpot = itin?.days?.[0]?.spots?.[0];
+                    // 自動跳過台灣出發點與航班站，精準抓取目的地市區首站座標
+                    const allSpots = (itin?.days || []).flatMap(d => d.spots || []).filter(s => s.lat && s.lng);
+                    const isTaiwan = s => s.lat >= 21.5 && s.lat <= 25.5 && s.lng >= 119.5 && s.lng <= 122.5;
+                    const destSpot = allSpots.find(s => !isTaiwan(s) && s.transport !== 'flight')
+                        || allSpots.find(s => !isTaiwan(s))
+                        || allSpots[0];
                     const regions = itin?.days ? [...new Set(itin.days.map(d => (d.region || '').replace('地區', '')).filter(Boolean))] : [];
                     const daysCount = itin?.days?.length || 11;
 
@@ -535,8 +540,8 @@
                         timezone: itin?.timezone || fb.timezone || 'Asia/Tokyo',
                         timezoneLabel: itin?.timezoneLabel || fb.timezoneLabel || '當地時間',
                         weatherCity: itin?.weatherCity || regions[0] || fb.weatherCity || '目的地',
-                        lat: firstSpot?.lat || fb.lat || 3.1390,
-                        lng: firstSpot?.lng || fb.lng || 101.6869,
+                        lat: itin?.weatherLat || destSpot?.lat || fb.lat || 3.1390,
+                        lng: itin?.weatherLng || destSpot?.lng || fb.lng || 101.6869,
                         vehicleTag: itin?.vehicleTag || fb.vehicleTag || '專屬行程規劃',
                         memoHtml: itin?.memoHtml || fb.memoHtml || '• 點擊下方按鈕即可進入「行程安排」查看每日路線、票券憑證與預估花費。'
                     });
