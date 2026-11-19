@@ -30,6 +30,7 @@
             --accent-brown-dark: #a6897c; /* 深奶茶棕 */
             --accent-pink: #E5D1C7;       /* 柔和藕粉 */
             --accent-sage: #D8E2D5;       /* 鼠尾草綠 */
+            --accent-sage-dark: #5B7A67;  /* 深鼠尾草綠（行前清單進度條） */
             --text-dark: #4A4A4A;         /* 主要深灰字 */
             --text-light: #7A7A7A;        /* 內文淺灰字 */
             --border-soft: rgba(196, 169, 158, 0.32);
@@ -48,7 +49,7 @@
         #map { width: 100%; height: 100%; }
         #right-panel { width: 50vw; box-sizing: border-box; }
 
-        /* 地圖頂部浮動列（統計膠囊與路線/尋訪切換，防重疊容器） */
+        /* 地圖頂部浮動列（統計膠囊與路線/尋訪切換） */
         .map-top-bar {
             position: absolute; top: 14px; left: 14px; right: 14px; z-index: 800;
             display: flex; justify-content: space-between; align-items: center; gap: 8px;
@@ -124,7 +125,7 @@
         }
         .draft-preview-badge { background: rgba(184, 74, 57, 0.85); }
         .day-banner h1 { margin: 0; font-size: 1.25rem; font-weight: 600; line-height: 1.5; }
-        .draft-empty-box { text-align: center; padding: 44px 24px; background: #fff; border: 1.5px dashed var(--accent-brown); border-radius: 18px; color: var(--text-light); margin: 20px 0; line-height: 1.7; }
+        .draft-empty-box { text-align: center; padding: 40px 22px; background: #fff; border: 1.5px dashed var(--accent-brown); border-radius: 18px; color: var(--text-light); margin: 16px 0; line-height: 1.7; }
 
         .chapter {
             min-height: 65vh; margin-bottom: 45px; padding: 30px; background: #fff;
@@ -154,7 +155,6 @@
         .media-item img:hover, .media-item video:hover { transform: scale(1.02); }
         .media-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.65)); color: #fff; font-size: 0.78rem; padding: 16px 10px 6px; pointer-events: none; }
         .replay-btn { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.55); color: #fff; border: none; border-radius: 14px; padding: 4px 10px; font-size: 0.75rem; cursor: pointer; backdrop-filter: blur(4px); z-index: 5; }
-        .replay-btn:hover { background: rgba(0,0,0,0.8); }
 
         #lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; touch-action: pan-y; }
         #lightbox-overlay img, #lightbox-overlay video { max-width: 85vw; max-height: 85vh; border-radius: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); object-fit: contain; cursor: default; user-select: none; -webkit-user-drag: none; }
@@ -200,8 +200,7 @@
         .itin-transit-icon { width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: #EFE7DA; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; }
         .itin-transit-right { font-weight: 600; color: var(--text-dark); white-space: nowrap; }
 
-        .spot-intro-card { background: #fff; border: 1.5px solid #8E7F76; border-radius: 16px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 3px 12px rgba(196, 169, 158, 0.12); transition: box-shadow 0.2s; }
-        .spot-intro-card:hover { box-shadow: 0 5px 16px rgba(196, 169, 158, 0.24); }
+        .spot-intro-card { background: #fff; border: 1.5px solid #8E7F76; border-radius: 16px; margin-bottom: 10px; overflow: hidden; box-shadow: 0 3px 12px rgba(196, 169, 158, 0.12); }
         .spot-card-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; cursor: pointer; user-select: none; gap: 10px; }
         .spot-header-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .spot-time-box { background: #F4EFE6; border: 1.5px solid #6E6259; color: #3A322D; font-family: 'Noto Serif TC', serif; font-size: 0.9rem; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
@@ -219,11 +218,9 @@
         .spot-sub-block.intro-block .spot-sub-title { color: #3B6E4C; }
         .spot-sub-block.note-block .spot-sub-title { color: #B85D14; }
         .spot-sub-text { white-space: pre-line; margin: 0; }
-
         .spot-action-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
         .spot-pill-btn { display: inline-flex; align-items: center; gap: 5px; padding: 6px 13px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-decoration: none; cursor: pointer; border: 1px solid #C9D6DF; background: #F0F5F9; color: #3A506B; transition: all 0.2s; }
         .spot-pill-btn.loc { background: #F4EFE6; border-color: #D8C8B8; color: #6E5A4F; }
-        .spot-pill-btn:hover { transform: translateY(-1px); filter: brightness(0.96); }
 
         /* === 7. 視角二：📡 資訊情報 === */
         .info-station-header { background: linear-gradient(135deg, #EBF3F9 0%, #F5F9FC 100%); border: 1.5px solid #C5D9E8; border-radius: 16px; padding: 20px 22px; margin-bottom: 20px; }
@@ -253,7 +250,6 @@
         .radar-cell.warn .radar-day-status { color: #C05621; font-weight: 600; }
         .radar-ext-links { display: flex; justify-content: center; gap: 6px; padding-top: 5px; border-top: 1px dashed #E2ECF2; }
         .radar-ext-a { font-size: 0.7rem; font-weight: 600; color: #2B6CB0; background: #EBF8FF; padding: 2px 7px; border-radius: 8px; text-decoration: none; }
-        .radar-ext-a:hover { background: #BEE3F8; }
 
         .clip-filter-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
         .clip-pill { border: 1px solid #C5D9E8; background: #fff; color: #46637A; padding: 5px 12px; border-radius: 18px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
@@ -269,9 +265,13 @@
         .clip-item-title a:hover { text-decoration: underline; color: #2B6CB0; }
         .clip-item-desc { font-size: 0.83rem; color: #4A5568; line-height: 1.5; }
 
-        /* === 8. 視角三：🎫 票券蒐集 === */
-        .pack-sub-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: #F3ECE3; padding: 6px; border-radius: 14px; margin-bottom: 16px; }
-        .pack-sub-btn { font-family: inherit; border: none; background: transparent; color: var(--text-dark); padding: 8px 6px; border-radius: 10px; font-size: 0.84rem; font-weight: 600; cursor: pointer; }
+        /* === 8. 視角三：🎫 票券蒐集（含互動台幣記帳 ＆ 行前 Check List） === */
+        .pack-sub-tabs { display: flex; flex-wrap: wrap; gap: 6px; background: #F3ECE3; padding: 6px; border-radius: 14px; margin-bottom: 16px; }
+        .pack-sub-btn {
+            font-family: inherit; flex: 1 1 92px; border: none; background: transparent;
+            color: var(--text-dark); padding: 8px 6px; border-radius: 10px;
+            font-size: 0.82rem; font-weight: 600; cursor: pointer; white-space: nowrap; text-align: center;
+        }
         .pack-sub-btn.active { background: #3B4D54; color: #fff; }
         .pack-panel { display: none; }
         .pack-panel.active { display: block; }
@@ -286,7 +286,6 @@
         .ticket-left-strip.hotel { background: #5B4B49; }
         .ticket-left-strip.spot { background: #8C4A32; }
         .ticket-left-strip.transit { background: #6E5A4F; }
-
         .ticket-head-main { flex: 1; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
         .ticket-head-title { font-weight: 700; font-size: 0.94rem; }
         .ticket-head-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; }
@@ -298,7 +297,7 @@
         .ticket-detail-body { display: none; padding: 14px 16px 16px; background: #FCFBF9; border-top: 1.5px dashed #E2D9CE; }
         .collapsible-ticket-card.open .ticket-detail-body { display: block; }
 
-        /* 飯店住宿確認憑證 */
+        /* 飯店住宿憑證 */
         .hotel-voucher-paper { background: #fff; border: 1.5px solid #C8B6A6; border-radius: 12px; overflow: hidden; }
         .hv-top-banner { background: linear-gradient(135deg, #4A3E3B 0%, #6E5D58 100%); color: #F7EFE8; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; letter-spacing: 0.08em; flex-wrap: wrap; gap: 6px; }
         .hv-stamp-confirmed { border: 1.5px solid #9AE6B4; color: #9AE6B4; padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 0.72rem; }
@@ -314,26 +313,83 @@
         .timetable-link-btn { display: inline-flex; align-items: center; gap: 5px; background: #EDF6F9; color: #1D5B79; border: 1px solid #B6D7E8; padding: 6px 13px; border-radius: 18px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: all 0.2s; }
         .timetable-link-btn:hover { background: #1D5B79; color: #fff; }
 
-        /* 預算與花費明細 */
-        .budget-card, .expense-detail-panel { background: #fff; border-radius: 16px; padding: 18px 20px; border: 1px solid var(--border-soft); margin-bottom: 16px; box-shadow: 0 3px 12px rgba(196, 169, 158, 0.1); }
+        /* 雲端同步控制條（記帳與行前清單共用） */
+        .cloud-auth-bar {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+            background: #F7F2EB; border: 1px solid var(--border-soft); border-radius: 12px;
+            padding: 10px 14px; margin-bottom: 14px; font-size: 0.82rem;
+        }
+        .cloud-auth-status { display: flex; align-items: center; gap: 6px; font-weight: 600; color: var(--text-dark); }
+        .cloud-auth-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .cloud-btn {
+            font-family: inherit; border: 1px solid var(--accent-brown); background: #fff;
+            color: var(--accent-brown-dark); padding: 5px 11px; border-radius: 14px;
+            font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        .cloud-btn:hover { background: var(--accent-brown); color: #fff; }
+        .cloud-btn.primary { background: var(--accent-brown-dark); color: #fff; border-color: var(--accent-brown-dark); }
+        .cloud-btn.primary:hover { filter: brightness(0.92); }
+        .cloud-btn.sage { background: var(--accent-sage-dark); color: #fff; border-color: var(--accent-sage-dark); }
+
+        /* 互動式台幣記帳表單與明細 */
+        .budget-card, .expense-detail-panel, .expense-form-panel, .checklist-card {
+            background: #fff; border-radius: 16px; padding: 18px 20px; border: 1px solid var(--border-soft);
+            margin-bottom: 16px; box-shadow: 0 3px 12px rgba(196, 169, 158, 0.1);
+        }
         .budget-bar-wrap { height: 8px; background: #EFEAE4; border-radius: 6px; overflow: hidden; margin: 8px 0 14px; }
-        .budget-bar-fill { height: 100%; background: #3B4D54; border-radius: 6px; }
-        .budget-cat-row { margin-bottom: 12px; }
-        .budget-cat-top { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; gap: 8px; }
-        .expense-filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-        .expense-filter-btn { font-family: inherit; border: 1px solid var(--border-soft); background: #FAF7F2; color: var(--text-dark); padding: 5px 12px; border-radius: 16px; font-size: 0.78rem; font-weight: 600; cursor: pointer; }
+        .budget-bar-fill { height: 100%; background: #3B4D54; border-radius: 6px; transition: width 0.3s; }
+        .budget-cat-row { margin-bottom: 10px; }
+        .budget-cat-top { display: flex; justify-content: space-between; font-size: 0.84rem; font-weight: 600; margin-bottom: 4px; gap: 8px; }
+
+        .expense-form-panel { background: #FCF9F5; border: 1.5px solid var(--accent-brown); }
+        .exp-form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+        .exp-field { display: flex; flex-direction: column; gap: 4px; }
+        .exp-field.full { grid-column: 1 / -1; }
+        .exp-field label { font-size: 0.76rem; font-weight: 700; color: var(--accent-brown-dark); }
+        .exp-input, .exp-select {
+            font-family: inherit; border: 1px solid #D8C8B8; border-radius: 10px;
+            padding: 8px 10px; font-size: 0.85rem; color: var(--text-dark); background: #fff;
+            width: 100%; box-sizing: border-box;
+        }
+        .exp-rate-row { display: flex; gap: 6px; align-items: center; }
+        .exp-check-row { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--text-dark); cursor: pointer; margin-top: 2px; }
+        .exp-form-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-soft); }
+        .exp-rate-hint { font-size: 0.74rem; color: var(--text-light); }
+
+        .expense-filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+        .expense-filter-btn { font-family: inherit; border: 1px solid var(--border-soft); background: #FAF7F2; color: var(--text-dark); padding: 5px 11px; border-radius: 16px; font-size: 0.78rem; font-weight: 600; cursor: pointer; }
         .expense-filter-btn.active { background: var(--accent-brown-dark); border-color: var(--accent-brown-dark); color: #fff; }
-        .expense-item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px dashed #EAE3DC; font-size: 0.86rem; gap: 10px; }
+        .expense-item-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 8px; border-bottom: 1px dashed #EAE3DC; font-size: 0.85rem; gap: 10px; }
         .expense-item-row:last-child { border-bottom: none; }
-        .expense-item-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .expense-item-left { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1; }
+        .expense-item-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
         .expense-cat-tag { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: #F3ECE3; color: #6E5A4F; white-space: nowrap; }
         .expense-cat-tag.交通 { background: #EBF3F9; color: #2B5B84; }
         .expense-cat-tag.住宿 { background: #F2EFE9; color: #5B4B49; }
         .expense-cat-tag.餐飲 { background: #FDF3EB; color: #9C4A32; }
         .expense-cat-tag.門票 { background: #EDF7ED; color: #2E6B3E; }
-        .expense-day-tag { font-size: 0.74rem; color: var(--text-light); font-weight: 600; }
-        .expense-item-title { font-weight: 600; }
-        .expense-item-amount { font-family: 'Noto Serif TC', serif; font-weight: 700; color: #B84A39; white-space: nowrap; }
+        .expense-cat-tag.購物 { background: #F6EEF8; color: #6B3F7C; }
+        .expense-sub-pill { font-size: 0.71rem; color: var(--text-light); background: #F5F2EE; padding: 1px 6px; border-radius: 6px; }
+        .expense-sub-pill.est { background: #FFF8E7; color: #9C6B3B; border: 1px solid #EAD7B7; }
+        .expense-item-title { font-weight: 600; word-break: break-word; }
+        .expense-fx-note { font-size: 0.75rem; color: var(--text-light); }
+        .expense-item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+        .expense-item-amount { font-family: 'Noto Serif TC', serif; font-weight: 700; color: #B84A39; white-space: nowrap; font-size: 0.92rem; }
+        .expense-row-ops { display: flex; gap: 4px; }
+        .icon-mini-btn { border: 1px solid #E2D9CE; background: #fff; color: var(--text-light); border-radius: 8px; padding: 2px 7px; font-size: 0.74rem; cursor: pointer; }
+        .icon-mini-btn:hover { background: #F4EFE6; color: var(--text-dark); }
+        .icon-mini-btn.del:hover { background: #FFF1F2; color: #BE123C; border-color: #FDA4AF; }
+
+        /* ✅ 行前準備清單樣式 */
+        .chk-progress-bar { height: 10px; background: #EAEFE8; border-radius: 8px; overflow: hidden; margin: 10px 0 6px; }
+        .chk-progress-fill { height: 100%; background: var(--accent-sage-dark); border-radius: 8px; transition: width 0.3s; }
+        .chk-add-row { display: grid; grid-template-columns: 120px 1fr auto; gap: 8px; margin-bottom: 14px; }
+        .chk-group-title { font-size: 0.84rem; font-weight: 700; color: var(--accent-sage-dark); margin: 14px 0 6px; padding-bottom: 4px; border-bottom: 1px solid #E4ECE2; display: flex; justify-content: space-between; }
+        .chk-item-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 6px; border-bottom: 1px dashed #ECE7E0; }
+        .chk-item-row:last-child { border-bottom: none; }
+        .chk-label { display: flex; align-items: center; gap: 10px; flex: 1; cursor: pointer; font-size: 0.88rem; line-height: 1.45; }
+        .chk-label input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent-sage-dark); cursor: pointer; flex-shrink: 0; }
+        .chk-label.done span { text-decoration: line-through; color: #A0A0A0; }
 
         /* 美食紀錄色塊 */
         .food-review-box { padding: 10px 14px; background: #F2F7FA; border-left: 3.5px solid #3B82F6; border-radius: 8px; margin-bottom: 10px; font-size: 0.86rem; line-height: 1.65; color: #2C3E50; }
@@ -370,19 +426,19 @@
             .top-nav { top: 36vh; padding: 10px 14px; }
             .view-section { padding: 16px 14px 50px; }
 
-            /* 1. 地圖頂部統計與路線切換改為上下錯開，徹底解決重疊裁切 */
+            /* 1. 地圖頂部統計與路線切換上下錯開不重疊 */
             .map-top-bar { top: 10px; left: 10px; right: 10px; flex-direction: column; align-items: flex-start; gap: 6px; }
             .map-stats-pill { font-size: 0.74rem; padding: 5px 10px; max-width: 100%; box-sizing: border-box; }
             .map-mode-overlay { align-self: flex-end; padding: 3px 5px; }
             .map-mode-btn { padding: 4px 10px; font-size: 0.76rem; }
 
-            /* 2. 導覽列標題與 4 大分頁單行均分，完整顯示不被右邊截斷 */
+            /* 2. 頂部 4 大分頁單行均分不裁切 */
             .nav-header { margin-bottom: 8px; }
             .trip-main-title { font-size: 0.96rem; }
             .view-mode-bar { gap: 4px; margin-bottom: 8px; }
             .view-mode-btn { flex: 1; justify-content: center; padding: 6px 4px; font-size: 0.76rem; gap: 3px; }
 
-            /* 3. 卡片、圖庫與燈箱適配 */
+            /* 3. 表單、清單與卡片響應式 */
             .spot-card-header { padding: 12px 14px; }
             .spot-card-body { padding: 0 14px 14px; }
             .chapter { min-height: auto; margin-bottom: 28px; padding: 20px 16px; }
@@ -393,8 +449,8 @@
             .lightbox-nav.next { right: 10px; }
             .affiliate-btn { width: 100%; justify-content: center; box-sizing: border-box; }
             .radar-grid { grid-template-columns: repeat(2, 1fr); }
-            .clip-search-row { grid-template-columns: 1fr; }
-            .pack-sub-tabs { grid-template-columns: repeat(2, 1fr); }
+            .clip-search-row, .exp-form-grid { grid-template-columns: 1fr; }
+            .chk-add-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -436,12 +492,12 @@
                 <div id="itinerary-content"></div>
             </div>
 
-            <!-- 視角 2：📡 資訊情報 -->
+            <!-- 視角 2：📡 資訊情報（出發前 3 天～結束日自動啟用即時抓取） -->
             <div id="view-info" class="view-section">
                 <div class="info-station-header">
                     <span class="info-tag-pill" id="info-trip-code">TRIP LIVE ・ 旅の速報</span>
                     <h2 class="info-station-title" id="info-station-title">旅途即時情報手帳</h2>
-                    <p class="info-station-sub">掌握出發前與旅途中的即時天氣、交通運行快訊、防災預警與重要新聞。</p>
+                    <p class="info-station-sub">掌握出發前 3 天與旅途中的即時天氣、交通運行快訊、防災預警與重要新聞。</p>
                     <div class="info-status-bar">
                         <span><span class="info-live-dot" id="info-live-dot"></span><span id="info-conn-label">即時連線</span> ｜ <span id="info-update-time">更新：讀取中...</span></span>
                         <button type="button" class="info-refresh-btn" id="btn-refresh-info" onclick="refreshInfoStation(true)">↻ 重新整理</button>
@@ -486,18 +542,20 @@
                 </div>
             </div>
 
-            <!-- 視角 3：🎫 票券蒐集 -->
+            <!-- 視角 3：🎫 票券蒐集（票券住宿、交通時刻、台幣記帳、美食紀錄、行前清單） -->
             <div id="view-pack" class="view-section">
                 <div class="pack-sub-tabs">
-                    <button type="button" class="pack-sub-btn active" onclick="switchPackSubTab('pack-vouchers', this)">🎫 票券住宿憑證</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-transit', this)">🚄 交通班次時刻</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 旅途預算花費</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 在地美食紀錄</button>
+                    <button type="button" class="pack-sub-btn active" onclick="switchPackSubTab('pack-vouchers', this)">🎫 票券住宿</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-transit', this)">🚄 交通時刻</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 台幣記帳</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 美食紀錄</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-checklist', this)">✅ 行前清單</button>
                 </div>
                 <div id="pack-vouchers" class="pack-panel active"></div>
                 <div id="pack-transit" class="pack-panel"></div>
                 <div id="pack-budget" class="pack-panel"></div>
                 <div id="pack-food" class="pack-panel"></div>
+                <div id="pack-checklist" class="pack-panel"></div>
             </div>
 
             <!-- 視角 4：📖 圖文遊記 -->
@@ -518,6 +576,11 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        /* =====================================================================
+           【⚙️ 功能設定】Google 試算表雲端同步網址（費用明細 ＆ 行前清單）
+           ===================================================================== */
+        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyRbstjJeBCcJaO4hfQxovl46GEmA_l0YrY9UkhglvVA1zRG7RVazHrbHcIau8gl2c4/exec';
+
         /* === 1. 全域狀態與工具函式 === */
         const $ = id => document.getElementById(id);
         const urlParams = new URLSearchParams(location.search);
@@ -526,8 +589,12 @@
 
         let rawJournalData = {}, rawItineraryData = {};
         let isWholeJournalDraft = false;
-        let currentTripAvatar = '🦊', currentTripEndDate = null, currentTripTimezone = 'Asia/Tokyo';
+        let currentTripAvatar = '🦊', currentTripStartDate = null, currentTripEndDate = null, currentTripTimezone = 'Asia/Tokyo';
         let currentCurrencyCode = 'JPY', currentCurrencySymbol = '¥';
+
+        // 預設外幣對台幣參考匯率（供行程預估項目換算與離線備援）
+        const FALLBACK_TWD_RATES = { TWD: 1, JPY: 0.215, MYR: 7.35, SGD: 24.3, USD: 32.5, EUR: 35.0, KRW: 0.0235, HKD: 4.18 };
+        let baselineToTwdRate = 1;
 
         let map, baseRouteLayer, activeRouteLayer, markersLayer, exploreStampsLayer;
         let foxMarker = null, foxAnimFrame = null, observer = null, videoObserver = null;
@@ -537,11 +604,27 @@
         const segmentCoordsCache = {}, chapterMarkers = new Map();
         let isClickScrolling = false, scrollUnlockTimer = null;
 
-        let liveWeatherByDay = {}, allInfoClippings = [], currentClipCategory = 'ALL', allExpenseDetails = [];
-        const CURVE_MODES = { flight: 0.22, hsr: 0.12, boat: 0.12, train: 0.08, metro: 0.05, ropeway: 0.04 };
+        let liveWeatherByDay = {}, allInfoClippings = [], currentClipCategory = 'ALL';
 
+        // 雲端記帳與行前清單狀態
+        let cloudExpenses = [];
+        let cloudChecklist = [];
+        let baselineExpensesTWD = [];
+        let totalTripSpotCount = 0;
+        let includeBaselineEstimates = true;
+        let currentExpenseFilter = 'ALL';
+        let editingExpenseId = null;
+        let cloudSyncState = 'loading'; // loading | ready | error
+        let cloudEditPassword = '';
+        try { cloudEditPassword = localStorage.getItem('flaneur_gas_pwd') || ''; } catch {}
+
+        const CURVE_MODES = { flight: 0.22, hsr: 0.12, boat: 0.12, train: 0.08, metro: 0.05, ropeway: 0.04 };
         const isItemDraft = obj => Boolean(obj && (obj.isDraft === true || obj.hidden === true || obj.status === 'draft'));
         const escHtml = s => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+        const todayISO = () => {
+            const d = new Date();
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        };
 
         /* === 2. 同步讀取 data/*.json（遊記）與 itinerary/*.json（行程情報）並縫合 === */
         Promise.all([
@@ -560,19 +643,19 @@
             $('trip-title').textContent = mainTitle;
 
             currentTripAvatar = rawItineraryData.avatar || rawJournalData.avatar || (isMY ? '🦁' : '🦊');
+            currentTripStartDate = rawItineraryData.startDate || rawJournalData.startDate || null;
             currentTripEndDate = rawItineraryData.endDate || rawJournalData.endDate || null;
             currentTripTimezone = rawItineraryData.timezone || (isMY ? 'Asia/Kuala_Lumpur' : 'Asia/Tokyo');
             currentCurrencyCode = rawItineraryData.currency || rawJournalData.currency || (isMY ? 'TWD' : 'JPY');
             currentCurrencySymbol = rawItineraryData.currencySymbol || ({ TWD: 'NT$', MYR: 'RM', SGD: 'S$', JPY: '¥' }[currentCurrencyCode] || '¥');
+            baselineToTwdRate = FALLBACK_TWD_RATES[currentCurrencyCode] || 1;
 
-            // 建立行程站點索引
             const itinSpotById = new Map(), itinDayByName = new Map();
             (rawItineraryData.days || []).forEach(d => {
                 if (d.day) itinDayByName.set(d.day, d);
                 (d.spots || []).forEach(sp => sp.id && itinSpotById.set(sp.id, { ...sp, dayRegion: d.region || '' }));
             });
 
-            // 決定基礎天數來源
             const fallbackCoord = isMY ? { lat: 3.1390, lng: 101.6869 } : { lat: 35.6895, lng: 139.6917 };
             let baseDays = [];
             if (!isWholeJournalDraft && Array.isArray(rawJournalData.days) && rawJournalData.days.length) {
@@ -598,7 +681,6 @@
                 }));
             }
 
-            // 縫合兩份檔案並過濾草稿
             const mergedDays = baseDays.map((dayObj, dIdx) => {
                 const itinDay = itinDayByName.get(dayObj.day) || rawItineraryData.days?.[dIdx];
                 const dayRegion = dayObj.region || itinDay?.region || dayObj.dayTitle || '主要旅遊地區';
@@ -626,7 +708,8 @@
             initMap(normalizedDays, fallbackCoord);
             buildDayTabs();
             renderDay('ALL');
-            renderPackAndBudgetViews();
+            renderPackStaticViews();
+            loadCloudData();
             refreshInfoStation(false);
 
             const reqView = urlParams.get('view');
@@ -962,7 +1045,6 @@
             const timeStr = ch.time || defaultHours[Math.min(idxInDay, defaultHours.length - 1)];
             const categoryLabel = ch.categoryLabel || '經典必訪';
 
-            // 尋訪印章判定（含星馬與日本常見關鍵字）
             let stampChar = '景', stampClass = 'spot';
             if (categoryLabel.includes('住宿') || /飯店|酒店|旅館|住宿|御宿野乃|Hotel|Stay|Méridien|Aloft|Holiday Inn|Village|APA/i.test(pureName)) {
                 stampChar = '住'; stampClass = 'hotel';
@@ -1020,8 +1102,7 @@
             document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
             if (sec) sec.classList.add('active');
             document.querySelectorAll('.custom-marker').forEach(el => el.classList.remove('active'));
-            const mk = activeMarker || chapterMarkers.get(sec);
-            mk?.getElement()?.classList.add('active');
+            (activeMarker || chapterMarkers.get(sec))?.getElement()?.classList.add('active');
         }
 
         function jumpToJournalChapter(chIndex, sectionId) {
@@ -1105,7 +1186,6 @@
                             </div>`);
                     }
 
-                    // 修正 Google 地圖搜尋網址（移除錯誤的 query_place_id=lat,lng）
                     const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(meta.pureName)}`;
                     dayCardsHTML.push(`
                         <div class="spot-intro-card ${idxInDay === 0 ? 'open' : ''}" id="itin-card-${ch.id}">
@@ -1193,81 +1273,73 @@
             }
         }
 
-        /* === 8. 📡 資訊情報引擎（氣象 API ＋ 全球通用即時新聞 RSS 自動抓取） === */
-        const isTripAlreadyEnded = () => Boolean(currentTripEndDate && new Date() > new Date(`${currentTripEndDate}T23:59:59`));
+        /* === 8. 📡 資訊情報引擎（出發前 3 天～旅程結束日才啟動即時抓取） === */
+        function getInfoWindowState() {
+            const now = new Date();
+            if (currentTripEndDate) {
+                const endWindow = new Date(`${currentTripEndDate}T23:59:59`);
+                if (!isNaN(endWindow) && now > endWindow) return { status: 'ended', openDateStr: '', startWindow: null, endWindow };
+            }
+            if (currentTripStartDate) {
+                const startDay = new Date(`${currentTripStartDate}T00:00:00`);
+                if (!isNaN(startDay)) {
+                    const startWindow = new Date(startDay.getTime() - 3 * 86400000);
+                    const openDateStr = `${startWindow.getFullYear()}-${String(startWindow.getMonth() + 1).padStart(2, '0')}-${String(startWindow.getDate()).padStart(2, '0')}`;
+                    const endWindow = currentTripEndDate ? new Date(`${currentTripEndDate}T23:59:59`) : null;
+                    if (!isPreviewMode && now < startWindow) return { status: 'upcoming', openDateStr, startWindow, endWindow };
+                    return { status: 'active', openDateStr, startWindow, endWindow };
+                }
+            }
+            return { status: 'active', openDateStr: '', startWindow: null, endWindow: null };
+        }
 
-        // 依旅程關鍵字或地區自動抓取 Google News 即時情報
-        async function fetchLiveTravelNews(dayCoords) {
+        async function fetchLiveTravelNews(dayCoords, winState) {
             const customKw = Array.isArray(rawItineraryData.newsKeywords) ? rawItineraryData.newsKeywords.filter(Boolean) : [];
             const regionNames = [...new Set(dayCoords.map(d => d.locName).filter(r => r && r !== '主要旅遊'))];
             const cleanTitle = (rawItineraryData.tripTitle || rawJournalData.tripTitle || '').split('｜').pop().trim();
-
-            let queryRaw = '';
-            if (customKw.length) {
-                queryRaw = customKw.slice(0, 3).join(' OR ');
-            } else if (regionNames.length) {
-                queryRaw = `(${regionNames.slice(0, 3).join(' OR ')}) (旅遊 OR 交通 OR 天氣 OR 入境)`;
-            } else {
-                queryRaw = `${cleanTitle || '旅遊'} 交通 天氣`;
-            }
+            const queryRaw = customKw.length
+                ? customKw.slice(0, 3).join(' OR ')
+                : (regionNames.length ? `(${regionNames.slice(0, 3).join(' OR ')}) (旅遊 OR 交通 OR 天氣 OR 入境)` : `${cleanTitle || '旅遊'} 交通 天氣`);
 
             const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(queryRaw)}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant`;
             try {
                 const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`);
                 const data = await res.json();
                 if (data?.status === 'ok' && Array.isArray(data.items)) {
-                    return data.items.slice(0, 8).map(item => {
-                        const title = (item.title || '').replace(/\s*-\s*[^-]+$/, '').trim();
-                        const matchedRegion = dayCoords.find(d => title.includes(d.locName))?.stdRegion || dayCoords[0]?.stdRegion || '當地快訊';
-                        let category = '快訊', urgent = false;
-                        if (/雨|颱風|氣象|氣溫|雷暴|熱浪|淹水|大雪/.test(title)) {
-                            category = '天氣'; urgent = /警報|暴雨|淹水|停飛|暴雪/.test(title);
-                        } else if (/捷運|地鐵|火車|列車|航班|機場|塞車|新幹線|MRT|KTM|ETS|Grab/i.test(title)) {
-                            category = '交通'; urgent = /停駛|延誤|故障|中斷|取消/.test(title);
-                        } else if (/地震|災害|警告|治安|詐騙|入境|簽證|MDAC/i.test(title)) {
-                            category = '防災'; urgent = true;
-                        }
-                        return {
-                            id: `rss-${btoa(unescape(encodeURIComponent(title.slice(0, 24)))).slice(0, 16)}`,
-                            category, region: matchedRegion, urgent,
-                            tag: item.author || '即時新聞快訊',
-                            title,
-                            desc: `發布時間：${(item.pubDate || '').slice(0, 16)}（點擊標題查看完整報導）`,
-                            link: item.link || ''
-                        };
-                    });
+                    return data.items
+                        .filter(item => {
+                            if (isPreviewMode || !winState.startWindow || !item.pubDate) return true;
+                            const pubTime = new Date(item.pubDate.replace(' ', 'T') + 'Z');
+                            return isNaN(pubTime) || (pubTime >= winState.startWindow && (!winState.endWindow || pubTime <= winState.endWindow));
+                        })
+                        .slice(0, 8)
+                        .map(item => {
+                            const title = (item.title || '').replace(/\s*-\s*[^-]+$/, '').trim();
+                            const matchedRegion = dayCoords.find(d => title.includes(d.locName))?.stdRegion || dayCoords[0]?.stdRegion || '當地快訊';
+                            let category = '快訊', urgent = false;
+                            if (/雨|颱風|氣象|氣溫|雷暴|熱浪|淹水|大雪/.test(title)) { category = '天氣'; urgent = /警報|暴雨|淹水|停飛|暴雪/.test(title); }
+                            else if (/捷運|地鐵|火車|列車|航班|機場|塞車|新幹線|MRT|KTM|ETS|Grab/i.test(title)) { category = '交通'; urgent = /停駛|延誤|故障|中斷|取消/.test(title); }
+                            else if (/地震|災害|警告|治安|詐騙|入境|簽證|MDAC/i.test(title)) { category = '防災'; urgent = true; }
+                            return {
+                                id: `rss-${btoa(unescape(encodeURIComponent(title.slice(0, 24)))).slice(0, 16)}`,
+                                category, region: matchedRegion, urgent,
+                                tag: item.author || '即時新聞快訊', title,
+                                desc: `發布時間：${(item.pubDate || '').slice(0, 16)}（點擊標題查看完整報導）`,
+                                link: item.link || ''
+                            };
+                        });
                 }
             } catch {}
             return [];
         }
 
         async function refreshInfoStation(isManualClick = false) {
-            const ended = isTripAlreadyEnded();
-            const refreshBtn = $('btn-refresh-info');
+            const winState = getInfoWindowState();
+            const refreshBtn = $('btn-refresh-info'), liveDot = $('info-live-dot');
             const mainTitle = rawItineraryData.tripTitle || rawJournalData.tripTitle || '旅途';
             $('info-trip-code').textContent = `${tripId.toUpperCase()} ・ 旅の速報`;
             $('info-station-title').textContent = `${mainTitle.split('｜').pop().trim()}情報手帳`;
 
-            if (ended) {
-                $('info-live-dot').classList.add('ended');
-                $('info-conn-label').textContent = '歷史封存';
-                $('info-update-time').textContent = `旅程已於 ${currentTripEndDate} 結束（停止更新）`;
-                refreshBtn.textContent = '🏁 旅程已結束'; refreshBtn.disabled = true;
-                $('clip-archive-badge').textContent = `🔒 已於 ${currentTripEndDate} 封存`;
-            } else {
-                $('info-live-dot').classList.remove('ended');
-                $('info-conn-label').textContent = '即時連線';
-                refreshBtn.disabled = false;
-                if (isManualClick) refreshBtn.textContent = '↻ 連線更新中...';
-                let timeStr = '';
-                try {
-                    timeStr = new Intl.DateTimeFormat('zh-TW', { timeZone: currentTripTimezone, month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
-                } catch { timeStr = new Date().toTimeString().slice(0, 5); }
-                $('info-update-time').textContent = `更新：當地時間 ${timeStr}`;
-                $('clip-archive-badge').textContent = '🟢 即時累積模式（自動過濾重複）';
-            }
-
-            // 取得每日代表座標（排除台灣出發機場）
             const dayCoords = normalizedDays.map((d, idx) => {
                 const valid = (d.chapters || []).filter(c => c.lat && c.lng && !(c.lat < 25.5 && c.lat > 21.5 && c.lng > 119.5 && c.lng < 122.5));
                 const picked = valid[Math.floor(valid.length / 2)] || d.chapters?.[0] || { lat: 3.1390, lng: 101.6869 };
@@ -1276,7 +1348,62 @@
                 return { dayKey: d.day, dayCode: `D${String(idx + 1).padStart(2, '0')}`, stdRegion, locName, lat: Number(picked.lat).toFixed(3), lng: Number(picked.lng).toFixed(3) };
             });
 
-            // 同步抓取每日即時氣象與新聞快訊
+            const staticNews = Array.isArray(rawItineraryData.urgentNews) ? rawItineraryData.urgentNews : [];
+
+            // 狀態 A：尚未進入出發前 3 天
+            if (winState.status === 'upcoming') {
+                liveDot.classList.add('ended'); liveDot.style.background = '#D69E2E';
+                $('info-conn-label').textContent = '行前待命中';
+                $('info-update-time').textContent = `將於出發前 3 天（${winState.openDateStr}）自動開啟抓取`;
+                refreshBtn.textContent = '⏳ 尚未開放抓取'; refreshBtn.disabled = true;
+                $('clip-archive-badge').textContent = `⏳ 預計 ${winState.openDateStr} 啟用即時連線`;
+
+                const items = [`<li><span>⏳</span><div><strong>【情報站尚未啟動】</strong>即時氣象與當地快訊將於出發前 3 天（<strong>${winState.openDateStr}</strong>）自動連線啟用。</div></li>`];
+                staticNews.slice(0, 4).forEach(n => items.push(`<li><span>📌</span><div><strong>${escHtml(n.title)}：</strong>${escHtml(n.desc)}</div></li>`));
+                $('info-quick-five').innerHTML = items.join('');
+
+                $('info-radar-grid').innerHTML = dayCoords.map(item => {
+                    const wcUrl = `https://weather.com/zh-TW/weather/today/l/${item.lat},${item.lng}`;
+                    const windyUrl = `https://www.windy.com/${item.lat}/${item.lng}?wind,${item.lat},${item.lng},11`;
+                    return `<div class="radar-cell"><a href="${wcUrl}" target="_blank" rel="noopener" class="radar-main-link"><div class="radar-day-num">${item.dayCode}・${item.locName}</div><div class="radar-day-status">⏳ ${winState.openDateStr} 開放</div></a><div class="radar-ext-links"><a href="${wcUrl}" target="_blank" rel="noopener" class="radar-ext-a">🌤️ Weather</a><a href="${windyUrl}" target="_blank" rel="noopener" class="radar-ext-a">🌬️ Windy</a></div></div>`;
+                }).join('');
+                updateAndRenderCumulativeClippings(dayCoords, [], winState);
+                return;
+            }
+
+            // 狀態 B：旅程已結束封存
+            if (winState.status === 'ended') {
+                liveDot.classList.add('ended'); liveDot.style.background = '';
+                $('info-conn-label').textContent = '歷史封存';
+                $('info-update-time').textContent = `旅程已於 ${currentTripEndDate} 結束（停止更新）`;
+                refreshBtn.textContent = '🏁 旅程已結束'; refreshBtn.disabled = true;
+                $('clip-archive-badge').textContent = `🔒 已於 ${currentTripEndDate} 封存`;
+
+                const items = [`<li><span>🏁</span><div><strong>【旅程已結束並封存】</strong>即時連線已於 ${currentTripEndDate} 停止，下方保留當時累積的情報剪報。</div></li>`];
+                staticNews.slice(0, 4).forEach(n => items.push(`<li><span>📌</span><div><strong>${escHtml(n.title)}：</strong>${escHtml(n.desc)}</div></li>`));
+                $('info-quick-five').innerHTML = items.join('');
+
+                $('info-radar-grid').innerHTML = dayCoords.map(item => {
+                    const wcUrl = `https://weather.com/zh-TW/weather/today/l/${item.lat},${item.lng}`;
+                    const windyUrl = `https://www.windy.com/${item.lat}/${item.lng}?wind,${item.lat},${item.lng},11`;
+                    return `<div class="radar-cell"><a href="${wcUrl}" target="_blank" rel="noopener" class="radar-main-link"><div class="radar-day-num">${item.dayCode}・${item.locName}</div><div class="radar-day-status">🏁 歷史封存</div></a><div class="radar-ext-links"><a href="${wcUrl}" target="_blank" rel="noopener" class="radar-ext-a">🌤️ Weather</a><a href="${windyUrl}" target="_blank" rel="noopener" class="radar-ext-a">🌬️ Windy</a></div></div>`;
+                }).join('');
+                updateAndRenderCumulativeClippings(dayCoords, [], winState);
+                return;
+            }
+
+            // 狀態 C：出發前 3 天～結束日內，開啟即時抓取
+            liveDot.classList.remove('ended'); liveDot.style.background = '';
+            $('info-conn-label').textContent = isPreviewMode ? '預覽測試連線' : '即時連線';
+            refreshBtn.disabled = false;
+            if (isManualClick) refreshBtn.textContent = '↻ 連線更新中...';
+
+            let timeStr = '';
+            try { timeStr = new Intl.DateTimeFormat('zh-TW', { timeZone: currentTripTimezone, month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date()); }
+            catch { timeStr = new Date().toTimeString().slice(0, 5); }
+            $('info-update-time').textContent = `更新：當地時間 ${timeStr}`;
+            $('clip-archive-badge').textContent = '🟢 旅途即時累積中（自動過濾重複）';
+
             const [_, liveNews] = await Promise.all([
                 Promise.all(dayCoords.map(async item => {
                     try {
@@ -1295,84 +1422,61 @@
                     } catch {}
                     liveWeatherByDay[item.dayCode] = { ...item, maxT: 26, minT: 20, rainProb: 20, wind: 10 };
                 })),
-                ended ? Promise.resolve([]) : fetchLiveTravelNews(dayCoords)
+                fetchLiveTravelNews(dayCoords, winState)
             ]);
 
-            // 1. 渲染 30 秒情報速讀（前 2 則氣象 + 最多 3 則重要提醒/即時新聞）
             const d1W = liveWeatherByDay['D01'] || { locName: '首站', maxT: 26, minT: 20, rainProb: 20, wind: 10 };
             const d2W = liveWeatherByDay['D02'] || d1W;
             const quickList = [
                 `<li><span>☀️</span><div><strong>【${d1W.locName} D01 即時氣象】</strong>氣溫 ${d1W.maxT}~${d1W.minT}°C，降雨機率 ${d1W.rainProb}%，最大風速 ${d1W.wind} km/h。</div></li>`,
-                `<li><span>🌬️</span><div><strong>【${d2W.locName} D02 戶外監測】</strong>氣溫 ${d2W.maxT}~${d2W.minT}°C，目前風速 ${d2W.wind} km/h（若有戶外或跨城交通請留意天候變化）。</div></li>`
+                `<li><span>🌬️</span><div><strong>【${d2W.locName} D02 戶外監測】</strong>氣溫 ${d2W.maxT}~${d2W.minT}°C，目前風速 ${d2W.wind} km/h（請留意戶外與跨城交通天候變化）。</div></li>`
             ];
-            const highlightNews = [...(rawItineraryData.urgentNews || []), ...liveNews].slice(0, 3);
-            highlightNews.forEach(n => {
-                const titleHtml = n.link ? `<a href="${escHtml(n.link)}" target="_blank" rel="noopener" style="color:inherit;">${escHtml(n.title)} ↗</a>` : escHtml(n.title);
-                quickList.push(`<li><span>🚨</span><div><strong>${titleHtml}：</strong>${escHtml(n.desc)}</div></li>`);
+            [...staticNews, ...liveNews].slice(0, 3).forEach(n => {
+                const tHtml = n.link ? `<a href="${escHtml(n.link)}" target="_blank" rel="noopener" style="color:inherit;">${escHtml(n.title)} ↗</a>` : escHtml(n.title);
+                quickList.push(`<li><span>🚨</span><div><strong>${tHtml}：</strong>${escHtml(n.desc)}</div></li>`);
             });
             $('info-quick-five').innerHTML = quickList.join('');
 
-            // 2. 渲染每日氣象影響雷達
             $('info-radar-grid').innerHTML = dayCoords.map(item => {
                 const w = liveWeatherByDay[item.dayCode] || { maxT: 26, minT: 20, rainProb: 20, wind: 10 };
                 const isWarn = w.wind >= 20 || w.rainProb >= 60 || w.minT <= 0;
                 const wcUrl = `https://weather.com/zh-TW/weather/today/l/${item.lat},${item.lng}`;
                 const windyUrl = `https://www.windy.com/${item.lat}/${item.lng}?wind,${item.lat},${item.lng},11`;
-                return `
-                    <div class="radar-cell ${isWarn ? 'warn' : ''}">
-                        <a href="${wcUrl}" target="_blank" rel="noopener" class="radar-main-link">
-                            <div class="radar-day-num">${item.dayCode}・${item.locName}</div>
-                            <div class="radar-day-status">${isWarn ? '⚠️' : '☀️'} ${w.maxT}~${w.minT}°C｜風速 ${w.wind}km/h</div>
-                        </a>
-                        <div class="radar-ext-links">
-                            <a href="${wcUrl}" target="_blank" rel="noopener" class="radar-ext-a">🌤️ Weather</a>
-                            <a href="${windyUrl}" target="_blank" rel="noopener" class="radar-ext-a">🌬️ Windy</a>
-                        </div>
-                    </div>`;
+                return `<div class="radar-cell ${isWarn ? 'warn' : ''}"><a href="${wcUrl}" target="_blank" rel="noopener" class="radar-main-link"><div class="radar-day-num">${item.dayCode}・${item.locName}</div><div class="radar-day-status">${isWarn ? '⚠️' : '☀️'} ${w.maxT}~${w.minT}°C｜風速 ${w.wind}km/h</div></a><div class="radar-ext-links"><a href="${wcUrl}" target="_blank" rel="noopener" class="radar-ext-a">🌤️ Weather</a><a href="${windyUrl}" target="_blank" rel="noopener" class="radar-ext-a">🌬️ Windy</a></div></div>`;
             }).join('');
 
-            // 3. 合併常駐提醒、即時新聞與氣象快訊至剪報庫
-            updateAndRenderCumulativeClippings(dayCoords, liveNews, ended);
-
-            if (isManualClick && !ended) {
-                refreshBtn.textContent = '✔ 已更新最新情報';
-                setTimeout(() => { refreshBtn.textContent = '↻ 重新整理'; }, 1800);
-            }
+            updateAndRenderCumulativeClippings(dayCoords, liveNews, winState);
+            if (isManualClick) { refreshBtn.textContent = '✔ 已更新最新情報'; setTimeout(() => { refreshBtn.textContent = '↻ 重新整理'; }, 1800); }
         }
 
-        function updateAndRenderCumulativeClippings(dayCoords, liveNews, isEnded) {
+        function updateAndRenderCumulativeClippings(dayCoords, liveNews, winState) {
             const storageKey = `flaneur_clippings_archive_v5_${tripId}`;
+            const staticNews = Array.isArray(rawItineraryData.urgentNews) ? rawItineraryData.urgentNews : [];
             let archive = [];
-            try { archive = JSON.parse(localStorage.getItem(storageKey) || '[]'); } catch {}
 
-            const existingIds = new Set(archive.map(i => i.id));
-            const addUnique = (items, toFront = false) => items.forEach(it => {
-                if (it?.id && !existingIds.has(it.id)) {
-                    toFront ? archive.unshift(it) : archive.push(it);
-                    existingIds.add(it.id);
+            if (winState.status === 'upcoming') {
+                archive = [...staticNews];
+            } else {
+                try { archive = JSON.parse(localStorage.getItem(storageKey) || '[]'); } catch {}
+                const existingIds = new Set(archive.map(i => i.id));
+                const addUnique = (items, toFront = false) => items.forEach(it => {
+                    if (it?.id && !existingIds.has(it.id)) { toFront ? archive.unshift(it) : archive.push(it); existingIds.add(it.id); }
+                });
+                addUnique(staticNews, false);
+                if (winState.status === 'active') {
+                    addUnique(liveNews || [], true);
+                    addUnique(dayCoords.map(item => {
+                        const w = liveWeatherByDay[item.dayCode]; if (!w) return null;
+                        const isSevere = w.wind >= 18 || w.rainProb >= 60 || w.minT <= 0;
+                        return {
+                            id: `weather-${item.stdRegion}-${w.maxT}-${w.minT}`,
+                            category: '天氣', region: item.stdRegion, urgent: isSevere, tag: `${item.dayCode} 即時氣象`,
+                            title: `【${item.stdRegion}氣象速報】今日 ${w.maxT}~${w.minT}°C・降雨機率 ${w.rainProb}%・風速 ${w.wind} km/h`,
+                            desc: isSevere ? '⚠️ 監測到較強陣風、高降雨機率或低溫，戶外與交通行程請留意變動。' : `目前 ${item.stdRegion} 氣候穩定，適合按原訂計畫漫遊。`
+                        };
+                    }).filter(Boolean), false);
+                    if (!isPreviewMode) try { localStorage.setItem(storageKey, JSON.stringify(archive.slice(0, 40))); } catch {}
                 }
-            });
-
-            // 1. 優先併入 JSON 內的常駐 urgentNews
-            addUnique(rawItineraryData.urgentNews || [], false);
-
-            // 2. 若旅程未結束，併入即時新聞與最新氣象速報
-            if (!isEnded) {
-                addUnique(liveNews || [], true);
-                const weatherAlerts = dayCoords.map(item => {
-                    const w = liveWeatherByDay[item.dayCode];
-                    if (!w) return null;
-                    const isSevere = w.wind >= 18 || w.rainProb >= 60 || w.minT <= 0;
-                    return {
-                        id: `weather-${item.stdRegion}-${w.maxT}-${w.minT}`,
-                        category: '天氣', region: item.stdRegion, urgent: isSevere,
-                        tag: `${item.dayCode} 即時氣象`,
-                        title: `【${item.stdRegion}氣象速報】今日 ${w.maxT}~${w.minT}°C・降雨機率 ${w.rainProb}%・風速 ${w.wind} km/h`,
-                        desc: isSevere ? '⚠️ 監測到較強陣風、高降雨機率或低溫，戶外與交通行程請留意變動。' : `目前 ${item.stdRegion} 氣候穩定，適合按原訂計畫漫遊。`
-                    };
-                }).filter(Boolean);
-                addUnique(weatherAlerts, false);
-                try { localStorage.setItem(storageKey, JSON.stringify(archive.slice(0, 40))); } catch {}
             }
 
             allInfoClippings = archive;
@@ -1407,27 +1511,14 @@
             btn.classList.add('active'); currentClipCategory = btn.dataset.cat; filterInfoClippings();
         }));
 
-        /* === 9. 🎫 票券蒐集、交通時刻、預算與美食紀錄 === */
+        /* =====================================================================
+           9. 🎫 票券蒐集：住宿憑證、交通時刻、美食紀錄（靜態渲染）
+           ===================================================================== */
         const toggleAllTicketsInPanel = (panelId, expand) => $(panelId)?.querySelectorAll('.collapsible-ticket-card').forEach(c => c.classList.toggle('open', expand));
 
-        function filterExpenseItems(cat, btnEl) {
-            document.querySelectorAll('.expense-filter-btn').forEach(b => b.classList.remove('active'));
-            btnEl?.classList.add('active');
-            const list = cat === 'ALL' ? allExpenseDetails : allExpenseDetails.filter(i => i.category === cat);
-            $('expense-items-container').innerHTML = list.map(i => `
-                <div class="expense-item-row">
-                    <div class="expense-item-left">
-                        <span class="expense-cat-tag ${i.category}">${i.categoryIcon} ${i.category}</span>
-                        ${i.day ? `<span class="expense-day-tag">${i.day}</span>` : ''}
-                        <span class="expense-item-title">${i.title}</span>
-                    </div>
-                    <div class="expense-item-amount">${currentCurrencySymbol}${Number(i.amount).toLocaleString()}</div>
-                </div>`).join('');
-        }
-
-        function renderPackAndBudgetViews() {
+        function renderPackStaticViews() {
             const transportTickets = [], rawHotels = [], transits = [], foods = [], autoExpenses = [];
-            let totalSpotCount = 0;
+            totalTripSpotCount = 0;
 
             (rawItineraryData.hotelVouchers || []).forEach((hv, idx) => {
                 const name = (hv.hotelName || '').trim();
@@ -1440,7 +1531,7 @@
             });
 
             normalizedDays.forEach(dayObj => (dayObj.chapters || []).forEach((ch, cIdx) => {
-                totalSpotCount++;
+                totalTripSpotCount++;
                 const meta = classifyChapterMeta(ch, cIdx, cIdx > 0 ? dayObj.chapters[cIdx - 1] : null);
 
                 if (meta.stampChar === '驛' || /機場|Skyliner|新幹線|ETS|纜車|遊船|劇場|敘宴|狐狸村|動物園|鐵塔/i.test(meta.pureName)) {
@@ -1471,7 +1562,21 @@
                 }
             }));
 
-            // 合併同名且連續入住的飯店憑證
+            // 準備行程預估花費基底（自動轉成台幣 NT$）
+            const srcBaseline = rawItineraryData.expenseItems?.length ? rawItineraryData.expenseItems : autoExpenses;
+            baselineExpensesTWD = srcBaseline.map((i, idx) => {
+                const origAmt = Number(i.amount) || 0;
+                const twdAmt = currentCurrencyCode === 'TWD' ? origAmt : Math.round(origAmt * baselineToTwdRate);
+                return {
+                    id: `base_${idx}`, isBaseline: true,
+                    category: i.category || '交通', day: i.day || '', date: '',
+                    title: i.title || '', payMethod: '行程預估',
+                    currency: currentCurrencyCode, originalAmount: origAmt,
+                    exchangeRate: baselineToTwdRate, hasFee: false, twdAmount: twdAmt, note: ''
+                };
+            });
+
+            // 合併同名連續入住飯店
             const mergedHotels = [];
             rawHotels.forEach(e => {
                 const last = mergedHotels.at(-1);
@@ -1481,7 +1586,7 @@
                 } else mergedHotels.push({ ...e, totalNights: e.nights, bookingIds: [e.bookingId] });
             });
 
-            // 1. 票券與住宿憑證
+            // 1. 票券住宿
             $('pack-vouchers').innerHTML = `
                 <div class="pack-toolbar">
                     <span>💡 點擊展開完整憑證（連續住宿已自動合併）：</span>
@@ -1539,7 +1644,7 @@
                         </div>
                     </div>`).join('')}`;
 
-            // 2. 交通班次時刻
+            // 2. 交通時刻
             $('pack-transit').innerHTML = `
                 <div class="pack-toolbar">
                     <span>起始站 → 轉乘 → 目的站（點擊展開時刻表）：</span>
@@ -1564,50 +1669,7 @@
                         </div>
                     </div>`).join('')}`;
 
-            // 3. 旅途預算花費
-            const iconMap = { 交通: '🚄', 住宿: '🏨', 餐飲: '🍽️', 門票: '🎟️' };
-            const srcExp = rawItineraryData.expenseItems?.length ? rawItineraryData.expenseItems : autoExpenses;
-            allExpenseDetails = srcExp.map(i => ({ category: i.category || '交通', categoryIcon: iconMap[i.category] || '🚄', day: i.day || '', title: i.title, amount: Number(i.amount) || 0 }));
-
-            const sum = { 交通: 0, 住宿: 0, 餐飲: 0, 門票: 0 };
-            allExpenseDetails.forEach(i => { sum[sum[i.category] !== undefined ? i.category : '交通'] += i.amount; });
-            const totalEst = Object.values(sum).reduce((a, b) => a + b, 0);
-            const cap = Number(rawItineraryData.budgetTotal) || Math.max(50000, Math.ceil(totalEst * 1.15 / 5000) * 5000);
-
-            const catRows = [
-                { name: '🚄 交通車資', amount: sum.交通 },
-                { name: '🏨 住宿預估', amount: sum.住宿 },
-                { name: '🍽️ 餐飲預估', amount: sum.餐飲 },
-                { name: '🎟️ 門票體驗', amount: sum.門票 }
-            ];
-
-            $('pack-budget').innerHTML = `
-                <div class="budget-card">
-                    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
-                        <div><div style="font-size:0.78rem;color:var(--text-light);">旅途行跡統計</div><div style="font-size:1.45rem;font-weight:700;color:#3B4D54;">${normalizedDays.length} 天 ・ ${totalSpotCount} 處打卡</div></div>
-                        <div style="text-align:right;"><div style="font-size:0.78rem;color:var(--text-light);">預估總花費 (${currentCurrencyCode})</div><div style="font-size:1.3rem;font-weight:700;color:#B84A39;">${currentCurrencySymbol}${totalEst.toLocaleString()}</div></div>
-                    </div>
-                    <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:${Math.min(100, Math.round(totalEst / cap * 100))}%;"></div></div>
-                    <div style="font-size:0.82rem;color:var(--text-light);margin-bottom:16px;">預算上限：${currentCurrencySymbol}${cap.toLocaleString()} ｜ 預留彈性：${currentCurrencySymbol}${Math.max(0, cap - totalEst).toLocaleString()}</div>
-                    ${catRows.map(c => {
-                        const pct = totalEst > 0 ? Math.round(c.amount / totalEst * 100) : 0;
-                        return `<div class="budget-cat-row"><div class="budget-cat-top"><span>${c.name}</span><span>${currentCurrencySymbol}${c.amount.toLocaleString()} (${pct}%)</span></div><div class="budget-bar-wrap" style="height:6px;margin:4px 0;"><div class="budget-bar-fill" style="width:${pct}%;background:#C4A99E;"></div></div></div>`;
-                    }).join('')}
-                </div>
-                <div class="expense-detail-panel">
-                    <h4 style="margin:0 0 12px;font-size:0.98rem;color:#3B4D54;">📋 預估花費細項明細（共 ${allExpenseDetails.length} 筆）</h4>
-                    <div class="expense-filter-bar">
-                        <button type="button" class="expense-filter-btn active" onclick="filterExpenseItems('ALL',this)">全部 (${allExpenseDetails.length})</button>
-                        <button type="button" class="expense-filter-btn" onclick="filterExpenseItems('交通',this)">🚄 交通</button>
-                        <button type="button" class="expense-filter-btn" onclick="filterExpenseItems('住宿',this)">🏨 住宿</button>
-                        <button type="button" class="expense-filter-btn" onclick="filterExpenseItems('餐飲',this)">🍽️ 餐飲</button>
-                        <button type="button" class="expense-filter-btn" onclick="filterExpenseItems('門票',this)">🎟️ 門票</button>
-                    </div>
-                    <div id="expense-items-container"></div>
-                </div>`;
-            filterExpenseItems('ALL', $('pack-budget').querySelector('.expense-filter-btn'));
-
-            // 4. 在地美食紀錄
+            // 3. 美食紀錄
             $('pack-food').innerHTML = `
                 <div class="pack-toolbar">
                     <span>旅途美食清單（共 ${foods.length} 家）：</span>
@@ -1627,6 +1689,635 @@
                             <div class="food-policy-box"><div style="font-weight:700;margin-bottom:4px;color:#22543D;">⚠️ 用餐／預約注意</div><div style="white-space:pre-line;">${f.policy}</div></div>
                         </div>
                     </div>`).join('')}`;
+
+            renderBudgetPanel();
+            renderChecklistPanel();
+        }
+
+        /* =====================================================================
+           10. ☁️ Google 試算表雲端同步核心（台幣記帳 ＆ 行前 Check List）
+           ===================================================================== */
+        async function callGasPost(payload) {
+            const res = await fetch(GAS_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // 避開 CORS 預檢請求
+                body: JSON.stringify({ ...payload, password: cloudEditPassword })
+            });
+            return res.json();
+        }
+
+        async function loadCloudData() {
+            cloudSyncState = 'loading';
+            renderBudgetPanel();
+            renderChecklistPanel();
+            try {
+                // 若行程原始幣別非台幣，順便更新一次最新換算匯率
+                const tasks = [fetch(`${GAS_API_URL}?action=getAll&tripId=${encodeURIComponent(tripId)}`).then(r => r.json())];
+                if (currentCurrencyCode !== 'TWD') {
+                    tasks.push(fetch(`${GAS_API_URL}?action=rate&from=${encodeURIComponent(currentCurrencyCode)}`).then(r => r.json()).catch(() => null));
+                }
+                const [cloudRes, baseRateRes] = await Promise.all(tasks);
+
+                if (baseRateRes?.ok && baseRateRes.rate) {
+                    baselineToTwdRate = Number(baseRateRes.rate);
+                    baselineExpensesTWD.forEach(b => { b.exchangeRate = baselineToTwdRate; b.twdAmount = Math.round(b.originalAmount * baselineToTwdRate); });
+                }
+
+                if (cloudRes?.ok) {
+                    cloudExpenses = Array.isArray(cloudRes.expenses) ? cloudRes.expenses : [];
+                    cloudChecklist = Array.isArray(cloudRes.checklist) ? cloudRes.checklist : [];
+                    cloudSyncState = 'ready';
+                } else {
+                    cloudSyncState = 'error';
+                }
+            } catch {
+                cloudSyncState = 'error';
+            }
+            renderBudgetPanel();
+            renderChecklistPanel();
+        }
+
+        // 解鎖／鎖定編輯密碼
+        async function unlockCloudEdit() {
+            const pwd = prompt('請輸入你的雲端編輯密碼（Apps Script 中設定的 EDIT_PASSWORD）：');
+            if (!pwd) return;
+            try {
+                const res = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'verifyPassword', password: pwd })
+                }).then(r => r.json());
+
+                if (res?.ok) {
+                    cloudEditPassword = pwd;
+                    try { localStorage.setItem('flaneur_gas_pwd', pwd); } catch {}
+                    renderBudgetPanel();
+                    renderChecklistPanel();
+                } else {
+                    alert(res?.error || '密碼錯誤，請再確認一次！');
+                }
+            } catch {
+                alert('連線雲端驗證失敗，請稍後再試。');
+            }
+        }
+
+        function lockCloudEdit() {
+            cloudEditPassword = '';
+            editingExpenseId = null;
+            try { localStorage.removeItem('flaneur_gas_pwd'); } catch {}
+            renderBudgetPanel();
+            renderChecklistPanel();
+        }
+
+        function buildCloudAuthBarHTML() {
+            const syncTag = cloudSyncState === 'loading' ? '⏳ 雲端同步中...' : (cloudSyncState === 'error' ? '⚠️ 雲端連線失敗' : '☁️ Google 試算表已連線');
+            return `
+                <div class="cloud-auth-bar">
+                    <div class="cloud-auth-status">
+                        <span>${cloudEditPassword ? '🔓 編輯已解鎖' : '🔒 唯讀瀏覽模式'}</span>
+                        <span style="color:var(--text-light);font-weight:500;">｜ ${syncTag}</span>
+                    </div>
+                    <div class="cloud-auth-actions">
+                        <button type="button" class="cloud-btn" onclick="loadCloudData()">↻ 重新同步</button>
+                        ${cloudEditPassword
+                            ? `<button type="button" class="cloud-btn" onclick="lockCloudEdit()">🔒 鎖定</button>`
+                            : `<button type="button" class="cloud-btn primary" onclick="unlockCloudEdit()">🔑 解鎖編輯</button>`}
+                    </div>
+                </div>`;
+        }
+
+        /* --- 10A. 💰 統一台幣（NT$）互動記帳面板 --- */
+        function renderBudgetPanel() {
+            const bContainer = $('pack-budget');
+            if (!bContainer) return;
+
+            const iconMap = { 交通: '🚄', 住宿: '🏨', 餐飲: '🍽️', 門票: '🎟️', 購物: '🛍️', 其他: '🧾' };
+            const combinedList = [
+                ...cloudExpenses.map(e => ({ ...e, isBaseline: false })),
+                ...(includeBaselineEstimates ? baselineExpensesTWD : [])
+            ];
+
+            const sum = { 交通: 0, 住宿: 0, 餐飲: 0, 門票: 0, 購物: 0, 其他: 0 };
+            combinedList.forEach(i => { sum[sum[i.category] !== undefined ? i.category : '其他'] += Number(i.twdAmount) || 0; });
+            const totalTWD = Object.values(sum).reduce((a, b) => a + b, 0);
+            const cloudOnlyTWD = cloudExpenses.reduce((a, b) => a + (Number(b.twdAmount) || 0), 0);
+
+            // 預算上限換算為台幣
+            const rawCap = Number(rawItineraryData.budgetTotal) || 0;
+            const capTWD = rawCap > 0
+                ? (currentCurrencyCode === 'TWD' ? rawCap : Math.round(rawCap * baselineToTwdRate))
+                : Math.max(30000, Math.ceil(totalTWD * 1.15 / 5000) * 5000);
+
+            const catRows = [
+                { key: '交通', name: '🚄 交通車資' },
+                { key: '住宿', name: '🏨 住宿費用' },
+                { key: '餐飲', name: '🍽️ 餐飲美食' },
+                { key: '門票', name: '🎟️ 門票體驗' },
+                { key: '購物', name: '🛍️ 購物伴手禮' },
+                { key: '其他', name: '🧾 其他雜支' }
+            ].filter(c => sum[c.key] > 0 || ['交通', '住宿', '餐飲', '門票'].includes(c.key));
+
+            const dayOptions = ['行前', ...normalizedDays.map(d => d.day)];
+            const defaultForeignCur = tripId.includes('malaysia') ? 'MYR' : (currentCurrencyCode !== 'TWD' ? currentCurrencyCode : 'JPY');
+            const editingItem = editingExpenseId ? cloudExpenses.find(e => e.id === editingExpenseId) : null;
+
+            const fDate = editingItem?.date || todayISO();
+            const fDay = editingItem?.day || (normalizedDays[0]?.day || 'Day 01');
+            const fCat = editingItem?.category || '餐飲';
+            const fTitle = editingItem?.title || '';
+            const fPay = editingItem?.payMethod || '刷卡外幣';
+            const fCur = editingItem?.currency || defaultForeignCur;
+            const fOrig = editingItem ? editingItem.originalAmount : '';
+            const fRate = editingItem ? editingItem.exchangeRate : (FALLBACK_TWD_RATES[fCur] || 1);
+            const fFee = editingItem ? editingItem.hasFee : (fPay === '刷卡外幣' && fCur !== 'TWD');
+            const fTwd = editingItem ? editingItem.twdAmount : '';
+            const fNote = editingItem?.note || '';
+
+            const filteredRows = currentExpenseFilter === 'ALL'
+                ? combinedList
+                : combinedList.filter(i => i.category === currentExpenseFilter);
+
+            bContainer.innerHTML = `
+                ${buildCloudAuthBarHTML()}
+
+                <!-- 台幣總預算統計卡 -->
+                <div class="budget-card">
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
+                        <div>
+                            <div style="font-size:0.78rem;color:var(--text-light);">旅途總計（統一換算台幣）</div>
+                            <div style="font-size:1.45rem;font-weight:700;color:#3B4D54;">${normalizedDays.length} 天 ・ ${totalTripSpotCount} 處打卡</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:0.78rem;color:var(--text-light);">${includeBaselineEstimates ? '實支＋預估總計 (TWD)' : '雲端實際花費 (TWD)'}</div>
+                            <div style="font-size:1.35rem;font-weight:700;color:#B84A39;">NT$${totalTWD.toLocaleString()}</div>
+                        </div>
+                    </div>
+                    <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:${Math.min(100, Math.round(totalTWD / Math.max(1, capTWD) * 100))}%;"></div></div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:0.8rem;color:var(--text-light);margin-bottom:14px;">
+                        <span>預算參考：NT$${capTWD.toLocaleString()} ｜ 雲端實支：NT$${cloudOnlyTWD.toLocaleString()}</span>
+                        <label style="display:inline-flex;align-items:center;gap:5px;cursor:pointer;color:var(--text-dark);font-weight:600;">
+                            <input type="checkbox" ${includeBaselineEstimates ? 'checked' : ''} onchange="includeBaselineEstimates=this.checked;renderBudgetPanel();"> 併入行程預估項目
+                        </label>
+                    </div>
+                    ${catRows.map(c => {
+                        const pct = totalTWD > 0 ? Math.round(sum[c.key] / totalTWD * 100) : 0;
+                        return `<div class="budget-cat-row"><div class="budget-cat-top"><span>${c.name}</span><span>NT$${sum[c.key].toLocaleString()} (${pct}%)</span></div><div class="budget-bar-wrap" style="height:6px;margin:4px 0;"><div class="budget-bar-fill" style="width:${pct}%;background:#C4A99E;"></div></div></div>`;
+                    }).join('')}
+                </div>
+
+                <!-- 互動新增／編輯記帳表單（解鎖後顯示） -->
+                ${cloudEditPassword ? `
+                    <div class="expense-form-panel" id="expense-form-panel">
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <strong style="font-size:0.94rem;color:var(--accent-brown-dark);">${editingItem ? '✏️ 編輯花費（可覆蓋實際帳單台幣金額）' : '➕ 新增一筆花費（自動依消費日換算台幣）'}</strong>
+                            ${editingItem ? `<button type="button" class="cloud-btn" onclick="cancelEditExpense()">取消編輯</button>` : ''}
+                        </div>
+                        <div class="exp-form-grid">
+                            <div class="exp-field">
+                                <label>消費日期（抓當日匯率）</label>
+                                <input type="date" id="exp-date" class="exp-input" value="${escHtml(fDate)}" onchange="fetchRateForForm()">
+                            </div>
+                            <div class="exp-field">
+                                <label>所屬天數</label>
+                                <select id="exp-day" class="exp-select">
+                                    ${dayOptions.map(d => `<option value="${escHtml(d)}" ${d === fDay ? 'selected' : ''}>${escHtml(d)}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="exp-field">
+                                <label>花費分類</label>
+                                <select id="exp-cat" class="exp-select">
+                                    ${['交通', '住宿', '餐飲', '門票', '購物', '其他'].map(c => `<option value="${c}" ${c === fCat ? 'selected' : ''}>${iconMap[c]} ${c}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="exp-field">
+                                <label>付款方式</label>
+                                <select id="exp-pay" class="exp-select" onchange="onPayMethodChange()">
+                                    ${['刷卡外幣', '刷卡台幣', '外幣現金', '台幣現金', '行動支付'].map(p => `<option value="${p}" ${p === fPay ? 'selected' : ''}>${p}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="exp-field full">
+                                <label>項目名稱</label>
+                                <input type="text" id="exp-title" class="exp-input" placeholder="例如：新源隆白咖啡、KLIA Ekspres、紀念品" value="${escHtml(fTitle)}">
+                            </div>
+                            <div class="exp-field">
+                                <label>刷卡／消費幣別</label>
+                                <select id="exp-cur" class="exp-select" onchange="onCurrencyChange()">
+                                    ${[
+                                        ['TWD', 'TWD 台幣 (NT$)'], ['MYR', 'MYR 馬幣 (RM)'], ['SGD', 'SGD 新幣 (S$)'],
+                                        ['JPY', 'JPY 日幣 (¥)'], ['USD', 'USD 美金 ($)'], ['EUR', 'EUR 歐元 (€)'],
+                                        ['KRW', 'KRW 韓元 (₩)'], ['HKD', 'HKD 港幣 (HK$)']
+                                    ].map(([code, label]) => `<option value="${code}" ${code === fCur ? 'selected' : ''}>${label}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="exp-field">
+                                <label>原幣金額</label>
+                                <input type="number" step="any" id="exp-orig" class="exp-input" placeholder="輸入原價" value="${fOrig}" oninput="recalcFormTWD()">
+                            </div>
+                            <div class="exp-field">
+                                <label>匯率（1 原幣 ≒ 台幣）</label>
+                                <div class="exp-rate-row">
+                                    <input type="number" step="0.0001" id="exp-rate" class="exp-input" value="${fRate}" oninput="recalcFormTWD()">
+                                    <button type="button" class="cloud-btn" id="btn-fetch-rate" onclick="fetchRateForForm(true)" style="white-space:nowrap;">🔄 查匯率</button>
+                                </div>
+                            </div>
+                            <div class="exp-field">
+                                <label>台幣結算金額 NT$（對帳後可直接修改）</label>
+                                <input type="number" id="exp-twd" class="exp-input" placeholder="自動換算，亦可手動改" value="${fTwd}" style="font-weight:700;color:#B84A39;">
+                            </div>
+                            <div class="exp-field full">
+                                <label class="exp-check-row">
+                                    <input type="checkbox" id="exp-fee" ${fFee ? 'checked' : ''} onchange="recalcFormTWD()">
+                                    <span>加計 <strong>1.5% 海外刷卡手續費</strong>（刷外幣時自動估算）</span>
+                                </label>
+                            </div>
+                            <div class="exp-field full">
+                                <label>備註（選填）</label>
+                                <input type="text" id="exp-note" class="exp-input" placeholder="例如：永豐卡、已核對帳單、2人平分" value="${escHtml(fNote)}">
+                            </div>
+                        </div>
+                        <div class="exp-form-footer">
+                            <span class="exp-rate-hint" id="exp-rate-hint">💡 選擇外幣與消費日期會自動抓取當日參考匯率</span>
+                            <button type="button" class="cloud-btn primary" id="btn-save-exp" onclick="submitExpenseForm()">${editingItem ? '💾 更新雲端紀錄' : '💾 儲存至 Google 試算表'}</button>
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- 花費細項明細列表 -->
+                <div class="expense-detail-panel">
+                    <h4 style="margin:0 0 12px;font-size:0.98rem;color:#3B4D54;">📋 台幣花費明細（共 ${filteredRows.length} 筆）</h4>
+                    <div class="expense-filter-bar">
+                        ${['ALL', '交通', '住宿', '餐飲', '門票', '購物', '其他'].map(cat => `
+                            <button type="button" class="expense-filter-btn ${currentExpenseFilter === cat ? 'active' : ''}" onclick="currentExpenseFilter='${cat}';renderBudgetPanel();">
+                                ${cat === 'ALL' ? `全部 (${combinedList.length})` : `${iconMap[cat]} ${cat}`}
+                            </button>`).join('')}
+                    </div>
+                    <div>
+                        ${filteredRows.length ? filteredRows.map(i => {
+                            const fxDetail = i.currency && i.currency !== 'TWD'
+                                ? `${i.currency} ${Number(i.originalAmount).toLocaleString()} × ${i.exchangeRate}${i.hasFee ? ' (+1.5%)' : ''}`
+                                : '';
+                            return `
+                                <div class="expense-item-row">
+                                    <div class="expense-item-left">
+                                        <div class="expense-item-tags">
+                                            <span class="expense-cat-tag ${i.category}">${iconMap[i.category] || '🧾'} ${escHtml(i.category)}</span>
+                                            ${i.day ? `<span class="expense-sub-pill">${escHtml(i.day)}</span>` : ''}
+                                            ${i.date ? `<span class="expense-sub-pill">${escHtml(i.date)}</span>` : ''}
+                                            <span class="expense-sub-pill ${i.isBaseline ? 'est' : ''}">${escHtml(i.payMethod)}</span>
+                                        </div>
+                                        <div class="expense-item-title">${escHtml(i.title)}</div>
+                                        ${(fxDetail || i.note) ? `<div class="expense-fx-note">${fxDetail}${fxDetail && i.note ? ' ｜ ' : ''}${escHtml(i.note)}</div>` : ''}
+                                    </div>
+                                    <div class="expense-item-right">
+                                        <div class="expense-item-amount">NT$${Number(i.twdAmount).toLocaleString()}</div>
+                                        ${(!i.isBaseline && cloudEditPassword) ? `
+                                            <div class="expense-row-ops">
+                                                <button type="button" class="icon-mini-btn" onclick="startEditExpense('${i.id}')" title="編輯／更新實際帳單金額">✏️ 編輯</button>
+                                                <button type="button" class="icon-mini-btn del" onclick="deleteCloudExpense('${i.id}')" title="刪除">🗑️</button>
+                                            </div>` : ''}
+                                    </div>
+                                </div>`;
+                        }).join('') : `<div style="text-align:center;padding:24px;color:var(--text-light);font-size:0.86rem;">目前尚無符合條件的花費紀錄</div>`}
+                    </div>
+                </div>`;
+
+            // 新開表單且為外幣時自動抓一次最新／當日匯率
+            if (cloudEditPassword && !editingItem && fCur !== 'TWD') {
+                fetchRateForForm(false);
+            }
+        }
+
+        function onPayMethodChange() {
+            const pay = $('exp-pay').value;
+            const curEl = $('exp-cur'), feeEl = $('exp-fee');
+            if (pay === '刷卡台幣' || pay === '台幣現金') {
+                curEl.value = 'TWD';
+                $('exp-rate').value = 1;
+                feeEl.checked = false;
+                recalcFormTWD();
+            } else if (pay === '刷卡外幣') {
+                if (curEl.value === 'TWD') curEl.value = tripId.includes('malaysia') ? 'MYR' : 'JPY';
+                feeEl.checked = true;
+                fetchRateForForm(false);
+            } else {
+                feeEl.checked = false;
+                recalcFormTWD();
+            }
+        }
+
+        function onCurrencyChange() {
+            const cur = $('exp-cur').value;
+            if (cur === 'TWD') {
+                $('exp-rate').value = 1;
+                $('exp-fee').checked = false;
+                $('exp-rate-hint').textContent = '台幣消費直接計入 NT$';
+                recalcFormTWD();
+            } else {
+                $('exp-fee').checked = $('exp-pay').value === '刷卡外幣';
+                fetchRateForForm(false);
+            }
+        }
+
+        function recalcFormTWD() {
+            const orig = parseFloat($('exp-orig')?.value);
+            const rate = parseFloat($('exp-rate')?.value) || 1;
+            const hasFee = Boolean($('exp-fee')?.checked);
+            if (!isNaN(orig)) {
+                $('exp-twd').value = Math.round(orig * rate * (hasFee ? 1.015 : 1));
+            }
+        }
+
+        async function fetchRateForForm(showFeedback = false) {
+            const cur = $('exp-cur')?.value;
+            const date = $('exp-date')?.value || todayISO();
+            const hint = $('exp-rate-hint');
+            if (!cur || cur === 'TWD') {
+                if ($('exp-rate')) $('exp-rate').value = 1;
+                recalcFormTWD();
+                return;
+            }
+            if (hint) hint.textContent = `⏳ 查詢 ${date} ${cur} ➔ TWD 匯率中...`;
+            try {
+                const res = await fetch(`${GAS_API_URL}?action=rate&from=${encodeURIComponent(cur)}&date=${encodeURIComponent(date)}`).then(r => r.json());
+                if (res?.ok && res.rate) {
+                    if ($('exp-rate')) $('exp-rate').value = res.rate;
+                    recalcFormTWD();
+                    if (hint) hint.textContent = res.isFallback
+                        ? `✅ 已套用最新參考匯率 1 ${cur} = ${res.rate} TWD（${date} 尚未公布歷史匯率）`
+                        : `✅ 已套用 ${res.dateUsed} 匯率：1 ${cur} = ${res.rate} TWD`;
+                    return;
+                }
+            } catch {}
+            const fb = FALLBACK_TWD_RATES[cur] || 1;
+            if ($('exp-rate')) $('exp-rate').value = fb;
+            recalcFormTWD();
+            if (hint && showFeedback) hint.textContent = `⚠️ 暫改用預設參考匯率 ${fb}，你也可以直接手動修改`;
+        }
+
+        function startEditExpense(id) {
+            editingExpenseId = id;
+            renderBudgetPanel();
+            $('expense-form-panel')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function cancelEditExpense() {
+            editingExpenseId = null;
+            renderBudgetPanel();
+        }
+
+        async function submitExpenseForm() {
+            const title = ($('exp-title').value || '').trim();
+            const twdAmount = Math.round(Number($('exp-twd').value) || 0);
+            const origAmount = Number($('exp-orig').value) || twdAmount;
+            if (!title) return alert('請輸入花費項目名稱！');
+            if (!twdAmount) return alert('請輸入金額！');
+
+            const btn = $('btn-save-exp');
+            btn.disabled = true; btn.textContent = '⏳ 同步中...';
+
+            const itemData = {
+                id: editingExpenseId || `exp_${Date.now()}`,
+                tripId,
+                date: $('exp-date').value || todayISO(),
+                day: $('exp-day').value || '',
+                category: $('exp-cat').value || '其他',
+                title,
+                payMethod: $('exp-pay').value || '刷卡外幣',
+                currency: $('exp-cur').value || 'TWD',
+                originalAmount: origAmount,
+                exchangeRate: Number($('exp-rate').value) || 1,
+                hasFee: Boolean($('exp-fee').checked),
+                twdAmount,
+                note: ($('exp-note').value || '').trim()
+            };
+
+            try {
+                const res = await callGasPost({ action: 'saveExpense', data: itemData });
+                if (res?.ok) {
+                    const idx = cloudExpenses.findIndex(e => e.id === itemData.id);
+                    if (idx >= 0) cloudExpenses[idx] = itemData;
+                    else cloudExpenses.unshift(itemData);
+                    editingExpenseId = null;
+                    renderBudgetPanel();
+                } else {
+                    alert(res?.error || '儲存失敗，請確認密碼是否正確');
+                    btn.disabled = false; btn.textContent = '💾 儲存至 Google 試算表';
+                }
+            } catch {
+                alert('雲端連線失敗，請稍後再試');
+                btn.disabled = false; btn.textContent = '💾 儲存至 Google 試算表';
+            }
+        }
+
+        async function deleteCloudExpense(id) {
+            if (!confirm('確定要從 Google 試算表刪除這筆花費紀錄嗎？')) return;
+            try {
+                const res = await callGasPost({ action: 'deleteExpense', id });
+                if (res?.ok) {
+                    cloudExpenses = cloudExpenses.filter(e => e.id !== id);
+                    if (editingExpenseId === id) editingExpenseId = null;
+                    renderBudgetPanel();
+                } else {
+                    alert(res?.error || '刪除失敗');
+                }
+            } catch { alert('雲端連線失敗'); }
+        }
+
+        /* --- 10B. ✅ 行前準備互動式 Check List 面板 --- */
+        function getSuggestedChecklistForTrip() {
+            const common = [
+                { group: '證件與入境', text: '護照正本（確認效期滿 6 個月以上）' },
+                { group: '證件與入境', text: '機票電子憑證、飯店訂房確認單離線存檔' },
+                { group: '交通與票券', text: '海外刷卡信用卡（開啟海外刷卡／確認免年費與回饋）' },
+                { group: '電子與網路', text: '行動電源（限隨身手提上機）與充電線' },
+                { group: '電子與網路', text: '海外 eSIM 或實體網卡設定完成' },
+                { group: '個人藥品雜項', text: '個人常備藥品（腸胃藥、止痛藥、OK繃）' }
+            ];
+            if (tripId.includes('malaysia')) {
+                return [
+                    { group: '證件與入境', text: '馬來西亞 MDAC 電子入境卡（出發前 3 天內線上免費填寫）' },
+                    { group: '證件與入境', text: '新加坡 SG Arrival Card（入境前 3 天內線上免費填寫）' },
+                    ...common,
+                    { group: '交通與票券', text: '下載 Grab App 並事先綁定信用卡' },
+                    { group: '交通與票券', text: '確認 ETS 電動列車車票與跨國包車聯絡資訊' },
+                    { group: '電子與網路', text: '英規三腳（Type G）萬國轉接頭' },
+                    { group: '衣物與鞋履', text: '折疊晴雨傘、防曬乳、太陽眼鏡（防熱帶午後雷陣雨）' },
+                    { group: '衣物與鞋履', text: '輕薄長袖外套（火車、商場與劇場冷氣強）' }
+                ];
+            }
+            if (tripId.includes('tohoku') || currentTripTimezone === 'Asia/Tokyo') {
+                return [
+                    { group: '證件與入境', text: 'Visit Japan Web 入境與海關 QR Code 截圖' },
+                    ...common,
+                    { group: '交通與票券', text: 'Suica / ICOCA 交通卡儲值（或綁定 Apple Pay）' },
+                    { group: '衣物與鞋履', text: '防風保暖外套、發熱衣、手套、毛帽、簡易冰爪' },
+                    { group: '個人藥品雜項', text: '暖暖包（手握式＋貼式，防低溫手機掉電）' }
+                ];
+            }
+            return common;
+        }
+
+        function renderChecklistPanel() {
+            const box = $('pack-checklist');
+            if (!box) return;
+
+            const total = cloudChecklist.length;
+            const done = cloudChecklist.filter(i => i.checked).length;
+            const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+            // 依群組分類顯示
+            const groups = {};
+            cloudChecklist.forEach(item => {
+                const g = item.group || '必備物品';
+                if (!groups[g]) groups[g] = [];
+                groups[g].push(item);
+            });
+
+            box.innerHTML = `
+                ${buildCloudAuthBarHTML()}
+
+                <div class="checklist-card">
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;">
+                        <strong style="font-size:1.02rem;color:var(--accent-sage-dark);">✅ 行前準備進度</strong>
+                        <span style="font-weight:700;color:var(--accent-sage-dark);">${done} / ${total} 項 (${pct}%)</span>
+                    </div>
+                    <div class="chk-progress-bar"><div class="chk-progress-fill" style="width:${pct}%;"></div></div>
+                    <div style="font-size:0.78rem;color:var(--text-light);">
+                        ${total === 0 ? '尚未建立本趟旅程的行前準備清單' : (pct === 100 ? '🎉 太棒了！行前物品已全數準備就緒，安心出發！' : '點擊項目即可打勾並即時同步至 Google 試算表')}
+                    </div>
+                </div>
+
+                <div class="checklist-card">
+                    ${cloudEditPassword ? `
+                        <div class="chk-add-row">
+                            <select id="chk-group" class="exp-select">
+                                <option value="證件與入境">🛂 證件與入境</option>
+                                <option value="交通與票券">🚄 交通與票券</option>
+                                <option value="衣物與鞋履">👕 衣物與鞋履</option>
+                                <option value="電子與網路">📱 電子與網路</option>
+                                <option value="個人藥品雜項">💊 藥品雜項</option>
+                            </select>
+                            <input type="text" id="chk-text" class="exp-input" placeholder="新增準備項目（如：轉接頭、泳衣...）" onkeydown="if(event.key==='Enter')addChecklistItem()">
+                            <button type="button" class="cloud-btn sage" onclick="addChecklistItem()">＋ 新增</button>
+                        </div>
+                    ` : ''}
+
+                    ${total === 0 ? `
+                        <div class="draft-empty-box" style="margin:8px 0;padding:28px 16px;">
+                            <div style="font-size:1.8rem;margin-bottom:6px;">🧳</div>
+                            <div style="margin-bottom:12px;">這趟旅程還沒有行前準備清單喔！</div>
+                            <button type="button" class="cloud-btn sage" onclick="importSuggestedChecklist()">✨ 一鍵匯入本趟建議清單</button>
+                        </div>
+                    ` : Object.entries(groups).map(([gName, items]) => {
+                        const gDone = items.filter(i => i.checked).length;
+                        return `
+                            <div class="chk-group-title">
+                                <span>${escHtml(gName)}</span>
+                                <span style="font-weight:500;color:var(--text-light);">${gDone}/${items.length}</span>
+                            </div>
+                            ${items.map(item => `
+                                <div class="chk-item-row">
+                                    <label class="chk-label ${item.checked ? 'done' : ''}">
+                                        <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleChecklistItem('${item.id}', this.checked)">
+                                        <span>${escHtml(item.text)}</span>
+                                    </label>
+                                    ${cloudEditPassword ? `<button type="button" class="icon-mini-btn del" onclick="deleteChecklistItem('${item.id}')" title="刪除">✕</button>` : ''}
+                                </div>`).join('')}`;
+                    }).join('')}
+                </div>`;
+        }
+
+        async function importSuggestedChecklist() {
+            if (!cloudEditPassword) {
+                await unlockCloudEdit();
+                if (!cloudEditPassword) return;
+            }
+            const nowTs = Date.now();
+            const items = getSuggestedChecklistForTrip().map((it, idx) => ({
+                id: `chk_${nowTs}_${idx}`,
+                tripId,
+                group: it.group,
+                text: it.text,
+                checked: false
+            }));
+            try {
+                const res = await callGasPost({ action: 'initChecklist', tripId, items });
+                if (res?.ok) {
+                    cloudChecklist = [...cloudChecklist, ...items];
+                    renderChecklistPanel();
+                } else {
+                    alert(res?.error || '匯入失敗');
+                }
+            } catch { alert('雲端連線失敗'); }
+        }
+
+        async function addChecklistItem() {
+            const text = ($('chk-text')?.value || '').trim();
+            if (!text) return;
+            const item = {
+                id: `chk_${Date.now()}`,
+                tripId,
+                group: $('chk-group').value || '必備物品',
+                text,
+                checked: false
+            };
+            cloudChecklist.push(item);
+            renderChecklistPanel();
+            try {
+                const res = await callGasPost({ action: 'saveChecklistItem', data: item });
+                if (!res?.ok) {
+                    cloudChecklist = cloudChecklist.filter(i => i.id !== item.id);
+                    alert(res?.error || '新增失敗');
+                    renderChecklistPanel();
+                }
+            } catch {
+                cloudChecklist = cloudChecklist.filter(i => i.id !== item.id);
+                alert('雲端同步失敗');
+                renderChecklistPanel();
+            }
+        }
+
+        async function toggleChecklistItem(id, checked) {
+            if (!cloudEditPassword) {
+                renderChecklistPanel(); // 復原勾選狀態
+                await unlockCloudEdit();
+                return;
+            }
+            const target = cloudChecklist.find(i => i.id === id);
+            if (!target) return;
+            target.checked = checked;
+            renderChecklistPanel();
+
+            try {
+                const res = await callGasPost({ action: 'toggleChecklist', id, checked });
+                if (!res?.ok) {
+                    target.checked = !checked;
+                    alert(res?.error || '更新狀態失敗');
+                    renderChecklistPanel();
+                }
+            } catch {
+                target.checked = !checked;
+                alert('雲端連線失敗');
+                renderChecklistPanel();
+            }
+        }
+
+        async function deleteChecklistItem(id) {
+            const backup = [...cloudChecklist];
+            cloudChecklist = cloudChecklist.filter(i => i.id !== id);
+            renderChecklistPanel();
+            try {
+                const res = await callGasPost({ action: 'deleteChecklistItem', id });
+                if (!res?.ok) {
+                    cloudChecklist = backup;
+                    alert(res?.error || '刪除失敗');
+                    renderChecklistPanel();
+                }
+            } catch {
+                cloudChecklist = backup;
+                alert('雲端連線失敗');
+                renderChecklistPanel();
+            }
         }
     </script>
 </body>
