@@ -162,6 +162,8 @@ collections:
     format: "json"
     fields:
       - {label: "旅程 ID（如 tohoku_2026）", name: "tripId", widget: "string"}
+      - {label: "地圖移動頭貼（Emoji 或圖片路徑）", name: "avatar", widget: "string", default: "🦊", required: false}
+      - {label: "旅程結束日期（YYYY-MM-DD）", name: "endDate", widget: "string", required: false, hint: "如 2026-01-17"}
       - {label: "旅程總標題", name: "tripTitle", widget: "string"}
       - {label: "整本設為編輯中草稿（隱藏於首頁歸檔）", name: "isDraft", widget: "boolean", default: false, required: false}
 
@@ -181,7 +183,6 @@ collections:
             summary: "{{fields.title}}"
             fields:
               - {label: "章節 ID", name: "id", widget: "string"}
-              - {label: "單一章節設為草稿（暫時隱藏）", name: "isDraft", widget: "boolean", default: false, required: false}
               - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float"}
               - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
               - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
@@ -241,5 +242,5 @@ collections:
                 widget: "list"
                 required: false
                 fields:
-                  - {label: "按鈕文字", name: "text", widget: "string"}
-                  - {label: "分潤網址", name: "url", widget: "string"}
+                  - {label: "按鈕文字", name: "text", widget: "string", required: false}
+                  - {label: "分潤網址", name: "url", widget: "string", required: false}
