@@ -391,6 +391,26 @@
         .chk-label input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent-sage-dark); cursor: pointer; flex-shrink: 0; }
         .chk-label.done span { text-decoration: line-through; color: #A0A0A0; }
 
+        /* 📝 隨手記事樣式 */
+        .note-textarea {
+            font-family: inherit; border: 1px solid #D8C8B8; border-radius: 10px;
+            padding: 10px 12px; font-size: 0.88rem; color: var(--text-dark); background: #fff;
+            width: 100%; min-height: 92px; box-sizing: border-box; resize: vertical; line-height: 1.6;
+        }
+        .note-card {
+            background: #FCFBF9; border: 1px solid #E5DDD5; border-left: 4px solid var(--accent-brown);
+            border-radius: 12px; padding: 12px 14px; margin-bottom: 10px;
+        }
+        .note-card.tag-避坑提醒 { border-left-color: #DD6B20; background: #FFFDF9; }
+        .note-card.tag-美食口感 { border-left-color: #B84A39; }
+        .note-card.tag-實用情報 { border-left-color: #3B82F6; }
+        .note-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+        .note-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 0.74rem; }
+        .note-tag-pill { background: #EFE7DA; color: #6E5A4F; font-weight: 700; padding: 2px 8px; border-radius: 8px; }
+        .note-spot-pill { background: #EDF6F9; color: #1D5B79; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+        .note-time { font-size: 0.72rem; color: var(--text-light); }
+        .note-content { font-size: 0.88rem; line-height: 1.68; color: var(--text-dark); white-space: pre-line; word-break: break-word; }
+
         /* 美食紀錄色塊 */
         .food-review-box { padding: 10px 14px; background: #F2F7FA; border-left: 3.5px solid #3B82F6; border-radius: 8px; margin-bottom: 10px; font-size: 0.86rem; line-height: 1.65; color: #2C3E50; }
         .food-policy-box { padding: 10px 14px; background: #F3FAF4; border-left: 3.5px solid #38A169; border-radius: 8px; font-size: 0.85rem; line-height: 1.65; color: #274E37; }
@@ -544,18 +564,21 @@
 
             <!-- 視角 3：🎫 票券蒐集（票券住宿、交通時刻、台幣記帳、美食紀錄、行前清單） -->
             <div id="view-pack" class="view-section">
+                <div id="view-pack" class="view-section">
                 <div class="pack-sub-tabs">
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-checklist', this)">✅ 行前清單</button>
                     <button type="button" class="pack-sub-btn active" onclick="switchPackSubTab('pack-vouchers', this)">🎫 票券住宿</button>
                     <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-transit', this)">🚄 交通時刻</button>
                     <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 台幣記帳</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 美食紀錄</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-checklist', this)">✅ 行前清單</button>
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 美食紀錄</button>                    
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-notes', this)">📝 隨手記事</button>
                 </div>
+                <div id="pack-checklist" class="pack-panel"></div>
                 <div id="pack-vouchers" class="pack-panel active"></div>
                 <div id="pack-transit" class="pack-panel"></div>
                 <div id="pack-budget" class="pack-panel"></div>
-                <div id="pack-food" class="pack-panel"></div>
-                <div id="pack-checklist" class="pack-panel"></div>
+                <div id="pack-food" class="pack-panel"></div>                
+                <div id="pack-notes" class="pack-panel"></div>
             </div>
 
             <!-- 視角 4：📖 圖文遊記 -->
@@ -609,6 +632,10 @@
         // 雲端記帳與行前清單狀態
         let cloudExpenses = [];
         let cloudChecklist = [];
+        let cloudNotes = [];
+        let currentNoteDayFilter = 'ALL';
+        let currentNoteTagFilter = 'ALL';
+        let editingNoteId = null;
         let baselineExpensesTWD = [];
         let totalTripSpotCount = 0;
         let includeBaselineEstimates = true;
@@ -1692,6 +1719,7 @@
 
             renderBudgetPanel();
             renderChecklistPanel();
+            renderNotesPanel();
         }
 
         /* =====================================================================
@@ -1710,9 +1738,10 @@
             cloudSyncState = 'loading';
             renderBudgetPanel();
             renderChecklistPanel();
+            renderNotesPanel();
             try {
-                // 若行程原始幣別非台幣，順便更新一次最新換算匯率
-                const tasks = [fetch(`${GAS_API_URL}?action=getAll&tripId=${encodeURIComponent(tripId)}`).then(r => r.json())];
+                const pwdQuery = cloudEditPassword ? `&password=${encodeURIComponent(cloudEditPassword)}` : '';
+                const tasks = [fetch(`${GAS_API_URL}?action=getAll&tripId=${encodeURIComponent(tripId)}${pwdQuery}`).then(r => r.json())];
                 if (currentCurrencyCode !== 'TWD') {
                     tasks.push(fetch(`${GAS_API_URL}?action=rate&from=${encodeURIComponent(currentCurrencyCode)}`).then(r => r.json()).catch(() => null));
                 }
@@ -1726,6 +1755,7 @@
                 if (cloudRes?.ok) {
                     cloudExpenses = Array.isArray(cloudRes.expenses) ? cloudRes.expenses : [];
                     cloudChecklist = Array.isArray(cloudRes.checklist) ? cloudRes.checklist : [];
+                    cloudNotes = Array.isArray(cloudRes.notes) ? cloudRes.notes : [];
                     cloudSyncState = 'ready';
                 } else {
                     cloudSyncState = 'error';
@@ -1735,9 +1765,9 @@
             }
             renderBudgetPanel();
             renderChecklistPanel();
+            renderNotesPanel();
         }
 
-        // 解鎖／鎖定編輯密碼
         async function unlockCloudEdit() {
             const pwd = prompt('請輸入你的雲端編輯密碼（Apps Script 中設定的 EDIT_PASSWORD）：');
             if (!pwd) return;
@@ -1751,8 +1781,7 @@
                 if (res?.ok) {
                     cloudEditPassword = pwd;
                     try { localStorage.setItem('flaneur_gas_pwd', pwd); } catch {}
-                    renderBudgetPanel();
-                    renderChecklistPanel();
+                    await loadCloudData(); // 解鎖後同步拉取私密隨手記事
                 } else {
                     alert(res?.error || '密碼錯誤，請再確認一次！');
                 }
@@ -1764,9 +1793,12 @@
         function lockCloudEdit() {
             cloudEditPassword = '';
             editingExpenseId = null;
+            editingNoteId = null;
+            cloudNotes = [];
             try { localStorage.removeItem('flaneur_gas_pwd'); } catch {}
             renderBudgetPanel();
             renderChecklistPanel();
+            renderNotesPanel();
         }
 
         function buildCloudAuthBarHTML() {
@@ -2317,6 +2349,242 @@
                 cloudChecklist = backup;
                 alert('雲端連線失敗');
                 renderChecklistPanel();
+            }
+        }
+
+        /* --- 10C. 📝 隨手記事面板（私密解鎖、自動帶入行程站點、一鍵複製素材） --- */
+        const NOTE_TAGS = [
+            { key: '心情碎片', icon: '✍️' },
+            { key: '美食口感', icon: '🍽️' },
+            { key: '避坑提醒', icon: '⚠️' },
+            { key: '實用情報', icon: '💡' },
+            { key: '戰利品', icon: '🛍️' }
+        ];
+
+        function getSpotOptionsForDay(dayKey) {
+            const targetDays = (!dayKey || dayKey === '行前' || dayKey === 'ALL')
+                ? normalizedDays
+                : normalizedDays.filter(d => d.day === dayKey);
+            const names = [];
+            targetDays.forEach(d => (d.chapters || []).forEach(ch => {
+                const n = ch.spotName?.trim() || (ch.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '').trim();
+                if (n && !names.includes(n)) names.push(n);
+            }));
+            return names;
+        }
+
+        function updateNoteSpotSuggestions() {
+            const dayVal = $('note-day')?.value || 'Day 01';
+            const dl = $('note-spot-list');
+            if (!dl) return;
+            dl.innerHTML = getSpotOptionsForDay(dayVal).map(s => `<option value="${escHtml(s)}"></option>`).join('');
+        }
+
+        function renderNotesPanel() {
+            const box = $('pack-notes');
+            if (!box) return;
+
+            // 未解鎖時隱藏私人記事內容
+            if (!cloudEditPassword) {
+                box.innerHTML = `
+                    ${buildCloudAuthBarHTML()}
+                    <div class="draft-empty-box" style="padding:40px 20px;">
+                        <div style="font-size:2rem;margin-bottom:8px;">🔒</div>
+                        <div style="font-weight:700;color:var(--accent-brown-dark);font-size:1.02rem;margin-bottom:6px;">
+                            私人隨手記事（未公開）
+                        </div>
+                        <p style="margin:0 0 16px;font-size:0.86rem;">
+                            這裡用來隨手記下旅途中的靈感碎片、美食口感與避坑細節，回國後再整理進正式遊記。<br>
+                            為保護草稿隱私，請先輸入編輯密碼解鎖檢視與記錄。
+                        </p>
+                        <button type="button" class="cloud-btn primary" onclick="unlockCloudEdit()">🔑 解鎖檢視與記錄</button>
+                    </div>`;
+                return;
+            }
+
+            const dayOptions = ['行前', ...normalizedDays.map(d => d.day)];
+            const editingItem = editingNoteId ? cloudNotes.find(n => n.id === editingNoteId) : null;
+            const fDay = editingItem?.day || (normalizedDays[0]?.day || 'Day 01');
+            const fSpot = editingItem?.spot || '';
+            const fTag = editingItem?.tag || '心情碎片';
+            const fContent = editingItem?.content || '';
+
+            const filteredNotes = cloudNotes.filter(n =>
+                (currentNoteDayFilter === 'ALL' || n.day === currentNoteDayFilter) &&
+                (currentNoteTagFilter === 'ALL' || n.tag === currentNoteTagFilter)
+            );
+
+            box.innerHTML = `
+                ${buildCloudAuthBarHTML()}
+
+                <!-- 隨手記一筆表單 -->
+                <div class="expense-form-panel" id="note-form-panel">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <strong style="font-size:0.94rem;color:var(--accent-brown-dark);">${editingItem ? '✏️ 編輯隨手記事' : '📝 隨手記一筆（同步至 Google 試算表）'}</strong>
+                        ${editingItem ? `<button type="button" class="cloud-btn" onclick="cancelEditNote()">取消編輯</button>` : ''}
+                    </div>
+                    <div class="exp-form-grid">
+                        <div class="exp-field">
+                            <label>天數</label>
+                            <select id="note-day" class="exp-select" onchange="updateNoteSpotSuggestions()">
+                                ${dayOptions.map(d => `<option value="${escHtml(d)}" ${d === fDay ? 'selected' : ''}>${escHtml(d)}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="exp-field">
+                            <label>分類標籤</label>
+                            <select id="note-tag" class="exp-select">
+                                ${NOTE_TAGS.map(t => `<option value="${t.key}" ${t.key === fTag ? 'selected' : ''}>${t.icon} ${t.key}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="exp-field full">
+                            <label>對應站點（可點選當日行程，或自由輸入新地點）</label>
+                            <input type="text" id="note-spot" class="exp-input" list="note-spot-list" placeholder="選擇站點或自行輸入地點（選填）" value="${escHtml(fSpot)}">
+                            <datalist id="note-spot-list"></datalist>
+                        </div>
+                        <div class="exp-field full">
+                            <label>記事內容</label>
+                            <textarea id="note-content" class="note-textarea" placeholder="隨手記下當下的感受、排隊時間、好吃的菜色、避坑提醒或想放進遊記的句子...">${escHtml(fContent)}</textarea>
+                        </div>
+                    </div>
+                    <div class="exp-form-footer">
+                        <span class="exp-rate-hint">💡 回國後可點下方「一鍵複製素材」直接整理成正式遊記</span>
+                        <button type="button" class="cloud-btn primary" id="btn-save-note" onclick="submitNoteForm()">${editingItem ? '💾 更新這則記事' : '💾 儲存隨手記事'}</button>
+                    </div>
+                </div>
+
+                <!-- 記事清單與一鍵複製素材 -->
+                <div class="expense-detail-panel">
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+                        <h4 style="margin:0;font-size:0.98rem;color:#3B4D54;">📒 已收錄隨手記事（${filteredNotes.length} 則）</h4>
+                        <button type="button" class="cloud-btn sage" id="btn-copy-notes" onclick="copyNotesMaterial()">📋 一鍵複製篩選素材</button>
+                    </div>
+
+                    <div class="clip-search-row" style="margin-bottom:10px;">
+                        <select class="exp-select" onchange="currentNoteDayFilter=this.value;renderNotesPanel();">
+                            <option value="ALL" ${currentNoteDayFilter === 'ALL' ? 'selected' : ''}>全部天數</option>
+                            ${dayOptions.map(d => `<option value="${escHtml(d)}" ${currentNoteDayFilter === d ? 'selected' : ''}>${escHtml(d)}</option>`).join('')}
+                        </select>
+                        <select class="exp-select" onchange="currentNoteTagFilter=this.value;renderNotesPanel();">
+                            <option value="ALL" ${currentNoteTagFilter === 'ALL' ? 'selected' : ''}>全部分類標籤</option>
+                            ${NOTE_TAGS.map(t => `<option value="${t.key}" ${currentNoteTagFilter === t.key ? 'selected' : ''}>${t.icon} ${t.key}</option>`).join('')}
+                        </select>
+                    </div>
+
+                    <div>
+                        ${filteredNotes.length ? filteredNotes.map(n => {
+                            const tagIcon = NOTE_TAGS.find(t => t.key === n.tag)?.icon || '📝';
+                            return `
+                                <div class="note-card tag-${escHtml(n.tag)}">
+                                    <div class="note-card-top">
+                                        <div class="note-meta">
+                                            <span class="note-tag-pill">${tagIcon} ${escHtml(n.tag)}</span>
+                                            <span class="expense-sub-pill">${escHtml(n.day)}</span>
+                                            ${n.spot ? `<span class="note-spot-pill">📍 ${escHtml(n.spot)}</span>` : ''}
+                                            <span class="note-time">${escHtml(n.createdAt)}</span>
+                                        </div>
+                                        <div class="expense-row-ops">
+                                            <button type="button" class="icon-mini-btn" onclick="startEditNote('${escHtml(n.id)}')">✏️ 編輯</button>
+                                            <button type="button" class="icon-mini-btn del" onclick="deleteCloudNote('${escHtml(n.id)}')">🗑️</button>
+                                        </div>
+                                    </div>
+                                    <div class="note-content">${escHtml(n.content)}</div>
+                                </div>`;
+                        }).join('') : `<div style="text-align:center;padding:24px;color:var(--text-light);font-size:0.86rem;">目前還沒有隨手記事，在上方隨手記下旅途的第一個靈感吧！</div>`}
+                    </div>
+                </div>`;
+
+            updateNoteSpotSuggestions();
+        }
+
+        function startEditNote(id) {
+            editingNoteId = id;
+            renderNotesPanel();
+            $('note-form-panel')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function cancelEditNote() {
+            editingNoteId = null;
+            renderNotesPanel();
+        }
+
+        async function submitNoteForm() {
+            const content = ($('note-content')?.value || '').trim();
+            if (!content) return alert('請輸入記事內容！');
+
+            const btn = $('btn-save-note');
+            btn.disabled = true; btn.textContent = '⏳ 同步中...';
+
+            const oldItem = editingNoteId ? cloudNotes.find(n => n.id === editingNoteId) : null;
+            const now = new Date();
+            const localNow = `${todayISO()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+            const noteData = {
+                id: editingNoteId || `note_${Date.now()}`,
+                tripId,
+                day: $('note-day').value || 'Day 01',
+                spot: ($('note-spot').value || '').trim(),
+                tag: $('note-tag').value || '心情碎片',
+                content,
+                createdAt: oldItem?.createdAt || localNow
+            };
+
+            try {
+                const res = await callGasPost({ action: 'saveNote', data: noteData });
+                if (res?.ok) {
+                    if (res.createdAt) noteData.createdAt = res.createdAt;
+                    const idx = cloudNotes.findIndex(n => n.id === noteData.id);
+                    if (idx >= 0) cloudNotes[idx] = noteData;
+                    else cloudNotes.unshift(noteData);
+                    editingNoteId = null;
+                    renderNotesPanel();
+                } else {
+                    alert(res?.error || '儲存失敗');
+                    btn.disabled = false; btn.textContent = '💾 儲存隨手記事';
+                }
+            } catch {
+                alert('雲端連線失敗，請稍後再試');
+                btn.disabled = false; btn.textContent = '💾 儲存隨手記事';
+            }
+        }
+
+        async function deleteCloudNote(id) {
+            if (!confirm('確定要刪除這則隨手記事嗎？')) return;
+            try {
+                const res = await callGasPost({ action: 'deleteNote', id });
+                if (res?.ok) {
+                    cloudNotes = cloudNotes.filter(n => n.id !== id);
+                    if (editingNoteId === id) editingNoteId = null;
+                    renderNotesPanel();
+                } else {
+                    alert(res?.error || '刪除失敗');
+                }
+            } catch { alert('雲端連線失敗'); }
+        }
+
+        async function copyNotesMaterial() {
+            const list = cloudNotes.filter(n =>
+                (currentNoteDayFilter === 'ALL' || n.day === currentNoteDayFilter) &&
+                (currentNoteTagFilter === 'ALL' || n.tag === currentNoteTagFilter)
+            ).slice().reverse(); // 複製時改由舊到新（順時序），方便直接整理成遊記
+
+            if (!list.length) return alert('目前沒有可複製的記事素材');
+
+            const text = list.map(n =>
+                `【${n.day}${n.spot ? '｜' + n.spot : ''}】(${n.tag}・${n.createdAt})\n${n.content}`
+            ).join('\n\n---\n\n');
+
+            try {
+                await navigator.clipboard.writeText(text);
+            } catch {
+                const ta = document.createElement('textarea');
+                ta.value = text; document.body.appendChild(ta); ta.select();
+                document.execCommand('copy'); document.body.removeChild(ta);
+            }
+
+            const btn = $('btn-copy-notes');
+            if (btn) {
+                btn.textContent = '✔ 已複製素材！';
+                setTimeout(() => { btn.textContent = '📋 一鍵複製篩選素材'; }, 1800);
             }
         }
     </script>
