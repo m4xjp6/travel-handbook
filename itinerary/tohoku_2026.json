@@ -13,44 +13,33 @@
       "checkIn": "Day 01",
       "checkOut": "Day 03",
       "nights": 2,
-      "bookingId": "METRO-YM-202601",
-      "roomType": "本館禁菸雙人房 (Standard Double)",
+      "bookingId": "METRO-YM-928491",
+      "roomType": "禁菸雙人房 (Standard Double)",
       "mealPlan": "JR 山形站東口直結免淋雪・行李可寄放櫃檯",
       "address": "山形縣山形市香澄町 1-1-1（JR 山形站東口直結・步行 0 分鐘）",
-      "estNightCost": 6500
+      "estNightCost": 22000
     },
     {
       "hotelName": "天然温泉 杜都の湯 御宿野乃 仙台 (Onyado Nono Sendai)",
       "checkIn": "Day 03",
-      "checkOut": "Day 05",
-      "nights": 2,
-      "bookingId": "NONO-SD-882910",
-      "roomType": "禁菸雙人房（全館榻榻米鋪設）",
-      "mealPlan": "含海鮮丼＆牛舌自助早餐 ＋ 免費宵夜醬油拉麵 ＆ 頂樓天然溫泉",
-      "address": "宮城縣仙台市青葉區本町 2-2-5（廣瀨通站東2出口步行 1 分鐘）",
-      "estNightCost": 7500
-    },
-    {
-      "hotelName": "天然温泉 杜都の湯 御宿野乃 仙台 (Onyado Nono Sendai)",
-      "checkIn": "Day 05",
       "checkOut": "Day 07",
-      "nights": 2,
-      "bookingId": "NONO-SD-993042",
-      "roomType": "禁菸雙人房（續住訂單・自動合併）",
-      "mealPlan": "含海鮮丼＆牛舌自助早餐 ＋ 免費宵夜醬油拉麵 ＆ 頂樓天然溫泉",
+      "nights": 4,
+      "bookingId": "ONYAD-SD-836575",
+      "roomType": "禁菸雙人房 (Standard Double)",
+      "mealPlan": "全館榻榻米鋪設，含海鮮丼＆牛舌自助早餐 ＋ 免費宵夜醬油拉麵 ＆ 頂樓天然溫泉",
       "address": "宮城縣仙台市青葉區本町 2-2-5（廣瀨通站東2出口步行 1 分鐘）",
-      "estNightCost": 7500
+      "estNightCost": 18000
     },
     {
       "hotelName": "APA 飯店〈京成上野站前〉(APA Hotel Keisei Ueno Ekimae)",
       "checkIn": "Day 07",
       "checkOut": "Day 09",
       "nights": 2,
-      "bookingId": "APA-UENO-771205",
+      "bookingId": "APAHT-TK-056435",
       "roomType": "標準雙人房 (Standard Room)",
       "mealPlan": "京成上野站池之端口出站即達・直通成田機場 Skyliner",
       "address": "東京都台東區上野 2-14-26（京成上野站池之端口步行 1 分鐘）",
-      "estNightCost": 6000
+      "estNightCost": 18000
     }
   ],
   "expenseItems": [
@@ -62,7 +51,7 @@
     { "category": "門票", "day": "Day 02", "title": "門票｜藏王纜車（山麓線＋山頂線來回票）", "amount": 3800 },
     { "category": "餐飲", "day": "Day 02", "title": "餐飲｜音茶屋 Otochaya（湯咖哩＆巧克力巴斯克）", "amount": 1850 },
     { "category": "餐飲", "day": "Day 02", "title": "餐飲｜山形牛ステーキ＆焼肉 かかし 駅前店（A4/A5 山形牛拼盤）", "amount": 4500 },
-    { "category": "住宿", "day": "Day 01–03", "title": "住宿｜山形大都會飯店（連續 2 晚・每人預估）", "amount": 13000 },
+    { "category": "住宿", "day": "Day 01–03", "title": "住宿｜山形大都會飯店（連續 2 晚・每人預估）", "amount": 22000 },
     { "category": "交通", "day": "Day 03", "title": "車資｜JR 山形站 → JR 大石田站（JR 奧羽本線來回）", "amount": 1520 },
     { "category": "交通", "day": "Day 03", "title": "車資｜JR 大石田站 → 銀山溫泉（尾花澤市營銀山線巴士來回）", "amount": 2000 },
     { "category": "餐飲", "day": "Day 03", "title": "餐飲｜伊豆の華（炸茄子蘿蔔泥蕎麥麵）", "amount": 1650 },
@@ -78,7 +67,7 @@
     { "category": "門票", "day": "Day 06", "title": "門票｜仙台大觀音胎內參拜守護札＆油掛大黑天祈福", "amount": 800 },
     { "category": "餐飲", "day": "Day 06", "title": "餐飲｜らーめん山頭火 仙台南中山店（辣味噌拉麵）", "amount": 1150 },
     { "category": "餐飲", "day": "Day 06", "title": "餐飲｜大崎八幡宮 松焚祭屋台美食", "amount": 1200 },
-    { "category": "住宿", "day": "Day 03–07", "title": "住宿｜天然温泉 杜都の湯 御宿野乃 仙台（連續 4 晚・每人預估）", "amount": 30000 },
+    { "category": "住宿", "day": "Day 03–07", "title": "住宿｜天然温泉 杜都の湯 御宿野乃 仙台（連續 4 晚・每人預估）", "amount": 36000 },
     { "category": "交通", "day": "Day 07", "title": "車資｜JR 仙台站 → JR 上野站（東北新幹線 Hayabusa 108號）", "amount": 11210 },
     { "category": "餐飲", "day": "Day 07", "title": "餐飲｜民福北京烤鴨店 上野店", "amount": 2500 },
     { "category": "門票", "day": "Day 07", "title": "門票｜東京都恩賜上野動物園入園券", "amount": 600 },
@@ -88,7 +77,7 @@
     { "category": "餐飲", "day": "Day 08", "title": "餐飲｜谷中銀座 肉のすずき（元氣炸肉餅）＆ 貓尾巴甜甜圈", "amount": 650 },
     { "category": "餐飲", "day": "Day 08", "title": "餐飲｜五代目 野田岩 麻布飯倉本店（江戶傳承鰻魚飯）", "amount": 5500 },
     { "category": "門票", "day": "Day 08", "title": "門票｜東京鐵塔 Top Deck Tour（250m 頂層展望台預約券）", "amount": 3000 },
-    { "category": "住宿", "day": "Day 07–09", "title": "住宿｜APA 飯店〈京成上野站前〉（連續 2 晚・每人預估）", "amount": 12000 },
+    { "category": "住宿", "day": "Day 07–09", "title": "住宿｜APA 飯店〈京成上野站前〉（連續 2 晚・每人預估）", "amount": 18000 },
     { "category": "交通", "day": "Day 09", "title": "車資｜京成上野站 → 成田國際機場第2航廈 (京成 Skyliner)", "amount": 2580 },
     { "category": "餐飲", "day": "Day 09", "title": "餐飲｜謝朋殿 成田空港店（中華料理套餐）", "amount": 2200 },
     { "category": "交通", "day": "Day 09", "title": "車資｜東京成田機場 (NRT) → 高雄小港機場 (KHH) 國際航班", "amount": 18500 }
