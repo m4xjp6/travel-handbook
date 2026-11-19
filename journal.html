@@ -337,10 +337,17 @@
             background: #fff; border-radius: 16px; padding: 18px 20px; border: 1px solid var(--border-soft);
             margin-bottom: 16px; box-shadow: 0 3px 12px rgba(196, 169, 158, 0.1);
         }
-        .budget-bar-wrap { height: 8px; background: #EFEAE4; border-radius: 6px; overflow: hidden; margin: 8px 0 14px; }
-        .budget-bar-fill { height: 100%; background: #3B4D54; border-radius: 6px; transition: width 0.3s; }
-        .budget-cat-row { margin-bottom: 10px; }
-        .budget-cat-top { display: flex; justify-content: space-between; font-size: 0.84rem; font-weight: 600; margin-bottom: 4px; gap: 8px; }
+        .budget-stacked-bar { display: flex; height: 14px; background: #EFEAE4; border-radius: 8px; overflow: hidden; margin: 12px 0; gap: 2px; }
+        .budget-seg { height: 100%; transition: width 0.35s ease, opacity 0.2s; cursor: pointer; }
+        .budget-seg:hover { opacity: 0.82; }
+        .budget-legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 8px 12px; margin-top: 12px; }
+        .budget-legend-item { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 10px; background: #FAF7F2; border: 1px solid transparent; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; }
+        .budget-legend-item:hover { border-color: var(--border-soft); background: #F5EFE6; }
+        .budget-legend-item.active { border-color: var(--accent-brown-dark); background: #F3EAE2; }
+        .budget-legend-left { display: flex; align-items: center; gap: 7px; font-weight: 600; color: var(--text-dark); white-space: nowrap; }
+        .budget-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .budget-legend-val { font-weight: 700; color: #3B4D54; white-space: nowrap; }
+        .budget-legend-pct { font-weight: 500; color: var(--text-light); font-size: 0.76rem; margin-left: 3px; }
 
         .expense-form-panel { background: #FCF9F5; border: 1.5px solid var(--accent-brown); }
         .exp-form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
@@ -1834,19 +1841,14 @@
             const totalTWD = Object.values(sum).reduce((a, b) => a + b, 0);
             const cloudOnlyTWD = cloudExpenses.reduce((a, b) => a + (Number(b.twdAmount) || 0), 0);
 
-            // 預算上限換算為台幣
-            const rawCap = Number(rawItineraryData.budgetTotal) || 0;
-            const capTWD = rawCap > 0
-                ? (currentCurrencyCode === 'TWD' ? rawCap : Math.round(rawCap * baselineToTwdRate))
-                : Math.max(30000, Math.ceil(totalTWD * 1.15 / 5000) * 5000);
-
+            const avgPerDayTWD = Math.round(totalTWD / Math.max(1, normalizedDays.length));
             const catRows = [
-                { key: '交通', name: '🚄 交通車資' },
-                { key: '住宿', name: '🏨 住宿費用' },
-                { key: '餐飲', name: '🍽️ 餐飲美食' },
-                { key: '門票', name: '🎟️ 門票體驗' },
-                { key: '購物', name: '🛍️ 購物伴手禮' },
-                { key: '其他', name: '🧾 其他雜支' }
+                { key: '交通', name: '🚄 交通車資', color: '#6B8EAD' },
+                { key: '住宿', name: '🏨 住宿費用', color: '#8B7268' },
+                { key: '餐飲', name: '🍽️ 餐飲美食', color: '#C97B63' },
+                { key: '門票', name: '🎟️ 門票體驗', color: '#6B9476' },
+                { key: '購物', name: '🛍️ 購物伴手禮', color: '#9A7AA0' },
+                { key: '其他', name: '🧾 其他雜支', color: '#B5ACA3' }
             ].filter(c => sum[c.key] > 0 || ['交通', '住宿', '餐飲', '門票'].includes(c.key));
 
             const dayOptions = ['行前', ...normalizedDays.map(d => d.day)];
@@ -1872,7 +1874,7 @@
             bContainer.innerHTML = `
                 ${buildCloudAuthBarHTML()}
 
-                <!-- 台幣總預算統計卡 -->
+                <!-- 台幣總花費與整合比例條 -->
                 <div class="budget-card">
                     <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;">
                         <div>
@@ -1884,17 +1886,30 @@
                             <div style="font-size:1.35rem;font-weight:700;color:#B84A39;">NT$${totalTWD.toLocaleString()}</div>
                         </div>
                     </div>
-                    <div class="budget-bar-wrap"><div class="budget-bar-fill" style="width:${Math.min(100, Math.round(totalTWD / Math.max(1, capTWD) * 100))}%;"></div></div>
-                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:0.8rem;color:var(--text-light);margin-bottom:14px;">
-                        <span>預算參考：NT$${capTWD.toLocaleString()} ｜ 雲端實支：NT$${cloudOnlyTWD.toLocaleString()}</span>
+                    <div class="budget-stacked-bar" title="點擊色塊可篩選下方花費明細">
+                        ${totalTWD > 0 ? catRows.filter(c => sum[c.key] > 0).map(c => {
+                            const w = (sum[c.key] / totalTWD * 100).toFixed(2);
+                            const pct = Math.round(sum[c.key] / totalTWD * 100);
+                            return `<div class="budget-seg" style="width:${w}%;background:${c.color};" title="${c.name}：NT$${sum[c.key].toLocaleString()} (${pct}%)" onclick="currentExpenseFilter=(currentExpenseFilter==='${c.key}'?'ALL':'${c.key}');renderBudgetPanel();"></div>`;
+                        }).join('') : ''}
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:0.8rem;color:var(--text-light);">
+                        <span>雲端實支：NT$${cloudOnlyTWD.toLocaleString()} ｜ 日均約 NT$${avgPerDayTWD.toLocaleString()}</span>
                         <label style="display:inline-flex;align-items:center;gap:5px;cursor:pointer;color:var(--text-dark);font-weight:600;">
                             <input type="checkbox" ${includeBaselineEstimates ? 'checked' : ''} onchange="includeBaselineEstimates=this.checked;renderBudgetPanel();"> 併入行程預估項目
                         </label>
                     </div>
-                    ${catRows.map(c => {
-                        const pct = totalTWD > 0 ? Math.round(sum[c.key] / totalTWD * 100) : 0;
-                        return `<div class="budget-cat-row"><div class="budget-cat-top"><span>${c.name}</span><span>NT$${sum[c.key].toLocaleString()} (${pct}%)</span></div><div class="budget-bar-wrap" style="height:6px;margin:4px 0;"><div class="budget-bar-fill" style="width:${pct}%;background:#C4A99E;"></div></div></div>`;
-                    }).join('')}
+                    <div class="budget-legend-grid">
+                        ${catRows.map(c => {
+                            const pct = totalTWD > 0 ? Math.round(sum[c.key] / totalTWD * 100) : 0;
+                            const isSel = currentExpenseFilter === c.key;
+                            return `
+                                <div class="budget-legend-item ${isSel ? 'active' : ''}" onclick="currentExpenseFilter=(currentExpenseFilter==='${c.key}'?'ALL':'${c.key}');renderBudgetPanel();">
+                                    <span class="budget-legend-left"><span class="budget-dot" style="background:${c.color};"></span>${c.name}</span>
+                                    <span class="budget-legend-val">NT$${sum[c.key].toLocaleString()}<span class="budget-legend-pct">(${pct}%)</span></span>
+                                </div>`;
+                        }).join('')}
+                    </div>
                 </div>
 
                 <!-- 互動新增／編輯記帳表單（解鎖後顯示） -->
