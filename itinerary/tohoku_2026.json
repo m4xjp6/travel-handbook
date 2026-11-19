@@ -56,7 +56,7 @@
     { "category": "交通", "day": "Day 01", "title": "JR 上野 → 福島 → 山形 (山形新幹線 翼號)", "amount": 11420 },
     { "category": "餐飲", "day": "Day 01", "title": "山形五十番飯店 駅前店（炒飯＆炒豆苗）", "amount": 1200 },
     { "category": "交通", "day": "Day 02", "title": "JR 山形站 ↔ 藏王溫泉（山交巴士來回）", "amount": 2400 },
-    { "category": "門票", "day": "Day 02", "title": "藏王纜車（山麓線＋山頂線來回票）", "amount": 3800 },
+    { "category": "門票", "day": "Day 02", "title": "藏王纜車（山麓線＋山頂線來回票）", "amount": 4400 },
     { "category": "餐飲", "day": "Day 02", "title": "音茶屋 Otochaya（湯咖哩＆巴斯克蛋糕）", "amount": 1850 },
     { "category": "餐飲", "day": "Day 02", "title": "山形牛燒肉 かかし 駅前店（A4/A5 拼盤）", "amount": 4500 },
     { "category": "住宿", "day": "Day 01–03", "title": "山形大都會飯店（2晚・每人預估）", "amount": 22000 },
@@ -68,7 +68,7 @@
     { "category": "門票", "day": "Day 04", "title": "宮城藏王狐狸村＆荒濱草莓園一日遊專車", "amount": 8500 },
     { "category": "餐飲", "day": "Day 04", "title": "創作料理 真都（A5 仙台牛與海膽暢飲套餐）", "amount": 8800 },
     { "category": "交通", "day": "Day 05", "title": "仙台二日周遊券（仙台まるごとパス）", "amount": 2720 },
-    { "category": "門票", "day": "Day 05", "title": "松島島巡り觀光船（仁王丸號 50 分鐘）", "amount": 1500 },
+    { "category": "門票", "day": "Day 05", "title": "松島灣觀光船（鹽釜港 ➔ 松島海岸 芭蕉路線 50 分鐘）", "amount": 1500 },
     { "category": "餐飲", "day": "Day 05", "title": "松島魚市場（現烤牡蠣與海鮮丼）", "amount": 2000 },
     { "category": "門票", "day": "Day 05", "title": "伊達政宗歷史館＆國寶瑞巖寺拜觀料", "amount": 1700 },
     { "category": "餐飲", "day": "Day 05", "title": "牛たん料理 閣 本店（炭火厚切牛舌定食）", "amount": 3800 },
@@ -124,8 +124,8 @@
       "region": "宮城・仙台地區",
       "urgent": false,
       "tag": "JR 仙石線速報",
-      "title": "JR 仙石線（仙台—松島海岸）強風區間提醒",
-      "desc": "冬季海岸強風時列車可能微幅誤點，前往遊船碼頭請由松島海岸站檢票口出站。"
+      "title": "JR 仙石線（仙台—本鹽釜／松島海岸）強風區間提醒",
+      "desc": "冬季海岸強風時列車可能微幅誤點；搭鹽釜單向遊船請於本鹽釜站下車，環灣周遊則於松島海岸站下車。"
     },
     {
       "id": "news-fox-village",
@@ -151,6 +151,7 @@
       "day": "Day 01",
       "dayTitle": "高雄直飛成田轉新幹線・前進山形雪國",
       "region": "山形地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d1-ch1",
@@ -221,6 +222,7 @@
       "day": "Day 02",
       "dayTitle": "零下 10 度藏王樹冰絕景・溫泉街與山形牛",
       "region": "山形地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d2-ch1",
@@ -246,7 +248,7 @@
           "scheduleTime": "09:00 山麓站發 → 09:20 抵地藏山頂站",
           "seatType": "🚡 山岳索道纜車",
           "transitMins": 20,
-          "transitCost": 3800,
+          "transitCost": 4400,
           "timetableUrl": "https://zaoropeway.co.jp/winter/cn.php",
           "timetableLabel": "藏王纜車運行資訊",
           "intro": "觀賞世界奇景「藏王樹冰」核心展望台，站外有開運之鐘與 1775 年建的藏王地藏尊。",
@@ -309,6 +311,7 @@
       "day": "Day 03",
       "dayTitle": "大正浪漫銀山溫泉巡禮・移動至仙台御宿野乃",
       "region": "山形地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d3-ch1",
@@ -427,6 +430,7 @@
       "day": "Day 04",
       "dayTitle": "宮城藏王狐狸村・荒濱採草莓與 A5 仙台牛",
       "region": "宮城・仙台地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d4-ch1",
@@ -493,15 +497,15 @@
           "time": "18:00",
           "spotName": "創作料理 真都 －マツ－",
           "categoryLabel": "在地美饌",
-          "routeFromTo": "JR 仙台站 → 國分町凱旋門大樓 1F（創作料理 真都）",
+          "routeFromTo": "JR 仙台站 → 一番町（創作料理 真都）",
           "scheduleTime": "17:45 步行 → 18:00 入座享用 A5 仙台牛套餐",
           "seatType": "🚶 市區步行 15 分鐘",
           "transitMins": 15,
           "transitCost": 0,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=創作料理+真都+仙台",
           "timetableLabel": "查看餐廳地圖",
-          "intro": "仙台國分町高級創作和食居酒屋，主打 A5 仙台牛與三陸生海膽炙燒料理。",
-          "note": "• 預約不同暢飲方案有嚴格用餐限時（2–3 小時），請先確認方案規定。",
+          "intro": "隱身仙台一番町商圈的高級創作和食居酒屋（第五吉岡屋ビル 5F），全席獨立包廂，主打 A5 仙台牛與三陸生海膽炙燒料理。",
+          "note": "• 地址：仙台市青葉區一番町 4-3-12 第五吉岡屋ビル 5F（勾當台公園站或廣瀨通站步行 3–4 分鐘）。\n• 預約不同暢飲方案有嚴格用餐限時（2–3 小時），請先確認方案規定。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】¥8,800 暢飲套餐招牌「海膽與 A5 仙台牛炙燒」，霜降和牛裹甜美海膽海陸旨味十足。",
           "foodPolicy": "• 強烈建議預約，暢飲於結束前 30 分鐘最後加點；若改單點居酒屋慣例收開胃小菜席料（約 ¥400–500）與一杯飲品低消。"
@@ -511,7 +515,7 @@
           "time": "20:30",
           "spotName": "天然温泉 杜都の湯 御宿野乃 仙台",
           "categoryLabel": "溫泉住宿",
-          "routeFromTo": "國分町 → 御宿野乃仙台",
+          "routeFromTo": "一番町 → 御宿野乃仙台",
           "scheduleTime": "20:20 散步回飯店 → 20:30 頂樓泡湯",
           "seatType": "🚶 步行 8 分鐘",
           "transitMins": 8,
@@ -527,36 +531,37 @@
       "day": "Day 05",
       "dayTitle": "日本三景松島遊船・國寶瑞巖寺與厚切牛舌",
       "region": "宮城・仙台地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d5-ch1",
           "time": "08:30",
-          "spotName": "JR 仙石線（仙台站 → 松島海岸站）",
+          "spotName": "JR 仙石線（仙台站 → 本鹽釜站）",
           "categoryLabel": "交通樞紐",
-          "routeFromTo": "御宿野乃 → JR 仙台站 → JR 松島海岸站",
-          "scheduleTime": "08:30 仙石線發車 → 09:10 抵松島海岸站",
+          "routeFromTo": "御宿野乃 → JR 仙台站 → JR 本鹽釜站",
+          "scheduleTime": "08:30 仙石線發車 → 約 08:58 抵本鹽釜站",
           "seatType": "🚃 JR 仙石線（適用仙台二日券或 Suica）",
-          "transitMins": 40,
-          "transitCost": 420,
+          "transitMins": 28,
+          "transitCost": 330,
           "timetableUrl": "https://www.jreast-timetable.jp/",
           "timetableLabel": "JR 仙石線時刻表",
-          "intro": "連接仙台市區與日本三景松島的海景鐵道。",
-          "note": "• 去程坐行進方向「右側」可搶先看松島灣海景；持仙台二日券走人工通道進出。"
+          "intro": "連接仙台市區與鹽釜、日本三景松島的海景鐵道，約 25–30 分鐘抵達本鹽釜站準備前往鹽釜港搭船。",
+          "note": "• 本鹽釜站與松島海岸站皆適用仙台二日券或 Suica／PASMO（持二日券走人工通道）。\n• 若直達松島海岸站（約 40 分鐘），去程坐右側可搶先賞松島灣海景。"
         },
         {
           "id": "d5-ch2",
           "time": "10:00",
-          "spotName": "松島島巡り觀光船（仁王丸航線）",
+          "spotName": "松島灣觀光船（鹽釜港 ➔ 松島海岸 芭蕉路線）",
           "categoryLabel": "名勝絕景",
-          "routeFromTo": "JR 松島海岸站 → 松島觀光船碼頭（環灣一周）",
-          "scheduleTime": "09:20 碼頭換票 → 10:00 仁王丸號出航（50 分鐘）",
-          "seatType": "⛴️ 大型觀光船",
+          "routeFromTo": "JR 本鹽釜站 → 跨路天橋 → 鹽釜港碼頭 (Marine Gate 鹽釜) → 松島海岸",
+          "scheduleTime": "09:10 步行過天橋至碼頭換票 → 10:00 出航（約 50 分鐘抵松島）",
+          "seatType": "⛴️ 丸文松島汽船（單向芭蕉路線）",
           "transitMins": 50,
           "transitCost": 1500,
           "timetableUrl": "https://www.matsushima.or.jp/cruise/timetable/",
           "timetableLabel": "松島觀光船時刻表",
-          "intro": "乘仁王丸號環遊松島灣約 260 座奇岩松島，近賞仁王島、鐘島等水墨畫絕景。",
-          "note": "• 通常整點發船，開航前 15 分鐘完成換票；船上已全面禁止餵食海鷗。"
+          "intro": "自本鹽釜站步行約 7–10 分鐘、走過跨路天橋至 Marine Gate 鹽釜登船，穿梭松島灣約 260 座奇岩松島直達松島海岸。",
+          "note": "• 冬季鹽釜港發船班次較少，開航前 15 分鐘完成換票並留意官網時刻；船上全面禁止餵食海鷗。"
         },
         {
           "id": "d5-ch3",
@@ -586,7 +591,7 @@
           "timetableUrl": "http://www.sakana-ichiba.co.jp/",
           "timetableLabel": "松島魚市場官網",
           "intro": "漁業公司直營海鮮市場，一樓集結現烤大牡蠣、海鮮丼與海產伴手禮，二樓為座位區。",
-          "note": "• 地址：松島町松島字普賢堂 4-10；營業 08:00–15:00（燒烤屋台 09:00–15:00）。",
+          "note": "• 地址：松島町松島字普賢堂 4-10；營業 08:00–16:00（熱食至 15:00、燒烤屋台 09:00–15:00）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】冬季松島帶殼烤牡蠣肥美無腥味，必配鮪魚鮭魚卵海鮮丼與熱騰騰牡蠣汁。",
           "foodPolicy": "• 11:30–13:00 建議分工一人佔位、一人食券機排隊；餐畢須自行將餐盤與牡蠣殼分類回收。"
@@ -660,6 +665,7 @@
       "day": "Day 06",
       "dayTitle": "百公尺仙台大觀音・仙台城跡與松焚祭火祭",
       "region": "宮城・仙台地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d6-ch1",
@@ -689,7 +695,7 @@
           "timetableUrl": "https://daikannon.com/",
           "timetableLabel": "仙台大觀音官網",
           "intro": "高 100 公尺的巨型白衣觀音像，由龍口入內搭電梯登 12F 俯瞰市景，再沿螺旋步道參拜 108 尊胎內佛。",
-          "note": "• 門票（守護札）¥500，冬季開放 09:30–15:30；拍住宅區街景請站人行道勿入車道。"
+          "note": "• 門票（守護札）¥500，平日 10:00–15:30（最終入場 15:00）；拍住宅區街景請站人行道勿入車道。"
         },
         {
           "id": "d6-ch3",
@@ -704,7 +710,7 @@
           "timetableUrl": "https://daikannon.com/",
           "timetableLabel": "查看參拜介紹",
           "intro": "大觀音旁小巧神社，舀麻油香專用油淋於大黑天像上，並綁粉（良緣）或紫（事業）彩帶祈願。",
-          "note": "• 【浴油法步驟】點蠟燭 ➔ 點線香 ➔ 邊淋油邊唸真言 7 次（オン・マカキャラヤ・ソワカ）。"
+          "note": "• 【浴油法步驟】點蠟燭 ➔ 點線香 ➔ 邊淋油邊唸真言 7 次（おん・まか・きゃらや・そわか）。"
         },
         {
           "id": "d6-ch4",
@@ -719,10 +725,10 @@
           "timetableUrl": "https://www.santouka.co.jp/shop-jp/tohoku/area02-001",
           "timetableLabel": "山頭火仙台南中山店",
           "intro": "北海道旭川人氣拉麵，以慢熬豚骨白湯與碗中央小梅聞名。",
-          "note": "• 地址：泉區南中山 1-35-38；營業 11:00–21:00（無午休）。",
+          "note": "• 地址：仙台市泉區南中山 1-1-12；營業 11:00–21:00（無午休）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】必點「辣味噌拉麵（辛味噌らーめん）」，濃醇豚骨融合赤味噌辣油，冬日喝湯超暖身。",
-          "foodPolicy": "• 拉麵店慣例一人一碗麵，尖峰餐畢不建議久坐；支援現金、刷卡與 IC 卡。"
+          "foodPolicy": "• 拉麵店慣例一人一碗麵，尖峰餐畢不建議久坐；以現金支付為主。"
         },
         {
           "id": "d6-ch5",
@@ -760,11 +766,11 @@
           "spotName": "大崎八幡宮「松焚祭（どんと祭）」＆ 屋台美食",
           "categoryLabel": "在地美饌",
           "routeFromTo": "大崎八幡宮御社殿 → 御神火會場＆參道屋台",
-          "scheduleTime": "17:00 點燃御神火 → 17:30 觀賞裸參拜＆逛屋台",
+          "scheduleTime": "16:00 點燃御神火 → 17:30 觀賞裸參拜＆逛屋台",
           "seatType": "🚶 祭典會場漫步",
           "transitMins": 5,
           "transitCost": 0,
-          "timetableUrl": "https://www.oosaki-hachiman.or.jp/festival/dontosai/",
+          "timetableUrl": "https://www.oosaki-hachiman.or.jp/festival/matsutaki/",
           "timetableLabel": "松焚祭官方介紹",
           "intro": "每年 1/14 舉行的三百年宮城最大冬日火祭，燃燒新年松飾「御神火」並有數千人寒冬「裸參拜」。",
           "note": "• 當晚表參道與國道 48 號實施大規模交管，回程請依指引至臨時巴士站搭車。",
@@ -793,6 +799,7 @@
       "day": "Day 07",
       "dayTitle": "東北新幹線返東京・上野動物園與阿美橫丁",
       "region": "東京・關東地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d7-ch1",
@@ -881,6 +888,7 @@
       "day": "Day 08",
       "dayTitle": "日暮里谷根千昭和散策・野田岩與東京鐵塔",
       "region": "東京・關東地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d8-ch1",
@@ -1017,6 +1025,7 @@
       "day": "Day 09",
       "dayTitle": "Skyliner 赴成田・雲端道別富士山返高雄",
       "region": "東京・關東地區",
+      "isDraft": false,
       "spots": [
         {
           "id": "d9-ch1",
