@@ -286,10 +286,11 @@
         .ticket-left-strip.hotel { background: #5B4B49; }
         .ticket-left-strip.spot { background: #8C4A32; }
         .ticket-left-strip.transit { background: #6E5A4F; }
-        .ticket-head-main { flex: 1; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
-        .ticket-head-title { font-weight: 700; font-size: 0.94rem; }
+        .ticket-head-main { flex: 1; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-width: 0; }
+        .ticket-head-main > div:first-child { flex: 1; min-width: 0; }
+        .ticket-head-title { font-weight: 700; font-size: 0.94rem; line-height: 1.4; }
         .ticket-head-sub { font-size: 0.78rem; color: var(--text-light); margin-top: 2px; }
-        .ticket-head-right { display: flex; align-items: center; gap: 8px; }
+        .ticket-head-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
         .ticket-time-pill { background: #F4EFE6; border: 1px solid #D8C8B8; color: #5A463C; padding: 3px 9px; border-radius: 10px; font-size: 0.78rem; font-weight: 700; white-space: nowrap; }
         .ticket-time-pill.reserved { background: #EBF5EE; border-color: #A3C9AE; color: #2F6B43; }
         .ticket-arrow { color: var(--accent-brown-dark); font-size: 0.8rem; transition: transform 0.25s; }
