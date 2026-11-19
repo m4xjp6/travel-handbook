@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 【✏️ 文字修改】瀏覽器分頁標籤顯示的網站名稱 -->
+    <!-- 【✏️ 文字修改】瀏覽器分頁名稱 -->
     <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</title>
 
-    <!-- 【⚙️ 功能設定】Travelpayouts 聯盟行銷自動分潤腳本 -->
+    <!-- 【⚙️ 功能設定】Travelpayouts 分潤腳本 -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
         (function () {
             var script = document.createElement("script");
@@ -20,139 +20,72 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
-        /* =================================================================
-           【🎨 顏色修改區】全站主色調調色盤
-           ================================================================= */
+        /* === 【🎨 顏色修改】全站主色調 === */
         :root {
-            --bg-color: #FDFBF7;          /* 網頁整體底色：手帳米白色 */
-            --accent-brown: #C4A99E;      /* 主題色：溫潤奶茶棕 */
+            --bg-color: #FDFBF7;          /* 整體底色：手帳米白 */
+            --accent-brown: #C4A99E;      /* 主題色：奶茶棕 */
             --accent-brown-dark: #a6897c; /* 強調色：深奶茶棕 */
-            --accent-pink: #E5D1C7;       /* 次要色：柔和藕粉色 */
-            --accent-gold: #F3D999;       /* 點綴色：暖陽奶油黃（倒數天數格底色） */
-            --accent-sage: #D8E2D5;       /* 點綴色：溫潤鼠尾草綠 */
-            --text-main: #7A6258;         /* 主要內文字體顏色：深可可棕 */
-            --text-light: #9E887E;        /* 次要說明字體顏色：淺可可棕 */
-            --callout-bg: #F5EFE6;        /* 提示框底色：溫潤米杏色 */
+            --accent-pink: #E5D1C7;       /* 次要色：柔和藕粉 */
+            --accent-gold: #F3D999;       /* 點綴色：奶油黃（倒數天數格） */
+            --accent-sage: #D8E2D5;       /* 點綴色：鼠尾草綠 */
+            --text-main: #7A6258;         /* 主要字色：深可可棕 */
+            --text-light: #9E887E;        /* 次要字色：淺可可棕 */
+            --callout-bg: #F5EFE6;        /* 提示框底色：米杏色 */
             --border-soft: rgba(196, 169, 158, 0.35);
         }
 
+        /* === 基礎版面與標題 === */
         body {
-            margin: 0;
-            padding: 32px 24px 90px;
-            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            margin: 0 auto;
+            padding: 32px 24px 96px;
             max-width: 1060px;
-            margin-inline: auto;
             box-sizing: border-box;
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
             -webkit-font-smoothing: antialiased;
         }
-
-        h1 {
+        h1, .section-title, .upcoming-title, .card-content h3 {
             font-family: 'Noto Serif TC', serif;
             color: var(--accent-brown-dark);
-            text-align: center;
-            font-size: 1.85rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            margin: 0 0 18px 0;
         }
+        h1 { text-align: center; font-size: 1.85rem; letter-spacing: 0.06em; margin: 0 0 18px; }
 
-        /* 頂部四大導覽列（整排無底色，僅選中按鈕有奶茶棕底色） */
-        .main-nav-tabs {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
+        /* === 頂部四大導覽列 === */
+        .main-nav-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
         .main-tab-btn {
-            font-family: inherit;
-            background: transparent;
-            color: var(--text-main);
-            border: 1.5px solid transparent;
-            padding: 9px 20px;
-            border-radius: 24px;
-            font-size: 0.94rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            white-space: nowrap;
+            font-family: inherit; background: transparent; color: var(--text-main);
+            border: 1.5px solid transparent; padding: 9px 20px; border-radius: 24px;
+            font-size: 0.94rem; font-weight: 600; cursor: pointer; text-decoration: none;
+            white-space: nowrap; transition: all 0.2s ease;
         }
-        .main-tab-btn:hover {
-            color: var(--accent-brown-dark);
-            border-color: var(--border-soft);
-            background: rgba(245, 239, 230, 0.5);
-        }
-        .main-tab-btn.active {
-            background: var(--accent-brown);
-            color: white;
-            border-color: var(--accent-brown);
-            box-shadow: 0 4px 12px rgba(196, 169, 158, 0.42);
-            font-weight: 700;
-        }
+        .main-tab-btn:hover { color: var(--accent-brown-dark); border-color: var(--border-soft); background: rgba(245, 239, 230, 0.5); }
+        .main-tab-btn.active { background: var(--accent-brown); color: #fff; border-color: var(--accent-brown); box-shadow: 0 4px 12px rgba(196, 169, 158, 0.42); font-weight: 700; }
 
         .tab-view-panel { display: none; animation: fadeIn 0.25s ease; }
         .tab-view-panel.active { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         .section-header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 10px;
-            border-bottom: 1.5px solid var(--border-soft);
-            flex-wrap: wrap;
-            gap: 8px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+            margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1.5px solid var(--border-soft);
         }
-        .section-title {
-            font-family: 'Noto Serif TC', serif;
-            color: var(--accent-brown-dark);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 0;
+        .section-title { font-size: 1.3rem; margin: 0; }
+        .header-tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .trip-switcher { display: none; padding: 4px 10px; border-radius: 10px; border: 1px solid var(--accent-brown); font-size: 0.82rem; color: var(--text-main); background: #fff; }
+        .dest-clock-pill {
+            background: var(--callout-bg); border: 1px solid var(--border-soft); color: var(--accent-brown-dark);
+            padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
         }
 
-        /* 未出發的旅程 ＆ 動態天氣繪本插畫 */
-        .dest-clock-pill {
-            background: var(--callout-bg);
-            border: 1px solid var(--border-soft);
-            color: var(--accent-brown-dark);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .upcoming-container {
-            max-width: 680px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        .upcoming-main-card {
-            background: white;
-            border: 2px solid var(--accent-brown);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 6px 22px rgba(196, 169, 158, 0.18);
-        }
-        .upcoming-illustration {
-            position: relative;
-            width: 100%;
-            height: 165px;
-            border-bottom: 1.5px solid var(--border-soft);
-            overflow: hidden;
-            transition: background 0.6s ease;
-        }
+        /* === 未來旅程倒數與動態天氣插畫 === */
+        .upcoming-container { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .upcoming-main-card { background: #fff; border: 2px solid var(--accent-brown); border-radius: 18px; overflow: hidden; box-shadow: 0 6px 22px rgba(196, 169, 158, 0.18); }
+
+        .upcoming-illustration { position: relative; width: 100%; height: 165px; border-bottom: 1.5px solid var(--border-soft); overflow: hidden; transition: background 0.6s ease; }
         .upcoming-illustration.weather-sunny  { background: linear-gradient(180deg, #EDE2D5 0%, #FDFBF7 100%); }
         .upcoming-illustration.weather-cloudy { background: linear-gradient(180deg, #E2DFDB 0%, #F7F4F0 100%); }
         .upcoming-illustration.weather-rainy  { background: linear-gradient(180deg, #CED6DC 0%, #ECEAE6 100%); }
@@ -160,134 +93,143 @@
         .upcoming-illustration.weather-night  { background: linear-gradient(180deg, #3E4A59 0%, #6E7B8B 100%); }
         .upcoming-illustration svg { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; }
 
+        /* 插畫頂部狀態列（左右自動保持間距不重疊） */
+        .illustration-badges {
+            position: absolute; top: 10px; left: 12px; right: 12px; z-index: 5;
+            display: flex; justify-content: space-between; align-items: center; gap: 8px;
+        }
         .upcoming-status-badge {
-            position: absolute; top: 12px; left: 14px;
-            background: rgba(166, 137, 124, 0.92); color: white;
-            padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; z-index: 5;
+            background: rgba(166, 137, 124, 0.92); color: #fff;
+            padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+            white-space: nowrap; flex-shrink: 0;
         }
         .live-weather-pill {
-            position: absolute; top: 12px; right: 14px;
-            background: rgba(255, 255, 255, 0.9); color: var(--text-main);
+            background: rgba(255, 255, 255, 0.92); color: var(--text-main);
             border: 1px solid var(--border-soft); padding: 4px 12px; border-radius: 20px;
-            font-size: 0.78rem; font-weight: 600; z-index: 5; cursor: pointer; user-select: none;
+            font-size: 0.78rem; font-weight: 600; cursor: pointer; user-select: none;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
         }
+
+        /* 天氣粒子與 SVG 動畫 */
         .weather-particles { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; }
-        .raindrop {
-            position: absolute; top: -20px; width: 1.8px; height: 15px;
-            background: linear-gradient(transparent, rgba(105, 135, 165, 0.75));
-            animation: rainFall linear infinite;
-        }
-        @keyframes rainFall {
-            0% { transform: translateY(-10px) translateX(0) rotate(12deg); opacity: 0; }
-            20% { opacity: 0.85; }
-            100% { transform: translateY(185px) translateX(-28px) rotate(12deg); opacity: 0.2; }
-        }
-        .snowflake {
-            position: absolute; top: -12px; background: white; border-radius: 50%;
-            box-shadow: 0 0 4px rgba(255,255,255,0.8); animation: snowFall linear infinite;
-        }
-        @keyframes snowFall {
-            0% { transform: translateY(-10px) translateX(0); opacity: 0; }
-            20% { opacity: 0.95; }
-            50% { transform: translateY(85px) translateX(12px); }
-            100% { transform: translateY(180px) translateX(-8px); opacity: 0.3; }
-        }
-        .star-dot {
-            position: absolute; background: #FFF8DC; border-radius: 50%;
-            animation: twinkleStar ease-in-out infinite alternate;
-        }
-        @keyframes twinkleStar {
-            0% { opacity: 0.25; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.25); }
-        }
+        .raindrop { position: absolute; top: -20px; width: 1.8px; height: 15px; background: linear-gradient(transparent, rgba(105, 135, 165, 0.75)); animation: rainFall linear infinite; }
+        .snowflake { position: absolute; top: -12px; background: #fff; border-radius: 50%; box-shadow: 0 0 4px rgba(255,255,255,0.8); animation: snowFall linear infinite; }
+        .star-dot { position: absolute; background: #FFF8DC; border-radius: 50%; animation: twinkleStar ease-in-out infinite alternate; }
         .svg-cloud-anim { animation: floatCloud 4.5s ease-in-out infinite alternate; }
         .svg-sun-anim { transform-origin: 95px 52px; animation: pulseSun 3s ease-in-out infinite alternate; }
-        @keyframes floatCloud { 0% { transform: translateX(-6px); } 100% { transform: translateX(8px); } }
-        @keyframes pulseSun { 0% { transform: scale(0.96); opacity: 0.82; } 100% { transform: scale(1.05); opacity: 0.96; } }
+        @keyframes rainFall { 0% { transform: translateY(-10px) rotate(12deg); opacity: 0; } 20% { opacity: 0.85; } 100% { transform: translateY(185px) translateX(-28px) rotate(12deg); opacity: 0.2; } }
+        @keyframes snowFall { 0% { transform: translateY(-10px); opacity: 0; } 20% { opacity: 0.95; } 50% { transform: translateY(85px) translateX(12px); } 100% { transform: translateY(180px) translateX(-8px); opacity: 0.3; } }
+        @keyframes twinkleStar { 0% { opacity: 0.25; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.25); } }
+        @keyframes floatCloud { from { transform: translateX(-6px); } to { transform: translateX(8px); } }
+        @keyframes pulseSun { from { transform: scale(0.96); opacity: 0.82; } to { transform: scale(1.05); opacity: 0.96; } }
 
+        /* 倒數卡片內容 */
         .upcoming-body { padding: 18px 22px 20px; }
         .upcoming-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
-        .up-tag {
-            padding: 3px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
-            border: 1.5px solid var(--accent-brown); background: #F9EBE6; color: var(--accent-brown-dark);
-        }
+        .up-tag { padding: 3px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1.5px solid var(--accent-brown); background: #F9EBE6; color: var(--accent-brown-dark); }
         .up-tag.members { background: var(--accent-sage); color: var(--text-main); border-color: #B8C9B4; }
-        .upcoming-title { font-family: 'Noto Serif TC', serif; font-size: 1.45rem; font-weight: 700; color: var(--accent-brown-dark); margin: 0 0 4px 0; }
-        .upcoming-subtitle { font-size: 0.88rem; color: var(--text-light); margin: 0 0 14px 0; line-height: 1.5; }
+        .upcoming-title { font-size: 1.45rem; margin: 0 0 4px; }
+        .upcoming-subtitle { font-size: 0.88rem; color: var(--text-light); margin: 0 0 14px; line-height: 1.5; }
         .countdown-boxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
         .cd-box { border: 1.5px solid var(--accent-brown); border-radius: 12px; padding: 10px 6px; text-align: center; background: var(--bg-color); }
         .cd-box.highlight { background: var(--accent-gold); border-color: #D8B86A; }
-        .cd-num { display: block; font-size: 1.55rem; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+        .cd-num { display: block; font-size: 1.55rem; font-weight: 700; line-height: 1.2; }
         .cd-label { display: block; font-size: 0.76rem; color: var(--text-light); margin-top: 2px; font-weight: 600; }
         .countdown-note { font-size: 0.82rem; color: var(--text-light); margin: 0; }
 
-        .memo-card {
-            background: linear-gradient(135deg, #F9EFEA 0%, #F5EFE6 100%);
-            border: 1.5px solid var(--accent-brown); border-radius: 16px; padding: 16px 20px;
-        }
-        .memo-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .memo-badge { background: var(--accent-brown); color: white; padding: 3px 12px; border-radius: 16px; font-size: 0.8rem; font-weight: 600; }
+        /* 旅途重點與行前備忘卡 */
+        .memo-card { background: linear-gradient(135deg, #F9EFEA 0%, #F5EFE6 100%); border: 1.5px solid var(--accent-brown); border-radius: 16px; padding: 16px 20px; }
+        .memo-card-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+        .memo-badge { background: var(--accent-brown); color: #fff; padding: 3px 12px; border-radius: 16px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+        .memo-vehicle { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+        .memo-list { font-size: 0.88rem; line-height: 1.7; }
+
         .upcoming-action-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-            background: white; color: var(--accent-brown-dark); border: 1.5px solid var(--accent-brown);
-            padding: 12px 18px; border-radius: 14px; text-decoration: none; font-size: 0.92rem; font-weight: 600;
-            transition: all 0.2s ease;
+            background: #fff; color: var(--accent-brown-dark); border: 1.5px solid var(--accent-brown);
+            padding: 12px 18px; border-radius: 14px; text-decoration: none; font-size: 0.92rem; font-weight: 600; transition: all 0.2s;
         }
-        .upcoming-action-btn:hover { background: var(--accent-brown); color: white; }
-
+        .upcoming-action-btn:hover { background: var(--accent-brown); color: #fff; }
         .secondary-pill-btn {
-            font-family: inherit; background: white; color: var(--accent-brown-dark);
+            font-family: inherit; background: #fff; color: var(--accent-brown-dark);
             border: 1.5px solid var(--accent-brown); padding: 8px 16px; border-radius: 20px;
-            font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none;
+            font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s;
         }
-        .secondary-pill-btn:hover { background: var(--accent-pink); color: white; }
+        .secondary-pill-btn:hover { background: var(--accent-pink); color: #fff; }
 
-        /* 已完成書櫃與篩選器 */
+        /* === 歸檔書櫃與地區篩選器 === */
         .filter-section { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-soft); }
         .filter-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 100%; }
         #country-filters { display: none; padding-top: 4px; }
         .filter-btn, .country-btn {
-            font-family: inherit; border: 1.5px solid var(--accent-brown); background: white;
+            font-family: inherit; border: 1.5px solid var(--accent-brown); background: #fff;
             color: var(--accent-brown-dark); padding: 7px 16px; border-radius: 20px;
             font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
         }
         .country-btn { padding: 5px 14px; font-size: 0.85rem; }
-        .filter-btn.active, .country-btn.active { background: var(--accent-brown); color: white; }
+        .filter-btn.active, .country-btn.active { background: var(--accent-brown); color: #fff; }
+
         .callout { padding: 14px 20px; border-radius: 10px; margin-bottom: 28px; font-size: 0.92rem; background: var(--callout-bg); border-left: 4px solid var(--accent-brown); line-height: 1.6; }
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
         .grid-container.single-card { grid-template-columns: minmax(0, 560px); justify-content: center; }
-        .trip-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 18px rgba(196, 169, 158, 0.18); transition: transform 0.3s; text-decoration: none; color: var(--text-main); display: block; }
+
+        .trip-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 18px rgba(196, 169, 158, 0.18); transition: transform 0.3s; text-decoration: none; color: var(--text-main); display: block; }
         .trip-card[data-status="draft"] { display: none !important; }
         .trip-card:hover { transform: translateY(-5px); }
         .cover-collage { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; aspect-ratio: 9 / 4; }
-        .cover-collage div { border-right: 2px solid white; background: var(--accent-brown); overflow: hidden; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.85rem; }
+        .cover-collage div { border-right: 2px solid #fff; background: var(--accent-brown); overflow: hidden; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.85rem; }
         .cover-collage div:last-child { border-right: none; }
         .cover-collage img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .card-content { padding: 20px 24px; }
-        .card-content h3 { font-family: 'Noto Serif TC', serif; margin: 0 0 12px 0; color: var(--accent-brown-dark); font-size: 1.2rem; }
+        .card-content h3 { margin: 0 0 12px; font-size: 1.2rem; }
         table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
         th, td { padding: 8px 4px; text-align: left; border-bottom: 1px solid #f0ebe6; }
         tr:last-child th, tr:last-child td { border-bottom: none; }
         th { color: var(--text-light); width: 22%; font-weight: 500; }
-        .status-empty-box { text-align: center; padding: 52px 24px; background: white; border: 1.5px dashed var(--accent-brown); border-radius: 18px; color: var(--text-light); max-width: 620px; margin: 12px auto; }
+
+        /* 空狀態框與懸浮管理鈕 */
+        .status-empty-box { text-align: center; padding: 48px 24px; background: #fff; border: 1.5px dashed var(--accent-brown); border-radius: 18px; color: var(--text-light); max-width: 620px; margin: 12px auto; }
+        .empty-title { font-weight: 700; color: var(--accent-brown-dark); font-size: 1.05rem; margin: 8px 0 6px; }
+        .empty-desc { margin: 0 0 18px; font-size: 0.9rem; line-height: 1.6; }
+        .empty-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
         .admin-fab {
-            position: fixed; bottom: 24px; right: 24px; background: var(--accent-brown); color: white;
-            text-decoration: none; padding: 12px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 600;
-            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5); z-index: 1000;
+            position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+            background: var(--accent-brown); color: #fff; text-decoration: none;
+            padding: 12px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 600;
+            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5);
         }
+
+        /* === 手機版排版專屬優化 === */
         @media (max-width: 768px) {
-            body { padding: 20px 14px 80px; }
+            body { padding: 18px 14px 96px; }
             h1 { font-size: 1.42rem; }
-            .main-tab-btn { padding: 8px 14px; font-size: 0.85rem; }
+
+            /* 1. 頂部 4 個分類平均單行排列，避免第 4 顆掉行 */
+            .main-nav-tabs { flex-wrap: nowrap; gap: 4px; margin-bottom: 22px; }
+            .main-tab-btn { flex: 1; padding: 8px 4px; font-size: 0.84rem; text-align: center; }
+
+            /* 2. 插畫頂部兩個膠囊縮小字級與間距，防止擠壓裁切 */
+            .illustration-badges { top: 8px; left: 8px; right: 8px; gap: 6px; }
+            .upcoming-status-badge, .live-weather-pill { font-size: 0.72rem; padding: 3px 8px; }
+
+            /* 3. 行前備忘標題與副標改為上下排列，防止標籤折行 */
+            .memo-card { padding: 14px 16px; }
+            .memo-card-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+            /* 4. 卡片單欄與懸浮按鈕精簡化 */
+            .upcoming-body { padding: 16px; }
             .grid-container { grid-template-columns: 1fr; }
+            .admin-fab { bottom: 16px; right: 16px; padding: 10px 16px; font-size: 0.84rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 【✏️ 文字修改】網站主標題 -->
     <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
 
-    <!-- 頂部四大導覽列：第四顆「漫遊提案」直接連往獨立的 planner.html -->
+    <!-- 頂部四大導覽列 -->
     <nav class="main-nav-tabs" aria-label="手帳主選單">
         <button type="button" class="main-tab-btn active" data-target="tab-upcoming">未來旅程</button>
         <button type="button" class="main-tab-btn" data-target="tab-ongoing">旅途連載</button>
@@ -295,12 +237,12 @@
         <a href="planner.html" class="main-tab-btn">漫遊提案</a>
     </nav>
 
-    <!-- ✈️ 分頁 1：未出發的旅程 -->
+    <!-- ✈️ 分頁 1：未來旅程 -->
     <section class="tab-view-panel active" id="tab-upcoming">
         <div class="section-header-bar">
             <h2 class="section-title">✈️ 未來旅程・期待倒數</h2>
-            <div style="display:flex; align-items:center; gap:8px;">
-                <select id="upcoming-trip-switcher" style="display:none; padding:4px 10px; border-radius:10px; border:1px solid var(--accent-brown); font-size:0.82rem;"></select>
+            <div class="header-tools">
+                <select id="upcoming-trip-switcher" class="trip-switcher"></select>
                 <div class="dest-clock-pill" id="dest-clock">當地時間讀取中...</div>
             </div>
         </div>
@@ -308,10 +250,13 @@
         <div class="upcoming-container" id="upcoming-content-wrap">
             <div class="upcoming-main-card">
                 <div class="upcoming-illustration weather-sunny" id="up-weather-stage">
-                    <span class="upcoming-status-badge" id="up-status-badge">籌備倒數中</span>
-                    <span class="live-weather-pill" id="live-weather-pill" title="點擊可切換預覽：晴天／下雨／飄雪／夜空動態">🌤️ 當地天氣連線中...</span>
+                    <div class="illustration-badges">
+                        <span class="upcoming-status-badge" id="up-status-badge">籌備倒數中</span>
+                        <span class="live-weather-pill" id="live-weather-pill" title="點擊切換天氣動態預覽">🌤️ 當地天氣連線中...</span>
+                    </div>
                     <div class="weather-particles" id="weather-particles"></div>
 
+                    <!-- 繪本風動態天氣 SVG -->
                     <svg viewBox="0 0 600 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="svg-sun-group" class="svg-sun-anim">
                             <circle cx="95" cy="52" r="26" fill="#F3D999" opacity="0.35"/>
@@ -346,7 +291,7 @@
                             <rect x="428" y="104" width="8" height="10" rx="1.5" fill="#FFF3B0"/>
                             <rect x="442" y="104" width="8" height="10" rx="1.5" fill="#FFF3B0"/>
                         </g>
-                        <path id="svg-headlight" d="M330 144 L292 135 L292 155 Z" fill="#FFF3B0" opacity="0" />
+                        <path id="svg-headlight" d="M330 144 L292 135 L292 155 Z" fill="#FFF3B0" opacity="0"/>
                         <rect x="330" y="132" width="68" height="24" rx="8" fill="#F3D999" stroke="#7A6258" stroke-width="2"/>
                         <rect x="340" y="137" width="18" height="9" rx="2" fill="#FDFBF7" stroke="#7A6258" stroke-width="1.5"/>
                         <rect x="364" y="137" width="18" height="9" rx="2" fill="#FDFBF7" stroke="#7A6258" stroke-width="1.5"/>
@@ -381,11 +326,11 @@
             <div class="memo-card">
                 <div class="memo-card-header">
                     <span class="memo-badge">🧳 旅途重點與行前備忘</span>
-                    <span style="font-size:0.85rem; font-weight:600;" id="up-vehicle-tag">跨國雙城慢旅</span>
+                    <span class="memo-vehicle" id="up-vehicle-tag">跨國雙城慢旅</span>
                 </div>
-                <div style="font-size: 0.88rem; line-height: 1.7;" id="up-memo-list">
-- <strong>簽證與入境：</strong>馬來西亞 MDAC 電子入境卡（出發前3天內填寫）、新加坡 SG Arrival Card。<br>
-- <strong>核心體驗：</strong>吉隆坡敘宴沉浸式宮廷宴、又見馬六甲劇場、星耀樟宜雨漩渦。
+                <div class="memo-list" id="up-memo-list">
+                    • <strong>簽證與入境：</strong>馬來西亞 MDAC 電子入境卡（出發前3天內填寫）、新加坡 SG Arrival Card。<br>
+                    • <strong>核心體驗：</strong>吉隆坡敘宴沉浸式宮廷宴、又見馬六甲劇場、星耀樟宜雨漩渦。
                 </div>
             </div>
 
@@ -395,21 +340,19 @@
         </div>
     </section>
 
-    <!-- 🚃 分頁 2：進行中的旅程 -->
+    <!-- 🚃 分頁 2：旅途連載 -->
     <section class="tab-view-panel" id="tab-ongoing">
         <div class="section-header-bar">
             <h2 class="section-title">🚃 旅途連載・即時手帳</h2>
         </div>
         <div id="ongoing-container">
             <div class="status-empty-box" id="ongoing-empty">
-                <div style="font-size: 2rem; margin-bottom: 8px;">🍵</div>
-                <div style="font-weight: 700; color: var(--accent-brown-dark); font-size: 1.05rem; margin-bottom: 6px;">
-                    目前沒有正在進行中的旅程
-                </div>
-                <p style="margin: 0 0 18px 0; font-size: 0.9rem; line-height: 1.6;">
+                <div style="font-size: 2rem;">🍵</div>
+                <div class="empty-title">目前沒有正在進行中的旅程</div>
+                <p class="empty-desc">
                     當下一趟旅程（<span id="ongoing-next-name">南洋星馬春季漫旅</span>）於 <span id="ongoing-next-date">2027/04/07</span> 出發時，<br>這裡就會自動切換為旅途實戰模式！
                 </p>
-                <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <div class="empty-actions">
                     <button type="button" class="secondary-pill-btn" onclick="switchMainTab('tab-upcoming')">查看未出發倒數</button>
                     <button type="button" class="secondary-pill-btn" onclick="switchMainTab('tab-completed')">瀏覽已完成手帳</button>
                 </div>
@@ -417,7 +360,7 @@
         </div>
     </section>
 
-    <!-- 🎞️ 分頁 3：已完成的旅程（由 data/[location_year].json 的 isDraft 欄位動態控制顯示/隱藏） -->
+    <!-- 🎞️ 分頁 3：歸檔風景（自動讀取 data/*.json 的 isDraft 控制顯示） -->
     <section class="tab-view-panel" id="tab-completed">
         <div class="section-header-bar">
             <h2 class="section-title">🎞️ 歸檔風景・珍藏回憶</h2>
@@ -446,16 +389,14 @@
         </div>
 
         <div class="callout">
-            <strong>📚 總覽資訊：</strong>點擊上方七大洲可展開對應國家並篩選旅程，點擊下方的旅程卡片即可開啟該趟旅行的專屬「動態地圖手帳」。
+            <strong>📚 總覽資訊：</strong>點擊上方七大洲可展開對應國家篩選，點擊旅程卡片即可開啟「動態地圖手帳」。
         </div>
 
+        <!-- 【✏️ 文字修改】歸檔旅程卡片列表 -->
         <div class="grid-container" id="cards-grid">
             <a href="journal.html?trip=malaysia_2027" class="trip-card"
-               data-trip-id="malaysia_2027"
-               data-continent="亞洲"
-               data-country="馬來西亞,新加坡"
-               data-start="2027-04-07"
-               data-end="2027-04-17">
+               data-trip-id="malaysia_2027" data-continent="亞洲" data-country="馬來西亞,新加坡"
+               data-start="2027-04-07" data-end="2027-04-17">
                 <div class="cover-collage">
                     <div><img src="media/malaysia_2027/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
                     <div><img src="media/malaysia_2027/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
@@ -472,11 +413,8 @@
             </a>
 
             <a href="journal.html?trip=tohoku_2026" class="trip-card"
-               data-trip-id="tohoku_2026"
-               data-continent="亞洲"
-               data-country="日本"
-               data-start="2026-01-28"
-               data-end="2026-02-05">
+               data-trip-id="tohoku_2026" data-continent="亞洲" data-country="日本"
+               data-start="2026-01-28" data-end="2026-02-05">
                 <div class="cover-collage">
                     <div><img src="media/tohoku_2026/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
                     <div><img src="media/tohoku_2026/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
@@ -501,7 +439,9 @@
     <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
 
     <script>
-        /* === PART 0：頂部三大分頁切換與網址參數支援 === */
+        /* === 【⚙️ 功能設定】1. 頂部分頁切換與網址參數 === */
+        const $ = id => document.getElementById(id);
+
         function switchMainTab(targetId) {
             document.querySelectorAll('.main-tab-btn[data-target]').forEach(b => b.classList.toggle('active', b.dataset.target === targetId));
             document.querySelectorAll('.tab-view-panel').forEach(p => p.classList.toggle('active', p.id === targetId));
@@ -509,13 +449,10 @@
         }
         document.querySelectorAll('.main-tab-btn[data-target]').forEach(b => b.addEventListener('click', () => switchMainTab(b.dataset.target)));
 
-        // 若從 planner.html 點擊返回特定分頁（例如 index.html?tab=tab-completed），自動切換至該分頁
-        const initTabParam = new URLSearchParams(location.search).get('tab');
-        if (initTabParam && document.getElementById(initTabParam)) {
-            switchMainTab(initTabParam);
-        }
+        const initTab = new URLSearchParams(location.search).get('tab');
+        if (initTab && $(initTab)) switchMainTab(initTab);
 
-        /* === PART 1：自動探索未出發的 itinerary/[location_year].json === */
+        /* === 【⚙️ 功能設定】2. 未來旅程倒數、自動掃描與即時天氣 === */
         const DEFAULT_UPCOMING_META = {
             malaysia_2027: {
                 tripId: "malaysia_2027",
@@ -537,9 +474,10 @@
 
         let activeUpcomingTrip = { ...DEFAULT_UPCOMING_META.malaysia_2027 };
         let upcomingTripsPool = [];
-        let currentWeatherModeIndex = 0;
-        let liveDetectedWeather = { mode: 'sunny', temp: 29, desc: '晴時多雲' };
-        const WEATHER_PREVIEW_MODES = [
+        let weatherModeIdx = 0;
+        let liveWeather = { mode: 'sunny', temp: 29, desc: '晴時多雲' };
+
+        const WEATHER_MODES = [
             { key: 'LIVE', label: '即時天氣' },
             { key: 'rainy', label: '🌧️ 下雨動態預覽', temp: 26 },
             { key: 'sunny', label: '☀️ 晴朗動態預覽', temp: 30 },
@@ -547,6 +485,7 @@
             { key: 'night', label: '🌙 夜空動態預覽', temp: 25 }
         ];
 
+        // 自動探索 itinerary/ 下的未出發旅程
         async function discoverAllItineraryTrips() {
             const tripIds = new Set(['malaysia_2027', 'tohoku_2026']);
             document.querySelectorAll('.trip-card[data-trip-id]').forEach(el => tripIds.add(el.dataset.tripId));
@@ -555,126 +494,102 @@
                 try {
                     const owner = location.hostname.split('.')[0];
                     const repo = location.pathname.split('/').filter(Boolean)[0] || `${owner}.github.io`;
-                    const apiRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/itinerary`);
-                    if (apiRes.ok) {
-                        const files = await apiRes.json();
-                        files.forEach(f => {
-                            if (f.name && f.name.endsWith('.json')) tripIds.add(f.name.replace('.json', ''));
-                        });
-                    }
-                } catch (e) {}
+                    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/itinerary`);
+                    if (res.ok) (await res.json()).forEach(f => f.name?.endsWith('.json') && tripIds.add(f.name.replace('.json', '')));
+                } catch {}
             }
 
             const now = new Date();
-            const upcomingList = [];
+            const list = [];
 
             for (const id of tripIds) {
-                let itinData = null;
+                let itin = null;
                 try {
                     const res = await fetch(`itinerary/${id}.json?t=${Date.now()}`, { cache: 'no-store' });
-                    if (res.ok) itinData = await res.json();
-                } catch (e) {}
+                    if (res.ok) itin = await res.json();
+                } catch {}
 
-                // 若在 itinerary/[id].json 中將 isDraft 設為 true，則連同未來旅程倒數一起隱藏
-                if (itinData?.isDraft === true || itinData?.hidden === true) continue;
+                // itinerary/*.json 設為 isDraft 或 hidden 時略過
+                if (itin?.isDraft === true || itin?.hidden === true) continue;
 
-                const cardEl = document.querySelector(`.trip-card[data-trip-id="${id}"]`);
-                const fallback = DEFAULT_UPCOMING_META[id] || {};
-                const startDate = itinData?.startDate || cardEl?.dataset.start || fallback.startDate || null;
-                const endDate = itinData?.endDate || cardEl?.dataset.end || fallback.endDate || null;
+                const card = document.querySelector(`.trip-card[data-trip-id="${id}"]`);
+                const fb = DEFAULT_UPCOMING_META[id] || {};
+                const startDate = itin?.startDate || card?.dataset.start || fb.startDate;
+                const endDate = itin?.endDate || card?.dataset.end || fb.endDate || startDate;
+                if (!startDate) continue;
 
-                if (startDate) {
-                    const startObj = new Date(`${startDate}T00:00:00`);
-                    const endObj = endDate ? new Date(`${endDate}T23:59:59`) : new Date(startObj.getTime() + 864000000);
+                const endObj = new Date(`${endDate}T23:59:59+08:00`);
+                if (now <= endObj) {
+                    const firstSpot = itin?.days?.[0]?.spots?.[0];
+                    const regions = itin?.days ? [...new Set(itin.days.map(d => (d.region || '').replace('地區', '')).filter(Boolean))] : [];
+                    const daysCount = itin?.days?.length || 11;
 
-                    if (now <= endObj) {
-                        const firstSpot = itinData?.days?.[0]?.spots?.[0];
-                        const regions = itinData?.days ? [...new Set(itinData.days.map(d => (d.region || '').replace('地區', '')).filter(Boolean))] : [];
-                        const daysCount = itinData?.days?.length || 11;
-
-                        upcomingList.push({
-                            tripId: id,
-                            tripTitle: (itinData?.tripTitle || fallback.tripTitle || id).split('｜').pop().trim(),
-                            routeTag: itinData?.routeTag || (regions.length ? regions.join('・') : fallback.routeTag || '精彩慢旅'),
-                            memberTag: itinData?.memberTag || fallback.memberTag || `${daysCount}天${Math.max(1, daysCount - 1)}夜`,
-                            startDate,
-                            endDate: endDate || startDate,
-                            dateSubTitle: itinData?.dateSubTitle || fallback.dateSubTitle || `${startDate.replace(/-/g, '.')} — ${(endDate || '').replace(/-/g, '.')}`,
-                            timezone: itinData?.timezone || fallback.timezone || 'Asia/Tokyo',
-                            timezoneLabel: itinData?.timezoneLabel || fallback.timezoneLabel || '當地時間',
-                            weatherCity: itinData?.weatherCity || regions[0] || fallback.weatherCity || '目的地',
-                            lat: firstSpot?.lat || fallback.lat || 3.1390,
-                            lng: firstSpot?.lng || fallback.lng || 101.6869,
-                            vehicleTag: itinData?.vehicleTag || fallback.vehicleTag || '專屬行程規劃',
-                            memoHtml: itinData?.memoHtml || fallback.memoHtml || '• 點擊下方按鈕即可直接進入「行程安排」查看每日路線、票券憑證與預估花費。'
-                        });
-                    }
+                    list.push({
+                        tripId: id,
+                        tripTitle: (itin?.tripTitle || fb.tripTitle || id).split('｜').pop().trim(),
+                        routeTag: itin?.routeTag || (regions.length ? regions.join('・') : fb.routeTag || '精彩慢旅'),
+                        memberTag: itin?.memberTag || fb.memberTag || `${daysCount}天${Math.max(1, daysCount - 1)}夜`,
+                        startDate,
+                        endDate,
+                        dateSubTitle: itin?.dateSubTitle || fb.dateSubTitle || `${startDate.replace(/-/g, '.')} — ${endDate.replace(/-/g, '.')}`,
+                        timezone: itin?.timezone || fb.timezone || 'Asia/Tokyo',
+                        timezoneLabel: itin?.timezoneLabel || fb.timezoneLabel || '當地時間',
+                        weatherCity: itin?.weatherCity || regions[0] || fb.weatherCity || '目的地',
+                        lat: firstSpot?.lat || fb.lat || 3.1390,
+                        lng: firstSpot?.lng || fb.lng || 101.6869,
+                        vehicleTag: itin?.vehicleTag || fb.vehicleTag || '專屬行程規劃',
+                        memoHtml: itin?.memoHtml || fb.memoHtml || '• 點擊下方按鈕即可進入「行程安排」查看每日路線、票券憑證與預估花費。'
+                    });
                 }
             }
 
-            upcomingList.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-            upcomingTripsPool = upcomingList;
+            upcomingTripsPool = list.sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+            if (upcomingTripsPool.length) activeUpcomingTrip = upcomingTripsPool[0];
 
-            if (upcomingTripsPool.length > 0) {
-                activeUpcomingTrip = upcomingTripsPool[0];
-            }
-
-            const switcher = document.getElementById('upcoming-trip-switcher');
+            const switcher = $('upcoming-trip-switcher');
             if (upcomingTripsPool.length > 1) {
                 switcher.style.display = 'inline-block';
                 switcher.innerHTML = upcomingTripsPool.map((t, i) => `<option value="${i}">切換旅程：${t.tripTitle}</option>`).join('');
-                switcher.onchange = () => {
-                    activeUpcomingTrip = upcomingTripsPool[Number(switcher.value)];
-                    renderActiveUpcomingTrip();
-                };
+                switcher.onchange = () => { activeUpcomingTrip = upcomingTripsPool[Number(switcher.value)]; renderActiveUpcomingTrip(); };
             } else {
                 switcher.style.display = 'none';
             }
-
             renderActiveUpcomingTrip();
         }
 
-        function applyIllustrationWeather(mode, cityText, tempText, descText, isPreview = false) {
-            const stage = document.getElementById('up-weather-stage');
-            const particles = document.getElementById('weather-particles');
-            const pill = document.getElementById('live-weather-pill');
+        // 套用天氣插畫與粒子動態
+        function applyIllustrationWeather(mode, city, temp, desc, isPreview = false) {
+            $('up-weather-stage').className = `upcoming-illustration weather-${mode}`;
+            $('svg-sun-group').style.display = (mode === 'sunny' || mode === 'cloudy') ? 'block' : 'none';
+            $('svg-moon-group').style.display = mode === 'night' ? 'block' : 'none';
+            $('svg-rain-extras').style.display = mode === 'rainy' ? 'block' : 'none';
+            $('svg-snow-extras').style.display = mode === 'snowy' ? 'block' : 'none';
 
-            stage.className = `upcoming-illustration weather-${mode}`;
+            $('cloud-path-1').setAttribute('fill', mode === 'rainy' ? '#98A6B3' : '#FFFFFF');
+            $('cloud-path-2').setAttribute('fill', mode === 'rainy' ? '#8796A5' : '#FFFFFF');
+            $('svg-clouds-group').setAttribute('opacity', mode === 'night' ? '0.2' : (mode === 'sunny' ? '0.55' : '0.92'));
+            $('svg-hill').setAttribute('fill', mode === 'snowy' ? '#FFFFFF' : '#D8E2D5');
+            $('svg-tower-lights').setAttribute('opacity', (mode === 'night' || mode === 'rainy') ? '0.95' : '0.35');
+            $('svg-headlight').setAttribute('opacity', (mode === 'night' || mode === 'rainy') ? '0.7' : '0');
+
+            const particles = $('weather-particles');
             particles.innerHTML = '';
-
-            document.getElementById('svg-sun-group').style.display = (mode === 'sunny' || mode === 'cloudy') ? 'block' : 'none';
-            document.getElementById('svg-moon-group').style.display = mode === 'night' ? 'block' : 'none';
-            document.getElementById('svg-rain-extras').style.display = mode === 'rainy' ? 'block' : 'none';
-            document.getElementById('svg-snow-extras').style.display = mode === 'snowy' ? 'block' : 'none';
-
-            const c1 = document.getElementById('cloud-path-1'), c2 = document.getElementById('cloud-path-2');
-            c1.setAttribute('fill', mode === 'rainy' ? '#98A6B3' : '#FFFFFF');
-            c2.setAttribute('fill', mode === 'rainy' ? '#8796A5' : '#FFFFFF');
-            document.getElementById('svg-clouds-group').setAttribute('opacity', mode === 'night' ? '0.2' : (mode === 'sunny' ? '0.55' : '0.92'));
-            document.getElementById('svg-hill').setAttribute('fill', mode === 'snowy' ? '#FFFFFF' : '#D8E2D5');
-            document.getElementById('svg-tower-lights').setAttribute('opacity', (mode === 'night' || mode === 'rainy') ? '0.95' : '0.35');
-            document.getElementById('svg-headlight').setAttribute('opacity', (mode === 'night' || mode === 'rainy') ? '0.7' : '0');
-
-            const count = mode === 'rainy' ? 24 : (mode === 'snowy' ? 22 : (mode === 'night' ? 16 : 0));
+            const count = { rainy: 24, snowy: 22, night: 16 }[mode] || 0;
             for (let i = 0; i < count; i++) {
                 const el = document.createElement('div');
+                el.style.left = `${Math.random() * 96}%`;
                 if (mode === 'rainy') {
                     el.className = 'raindrop';
-                    el.style.left = `${Math.random() * 100}%`;
                     el.style.animationDuration = `${0.65 + Math.random() * 0.4}s`;
                     el.style.animationDelay = `${Math.random() * 1.2}s`;
                 } else if (mode === 'snowy') {
                     el.className = 'snowflake';
-                    const s = 4 + Math.random() * 4;
-                    el.style.width = el.style.height = `${s}px`;
-                    el.style.left = `${Math.random() * 100}%`;
+                    el.style.width = el.style.height = `${4 + Math.random() * 4}px`;
                     el.style.animationDuration = `${2.2 + Math.random() * 1.5}s`;
                     el.style.animationDelay = `${Math.random() * 2}s`;
                 } else {
                     el.className = 'star-dot';
-                    const s = 2 + Math.random() * 2.5;
-                    el.style.width = el.style.height = `${s}px`;
-                    el.style.left = `${Math.random() * 95}%`;
+                    el.style.width = el.style.height = `${2 + Math.random() * 2.5}px`;
                     el.style.top = `${8 + Math.random() * 55}%`;
                     el.style.animationDuration = `${1.2 + Math.random() * 1.4}s`;
                 }
@@ -682,46 +597,48 @@
             }
 
             const icons = { sunny: '☀️', cloudy: '⛅', rainy: '🌧️', snowy: '❄️', night: '🌙' };
-            pill.textContent = isPreview ? `${descText}（點擊切換）` : `${icons[mode] || '☀️'} ${cityText}即時：${tempText}°C ${descText}`;
+            $('live-weather-pill').textContent = isPreview
+                ? `${desc}（點擊切換）`
+                : `${icons[mode] || '☀️'} ${city}即時：${temp}°C ${desc}`;
         }
 
+        // 串接 Open-Meteo 抓取目的地即時氣象
         async function fetchDestinationLiveWeather() {
             const { lat, lng, weatherCity } = activeUpcomingTrip;
             try {
                 const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,is_day&timezone=auto`);
-                const data = await res.json();
-                if (data?.current) {
-                    const temp = Math.round(data.current.temperature_2m);
-                    const code = data.current.weather_code;
-                    const isDay = data.current.is_day === 1;
-                    let mode = 'sunny', desc = '晴時多雲';
-                    if ([51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(code)) { mode = 'rainy'; desc = code >= 95 ? '雷陣雨' : '降雨中'; }
-                    else if ([71, 73, 75, 77, 85, 86].includes(code)) { mode = 'snowy'; desc = '降雪中'; }
-                    else if (!isDay) { mode = 'night'; desc = '星夜微風'; }
-                    else if ([2, 3, 45, 48].includes(code)) { mode = 'cloudy'; desc = '多雲微風'; }
-                    liveDetectedWeather = { mode, temp, desc };
-                    applyIllustrationWeather(mode, weatherCity, temp, desc, false);
-                }
-            } catch (e) {
-                applyIllustrationWeather('sunny', weatherCity, 29, '晴時多雲', false);
+                const { current } = await res.json();
+                if (!current) throw new Error();
+                const temp = Math.round(current.temperature_2m);
+                const code = current.weather_code;
+                let mode = 'sunny', desc = '晴時多雲';
+                if ([51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(code)) { mode = 'rainy'; desc = code >= 95 ? '雷陣雨' : '降雨中'; }
+                else if ([71, 73, 75, 77, 85, 86].includes(code)) { mode = 'snowy'; desc = '降雪中'; }
+                else if (current.is_day !== 1) { mode = 'night'; desc = '星夜微風'; }
+                else if ([2, 3, 45, 48].includes(code)) { mode = 'cloudy'; desc = '多雲微風'; }
+                liveWeather = { mode, temp, desc };
+                applyIllustrationWeather(mode, weatherCity, temp, desc);
+            } catch {
+                applyIllustrationWeather('sunny', weatherCity, 29, '晴時多雲');
             }
         }
 
         function renderActiveUpcomingTrip() {
             const t = activeUpcomingTrip;
-            document.getElementById('up-title').textContent = t.tripTitle;
-            document.getElementById('up-route-tag').textContent = t.routeTag;
-            document.getElementById('up-member-tag').textContent = t.memberTag;
-            document.getElementById('up-date-text').textContent = t.dateSubTitle;
-            document.getElementById('up-vehicle-tag').textContent = t.vehicleTag;
-            document.getElementById('up-memo-list').innerHTML = t.memoHtml;
-            document.getElementById('up-link-btn').href = `journal.html?trip=${t.tripId}&view=itinerary`;
-            document.getElementById('ongoing-next-name').textContent = t.tripTitle;
-            document.getElementById('ongoing-next-date').textContent = t.startDate.replace(/-/g, '/');
+            $('up-title').textContent = t.tripTitle;
+            $('up-route-tag').textContent = t.routeTag;
+            $('up-member-tag').textContent = t.memberTag;
+            $('up-date-text').textContent = t.dateSubTitle;
+            $('up-vehicle-tag').textContent = t.vehicleTag;
+            $('up-memo-list').innerHTML = t.memoHtml;
+            $('up-link-btn').href = `journal.html?trip=${t.tripId}&view=itinerary`;
+            if ($('ongoing-next-name')) $('ongoing-next-name').textContent = t.tripTitle;
+            if ($('ongoing-next-date')) $('ongoing-next-date').textContent = t.startDate.replace(/-/g, '/');
             fetchDestinationLiveWeather();
             updateClockAndCountdown();
         }
 
+        // 即時時鐘、倒數計時與「旅途連載」自動切換
         function updateClockAndCountdown() {
             const now = new Date();
             const t = activeUpcomingTrip;
@@ -729,151 +646,132 @@
                 const timeStr = new Intl.DateTimeFormat('zh-TW', {
                     timeZone: t.timezone, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
                 }).format(now);
-                document.getElementById('dest-clock').textContent = `🕒 ${t.timezoneLabel} ${timeStr}`;
-            } catch (e) {}
+                $('dest-clock').textContent = `🕒 ${t.timezoneLabel} ${timeStr}`;
+            } catch {}
 
             const depTime = new Date(`${t.startDate}T08:00:00+08:00`);
             const retTime = new Date(`${t.endDate}T23:59:59+08:00`);
             const diffMs = depTime - now;
 
-            const badgeEl = document.getElementById('up-status-badge');
-            const noteEl = document.getElementById('up-note-text');
-
             if (diffMs > 0) {
-                const s = Math.floor(diffMs / 1000);
-                const d = Math.floor(s / 86400);
-                document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
-                document.getElementById('cd-hours').textContent = String(Math.floor((s % 86400) / 3600)).padStart(2, '0');
-                document.getElementById('cd-mins').textContent = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
-                document.getElementById('cd-secs').textContent = String(s % 60).padStart(2, '0');
-                badgeEl.textContent = `距離出發還有 ${d} 天`;
-                noteEl.textContent = `距離展開 ${t.tripTitle}（${t.startDate.replace(/-/g, '/')} 出發）倒數計時中`;
+                const s = Math.floor(diffMs / 1000), d = Math.floor(s / 86400);
+                $('cd-days').textContent = String(d).padStart(2, '0');
+                $('cd-hours').textContent = String(Math.floor((s % 86400) / 3600)).padStart(2, '0');
+                $('cd-mins').textContent = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+                $('cd-secs').textContent = String(s % 60).padStart(2, '0');
+                $('up-status-badge').textContent = `距離出發還有 ${d} 天`;
+                $('up-note-text').textContent = `距離展開 ${t.tripTitle}（${t.startDate.replace(/-/g, '/')} 出發）倒數計時中`;
             } else if (now <= retTime) {
                 const curDay = Math.floor((now - depTime) / 86400000) + 1;
-                document.getElementById('cd-days').textContent = `D${curDay}`;
-                document.getElementById('cd-hours').textContent = '旅';
-                document.getElementById('cd-mins').textContent = '途';
-                document.getElementById('cd-secs').textContent = '中';
-                badgeEl.textContent = `🚃 旅途連載・Day ${String(curDay).padStart(2, '0')}`;
-                noteEl.textContent = `正在享受 ${t.tripTitle} 的美好時光！`;
+                const dayStr = String(curDay).padStart(2, '0');
+                $('cd-days').textContent = `D${curDay}`;
+                $('cd-hours').textContent = '旅';
+                $('cd-mins').textContent = '途';
+                $('cd-secs').textContent = '中';
+                $('up-status-badge').textContent = `🚃 旅途連載・Day ${dayStr}`;
+                $('up-note-text').textContent = `正在享受 ${t.tripTitle} 的美好時光！`;
 
-                const ongoingContainer = document.getElementById('ongoing-container');
-                const upcomingWrap = document.getElementById('upcoming-content-wrap');
-                if (ongoingContainer && upcomingWrap && document.getElementById('ongoing-empty')) {
-                    ongoingContainer.innerHTML = '';
-                    ongoingContainer.appendChild(upcomingWrap.cloneNode(true));
+                // 切換為獨立實戰卡片（不複製重複 ID）
+                if ($('ongoing-empty')) {
+                    $('ongoing-container').innerHTML = `
+                        <div class="upcoming-container">
+                            <div class="upcoming-main-card">
+                                <div class="upcoming-body">
+                                    <div class="upcoming-tags">
+                                        <span class="up-tag">🚃 旅途進行中・Day ${dayStr}</span>
+                                        <span class="up-tag members">${t.routeTag}</span>
+                                    </div>
+                                    <h3 class="upcoming-title">${t.tripTitle}</h3>
+                                    <p class="upcoming-subtitle">${t.dateSubTitle}</p>
+                                    <div class="empty-actions" style="justify-content:flex-start;">
+                                        <a href="journal.html?trip=${t.tripId}&view=itinerary" class="upcoming-action-btn">📅 開啟今日行程</a>
+                                        <a href="journal.html?trip=${t.tripId}&view=info" class="upcoming-action-btn">📡 查看即時情報</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
                 }
             }
         }
 
-        document.getElementById('live-weather-pill').addEventListener('click', () => {
-            currentWeatherModeIndex = (currentWeatherModeIndex + 1) % WEATHER_PREVIEW_MODES.length;
-            const picked = WEATHER_PREVIEW_MODES[currentWeatherModeIndex];
-            if (picked.key === 'LIVE') {
-                applyIllustrationWeather(liveDetectedWeather.mode, activeUpcomingTrip.weatherCity, liveDetectedWeather.temp, liveDetectedWeather.desc, false);
-            } else {
-                applyIllustrationWeather(picked.key, activeUpcomingTrip.weatherCity, picked.temp, picked.label, true);
-            }
+        // 點擊天氣膠囊切換預覽動畫
+        $('live-weather-pill').addEventListener('click', () => {
+            weatherModeIdx = (weatherModeIdx + 1) % WEATHER_MODES.length;
+            const picked = WEATHER_MODES[weatherModeIdx];
+            picked.key === 'LIVE'
+                ? applyIllustrationWeather(liveWeather.mode, activeUpcomingTrip.weatherCity, liveWeather.temp, liveWeather.desc)
+                : applyIllustrationWeather(picked.key, activeUpcomingTrip.weatherCity, picked.temp, picked.label, true);
         });
 
-        /* === PART 2：已完成書櫃篩選器（自動讀取 data/[id].json 的 isDraft 狀態） === */
+        /* === 【⚙️ 功能設定】3. 歸檔書櫃篩選與 isDraft 連動 === */
         const continentBtns = document.querySelectorAll('#continent-filters .filter-btn');
-        const countryRow = document.getElementById('country-filters');
         const countryBtns = document.querySelectorAll('#country-filters .country-btn');
-        const cardsGrid = document.getElementById('cards-grid');
         const allCards = Array.from(document.querySelectorAll('.trip-card'));
-        const emptyState = document.getElementById('empty-state');
-
         let currentContinent = 'ALL', currentCountry = null;
-        let publishedCards = [];
-        const activeCountries = new Set();
 
-        // 0ms 初始防閃爍預判：尚未出發的卡片先暫時隱藏，待讀取 JSON 後依 isDraft 決定最終狀態
-        const todayNow = new Date();
-        allCards.forEach(card => {
-            if (card.dataset.start && new Date(`${card.dataset.start}T00:00:00`) > todayNow) {
-                card.dataset.status = 'draft';
-            }
+        // 尚未出發的卡片先暫時隱藏，避免畫面閃爍
+        const today = new Date();
+        allCards.forEach(c => {
+            if (c.dataset.start && new Date(`${c.dataset.start}T00:00:00`) > today) c.dataset.status = 'draft';
         });
 
         function rebuildPublishedState() {
-            publishedCards = allCards.filter(c => c.dataset.status !== 'draft');
-            activeCountries.clear();
-            publishedCards.forEach(c => {
+            const activeCountries = new Set();
+            allCards.filter(c => c.dataset.status !== 'draft').forEach(c => {
                 (c.dataset.country || '').split(',').map(s => s.trim()).filter(Boolean).forEach(x => activeCountries.add(x));
             });
 
-            // 若當前選中的國家因隱藏卡片而不再有效，自動重置國家篩選
-            if (currentCountry && !activeCountries.has(currentCountry)) {
-                currentCountry = null;
-            }
+            if (currentCountry && !activeCountries.has(currentCountry)) currentCountry = null;
 
             countryBtns.forEach(b => {
                 b.classList.toggle('active', b.dataset.country === currentCountry);
                 b.style.display = (currentContinent !== 'ALL' && b.dataset.continent === currentContinent && activeCountries.has(b.dataset.country))
-                    ? 'inline-block'
-                    : 'none';
+                    ? 'inline-block' : 'none';
             });
-            countryRow.style.display = currentContinent === 'ALL' ? 'none' : 'flex';
+            $('country-filters').style.display = currentContinent === 'ALL' ? 'none' : 'flex';
             applyFilter();
         }
 
         function applyFilter() {
             let count = 0;
             allCards.forEach(card => {
-                if (card.dataset.status === 'draft') {
-                    card.style.display = 'none';
-                    return;
-                }
+                if (card.dataset.status === 'draft') { card.style.display = 'none'; return; }
                 const matchCont = currentContinent === 'ALL' || card.dataset.continent === currentContinent;
                 const matchCtry = !currentCountry || (card.dataset.country || '').split(',').map(s => s.trim()).includes(currentCountry);
-                card.style.display = (matchCont && matchCtry) ? 'block' : 'none';
-                if (matchCont && matchCtry) count++;
+                const show = matchCont && matchCtry;
+                card.style.display = show ? 'block' : 'none';
+                if (show) count++;
             });
-            cardsGrid.classList.toggle('single-card', count === 1);
-            emptyState.style.display = count === 0 ? 'block' : 'none';
+            $('cards-grid').classList.toggle('single-card', count === 1);
+            $('empty-state').style.display = count === 0 ? 'block' : 'none';
         }
 
-        // 讀取 data/[location_year].json 中的 isDraft 欄位，自動更新歸檔書櫃的卡片顯示與國家按鈕
+        // 讀取 data/*.json 的 isDraft 欄位同步歸檔狀態
         async function syncCardsWithDataJson() {
             const now = new Date();
-            await Promise.all(allCards.map(async (card) => {
+            await Promise.all(allCards.map(async card => {
                 const id = card.dataset.tripId;
                 if (!id) return;
-
                 let dataJson = null;
                 try {
                     const res = await fetch(`data/${id}.json?t=${Date.now()}`, { cache: 'no-store' });
                     if (res.ok) dataJson = await res.json();
-                } catch (e) {}
+                } catch {}
 
-                let isDraft = false;
+                let isDraft = true;
                 if (dataJson) {
                     if (typeof dataJson.isDraft === 'boolean') {
-                        // 1. 若 JSON 最外層有明確設定 "isDraft": true / false，優先以此為準
                         isDraft = dataJson.isDraft;
                     } else if (dataJson.hidden === true || dataJson.status === 'draft') {
                         isDraft = true;
-                    } else if (Array.isArray(dataJson.days)) {
-                        // 2. 若未設定最外層 isDraft，但所有天數皆標記為 isDraft 或尚無任何天數，或是出發日尚未到來，預設隱藏
-                        const visibleDays = dataJson.days.filter(d => !d.isDraft);
+                    } else {
+                        const visibleDays = (dataJson.days || []).filter(d => !d.isDraft);
                         const isFuture = card.dataset.start && new Date(`${card.dataset.start}T00:00:00`) > now;
-                        if (visibleDays.length === 0 || isFuture) {
-                            isDraft = true;
-                        }
+                        isDraft = visibleDays.length === 0 || isFuture;
                     }
-                } else {
-                    // 找不到 data/[id].json 時視為尚未撰寫遊記，自動隱藏
-                    isDraft = true;
                 }
-
-                if (isDraft) {
-                    card.dataset.status = 'draft';
-                } else {
-                    delete card.dataset.status;
-                }
+                isDraft ? (card.dataset.status = 'draft') : delete card.dataset.status;
             }));
-
             rebuildPublishedState();
         }
 
@@ -891,6 +789,18 @@
             applyFilter();
         }));
 
+        /* === 【⚙️ 功能設定】4. Netlify 後台驗證自動跳轉 === */
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on('init', user => {
+                if (!user) window.netlifyIdentity.on('login', () => { location.href = '/admin/'; });
+            });
+            window.netlifyIdentity.on('invite', () => {
+                window.netlifyIdentity.open();
+                window.netlifyIdentity.on('signup', () => { location.href = '/admin/'; });
+            });
+        }
+
+        /* === 啟動初始化 === */
         rebuildPublishedState();
         syncCardsWithDataJson();
         discoverAllItineraryTrips();
