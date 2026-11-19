@@ -3,10 +3,12 @@
   "avatar": "🦊",
   "endDate": "2026-01-17",
   "tripTitle": "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 日本東北冬季漫旅",
+  "isDraft": false,
   "days": [
     {
       "day": "Day 01",
       "dayTitle": "南部人追雪去！高雄直飛成田轉新幹線：3000公里的移動全紀錄",
+      "isDraft": false,
       "isFieldTest": false,
       "chapters": [
         {
@@ -23,7 +25,7 @@
             { "src": "media/tohoku_2026/d1-ch1-2.png", "caption": "" },
             { "src": "media/tohoku_2026/d1-ch1-3.png", "caption": "" }
           ],
-          "content": "帶著輕簡的行囊，搭乘機場接送專車摸黑出發，準備展開三千公里的雪國旅程。搭乘 AirAsia FD234 直飛成田，揮別熱情的太陽，準備迎接零下北國。<div class='callout-box callout-tip'><div class='callout-icon'>💳</div><div class='callout-content'><div class='callout-title'>省錢妙招｜善用信用卡機場接送優惠</div>預訂機場專車前，別忘了先確認手邊刷機票的信用卡權益！許多銀行都有提供<strong>免費或卡友專屬優惠價的機場接送服務</strong>（通常需提前預約），不妨先與平台方案比價看看哪個最划算！</div></div><div class='callout-box callout-tip'><div class='callout-icon'>🚗</div><div class='callout-content'><div class='callout-title'>專車預約｜車型與行李計件規則</div><ul><li><strong>車型選擇：</strong>五人座（1-3人，2-4件大行李）、七人座（4-6人，4-6件大行李）、九人座（5-8人，6-8件大行李）。</li><li><strong>計件規則：</strong>20吋以上皆算大行李，紙箱不論大小皆算一件；特殊行李（如嬰兒車、滑雪板）須預先告知。</li></ul></div></div>",
+          "content": "帶著輕簡行囊搭專車摸黑出發，乘 AirAsia FD234 直飛成田，揮別南台灣的陽光，展開三千公里雪國旅程。<div class='callout-box callout-tip'><div class='callout-icon'>💳</div><div class='callout-content'><div class='callout-title'>省錢妙招｜信用卡機場接送</div>預訂專車前先確認刷機票的信用卡權益，不少銀行提供<strong>免費或優惠價接送</strong>（需提前預約），可先與平台比價。</div></div><div class='callout-box callout-tip'><div class='callout-icon'>🚗</div><div class='callout-content'><div class='callout-title'>專車預約｜車型與行李規則</div><ul><li><strong>車型：</strong>五人座（1–3人、2–4件大行李）、七人座（4–6人、4–6件）、九人座（5–8人、6–8件）。</li><li><strong>計件：</strong>20吋以上及紙箱皆算一件大行李；嬰兒車、滑雪板等特殊行李須事先告知。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -46,7 +48,7 @@
             { "src": "media/tohoku_2026/d1-ch2-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d1-ch2-4.png", "caption": "" }
           ],
-          "content": "抵達 9°C 的成田機場，順利兌換 Skyliner 車票直奔東京上野。在 JR 上野站旁的「いろり庵きらくそば」快速解決美味的蕎麥麵與烏龍麵，儲存體力！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>換票留意｜Skyliner 兌換與乘車</div><ul><li><strong>不能直接刷 QR Code：</strong>拿到 QR code 後，務必至成田機場 B1 的自動售票機或服務中心換取<strong>實體車票</strong>才能搭乘。</li><li><strong>排隊方向確認：</strong>在 JR 上野站轉乘新幹線時，注意別排錯往成田機場的反向隊伍。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🍜</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜いろり庵きらくそば 上野店</div><ul><li><strong>位置：</strong>JR 上野站 1F 中央改札外（出改札口後往左、淺草口方向左側）。</li><li><strong>營業時間：</strong>平日 06:30–22:30 / 週六 06:30–22:00 / 週日及假日 07:00–21:30。</li><li><strong>平均預算：</strong>約 ¥450 – ¥850（支援現金與 Suica 等交通系 IC 卡）。</li><li><strong>預留時間：</strong>約 20 – 30 分鐘完食。</li><li><strong>餐點推薦：</strong>什錦天婦羅蕎麥麵（かき揚げそば）。</li></ul></div></div>",
+          "content": "抵達 9°C 的成田機場，兌換 Skyliner 車票直奔上野。轉車空檔在 JR 上野站旁「いろり庵きらくそば」快速享用蕎麥麵與烏龍麵補充體力。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>換票留意｜Skyliner 乘車提醒</div><ul><li><strong>須換實體票：</strong>QR Code 無法直接進站，須至成田機場 B1 售票機或櫃檯兌換<strong>實體車票</strong>。</li><li><strong>確認方向：</strong>上野站轉乘新幹線時留意動線，避免排錯往機場的隊伍。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🍜</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜いろり庵きらくそば 上野店</div><ul><li><strong>位置：</strong>JR 上野站 1F 中央改札外（出站往左、淺草口方向左側）。</li><li><strong>營業：</strong>平日 06:30–22:30／週六至 22:00／週日及假日 07:00–21:30。</li><li><strong>預算：</strong>¥450–¥850（現金／IC 卡）。</li><li><strong>時間：</strong>約 20–30 分鐘。</li><li><strong>推薦：</strong>什錦天婦羅蕎麥麵（かき揚げそば）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -69,7 +71,7 @@
             { "src": "media/tohoku_2026/d1-ch3-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d1-ch3-2.png", "caption": "" }
           ],
-          "content": "一手拉著行李、一手拿著票券，搭上前往山形的新幹線。看著窗外路邊的積雪映入眼簾，隨著列車廣播響起：「山形，請多多指教了！」<div class='callout-box callout-sci'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>鐵道迷必看：福島站「華麗分手」</div>搭乘山形新幹線「翼號」時，列車在經過<strong>福島站</strong>時會有著名的解聯奇觀：車身較窄的 Tsubasa 會與前方連結的 Yamabiko 山彥號在此分道揚鑣，獨自進入山區前往山形。</div></div>",
+          "content": "拖著行李搭上往山形的新幹線，窗外漸現路邊積雪，隨著到站廣播響起：「山形，請多多指教！」<div class='callout-box callout-sci'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>鐵道迷必看：福島站「華麗分手」</div>山形新幹線「翼號（Tsubasa）」在<strong>福島站</strong>會與前方的「山彥號（Yamabiko）」解聯，車身較窄的翼號隨後獨自駛入山區前往山形。</div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -81,8 +83,8 @@
         },
         {
           "id": "d1-ch4",
-          "lat": 38.2490,
-          "lng": 140.3280,
+          "lat": 38.249,
+          "lng": 140.328,
           "zoom": 15,
           "transport": "hsr",
           "title": "04. 抵達｜山形大都會飯店與五十番中華料理",
@@ -92,7 +94,7 @@
             { "src": "media/tohoku_2026/d1-ch4-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d1-ch4-2.png", "caption": "" }
           ],
-          "content": "入住與 JR 山形站東口直結的「Hotel Metropolitan Yamagata」，從檢票口出來不用吹風淋雪，3 分鐘即達溫暖大廳。晚餐在站前步行 3 分鐘的「山形五十番飯店」享用充滿鍋氣的炒飯與炒豆苗，在零下低溫中溫暖收尾！<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>點餐小撇步｜附圖平板點餐</div>桌邊配有觸控平板且附餐點照片，免開口就能輕鬆加點。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🍽️</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜山形五十番飯店 駅前店</div><ul><li><strong>位置：</strong>JR 山形站東口步行約 2–3 分鐘（山形市香澄町 1-8-8 1F）。</li><li><strong>營業時間：</strong>週一至週六 11:30–15:00、15:30–02:00 / 週四晚間 17:00 開始 / 週日公休）。</li><li><strong>平均預算：</strong>約 ¥800 – ¥1,500（以現金支付為主，建議備妥現金）。</li><li><strong>預留時間：</strong>約 40–50 分鐘即可完食。</li><li><strong>推薦餐點：</strong>炒飯（チャーハン）、炒豆苗（豆苗炒め）。</li></ul></div></div>",
+          "content": "入住與 JR 山形站東口直結的「山形大都會飯店」，出站 3 分鐘不吹風淋雪即達大廳。晚餐到站前步行 3 分鐘的「山形五十番飯店」，用鍋氣十足的炒飯與炒豆苗溫暖收尾。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>點餐小撇步｜附圖平板點餐</div>桌邊設有附照片的觸控平板，免開口也能輕鬆加點。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🍽️</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜山形五十番飯店 駅前店</div><ul><li><strong>位置：</strong>山形市香澄町 1-8-8 1F（JR 山形站東口步行 2–3 分鐘）。</li><li><strong>營業：</strong>週一至六 11:30–15:00、15:30–02:00（週四晚間 17:00 開始）／週日公休。</li><li><strong>預算：</strong>¥800–¥1,500（以現金為主）。</li><li><strong>時間：</strong>約 40–50 分鐘。</li><li><strong>推薦：</strong>炒飯（チャーハン）、炒豆苗（豆苗炒め）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -110,6 +112,7 @@
     {
       "day": "Day 02",
       "dayTitle": "走進零下 10 度的白色異世界！藏王樹冰震撼絕景",
+      "isDraft": false,
       "isFieldTest": false,
       "chapters": [
         {
@@ -127,7 +130,7 @@
             { "src": "media/tohoku_2026/d2-ch1-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d2-ch1-4.mp4", "caption": "" }
           ],
-          "content": "從山形站前 1 號月台搭乘山交巴士前往藏王溫泉。下車後穿戴好簡易冰爪套，小心翼翼踩在結冰路面上步行約 15 分鐘抵達「藏王山麓站」。隨著第一段山麓線與第二段山頂線纜車緩緩攀升，成千上萬隻白色雪怪佇立在山坡上，壯闊景色讓人屏息！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>小提醒｜藏王交通與雪地行走</div><ul><li><strong>套票政策變動：</strong>2026 年山交巴士停售「藏王樹冰套票」，建議提早至山形站前排隊購票，或事先於網路預訂「藏王纜車優先通關票」。</li><li><strong>必備簡易冰爪：</strong>從藏王溫泉巴士站步行往纜車站的路面容易結冰，強烈建議套上簡易冰爪套防滑！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🚡</div><div class='callout-content'><div class='callout-title'>景點資訊｜藏王纜車（蔵王ロープウェイ）</div><ul><li><strong>位置：</strong>自藏王溫泉巴士總站步行約 10–15 分鐘抵達「藏王山麓站」。</li><li><strong>營業時間：</strong>山麓線 08:30–17:00 / 山頂線 08:45–16:45（往返地藏山頂站建議 16:00 前上山）。</li><li><strong>來回票價：</strong>地藏山頂站（全程兩段）成人 ¥4,400、兒童 ¥2,200（支援現金與信用卡）。</li><li><strong>預留時間：</strong>含排隊與山頂賞樹冰拍照，建議預留約 2–3 小時。</li></ul></div></div>",
+          "content": "從山形站前 1 號月台搭山交巴士抵藏王溫泉，套上簡易冰爪沿結冰路面步行約 15 分鐘至「藏王山麓站」。隨兩段纜車攀升，滿山白色雪怪映入眼簾，壯闊得讓人屏息。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>小提醒｜藏王交通與防滑</div><ul><li><strong>套票異動：</strong>2026 年山交巴士停售「藏王樹冰套票」，建議提早至站前排隊或先網購纜車優先票。</li><li><strong>必備冰爪：</strong>巴士站至纜車站路面易結冰，強烈建議套上簡易冰爪防滑。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🚡</div><div class='callout-content'><div class='callout-title'>景點資訊｜藏王纜車（蔵王ロープウェイ）</div><ul><li><strong>位置：</strong>藏王溫泉巴士總站步行 10–15 分鐘至「藏王山麓站」。</li><li><strong>營業：</strong>山麓線 08:30–17:00／山頂線 08:45–16:45（建議 16:00 前上山）。</li><li><strong>票價：</strong>地藏山頂站來回成人 ¥4,400、兒童 ¥2,200（現金／信用卡）。</li><li><strong>時間：</strong>含排隊與山頂賞景約 2–3 小時。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -137,7 +140,7 @@
         },
         {
           "id": "d2-ch2",
-          "lat": 38.1550,
+          "lat": 38.155,
           "lng": 140.4324,
           "zoom": 15,
           "transport": "ropeway",
@@ -150,7 +153,7 @@
             { "src": "media/tohoku_2026/d2-ch2-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d2-ch2-4.mp4", "caption": "" }
           ],
-          "content": "步出地藏山頂站，零下低溫直衝腦門，登上 360 度展望台盡情與樹冰合照。接著躲進 1 樓的「レストラン山頂 (Restaurant Sancho)」來支霜淇淋配熱紅茶回溫（只收現金）。離開前敲響「開運之鐘」、參拜半身埋在白雪中的「藏王地藏尊」，還在棉花般的厚雪上開心往後倒體驗躺雪地，回程更幸運全家包下一整台纜車！<div class='callout-box callout-tip'><div class='callout-icon'>🔋</div><div class='callout-content'><div class='callout-title'>預防掉電｜極凍山頂的手機保命秘訣</div>山頂氣溫極低，手機電量掉速非常驚人！不拍照時務必將<strong>手機與暖暖包一起放進外套懷裡回溫</strong>，避免瞬間凍到自動關機。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🏔️</div><div class='callout-content'><div class='callout-title'>景點資訊｜地藏山頂站展望台 ＆ 藏王地藏尊</div><ul><li><strong>位置：</strong>藏王纜車「地藏山頂站」頂樓（360 度展望台）、1F 站外步行 1 分鐘（藏王地藏尊、開運之鐘）。</li><li><strong>開放時間：</strong>08:45–16:45（隨山頂線纜車營運時間開放，請留意下山末班車時間）。</li><li><strong>參觀費用：</strong>免費開放（需搭乘藏王纜車抵達山頂）。</li><li><strong>預留時間：</strong>約 30–40 分鐘（含頂樓環景拍樹冰、參拜雪中地藏尊與敲鐘體驗）。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>☕</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜レストラン山頂 (Restaurant Sancho)</div><ul><li><strong>位置：</strong>藏王纜車「地藏山頂站」1F 室內暖氣區。</li><li><strong>營業時間：</strong>08:30–16:00（熱食最後點餐時間 15:00）。</li><li><strong>平均預算：</strong>飲品點心約 ¥400–¥700 / 正餐約 ¥1,000–¥1,800（採食券機點餐，<strong>僅收現金</strong>）。</li><li><strong>預留時間：</strong>約 20–30 分鐘（拍完照入內吹暖氣回溫）。</li><li><strong>推薦餐點：</strong>濃郁牛奶霜淇淋配熱紅茶、山形名物芋煮蕎麥麵（芋煮そば）、熱玉蒟蒻。</li></ul></div></div>",
+          "content": "步出地藏山頂站迎面就是零下低溫，在 360 度展望台與樹冰合影後，躲進 1 樓「レストラン山頂」吃霜淇淋配熱紅茶回溫。離開前敲響開運之鐘、參拜半埋雪中的藏王地藏尊，還在厚雪上躺雪玩鬧，回程更幸運全家包下一整台纜車！<div class='callout-box callout-tip'><div class='callout-icon'>🔋</div><div class='callout-content'><div class='callout-title'>預防掉電｜極凍山頂手機保命法</div>山頂極冷掉電極快，不拍時務必將<strong>手機與暖暖包放進外套內袋保暖</strong>，避免自動關機。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🏔️</div><div class='callout-content'><div class='callout-title'>景點資訊｜地藏山頂站展望台 ＆ 藏王地藏尊</div><ul><li><strong>位置：</strong>地藏山頂站頂樓（展望台）、1F 站外步行 1 分鐘（地藏尊、開運之鐘）。</li><li><strong>開放：</strong>08:45–16:45（隨山頂線纜車營運，留意下山末班車）。</li><li><strong>費用：</strong>免費開放（須搭纜車上山）。</li><li><strong>時間：</strong>約 30–40 分鐘。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>☕</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜レストラン山頂 (Restaurant Sancho)</div><ul><li><strong>位置：</strong>地藏山頂站 1F 室內暖氣區。</li><li><strong>營業：</strong>08:30–16:00（熱食 L.O. 15:00）。</li><li><strong>預算：</strong>點心 ¥400–¥700／正餐 ¥1,000–¥1,800（食券機，<strong>僅收現金</strong>）。</li><li><strong>時間：</strong>約 20–30 分鐘。</li><li><strong>推薦：</strong>牛奶霜淇淋配熱紅茶、芋煮蕎麥麵、熱玉蒟蒻。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -168,7 +171,7 @@
             { "src": "media/tohoku_2026/d2-ch3-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d2-ch3-2.mp4", "caption": "" }
           ],
-          "content": "下纜車後步行 2 分鐘來到質感滿分的「音茶屋」。熱騰騰的湯咖哩、咖哩牛與牛蓋飯瞬間療癒飢腸轆轆的胃。最令人驚豔的是甜點「巧克力巴斯克 ft. 柚子檸檬醬」，微酸的自製果醬搭配濃郁巴斯克，清爽不死甜且層次感十足，絕對推薦！<div class='callout-box callout-info'><div class='callout-icon'>🍛</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜音茶屋 (Otochaya)</div><ul><li><strong>位置：</strong>山形市蔵王温泉 553-20（藏王中央纜車溫泉站旁步行約 2 分鐘 / 巴士總站步行約 5 分鐘）。</li><li><strong>營業時間：</strong>10:00–18:00（最後點餐時間 17:30）/ 週三公休。</li><li><strong>平均預算：</strong>約 ¥1,200–¥2,200（支援現金、信用卡與 Suica 等交通系 IC 卡）。</li><li><strong>預留時間：</strong>約 45–60 分鐘完食（下午不午休全日供餐）。</li><li><strong>推薦餐點：</strong>湯咖哩、咖哩牛、牛蓋飯、巧克力巴斯克（佐自製柚子檸檬醬）。</li></ul></div></div>",
+          "content": "下纜車步行 2 分鐘抵達質感小店「音茶屋」，熱騰騰的湯咖哩、咖哩牛與牛蓋飯瞬間療癒脾胃。最驚豔的是「巧克力巴斯克佐柚子檸檬醬」，微酸自製果醬平衡濃郁起司，層次十足。<div class='callout-box callout-info'><div class='callout-icon'>🍛</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜音茶屋 (Otochaya)</div><ul><li><strong>位置：</strong>山形市蔵王温泉 553-20（藏王中央纜車旁步行 2 分鐘／巴士總站步行 5 分鐘）。</li><li><strong>營業：</strong>10:00–18:00（L.O. 17:30，無午休）／週三公休。</li><li><strong>預算：</strong>¥1,200–¥2,200（現金／信用卡／IC 卡）。</li><li><strong>時間：</strong>約 45–60 分鐘。</li><li><strong>推薦：</strong>湯咖哩、咖哩牛、牛蓋飯、巧克力巴斯克。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -188,7 +191,7 @@
             { "src": "media/tohoku_2026/d2-ch4-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d2-ch4-4.mp4", "caption": "" }
           ],
-          "content": "漫步在煙霧繚繞、充滿硫磺香的溫泉街，途經藏王溫泉郵便局（可惜遇上週末公休錯過風景印）。接著獨自挑戰覆滿白雪的五階段長階梯，登上西元 110 年創立的「酢川溫泉神社」感謝山神賜予大晴天。下山時看著結滿白雪的階梯，靈機一動抓緊扶手直接用屁股當雪板「溜滑梯」下山，解鎖另類滑雪成就！<div class='callout-box callout-sci'><div class='callout-icon'>📮</div><div class='callout-content'><div class='callout-title'>集章迷必存：日本郵局「風景印」禮儀與日文</div><ul><li><strong>貼郵票才能蓋：</strong>風景印本質是註銷郵票的郵戳，無論寄出或蓋在集章本收藏，都<strong>必須先購買郵票貼上</strong>才能請櫃檯人員蓋章（僅平日 09:00–17:00 營業）。</li><li><strong>實用日文金句：</strong>「風景印を押してもらえますか？」（請問可以幫我蓋風景印嗎？）</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🏣</div><div class='callout-content'><div class='callout-title'>營業資訊｜藏王溫泉郵便局</div><ul><li><strong>位置：</strong>山形市蔵王温泉 709-1（藏王溫泉巴士總站對面步行約 1 分鐘）。</li><li><strong>營業時間：</strong>平日 09:00–17:00 / 週六、週日及日本國定假日公休。</li><li><strong>郵資參考：</strong>純蓋風景印需貼 ¥85 以上郵票 / 寄台灣等國際明信片郵資 ¥100（支援現金與 Suica 等 IC 卡）。</li><li><strong>預留時間：</strong>約 10–15 分鐘（風景印圖案為藏王樹冰、滑雪客與御釜）。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>景點資訊｜酢川溫泉神社（酢川温泉神社）</div><ul><li><strong>位置：</strong>山形市蔵王温泉 12（自巴士總站沿「高湯通」步行約 6–8 分鐘至紅色鳥居入口）。</li><li><strong>開放時間：</strong>24 小時自由參拜（冬季階梯積雪深厚，強烈建議白天前往）。</li><li><strong>參觀費用：</strong>免費參拜。</li><li><strong>預留時間：</strong>約 25–40 分鐘（含攀登 229 階五階段雪地長階梯與拍照）。</li><li><strong>防滑提醒：</strong>冬季石階常被厚雪掩埋成斜坡，上下山務必抓緊中央扶手並穿戴防滑冰爪！</li></ul></div></div>",
+          "content": "漫步在硫磺氣息瀰漫的溫泉街，經過週末公休的藏王溫泉郵便局後，獨自挑戰覆滿白雪的五段長階梯，登上西元 110 年創立的「酢川溫泉神社」答謝好天氣。下山見階梯積滿厚雪，索性緊抓扶手直接用屁股當雪板溜下來，解鎖另類滑雪成就。<div class='callout-box callout-sci'><div class='callout-icon'>📮</div><div class='callout-content'><div class='callout-title'>集章必存：日本郵局「風景印」規則</div><ul><li><strong>須貼郵票：</strong>風景印屬郵戳，寄出或蓋集章本皆<strong>須先買郵票貼上</strong>（僅平日 09:00–17:00 受理）。</li><li><strong>實用日文：</strong>「風景印を押してもらえますか？」（請問可以蓋風景印嗎？）</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🏣</div><div class='callout-content'><div class='callout-title'>營業資訊｜藏王溫泉郵便局</div><ul><li><strong>位置：</strong>山形市蔵王温泉 709-1（巴士總站對面步行 1 分鐘）。</li><li><strong>營業：</strong>平日 09:00–17:00／週末及國定假日公休。</li><li><strong>郵資：</strong>純蓋章須貼 ¥85 以上郵票／國際明信片 ¥100（現金／IC 卡）。</li><li><strong>時間：</strong>約 10–15 分鐘（圖案為樹冰、滑雪客與御釜）。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>景點資訊｜酢川溫泉神社（酢川温泉神社）</div><ul><li><strong>位置：</strong>山形市蔵王温泉 12（巴士總站沿高湯通步行 6–8 分鐘）。</li><li><strong>開放：</strong>24 小時免費參拜（冬季建議白天前往）。</li><li><strong>時間：</strong>約 25–40 分鐘（含 229 階雪地階梯）。</li><li><strong>防滑：</strong>冬季石階易積雪成斜坡，務必穿戴冰爪並抓緊中央扶手。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -207,7 +210,7 @@
             { "src": "media/tohoku_2026/d2-ch5-2.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d2-ch5-3.mp4", "caption": "" }
           ],
-          "content": "搭巴士返回山形站休整後，直奔東口交通中心 2 樓的肉舖直營店「かかし駅前店」，大啖油花迷人的 A4/A5 山形牛拼盤（盛り合わせ），油脂滲入熱白飯簡直人間天堂！餐後散步前往霞城公園幸運遇上絢麗的冬季煙火大會，最後登上西口直結的「霞城中央大樓（霞城セントラル）」24 樓免費展望台，將 360 度的雪國城市燈火盡收眼底。<div class='callout-box callout-sci'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>吃貨科普：山形牛 vs. 米澤牛，到底差在哪？</div><ul><li><strong>產地範圍：</strong>「山形牛」為山形縣全域飼養合格牛隻；「米澤牛」僅限置賜地區（三市五町）。</li><li><strong>性別與等級：</strong>「山形牛」包含未生育母牛與去勢公牛；「米澤牛」僅限黑毛和種未生育母牛且須達 A3 等級以上，如同山形牛家族中的頂級資優班，價格也較高。同樓層有另一間米澤牛餐廳，進門前別看錯招牌囉！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜山形牛ステーキ＆焼肉 かかし 駅前店</div><ul><li><strong>位置：</strong>JR 山形站東口步行約 2 分鐘（山形市香澄町 1-16-34 東口交通中心 2F）。</li><li><strong>營業時間：</strong>午餐 11:00–15:00（最後點餐時間 14:30） / 晚餐 17:00–22:00（最後點餐時間 21:00）。</li><li><strong>平均預算：</strong>午餐約 ¥1,500–¥3,000 / 晚餐約 ¥4,500–¥8,000（支援現金、信用卡與 Suica 等 IC 卡）。</li><li><strong>預留時間：</strong>約 60–90 分鐘（提供附圖平板點餐；冬季晚餐尖峰建議事先預約或提早入店）。</li> <li><strong>推薦餐點：</strong>A4/A5 山形牛拼盤（盛り合わせ）、山形牛牛排。</li> </ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🌃</div><div class='callout-content'><div class='callout-title'>景點資訊｜霞城中央大樓（霞城セントラル）24F 展望台</div><ul><li><strong>位置：</strong>JR 山形站西口直結（山形市城南町 1-1-1 24F，經 2F 連通道步行約 2–3 分鐘）。</li><li><strong>開放時間：</strong>每日 07:00–23:00。</li><li><strong>參觀費用：</strong>免費開放（可搭乘透明景觀電梯直達 24 樓）。</li><li><strong>預留時間：</strong>約 20–30 分鐘（室內設有暖氣與座位，手機貼緊窗面拍攝可避免玻璃反光）。</li></ul></div></div>",
+          "content": "搭巴士返山形站稍作休息，直奔肉舖直營的「かかし駅前店」大啖油花迷人的 A4/A5 山形牛拼盤，油脂滲進熱白飯簡直銷魂。餐後散步至霞城公園巧遇冬季煙火，最後登上「霞城中央大樓」24 樓免費展望台，將 360 度雪國夜景收進眼底。<div class='callout-box callout-sci'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>吃貨科普：山形牛 vs. 米澤牛</div><ul><li><strong>產地：</strong>山形牛涵蓋全山形縣；米澤牛僅限置賜地區（三市五町）。</li><li><strong>門檻：</strong>米澤牛僅限 A3 以上未生育黑毛母牛，屬山形牛中的頂級優等生、單價較高。同樓層另有一間米澤牛餐廳，入店別看錯招牌。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜山形牛ステーキ＆焼肉 かかし 駅前店</div><ul><li><strong>位置：</strong>山形市香澄町 1-16-34 東口交通中心 2F（JR 山形站東口步行 2 分鐘）。</li><li><strong>營業：</strong>11:00–15:00（L.O. 14:30）／17:00–22:00（L.O. 21:00）。</li><li><strong>預算：</strong>午 ¥1,500–¥3,000／晚 ¥4,500–¥8,000（現金／信用卡／IC 卡）。</li><li><strong>時間：</strong>約 60–90 分鐘（附圖平板點餐，冬季晚餐建議預約）。</li><li><strong>推薦：</strong>A4/A5 山形牛拼盤（盛り合わせ）、山形牛牛排。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🌃</div><div class='callout-content'><div class='callout-title'>景點資訊｜霞城中央大樓（霞城セントラル）24F 展望台</div><ul><li><strong>位置：</strong>山形市城南町 1-1-1 24F（JR 山形站西口經 2F 連通道步行 2–3 分鐘）。</li><li><strong>開放：</strong>07:00–23:00，免費入場（搭透明景觀電梯直達）。</li><li><strong>時間：</strong>約 20–30 分鐘（室內有暖氣，手機貼窗拍可減反光）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -220,6 +223,7 @@
     {
       "day": "Day 03",
       "dayTitle": "穿越時空的大正浪漫！銀山溫泉《神隱少女》湯屋巡禮",
+      "isDraft": false,
       "isFieldTest": false,
       "chapters": [
         {
@@ -227,7 +231,7 @@
           "lat": 38.5959,
           "lng": 140.3753,
           "zoom": 14,
-          "transport": "jr",
+          "transport": "train",
           "title": "01. 出發｜搭乘 JR 奧羽本線前進大石田",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放大石田車站或新幹線照片",
@@ -236,7 +240,7 @@
             { "src": "media/tohoku_2026/d3-ch1-2.png", "caption": "" },
             { "src": "media/tohoku_2026/d3-ch1-3.mp4", "caption": "" }
           ],
-          "content": "早上將大型行李寄放在山形飯店櫃檯後，輕裝出發。搭乘 JR 奧羽本線抵達大石田站，幾乎九成的人都在此下車！準備轉乘巴士前，因為這站的 IC 卡僅限在來線使用，所以乖乖排隊請站務員人工協助過卡，順利通關不用重新買票！",
+          "content": "將大行李寄放山形飯店後輕裝出發，搭 JR 奧羽本線抵大石田站，車上近九成乘客都在此下車。因本站 IC 卡僅限在來線使用，排隊請站務員人工過卡即可順利出站轉乘巴士。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -258,7 +262,7 @@
           "mediaList": [
             { "src": "media/tohoku_2026/d3-ch2-1.mp4", "caption": "" }
           ],
-          "content": "搭上「尾花澤市營巴士銀山線」，一路直達溫泉街入口。下車後映入眼簾的是清澈的銀山川，兩旁並列著三、四層樓高、被白雪覆蓋的木造建築。深吸一口氣，空氣中瀰漫著溫泉特有的氣息，瞬間彷彿乘坐時光機回到了百年前的大正時代。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>銀山溫泉交通管制提醒</div>由於冬季旅客眾多，每年交通管制都會調整：<ul><li><strong>一般路線巴士 (銀山線)：</strong>可直達溫泉街入口，不用換車。</li><li><strong>自駕 / 觀光巴士：</strong>需在大正浪漫館轉乘接駁車。</li><li><strong>大正浪漫館 ⇔ 銀山溫泉：</strong>這段路程在管制期間禁止步行通行。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>♨️</div><div class='callout-content'><div class='callout-title'>景點資訊｜銀山溫泉 大正浪漫街道</div><ul><li><strong>位置：</strong>山形縣尾花澤市銀山新畑（自 JR 大石田站搭乘尾花澤市營巴士約 35–40 分鐘）。</li><li><strong>營業時間：</strong>街道全天開放（冬季一日遊管制時段約 09:00–20:00 / 瓦斯燈約 16:30 陸續點亮）。</li><li><strong>免費足湯：</strong>入口河畔設有「和樂足湯」（09:00–17:30，建議自備小毛巾擦腳）。</li><li><strong>預留時間：</strong>約 2.5–3 小時（含溫泉街漫步拍照與古民家午餐）。</li></ul></div></div>",
+          "content": "搭「尾花澤市營巴士銀山線」直達溫泉街入口。清澈的銀山川兩旁並列著覆雪木造建築，空氣中飄散著溫泉氣息，彷彿瞬間穿越回百年前的大正時代。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>銀山溫泉冬季管制提醒</div><ul><li><strong>一般路線巴士（銀山線）：</strong>直達溫泉街入口免換車。</li><li><strong>自駕／觀光巴士：</strong>須於大正浪漫館轉乘接駁車，管制期間該路段禁止步行。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>♨️</div><div class='callout-content'><div class='callout-title'>景點資訊｜銀山溫泉 大正浪漫街道</div><ul><li><strong>位置：</strong>山形縣尾花澤市銀山新畑（JR 大石田站搭市營巴士約 35–40 分鐘）。</li><li><strong>開放：</strong>全天開放（冬季一日遊管制約 09:00–20:00／瓦斯燈約 16:30 點亮）。</li><li><strong>足湯：</strong>入口河畔「和樂足湯」免費（09:00–17:30，建議自備毛巾）。</li><li><strong>時間：</strong>約 2.5–3 小時（含漫步拍照與午餐）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -279,7 +283,7 @@
             { "src": "media/tohoku_2026/d3-ch3-2.png", "caption": "" },
             { "src": "media/tohoku_2026/d3-ch3-3.mp4", "caption": "" }
           ],
-          "content": "趁早來到才剛營業 10 分鐘就需要候位的「伊豆の華」。這間由築齡 140 年古民家改建的餐廳保留了濃厚的木造結構。幸運坐在二樓窗邊，看著最經典的銀山川神席視角，品嚐尾花沢產「最上早生」蕎麥粉製成的麵條（個人最推薦炸茄子蕎麥麵）。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>覓食小撇步｜搶佔二樓窗邊「銀山川神席」</div>銀山溫泉街內餐廳不多，冬季剛開門極易客滿！建議於 <strong>11:00 開店前抵達</strong>，或到店後先至櫃檯抽取號碼牌；入座時若幸運排到二樓靠窗座位，就能一邊吹暖氣吃蕎麥麵、一邊俯瞰整條大正浪漫雪景街道。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🍜</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜伊豆の華（Izu no Hana）</div><ul><li><strong>位置：</strong>山形県尾花沢市銀山新畑 440（銀山溫泉街入口步行約 2–3 分鐘）。</li><li><strong>營業時間：</strong>11:00–18:00（最後點餐時間 17:30）/ 週三公休（17:00 後為預約制）。</li><li><strong>平均預算：</strong>約 ¥1,500–¥2,400（支援現金、信用卡與 Suica 等交通系 IC 卡）。</li><li><strong>預留時間：</strong>約 45–60 分鐘（2 樓座位區需脫鞋入席）。</li><li><strong>推薦餐點：</strong>炸茄子蘿蔔泥蕎麥麵（揚げ茄子おろしそば，可選冷 / 溫）、蕎麥霜淇淋。</li></ul></div></div>",
+          "content": "提早報到由 140 年古民家改建的人氣名店「伊豆の華」，剛開門 10 分鐘就需候位。幸運坐到二樓窗邊俯瞰銀山川，大啖尾花澤產「最上早生」蕎麥粉製成的炸茄子蕎麥麵，超推！<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>覓食小撇步｜搶佔二樓窗邊神席</div>溫泉街餐廳少且冬季極易客滿，建議 <strong>11:00 開店前抵達</strong>或先抽號碼牌，坐上二樓靠窗位就能邊吹暖氣邊俯瞰整條雪景街。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🍜</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜伊豆の華（Izu no Hana）</div><ul><li><strong>位置：</strong>山形県尾花沢市銀山新畑 440（溫泉街入口步行 2–3 分鐘）。</li><li><strong>營業：</strong>11:00–18:00（L.O. 17:30，17:00 後預約制）／週三公休。</li><li><strong>預算：</strong>¥1,500–¥2,400（現金／信用卡／IC 卡）。</li><li><strong>時間：</strong>約 45–60 分鐘（2 樓需脫鞋入座）。</li><li><strong>推薦：</strong>炸茄子蘿蔔泥蕎麥麵（冷／溫）、蕎麥霜淇淋。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -301,7 +305,7 @@
             { "src": "media/tohoku_2026/d3-ch4-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d3-ch4-2.mp4", "caption": "" }
           ],
-          "content": "順著街道往內走，看見那橫跨溪流的紅色木橋，身後是層層堆疊、煙霧繚繞的「能登屋旅館」。雖然沒有官方證實，但在走過短短幾步路的紅橋時，內心彷彿自動響起了《神隱少女》的配樂，自己就如同千尋一般。<div class='callout-box callout-warning'><div class='callout-icon'>📸</div><div class='callout-content'><div class='callout-title'>拍照禮儀提醒</div>這座紅橋主要供住宿旅客進出，若非住客，建議在橋頭拍照留念即可，避免長時間佔用或擅自闖入旅館喔！</div></div>",
+          "content": "往街道深處走，紅橋橫跨溪流、身後是煙霧繚繞的「能登屋旅館」。雖未獲官方證實，走過紅橋那刻腦海仍自動響起《神隱少女》配樂，彷彿化身千尋。<div class='callout-box callout-warning'><div class='callout-icon'>📸</div><div class='callout-content'><div class='callout-title'>拍照禮儀提醒</div>紅橋主要供住客進出，非住客建議在橋頭留影即可，避免長時間佔用或闖入旅館。</div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -319,7 +323,7 @@
             { "src": "media/tohoku_2026/d3-ch5-1.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d3-ch5-2.mp4", "caption": "" }
           ],
-          "content": "走到溫泉街盡頭，一座高 22 公尺、水聲轟隆的「白銀瀑布」宣洩而下，黑白分明的對比在雪地裡格外震撼，這時天空也開始飄下細雪，浪漫滿分。轉過身，瀑布對面有一處守護兒童安全的「鬼子母神」，在一片雪白中紅色的欄杆十分醒目，洗滌了心靈與精神。",
+          "content": "溫泉街盡頭，高 22 公尺的「白銀瀑布」轟隆宣洩，黑白對比在細雪飄落時格外震撼浪漫。轉身對面則是守護兒童的「鬼子母神」，雪白中的紅色欄杆格外醒目。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -329,14 +333,14 @@
           "lat": 38.2486,
           "lng": 140.3277,
           "zoom": 15,
-          "transport": "jr",
+          "transport": "train",
           "title": "06. 晚餐｜產地直送高品質豬肉的平田牧場",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放平田牧場豬排",
           "mediaList": [
             { "src": "media/tohoku_2026/d3-ch6-1.png", "caption": "" }
           ],
-          "content": "傍晚搭巴士轉 JR 回到山形，在車站東口的「平田牧場」享用產地直送的高品質豬肉後，領取行李搭乘高速巴士大移動前往仙台。<div class='callout-box callout-sci'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>吃貨科普：平田牧場「金華豚」vs.「三元豚」怎麼選？</div><ul><li><strong>金華豚（幻之豚）：</strong>培育難度極高的珍稀品種，白色油脂豐潤甘甜、入口即化，適合喜愛濃郁脂香的饕客。</li><li><strong>三元豚：</strong>由三種純種豬培育而成，肉質緊實彈牙、瘦肉與油花比例均衡；有選擇障礙最推薦直接點「雙拼套餐（食べ比べ膳）」一次滿足！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🐷</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜平田牧場 ホテルメトロポリタン山形店</div><ul><li><strong>位置：</strong>JR 山形站 2F 改札口外右側步行 1 分鐘（山形市香澄町 1-1-1 山形大都會大飯店 2F）。</li><li><strong>營業時間：</strong>餐廳 11:00–21:00（最後點餐時間 20:00） / 物販外帶區 10:00–20:00。</li><li><strong>平均預算：</strong>約 ¥1,600–¥3,200（支援現金、信用卡與 Suica 等交通系 IC 卡）。</li><li><strong>預留時間：</strong>約 45–60 分鐘完食。</li><li><strong>推薦餐點：</strong>金華豚＆三元豚雙拼豬排套餐、金華豚厚切里肌豬排（內用山形「つや姫」白飯、高麗菜絲與味噌湯可免費續加）。</li></ul></div></div>",
+          "content": "傍晚轉車回到山形，在車站旁的「平田牧場」品嚐產地直送的優質豬排，接著領取行李搭高速巴士前往仙台。<div class='callout-box callout-sci'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>吃貨科普：金華豚 vs. 三元豚</div><ul><li><strong>金華豚（幻之豚）：</strong>珍稀品種，油脂甘甜入口即化，適合愛濃郁脂香者。</li><li><strong>三元豚：</strong>肉質緊實彈牙、油瘦均衡；選擇障礙直接點「雙拼套餐（食べ比べ膳）」。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🐷</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜平田牧場 ホテルメトロポリタン山形店</div><ul><li><strong>位置：</strong>JR 山形站 2F 改札外右側步行 1 分鐘（山形大都會大飯店 2F）。</li><li><strong>營業：</strong>餐廳 11:00–21:00（L.O. 20:00）／外帶 10:00–20:00。</li><li><strong>預算：</strong>¥1,600–¥3,200（現金／信用卡／IC 卡）。</li><li><strong>時間：</strong>約 45–60 分鐘。</li><li><strong>推薦：</strong>金華豚＆三元豚雙拼、金華豚厚切里肌（內用白飯、高麗菜絲、味噌湯免費續）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -358,7 +362,7 @@
             { "src": "media/tohoku_2026/d3-ch7-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d3-ch7-2.png", "caption": "" }
           ],
-          "content": "經歷近一小時的高速巴士車程，終於抵達被譽為溫泉系商務飯店的「御宿 野乃仙台」。全館榻榻米設計讓人進門就脫鞋，彷彿回到家般放鬆。晚上 21:30 泡完天然溫泉後，來碗免費提供的清爽醬油拉麵，為奔波的一天畫下最溫暖的句點！<div class='callout-box callout-warning'><div class='callout-icon'>🚌</div><div class='callout-content'><div class='callout-title'>山形 ⇔ 仙台 交通末班車警報</div><ul><li><strong>高速巴士：</strong>末班車 21:30（從山形車站前1號搭往廣瀨通一番町）。</li><li><strong>JR 仙山線：</strong>末班車 21:46。</li><li><strong>計程車代價：</strong>錯過末班車，計程車至少 ¥15,000 起跳（不含夜間加成），千萬別跟荷包開玩笑！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>♨️</div><div class='callout-content'><div class='callout-title'>飯店資訊｜天然温泉 杜都の湯 御宿 野乃仙台</div><ul><li><strong>位置與交通：</strong>地下鐵「廣瀨通站」東 2 出口步行 1 分鐘 / 山形高速巴士於「廣瀨通一番町」下車步行約 5 分鐘 / JR 仙台站步行約 12 分鐘（仙台市青葉區本町 2-2-5）。</li><li><strong>入住 / 退房：</strong>Check-in 15:00 後 / Check-out 11:00 前。</li><li><strong>溫泉開放時間：</strong>14F 天然溫泉大浴場 15:00–翌 10:00（徹夜開放，僅 01:00–05:00 桑拿暫停）。</li><li><strong>免費住客福利：</strong>2F 宵夜醬油拉麵（21:30–23:00）、14F 泡湯後免費冰棒（15:00–01:00）＆晨間乳酸菌飲料（05:00–10:00）。</li><li><strong>貼心設施：</strong>全館榻榻米地板（進門即脫鞋，備有行李箱擦輪機）、免費自助洗衣機（烘衣機 20 分鐘 ¥100），房內電視可即時查看浴場與洗衣機擁擠度。</li></ul></div></div>",
+          "content": "搭近一小時高速巴士抵達溫泉系商務飯店「御宿 野乃仙台」。全館榻榻米進門即脫鞋，晚上 21:30 泡完天然溫泉再來碗免費醬油拉麵，完美撫慰整天奔波。<div class='callout-box callout-warning'><div class='callout-icon'>🚌</div><div class='callout-content'><div class='callout-title'>山形 ⇔ 仙台 末班車警報</div><ul><li><strong>高速巴士：</strong>末班 21:30（山形站前 1 號往廣瀨通一番町）。</li><li><strong>JR 仙山線：</strong>末班 21:46。</li><li><strong>錯過代價：</strong>計程車至少 ¥15,000 起跳（不含夜間加成），務必抓準時間。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>♨️</div><div class='callout-content'><div class='callout-title'>飯店資訊｜天然温泉 杜都の湯 御宿 野乃仙台</div><ul><li><strong>交通：</strong>仙台市青葉區本町 2-2-5（地鐵廣瀨通站東 2 出口步行 1 分鐘／山形巴士廣瀨通一番町下車 5 分鐘／JR 仙台站 12 分鐘）。</li><li><strong>入住／退房：</strong>15:00 後／11:00 前。</li><li><strong>溫泉：</strong>14F 天然大浴場 15:00–翌 10:00（01:00–05:00 桑拿暫停）。</li><li><strong>免費福利：</strong>2F 宵夜拉麵（21:30–23:00）、14F 冰棒（15:00–01:00）＆晨間乳酸飲（05:00–10:00）。</li><li><strong>設施：</strong>全館榻榻米（備行李擦輪機）、免費洗衣機（烘衣 20 分鐘 ¥100），電視可查浴場與洗衣機使用狀態。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -377,6 +381,7 @@
     {
       "day": "Day 04",
       "dayTitle": "融化了！藏王狐狸村一日遊：被百隻狐狸包圍的幸福時刻 🥰",
+      "isDraft": false,
       "isFieldTest": true,
       "chapters": [
         {
@@ -392,14 +397,14 @@
             { "src": "media/tohoku_2026/d4-ch1-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d4-ch1-2.mp4", "caption": "" }
           ],
-          "content": "早上 08:00 從飯店出發，慢慢散步至藍色 HIS 標誌的集合點「仙台站東口觀光巴士乘車點」。08:45 準時搭上暖氣充足的專車，一路前往宮城藏王狐狸村。",
+          "content": "08:00 從飯店散步至仙台站東口觀光巴士乘車點（藍色 HIS 標誌），08:45 準時搭上暖氣專車前往宮城藏王狐狸村。",
           "affiliateText": "官方網站｜株式会社エイチ・アイ・エス（H.I.S 日本旅行）",
           "affiliateUrl": "https://bushisgo.rezio.shop/zh-TW",
           "affiliateLinks": []
         },
         {
           "id": "d4-ch2",
-          "lat": 38.0410,
+          "lat": 38.041,
           "lng": 140.5304,
           "zoom": 15,
           "transport": "drive",
@@ -411,7 +416,7 @@
             { "src": "media/tohoku_2026/d4-ch2-2.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d4-ch2-3.mp4", "caption": "" }
           ],
-          "content": "抵達宮城藏王狐狸村。雖然因為風雪交加取消了抱狐狸體驗，但在雪白園區中看著成群狐狸在雪地裡穿梭，甚至調皮地咬了褲腳與衣襬，也是最近距離的深刻互動。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>狐狸村安全與參觀小提醒</div><ul><li><strong>絕對禁止觸摸：</strong>放養區狐狸具有野性，可能會咬人，只有在工作人員指導的體驗活動中才能觸碰。</li><li><strong>收好隨身物品：</strong>狐狸對懸掛物很有興趣，手機吊飾、手套繩務必收好。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🦊</div><div class='callout-content'><div class='callout-title'>景點資訊｜宮城藏王狐狸村（宮城蔵王キツネ村）</div><ul><li><strong>位置：</strong>宮城県白石市福岡八宮字川原子 11-3（建議搭乘仙台出發一日遊巴士，或自 JR 白石藏王站搭計程車約 25 分鐘）。</li><li><strong>營業時間：</strong>冬季（12/1–3/15）09:00–16:00（最後入園時間 15:30）/ 夏季至 17:00 / 週三公休（2 月無休）。</li><li><strong>門票與消費：</strong>成人 ¥1,500、小學生以下免費 / 餵食飼料 ¥200（門票以現金支付為主，伴手禮區可刷卡）。</li><li><strong>預留時間：</strong>建議停留約 60–90 分鐘。</li><li><strong>抱狐狸體驗：</strong>每日 11:00、14:00（遇風雪等惡劣天候將取消）。</li></ul></div></div>",
+          "content": "抵達宮城藏王狐狸村，雖遇風雪取消抱狐狸體驗，但看著成群狐狸在雪地穿梭，還調皮輕咬褲腳與衣襬，仍是難忘的近距離互動。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>狐狸村安全提醒</div><ul><li><strong>禁止觸摸：</strong>放養區狐狸具野性可能咬人，僅限專人指導活動觸碰。</li><li><strong>收好配件：</strong>手機吊飾、手套繩等懸掛物易吸引狐狸咬扯，務必收好。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🦊</div><div class='callout-content'><div class='callout-title'>景點資訊｜宮城藏王狐狸村（宮城蔵王キツネ村）</div><ul><li><strong>位置：</strong>宮城県白石市福岡八宮字川原子 11-3（建議參加仙台一日遊，或自 JR 白石藏王站搭計程車 25 分鐘）。</li><li><strong>營業：</strong>冬季（12/1–3/15）09:00–16:00（最終入園 15:30）／夏季至 17:00／週三公休（2 月無休）。</li><li><strong>費用：</strong>成人 ¥1,500、小學生以下免費／飼料 ¥200（門票現金為主，賣店可刷卡）。</li><li><strong>時間：</strong>約 60–90 分鐘；抱狐體驗每日 11:00、14:00（惡劣天候取消）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -436,7 +441,7 @@
             { "src": "media/tohoku_2026/d4-ch3-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d4-ch3-4.png", "caption": "" }
           ],
-          "content": "下午搭乘活動巴士抵達草莓農場「JRフルーツパーク仙台あらはま」。聽完工作人員傳授「向上轉寶特瓶蓋」的輕鬆採摘訣竅與挑選蒂頭朝上完熟草莓的技巧後，展開 30 分鐘的草莓吃到飽甜蜜爆擊！<div class='callout-box callout-sci'><div class='callout-icon'>🍓</div><div class='callout-content'><div class='callout-title'>採果小撇步：輕鬆採摘「完熟草莓」</div><ul><li><strong>挑選完熟紅寶石：</strong>優先鎖定果實紅到根部、且<strong>綠色蒂頭向上反折翹起</strong>的草莓，甜度最高！</li><li><strong>向上轉瓶蓋秒摘：</strong>捏住蒂頭上方果梗，像「轉開寶特瓶蓋」般向上輕扭即可輕鬆摘下，千萬別直接往下硬扯！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🧺</div><div class='callout-content'><div class='callout-title'>景點資訊｜JR 水果公園仙台荒濱（JRフルーツパーク仙台あらはま）</div><ul><li><strong>位置：</strong>宮城県仙台市若林區荒浜新 2-17-1（仙台站東口車程約 30 分鐘 / 地下鐵「荒井站」轉搭巴士步行約 7 分鐘）。</li><li><strong>營業時間：</strong>10:00–16:00（採草莓每日 10:00–14:00 共 5 場次，不同季節有不同的水果可以採摘）/ 週二公休。</li><li><strong>體驗費用：</strong>30 分鐘吃到飽成人約 ¥2,100–¥2,500、兒童 ¥1,100–¥1,300（依月份浮動，支援現金、信用卡與 Suica 等 IC 卡）。</li><li><strong>預留時間：</strong>約 45–60 分鐘。</li><li><strong>草莓品種：</strong>宮城縣限定「にこにこベリー」與「もういっこ」。</li></ul></div></div>",
+          "content": "下午搭專車來到「JRフルーツパーク仙台あらはま」，聽完工作人員示範採摘技巧後，正式展開 30 分鐘的草莓吃到飽甜蜜爆擊！<div class='callout-box callout-sci'><div class='callout-icon'>🍓</div><div class='callout-content'><div class='callout-title'>採果撇步：挑摘「完熟草莓」</div><ul><li><strong>看蒂頭：</strong>挑紅至根部且<strong>綠色蒂頭向上反折翹起</strong>的最甜。</li><li><strong>轉瓶蓋法：</strong>捏住蒂頭上方果梗，像轉開寶特瓶蓋般向上輕扭即可摘下，勿硬往下扯。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🧺</div><div class='callout-content'><div class='callout-title'>景點資訊｜JR 水果公園仙台荒濱（JRフルーツパーク仙台あらはま）</div><ul><li><strong>位置：</strong>仙台市若林區荒浜新 2-17-1（仙台站東口車程約 30 分鐘／地鐵荒井站轉巴士步行 7 分鐘）。</li><li><strong>營業：</strong>10:00–16:00（採草莓 10:00–14:00 共 5 場，各季水果不同）／週二公休。</li><li><strong>費用：</strong>30 分鐘吃到飽成人 ¥2,100–¥2,500、兒童 ¥1,100–¥1,300（現金／信用卡／IC 卡）。</li><li><strong>時間：</strong>約 45–60 分鐘；品種為宮城限定「にこにこベリー」與「もういっこ」。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -461,7 +466,7 @@
             { "src": "media/tohoku_2026/d4-ch4-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d4-ch4-2.png", "caption": "" }
           ],
-          "content": "回到活動解散地仙台站東口，順便購買明天要使用的「仙台 2 日券」。在電梯出口的地磚與人群圍繞的「麵包超人」雕像合影，尋找八年級生的童年共同回憶。",
+          "content": "回到仙台站東口解散，順手買好明天用的「仙台二日券」，並與電梯口地磚及人氣「麵包超人」雕像合影，重溫八年級生的童年回憶。",
           "affiliateText": "官方網站｜仙台二日券",
           "affiliateUrl": "https://sendaitravelpass.jp/2days/en/",
           "affiliateLinks": []
@@ -481,7 +486,7 @@
             { "src": "media/tohoku_2026/d4-ch5-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d4-ch5-4.png", "caption": "" }
           ],
-          "content": "隱身在國分町凱旋門大樓 1 樓的「創作料理 真都 －マツ－」，享用預訂的高級暢飲套餐（¥8,800/人）。奢華的海膽與牛肉炙燒在口中炸裂，搭配綠茶解膩，度過完美的一天。<div class='callout-box callout-warning'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>預訂提醒｜留意用餐限時</div><ul><li>預訂不同的餐點套餐會有不同的「用餐限時」（2小時／2.5小時／3小時），預約時請務必確認方案內容！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜創作料理 真都 －マツ－</div><ul><li><strong>位置：</strong>仙台市青葉區一番町 4-3-12 第五吉岡屋ビル 5F（地下鐵「勾當台公園站」或「廣瀨通站」步行約 3–4 分鐘）。</li><li><strong>營業時間：</strong>每日 16:00–翌 01:00（料理最後點餐時間 24:00）。</li><li><strong>平均預算：</strong>約 ¥5,000–¥8,800（預訂「竹コース」含暢飲套餐為 ¥8,800 / 人，支援現金與信用卡）。</li><li><strong>預留時間：</strong>約 2–2.5 小時（全席皆為獨立包廂）。</li><li><strong>推薦餐點：</strong>A5 仙台牛與生海膽炙燒料理、宮城三陸產鮮魚刺身。</li></ul></div></div>",
+          "content": "隱身在一番町商圈的「創作料理 真都 －マツ－」，享用預約的高級暢飲套餐（¥8,800／人）。奢華海膽與炙燒 A5 仙台牛在口中化開，配綠茶解膩超滿足。<div class='callout-box callout-warning'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>預訂提醒｜留意用餐限時</div>不同套餐的用餐限時各異（2／2.5／3 小時），預約時務必確認方案內容。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🥩</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜創作料理 真都 －マツ－</div><ul><li><strong>位置：</strong>仙台市青葉區一番町 4-3-12 第五吉岡屋ビル 5F（地鐵勾當台公園站或廣瀨通站步行 3–4 分鐘）。</li><li><strong>營業：</strong>16:00–翌 01:00（料理 L.O. 24:00）。</li><li><strong>預算：</strong>¥5,000–¥8,800（「竹コース」含暢飲 ¥8,800／人，現金／信用卡）。</li><li><strong>時間：</strong>約 2–2.5 小時（全獨立包廂）。</li><li><strong>推薦：</strong>A5 仙台牛生海膽炙燒、宮城三陸鮮魚刺身。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -507,7 +512,7 @@
             { "src": "media/tohoku_2026/d4-ch6-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d4-ch6-2.png", "caption": "" }
           ],
-          "content": "緩步走回飯店，褪去厚重衣裳泡進天然溫泉大浴場中，讓熱騰騰的泉水放鬆緊繃的肌肉，完美結束充滿驚奇與美味的一天。準備迎接明天日本三景「松島」的到來！<div class='callout-box callout-info'><div class='callout-icon'>♨️</div><div class='callout-content'><div class='callout-title'>飯店資訊｜天然温泉 杜都の湯 御宿 野乃仙台</div><ul><li><strong>位置與交通：</strong>地下鐵「廣瀨通站」東 2 出口步行 1 分鐘 / 山形高速巴士於「廣瀨通一番町」下車步行約 5 分鐘 / JR 仙台站步行約 12 分鐘（仙台市青葉區本町 2-2-5）。</li><li><strong>入住 / 退房：</strong>Check-in 15:00 後 / Check-out 11:00 前。</li><li><strong>溫泉開放時間：</strong>14F 天然溫泉大浴場 15:00–翌 10:00（徹夜開放，僅 01:00–05:00 桑拿暫停）。</li><li><strong>免費住客福利：</strong>2F 宵夜醬油拉麵（21:30–23:00）、14F 泡湯後免費冰棒（15:00–01:00）＆晨間乳酸菌飲料（05:00–10:00）。</li><li><strong>貼心設施：</strong>全館榻榻米地板（進門即脫鞋，備有行李箱擦輪機）、免費自助洗衣機（烘衣機 20 分鐘 ¥100），房內電視可即時查看浴場與洗衣機擁擠度。</li></ul></div></div>",
+          "content": "散步回御宿野乃泡天然溫泉，讓熱泉舒緩緊繃肌肉，養足精神迎接明天日本三景「松島」。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -526,6 +531,7 @@
     {
       "day": "Day 05",
       "dayTitle": "走進日本三景的水墨畫！絕美遊船，探訪伊達政宗的國寶古剎",
+      "isDraft": false,
       "isFieldTest": true,
       "chapters": [
         {
@@ -534,14 +540,14 @@
           "lng": 140.8824,
           "zoom": 14,
           "transport": "walk",
-          "title": "01. 出發｜搭乘 JR 仙石線前進松島海岸",
+          "title": "01. 出發｜搭乘 JR 仙石線前進本鹽釜",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放 JR 仙台站月台或仙石線列車照片",
           "mediaList": [
             { "src": "media/tohoku_2026/d5-ch1-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d5-ch1-2.png", "caption": "" }
           ],
-          "content": "早上在御宿野乃享用豐富的日式早餐後，步行至 JR 仙台站搭乘 08:30 發車的 JR 仙石線。大約 40 分鐘車程便順利抵達「本鹽釜站」，沿途窗外風景逐漸轉為海景與林蔭，心情也跟著放鬆。<div class='callout-box callout-tip'><div class='callout-icon'>🚆</div><div class='callout-content'><div class='callout-title'>JR 仙石線搭乘小撇步</div><ul><li><strong>IC 卡對應：</strong>松島海岸站支援 Suica、PASMO 等全國互通 IC 卡，直接嗶卡進出非常方便，不需要另外買紙本車票。</li><li><strong>座位選擇：</strong>去程建議坐在列車的<strong>右側</strong>，快到松島海岸站前可以搶先看到漂亮的海灣與島嶼風光！</li></ul></div></div>",
+          "content": "在御宿野乃享用豐盛日式早餐後，步行至 JR 仙台站搭 08:30 的 JR 仙石線，約 25–30 分鐘抵達「本鹽釜站」，準備前往鹽釜港搭遊船。<div class='callout-box callout-tip'><div class='callout-icon'>🚆</div><div class='callout-content'><div class='callout-title'>JR 仙石線搭乘小撇步</div><ul><li><strong>票券與 IC 卡：</strong>本鹽釜站與松島海岸站皆可使用仙台二日券或 Suica／PASMO 等 IC 卡直接進出。</li><li><strong>海景座位：</strong>若直接搭往松島海岸站（車程約 40 分鐘），去程坐<strong>右側</strong>可搶先賞海灣群島。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -566,7 +572,7 @@
             { "src": "media/tohoku_2026/d5-ch2-3.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d5-ch2-4.mp4", "caption": "" }
           ],
-          "content": "步行 7 分鐘穿過商店街來到碼頭。松島灣內散落著約 260 個被松樹覆蓋的奇岩小島，乘船穿梭其中就像走進活生生的水墨畫！<div class='callout-box callout-tip'><div class='callout-icon'>🛳️</div><div class='callout-content'><div class='callout-title'>松島遊船小撇步：「松島環島」vs.「鹽釜單向」雙路線怎麼選？</div><ul><li><strong>松島 ➔ 松島（周遊路線）：</strong>於 JR「松島海岸站」碼頭原地上、下船（繞行一周約 50 分鐘），班次最密集，下船即可直奔魚市場與瑞巖寺，最推薦初次造訪的旅人！</li><li><strong>鹽釜 ➔ 松島（芭蕉路線）：</strong>可於 JR「本塩釜站」步行至鹽釜港搭船單向直達松島，適合早上想先去「鹽釜水產仲卸市場」吃自製海鮮丼或參拜「鹽竈神社」的饕客！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⚓</div><div class='callout-content'><div class='callout-title'>景點資訊｜松島海岸中央碼頭（松島上船：仁王丸 / 政宗周遊路線）</div><ul><li><strong>乘船位置：</strong>宮城県宮城郡松島町松島字町内 85（JR 仙石線「松島海岸站」出站右轉步行約 6–7 分鐘）。</li><li><strong>營業時間：</strong>09:00–16:00（每整點 00 分開船，冬季 11–3 月末班船為 15:00）。</li><li><strong>船票費用：</strong>成人 ¥1,500、小學生 ¥750（船上可另加價 ¥600 升等 2F 綠色展望客艙）。</li><li><strong>航程時間：</strong>約 50 分鐘（原地上下船，由「松島島巡り観光船」與「丸文松島汽船」共同營運）。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⚓</div><div class='callout-content'><div class='callout-title'>景點資訊｜Marine Gate 鹽釜（鹽釜上船 / 松尾芭蕉單向路線）</div><ul><li><strong>乘船位置：</strong>宮城県塩竈市港町 1-4-1 マリンゲート塩釜 1F（JR 仙石線「本塩釜站」步行約 7–10 分鐘，商場正門前有巨大彩色船錨地標）。</li><li><strong>營業時間：</strong>10:00–15:00（約每小時 1 班船，由「丸文松島汽船」獨家營運，冬季班次較少建議先查官網時刻表）。</li><li><strong>船票費用：</strong>單程成人 ¥1,500、小學生 ¥750（於商場 1 樓售票櫃檯購票，支援現金與信用卡）。</li><li><strong>航程時間：</strong>單向航程約 50 分鐘（鹽釜港上船 ➔ 松島海岸下船）。</li></ul></div></div>",
+          "content": "從本鹽釜站步行約 7–10 分鐘，走過跨路天橋抵達鹽釜港碼頭（Marine Gate 鹽釜）登船。松島灣散落約 260 座松樹覆蓋的奇岩小島，航行其間宛如走進活生生的水墨畫。<div class='callout-box callout-tip'><div class='callout-icon'>🛳️</div><div class='callout-content'><div class='callout-title'>松島遊船雙路線怎麼選？</div><ul><li><strong>鹽釜 ➔ 松島（芭蕉單向路線）：</strong>JR 本鹽釜站步行搭船直達松島海岸，適合串聯鹽釜水產仲卸市場或鹽竈神社。</li><li><strong>松島 ➔ 松島（周遊路線）：</strong>JR 松島海岸站碼頭原地上下船，班次最密集，下船即達五大堂與瑞巖寺。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⚓</div><div class='callout-content'><div class='callout-title'>碼頭資訊｜Marine Gate 鹽釜 ＆ 松島海岸中央碼頭</div><ul><li><strong>鹽釜港（單向至松島）：</strong>塩竈市港町 1-4-1 1F（本鹽釜站步行 7–10 分鐘）／10:00–15:00 約每小時一班（丸文松島汽船，冬季班次少請先查官網）。</li><li><strong>松島中央碼頭（環島周遊）：</strong>松島町松島字町内 85（松島海岸站步行 6–7 分鐘）／09:00–16:00 整點開船（11–3 月末班 15:00）。</li><li><strong>票價與航程：</strong>兩路線皆約 50 分鐘，成人 ¥1,500、小學生 ¥750（周遊船可加 ¥600 升等 2F 綠色展望艙）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -590,7 +596,7 @@
             { "src": "media/tohoku_2026/d5-ch3-2.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d5-ch3-3.png", "caption": "" }
           ],
-          "content": "造訪建在海中小島上的松島地標「五大堂」，需跨越採用空隙結構的紅色木橋（又稱結緣橋 / 剪戀橋 / 透橋），走在上面能微微看到下方海水讓人專注腳步。<div class='callout-box callout-warning'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>參拜留意｜小心腳下</div><ul><li><strong>握緊手機防掉落：</strong>通往五大堂的紅色「透橋」橋板間有約 15 公分寬的縷空縫隙（可直接看見下方海水），過橋拍照時務必抓緊手機與隨身物品，穿細跟鞋或帶小朋友也請特別留意腳步！</li><li><strong>屋簷下的十二生肖：</strong>繞著五大堂走一圈時別忘了抬頭看屋簷四周，上面有伊達政宗時期留下的精緻「十二生肖」木雕；堂內五大明王秘佛每 33 年才開帳一次（下次為 2039 年）！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🪷</div><div class='callout-content'><div class='callout-title'>景點資訊｜瑞巖寺 五大堂（Godai-do）</div><ul><li><strong>位置：</strong>宮城県宮城郡松島町松島字町内 111（JR 仙石線「松島海岸站」步行約 7 分鐘 / 松島遊船碼頭旁步行 1 分鐘）。</li><li><strong>開放時間：</strong>08:30–17:00（日落後即關閉上橋通道，冬季建議 16:30 前造訪）。</li><li><strong>參觀費用：</strong>免費參觀（旁邊授與所可請領五大堂御朱印，僅收現金）。</li><li><strong>預留時間：</strong>約 15–20 分鐘。</li></ul></div></div>",
+          "content": "下船走訪建於海中小島的松島地標「五大堂」，必經的紅色「透橋（結緣橋）」橋板間留有縫隙，可直視下方海水，走起來格外專注。<div class='callout-box callout-warning'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>參拜亮點與安全提醒</div><ul><li><strong>留意腳下與手機：</strong>透橋縫隙約 15 公分寬，拍照務必握緊手機，穿細跟鞋或帶孩童請留心。</li><li><strong>屋簷十二生肖：</strong>繞行時可抬頭欣賞伊達政宗時期的十二生肖木雕；堂內秘佛每 33 年開帳一次（下次 2039 年）。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🪷</div><div class='callout-content'><div class='callout-title'>景點資訊｜瑞巖寺 五大堂（Godai-do）</div><ul><li><strong>位置：</strong>松島町松島字町内 111（遊船碼頭步行 1 分鐘／松島海岸站步行 7 分鐘）。</li><li><strong>開放：</strong>08:30–17:00（日落關閉，冬季建議 16:30 前）。</li><li><strong>費用：</strong>免費參觀（御朱印僅收現金）。</li><li><strong>時間：</strong>約 15–20 分鐘。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -608,7 +614,7 @@
             { "src": "media/tohoku_2026/d5-ch4-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d5-ch4-2.mp4", "caption": "" }
           ],
-          "content": "沿著海岸散步約 10 分鐘，來到在地饕客必訪的「松島魚市場」。一樓集結了現烤大牡蠣、生魚片丼飯等新鮮海味，現烤牡蠣鮮甜飽滿、完全沒有腥味，一口咬下超級滿足！<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>松島魚市場用餐小提醒</div>尖峰時刻（11:30 - 13:00）座位區一位難求，建議採取分工合作，一人先找座位，其他人去排隊買烤牡蠣和海鮮丼！</div></div><div class='callout-box callout-info'><div class='callout-icon'>🦪</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜松島魚市場（松島さかな市場）</div><ul><li><strong>位置：</strong>宮城県宮城郡松島町松島字普賢堂 4-10（JR 仙石線「松島海岸站」步行約 10 分鐘 / 自五大堂步行約 5 分鐘）。</li><li><strong>營業時間：</strong>每日 08:00–16:00（熱食與海鮮丼供餐至 15:00、假日至 15:30 / 戶外烤牡蠣小屋 09:00–15:00，全年無休）。</li> <li><strong>平均預算：</strong>約 ¥1,000–¥3,000（採自動食券機點餐，建議備妥日幣現金；伴手禮賣店可刷卡）。</li><li><strong>預留時間：</strong>約 45–60 分鐘完食。</li><li><strong>推薦餐點：</strong>現烤帶殼大牡蠣、氣仙沼直送鮪魚海鮮丼、名物「松島牡蠣漢堡（かきバーガー）」、炸牡蠣。</li></ul></div></div>",
+          "content": "沿海岸散步來到「松島魚市場」，一樓集結現烤大牡蠣與海鮮丼。現烤牡蠣鮮甜飽滿、毫無腥味，一口咬下超滿足。<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>用餐提醒</div>11:30–13:00 尖峰一位難求，建議一人先找位，其餘人排隊買餐。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🦪</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜松島魚市場（松島さかな市場）</div><ul><li><strong>位置：</strong>松島町松島字普賢堂 4-10（五大堂步行 5 分鐘／松島海岸站步行 10 分鐘）。</li><li><strong>營業：</strong>08:00–16:00（海鮮丼至 15:00、假日至 15:30／戶外烤牡蠣 09:00–15:00，無休）。</li><li><strong>預算：</strong>¥1,000–¥3,000（食券機建議備現金，賣店可刷卡）。</li><li><strong>時間：</strong>約 45–60 分鐘。</li><li><strong>推薦：</strong>現烤帶殼大牡蠣、氣仙沼鮪魚丼、松島牡蠣漢堡、炸牡蠣。</li></ul></div></div>",
           "affiliateText": "官方網站｜松島さかな市場",
           "affiliateUrl": "https://www.sakana-ichiba.co.jp/",
           "affiliateLinks": [
@@ -630,7 +636,7 @@
           "mediaList": [
             { "src": "media/tohoku_2026/d5-ch5-1.png", "caption": "" }
           ],
-          "content": "透過館內兩百多尊栩栩如生的等身大蠟像與二十五個歷史場景，生動重現「奧州獨眼龍」伊達政宗波瀾壯闊的一生，在光影與語音導覽間細細品味戰國名將的傳奇故事。<div class='callout-box callout-tip'><div class='callout-icon'>🌙</div><div class='callout-content'><div class='callout-title'>參觀小撇步</div><ul><li><strong>多國語言導覽：</strong>館內 25 個歷史場景旁皆附有 QR Code，用手機掃描即可收聽中文語音與圖文解說，不懂日本戰國史也能輕鬆看懂「獨眼龍」的傳奇一生！</li><li><strong>門票折扣：</strong>購票時出示「仙台二日券（SENDAI AREA PASS）」可享門票優惠。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🏯</div><div class='callout-content'><div class='callout-title'>景點資訊｜陸奧 伊達政宗歷史館（みちのく伊達政宗歴史館）</div><ul><li><strong>位置：</strong>宮城県宮城郡松島町松島字普賢堂 13-13（JR 仙石線「松島海岸站」步行約 10 分鐘 / 松島魚市場正隔壁步行 1 分鐘）。</li><li><strong>營業時間：</strong>每日 09:00–17:00（最後入館時間 16:30，全年無休）。</li><li><strong>門票費用：</strong>成人 ¥1,000、高中生以下 ¥500（支援現金、信用卡與 Suica 等交通系 IC 卡，現場購票出示仙台二日券享優惠）。</li><li><strong>預留時間：</strong>約 40–60 分鐘。</li><li><strong>體驗活動：</strong>伊達政宗甲冑穿戴體驗（預約制）。</li><li><strong>必看亮點：</strong>200 多尊等身大蠟像重現 25 個歷史名場面、復刻版黑漆弦月甲冑、東北歷史偉人蠟像展區。</li></ul></div></div>",
+          "content": "館內以兩百多尊等身蠟像與 25 個歷史場景，生動重現「奧州獨眼龍」伊達政宗的傳奇一生，搭配語音導覽輕鬆讀懂戰國故事。<div class='callout-box callout-tip'><div class='callout-icon'>🌙</div><div class='callout-content'><div class='callout-title'>參觀小撇步</div><ul><li><strong>中文導覽：</strong>展區附 QR Code，手機掃碼即可收聽中文語音與圖文解說。</li><li><strong>門票優惠：</strong>現場出示「仙台二日券」享門票折扣。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🏯</div><div class='callout-content'><div class='callout-title'>景點資訊｜陸奧 伊達政宗歷史館（みちのく伊達政宗歴史館）</div><ul><li><strong>位置：</strong>松島町松島字普賢堂 13-13（松島魚市場隔壁步行 1 分鐘）。</li><li><strong>營業：</strong>09:00–17:00（最終入館 16:30，無休）。</li><li><strong>門票：</strong>成人 ¥1,000、高中生以下 ¥500（現金／信用卡／IC 卡）。</li><li><strong>時間：</strong>約 40–60 分鐘；另提供預約制甲冑穿戴體驗。</li><li><strong>亮點：</strong>25 個歷史場景蠟像、復刻弦月甲冑、東北偉人展區。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -648,20 +654,20 @@
           "lng": 141.0596,
           "zoom": 16,
           "transport": "walk",
-          "title": "06. 歷史｜國寶古剎瑞嚴寺莊嚴巡禮",
+          "title": "06. 歷史｜國寶古剎瑞巖寺莊嚴巡禮",
           "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放瑞嚴寺杉樹林參道或本堂照片",
+          "mediaPlaceholder": "此處可放瑞巖寺杉樹林參道或本堂照片",
           "mediaList": [
             { "src": "media/tohoku_2026/d5-ch6-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d5-ch6-2.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d5-ch6-3.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d5-ch6-4.mp4", "caption": "" }
           ],
-          "content": "散步前往松島最具代表性的歷史名寺──瑞巖寺。這是東北地區最著名的禪寺，也是江戶時代仙台藩祖「伊達政宗」的家族菩提寺。走進兩旁高聳巨大杉樹林的參道，肅穆氛圍讓人瞬間沉澱，本堂與庫裡的桃山樣式建築雕刻極具歷史價值。<div class='callout-box callout-tip'><div class='callout-icon'>🍁</div><div class='callout-content'><div class='callout-title'>參拜小撇步</div><ul><li><strong>期間限定夜間參拜：</strong>瑞巖寺與円通院皆會配合季節推出限定夜間點燈活動（如 <strong>2026 年 10 月瑞巖寺秋季夜間參拜</strong>與<strong>円通院秋季夜楓點燈</strong>），出發前先上官網查詢最新公告！</li><li><strong>冬季閉門時間較早：</strong>冬季瑞巖寺於 15:30 閉門（15:00 最後入場）、円通院於 16:00 閉門。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>景點資訊｜國寶 瑞巖寺（Zuigan-ji Temple）</div><ul><li><strong>位置：</strong>宮城県宮城郡松島町松島字町内 91（JR 仙石線「松島海岸站」步行約 5–8 分鐘）。</li><li><strong>營業時間：</strong>08:30–17:00（依月份調整閉門時間：12–1月 15:30 / 2月・11月 16:00 / 3月・10月 16:30 / 4–9月 17:00，最後入場為閉門前 30 分鐘）。</li><li><strong>門票費用：</strong>成人 ¥700、國中小學生 ¥400（現金購票）。</li><li><strong>預留時間：</strong>約 60–90 分鐘（含杉樹參道石窟群、國寶本堂、庫裡與青龍殿寶物館）。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>📿</div><div class='callout-content'><div class='callout-title'>景點資訊｜松島 円通院（Entsuin Temple）</div><ul><li><strong>位置：</strong>宮城県宮城郡松島町松島字町内 67（瑞巖寺總門左側步行 1 分鐘）。</li><li><strong>營業時間：</strong>4–11月 08:30–17:00 / 12–3月 09:00–16:00。</li><li><strong>門票費用：</strong>成人 ¥500、高中生 ¥200、中小學生 ¥100。</li><li><strong>預留時間：</strong>約 30–45 分鐘（本堂另提供免預約念珠 DIY 體驗 ¥1,000 起）。</li></ul></div></div>",
+          "content": "走進東北名剎、伊達政宗家族菩提寺「瑞巖寺」。穿過高聳杉木林參道頓覺莊嚴沉靜，本堂與庫裡的桃山樣式雕刻更是難得的國寶工藝。<div class='callout-box callout-tip'><div class='callout-icon'>🍁</div><div class='callout-content'><div class='callout-title'>參拜小撇步</div><ul><li><strong>季節夜參：</strong>瑞巖寺與円通院秋季常辦限定夜間點燈，出發前可查官網公告。</li><li><strong>冬季早閉門：</strong>12–1 月瑞巖寺 15:30 閉門（15:00 停止入場），円通院 16:00 閉門。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>景點資訊｜國寶 瑞巖寺（Zuigan-ji Temple）</div><ul><li><strong>位置：</strong>松島町松島字町内 91（松島海岸站步行 5–8 分鐘）。</li><li><strong>營業：</strong>08:30 起（閉門：12–1 月 15:30／2・11 月 16:00／3・10 月 16:30／4–9 月 17:00，前 30 分鐘止票）。</li><li><strong>門票：</strong>成人 ¥700、國中小 ¥400（現金）。</li><li><strong>時間：</strong>約 60–90 分鐘（含石窟群、本堂、庫裡與寶物館）。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>📿</div><div class='callout-content'><div class='callout-title'>景點資訊｜松島 円通院（Entsuin Temple）</div><ul><li><strong>位置：</strong>松島町松島字町内 67（瑞巖寺總門左側步行 1 分鐘）。</li><li><strong>營業：</strong>4–11 月 08:30–17:00／12–3 月 09:00–16:00。</li><li><strong>門票：</strong>成人 ¥500、高中 ¥200、中小學 ¥100。</li><li><strong>時間：</strong>約 30–45 分鐘（另有免預約念珠 DIY ¥1,000 起）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
-            {"text": "官方網站｜瑞嚴寺", "url": "https://www.zuiganji.or.jp/"},
+            {"text": "官方網站｜瑞巖寺", "url": "https://www.zuiganji.or.jp/"},
             {"text": "官方網站｜円通院", "url": "https://www.entuuin.or.jp/"},
             {"text": "trip.com｜", "url": ""},
             {"text": "kkday｜", "url": ""},
@@ -671,7 +677,7 @@
         {
           "id": "d5-ch7",
           "lat": 38.2616,
-          "lng": 140.8720,
+          "lng": 140.872,
           "zoom": 16,
           "transport": "train",
           "title": "07. 晚餐｜牛たん料理 閣 ブランドーム本店",
@@ -681,7 +687,7 @@
             { "src": "media/tohoku_2026/d5-ch7-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d5-ch7-2.png", "caption": "" }
           ],
-          "content": "搭乘夕陽時分的 JR 仙石線返回仙台市區，直奔一番町商店街的人氣名店「閣」。招牌炭火現烤牛舌外層微焦酥脆、內裡軟嫩多汁，搭配溫潤清爽的牛尾湯與麥飯，讓人大呼過癮！<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>覓食小撇步：排隊卡位攻略</div><strong>提早排隊或預約：</strong>地下一樓店內座位僅 26 席，午餐時段恕不接受預約，建議開店前 20–30 分鐘抵達排隊；晚餐時段則強烈建議事先預約（若牛舌售罄會提早打烊）。</div></div><div class='callout-box callout-info'><div class='callout-icon'>👅</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜牛たん料理 閣 ブランドーム本店</div><ul><li><strong>位置：</strong>仙台市青葉区一番町 3-8-14 鈴喜ビル B1F（地下鐵「廣瀨通站」或「青葉通一番町站」步行約 3 分鐘，位於一番町拱廊商店街內地下一樓）。</li><li><strong>營業時間：</strong>午餐 11:30–14:30（最後點餐時間 14:00）/ 晚餐 17:00–22:30（最後點餐時間 21:30，售完為止）。</li><li><strong>平均預算：</strong>午餐約 ¥2,800–¥3,800 / 晚餐約 ¥4,000–¥6,000（支援現金與信用卡）。</li><li><strong>預留時間：</strong>約 60–90 分鐘（不含排隊候位時間）。</li><li><strong>推薦餐點：</strong>炭烤牛舌定食（たん焼き定食）、半熟炙燒牛舌（たんタタキ）、生牛舌刺身、牛舌角煮。</li></ul></div></div>",
+          "content": "傍晚搭 JR 仙石線返仙台，直奔一番町人氣名店「閣」。炭烤厚切牛舌外焦內嫩多汁，配溫潤牛尾湯與麥飯超銷魂！<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>排隊卡位攻略</div>店內僅 26 席，午餐不接受預約建議開店前 20–30 分鐘排隊；晚餐強烈建議先訂位（售罄即提早打烊）。</div></div><div class='callout-box callout-info'><div class='callout-icon'>👅</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜牛たん料理 閣 ブランドーム本店</div><ul><li><strong>位置：</strong>仙台市青葉区一番町 3-8-14 鈴喜ビル B1F（地鐵廣瀨通站或青葉通一番町站步行 3 分鐘）。</li><li><strong>營業：</strong>11:30–14:30（L.O. 14:00）／17:00–22:30（L.O. 21:30，售完為止）。</li><li><strong>預算：</strong>午 ¥2,800–¥3,800／晚 ¥4,000–¥6,000（現金／信用卡）。</li><li><strong>時間：</strong>約 60–90 分鐘（不含排隊）。</li><li><strong>推薦：</strong>炭烤牛舌定食、半熟炙燒牛舌（たんタタキ）、生牛舌刺身、牛舌角煮。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -706,7 +712,7 @@
           "mediaList": [
             { "src": "media/tohoku_2026/d5-ch8-1.png", "caption": "" }
           ],
-          "content": "飽餐一頓後慢慢散步回飯店泡湯。今晚同樣以御宿野乃溫泉飯店的天然溫泉與免費宵夜醬油拉麵作為完美句點，帶著滿滿的暖意入眠。<div class='callout-box callout-info'><div class='callout-icon'>♨️</div><div class='callout-content'><div class='callout-title'>飯店資訊｜天然温泉 杜都の湯 御宿 野乃仙台</div><ul><li><strong>位置與交通：</strong>地下鐵「廣瀨通站」東 2 出口步行 1 分鐘 / 山形高速巴士於「廣瀨通一番町」下車步行約 5 分鐘 / JR 仙台站步行約 12 分鐘（仙台市青葉區本町 2-2-5）。</li><li><strong>入住 / 退房：</strong>Check-in 15:00 後 / Check-out 11:00 前。</li><li><strong>溫泉開放時間：</strong>14F 天然溫泉大浴場 15:00–翌 10:00（徹夜開放，僅 01:00–05:00 桑拿暫停）。</li><li><strong>免費住客福利：</strong>2F 宵夜醬油拉麵（21:30–23:00）、14F 泡湯後免費冰棒（15:00–01:00）＆晨間乳酸菌飲料（05:00–10:00）。</li><li><strong>貼心設施：</strong>全館榻榻米地板（進門即脫鞋，備有行李箱擦輪機）、免費自助洗衣機（烘衣機 20 分鐘 ¥100），房內電視可即時查看浴場與洗衣機擁擠度。</li></ul></div></div>",
+          "content": "飽餐後散步回御宿野乃，以天然溫泉與免費宵夜醬油拉麵溫暖收尾，滿懷暖意入眠。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -725,6 +731,7 @@
     {
       "day": "Day 06",
       "dayTitle": "住宅區驚見白色巨人？直擊 100 公尺仙台大觀音！還有零下溫度的熱血「松焚祭」",
+      "isDraft": false,
       "isFieldTest": false,
       "chapters": [
         {
@@ -741,7 +748,7 @@
             { "src": "media/tohoku_2026/d6-ch1-2.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d6-ch1-3.png", "caption": "" }
           ],
-          "content": "吃飽後散步到「商工會議所前」巴士站，搭乘仙台市營巴士去找尋隱身在住宅區的白色巨人。隨著巴士駛離市中心，窗外景色逐漸轉為一般住宅區，在車上就能看見牠在住宅夾縫中的巨大身影，這種超現實的違和感簡直就像動漫場景一樣！",
+          "content": "飯後散步至「商工會議所前」搭市營巴士尋訪白色巨人。車駛入住宅區後，就能在建築縫隙間望見祂的巨大身影，超現實畫面宛如動漫場景。",
           "affiliateText": "官方網站｜仙台二日券",
           "affiliateUrl": "https://sendaitravelpass.jp/2days/en/",
           "affiliateLinks": []
@@ -761,7 +768,7 @@
             { "src": "media/tohoku_2026/d6-ch2-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d6-ch2-4.mp4", "caption": "" }
           ],
-          "content": "下車後站在祂的腳下，脖子仰到酸都還看不到頂！入口設有龍口雕像，寓意開運與升龍。內部共有 12 層樓，搭電梯直達頂樓欣賞壯麗市景，沿著螺旋樓梯慢慢下樓，逐層參觀 108 尊象徵人類煩惱的胎內佛像，是個神聖莊嚴與巨大恐懼交織的奇妙體驗。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>參拜小撇步</div><ul><li><strong>參拜動線：</strong>入內後建議<strong>先搭電梯直達 12 樓頂層</strong>（高約 68 公尺的觀音胸口處）遠眺仙台市景與太平洋，再順著螺旋迴廊往下走，逐層參拜 108 尊胎內佛像最省力！（內部無洗手間，入內前請先於入口旁如廁）。</li><li><strong>閉館提醒：</strong>平日下午 <strong>15:00 即停止入場</strong>（週末假日為 15:30），想入內體驗震撼天井視角須留意造訪時間！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>景點資訊｜仙台大觀音（仙台天道白衣大観音 / 大觀密寺）</div><ul><li><strong>位置：</strong>宮城県仙台市泉區実沢字中山南 31-36（市營巴士至「仙台大観音前」下車即達）。</li><li><strong>營業時間：</strong>平日 10:00–15:30（最後入場 15:00）/ 週末及國定假日 10:00–16:00（最後入場 15:30），全年無休。</li><li><strong>門票費用：</strong>外部廣場免費；胎內參拜國中生以上 ¥500（附贈一張守護札）、國小以下免費（僅收現金）。</li><li><strong>預留時間：</strong>約 45–60 分鐘。</li><li><strong>必看亮點：</strong>住宅區 100 公尺巨像街拍視角、1F 升龍入口與摸肚布袋尊、12F 展望窗與挑高 108 尊胎內佛螺旋天井。</li></ul></div></div>",
+          "content": "站在 100 公尺巨像腳下仰到脖子發酸！穿過寓意開運的龍口入口進入 12 層胎內空間，在高聳挑高的螺旋天井間參拜 108 尊佛像，莊嚴又帶點巨物震撼感。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>參拜小撇步</div><ul><li><strong>省力動線：</strong>先搭電梯直上 12F 遠眺市景與太平洋，再順螺旋迴廊往下參拜 108 尊佛像（內部無廁所，入內前先至入口旁使用）。</li><li><strong>早閉館：</strong>平日 <strong>15:00 即停止入場</strong>（假日 15:30），留意造訪時間。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>景點資訊｜仙台大觀音（仙台天道白衣大観音 / 大觀密寺）</div><ul><li><strong>位置：</strong>仙台市泉區実沢字中山南 31-36（市營巴士「仙台大観音前」即達）。</li><li><strong>營業：</strong>平日 10:00–15:30（最終入場 15:00）／假日至 16:00（最終入場 15:30），無休。</li><li><strong>門票：</strong>外部免費；胎內參拜國中生以上 ¥500（附守護札，現金）。</li><li><strong>時間：</strong>約 45–60 分鐘；亮點為住宅區巨像街拍、龍口入口、12F 展望與螺旋天井。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -773,7 +780,7 @@
         },
         {
           "id": "d6-ch3",
-          "lat": 38.3010,
+          "lat": 38.301,
           "lng": 140.8235,
           "zoom": 16,
           "transport": "walk",
@@ -784,7 +791,7 @@
             { "src": "media/tohoku_2026/d6-ch3-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d6-ch3-2.mp4", "caption": "" }
           ],
-          "content": "從大觀音出來後，順道參訪了入口旁邊的小神社──油掛大黑天。我們入鄉隨俗，舀起一旁的專用油，慢慢地淋在大黑天像上，誠心祈求旅途一切平安。一旁還有粉色（求良緣）與紫色（求職場順利）的彩帶可以綁上祈願。<div class='callout-box callout-story'><div class='callout-icon'>📖</div><div class='callout-content'><div class='callout-title'>油掛大黑天的民間傳說</div><ul><li><strong>《打翻的賣油商人》：</strong>相傳有位賣油商人在神社附近不小心跌倒，打翻了油桶。無奈之下，乾脆把僅剩的油灑在大黑天財神身上並誠心祈願，結果此後竟心想事成、喜事連連，「淋油祈福」的方法便由此傳開來！</li><li><strong>《窮苦的賣油商人》：</strong>以前有個窮苦的賣油商人，即使生意不好仍堅持買食物供奉大黑天神。某天他完全沒賣出半點油、沒錢買供品，便愧疚地向大黑天說：「請原諒我今天沒食物能供奉祢，只能以油來供奉祢。」說完便將油淋在神像上，沒想到後來生意竟越來越興隆！人們紛紛效仿，用淋油祈求生意興隆與財運。</li></ul></div></div><div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>參拜小撇步：特殊「浴油法」3 步驟＆大黑天真言</div><ul><li><strong>浴油祈願流程：</strong>1. 點亮蠟燭 ➔ 2. 點燃線香 ➔ 3. 舀起專用油，<strong>一邊淋在大黑天神像上、一邊默念心願或「大黑天真言」共 7 次</strong>（建議自備 ¥100 零錢投入奉納箱）。</li><li><strong>大黑天真言：</strong>「おん・まか・きゃらや・そわか」（曩謨三滿多 母怛喃 唵 摩訶迦羅耶 娑婆訶）──祈求財運亨通、商業繁盛與旅途平安！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🏺</div><div class='callout-content'><div class='callout-title'>景點資訊｜油掛大黑天（油掛け大黒天）</div><ul><li><strong>位置：</strong>宮城県仙台市泉區実沢字中山南 31-36（大觀密寺境內，面向仙台大觀音龍口入口右側步行 1 分鐘）。</li><li><strong>開放時間：</strong>平日 10:00–15:30 / 週末及國定假日 10:00–16:00（配合仙台大觀音開放時間）。</li><li><strong>參拜費用：</strong>免費參拜（體驗淋油祈福、購買八正堂粉色良緣 / 紫色事業彩帶約 ¥100–¥500，僅收現金）。</li><li><strong>預留時間：</strong>約 15–20 分鐘。</li></ul></div></div>",
+          "content": "順道參拜入口旁的「油掛大黑天」，入鄉隨俗舀起專用油淋在神像上祈求旅途平安，一旁也可綁粉色（良緣）或紫色（事業）彩帶許願。<div class='callout-box callout-story'><div class='callout-icon'>📖</div><div class='callout-content'><div class='callout-title'>油掛大黑天傳說</div>相傳古時有賣油商人在神社前打翻油桶（另一說為貧困無錢買供品），便以油淋神像誠心供奉，自此生意興隆、心想事成，「淋油祈福」習俗因而流傳。</div></div><div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>獨特「浴油法」3 步驟</div><ul><li><strong>流程：</strong>1. 點蠟燭 ➔ 2. 點線香 ➔ 3. 舀油淋在神像上，<strong>默念心願或真言 7 次</strong>（建議自備 ¥100 投入奉納箱）。</li><li><strong>大黑天真言：</strong>「おん・まか・きゃらや・そわか」祈求財運與平安。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🏺</div><div class='callout-content'><div class='callout-title'>景點資訊｜油掛大黑天（油掛け大黒天）</div><ul><li><strong>位置：</strong>大觀密寺境內（面對大觀音龍口右側步行 1 分鐘）。</li><li><strong>開放：</strong>同仙台大觀音（平日 10:00–15:30／假日至 16:00）。</li><li><strong>費用：</strong>免費參拜（淋油與良緣／事業彩帶約 ¥100–¥500，僅收現金）。</li><li><strong>時間：</strong>約 15–20 分鐘。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -804,7 +811,7 @@
             { "src": "media/tohoku_2026/d6-ch4-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d6-ch4-4.png", "caption": "" }
           ],
-          "content": "充滿麻油香氣的油掛大黑天勾起了大家的食慾，步行半小時來到源自北海道的名店「らーめん山頭火 仙台南中山店」。我每次必點的「辣味噌拉麵 (辛味噌らーめん)」， Q 彈帶勁的麵體吸附著濃郁鹹辣的豚骨味噌湯底，在冷冷的冬天喝下一口熱辣的湯，簡直幸福滿分！<div class='callout-box callout-info'><div class='callout-icon'>🥢</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜らーめん山頭火 仙台南中山店</div><ul><li><strong>位置：</strong>宮城県仙台市泉區南中山 1-1-12（仙台大觀音後方 AEON 商圈附近，自大觀音步行約 15–25 分鐘或搭巴士至「南中山一丁目」站下車即達）。</li><li><strong>營業時間：</strong>每日 11:00–21:00（最後點餐時間 20:30 / 下午不午休）。</li><li><strong>平均預算：</strong>約 ¥950–¥1,500（以現金支付為主）。</li><li><strong>預留時間：</strong>約 45–60 分鐘完食。</li><li><strong>推薦餐點：</strong>辣味噌拉麵（辛味噌らーめん）、鹽味拉麵（しおらーめん）、特選豬頰肉拉麵（特選とろ肉らーめん）。</li></ul></div></div>",
+          "content": "麻油香勾起食慾，步行前往源自北海道的「らーめん山頭火 仙台南中山店」。必點「辣味噌拉麵」，Q 彈麵條吸附濃郁鹹辣豚骨味噌湯，冬天喝一口超幸福。<div class='callout-box callout-info'><div class='callout-icon'>🥢</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜らーめん山頭火 仙台南中山店</div><ul><li><strong>位置：</strong>仙台市泉區南中山 1-1-12（大觀音步行 15–25 分鐘，或搭巴士至南中山一丁目）。</li><li><strong>營業：</strong>11:00–21:00（L.O. 20:30，無午休）。</li><li><strong>預算：</strong>¥950–¥1,500（現金為主）。</li><li><strong>時間：</strong>約 45–60 分鐘。</li><li><strong>推薦：</strong>辣味噌拉麵、鹽味拉麵、特選豬頰肉拉麵。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -830,7 +837,7 @@
             { "src": "media/tohoku_2026/d6-ch5-3.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d6-ch5-4.mp4", "caption": "" }
           ],
-          "content": "搭乘巴士抵達仙台城跡站，爬上階梯迎面而來的就是經典的伊達政宗騎馬像。當初政宗為了向德川家康表示沒有謀反之意，仙台城是難得沒有天守閣的一座城池。順著他的目光遠眺整個仙台市景，一旁還有宮城縣護國神社，感受歷史的厚重與傳承。<div class='callout-box callout-sci'><div class='callout-icon'>🏯</div><div class='callout-content'><div class='callout-title'>歷史冷知識</div><ul><li><strong>不建天守閣的政治智慧：</strong>當年伊達政宗為了向德川家康表明「絕無謀反之意」，加上青葉山擁有高達百尺的天然斷崖防禦優勢，因此刻意不蓋象徵軍事指揮塔的「天守閣」，反而將資源拿去建造金碧輝煌的「大廣間」招待所！</li><li><strong>城跡裡的大鳥居之謎：</strong>一下巴士看到的灰色大鳥居並非伊達政宗所建，而是明治時代為了紀念戰爭英靈，在本丸遺址旁建立了「宮城縣護國神社」，才形成「穿過神社鳥居走進城跡」的獨特風景。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🐎</div><div class='callout-content'><div class='callout-title'>景點資訊｜仙台城跡（青葉城跡）＆ 青葉城本丸會館</div><ul><li><strong>位置：</strong>宮城県仙台市青葉區川内 1（搭乘 Loople 仙台觀光巴士至「仙台城跡」站下車即達）。</li><li><strong>開放時間：</strong>戶外城跡與展望台 24 小時開放（夜間點燈至 23:00）/ 青葉城資料展示館 4–10月 09:00–17:00、11–3月（冬季）09:00–16:00。</li><li><strong>門票費用：</strong>戶外入園免費；青葉城資料展示館（3D CG 復原劇場）成人 ¥700、中小學生 ¥300–¥500（出示仙台二日券或 Loople 一日券享折扣）。</li><li><strong>預留時間：</strong>約 45–60 分鐘。</li><li><strong>必看亮點：</strong>伊達政宗公騎馬像、仙台市景展望台、本丸大廣間遺構、宮城縣護國神社。</li></ul></div></div>",
+          "content": "搭巴士上仙台城跡，經典的伊達政宗騎馬像立於高處俯瞰整座仙台市，一旁則是宮城縣護國神社，處處透著歷史厚重感。<div class='callout-box callout-sci'><div class='callout-icon'>🏯</div><div class='callout-content'><div class='callout-title'>歷史冷知識</div><ul><li><strong>不建天守閣：</strong>伊達政宗為向德川家康表忠，加上青葉山天然斷崖易守難攻，刻意不蓋天守閣，轉而打造華麗「大廣間」。</li><li><strong>城跡大鳥居：</strong>灰色鳥居為明治時期增建的「宮城縣護國神社」，造就穿過鳥居進城跡的獨特風景。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>🐎</div><div class='callout-content'><div class='callout-title'>景點資訊｜仙台城跡（青葉城跡）＆ 本丸會館</div><ul><li><strong>位置：</strong>仙台市青葉區川内 1（Loople 仙台巴士「仙台城跡」站即達）。</li><li><strong>開放：</strong>戶外 24 小時（點燈至 23:00）／資料展示館 4–10 月 09:00–17:00、11–3 月至 16:00。</li><li><strong>門票：</strong>戶外免費；資料展示館成人 ¥700、中小學生 ¥300–¥500（仙台二日券享優惠）。</li><li><strong>時間：</strong>約 45–60 分鐘；必看騎馬像、市景展望台、大廣間遺構與護國神社。</li></ul></div></div>",
           "affiliateText": "官方網站｜仙台城跡",
           "affiliateUrl": "https://www.city.sendai.jp/shisekichosa/kurashi/manabu/kyoiku/inkai/bunkazai/bunkazai/joseki/index.html",
           "affiliateLinks": [
@@ -843,7 +850,7 @@
         {
           "id": "d6-ch6",
           "lat": 38.2727,
-          "lng": 140.8450,
+          "lng": 140.845,
           "zoom": 15,
           "transport": "bus",
           "title": "06. 巡禮｜大崎八幡宮國寶權現造建築",
@@ -855,7 +862,7 @@
             { "src": "media/tohoku_2026/d6-ch6-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d6-ch6-4.png", "caption": "" }
           ],
-          "content": "搭乘 Loople仙台來到仙台第一守護神──大崎八幡宮。眼前由伊達政宗下令建造的「御社殿」採用了華麗的權現造建築，黑底點綴金箔與五彩雕刻，與樸素的長床形成強烈對比。<div class='callout-box callout-sci'><div class='callout-icon'>🎓</div><div class='callout-content'><div class='callout-title'>歷史科普：什麼是國寶級「權現造」建築？</div><ul><li><strong>「H」型連接結構：</strong>一般神社的「本殿（神明居所）」與「拜殿（參拜處）」是分開的，而「權現造」則是利用走廊（石之間）將本殿與拜殿連接起來，從空中俯瞰就像一個大寫的 <strong>H 或 I 字型</strong>。</li><li><strong>比日光東照宮更古老：</strong>「權現造」之名源自祭祀德川家康（東照大權現）的日光東照宮；但由伊達政宗下令建造的大崎八幡宮（1607 年竣工）其實比日光東照宮還早建成，是<strong>日本現存最古老的權現造建築</strong>！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>景點資訊｜國寶 大崎八幡宮（Osaki Hachimangu）</div><ul><li><strong>位置：</strong>宮城県仙台市青葉區八幡 4-6-1（搭乘 Loople 仙台觀光巴士或市營巴士至「大崎八幡宮前」下車即達）。</li><li><strong>開放時間：</strong>境內 24 小時開放 / 授與所（御守、御朱印）09:00–16:00（祭典期間延長）。</li><li><strong>參拜費用：</strong>免費參拜。</li><li><strong>預留時間：</strong>約 30–40 分鐘（若遇松焚祭建議預留 1.5–2 小時）。</li><li><strong>必看亮點：</strong>黑漆金箔國寶「御社殿」、重要文化財「長床」與石造「二之鳥居」、職業運動選手必勝繪馬牆、仙台傳統「松川達摩」。</li></ul></div></div>",
+          "content": "搭 Loople 仙台來到守護神「大崎八幡宮」。伊達政宗敕建的國寶御社殿採華麗權現造，黑漆金箔與五彩雕刻和樸素長床形成強烈對比。<div class='callout-box callout-sci'><div class='callout-icon'>🎓</div><div class='callout-content'><div class='callout-title'>建築科普：國寶級「權現造」</div><ul><li><strong>H 型結構：</strong>以走廊（石之間）串聯本殿與拜殿，俯瞰呈 <strong>H 或 I 字型</strong>。</li><li><strong>現存最古：</strong>大崎八幡宮（1607 年竣工）比日光東照宮更早落成，是<strong>日本現存最古老的權現造建築</strong>。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>景點資訊｜國寶 大崎八幡宮（Osaki Hachimangu）</div><ul><li><strong>位置：</strong>仙台市青葉區八幡 4-6-1（Loople 或市營巴士「大崎八幡宮前」即達）。</li><li><strong>開放：</strong>境內 24 小時免費／授與所 09:00–16:00（祭典延長）。</li><li><strong>時間：</strong>約 30–40 分鐘（松焚祭建議 1.5–2 小時）。</li><li><strong>亮點：</strong>國寶御社殿、重要文化財長床、二之鳥居、必勝繪馬牆與松川達摩。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -869,7 +876,7 @@
         },
         {
           "id": "d6-ch7",
-          "lat": 38.2710,
+          "lat": 38.271,
           "lng": 140.8444,
           "zoom": 16,
           "transport": "walk",
@@ -881,7 +888,7 @@
             { "src": "media/tohoku_2026/d6-ch7-2.png", "caption": "" },
             { "src": "media/tohoku_2026/d6-ch7-3.mp4", "caption": "" }
           ],
-          "content": "大崎八幡宮聞名世界的莫過於一年一度的「松焚祭 (どんと祭)」，人們將新年裝飾堆成小山點燃「御神火」送走年神。現場還能看見成千上萬在零下低溫中進行「裸參拜」的參拜者，伴隨清脆鈴鐺聲，結合信仰與毅力的氛圍讓人震撼。參道兩旁的屋台擺滿熱食，喝上一口熱湯暖胃又暖心！<div class='callout-box callout-sci'><div class='callout-icon'>🔥</div><div class='callout-content'><div class='callout-title'>祭典文化科普：什麼是「御神火」與口含白紙的「裸參拜」？</div><ul><li><strong>御神火送年神（日本版送神）：</strong>日本人會在 1 月 14 日將家中依附著「年神」的門松、注連繩等新年裝飾帶到神社堆成小山，點燃「御神火」焚燒送年神回天上；相傳只要被神聖的火光與白煙燻烤過，一整年都能無病息災、不容易感冒！</li><li><strong>零下裸參拜的神秘裝備：</strong>成千上萬的參拜者在寒冬中僅穿白色短褲或短法被、腰繫草繩前行；每個人<strong>嘴裡都咬著一張白紙（含み紙）以防止在神聖儀式中開口閒聊</strong>，右手則搖晃鈴鐺淨化沿途厄運！</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>祭典資訊｜大崎八幡宮 松焚祭（どんと祭 / Don'tossai）</div><ul><li><strong>舉辦地點：</strong>宮城県仙台市青葉區八幡 4-6-1（國寶 大崎八幡宮境內，祭典當日於仙台站西口設有臨時直達巴士）。</li><li><strong>舉辦日期與時間：</strong>每年 1 月 14 日（御神火點火儀式約 16:00 開始 / 裸參拜隊伍於傍晚至 20:00–21:00 最為熱鬧）。</li><li><strong>參觀費用：</strong>免費參觀（屋台小吃僅收現金）。</li><li><strong>預留時間：</strong>約 60–90 分鐘。</li></ul></div></div>",
+          "content": "適逢一年一度「松焚祭（どんと祭）」，眾人點燃堆成小山的「御神火」送走年神。零下低溫中成千上萬「裸參拜」隊伍伴隨鈴聲前行，震撼人心；參道屋台的熱湯更是暖胃又暖心。<div class='callout-box callout-sci'><div class='callout-icon'>🔥</div><div class='callout-content'><div class='callout-title'>祭典科普：御神火與裸參拜</div><ul><li><strong>御神火送神：</strong>每年 1 月 14 日焚燒門松、注連繩送年神回天，相傳被火光白煙燻過能一整年無病息災。</li><li><strong>口含白紙：</strong>裸參拜者寒冬僅穿白短褲或短法被、<strong>嘴咬白紙（含み紙）防儀式間閒聊</strong>，並搖鈴淨化厄運。</li></ul></div></div><div class='callout-box callout-info'><div class='callout-icon'>⛩️</div><div class='callout-content'><div class='callout-title'>祭典資訊｜大崎八幡宮 松焚祭（どんと祭 / Dontosai）</div><ul><li><strong>地點：</strong>大崎八幡宮境內（當日仙台站西口有臨時直達巴士）。</li><li><strong>時間：</strong>每年 1 月 14 日（約 16:00 點火／裸參拜傍晚至 21:00 最熱鬧）。</li><li><strong>費用：</strong>免費參觀（屋台僅收現金）；建議停留 60–90 分鐘。</li></ul></div></div>",
           "affiliateText": "官方網站｜大崎八幡宮 松焚祭",
           "affiliateUrl": "https://www.oosaki-hachiman.or.jp/festival/matsutaki/",
           "affiliateLinks": []
@@ -898,7 +905,7 @@
           "mediaList": [
             { "src": "media/tohoku_2026/d6-ch8-1.png", "caption": "" }
           ],
-          "content": "在復古懷舊的冬日祭典中體驗了最道地的仙台夜生活。回到飯店，依舊是溫暖的天然泉水迎接滿身寒氣的我們。褪去寒意，享受沉澱的個人時光，為充實的一天畫下完美句點。<div class='callout-box callout-info'><div class='callout-icon'>♨️</div><div class='callout-content'><div class='callout-title'>飯店資訊｜天然温泉 杜都の湯 御宿 野乃仙台</div><ul><li><strong>位置與交通：</strong>地下鐵「廣瀨通站」東 2 出口步行 1 分鐘 / 山形高速巴士於「廣瀨通一番町」下車步行約 5 分鐘 / JR 仙台站步行約 12 分鐘（仙台市青葉區本町 2-2-5）。</li><li><strong>入住 / 退房：</strong>Check-in 15:00 後 / Check-out 11:00 前。</li><li><strong>溫泉開放時間：</strong>14F 天然溫泉大浴場 15:00–翌 10:00（徹夜開放，僅 01:00–05:00 桑拿暫停）。</li><li><strong>免費住客福利：</strong>2F 宵夜醬油拉麵（21:30–23:00）、14F 泡湯後免費冰棒（15:00–01:00）＆晨間乳酸菌飲料（05:00–10:00）。</li><li><strong>貼心設施：</strong>全館榻榻米地板（進門即脫鞋，備有行李箱擦輪機）、免費自助洗衣機（烘衣機 20 分鐘 ¥100），房內電視可即時查看浴場與洗衣機擁擠度。</li></ul></div></div>",
+          "content": "體驗完道地冬日祭典，回御宿野乃泡進熱騰騰天然泉水褪去寒氣，替充實的仙台最終夜畫下句點。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -917,12 +924,13 @@
     {
       "day": "Day 07",
       "dayTitle": "告別雪國的白色浪漫！在都市叢林裡尋找黑白萌寵 🐼",
+      "isDraft": false,
       "isFieldTest": false,
       "chapters": [
         {
           "id": "d7-ch1",
-          "lat": 38.2601,
-          "lng": 140.8824,
+          "lat": 35.7114,
+          "lng": 139.7728,
           "zoom": 14,
           "transport": "hsr",
           "title": "01. 出發｜新幹線瞬間移動到東京上野",
@@ -934,7 +942,7 @@
             { "src": "media/tohoku_2026/d7-ch1-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d7-ch1-4.png", "caption": "" }
           ],
-          "content": "享用完御宿野乃豐盛的自助早餐（牛舌與海鮮丼吃到飽！）後，搭上新幹線 Hayabusa 108 號，一個半小時就從雪國回到了繁華的東京上野。入住地理位置絕佳的「APA 京成上野站前飯店」，挑戰行李箱收納的俄羅斯方塊空間智慧！<div class='callout-box callout-info'><div class='callout-icon'>🛏️</div><div class='callout-content'><div class='callout-title'>飯店資訊｜APA 京成上野站前飯店（アパホテル〈京成上野駅前〉）</div><ul><li><strong>位置與交通：</strong>東京都台東區上野 2-14-26（京成電鐵 Skyliner「京成上野站」池之端口步行約 1 分鐘 / JR「上野站」不忍口步行約 3 分鐘）。</li><li><strong>入住 / 退房：</strong>Check-in 15:00 後 / Check-out 10:00 前（退房僅需將房卡投入回收箱即可 1 秒閃人）。</li><li><strong>早餐供應時間：</strong>1F 餐廳 07:00–09:30（最後入場 09:00）。</li><li><strong>貼心設施：</strong>大廳行李寄放服務、1F 投幣式自助洗衣機、製冰機與微波爐（房內 50 吋大電視支援手機投屏並可即時查看洗衣機使用狀態）。</li></ul></div></div>",
+          "content": "吃飽御宿野乃自助早餐（牛舌與海鮮丼吃到飽！），搭新幹線 Hayabusa 108 號僅 1.5 小時便重返東京上野。入住交通超方便的「APA 京成上野站前飯店」，挑戰行李收納的空間極限。<div class='callout-box callout-info'><div class='callout-icon'>🛏️</div><div class='callout-content'><div class='callout-title'>飯店資訊｜APA 京成上野站前飯店（アパホテル〈京成上野駅前〉）</div><ul><li><strong>交通：</strong>台東區上野 2-14-26（京成上野站池之端口步行 1 分鐘／JR 上野站不忍口步行 3 分鐘）。</li><li><strong>入住／退房：</strong>15:00 後／10:00 前（房卡投回收箱即快速退房）。</li><li><strong>早餐：</strong>1F 餐廳 07:00–09:30（最終入場 09:00）。</li><li><strong>設施：</strong>大廳寄放行李、1F 投幣洗衣機、製冰機與微波爐（50 吋電視可投屏及查洗衣機狀態）。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -958,7 +966,7 @@
             { "src": "media/tohoku_2026/d7-ch2-1.png", "caption": "沒吃到的鴨to葱" },
             { "src": "media/tohoku_2026/d7-ch2-2.png", "caption": "" }
           ],
-          "content": "本來想朝聖排隊名店「らーめん 鴨to葱」，無奈排隊人潮實在太驚人只好放棄。轉身前往離車站不遠的「民福北京烤鴨店」，意外遇到會講中文的店員，點了一大桌美味餐點，四個人吃得超級飽足！",
+          "content": "原想朝聖「らーめん 鴨to葱」，無奈人潮過長只好放棄。轉戰車站旁的「民福北京烤鴨店」，巧遇會說中文的店員，點滿一桌讓四人吃得超飽足。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -978,7 +986,7 @@
             { "src": "media/tohoku_2026/d7-ch3-3.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d7-ch3-4.mp4", "caption": "" }
           ],
-          "content": "漫步穿過上野恩賜公園來到歷史悠久的上野動物園。直奔西園想看人氣明星大貓熊「曉曉」與「蕾蕾」，可惜平日下午門票早已完售！不過還是觀賞了厭世臉的鯨頭鸛、表情豐富的兔猻，以及東園的北極熊與海豹，度過療癒的動物園時光。<div class='callout-box callout-tip'><div class='callout-icon'>🐼</div><div class='callout-content'><div class='callout-title'>上野動物園參觀小貼士</div>上野動物園的明星大貓熊人氣極高，即使是平日也強烈建議提前預約或留意當日票券販售狀況，以免撲空喔！</div></div>",
+          "content": "穿過上野恩賜公園來到上野動物園。雖因平日下午大貓熊「曉曉」與「蕾蕾」觀覽已滿無緣一見，但看了厭世鯨頭鸛、表情豐富的兔猻，以及北極熊與海豹，依然相當療癒。<div class='callout-box callout-tip'><div class='callout-icon'>🐼</div><div class='callout-content'><div class='callout-title'>參觀小貼士</div>大貓熊人氣極高，即使平日也建議提早預約或確認當日排隊名額，以免撲空。</div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -1001,7 +1009,7 @@
             { "src": "media/tohoku_2026/d7-ch4-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d7-ch4-2.png", "caption": "" }
           ],
-          "content": "離開動物園後晃到阿美橫丁末端，隨性走進「羊貴妃羊湯館 御徒町店」。掃碼點餐時向隔壁桌客人取經，點了一碗溫潤濃郁的純肉羊肉湯，全家人一致讚不絕口，被評為這次旅程最好吃的餐點（除了免費宵夜之外）！",
+          "content": "晃到阿美橫丁尾端隨興走進「羊貴妃羊湯館 御徒町店」，參考鄰桌點了溫潤濃郁的純肉羊肉湯，全家人一致好評，榮登整趟最愛（僅次於免費宵夜）！",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1018,7 +1026,7 @@
           "mediaList": [
             { "src": "media/tohoku_2026/d7-ch5-1.png", "caption": "" }
           ],
-          "content": "吃飽後直接投入東京最有活力的「阿美橫丁」商店街。這裡叫賣聲此起彼落，是藥妝與零食補貨的一級戰區。在 OS Drug 瘋狂掃貨免稅藥品，再到二木的菓子採買大量伴手禮，大包小包地結束精彩的一天！<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>阿美橫丁購物小提醒</div><ul><li><strong>現金準備：</strong>部分藥妝店（如 OS Drug）或路面攤販僅收現金，建議準備充足日幣。</li><li><strong>護照隨身帶：</strong>藥妝免稅門檻為未稅滿 ¥5,000，記得備妥護照與免稅 QR code。</li></ul></div></div>",
+          "content": "飯後直接投入藥妝零食一級戰區「阿美橫丁」，在 OS Drug 掃貨免稅藥妝，再到二木的菓子狂買伴手禮，大包小包收穫滿滿。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>購物小提醒</div><ul><li><strong>備妥現金：</strong>OS Drug 等部分藥妝與攤販僅收現金。</li><li><strong>帶好護照：</strong>免稅門檻未稅滿 ¥5,000，記得備妥護照與免稅 QR Code。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1028,6 +1036,7 @@
     {
       "day": "Day 08",
       "dayTitle": "穿梭東京的時光機！從昭和風情的日暮里夕陽，到浪漫璀璨的東京鐵塔",
+      "isDraft": false,
       "isFieldTest": false,
       "chapters": [
         {
@@ -1044,7 +1053,7 @@
             { "src": "media/tohoku_2026/d8-ch1-2.png", "caption": "" },
             { "src": "media/tohoku_2026/d8-ch1-3.png", "caption": "" }
           ],
-          "content": "搭乘京成本線短短 5 分鐘來到充滿下町風情的日暮里。東口著名的「纖維街」聚集了超過 80 間專賣布料與裁縫配件的批發店，價格親民是手作迷的天堂，讓媽媽也忍不住挑選了心儀的材料。",
+          "content": "搭京成本線 5 分鐘抵達下町味濃厚的日暮里。東口「纖維街」聚集超過 80 間平價布料與裁縫批發店，是手作迷天堂，媽媽也挑得不亦樂乎。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -1057,7 +1066,7 @@
         {
           "id": "d8-ch2",
           "lat": 35.7278,
-          "lng": 139.7680,
+          "lng": 139.768,
           "zoom": 16,
           "transport": "walk",
           "title": "02. 午茶｜ダージリン 日暮里店品嚐印度香料奶茶",
@@ -1066,7 +1075,7 @@
           "mediaList": [
             { "src": "media/tohoku_2026/d8-ch2-1.png", "caption": "" }
           ],
-          "content": "漫步巷弄來到由孟加拉老闆開的印度料理店「ダージリン」。店內充滿寶石藍燈光與華麗掛毯，點了現點現沖的香料奶茶（Chai）與濃郁紮實的重乳酪起司蛋糕，享受片刻異國風情。",
+          "content": "走進巷弄裡孟加拉老闆開設的「ダージリン」，在寶石藍燈光與華麗掛毯間，點杯現沖香料奶茶（Chai）配濃郁重乳酪蛋糕，享受片刻異國風情。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1084,7 +1093,7 @@
             { "src": "media/tohoku_2026/d8-ch3-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d8-ch3-2.png", "caption": "" }
           ],
-          "content": "避開人潮鑽進谷中巷弄，來到由昭和木造老宅改建的「猫町ギャラリー」。入內欣賞溫潤的陶藝作品與貓咪主題個展，感受藝術家展現的生活美學與心靈沉靜。",
+          "content": "鑽進谷中靜巷，探訪昭和木造老宅改建的「猫町ギャラリー」，欣賞溫潤陶藝與貓咪主題個展，在靜謐氛圍中品味生活美學。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1103,7 +1112,7 @@
             { "src": "media/tohoku_2026/d8-ch4-2.png", "caption": "" },
             { "src": "media/tohoku_2026/d8-ch4-3.mp4", "caption": "" }
           ],
-          "content": "造訪擁有近 1900 年歷史的東京十社之一「根津神社」。境內保存了完整的江戶時代神社建築群，並參拜了乙女稻荷神社旁蜿蜒小山坡的迷你版千本鳥居，氣場莊嚴寧靜。",
+          "content": "走訪近 1900 年歷史的東京十社之一「根津神社」，欣賞保存完整的江戶神社建築群，並走過乙女稻荷神社蜿蜒山坡的迷你千本鳥居，莊嚴又寧靜。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1114,7 +1123,7 @@
           "lng": 139.7657,
           "zoom": 16,
           "transport": "walk",
-          "title": "05. 美食｜谷中銀座商店街吃爆炸肉餅與貓尾巴甜甜圈",
+          "title": "05. 美食｜谷中銀座商店街吃元氣炸肉餅與貓尾巴甜甜圈",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放元氣炸肉餅或貓尾巴甜甜圈照片",
           "mediaList": [
@@ -1123,7 +1132,7 @@
             { "src": "media/tohoku_2026/d8-ch5-3.png", "caption": "" },
             { "src": "media/tohoku_2026/d8-ch5-4.mp4", "caption": "" }
           ],
-          "content": "來到充滿貓咪元素的「谷中銀座商店街」，一路尋找貓咪蹤影並品嚐排隊美食。一口咬下外酥內潤的「肉のすずき」元氣炸肉餅，再品嚐造型可愛的虎紋貓尾巴甜甜圈，滿足味蕾。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>谷中銀座美食推薦</div><ul><li><strong>元氣炸肉餅：</strong>外皮酥脆、肉汁飽滿，強烈建議趁熱吃！</li><li><strong>貓尾巴甜甜圈：</strong>人氣第一名的 Tora (虎紋貓) 是可可麵團搭配白巧克力豆，造型與甜度都剛剛好。</li></ul></div></div>",
+          "content": "來到貓咪元素滿滿的「谷中銀座商店街」，邊尋貓邊吃排隊美食：外酥多汁的「肉のすずき」元氣炸肉餅，配可愛的虎紋貓尾巴甜甜圈超滿足。<div class='callout-box callout-tip'><div class='callout-icon'>💡</div><div class='callout-content'><div class='callout-title'>谷中銀座必吃推薦</div><ul><li><strong>元氣炸肉餅：</strong>外酥內嫩多汁，務必趁熱吃。</li><li><strong>貓尾巴甜甜圈：</strong>人氣第一的 Tora（虎紋貓）為可可麵團搭白巧克力豆，甜度剛好。</li></ul></div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1141,7 +1150,7 @@
             { "src": "media/tohoku_2026/d8-ch6-1.png", "caption": "" },
             { "src": "media/tohoku_2026/d8-ch6-2.mp4", "caption": "" }
           ],
-          "content": "站在著名的「夕陽階梯」頂端往下俯瞰，橘黃色調的天空灑落在懷舊的街道上，感受日劇名場景的浪漫氛圍，將谷中下町的溫柔餘暉收進眼底。",
+          "content": "立於「夕陽階梯」頂端俯瞰，橘黃天色灑落懷舊商店街，宛如日劇名場景，靜靜珍藏下町最溫柔的餘暉。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1160,7 +1169,7 @@
             { "src": "media/tohoku_2026/d8-ch7-2.png", "caption": "" },
             { "src": "media/tohoku_2026/d8-ch7-3.png", "caption": "" }
           ],
-          "content": "在登高看夜景前，前往創業於江戶時代、擁有兩百多年歷史並拿過米其林一星的「五代目 野田岩 麻布飯倉本店」。古色古香的合掌造建築與東京鐵塔相映成趣，品嚐傳承百年的精緻鰻魚飯。",
+          "content": "看夜景前造訪兩百年老字號、曾獲米其林一星的「五代目 野田岩 麻布飯倉本店」。在與東京鐵塔相映的合掌造建築裡，品嚐傳承江戶手藝的精緻鰻魚飯。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1180,7 +1189,7 @@
             { "src": "media/tohoku_2026/d8-ch8-3.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d8-ch8-4.mp4", "caption": "" }
           ],
-          "content": "登上 250 公尺高的東京鐵塔 Top Deck 頂層展望台，鳥瞰整個東京如流動光河般的壯麗夜景。兌現了去年的承諾，在紅白相間的經典鐵塔餘暉中，為 9 天 8 夜的日本東北與東京冬日旅程留下最璀璨的夜晚記憶！",
+          "content": "登上 250 公尺高的東京鐵塔 Top Deck 展望台俯瞰流動光河般的東京夜景，兌現去年的約定，為 9 天 8 夜旅程寫下最璀璨的夜章。",
           "affiliateText": "🗼 預訂東京鐵塔展望台優惠門票 (Main Deck / Top Deck)",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -1195,6 +1204,7 @@
     {
       "day": "Day 09",
       "dayTitle": "旅行的終點是生活的起點，再見日本！再見東北！",
+      "isDraft": false,
       "isFieldTest": false,
       "chapters": [
         {
@@ -1209,7 +1219,7 @@
           "mediaList": [
             { "src": "media/tohoku_2026/d9-ch1-1.png", "caption": "" }
           ],
-          "content": "辦理完退房手續，推著明顯變重的行李搭乘 Skyliner 特急列車。從京成上野出發，最快 41 分鐘順利抵達成田機場第二航廈，在窗外逐漸開闊的田野風景中迎來旅程最終章。",
+          "content": "退房後推著變重的行李搭 Skyliner，從京成上野最快 41 分鐘直抵成田第二航廈，在窗外田野間迎來旅程終章。",
           "affiliateText": "🎟️ 預訂京成電鐵 Skyliner 特急優惠車票",
           "affiliateUrl": "",
           "affiliateLinks": [
@@ -1231,7 +1241,7 @@
           "mediaList": [
             { "src": "media/tohoku_2026/d9-ch2-1.png", "caption": "沒拍到謝朋殿就用星巴克代勞" }
           ],
-          "content": "提早抵達機場辦理完托運後，在第二航廈 4 樓美食街的「謝朋殿」享用在日本的最後一餐。肉質軟嫩的雞牛肉與美味炒飯，為這趟旅程畫下飽足的句點。<div class='callout-box callout-info'><div class='callout-icon'>🛍️</div><div class='callout-content'><div class='callout-title'>機場免稅店與伴手禮小撇步</div>機場免稅店雖然便利，但若喜歡尋找當地限定的特色伴手禮，建議在各個景點當地先買齊！不過長輩們幫親友帶菸酒的心意，也是維繫情感的重要環節。</div></div>",
+          "content": "辦妥托運後在第二航廈 4 樓美食街「謝朋殿」享用最後一餐，軟嫩雞牛肉與炒飯讓人飽足滿足。<div class='callout-box callout-info'><div class='callout-icon'>🛍️</div><div class='callout-content'><div class='callout-title'>機場免稅與伴手禮小撇步</div>地方限定伴手禮建議在各景點先買齊，免稅店則方便長輩幫親友採購菸酒、傳遞心意。</div></div>",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
@@ -1250,7 +1260,7 @@
             { "src": "media/tohoku_2026/d9-ch3-2.mp4", "caption": "" },
             { "src": "media/tohoku_2026/d9-ch3-3.png", "caption": "" }
           ],
-          "content": "飛機沿著跑道緩緩起飛，幸運被分配到右側窗邊的位置，不僅超近距離看到下過雪後絕美的富士山，還有陽光透過雲層灑下的光芒。九天跨越三千公里的冬日慢旅，在老天爺的眷顧下完美落幕。旅行的終點，是為了在平凡的日子裡重新拾起對生活的熱誠與期待！",
+          "content": "起飛後幸運坐到右側窗位，近距離望見覆雪富士山與破雲陽光。九天三千公里冬日漫旅圓滿落幕——旅行的終點，是為了帶著熱誠重新擁抱生活。",
           "affiliateText": "",
           "affiliateUrl": "",
           "affiliateLinks": []
