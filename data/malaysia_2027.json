@@ -13,8 +13,8 @@
       "chapters": [
         {
           "id": "d1-ch1",
-          "lat": 22.5751,
-          "lng": 120.3472,
+          "lat": 22.5752,
+          "lng": 120.3471,
           "zoom": 13,
           "transport": "drive",
           "title": "01. 啟程｜專車直達高雄小港機場",
@@ -24,8 +24,6 @@
             { "src": "media/malaysia_2027/d1-ch1-1.png", "caption": "" }
           ],
           "content": "（出發後補寫：08:00 起床整理行囊，10:00 搭專車前往小港機場的心情與報到實況）<div class='callout-box callout-tip'><div class='callout-icon'>💳</div><div class='callout-content'><div class='callout-title'>省錢妙招｜信用卡機場接送</div>預訂專車前先確認刷機票的信用卡權益，不少銀行提供<strong>免費或優惠價接送</strong>（需提前預約），可先與平台比價。</div></div><div class='callout-box callout-tip'><div class='callout-icon'>🚗</div><div class='callout-content'><div class='callout-title'>專車預約｜車型與行李規則</div><ul><li><strong>車型：</strong>五人座（1–3人、2–4件大行李）、七人座（4–6人、4–6件）、九人座（5–8人、6–8件）。</li><li><strong>計件：</strong>20吋以上及紙箱皆算一件大行李；嬰兒車等特殊行李須事先告知。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
           "affiliateLinks": [
             {"text": "kkday｜高雄小港機場專車接送", "url": "https://kkday.tpk.lu/uHxcv1ku"},
             {"text": "klook｜高雄小港機場專車接送", "url": "https://klook.tpk.lu/YH8NQa3A"}
