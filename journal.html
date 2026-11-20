@@ -625,6 +625,17 @@
         // 預設外幣對台幣參考匯率（供行程預估項目換算與離線備援）
         const FALLBACK_TWD_RATES = { TWD: 1, JPY: 0.215, MYR: 7.35, SGD: 24.3, USD: 32.5, EUR: 35.0, KRW: 0.0235, HKD: 4.18 };
         let baselineToTwdRate = 1;
+        let currentDayKey = 'ALL';
+
+        // 統一換算為新台幣（若單筆有指定幣別就依該幣別匯率換算，否則依旅程預設幣別）
+        function toTwd(amount, currencyCode) {
+            const val = Number(amount) || 0;
+            if (!val) return 0;
+            const code = String(currencyCode || currentCurrencyCode || 'TWD').toUpperCase();
+            if (code === 'TWD') return Math.round(val);
+            const rate = (code === currentCurrencyCode) ? baselineToTwdRate : (FALLBACK_TWD_RATES[code] || 1);
+            return Math.round(val * rate);
+        }
 
         let map, baseRouteLayer, activeRouteLayer, markersLayer, exploreStampsLayer;
         let foxMarker = null, foxAnimFrame = null, observer = null, videoObserver = null;
@@ -690,6 +701,11 @@
                 (d.spots || []).forEach(sp => sp.id && itinSpotById.set(sp.id, { ...sp, dayRegion: d.region || '' }));
             });
 
+            // 無論遊記是否為草稿，皆先建立章節索引以保留 affiliateLinks
+            const journalChapById = new Map();
+            (rawJournalData.days || []).forEach(d => (d.chapters || []).forEach(ch => ch.id && journalChapById.set(ch.id, ch)));
+            (rawJournalData.chapters || []).forEach(ch => ch.id && journalChapById.set(ch.id, ch));
+
             const fallbackCoord = isMY ? { lat: 3.1390, lng: 101.6869 } : { lat: 35.6895, lng: 139.6917 };
             let baseDays = [];
             if (!isWholeJournalDraft && Array.isArray(rawJournalData.days) && rawJournalData.days.length) {
@@ -722,11 +738,18 @@
 
                 const chapters = (dayObj.chapters || []).map((ch, cIdx) => {
                     const sp = itinSpotById.get(ch.id) || itinDay?.spots?.[cIdx] || {};
+                    const jCh = journalChapById.get(ch.id) || {};
+                    const mergedAffLinks = (Array.isArray(sp.affiliateLinks) && sp.affiliateLinks.length)
+                        ? sp.affiliateLinks
+                        : ((Array.isArray(ch.affiliateLinks) && ch.affiliateLinks.length) ? ch.affiliateLinks : (jCh.affiliateLinks || []));
                     return {
-                        ...ch, ...sp,
+                        ...jCh, ...ch, ...sp,
                         id: ch.id || sp.id || `d${dIdx + 1}-ch${cIdx + 1}`,
-                        lat: ch.lat ?? sp.lat, lng: ch.lng ?? sp.lng, zoom: ch.zoom || sp.zoom || 14,
-                        title: ch.title || sp.spotName || '', content: ch.content || sp.intro || '',
+                        lat: ch.lat ?? sp.lat ?? jCh.lat, lng: ch.lng ?? sp.lng ?? jCh.lng, zoom: ch.zoom || sp.zoom || jCh.zoom || 14,
+                        title: ch.title || sp.spotName || jCh.title || '', content: ch.content || sp.intro || '',
+                        affiliateText: sp.affiliateText || ch.affiliateText || jCh.affiliateText || '',
+                        affiliateUrl: sp.affiliateUrl || ch.affiliateUrl || jCh.affiliateUrl || '',
+                        affiliateLinks: mergedAffLinks,
                         dayRegion, _isDraft: isItemDraft(ch) || isItemDraft(sp)
                     };
                 });
@@ -1152,6 +1175,7 @@
         const focusSpotOnMap = chIndex => transitionToChapter(chIndex);
 
         function renderDay(dayKey) {
+            currentDayKey = dayKey;
             const contentDiv = $('content'), itinDiv = $('itinerary-content');
             contentDiv.innerHTML = ''; itinDiv.innerHTML = '';
             if (observer) observer.disconnect();
@@ -1212,11 +1236,12 @@
                     }
 
                     if (meta.transitInfo && idxInDay > 0 && meta.transitInfo.mode !== 'flight') {
-                        dayMins += meta.transitInfo.mins; dayCost += meta.transitInfo.cost;
+                        const segCostTwd = toTwd(meta.transitInfo.cost, ch.transitCurrency);
+                        dayMins += meta.transitInfo.mins; dayCost += segCostTwd;
                         dayCardsHTML.push(`
                             <div class="itin-transit-row">
                                 <div class="itin-transit-left"><span class="itin-transit-icon">${meta.transitInfo.icon}</span><span>${meta.transitInfo.modeName}｜${meta.transitInfo.routeText}</span></div>
-                                <div class="itin-transit-right">${meta.transitInfo.mins} 分 &nbsp; ${currentCurrencySymbol}${meta.transitInfo.cost.toLocaleString()}</div>
+                                <div class="itin-transit-right">${meta.transitInfo.mins} 分 &nbsp; NT$${segCostTwd.toLocaleString()}</div>
                             </div>`);
                     }
 
@@ -1281,7 +1306,7 @@
                     </div>
                     <div class="itin-summary-box">
                         <div class="itin-sum-col"><div class="itin-sum-label">當日區域移動時間</div><div class="itin-sum-val">${hrs > 0 ? `${hrs} 時 ${mins} 分` : `${mins} 分`}</div></div>
-                        <div class="itin-sum-col"><div class="itin-sum-label">預估區域交通花費</div><div class="itin-sum-val cost">${currentCurrencySymbol}${dayCost.toLocaleString()}</div></div>
+                        <div class="itin-sum-col"><div class="itin-sum-label">預估區域交通花費</div><div class="itin-sum-val cost">NT$${dayCost.toLocaleString()}</div></div>
                     </div>
                     ${dayCardsHTML.join('')}`;
                 itinDiv.appendChild(block);
@@ -1578,35 +1603,39 @@
                         alignedClock: meta.timeStr, timeRange: meta.transitInfo ? meta.transitInfo.timeRange : meta.timeStr,
                         timetableUrl: meta.transitInfo?.timetableUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(meta.pureName)}`,
                         timetableLabel: meta.transitInfo?.timetableLabel || '查看時刻表與官網',
-                        note: meta.noteText
+                        note: meta.noteText,
+                        affHtml: buildAffiliateHTML(ch)
                     });
                 }
 
                 if (meta.transitInfo && (meta.transitInfo.cost > 0 || meta.transitInfo.mode !== 'walk')) {
-                    transits.push({ day: dayObj.day, ...meta.transitInfo });
-                    if (meta.transitInfo.cost > 0) autoExpenses.push({ category: '交通', day: dayObj.day, title: `車資｜${meta.transitInfo.routeText}`, amount: meta.transitInfo.cost });
+                    transits.push({ day: dayObj.day, currency: ch.transitCurrency || currentCurrencyCode, ...meta.transitInfo });
+                    if (meta.transitInfo.cost > 0) autoExpenses.push({ category: '交通', day: dayObj.day, title: `車資｜${meta.transitInfo.routeText}`, amount: meta.transitInfo.cost, currency: ch.transitCurrency || currentCurrencyCode });
                 }
 
                 if (meta.isFoodSpot) {
                     foods.push({
                         day: dayObj.day, time: meta.timeStr, name: meta.pureName,
                         review: meta.foodReview, isCustom: Boolean(ch.foodReview && !ch.foodReview.includes('【AI 美味預覽')),
-                        policy: meta.foodPolicy
+                        policy: meta.foodPolicy,
+                        affHtml: buildAffiliateHTML(ch)
                     });
                 }
             }));
 
-            // 準備行程預估花費基底（自動轉成台幣 NT$）
+            // 準備行程預估花費基底（若單筆有輸入 currency 就依該幣別匯率換算成台幣 NT$）
             const srcBaseline = rawItineraryData.expenseItems?.length ? rawItineraryData.expenseItems : autoExpenses;
             baselineExpensesTWD = srcBaseline.map((i, idx) => {
+                const itemCur = String(i.currency || currentCurrencyCode || 'TWD').toUpperCase();
                 const origAmt = Number(i.amount) || 0;
-                const twdAmt = currentCurrencyCode === 'TWD' ? origAmt : Math.round(origAmt * baselineToTwdRate);
+                const rate = itemCur === 'TWD' ? 1 : (itemCur === currentCurrencyCode ? baselineToTwdRate : (FALLBACK_TWD_RATES[itemCur] || 1));
+                const twdAmt = Math.round(origAmt * rate);
                 return {
                     id: `base_${idx}`, isBaseline: true,
                     category: i.category || '交通', day: i.day || '', date: '',
                     title: i.title || '', payMethod: '行程預估',
-                    currency: currentCurrencyCode, originalAmount: origAmt,
-                    exchangeRate: baselineToTwdRate, hasFee: false, twdAmount: twdAmt, note: ''
+                    currency: itemCur, originalAmount: origAmt,
+                    exchangeRate: rate, hasFee: false, twdAmount: twdAmt, note: ''
                 };
             });
 
@@ -1620,6 +1649,25 @@
                 } else mergedHotels.push({ ...e, totalNights: e.nights, bookingIds: [e.bookingId] });
             });
 
+            // 依飯店名稱自動比對對應章節的 affiliateLinks
+            const findHotelAffHtml = (hotelName) => {
+                const cleanKey = (hotelName || '').split(/[（(〈]/)[0].replace(/飯店|酒店|旅館|溫泉|天然温泉|杜都の湯/g, '').trim();
+                if (!cleanKey) return '';
+                for (const d of normalizedDays) {
+                    for (const ch of (d.chapters || [])) {
+                        const hay = `${ch.title || ''} ${ch.spotName || ''}`;
+                        if (hay.includes(cleanKey) || (cleanKey.includes('御宿野乃') && hay.includes('御宿野乃')) || (cleanKey.includes('APA') && hay.includes('APA'))) {
+                            const html = buildAffiliateHTML(ch);
+                            if (html) return html;
+                        }
+                    }
+                }
+                return '';
+            };
+
+            // 1. 票券住宿
+            $('pack-vouchers').innerHTML = `
+            
             // 1. 票券住宿
             $('pack-vouchers').innerHTML = `
                 <div class="pack-toolbar">
@@ -1656,6 +1704,7 @@
                                     <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.officialName)}" target="_blank" rel="noopener" class="timetable-link-btn">🗺️ 開啟飯店地圖 ↗</a>
                                 </div>
                             </div>
+                            ${findHotelAffHtml(h.officialName)}
                         </div>
                     </div>`).join('')}
                 <h4 style="margin:20px 0 8px;color:var(--accent-brown-dark);font-size:0.92rem;">✈️ 航班・列車・重要票券（共 ${transportTickets.length} 項）</h4>
@@ -1675,6 +1724,7 @@
                                 ${t.note ? `<div style="margin-top:6px;padding:8px 12px;background:#FFF9F2;border-left:3px solid #D97724;border-radius:6px;white-space:pre-line;"><strong>⚠️ 注意事項：</strong>\n${t.note}</div>` : ''}
                             </div>
                             <div style="display:flex;justify-content:flex-end;"><a href="${t.timetableUrl}" target="_blank" rel="noopener" class="timetable-link-btn">🕒 ${t.timetableLabel} ↗</a></div>
+                            ${t.affHtml || ''}
                         </div>
                     </div>`).join('')}`;
 
@@ -1697,7 +1747,7 @@
                             <div style="font-size:0.86rem;line-height:1.65;margin-bottom:10px;">
                                 <div><strong>📍 動線：</strong>${t.routeText}</div>
                                 <div><strong>🕒 時刻：</strong>${t.timeRange}</div>
-                                <div><strong>💰 預估車資：</strong>${currentCurrencySymbol}${t.cost.toLocaleString()}</div>
+                                <div><strong>💰 預估車資：</strong>NT$${toTwd(t.cost, t.currency).toLocaleString()}</div>
                             </div>
                             <div style="display:flex;justify-content:flex-end;"><a href="${t.timetableUrl}" target="_blank" rel="noopener" class="timetable-link-btn">🕒 ${t.timetableLabel} ↗</a></div>
                         </div>
@@ -1721,6 +1771,7 @@
                         <div class="ticket-detail-body">
                             <div class="food-review-box"><div style="font-weight:700;margin-bottom:4px;color:#1E40AF;">📘 美味紀錄</div><div style="white-space:pre-line;">${f.review}</div></div>
                             <div class="food-policy-box"><div style="font-weight:700;margin-bottom:4px;color:#22543D;">⚠️ 用餐／預約注意</div><div style="white-space:pre-line;">${f.policy}</div></div>
+                            ${f.affHtml || ''}
                         </div>
                     </div>`).join('')}`;
 
