@@ -1664,9 +1664,6 @@
                 }
                 return '';
             };
-
-            // 1. 票券住宿
-            $('pack-vouchers').innerHTML = `
             
             // 1. 票券住宿
             $('pack-vouchers').innerHTML = `
@@ -1799,16 +1796,7 @@
             renderNotesPanel();
             try {
                 const pwdQuery = cloudEditPassword ? `&password=${encodeURIComponent(cloudEditPassword)}` : '';
-                const tasks = [fetch(`${GAS_API_URL}?action=getAll&tripId=${encodeURIComponent(tripId)}${pwdQuery}`).then(r => r.json())];
-                if (currentCurrencyCode !== 'TWD') {
-                    tasks.push(fetch(`${GAS_API_URL}?action=rate&from=${encodeURIComponent(currentCurrencyCode)}`).then(r => r.json()).catch(() => null));
-                }
-                const [cloudRes, baseRateRes] = await Promise.all(tasks);
-
-                if (baseRateRes?.ok && baseRateRes.rate) {
-                    baselineToTwdRate = Number(baseRateRes.rate);
-                    baselineExpensesTWD.forEach(b => { b.exchangeRate = baselineToTwdRate; b.twdAmount = Math.round(b.originalAmount * baselineToTwdRate); });
-                }
+                const cloudRes = await fetch(`${GAS_API_URL}?action=getAll&tripId=${encodeURIComponent(tripId)}${pwdQuery}`).then(r => r.json());
 
                 if (cloudRes?.ok) {
                     cloudExpenses = Array.isArray(cloudRes.expenses) ? cloudRes.expenses : [];
