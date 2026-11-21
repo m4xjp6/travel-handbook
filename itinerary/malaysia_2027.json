@@ -458,7 +458,7 @@
           "transitCost": 0,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Kedai+Kopi+Sin+Yoon+Loong+Ipoh",
           "timetableLabel": "查看餐廳地圖",
-          "intro": "創立於 1937 年的怡保白咖啡老字號，大理石圓桌與老吊扇充滿復古街坊氛圍。",
+          "intro": "創立於 1937 年的怡保白咖啡老字號，是馬來西亞怡保歷史最悠久的傳統海南茶室之一，也是公認的「怡保白咖啡」鼻祖老店，大理石圓桌與老吊扇充滿復古街坊氛圍。",
           "note": "• 地址：15A, Jalan Bandar Timah；營業 06:00–17:00。\n• 餐後可先回飯店退房並寄放行李至 18:00。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】招牌熱 / 冰傳統白咖啡泡沫綿密，必配斑蘭咖椰牛油烤吐司與半熟生熟蛋。",
@@ -516,7 +516,7 @@
           "timetableUrl": "https://www.ipohworld.org/reservation/",
           "timetableLabel": "閒真別墅官方預約",
           "intro": "建於 1893 年的客家錫礦大亨私人俱樂部，透過立體模型與古董呈現百年採錫史與昔日豪門夜生活秘辛。",
-          "note": "• 【🈯 全預約制（週一休）】須事先官網預約 11:00 場次並提早 10 分鐘報到；免費參觀（建議隨喜樂捐），入內須脫鞋。"
+          "note": "• 🈯【全預約制（週一休）】須事先官網預約 11:00 場次並提早 10 分鐘報到；免費參觀（建議隨喜樂捐），入內須脫鞋。"
         },
         {
           "id": "d3-ch5",
@@ -555,7 +555,7 @@
           "timetableUrl": "https://hoyanhor.com/museum/",
           "timetableLabel": "何人可博物館官網",
           "intro": "欣賞近打河畔的錫米巷與《老虎與樹》壁畫，接續參觀 1941 年大馬國民涼茶發源地的藍色老屋博物館。",
-          "note": "• 【🈯 開放時間】週二至週日 10:00–16:00（週一公休），免費入場並提供多種草本涼茶免費試飲。"
+          "note": "• 🈯【開放時間】週二至週日 10:00–16:00（週一公休），免費入場並提供多種草本涼茶免費試飲。"
         },
         {
           "id": "d3-ch7",
@@ -626,7 +626,7 @@
           "transitCost": 0,
           "timetableUrl": "https://www.marriott.com/en-us/hotels/kulal-aloft-kuala-lumpur-sentral/overview/",
           "timetableLabel": "雅樂軒飯店官方網站",
-          "intro": "抵達吉隆坡中央車站後免受日曬雨淋，經連通空橋直達萬豪旗下雅樂軒飯店辦理入住，展開接下來 3 晚的吉隆坡都會行程。",
+          "intro": "萬豪國際集團（Marriott）旗下的四星級時尚設計酒店，以「室內空橋直通吉隆坡中央車站（KL Sentral）與大型購物中心」的無敵交通便利性、高空無邊際泳池及年輕活潑的空間風格而廣受旅客歡迎。",
           "note": "• 訂房平台：AGODA，辦理入住時請主動提醒櫃檯合併續住免換房。\n• 地址：No. 5, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur；直結 NU Sentral 商場，下樓即可覓食。"
         }        
       ]
@@ -638,7 +638,7 @@
       "spots": [
         {
           "id": "d4-ch1",
-          "lat": 3.2379,
+          "lat": 3.2381,
           "lng": 101.6840,
           "transport": "train",
           "time": "08:00",
@@ -646,13 +646,13 @@
           "categoryLabel": "名勝絕景",
           "routeFromTo": "吉隆坡雅樂軒飯店 (KL Sentral) → 黑風洞 (Batu Caves)",
           "scheduleTime": "08:00 出發 → 08:50–11:20 攀登彩虹階梯與參拜石灰岩神廟洞（停留 2.5 hr）",
-          "seatType": "🚆 KTM Komuter 直達／🚕 Grab",
-          "transitMins": 30,
+          "seatType": "🚆 KTM Komuter 直達 / 🚕 Grab",
+          "transitMins": 36,
           "transitCost": 60,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Batu+Caves+Selangor",
           "timetableLabel": "查看黑風洞地圖",
-          "intro": "吉隆坡北郊著名的印度教聖地，洞口矗立 42.7 公尺高的金色戰神巨像，攀登 272 級彩虹階梯可抵天坑石灰岩神廟洞穴。",
-          "note": "• 【防猴提醒】階梯沿途獼猴眾多，切勿手提塑膠袋、食物或水瓶。\n• 【服裝規定】嚴禁露膝短褲或短裙（現場租沙龍約 RM15）；上午攀登較涼爽。"
+          "intro": "吉隆坡北郊著名的印度教聖地，天然石灰岩溶洞群以高達 42.7 公尺的金色室建陀（Lord Murugan）神像與 272 階彩虹階梯聞名全球。",
+          "note": "• 【防猴提醒】階梯沿途獼猴眾多，切勿手提塑膠袋、食物或水瓶。\n• 【服裝規定】嚴禁露膝短褲或短裙（現場租沙龍約 MYR15）；上午攀登較涼爽。"
         },
         {
           "id": "d4-ch2",
