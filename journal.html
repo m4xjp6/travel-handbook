@@ -1302,7 +1302,7 @@
                 block.innerHTML = `
                     <div class="itin-day-header">
                         <h3 class="itin-day-title">${dayObj.day}｜${dayObj.dayTitle || ''}</h3>
-                        <div class="itin-day-sub">📅 ${spotNames.slice(0, 4).join(' · ')}</div>
+                        <div class="itin-day-sub">📅 ${spotNames.join(' · ')}</div>
                     </div>
                     <div class="itin-summary-box">
                         <div class="itin-sum-col"><div class="itin-sum-label">當日區域移動時間</div><div class="itin-sum-val">${hrs > 0 ? `${hrs} 時 ${mins} 分` : `${mins} 分`}</div></div>
