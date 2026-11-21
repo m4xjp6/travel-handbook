@@ -256,7 +256,7 @@
           "timetableUrl": "https://www.kliaekspres.com/",
           "timetableLabel": "KLIA Ekspres 時刻表與票價",
           "intro": "緊鄰交通樞紐「吉隆坡中央車站（KL Sentral）」的五星級現代藝術設計酒店，以直通機場快線與地鐵的絕佳便利性、豐富的餐飲選擇及俯瞰湖濱公園的城市景觀而聞名。",
-          "note": "• 訂房平台：AGODA（2, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur）。\n• 與 KL Sentral 直結，隔早下樓即達 ETS 電動列車月台。\n• KLIA Ekspres 自 2027/01/01 起成人單程調漲為 MYR65（約 NT$522、來回 MYR118）；2 人以上同行也可彈性比價 Grab（單車含過路費約 MYR65–85）；23:00 後快線改為站站停，21:00 出發不受影響。"
+          "note": "• 訂房平台：AGODA。\n• 地址：2, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur。\n• 與 KL Sentral 直結，隔早下樓即達 ETS 電動列車月台。\n• KLIA Ekspres 自 2027/01/01 起成人單程調漲為 MYR65（約 NT$522、來回 MYR118）；2 人以上同行也可彈性比價 Grab（單車含過路費約 MYR65–85）；23:00 後快線改為站站停，21:00 出發不受影響。"
         }
       ]
     },
@@ -299,7 +299,7 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Sarang+Paloh+Heritage+Stay+Ipoh",
           "timetableLabel": "查看飯店位置",
           "intro": "馬來西亞怡保舊街場（Ipoh Old Town）核心地帶的四星級精品古蹟旅店，由百年歷史老建築修復改建而成。",
-          "note": "• 訂房平台：Booking.com（16, Jalan Sultan Iskandar）。\n• 怡保午後日照強，外出請備妥防曬與陽傘。"
+          "note": "• 訂房平台：Booking.com。\n• 地址：16, Jalan Sultan Iskandar。\n• 怡保午後日照強，外出請備妥防曬與陽傘。"
         },
         {
           "id": "d2-ch3",
@@ -338,7 +338,7 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Kek+Lok+Tong+Ipoh",
           "timetableLabel": "查看極樂洞地圖",
           "intro": "馬來西亞怡保最具代表性的石灰岩洞穴寺廟之一，以宏偉的天然鐘乳石洞穴與穿過山洞後「別有洞天」的世外桃源後花園而聞名。",
-          "note": "• 開放時間 07:00–17:30，免費入場（後山可租單車或天鵝船）。\n• 去回程建議搭 Grab；洞內偶有滴水請留意腳步防滑。"
+          "note": "• 開放時間 07:00–17:30，免費入場（後山可租單車或天鵝船）。\n• 去回程建議搭 Grab。\n• 洞內偶有滴水請留意腳步防滑。"
         },
         {
           "id": "d2-ch5",
@@ -434,7 +434,7 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Sarang+Paloh+Heritage+Stay+Ipoh",
           "timetableLabel": "查看飯店位置",
           "intro": "吃飽喝足後跨越近打河返回舊街場的古蹟旅宿休息，養足精神迎接隔日早上的新源隆白咖啡與舊街場壁畫巡禮。",
-          "note": "• 訂房平台：Booking.com（16, Jalan Sultan Iskandar, 30000 Ipoh, Perak）。\n• 夜間若逛累了，直接從糖水街叫 Grab 回飯店車程僅約 5 分鐘。"
+          "note": "• 訂房平台：Booking.com。\n• 地址：16, Jalan Sultan Iskandar, 30000 Ipoh, Perak。\n• 夜間若逛累了，直接從糖水街叫 Grab 回飯店車程僅約 5 分鐘。"
         }
       ]
     },
@@ -459,7 +459,7 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Kedai+Kopi+Sin+Yoon+Loong+Ipoh",
           "timetableLabel": "查看餐廳地圖",
           "intro": "創立於 1937 年的怡保白咖啡老字號，是馬來西亞怡保歷史最悠久的傳統海南茶室之一，也是公認的「怡保白咖啡」鼻祖老店，大理石圓桌與老吊扇充滿復古街坊氛圍。",
-          "note": "• 地址：15A, Jalan Bandar Timah；營業 06:00–17:00。\n• 08:00 先於薩朗柏羅傳承飯店辦理退房並寄放行李（預計傍晚 16:50 返回領取）。",
+          "note": "• 地址：15A, Jalan Bandar Timah。\n• 營業 06:00–17:00。\n• 08:00 先於薩朗柏羅傳承飯店辦理退房並寄放行李（預計傍晚 16:50 返回領取）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】招牌熱 / 冰傳統白咖啡泡沫綿密，必配斑蘭咖椰牛油烤吐司與半熟生熟蛋。",
           "foodPolicy": "• 晨間人氣極旺常需併桌（搭檯），僅收馬幣現金。"
@@ -516,7 +516,7 @@
           "timetableUrl": "https://www.ipohworld.org/reservation/",
           "timetableLabel": "閒真別墅官方預約",
           "intro": "建於 1893 年的客家錫礦大亨私人俱樂部，透過立體模型與古董呈現百年採錫史與昔日豪門夜生活秘辛。",
-          "note": "• 🈯【全預約制（週一休）】須事先官網預約 11:00 指定場次並提早 5 分鐘（10:55）抵達報到；免費參觀（建議隨喜樂捐），入內須脫鞋。"
+          "note": "• 🈯【全預約制（週一休）】須事先官網預約 11:00 指定場次並提早 5 分鐘（10:55）抵達報到。\n• 免費參觀（建議隨喜樂捐），入內須脫鞋。"
         },
         {
           "id": "d3-ch5",
@@ -555,7 +555,7 @@
           "timetableUrl": "https://hoyanhor.com/museum/",
           "timetableLabel": "何人可博物館官網",
           "intro": "欣賞近打河畔的錫米巷與《老虎與樹》壁畫，接續參觀 1941 年大馬國民涼茶發源地的藍色老屋博物館。",
-          "note": "• 🈯【指定場次與開放時間】預約 14:30 場次，務必提早 5 分鐘（14:25）抵達報到；週二至週日 10:00–16:00（週一公休），免費入場並提供多種草本涼茶免費試飲。"
+          "note": "• 🈯【指定場次與開放時間】預約 14:30 場次，務必提早 5 分鐘（14:25）抵達報到。\n• 週二至週日 10:00–16:00（週一公休），免費入場並提供多種草本涼茶免費試飲。"
         },
         {
           "id": "d3-ch7",
@@ -609,7 +609,7 @@
           "timetableUrl": "https://online.ktmb.com.my/",
           "timetableLabel": "KTMB ETS 官方時刻表",
           "intro": "從怡保總郵局步行即達素有「怡保泰姬瑪哈陵」美譽的純白摩爾式車站，搭乘高速 ETS 電動列車南返吉隆坡。",
-          "note": "• 【驗票提醒】ETS 全車對號入座，發車前 30 分鐘開放驗票進站、發車前 5 分鐘關閉閘門，請先備妥電子車票 QR Code。\n• 車廂冷氣偏強，建議隨身備妥薄外套；由於抵達吉隆坡時間較晚，建議進站前先在怡保舊街場或車站周邊買點心／簡餐上車墊胃。"
+          "note": "• 【驗票提醒】ETS 全車對號入座，發車前 30 分鐘開放驗票進站、發車前 5 分鐘關閉閘門，請先備妥電子車票 QR Code。\n• 車廂冷氣偏強，建議隨身備妥薄外套；由於抵達吉隆坡時間較晚，建議進站前先在怡保舊街場或車站周邊買點心 / 簡餐上車墊胃。"
         },
         {
           "id": "d3-ch10",
@@ -621,13 +621,13 @@
           "categoryLabel": "飯店住宿",
           "routeFromTo": "怡保火車站 → 吉隆坡中央車站 (KL Sentral) → 雅樂軒飯店（空橋直結）",
           "scheduleTime": "搭乘晚間 ETS 返吉隆坡（車程約 3 hr）→ 約 21:00 抵達 KL Sentral 經空橋步行辦理入住（連住 3 晚）",
-          "seatType": "🚂 KTMB ETS 電動列車 ＋ 🚶 空橋直結步行約 3 分鐘",
+          "seatType": "🚂 KTMB ETS 電動列車 + 🚶 空橋直結步行約 3 分鐘",
           "transitMins": 185,
           "transitCost": 522,
           "timetableUrl": "https://online.ktmb.com.my/",
           "timetableLabel": "KTMB ETS 官方時刻表",
           "intro": "萬豪國際集團（Marriott）旗下的四星級時尚設計酒店，以「室內空橋直通吉隆坡中央車站（KL Sentral）與大型購物中心」的無敵交通便利性、高空無邊際泳池及年輕活潑的空間風格而廣受旅客歡迎。",
-          "note": "• 訂房平台：AGODA，辦理入住時請主動提醒櫃檯合併續住免換房。\n• 地址：No. 5, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur；直結 NU Sentral 商場（餐廳多營業至 22:00），下樓即可覓食。\n• ETS 電動列車車資預估 MYR 65（約 NT$522）。"
+          "note": "• 訂房平台：AGODA，辦理入住時請主動提醒櫃檯合併續住免換房。\n• 地址：No. 5, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur；直結 NU Sentral 商場（餐廳多營業至 22:00），下樓即可覓食。\n• ETS 電動列車車資預估 MYR65（約 NT$522）。"
         }
       ]
     },
@@ -645,71 +645,128 @@
           "spotName": "黑風洞 (Batu Caves) 272 級彩虹階梯",
           "categoryLabel": "名勝絕景",
           "routeFromTo": "吉隆坡雅樂軒飯店 (KL Sentral) → 黑風洞 (Batu Caves)",
-          "scheduleTime": "08:00 出發 → 08:50–11:20 攀登彩虹階梯與參拜石灰岩神廟洞（停留 2.5 hr）",
+          "scheduleTime": "08:00 出發 → 08:50–10:50 攀登彩虹階梯與參拜石灰岩神廟洞（停留 2 hr）",
           "seatType": "🚆 KTM Komuter 直達 / 🚕 Grab",
           "transitMins": 36,
           "transitCost": 60,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Batu+Caves+Selangor",
           "timetableLabel": "查看黑風洞地圖",
           "intro": "吉隆坡北郊著名的印度教聖地，天然石灰岩溶洞群以高達 42.7 公尺的金色室建陀（Lord Murugan）神像與 272 階彩虹階梯聞名全球。",
-          "note": "• 【防猴提醒】階梯沿途獼猴眾多，切勿手提塑膠袋、食物或水瓶。\n• 【服裝規定】嚴禁露膝短褲或短裙（現場租沙龍約 MYR15）；上午攀登較涼爽。"
+          "note": "• 【週六交通提醒】KL Sentral 往黑風洞的 KTM Komuter 班距偏長（約 30–45 分鐘一班），出發前建議先查時刻表，若候車過久可直接改搭 Grab（約 25–30 分鐘）。\n• 【防猴提醒】階梯沿途獼猴眾多，切勿手提塑膠袋、食物或水瓶。\n• 【服裝規定】嚴禁露膝短褲或短裙（現場租沙龍約 MYR 15）；上午攀登較涼爽。"
         },
         {
           "id": "d4-ch2",
-          "lat": 3.2366,
-          "lng": 101.6834,
+          "lat": 3.2389,
+          "lng": 101.6816,
           "transport": "walk",
-          "time": "12:00",
+          "time": "10:55",
+          "spotName": "羅摩衍那洞 (Ramayana Cave - Suyambu Lingam)",
+          "categoryLabel": "名勝絕景",
+          "routeFromTo": "黑風洞 → 羅摩衍那洞 (Ramayana Cave)",
+          "scheduleTime": "10:55–11:45 參觀綠色哈奴曼神像、史詩彩繪洞窟與鐘乳石神龕（停留 50 min）",
+          "seatType": "🚶 步行約 5 分鐘",
+          "transitMins": 5,
+          "transitCost": 0,
+          "timetableUrl": "https://maps.app.goo.gl/9gx8BqUhPShYqK649",
+          "timetableLabel": "查看羅摩衍那洞地圖",
+          "intro": "位於黑風洞景區左側的彩繪石灰岩洞窟，洞口矗立醒目的綠色猴神哈奴曼（Hanuman）巨像，洞內以鮮豔燈光與雕像生動演繹印度史詩《羅摩衍那》，拾級而上可見天然鐘乳石形成的林迦神龕。",
+          "note": "• 【門票與動線】此洞須另購門票（約 MYR 5，以馬幣現金為主）。\n• 洞內階梯略陡且地面偶有潮濕，上下請留意腳步防滑。"
+        },
+        {
+          "id": "d4-ch3",
+          "lat": 3.2339,
+          "lng": 101.6829,
+          "transport": "walk",
+          "time": "11:55",
           "spotName": "Han's Kopitiam • Batu Caves",
           "categoryLabel": "在地美饌",
-          "routeFromTo": "黑風洞 → Han's Kopitiam",
-          "scheduleTime": "12:00–13:30 享用南洋茶室午餐（停留 1.5 hr）",
-          "seatType": "🚶 步行／短程移動",
+          "routeFromTo": "羅摩衍那洞 → Han's Kopitiam",
+          "scheduleTime": "11:55–13:20 享用南洋茶室午餐（停留約 1.5 hr）",
+          "seatType": "🚶 步行 / 短程移動",
           "transitMins": 10,
           "transitCost": 0,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Han's+Kopitiam+Batu+Caves",
           "timetableLabel": "查看餐廳地圖",
-          "intro": "黑風洞旁的冷氣南洋茶室，爬完 272 級階梯後最適合在此吹冷氣補水用餐。",
-          "note": "• 餐後於店外叫 Grab 前往皇家雪蘭莪錫鑞館（車程約 15–20 分鐘）。",
+          "intro": "黑風洞旁的冷氣南洋茶室，爬完 272 級階梯與洞窟後最適合在此吹冷氣補水用餐。",
+          "note": "• 建議 13:25 於店外叫 Grab 前往皇家雪蘭莪錫鑞館（車程約 20 分鐘），先參加免費導覽再接 14:30 DIY 工坊。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】推薦冰鎮美祿恐龍、白咖啡、咖椰吐司、滑蛋河粉與炒粿條。",
-          "foodPolicy": "• 室內冷氣開放，支援現金與信用卡／電子支付。"
+          "foodPolicy": "• 室內冷氣開放，支援現金與信用卡 / 電子支付。"
         },
         {
-          "id": "d4-ch3",
-          "lat": 3.1973,
+          "id": "d4-ch4",
+          "lat": 3.1969,
           "lng": 101.7244,
           "transport": "drive",
-          "time": "14:00",
+          "time": "13:45",
           "spotName": "皇家雪蘭莪當代錫鑞館 (Royal Selangor) 🈯",
           "categoryLabel": "文化體驗",
           "routeFromTo": "Han's Kopitiam → 皇家雪蘭莪當代錫鑞館",
-          "scheduleTime": "13:35 叫車 → 14:00–15:35 導覽與錫碗敲擊工坊（停留 1.5 hr）",
+          "scheduleTime": "13:25 叫車 → 13:45–14:25 免費專人導覽（約 30–40 min）→ 14:30–15:00 錫碗敲擊 DIY 工坊 → 15:00–15:30 參觀展售區",
           "seatType": "🚕 Grab 計程車",
           "transitMins": 20,
           "transitCost": 120,
           "timetableUrl": "https://visitorcentre.royalselangor.com/",
           "timetableLabel": "皇家雪蘭莪遊客中心官網",
           "intro": "創立於 1885 年的全球最大錫鑞工藝品牌總部，提供免費導覽並可參加「錫碗敲擊工作坊」親手敲製刻字錫碗。",
-          "note": "• 【🈯 工坊提醒】敲擊工坊成品連同圍裙與證書可帶回紀念；全年無休 09:00–17:00。"
+          "note": "• 🈯【導覽與工坊節奏】免費導覽約 30–40 分鐘，先完成導覽剛好銜接 14:30 預約場次的錫碗敲擊 DIY（約 30 分鐘）；成品連同圍裙與證書皆可帶回紀念。\n• 全年無休 09:00–17:00。"
         },
         {
-          "id": "d4-ch4",
-          "lat": 3.1528,
+          "id": "d4-ch5",
+          "lat": 3.1531,
           "lng": 101.7038,
           "transport": "drive",
-          "time": "16:00",
+          "time": "16:10",
           "spotName": "吉隆坡塔 (KL Tower)",
           "categoryLabel": "名勝絕景",
-          "routeFromTo": "皇家雪蘭莪錫鑞館 → 吉隆坡塔",
-          "scheduleTime": "15:35 叫車 → 16:10–18:10 登塔賞雙子星塔天際線與夕陽（停留 2 hr）",
+          "routeFromTo": "皇家雪蘭莪當代錫鑞館 → 吉隆坡塔",
+          "scheduleTime": "15:35 叫車 → 16:00 抵塔 → 16:10–18:10 登塔賞雙子星塔天際線與午後斜陽（停留 2 hr）",
           "seatType": "🚕 Grab 直達塔底",
           "transitMins": 25,
           "transitCost": 150,
           "timetableUrl": "https://kltower.com.my/",
           "timetableLabel": "吉隆坡塔官網",
           "intro": "高 421 公尺的東南亞最高電信塔，在 300 公尺露天 Sky Deck 可一次將雙峰塔與默迪卡 118 摩天樓同框收入鏡頭。",
-          "note": "• 16:10–18:10 涵蓋晴空與夕陽斜照時段；若買含 Sky Box 玻璃屋套票，上樓後請先抽號碼牌排隊拍照。"
+          "note": "• 16:10–18:10 涵蓋午後晴空與柔和斜陽時段。\n• 若購買含 Sky Box 玻璃屋套票，上樓後請先抽號碼牌排隊拍照。"
+        },
+        {
+          "id": "d4-ch6",
+          "lat": 3.1482,
+          "lng": 101.7139,
+          "transport": "drive",
+          "time": "19:00",
+          "spotName": "吉隆坡敘宴沉浸式宮廷饗宴 🈯",
+          "categoryLabel": "在地美饌",
+          "routeFromTo": "吉隆坡塔 → 吉隆坡敘宴沉浸式饗宴",
+          "scheduleTime": "18:15 叫車前往 → 18:35–18:50 報到入場 → 19:00–20:30 沉浸式宮廷晚宴（約 1.5 hr）",
+          "seatType": "🚕 Grab 計程車",
+          "transitMins": 15,
+          "transitCost": 80,
+          "timetableUrl": "https://www.google.com/maps/search/?api=1&query=3.1482,101.7139",
+          "timetableLabel": "查看敘宴位置地圖",
+          "intro": "主打古風宮廷場景與歌舞演藝結合的沉浸式主題饗宴，一道菜配一段劇場演出，在吉隆坡市中心體驗穿越古代宮廷的視聽與味覺雙重盛宴。",
+          "note": "• 🈯【預約報到提醒】晚宴採預約場次制（本次為純用餐方案，不含古裝妝造），建議於開席前 15–20 分鐘完成報到入場。\n• 週六傍晚 18:00–19:00 為吉隆坡市區尖峰車潮時段，叫車建議多預留 10 分鐘緩衝。",
+          "isFood": true,
+          "foodReview": "【AI 美味預覽】以中式宮廷御膳位上套餐呈現，搭配現場古風樂舞與互動橋段，儀式感十足。",
+          "foodPolicy": "• 全預約制並依場次統一開席，如有飲食禁忌或素食需求請於預約時提前備註。"
+        },
+        {
+          "id": "d4-ch7",
+          "lat": 3.1330,
+          "lng": 101.6863,
+          "transport": "drive",
+          "time": "21:00",
+          "spotName": "吉隆坡中央車站雅樂軒飯店 - 萬豪旗下 (Aloft Kuala Lumpur Sentral)",
+          "categoryLabel": "飯店住宿",
+          "routeFromTo": "吉隆坡敘宴 → 吉隆坡中央車站雅樂軒飯店 (KL Sentral)",
+          "scheduleTime": "20:40 搭車返程 → 21:00 返回飯店梳洗休息（續住第 2 晚）",
+          "seatType": "🚕 Grab 計程車 / 🚇 單軌電車轉乘",
+          "transitMins": 20,
+          "transitCost": 100,
+          "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Aloft+Kuala+Lumpur+Sentral",
+          "timetableLabel": "查看飯店位置",
+          "intro": "享用完宮廷晚宴後返回與吉隆坡中央車站直結的雅樂軒飯店休息，養足體力迎接隔日的吉隆坡老城文化走讀。",
+          "note": "• 訂房平台：AGODA。\n• 地址：No. 5, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur。"
         }
       ]
     },
