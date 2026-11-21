@@ -198,8 +198,8 @@
           "transitCost": 210,
           "timetableUrl": "https://www.kia.gov.tw/InstantScheduleC001110.aspx",
           "timetableLabel": "小港機場即時航班",
-          "intro": "搭乘預約專車由住家直達高雄小港國際機場，輕鬆展開 11 天星馬雙國慢旅。",
-          "note": "• 已購車資 NT$210。\n• 確認護照效期滿 6 個月、MDAC 入境卡截圖、Touch 'n Go 卡與網卡隨身攜帶。"
+          "intro": "是台灣第二大國際機場，也是南台灣最重要的空運門戶。",
+          "note": "• 確認護照效期滿 6 個月、MDAC 入境卡截圖、Touch 'n Go 卡與網卡隨身攜帶。"
         },
         {
           "id": "d1-ch2",
@@ -216,7 +216,7 @@
           "transitCost": 4138,
           "timetableUrl": "https://www.airasia.com/",
           "timetableLabel": "亞洲航空航班查詢",
-          "intro": "搭乘亞洲航空直飛吉隆坡國際機場第二航廈 (klia2)，傍晚抵達馬來西亞。",
+          "intro": "搭乘亞洲航空從高雄小港機場國際直飛吉隆坡國際機場第二航廈 (klia2)，傍晚抵達馬來西亞。",
           "note": "• 請務必提早 3 小時（10:30）抵達小港機場辦理報到與 20kg 託運。\n• 行動電源與鋰電池僅限隨身手提上機。\n• 18:10 降落後預留約 1.5 小時通關領行李，再搭 KLIA Ekspres 或 Grab 進市區。"
         },
         {
@@ -234,11 +234,11 @@
           "transitCost": 0,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Hometown+Hainan+Coffee+Kuala+Lumpur",
           "timetableLabel": "查看餐廳地圖",
-          "intro": "以大馬傳統海南咖啡與道地南洋熱食作為第一晚晚餐，剛下飛機先補充體力。",
+          "intro": "馬來西亞知名的連鎖南洋風茶餐廳品牌，主打將傳統海南咖啡店（Kopitiam）文化與現代舒適的用餐環境結合。",
           "note": "• 餐飲預算約 RM40。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】必點「海南白咖啡 / 摻（咖啡加茶）」配酥脆咖椰牛油烤吐司、海南雞飯或咖哩叻沙麵。",
-          "foodPolicy": "• 提供中英文圖文菜單，支援現金與信用卡；連鎖茶室另收服務費與稅金。"
+          "foodPolicy": "• 提供中英文圖文菜單，支援現金與信用卡。\n• 連鎖茶室另收服務費與稅金。"
         },
         {
           "id": "d1-ch4",
@@ -255,7 +255,7 @@
           "transitCost": 448,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Le+Meridien+Kuala+Lumpur",
           "timetableLabel": "查看飯店位置",
-          "intro": "入住與吉隆坡中央車站 (KL Sentral) 直結的吉隆坡艾美酒店，交通極為便利。",
+          "intro": "緊鄰交通樞紐「吉隆坡中央車站（KL Sentral）」的五星級現代藝術設計酒店，以直通機場快線與地鐵的絕佳便利性、豐富的餐飲選擇及俯瞰湖濱公園的城市景觀而聞名。",
           "note": "• 訂房平台：AGODA（2, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur）。\n• 與 KL Sentral 直結，隔早下樓即達 ETS 電動列車月台。"
         }
       ]
@@ -280,7 +280,7 @@
           "transitCost": 350,
           "timetableUrl": "https://online.ktmb.com.my/",
           "timetableLabel": "KTMB ETS 官方時刻表",
-          "intro": "由 KL Sentral 搭乘馬來亞鐵道最高速的 ETS 電動列車（時速 140km/h，類似台鐵自強號），北上錫礦古都與白咖啡故鄉「怡保」。",
+          "intro": "• 馬來亞鐵道公司營運的城際電氣化快速火車，最高時速可達 140 公里，以舒適準點、直達市中心車站的特性，高效串聯吉隆坡、怡保、檳城（北海）及馬六甲（淡邊）等西海岸主要旅遊城市。\n• 怡保火車站馬來西亞霹靂州首府怡保市的主要鐵路樞紐，因其純白色圓頂與宏偉的殖民建築外觀，被當地人美譽為「怡保的泰姬陵」。",
           "note": "• 務必認明「ETS」對號列車（非站站停的 Komuter 區間車）。\n• 出站後可順拍有「怡保泰姬瑪哈陵」之稱的白色摩爾式車站建築。"
         },
         {
@@ -298,7 +298,7 @@
           "transitCost": 0,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Sarang+Paloh+Heritage+Stay+Ipoh",
           "timetableLabel": "查看飯店位置",
-          "intro": "位於怡保舊街場核心區的古蹟改建旅宿，下樓步行 3 分鐘即達二奶巷與白咖啡名店。",
+          "intro": "馬來西亞怡保舊街場（Ipoh Old Town）核心地帶的四星級精品古蹟旅店，由百年歷史老建築修復改建而成。",
           "note": "• 訂房平台：Booking.com（16, Jalan Sultan Iskandar）。\n• 怡保午後日照強，外出請備妥防曬與陽傘。"
         },
         {
@@ -316,7 +316,7 @@
           "transitCost": 0,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Nam+Heong+White+Coffee+Ipoh+Old+Town",
           "timetableLabel": "查看餐廳地圖",
-          "intro": "OldTown 舊街場白咖啡的技術發源老店，保留傳統南洋茶室與多個獨立熟食檔口。",
+          "intro": "馬來西亞怡保舊街場（Ipoh Old Town）最具代表性的百年老字號茶室之一，也是知名連鎖品牌「舊街場白咖啡（OldTown White Coffee）」的正宗發源老店。",
           "note": "• 地址：2, Jalan Bandar Timah。\n• 營業約 06:30–16:30，熱門蛋撻與熟食售完為止。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】招牌冰白咖啡奶香滑順不焦苦，必搭現烤千層酥皮蛋撻、雞絲河粉與豬腸粉。",
@@ -337,7 +337,7 @@
           "transitCost": 100,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Kek+Lok+Tong+Ipoh",
           "timetableLabel": "查看極樂洞地圖",
-          "intro": "天然石灰岩溶洞佛教寺院，穿過巨大鐘乳石洞窟後，後方豁然開朗為群山環抱的禪意湖景花園。",
+          "intro": "馬來西亞怡保最具代表性的石灰岩洞穴寺廟之一，以宏偉的天然鐘乳石洞穴與穿過山洞後「別有洞天」的世外桃源後花園而聞名。",
           "note": "• 開放時間 07:00–17:30，免費入場（後山可租單車或天鵝船）。\n• 去回程建議搭 Grab；洞內偶有滴水請留意腳步防滑。"
         },
         {
@@ -355,7 +355,7 @@
           "transitCost": 100,
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=Restoran+Onn+Kee+Ipoh",
           "timetableLabel": "查看餐廳地圖",
-          "intro": "怡保代表名物「芽菜雞」兩大老字號之一，主打山泉水培育的粗脆芽菜、白斬滑雞與雞汁沙河粉。",
+          "intro": "馬來西亞怡保新街場最知名的芽菜雞老字號之一，與斜對面的「老黃芽菜雞」並列為造訪怡保必吃的雙雄地標，主打山泉水培育的粗脆芽菜、白斬滑雞與雞汁沙河粉。",
           "note": "• 地址：48-51, Jalan Yau Tet Shin。\n• 餐後可順買姚德勝街伴手禮（怡保香餅、花生糖）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】必吃爽脆無草腥味的白灼怡保芽菜、淋醬油麻油的白斬滑雞、手工魚丸湯與滑溜沙河粉。",
