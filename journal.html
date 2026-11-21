@@ -424,8 +424,9 @@
         .food-policy-box { padding: 10px 14px; background: #F3FAF4; border-left: 3.5px solid #38A169; border-radius: 8px; font-size: 0.85rem; line-height: 1.65; color: #274E37; }
 
         /* === 9. 地圖標記、尋訪方章、方向箭頭與移動頭貼 === */
-        .custom-marker, .stamp-marker, .route-arrow-icon, .fox-traveler-icon { background: transparent; border: none; }
+        .custom-marker, .prev-origin-marker, .stamp-marker, .route-arrow-icon, .fox-traveler-icon { background: transparent; border: none; }
         .custom-marker .marker-dot { width: 16px; height: 16px; box-sizing: border-box; background: var(--accent-brown); border: 3px solid #fff; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; transition: all 0.25s; }
+        .prev-origin-marker .prev-origin-dot { width: 14px; height: 14px; box-sizing: border-box; background: rgba(196, 169, 158, 0.45); border: 2px dashed var(--accent-brown-dark); border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
         .custom-marker:hover .marker-dot, .custom-marker.active .marker-dot { background: var(--accent-brown-dark); transform: scale(1.35); box-shadow: 0 0 0 4px rgba(255, 229, 153, 0.7), 0 3px 8px rgba(0,0,0,0.3); }
 
         .stamp-box { width: 26px; height: 26px; border-radius: 6px; background: #3B4D54; color: #fff; border: 2px solid #fff; font-family: 'Noto Serif TC', serif; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.28); cursor: pointer; transition: transform 0.2s; }
@@ -640,6 +641,7 @@
         let map, baseRouteLayer, activeRouteLayer, markersLayer, exploreStampsLayer;
         let foxMarker = null, foxAnimFrame = null, observer = null, videoObserver = null;
         let normalizedDays = [], currentChaptersList = [], currentActiveIndex = 0;
+        let prevDayOriginChapter = null;
 
         let lightboxItems = [], lightboxIndex = 0, touchStartX = 0, touchStartY = 0, justSwiped = false;
         const segmentCoordsCache = {}, chapterMarkers = new Map();
@@ -755,7 +757,10 @@
                 });
 
                 return {
-                    ...dayObj, region: dayRegion, _isDraft: dayDraft,
+                    ...dayObj,
+                    daySub: (itinDay?.daySub || dayObj.daySub || '').trim(),
+                    region: dayRegion,
+                    _isDraft: dayDraft,
                     chapters: isPreviewMode ? chapters : chapters.filter(c => !c._isDraft)
                 };
             });
@@ -965,11 +970,15 @@
             foxAnimFrame = requestAnimationFrame(step);
         }
 
-        async function transitionToChapter(newIndex) {
+        async function transitionToChapter(newIndex, animateFromPrevOrigin = false) {
             const target = currentChaptersList[newIndex];
             if (!target?.lat || !target?.lng) return;
 
-            if (newIndex !== currentActiveIndex && Math.abs(newIndex - currentActiveIndex) === 1) {
+            if (animateFromPrevOrigin && newIndex === 0 && prevDayOriginChapter) {
+                const path = await getDetailedPath(prevDayOriginChapter, target);
+                drawActiveArrowRoute(path);
+                animateFoxAlongPath(path, target.zoom || 14);
+            } else if (newIndex !== currentActiveIndex && Math.abs(newIndex - currentActiveIndex) === 1) {
                 const from = currentChaptersList[currentActiveIndex], fwd = newIndex > currentActiveIndex;
                 const raw = await getDetailedPath(fwd ? from : target, fwd ? target : from);
                 const path = fwd ? raw : [...raw].reverse();
@@ -977,7 +986,11 @@
                 animateFoxAlongPath(path, target.zoom || 14);
             } else {
                 activeRouteLayer.clearLayers();
-                if (newIndex > 0) drawActiveArrowRoute(await getDetailedPath(currentChaptersList[newIndex - 1], target));
+                if (newIndex > 0) {
+                    drawActiveArrowRoute(await getDetailedPath(currentChaptersList[newIndex - 1], target));
+                } else if (newIndex === 0 && prevDayOriginChapter) {
+                    drawActiveArrowRoute(await getDetailedPath(prevDayOriginChapter, target));
+                }
                 animateFoxAlongPath([[target.lat, target.lng]], target.zoom || 14);
             }
             currentActiveIndex = newIndex;
@@ -1183,8 +1196,10 @@
 
             const dotIcon = L.divIcon({ className: 'custom-marker', html: '<div class="marker-dot"></div>', iconSize: [16, 16], iconAnchor: [8, 8] });
             currentChaptersList = []; currentActiveIndex = 0;
+            prevDayOriginChapter = null;
             const simpleLatLngs = [];
-            let spotCount = 0, hotelCount = 0;
+            let spotCount = 0;
+            const uniqueHotels = new Set();
 
             const daysToRender = dayKey === 'ALL' ? normalizedDays : normalizedDays.filter(d => d.day === dayKey);
 
@@ -1195,6 +1210,29 @@
                 itinDiv.innerHTML = `<div class="draft-empty-box">✨ 目前尚無公開的行程天數（編輯中可於網址加上 <code>&preview=1</code> 預覽草稿）。</div>`;
                 $('map-stats-pill').textContent = '0 日行跡';
                 return;
+            }
+
+            // 單日視角時，自動抓取前一天最後一個有效站點當出發起點（相距 < 20 公尺則略過避免重疊）
+            if (dayKey !== 'ALL') {
+                const curDayIdx = normalizedDays.findIndex(d => d.day === dayKey);
+                const firstTodayCh = daysToRender[0]?.chapters?.find(c => c.lat && c.lng);
+                if (curDayIdx > 0 && firstTodayCh) {
+                    for (let i = curDayIdx - 1; i >= 0; i--) {
+                        const prevValid = [...(normalizedDays[i].chapters || [])].reverse().find(c => c.lat && c.lng);
+                        if (prevValid) {
+                            if (getDistanceKm(prevValid.lat, prevValid.lng, firstTodayCh.lat, firstTodayCh.lng) >= 0.02) {
+                                prevDayOriginChapter = { ...prevValid, _fromDay: normalizedDays[i].day };
+                                simpleLatLngs.push([prevValid.lat, prevValid.lng]);
+                                const originName = prevValid.spotName?.trim() || (prevValid.title || '').replace(/^\d+\.\s*/, '').replace(/^[^｜|]+[｜|]\s*/, '').trim();
+                                const originIcon = L.divIcon({ className: 'prev-origin-marker', html: '<div class="prev-origin-dot"></div>', iconSize: [14, 14], iconAnchor: [7, 7] });
+                                L.marker([prevValid.lat, prevValid.lng], { icon: originIcon })
+                                    .bindTooltip(`前日出發 (${normalizedDays[i].day})｜${originName}`, { direction: 'top', offset: [0, -8], className: 'marker-tooltip' })
+                                    .addTo(markersLayer);
+                            }
+                            break;
+                        }
+                    }
+                }
             }
 
             daysToRender.forEach(dayObj => {
@@ -1218,7 +1256,14 @@
                     const chIndex = currentChaptersList.length;
                     currentChaptersList.push(ch);
                     const meta = classifyChapterMeta(ch, idxInDay, idxInDay > 0 ? dayObj.chapters[idxInDay - 1] : null);
-                    meta.stampChar === '住' ? hotelCount++ : spotCount++;
+                    if (meta.stampChar === '住') {
+                        const hotelKey = (ch.lat && ch.lng)
+                            ? `${Number(ch.lat).toFixed(4)},${Number(ch.lng).toFixed(4)}`
+                            : meta.pureName.replace(/\bcheck-?(in|out)\b/gi, '').trim().toLowerCase();
+                        uniqueHotels.add(hotelKey);
+                    } else {
+                        spotCount++;
+                    }
                     spotNames.push(meta.pureName);
 
                     let section = null;
@@ -1302,7 +1347,7 @@
                 block.innerHTML = `
                     <div class="itin-day-header">
                         <h3 class="itin-day-title">${dayObj.day}｜${dayObj.dayTitle || ''}</h3>
-                        <div class="itin-day-sub">📅 ${spotNames.join(' · ')}</div>
+                        <div class="itin-day-sub">📅 ${escHtml(dayObj.daySub || spotNames.join(' · '))}</div>
                     </div>
                     <div class="itin-summary-box">
                         <div class="itin-sum-col"><div class="itin-sum-label">當日區域移動時間</div><div class="itin-sum-val">${hrs > 0 ? `${hrs} 時 ${mins} 分` : `${mins} 分`}</div></div>
@@ -1312,9 +1357,13 @@
                 itinDiv.appendChild(block);
             });
 
-            $('map-stats-pill').textContent = `${daysToRender.length} 日行跡・${spotCount} 處尋訪・${hotelCount} 處住宿點`;
+            $('map-stats-pill').textContent = `${daysToRender.length} 日行跡・${spotCount} 處尋訪・${uniqueHotels.size} 處住宿點`;
             if (simpleLatLngs.length > 1) L.polyline(simpleLatLngs, { color: '#C4A99E', weight: 2, opacity: 0.45, dashArray: '5, 10' }).addTo(baseRouteLayer);
-            if (currentChaptersList.length) { const first = document.querySelector('.chapter'); if (first) setActiveChapter(first); transitionToChapter(0); }
+            if (currentChaptersList.length) {
+                const first = document.querySelector('.chapter');
+                if (first) setActiveChapter(first);
+                transitionToChapter(0, Boolean(prevDayOriginChapter));
+            }
 
             if (!isWholeJournalDraft) {
                 observer = new IntersectionObserver(entries => {
@@ -1323,7 +1372,7 @@
                         if (e.isIntersecting) {
                             const idx = parseInt(e.target.dataset.index, 10);
                             setActiveChapter(e.target);
-                            if (!isNaN(idx)) transitionToChapter(idx);
+                            if (!isNaN(idx) && idx !== currentActiveIndex) transitionToChapter(idx);
                         }
                     });
                 }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
