@@ -149,7 +149,7 @@
   "days": [
     {
       "day": "Day 01",
-      "dayTitle": "高雄直飛成田轉新幹線・前進山形雪國",
+      "dayTitle": "初見雪國・翼號抵山形",
       "region": "山形地區",
       "isDraft": false,
       "spots": [
@@ -220,7 +220,7 @@
     },
     {
       "day": "Day 02",
-      "dayTitle": "零下 10 度藏王樹冰絕景・溫泉街與山形牛",
+      "dayTitle": "雪國奇境・藏王賞樹冰",
       "region": "山形地區",
       "isDraft": false,
       "spots": [
@@ -309,7 +309,7 @@
     },
     {
       "day": "Day 03",
-      "dayTitle": "大正浪漫銀山溫泉巡禮・移動至仙台御宿野乃",
+      "dayTitle": "雪國拾光・漫步銀山街",
       "region": "山形地區",
       "isDraft": false,
       "spots": [
@@ -428,7 +428,7 @@
     },
     {
       "day": "Day 04",
-      "dayTitle": "宮城藏王狐狸村・荒濱採草莓與 A5 仙台牛",
+      "dayTitle": "雪國野趣・藏王狐狸村",
       "region": "宮城・仙台地區",
       "isDraft": false,
       "spots": [
@@ -529,7 +529,7 @@
     },
     {
       "day": "Day 05",
-      "dayTitle": "日本三景松島遊船・國寶瑞巖寺與厚切牛舌",
+      "dayTitle": "雪國水岸・松島瑞巖寺",
       "region": "宮城・仙台地區",
       "isDraft": false,
       "spots": [
@@ -663,7 +663,7 @@
     },
     {
       "day": "Day 06",
-      "dayTitle": "百公尺仙台大觀音・仙台城跡與松焚祭火祭",
+      "dayTitle": "雪國祈願・觀音松焚祭",
       "region": "宮城・仙台地區",
       "isDraft": false,
       "spots": [
@@ -797,7 +797,7 @@
     },
     {
       "day": "Day 07",
-      "dayTitle": "東北新幹線返東京・上野動物園與阿美橫丁",
+      "dayTitle": "別離雪國・上野尋萌寵",
       "region": "東京・關東地區",
       "isDraft": false,
       "spots": [
@@ -886,7 +886,7 @@
     },
     {
       "day": "Day 08",
-      "dayTitle": "日暮里谷根千昭和散策・野田岩與東京鐵塔",
+      "dayTitle": "雪國餘韻・谷中鐵塔夜",
       "region": "東京・關東地區",
       "isDraft": false,
       "spots": [
@@ -1023,7 +1023,7 @@
     },
     {
       "day": "Day 09",
-      "dayTitle": "Skyliner 赴成田・雲端道別富士山返高雄",
+      "dayTitle": "雪國終章・雲端別富士",
       "region": "東京・關東地區",
       "isDraft": false,
       "spots": [
