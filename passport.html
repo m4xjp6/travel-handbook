@@ -66,6 +66,20 @@
             padding: 10px 16px; border-radius: 12px; margin-bottom: 18px; font-size: 0.86rem; text-align: center; font-weight: 600;
         }
 
+        /* 跨裝置行內真實向量小國旗（修正 Windows 不顯示國旗 Emoji） */
+        .inline-flag-img {
+            width: 18px; height: 13px; object-fit: cover; border-radius: 2.5px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14);
+            display: inline-block; flex-shrink: 0; vertical-align: -2px;
+            filter: sepia(0.08) saturate(0.95);
+        }
+        .inline-flag-img.on-dark {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35), 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .inline-flag-img.lg {
+            width: 24px; height: 17px; border-radius: 3px; vertical-align: -2px; margin-right: 7px;
+        }
+
         /* === 區塊一：上方「目前解鎖國家」可點擊護照總覽進度卡 === */
         .passport-hero-link { display: block; text-decoration: none; color: inherit; margin-bottom: 28px; }
         .passport-hero-card {
@@ -103,7 +117,7 @@
         .unlocked-pills-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; position: relative; z-index: 2; }
         .unlocked-flags-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
         .unlocked-flag-chip {
-            display: inline-flex; align-items: center; gap: 5px; padding: 4px 11px; border-radius: 16px;
+            display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 16px;
             background: rgba(253, 251, 247, 0.18); border: 1px solid rgba(255, 255, 255, 0.28);
             color: #fff; font-size: 0.8rem; font-weight: 600;
         }
@@ -129,13 +143,15 @@
         .filter-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
         .capsule-row { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
         .capsule-btn {
-            font-family: inherit; border: 1.5px solid var(--border-soft); background: var(--bg-color);
+            font-family: inherit; display: inline-flex; align-items: center; gap: 5px;
+            border: 1.5px solid var(--border-soft); background: var(--bg-color);
             color: var(--text-main); padding: 6px 13px; border-radius: 20px;
             font-size: 0.83rem; font-weight: 600; cursor: pointer; transition: all 0.2s; white-space: nowrap;
         }
         .capsule-btn:hover { border-color: var(--accent-brown); background: #F5EFE6; }
         .capsule-btn.active { background: var(--accent-brown); border-color: var(--accent-brown); color: #fff; box-shadow: 0 2px 8px rgba(196, 169, 158, 0.35); }
-        .capsule-count { opacity: 0.82; font-size: 0.76rem; margin-left: 3px; }
+        .capsule-btn.active .inline-flag-img { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45); }
+        .capsule-count { opacity: 0.82; font-size: 0.76rem; }
         .search-input-wrap { position: relative; flex: 1 1 220px; max-width: 300px; }
         .search-input {
             font-family: inherit; width: 100%; box-sizing: border-box; padding: 8px 14px 8px 34px;
@@ -200,7 +216,11 @@
         .modal-stamp-preview svg { max-width: 210px; max-height: 210px; width: 100%; height: auto; }
         .modal-title { font-size: 1.24rem; margin: 0 0 8px; line-height: 1.4; }
         .modal-tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-        .modal-pill { font-size: 0.78rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: #F5EFE6; color: var(--accent-brown-dark); border: 1px solid var(--border-soft); }
+        .modal-pill {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 0.78rem; font-weight: 600; padding: 3px 10px; border-radius: 12px;
+            background: #F5EFE6; color: var(--accent-brown-dark); border: 1px solid var(--border-soft);
+        }
         .modal-pill.sage { background: var(--accent-sage); color: var(--text-main); border-color: #B8C9B4; }
         .modal-info-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 14px; }
         .modal-info-table th, .modal-info-table td { padding: 7px 6px; border-bottom: 1px dashed #EAE1D8; text-align: left; vertical-align: top; }
@@ -274,7 +294,7 @@
     </div>
 
     <!-- 區塊一：目前解鎖國家（可點擊前往 countries.html 世界地圖＆蒐集冊） -->
-    <a href="countries.html" class="passport-hero-link" aria-label="前往互動世界地圖與國家蒐集冊">
+    <a href="countries.html" id="countries-hero-link" class="passport-hero-link" aria-label="前往互動世界地圖與國家蒐集冊">
         <section class="passport-hero-card">
             <div class="passport-hero-top">
                 <div class="passport-emblem-row">
@@ -353,36 +373,61 @@
 
     <script>
         /* =====================================================================
-           1. 全域設定、國家對照與日期工具
+           1. 全域設定、國家對照（與 countries.html 同步）與工具函式
            ===================================================================== */
         const $ = id => document.getElementById(id);
         const urlParams = new URLSearchParams(location.search);
         const isPreviewMode = ['1', 'true'].includes(urlParams.get('preview'));
-        if (isPreviewMode) $('preview-banner').style.display = 'block';
+        if (isPreviewMode) {
+            $('preview-banner').style.display = 'block';
+            $('countries-hero-link').href = 'countries.html?preview=1';
+        }
 
         const TOTAL_WORLD_TARGETS = 197;
 
         const COUNTRY_META = {
-            '台灣':     { code: 'TW', flag: '🇹🇼', en: 'TAIWAN' },
-            '日本':     { code: 'JP', flag: '🇯🇵', en: 'JAPAN' },
-            '韓國':     { code: 'KR', flag: '🇰🇷', en: 'KOREA' },
-            '香港':     { code: 'HK', flag: '🇭🇰', en: 'HONG KONG' },
-            '澳門':     { code: 'MO', flag: '🇲🇴', en: 'MACAU' },
-            '中國':     { code: 'CN', flag: '🇨🇳', en: 'CHINA' },
-            '馬來西亞': { code: 'MY', flag: '🇲🇾', en: 'MALAYSIA' },
-            '新加坡':   { code: 'SG', flag: '🇸🇬', en: 'SINGAPORE' },
-            '泰國':     { code: 'TH', flag: '🇹🇭', en: 'THAILAND' },
-            '越南':     { code: 'VN', flag: '🇻🇳', en: 'VIETNAM' },
-            '印尼':     { code: 'ID', flag: '🇮🇩', en: 'INDONESIA' },
-            '菲律賓':   { code: 'PH', flag: '🇵🇭', en: 'PHILIPPINES' },
-            '美國':     { code: 'US', flag: '🇺🇸', en: 'UNITED STATES' },
-            '英國':     { code: 'GB', flag: '🇬🇧', en: 'UNITED KINGDOM' },
-            '法國':     { code: 'FR', flag: '🇫🇷', en: 'FRANCE' },
-            '德國':     { code: 'DE', flag: '🇩🇪', en: 'GERMANY' },
-            '義大利':   { code: 'IT', flag: '🇮🇹', en: 'ITALY' },
-            '瑞士':     { code: 'CH', flag: '🇨🇭', en: 'SWITZERLAND' },
-            '澳洲':     { code: 'AU', flag: '🇦🇺', en: 'AUSTRALIA' },
-            '紐西蘭':   { code: 'NZ', flag: '🇳🇿', en: 'NEW ZEALAND' }
+            '台灣':     { code: 'TW', en: 'TAIWAN' },
+            '日本':     { code: 'JP', en: 'JAPAN' },
+            '韓國':     { code: 'KR', en: 'KOREA' },
+            '香港':     { code: 'HK', en: 'HONG KONG' },
+            '澳門':     { code: 'MO', en: 'MACAU' },
+            '中國':     { code: 'CN', en: 'CHINA' },
+            '馬來西亞': { code: 'MY', en: 'MALAYSIA' },
+            '新加坡':   { code: 'SG', en: 'SINGAPORE' },
+            '泰國':     { code: 'TH', en: 'THAILAND' },
+            '越南':     { code: 'VN', en: 'VIETNAM' },
+            '印尼':     { code: 'ID', en: 'INDONESIA' },
+            '菲律賓':   { code: 'PH', en: 'PHILIPPINES' },
+            '印度':     { code: 'IN', en: 'INDIA' },
+            '土耳其':   { code: 'TR', en: 'TURKEY' },
+            '阿聯酋':   { code: 'AE', en: 'UAE' },
+            '英國':     { code: 'GB', en: 'UNITED KINGDOM' },
+            '法國':     { code: 'FR', en: 'FRANCE' },
+            '德國':     { code: 'DE', en: 'GERMANY' },
+            '義大利':   { code: 'IT', en: 'ITALY' },
+            '瑞士':     { code: 'CH', en: 'SWITZERLAND' },
+            '西班牙':   { code: 'ES', en: 'SPAIN' },
+            '葡萄牙':   { code: 'PT', en: 'PORTUGAL' },
+            '荷蘭':     { code: 'NL', en: 'NETHERLANDS' },
+            '奧地利':   { code: 'AT', en: 'AUSTRIA' },
+            '捷克':     { code: 'CZ', en: 'CZECHIA' },
+            '希臘':     { code: 'GR', en: 'GREECE' },
+            '冰島':     { code: 'IS', en: 'ICELAND' },
+            '挪威':     { code: 'NO', en: 'NORWAY' },
+            '芬蘭':     { code: 'FI', en: 'FINLAND' },
+            '美國':     { code: 'US', en: 'UNITED STATES' },
+            '加拿大':   { code: 'CA', en: 'CANADA' },
+            '墨西哥':   { code: 'MX', en: 'MEXICO' },
+            '巴西':     { code: 'BR', en: 'BRAZIL' },
+            '阿根廷':   { code: 'AR', en: 'ARGENTINA' },
+            '秘魯':     { code: 'PE', en: 'PERU' },
+            '智利':     { code: 'CL', en: 'CHILE' },
+            '澳洲':     { code: 'AU', en: 'AUSTRALIA' },
+            '紐西蘭':   { code: 'NZ', en: 'NEW ZEALAND' },
+            '埃及':     { code: 'EG', en: 'EGYPT' },
+            '摩洛哥':   { code: 'MA', en: 'MOROCCO' },
+            '南非':     { code: 'ZA', en: 'SOUTH AFRICA' },
+            '肯亞':     { code: 'KE', en: 'KENYA' }
         };
 
         const AIRPORT_CANONICAL = {
@@ -403,6 +448,19 @@
         const GENERIC_ARROW_PREFIXES = new Set(['機場', '車站', '航段', '交通', '轉乘']);
         const escHtml = s => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
         const normalizeCountry = name => String(name || '').trim().replace(/^臺灣$/, '台灣');
+
+        function getFlagSvgUrl(countryName) {
+            const meta = COUNTRY_META[normalizeCountry(countryName)];
+            const code = String(meta?.code || '').toLowerCase();
+            return /^[a-z]{2}$/.test(code) ? `https://flagcdn.com/${code}.svg` : '';
+        }
+
+        function buildFlagImgHtml(countryName, extraClass = '') {
+            const url = getFlagSvgUrl(countryName);
+            if (!url) return '';
+            const cls = extraClass ? `inline-flag-img ${extraClass}` : 'inline-flag-img';
+            return `<img class="${cls}" src="${url}" alt="${escHtml(countryName)} 國旗" loading="lazy" onerror="this.style.display='none'">`;
+        }
 
         function getTodayStrTW() {
             try {
@@ -834,7 +892,13 @@
             const unlockedCountrySet = new Set();
 
             (passportCfg.countries || []).forEach(c => {
-                if (c && c.unlocked !== false && c.name) unlockedCountrySet.add(normalizeCountry(c.name));
+                if (c && c.unlocked !== false && c.name) {
+                    const stdName = normalizeCountry(c.name);
+                    unlockedCountrySet.add(stdName);
+                    if (c.code && !COUNTRY_META[stdName]) {
+                        COUNTRY_META[stdName] = { code: String(c.code).toUpperCase(), en: String(c.code).toUpperCase() };
+                    }
+                }
             });
 
             (passportCfg.manualCrossings || []).forEach((mc, idx) => {
@@ -983,8 +1047,8 @@
             $('stat-spot-count').textContent = allSpotStamps.length;
 
             $('unlocked-flags-wrap').innerHTML = ordered.map(c => {
-                const flag = COUNTRY_META[c]?.flag || '🏳️';
-                return `<span class="unlocked-flag-chip">${flag} ${escHtml(c)}</span>`;
+                const flagHtml = buildFlagImgHtml(c, 'on-dark') || '<span>🌐</span>';
+                return `<span class="unlocked-flag-chip">${flagHtml}<span>${escHtml(c)}</span></span>`;
             }).join('');
         }
 
@@ -992,13 +1056,13 @@
             const counts = {};
             allCrossings.forEach(c => { const k = c.country || '其他'; counts[k] = (counts[k] || 0) + 1; });
             const pills = [
-                { key: 'ALL', label: '全部', count: allCrossings.length },
-                ...Object.keys(counts).map(c => ({ key: c, label: `${COUNTRY_META[c]?.flag || ''} ${c}`.trim(), count: counts[c] }))
+                { key: 'ALL', label: '全部', country: '', count: allCrossings.length },
+                ...Object.keys(counts).map(c => ({ key: c, label: c, country: c, count: counts[c] }))
             ];
             $('crossing-country-filters').innerHTML = pills.map(p => `
                 <button type="button" class="capsule-btn ${currentCrossingCountry === p.key ? 'active' : ''}"
                     onclick="currentCrossingCountry='${escHtml(p.key)}';renderCrossingFilters();renderCrossingsWall();">
-                    ${escHtml(p.label)}<span class="capsule-count">(${p.count})</span>
+                    ${p.country ? buildFlagImgHtml(p.country) : ''}<span>${escHtml(p.label)}</span><span class="capsule-count">(${p.count})</span>
                 </button>`).join('');
         }
 
@@ -1035,13 +1099,13 @@
             });
 
             const pills = [
-                { key: 'ALL', label: '全部國家', count: allSpotStamps.length },
-                ...countries.map(c => ({ key: c, label: `${COUNTRY_META[c]?.flag || ''} ${c}`.trim(), count: counts[c] }))
+                { key: 'ALL', label: '全部國家', country: '', count: allSpotStamps.length },
+                ...countries.map(c => ({ key: c, label: c, country: c, count: counts[c] }))
             ];
             $('spot-country-filters').innerHTML = pills.map(p => `
                 <button type="button" class="capsule-btn ${currentSpotCountry === p.key ? 'active' : ''}"
                     onclick="currentSpotCountry='${escHtml(p.key)}';renderSpotFilters();renderSpotsWall();">
-                    ${escHtml(p.label)}<span class="capsule-count">(${p.count})</span>
+                    ${p.country ? buildFlagImgHtml(p.country) : ''}<span>${escHtml(p.label)}</span><span class="capsule-count">(${p.count})</span>
                 </button>`).join('');
         }
 
@@ -1069,14 +1133,14 @@
         function openCrossingModal(uid) {
             const item = allCrossings.find(c => c.uid === uid);
             if (!item) return;
-            const flag = COUNTRY_META[item.country]?.flag || '🛂';
+            const flagHtml = buildFlagImgHtml(item.country, 'lg') || '🛂 ';
             const dirLabel = item.direction === 'departure' ? '🛫 出境 (DEPARTURE)' : '🛬 入境 (ARRIVAL)';
             const modeLabel = item.mode === 'land' ? '🚗 陸路關卡' : (item.mode === 'sea' ? '⛴️ 水路 / 郵輪' : '✈️ 航空通關');
             const hasJournal = item.tripId && publishedJournalMap.get(item.tripId);
 
             $('stamp-modal-body').innerHTML = `
                 <div class="modal-stamp-preview">${buildCrossingSVG(item)}</div>
-                <h3 class="modal-title">${flag} ${escHtml(item.country)}・${escHtml(item.portName || item.portCode)}</h3>
+                <h3 class="modal-title">${flagHtml}${escHtml(item.country)}・${escHtml(item.portName || item.portCode)}</h3>
                 <div class="modal-tags-row">
                     <span class="modal-pill">${dirLabel}</span>
                     <span class="modal-pill sage">${modeLabel}</span>
@@ -1103,7 +1167,7 @@
             const key = decodeURIComponent(encodedKey);
             const stamp = allSpotStamps.find(s => s.key === key);
             if (!stamp) return;
-            const flag = COUNTRY_META[stamp.country]?.flag || '📍';
+            const flagHtml = buildFlagImgHtml(stamp.country) || '📍';
             const theme = inferStampTheme(stamp.name, stamp.categoryLabel, stamp.isFood, stamp.kind);
 
             const visitsHtml = stamp.visits.map(v => {
@@ -1129,7 +1193,7 @@
                 <div class="modal-stamp-preview">${buildSpotStampSVG(stamp, 'modal')}</div>
                 <h3 class="modal-title">${escHtml(stamp.name)}</h3>
                 <div class="modal-tags-row">
-                    <span class="modal-pill">${flag} ${escHtml(stamp.country)}${stamp.region ? '・' + escHtml(stamp.region) : ''}</span>
+                    <span class="modal-pill">${flagHtml}<span>${escHtml(stamp.country)}${stamp.region ? '・' + escHtml(stamp.region) : ''}</span></span>
                     <span class="modal-pill sage">${escHtml(theme.label)}</span>
                     <span class="modal-pill">累計造訪 ${stamp.visitCount} 次</span>
                 </div>
