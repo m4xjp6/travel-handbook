@@ -150,6 +150,18 @@
             font-weight: 600;
         }
 
+        /* 跨裝置行內真實小國旗（修正 Windows 不顯示國旗 Emoji） */
+        .inline-flag-img {
+            width: 18px;
+            height: 13px;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14);
+            vertical-align: -2px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
         /* === 卡片容器共通樣式 === */
         .panel-card {
             background: #fff;
@@ -258,13 +270,15 @@
             position: absolute;
             pointer-events: none;
             z-index: 20;
-            background: rgba(74, 58, 50, 0.94);
+            background: rgba(74, 58, 50, 0.95);
             color: #FFFDF9;
             padding: 6px 12px;
             border-radius: 10px;
             font-size: 0.8rem;
             font-weight: 600;
             white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
             opacity: 0;
             transform: translate(-50%, -125%);
@@ -287,7 +301,7 @@
         .legend-swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
         .legend-dot { width: 11px; height: 11px; border-radius: 50%; background: #C66B4F; box-shadow: 0 0 0 3px rgba(232, 168, 92, 0.35); display: inline-block; }
 
-        /* === 區塊二：各洲國家蒐集冊 === */
+        /* === 區塊二：各洲國家蒐集冊（方案 C：真實國旗 × 復古郵票圓章） === */
         .filter-toolbar {
             display: flex;
             flex-wrap: wrap;
@@ -353,68 +367,104 @@
 
         .countries-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 14px;
         }
         .country-badge-card {
             appearance: none;
             font-family: inherit;
-            background: #fff;
+            background: #FFFDFA;
             border: 1.5px solid var(--accent-brown);
             border-radius: 16px;
-            padding: 14px 10px 12px;
+            padding: 12px 10px 12px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 8px;
+            gap: 6px;
             position: relative;
             box-shadow: 0 4px 12px rgba(196, 169, 158, 0.14);
-            transition: transform 0.22s ease, box-shadow 0.22s ease;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
         }
-        .country-badge-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(122, 98, 88, 0.18); }
+        .country-badge-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(122, 98, 88, 0.18);
+            border-color: var(--accent-brown-dark);
+        }
         .country-badge-card.locked {
             background: #FAF8F5;
             border: 1.5px dashed rgba(196, 169, 158, 0.45);
             box-shadow: none;
-            opacity: 0.68;
+            opacity: 0.72;
         }
-        .country-badge-card.locked:hover { opacity: 0.92; }
+        .country-badge-card.locked:hover { opacity: 0.95; }
 
-        .badge-medallion {
-            width: 72px;
-            height: 72px;
-            border-radius: 18px;
-            background: linear-gradient(145deg, #FFFBF3 0%, #F3E9DC 100%);
-            border: 2px solid #D9C3AE;
+        /* 方案 C：真實國旗 × 復古郵票圓章容器 */
+        .stamp-seal-wrap {
+            position: relative;
+            width: 96px;
+            height: 96px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.9), 0 3px 8px rgba(122, 98, 88, 0.12);
+            flex-shrink: 0;
         }
-        .country-badge-card.locked .badge-medallion {
-            filter: grayscale(0.85);
-            background: #F2EEE9;
-            border-color: #DCD3CA;
-            box-shadow: none;
-        }
-        .badge-medallion img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .badge-flag-emoji { font-size: 2.25rem; line-height: 1; }
-        .badge-iso-chip {
+        .stamp-seal-svg {
             position: absolute;
-            bottom: 3px;
-            right: 4px;
-            background: rgba(122, 98, 88, 0.84);
-            color: #fff;
-            font-size: 0.62rem;
-            font-weight: 700;
-            padding: 1px 5px;
-            border-radius: 6px;
-            letter-spacing: 0.05em;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
+        .stamp-flag-disc {
+            position: relative;
+            z-index: 2;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #FDFBF7;
+            box-shadow: 0 0 0 1.2px rgba(138, 108, 94, 0.45), 0 2px 6px rgba(90, 72, 62, 0.16);
+            background: #F4ECE2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .stamp-flag-disc img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* 微暖復古色調，讓高飽和國旗自然融入奶茶手帳風 */
+            filter: sepia(0.1) saturate(0.92) contrast(0.98);
+        }
+        .stamp-flag-disc.custom-img img {
+            filter: none;
+        }
+        .country-badge-card.locked .stamp-flag-disc img,
+        .modal-seal-wrap.locked .stamp-flag-disc img {
+            filter: grayscale(0.92) contrast(0.88) opacity(0.55);
+        }
+        .stamp-flag-fallback {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-brown-dark);
+            letter-spacing: 0.08em;
+        }
+        /* 右下角淡淡郵戳波浪壓印（僅已解鎖顯示） */
+        .stamp-postmark-overlay {
+            position: absolute;
+            right: 2px;
+            bottom: 4px;
+            width: 34px;
+            height: 20px;
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0.62;
+        }
+
         .unlocked-check-dot {
             position: absolute;
             top: 8px;
@@ -429,6 +479,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 4;
         }
         .country-card-name { font-size: 0.98rem; font-weight: 700; margin: 0; line-height: 1.25; }
         .country-card-sub { font-size: 0.74rem; color: var(--text-light); font-weight: 500; }
@@ -491,22 +542,22 @@
             margin-bottom: 16px;
             text-align: center;
         }
-        .modal-medallion {
-            width: 108px;
-            height: 108px;
-            border-radius: 24px;
-            background: linear-gradient(145deg, #FFFDF9 0%, #EFE4D6 100%);
-            border: 2.5px solid var(--accent-brown);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            margin-bottom: 10px;
-            box-shadow: 0 6px 18px rgba(122, 98, 88, 0.16);
+        .modal-seal-wrap {
+            width: 136px;
+            height: 136px;
+            margin-bottom: 8px;
         }
-        .modal-medallion.locked { filter: grayscale(0.85); opacity: 0.75; }
-        .modal-medallion img { width: 100%; height: 100%; object-fit: cover; }
-        .modal-medallion .badge-flag-emoji { font-size: 3.4rem; }
+        .modal-seal-wrap .stamp-flag-disc {
+            width: 78px;
+            height: 78px;
+            border-width: 3px;
+        }
+        .modal-seal-wrap .stamp-postmark-overlay {
+            width: 46px;
+            height: 26px;
+            right: 4px;
+            bottom: 6px;
+        }
         .modal-title { font-size: 1.32rem; margin: 0 0 4px; }
         .modal-en-sub { font-size: 0.8rem; color: var(--text-light); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
 
@@ -572,6 +623,8 @@
             .world-map-stage { aspect-ratio: 4 / 3; min-height: 240px; }
             .search-input-wrap { max-width: none; width: 100%; }
             .countries-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .stamp-seal-wrap { width: 88px; height: 88px; }
+            .stamp-flag-disc { width: 50px; height: 50px; }
             .admin-fab { bottom: 16px; right: 14px; padding: 9px 15px; font-size: 0.82rem; }
         }
     </style>
@@ -632,7 +685,7 @@
     <section class="panel-card">
         <div class="section-header-bar">
             <h2 class="section-title">🎖️ 各洲國家 / 地區蒐集冊</h2>
-            <span class="section-sub">支援於 /admin/ 上傳自訂國家徽章插畫・點擊卡片放大查看</span>
+            <span class="section-sub">真實國旗 × 復古郵戳圓章・支援於 /admin/ 替換自訂徽章插畫</span>
         </div>
 
         <div class="filter-toolbar">
@@ -671,6 +724,25 @@
         const escHtml = s => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
         const normalizeCountry = name => String(name || '').trim().replace(/^臺灣$/, '台灣');
 
+        function getFlagSvgUrl(isoCode) {
+            const c = String(isoCode || '').trim().toLowerCase();
+            return /^[a-z]{2}$/.test(c) ? `https://flagcdn.com/${c}.svg` : '';
+        }
+
+        function buildInlineFlagHtml(code, altName) {
+            const url = getFlagSvgUrl(code);
+            return url ? `<img class="inline-flag-img" src="${url}" alt="${escHtml(altName)}" loading="lazy">` : '';
+        }
+
+        function hashStr(s) {
+            let h = 2166136261;
+            for (let i = 0; i < s.length; i++) {
+                h ^= s.charCodeAt(i);
+                h = Math.imul(h, 16777619);
+            }
+            return Math.abs(h);
+        }
+
         function getTodayStrTW() {
             try {
                 const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
@@ -686,61 +758,70 @@
 
         const WORLD_CATALOG = [
             // 亞洲
-            { code: 'TW', num: '158', name: '台灣',     en: 'Taiwan',         continent: '亞洲', flag: '🇹🇼', micro: false, coords: [120.96, 23.70] },
-            { code: 'JP', num: '392', name: '日本',     en: 'Japan',          continent: '亞洲', flag: '🇯🇵', micro: false },
-            { code: 'KR', num: '410', name: '韓國',     en: 'South Korea',    continent: '亞洲', flag: '🇰🇷', micro: false },
-            { code: 'HK', num: '344', name: '香港',     en: 'Hong Kong',      continent: '亞洲', flag: '🇭🇰', micro: true,  coords: [114.17, 22.32] },
-            { code: 'MO', num: '446', name: '澳門',     en: 'Macau',          continent: '亞洲', flag: '🇲🇴', micro: true,  coords: [113.54, 22.20] },
-            { code: 'MY', num: '458', name: '馬來西亞', en: 'Malaysia',       continent: '亞洲', flag: '🇲🇾', micro: false },
-            { code: 'SG', num: '702', name: '新加坡',   en: 'Singapore',      continent: '亞洲', flag: '🇸🇬', micro: true,  coords: [103.82, 1.35] },
-            { code: 'CN', num: '156', name: '中國',     en: 'China',          continent: '亞洲', flag: '🇨🇳', micro: false },
-            { code: 'TH', num: '764', name: '泰國',     en: 'Thailand',       continent: '亞洲', flag: '🇹🇭', micro: false },
-            { code: 'VN', num: '704', name: '越南',     en: 'Vietnam',        continent: '亞洲', flag: '🇻🇳', micro: false },
-            { code: 'ID', num: '360', name: '印尼',     en: 'Indonesia',      continent: '亞洲', flag: '🇮🇩', micro: false },
-            { code: 'PH', num: '608', name: '菲律賓',   en: 'Philippines',    continent: '亞洲', flag: '🇵🇭', micro: false },
-            { code: 'IN', num: '356', name: '印度',     en: 'India',          continent: '亞洲', flag: '🇮🇳', micro: false },
-            { code: 'TR', num: '792', name: '土耳其',   en: 'Turkey',         continent: '亞洲', flag: '🇹🇷', micro: false },
-            { code: 'AE', num: '784', name: '阿聯酋',   en: 'UAE',            continent: '亞洲', flag: '🇦🇪', micro: false },
+            { code: 'TW', num: '158', name: '台灣',     en: 'Taiwan',         continent: '亞洲', micro: false, coords: [120.96, 23.70] },
+            { code: 'JP', num: '392', name: '日本',     en: 'Japan',          continent: '亞洲', micro: false },
+            { code: 'KR', num: '410', name: '韓國',     en: 'South Korea',    continent: '亞洲', micro: false },
+            { code: 'HK', num: '344', name: '香港',     en: 'Hong Kong',      continent: '亞洲', micro: true,  coords: [114.17, 22.32] },
+            { code: 'MO', num: '446', name: '澳門',     en: 'Macau',          continent: '亞洲', micro: true,  coords: [113.54, 22.20] },
+            { code: 'MY', num: '458', name: '馬來西亞', en: 'Malaysia',       continent: '亞洲', micro: false },
+            { code: 'SG', num: '702', name: '新加坡',   en: 'Singapore',      continent: '亞洲', micro: true,  coords: [103.82, 1.35] },
+            { code: 'CN', num: '156', name: '中國',     en: 'China',          continent: '亞洲', micro: false },
+            { code: 'TH', num: '764', name: '泰國',     en: 'Thailand',       continent: '亞洲', micro: false },
+            { code: 'VN', num: '704', name: '越南',     en: 'Vietnam',        continent: '亞洲', micro: false },
+            { code: 'ID', num: '360', name: '印尼',     en: 'Indonesia',      continent: '亞洲', micro: false },
+            { code: 'PH', num: '608', name: '菲律賓',   en: 'Philippines',    continent: '亞洲', micro: false },
+            { code: 'IN', num: '356', name: '印度',     en: 'India',          continent: '亞洲', micro: false },
+            { code: 'TR', num: '792', name: '土耳其',   en: 'Turkey',         continent: '亞洲', micro: false },
+            { code: 'AE', num: '784', name: '阿聯酋',   en: 'UAE',            continent: '亞洲', micro: false },
 
             // 歐洲
-            { code: 'GB', num: '826', name: '英國',     en: 'United Kingdom', continent: '歐洲', flag: '🇬🇧', micro: false },
-            { code: 'FR', num: '250', name: '法國',     en: 'France',         continent: '歐洲', flag: '🇫🇷', micro: false },
-            { code: 'DE', num: '276', name: '德國',     en: 'Germany',        continent: '歐洲', flag: '🇩🇪', micro: false },
-            { code: 'IT', num: '380', name: '義大利',   en: 'Italy',          continent: '歐洲', flag: '🇮🇹', micro: false },
-            { code: 'CH', num: '756', name: '瑞士',     en: 'Switzerland',    continent: '歐洲', flag: '🇨🇭', micro: false },
-            { code: 'ES', num: '724', name: '西班牙',   en: 'Spain',          continent: '歐洲', flag: '🇪🇸', micro: false },
-            { code: 'PT', num: '620', name: '葡萄牙',   en: 'Portugal',       continent: '歐洲', flag: '🇵🇹', micro: false },
-            { code: 'NL', num: '528', name: '荷蘭',     en: 'Netherlands',    continent: '歐洲', flag: '🇳🇱', micro: false },
-            { code: 'AT', num: '040', name: '奧地利',   en: 'Austria',        continent: '歐洲', flag: '🇦🇹', micro: false },
-            { code: 'CZ', num: '203', name: '捷克',     en: 'Czechia',        continent: '歐洲', flag: '🇨🇿', micro: false },
-            { code: 'GR', num: '300', name: '希臘',     en: 'Greece',         continent: '歐洲', flag: '🇬🇷', micro: false },
-            { code: 'IS', num: '352', name: '冰島',     en: 'Iceland',        continent: '歐洲', flag: '🇮🇸', micro: false },
-            { code: 'NO', num: '578', name: '挪威',     en: 'Norway',         continent: '歐洲', flag: '🇳🇴', micro: false },
-            { code: 'FI', num: '246', name: '芬蘭',     en: 'Finland',        continent: '歐洲', flag: '🇫🇮', micro: false },
+            { code: 'GB', num: '826', name: '英國',     en: 'United Kingdom', continent: '歐洲', micro: false },
+            { code: 'FR', num: '250', name: '法國',     en: 'France',         continent: '歐洲', micro: false },
+            { code: 'DE', num: '276', name: '德國',     en: 'Germany',        continent: '歐洲', micro: false },
+            { code: 'IT', num: '380', name: '義大利',   en: 'Italy',          continent: '歐洲', micro: false },
+            { code: 'CH', num: '756', name: '瑞士',     en: 'Switzerland',    continent: '歐洲', micro: false },
+            { code: 'ES', num: '724', name: '西班牙',   en: 'Spain',          continent: '歐洲', micro: false },
+            { code: 'PT', num: '620', name: '葡萄牙',   en: 'Portugal',       continent: '歐洲', micro: false },
+            { code: 'NL', num: '528', name: '荷蘭',     en: 'Netherlands',    continent: '歐洲', micro: false },
+            { code: 'AT', num: '040', name: '奧地利',   en: 'Austria',        continent: '歐洲', micro: false },
+            { code: 'CZ', num: '203', name: '捷克',     en: 'Czechia',        continent: '歐洲', micro: false },
+            { code: 'GR', num: '300', name: '希臘',     en: 'Greece',         continent: '歐洲', micro: false },
+            { code: 'IS', num: '352', name: '冰島',     en: 'Iceland',        continent: '歐洲', micro: false },
+            { code: 'NO', num: '578', name: '挪威',     en: 'Norway',         continent: '歐洲', micro: false },
+            { code: 'FI', num: '246', name: '芬蘭',     en: 'Finland',        continent: '歐洲', micro: false },
 
             // 北美洲
-            { code: 'US', num: '840', name: '美國',     en: 'United States',  continent: '北美洲', flag: '🇺🇸', micro: false },
-            { code: 'CA', num: '124', name: '加拿大',   en: 'Canada',         continent: '北美洲', flag: '🇨🇦', micro: false },
-            { code: 'MX', num: '484', name: '墨西哥',   en: 'Mexico',         continent: '北美洲', flag: '🇲🇽', micro: false },
+            { code: 'US', num: '840', name: '美國',     en: 'United States',  continent: '北美洲', micro: false },
+            { code: 'CA', num: '124', name: '加拿大',   en: 'Canada',         continent: '北美洲', micro: false },
+            { code: 'MX', num: '484', name: '墨西哥',   en: 'Mexico',         continent: '北美洲', micro: false },
 
             // 南美洲
-            { code: 'BR', num: '076', name: '巴西',     en: 'Brazil',         continent: '南美洲', flag: '🇧🇷', micro: false },
-            { code: 'AR', num: '032', name: '阿根廷',   en: 'Argentina',      continent: '南美洲', flag: '🇦🇷', micro: false },
-            { code: 'PE', num: '604', name: '秘魯',     en: 'Peru',           continent: '南美洲', flag: '🇵🇪', micro: false },
-            { code: 'CL', num: '152', name: '智利',     en: 'Chile',          continent: '南美洲', flag: '🇨🇱', micro: false },
+            { code: 'BR', num: '076', name: '巴西',     en: 'Brazil',         continent: '南美洲', micro: false },
+            { code: 'AR', num: '032', name: '阿根廷',   en: 'Argentina',      continent: '南美洲', micro: false },
+            { code: 'PE', num: '604', name: '秘魯',     en: 'Peru',           continent: '南美洲', micro: false },
+            { code: 'CL', num: '152', name: '智利',     en: 'Chile',          continent: '南美洲', micro: false },
 
             // 大洋洲
-            { code: 'AU', num: '036', name: '澳洲',     en: 'Australia',      continent: '大洋洲', flag: '🇦🇺', micro: false },
-            { code: 'NZ', num: '554', name: '紐西蘭',   en: 'New Zealand',    continent: '大洋洲', flag: '🇳🇿', micro: false },
+            { code: 'AU', num: '036', name: '澳洲',     en: 'Australia',      continent: '大洋洲', micro: false },
+            { code: 'NZ', num: '554', name: '紐西蘭',   en: 'New Zealand',    continent: '大洋洲', micro: false },
 
             // 非洲
-            { code: 'EG', num: '818', name: '埃及',     en: 'Egypt',          continent: '非洲', flag: '🇪🇬', micro: false },
-            { code: 'MA', num: '504', name: '摩洛哥',   en: 'Morocco',        continent: '非洲', flag: '🇲🇦', micro: false },
-            { code: 'ZA', num: '710', name: '南非',     en: 'South Africa',   continent: '非洲', flag: '🇿🇦', micro: false },
-            { code: 'KE', num: '404', name: '肯亞',     en: 'Kenya',          continent: '非洲', flag: '🇰🇪', micro: false }
+            { code: 'EG', num: '818', name: '埃及',     en: 'Egypt',          continent: '非洲', micro: false },
+            { code: 'MA', num: '504', name: '摩洛哥',   en: 'Morocco',        continent: '非洲', micro: false },
+            { code: 'ZA', num: '710', name: '南非',     en: 'South Africa',   continent: '非洲', micro: false },
+            { code: 'KE', num: '404', name: '肯亞',     en: 'Kenya',          continent: '非洲', micro: false }
         ];
 
         const CONTINENT_ORDER = ['亞洲', '歐洲', '北美洲', '南美洲', '大洋洲', '非洲'];
+        const CONTINENT_INK = {
+            '亞洲': '#A66F58',
+            '歐洲': '#5C768D',
+            '北美洲': '#5B7A67',
+            '南美洲': '#9E6843',
+            '大洋洲': '#4E7D8B',
+            '非洲': '#8F6A4A',
+            '其他': '#8C756A'
+        };
 
         let countryRecords = new Map();
         let currentContinentFilter = 'ALL';
@@ -760,7 +841,6 @@
                     name: std,
                     en: catalogItem?.en || extra.code || std,
                     continent: catalogItem?.continent || '其他',
-                    flag: catalogItem?.flag || '🏳️',
                     micro: Boolean(catalogItem?.micro),
                     coords: catalogItem?.coords || null,
                     unlocked: false,
@@ -783,7 +863,62 @@
         }
 
         /* =====================================================================
-           2. 讀取護照設定與行程檔並合併各國解鎖狀態
+           2. 方案 C：真實國旗 × 復古郵票圓章渲染器
+           ===================================================================== */
+        function buildFlagSealHtml(rec, uid, isModal = false) {
+            const datesSorted = [...rec.dates].sort();
+            const latestYear = datesSorted.length ? datesSorted[datesSorted.length - 1].slice(0, 4) : '';
+            const ringInk = rec.unlocked ? (CONTINENT_INK[rec.continent] || '#9C6F5C') : '#B8ACA1';
+            const topText = `${(rec.en || rec.name).toUpperCase().slice(0, 14)}${rec.code ? ' · ' + rec.code : ''}`;
+            const botText = rec.unlocked
+                ? (latestYear ? `★ VISITED ${latestYear} ★` : '★ STAMPED ★')
+                : '• UNEXPLORED •';
+            const tilt = rec.unlocked ? (((hashStr(rec.name) % 7) - 3) * 1.1) : 0;
+            const arcTopId = `c-arc-t-${uid}`;
+            const arcBotId = `c-arc-b-${uid}`;
+
+            const flagUrl = getFlagSvgUrl(rec.code);
+            const hasCustom = Boolean(rec.badgeImage);
+            const imgSrc = hasCustom ? rec.badgeImage : flagUrl;
+            const fallbackCode = escHtml(rec.code || rec.name.slice(0, 2));
+
+            const innerMedia = imgSrc
+                ? `<img src="${escHtml(imgSrc)}" alt="${escHtml(rec.name)} 國旗" loading="lazy" onerror="this.outerHTML='<span class=\\'stamp-flag-fallback\\'>${fallbackCode}</span>'">`
+                : `<span class="stamp-flag-fallback">${fallbackCode}</span>`;
+
+            const postmarkSvg = rec.unlocked ? `
+                <svg class="stamp-postmark-overlay" viewBox="0 0 46 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g fill="none" stroke="${ringInk}" stroke-width="1.5" stroke-linecap="round">
+                        <path d="M2,6 Q8,2 14,6 T26,6 T38,6 T44,6"/>
+                        <path d="M2,13 Q8,9 14,13 T26,13 T38,13 T44,13"/>
+                        <path d="M2,20 Q8,16 14,20 T26,20 T38,20 T44,20"/>
+                    </g>
+                </svg>` : '';
+
+            return `
+                <div class="stamp-seal-wrap ${isModal ? 'modal-seal-wrap' : ''} ${rec.unlocked ? 'unlocked' : 'locked'}" style="transform:rotate(${tilt.toFixed(1)}deg);">
+                    <svg class="stamp-seal-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs>
+                            <path id="${arcTopId}" d="M 16,60 A 44,44 0 0,1 104,60"/>
+                            <path id="${arcBotId}" d="M 104,62 A 44,44 0 0,1 16,62"/>
+                        </defs>
+                        <circle cx="60" cy="60" r="56" fill="none" stroke="${ringInk}" stroke-width="${rec.unlocked ? 2.2 : 1.5}" stroke-dasharray="${rec.unlocked ? 'none' : '4 3'}" opacity="${rec.unlocked ? 0.85 : 0.65}"/>
+                        <circle cx="60" cy="60" r="51" fill="none" stroke="${ringInk}" stroke-width="0.9" stroke-dasharray="2.5 2.5" opacity="0.65"/>
+                        <circle cx="60" cy="60" r="35" fill="none" stroke="${ringInk}" stroke-width="0.9" opacity="0.5"/>
+                        <text fill="${ringInk}" font-size="6.8" font-weight="700" letter-spacing="1.1">
+                            <textPath href="#${arcTopId}" startOffset="50%" text-anchor="middle">${escHtml(topText)}</textPath>
+                        </text>
+                        <text fill="${ringInk}" font-size="6.3" font-weight="700" letter-spacing="0.9">
+                            <textPath href="#${arcBotId}" startOffset="50%" text-anchor="middle">${escHtml(botText)}</textPath>
+                        </text>
+                    </svg>
+                    <div class="stamp-flag-disc ${hasCustom ? 'custom-img' : ''}">${innerMedia}</div>
+                    ${postmarkSvg}
+                </div>`;
+        }
+
+        /* =====================================================================
+           3. 讀取護照設定與行程檔並合併各國解鎖狀態
            ===================================================================== */
         async function initCountriesPage() {
             WORLD_CATALOG.forEach(item => ensureRecord(item.name, item));
@@ -799,7 +934,6 @@
                 if (res.ok) passportCfg = { ...passportCfg, ...(await res.json()) };
             } catch {}
 
-            // 1. 套用 passport.json 的 countries 設定（手動解鎖、自訂徽章圖、小語）
             (passportCfg.countries || []).forEach(c => {
                 if (!c?.name) return;
                 const rec = ensureRecord(c.name, { code: c.code });
@@ -809,7 +943,6 @@
                 if (c.note) rec.note = c.note.trim();
             });
 
-            // 2. 合併 manualCrossings
             (passportCfg.manualCrossings || []).forEach(mc => {
                 if (!mc?.country || !mc?.date) return;
                 if (!isPreviewMode && mc.date > todayStr) return;
@@ -823,7 +956,6 @@
                 }
             });
 
-            // 3. 合併 manualSpotStamps
             (passportCfg.manualSpotStamps || []).forEach(ms => {
                 if (!ms?.country) return;
                 if (!isPreviewMode && ms.date && ms.date > todayStr) return;
@@ -833,7 +965,6 @@
                 if (ms.date) rec.dates.add(ms.date);
             });
 
-            // 4. 自動讀取 trackedTrips
             const trackedTrips = Array.isArray(passportCfg.trackedTrips) ? passportCfg.trackedTrips.filter(Boolean) : [];
             await Promise.all(trackedTrips.map(async id => {
                 const [itin, data] = await Promise.all([
@@ -886,7 +1017,7 @@
         }
 
         /* =====================================================================
-           3. 互動 SVG 世界地圖（Natural Earth 投影 ＋ 香港 / 新加坡發光圓點）
+           4. 互動 SVG 世界地圖（Natural Earth 投影 ＋ 香港 / 新加坡發光圓點）
            ===================================================================== */
         async function renderInteractiveWorldMap() {
             const svgEl = $('world-map-svg');
@@ -921,9 +1052,9 @@
                     .attr('stroke', 'rgba(196, 169, 158, 0.2)')
                     .attr('stroke-width', 0.6);
 
-                const showTip = (event, text) => {
+                const showTip = (event, htmlContent) => {
                     const rect = stage.getBoundingClientRect();
-                    tooltip.textContent = text;
+                    tooltip.innerHTML = htmlContent;
                     tooltip.style.left = `${event.clientX - rect.left}px`;
                     tooltip.style.top = `${event.clientY - rect.top}px`;
                     tooltip.classList.add('show');
@@ -944,9 +1075,9 @@
                         const numId = String(f.id).padStart(3, '0');
                         const rec = recByNum.get(numId);
                         if (rec) {
-                            showTip(event, `${rec.flag} ${rec.name}（${rec.unlocked ? '已解鎖' : '待探索'}）`);
+                            showTip(event, `${buildInlineFlagHtml(rec.code, rec.name)}<span>${escHtml(rec.name)}（${rec.unlocked ? '已解鎖' : '待探索'}）</span>`);
                         } else {
-                            showTip(event, `${f.properties?.name || '探索中地區'}（待探索）`);
+                            showTip(event, `<span>${escHtml(f.properties?.name || '探索中地區')}（待探索）</span>`);
                         }
                     })
                     .on('mouseleave', hideTip)
@@ -967,7 +1098,7 @@
                         return pt ? `translate(${pt[0].toFixed(2)}, ${pt[1].toFixed(2)})` : 'translate(-100,-100)';
                     })
                     .on('mousemove', (event, d) => {
-                        showTip(event, `${d.flag} ${d.name}（${d.unlocked ? '已解鎖' : '待探索'}）`);
+                        showTip(event, `${buildInlineFlagHtml(d.code, d.name)}<span>${escHtml(d.name)}（${d.unlocked ? '已解鎖' : '待探索'}）</span>`);
                     })
                     .on('mouseleave', hideTip)
                     .on('click', (event, d) => {
@@ -1020,7 +1151,7 @@
         }
 
         /* =====================================================================
-           4. 各洲國家蒐集冊渲染與篩選
+           5. 各洲國家蒐集冊渲染與篩選
            ===================================================================== */
         function renderContinentFilters() {
             const all = [...countryRecords.values()];
@@ -1040,13 +1171,6 @@
                     onclick="currentContinentFilter='${escHtml(t.key)}';renderContinentFilters();renderCountriesCollection();">
                     ${escHtml(t.label)}<span class="capsule-count">(${t.count})</span>
                 </button>`).join('');
-        }
-
-        function buildBadgeMedallionInner(rec) {
-            if (rec.badgeImage) {
-                return `<img src="${escHtml(rec.badgeImage)}" alt="${escHtml(rec.name)} 徽章" onerror="this.outerHTML='<span class=\\'badge-flag-emoji\\'>${rec.flag}</span>'">`;
-            }
-            return `<span class="badge-flag-emoji">${rec.flag}</span>${rec.code ? `<span class="badge-iso-chip">${escHtml(rec.code)}</span>` : ''}`;
         }
 
         function renderCountriesCollection() {
@@ -1071,6 +1195,7 @@
             });
 
             const orderedContinents = [...CONTINENT_ORDER, '其他'].filter(c => groups[c]?.length);
+            let stampIdx = 0;
             $('countries-collection-wrap').innerHTML = orderedContinents.map(cont => {
                 const list = groups[cont].sort((a, b) => (a.unlocked === b.unlocked ? 0 : (a.unlocked ? -1 : 1)));
                 const unlockedInCont = list.filter(x => x.unlocked).length;
@@ -1082,6 +1207,7 @@
                         </div>
                         <div class="countries-grid">
                             ${list.map(r => {
+                                const uid = `card-${stampIdx++}`;
                                 const datesSorted = [...r.dates].sort();
                                 const latestYear = datesSorted.length ? datesSorted[datesSorted.length - 1].slice(0, 4) : '';
                                 const subText = r.unlocked
@@ -1090,7 +1216,7 @@
                                 return `
                                     <button type="button" class="country-badge-card ${r.unlocked ? 'unlocked' : 'locked'}" onclick="openCountryModal('${escHtml(r.name)}')">
                                         ${r.unlocked ? `<span class="unlocked-check-dot" title="已解鎖">✓</span>` : ''}
-                                        <div class="badge-medallion">${buildBadgeMedallionInner(r)}</div>
+                                        ${buildFlagSealHtml(r, uid, false)}
                                         <h3 class="country-card-name">${escHtml(r.name)}</h3>
                                         <div class="country-card-sub">${escHtml(subText)}</div>
                                     </button>`;
@@ -1101,7 +1227,7 @@
         }
 
         /* =====================================================================
-           5. 國家詳情放大彈窗
+           6. 國家詳情放大彈窗
            ===================================================================== */
         function openCountryModal(countryName) {
             const rec = countryRecords.get(normalizeCountry(countryName));
@@ -1119,7 +1245,7 @@
 
             $('country-modal-body').innerHTML = `
                 <div class="modal-hero-badge">
-                    <div class="modal-medallion ${rec.unlocked ? '' : 'locked'}">${buildBadgeMedallionInner(rec)}</div>
+                    ${buildFlagSealHtml(rec, 'modal', true)}
                     <h3 class="modal-title">${escHtml(rec.name)}</h3>
                     <div class="modal-en-sub">${escHtml(rec.en)}${rec.code ? ' ・ ' + escHtml(rec.code) : ''}</div>
                     <div class="modal-tags-row">
