@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 【✏️ 文字修改】瀏覽器分頁標題 -->
+    <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 世界地圖＆國家蒐集冊</title>
+
+    <!-- 【⚙️ 功能設定】Travelpayouts 分潤腳本 -->
+    <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
+        (function () {
+            var script = document.createElement("script");
+            script.async = 1;
+            script.setAttribute("data-cmp-ab", "2");
+            script.src = 'https://emrld.ltd/NTk5Njg0.js?t=599684';
+            document.head.appendChild(script);
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- 互動世界地圖向量引擎（D3 + TopoJSON） -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+    <style>
+        /* =================================================================
+           【🎨 顏色修改區】全站共用溫潤奶茶色調色盤
+           ================================================================= */
+        :root {
+            --bg-color: #FDFBF7;          /* 網頁米白底色 */
+            --paper-warm: #FAF5EC;        /* 暖米紙張色 */
+            --accent-brown: #C4A99E;      /* 主題奶茶棕 */
+            --accent-brown-dark: #a6897c; /* 深奶茶棕 */
+            --accent-pink: #E5D1C7;       /* 柔和藕粉 */
+            --accent-gold: #E8C984;       /* 燙金點綴 */
+            --accent-sage: #D8E2D5;       /* 鼠尾草綠 */
+            --accent-sage-dark: #5B7A67;  /* 深鼠尾草綠 */
+            --text-main: #7A6258;         /* 主要字色 */
+            --text-light: #9E887E;        /* 次要字色 */
+            --border-soft: rgba(196, 169, 158, 0.35);
+            --map-ocean: #F4EFE6;         /* 地圖海洋暖米底色 */
+            --map-land: #E8DFD5;          /* 未解鎖國家淺灰米 */
+            --map-land-stroke: #FDFBF7;   /* 國界線 */
+            --map-unlocked: #B98E7C;      /* 已解鎖國家焦糖奶茶色 */
+            --map-unlocked-hover: #9C6F5C;
+        }
+
+        body {
+            margin: 0 auto;
+            padding: 32px 24px 104px;
+            max-width: 1060px;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, .section-title, .modal-title, .country-card-name {
+            font-family: 'Noto Serif TC', serif;
+            color: var(--accent-brown-dark);
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.85rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            margin: 0 0 18px;
+        }
+
+        /* === 頂部五大導覽列（桌機置中、手機單排橫向滑動） === */
+        .main-nav-tabs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 10px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 2px 4px 6px;
+        }
+        .main-nav-tabs::-webkit-scrollbar { display: none; }
+        .main-tab-btn {
+            font-family: inherit;
+            flex: 0 0 auto;
+            background: transparent;
+            color: var(--text-main);
+            border: 1.5px solid transparent;
+            padding: 9px 18px;
+            border-radius: 24px;
+            font-size: 0.94rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .main-tab-btn:hover { color: var(--accent-brown-dark); border-color: var(--border-soft); background: rgba(245, 239, 230, 0.5); }
+        .main-tab-btn.active { background: var(--accent-brown); color: #fff; border-color: var(--accent-brown); box-shadow: 0 4px 12px rgba(196, 169, 158, 0.42); font-weight: 700; }
+
+        /* 返回護照麵包屑列 */
+        .subpage-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .back-passport-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--accent-brown-dark);
+            background: #fff;
+            border: 1.5px solid var(--accent-brown);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+        .back-passport-btn:hover { background: var(--accent-brown); color: #fff; }
+        .summary-stat-badge {
+            background: var(--paper-warm);
+            border: 1px solid var(--border-soft);
+            color: var(--accent-brown-dark);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.84rem;
+            font-weight: 600;
+        }
+
+        .preview-banner {
+            display: none;
+            background: #FFF6E8;
+            border: 1.5px dashed #D4A15E;
+            color: #8C5E22;
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            font-size: 0.86rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* === 卡片容器共通樣式 === */
+        .panel-card {
+            background: #fff;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 22px 24px 26px;
+            margin-bottom: 26px;
+            box-shadow: 0 4px 20px rgba(196, 169, 158, 0.13);
+        }
+        .section-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border-soft);
+        }
+        .section-title { font-size: 1.26rem; margin: 0; }
+        .section-sub { font-size: 0.82rem; color: var(--text-light); }
+
+        /* === 區塊一：互動 SVG 世界地圖 === */
+        .map-region-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .map-zoom-btn {
+            font-family: inherit;
+            border: 1px solid var(--border-soft);
+            background: var(--bg-color);
+            color: var(--text-main);
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .map-zoom-btn:hover { border-color: var(--accent-brown); background: #F5EFE6; }
+        .map-zoom-btn.active { background: var(--accent-brown-dark); border-color: var(--accent-brown-dark); color: #fff; }
+
+        .world-map-stage {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            min-height: 260px;
+            background: radial-gradient(circle at 50% 45%, #FAF6EE 0%, #EFE7DC 100%);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 16px;
+            overflow: hidden;
+            user-select: none;
+        }
+        #world-map-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: grab;
+        }
+        #world-map-svg:active { cursor: grabbing; }
+        .land-path {
+            fill: var(--map-land);
+            stroke: var(--map-land-stroke);
+            stroke-width: 0.65;
+            transition: fill 0.2s ease;
+            cursor: pointer;
+        }
+        .land-path:hover { fill: #D9CCC0; }
+        .land-path.unlocked {
+            fill: var(--map-unlocked);
+            stroke: #FDFBF7;
+            stroke-width: 0.8;
+        }
+        .land-path.unlocked:hover { fill: var(--map-unlocked-hover); }
+
+        /* 香港 / 新加坡等袖珍地區發光圓點 */
+        .micro-pin-group { cursor: pointer; }
+        .micro-pin-pulse {
+            fill: rgba(232, 168, 92, 0.35);
+            animation: pinPulse 2.2s ease-out infinite;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        @keyframes pinPulse {
+            0% { transform: scale(0.85); opacity: 0.85; }
+            70% { transform: scale(2.15); opacity: 0; }
+            100% { transform: scale(2.15); opacity: 0; }
+        }
+        .micro-pin-core {
+            fill: #C66B4F;
+            stroke: #FFF8E7;
+            stroke-width: 1.4;
+            transition: transform 0.2s;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        .micro-pin-group.locked .micro-pin-core {
+            fill: #B8ACA1;
+            stroke: #FDFBF7;
+        }
+        .micro-pin-group:hover .micro-pin-core { transform: scale(1.3); }
+
+        .map-tooltip {
+            position: absolute;
+            pointer-events: none;
+            z-index: 20;
+            background: rgba(74, 58, 50, 0.94);
+            color: #FFFDF9;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+            opacity: 0;
+            transform: translate(-50%, -125%);
+            transition: opacity 0.15s ease;
+        }
+        .map-tooltip.show { opacity: 1; }
+
+        .map-legend-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .legend-items { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+        .legend-swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+        .legend-dot { width: 11px; height: 11px; border-radius: 50%; background: #C66B4F; box-shadow: 0 0 0 3px rgba(232, 168, 92, 0.35); display: inline-block; }
+
+        /* === 區塊二：各洲國家蒐集冊 === */
+        .filter-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .capsule-row { display: flex; flex-wrap: wrap; gap: 7px; }
+        .capsule-btn {
+            font-family: inherit;
+            border: 1.5px solid var(--border-soft);
+            background: var(--bg-color);
+            color: var(--text-main);
+            padding: 6px 13px;
+            border-radius: 20px;
+            font-size: 0.83rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .capsule-btn:hover { border-color: var(--accent-brown); background: #F5EFE6; }
+        .capsule-btn.active { background: var(--accent-brown); border-color: var(--accent-brown); color: #fff; box-shadow: 0 2px 8px rgba(196, 169, 158, 0.35); }
+        .capsule-count { opacity: 0.82; font-size: 0.75rem; margin-left: 3px; }
+
+        .search-input-wrap { position: relative; flex: 1 1 200px; max-width: 280px; }
+        .search-input {
+            font-family: inherit;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 14px 8px 34px;
+            border: 1.5px solid var(--accent-brown);
+            border-radius: 20px;
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-size: 0.86rem;
+            outline: none;
+        }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.86rem; pointer-events: none; opacity: 0.7; }
+
+        .continent-block { margin-bottom: 24px; }
+        .continent-block:last-child { margin-bottom: 0; }
+        .continent-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent-brown-dark);
+            margin: 0 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed var(--border-soft);
+        }
+        .continent-progress {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-light);
+            background: var(--paper-warm);
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+            gap: 14px;
+        }
+        .country-badge-card {
+            appearance: none;
+            font-family: inherit;
+            background: #fff;
+            border: 1.5px solid var(--accent-brown);
+            border-radius: 16px;
+            padding: 14px 10px 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(196, 169, 158, 0.14);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+        .country-badge-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(122, 98, 88, 0.18); }
+        .country-badge-card.locked {
+            background: #FAF8F5;
+            border: 1.5px dashed rgba(196, 169, 158, 0.45);
+            box-shadow: none;
+            opacity: 0.68;
+        }
+        .country-badge-card.locked:hover { opacity: 0.92; }
+
+        .badge-medallion {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #FFFBF3 0%, #F3E9DC 100%);
+            border: 2px solid #D9C3AE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.9), 0 3px 8px rgba(122, 98, 88, 0.12);
+        }
+        .country-badge-card.locked .badge-medallion {
+            filter: grayscale(0.85);
+            background: #F2EEE9;
+            border-color: #DCD3CA;
+            box-shadow: none;
+        }
+        .badge-medallion img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .badge-flag-emoji { font-size: 2.25rem; line-height: 1; }
+        .badge-iso-chip {
+            position: absolute;
+            bottom: 3px;
+            right: 4px;
+            background: rgba(122, 98, 88, 0.84);
+            color: #fff;
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 1px 5px;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+        }
+        .unlocked-check-dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--accent-sage-dark);
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .country-card-name { font-size: 0.98rem; font-weight: 700; margin: 0; line-height: 1.25; }
+        .country-card-sub { font-size: 0.74rem; color: var(--text-light); font-weight: 500; }
+
+        /* === 國家詳情放大彈窗 === */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(58, 46, 40, 0.68);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-card {
+            background: #FDFBF7;
+            border: 2px solid var(--accent-brown);
+            border-radius: 22px;
+            max-width: 460px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            padding: 26px 24px 22px;
+            box-sizing: border-box;
+            box-shadow: 0 18px 46px rgba(45, 34, 28, 0.32);
+            position: relative;
+            animation: modalPop 0.22s ease;
+        }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.94) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .modal-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--border-soft);
+            background: #fff;
+            color: var(--text-main);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close-btn:hover { background: var(--accent-brown); color: #fff; }
+
+        .modal-hero-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 18px;
+            background: var(--paper-warm);
+            border: 1px dashed var(--border-soft);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .modal-medallion {
+            width: 108px;
+            height: 108px;
+            border-radius: 24px;
+            background: linear-gradient(145deg, #FFFDF9 0%, #EFE4D6 100%);
+            border: 2.5px solid var(--accent-brown);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 10px;
+            box-shadow: 0 6px 18px rgba(122, 98, 88, 0.16);
+        }
+        .modal-medallion.locked { filter: grayscale(0.85); opacity: 0.75; }
+        .modal-medallion img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-medallion .badge-flag-emoji { font-size: 3.4rem; }
+        .modal-title { font-size: 1.32rem; margin: 0 0 4px; }
+        .modal-en-sub { font-size: 0.8rem; color: var(--text-light); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+
+        .modal-tags-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 10px; }
+        .modal-pill { font-size: 0.78rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; background: #fff; color: var(--accent-brown-dark); border: 1px solid var(--border-soft); }
+        .modal-pill.unlocked { background: var(--accent-sage); color: var(--accent-sage-dark); border-color: #B8C9B4; }
+
+        .modal-note-box {
+            background: #fff;
+            border-left: 3.5px solid var(--accent-brown);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            line-height: 1.65;
+            margin-bottom: 14px;
+        }
+        .modal-info-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 14px; }
+        .modal-info-table th, .modal-info-table td { padding: 7px 6px; border-bottom: 1px dashed #EAE1D8; text-align: left; }
+        .modal-info-table th { width: 32%; color: var(--text-light); font-weight: 600; }
+        .modal-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .modal-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 14px;
+            border-radius: 18px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1.5px solid var(--accent-brown);
+            background: #fff;
+            color: var(--accent-brown-dark);
+            transition: all 0.2s;
+        }
+        .modal-link-btn:hover { background: var(--accent-brown); color: #fff; }
+        .modal-link-btn.primary { background: var(--accent-brown); color: #fff; }
+        .modal-link-btn.primary:hover { background: var(--accent-brown-dark); }
+
+        .admin-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            background: rgba(196, 169, 158, 0.94);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(196, 169, 158, 0.45);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .admin-fab:hover { background: var(--accent-brown-dark); transform: translateY(-2px); }
+
+        @media (max-width: 768px) {
+            body { padding: 18px 14px 116px; }
+            h1 { font-size: 1.42rem; }
+            .main-nav-tabs { justify-content: flex-start; flex-wrap: nowrap; gap: 6px; margin: 0 -14px 18px; padding: 2px 14px 6px; }
+            .main-tab-btn { flex: 0 0 auto; padding: 8px 14px; font-size: 0.86rem; text-align: center; }
+            .panel-card { padding: 18px 14px 20px; }
+            .world-map-stage { aspect-ratio: 4 / 3; min-height: 240px; }
+            .search-input-wrap { max-width: none; width: 100%; }
+            .countries-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .admin-fab { bottom: 16px; right: 14px; padding: 9px 15px; font-size: 0.82rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
+
+    <!-- 頂部五大導覽列 -->
+    <nav class="main-nav-tabs" aria-label="手帳主選單">
+        <a href="index.html?tab=tab-upcoming" class="main-tab-btn">未來旅程</a>
+        <a href="index.html?tab=tab-ongoing" class="main-tab-btn">旅途連載</a>
+        <a href="index.html?tab=tab-completed" class="main-tab-btn">歸檔風景</a>
+        <a href="passport.html" class="main-tab-btn active">旅遊護照</a>
+        <a href="planner.html" class="main-tab-btn">漫遊提案</a>
+    </nav>
+
+    <div class="subpage-bar">
+        <a href="passport.html" class="back-passport-btn">← 返回旅遊護照＆印章冊</a>
+        <span class="summary-stat-badge" id="top-progress-badge">🌍 已點亮 0 / 197 國</span>
+    </div>
+
+    <div id="preview-banner" class="preview-banner">
+        📝 預覽模式：已提前點亮尚未出發的未來行程國家（一般瀏覽會依出發日期自動解鎖）
+    </div>
+
+    <!-- 區塊一：奶茶風互動 SVG 世界地圖 -->
+    <section class="panel-card">
+        <div class="section-header-bar">
+            <h2 class="section-title">🗺️ 旅途足跡世界地圖</h2>
+            <span class="section-sub">可拖曳縮放、點擊任一國家或發光圓點查看解鎖紀錄</span>
+        </div>
+
+        <div class="map-region-pills" id="map-zoom-pills">
+            <button type="button" class="map-zoom-btn active" data-focus="WORLD">🌍 全覽世界</button>
+            <button type="button" class="map-zoom-btn" data-focus="EAST_ASIA">🏮 東亞・東南亞</button>
+            <button type="button" class="map-zoom-btn" data-focus="EUROPE">🏰 歐洲</button>
+            <button type="button" class="map-zoom-btn" data-focus="AMERICAS">🗽 美洲</button>
+            <button type="button" class="map-zoom-btn" data-focus="OCEANIA">🦘 大洋洲</button>
+        </div>
+
+        <div class="world-map-stage" id="world-map-stage">
+            <svg id="world-map-svg" viewBox="0 0 960 500" preserveAspectRatio="xMidYMid meet"></svg>
+            <div class="map-tooltip" id="map-tooltip"></div>
+        </div>
+
+        <div class="map-legend-bar">
+            <div class="legend-items">
+                <span class="legend-item"><span class="legend-swatch" style="background:var(--map-unlocked);"></span>已點亮國家</span>
+                <span class="legend-item"><span class="legend-dot"></span>香港 / 新加坡等袖珍地區發光圓點</span>
+                <span class="legend-item"><span class="legend-swatch" style="background:var(--map-land);border:1px solid #D5C8BC;"></span>尚未探索</span>
+            </div>
+            <span>提示：雙指或滾輪可放大縮小地圖</span>
+        </div>
+    </section>
+
+    <!-- 區塊二：各洲國家蒐集冊 -->
+    <section class="panel-card">
+        <div class="section-header-bar">
+            <h2 class="section-title">🎖️ 各洲國家 / 地區蒐集冊</h2>
+            <span class="section-sub">支援於 /admin/ 上傳自訂國家徽章插畫・點擊卡片放大查看</span>
+        </div>
+
+        <div class="filter-toolbar">
+            <div class="capsule-row" id="continent-filter-row"></div>
+            <div class="search-input-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="country-search-input" class="search-input" placeholder="搜尋國家中文、英文或代碼...">
+            </div>
+        </div>
+
+        <div id="countries-collection-wrap">
+            <div style="text-align:center;padding:30px;color:var(--text-light);">讀取國家蒐集資料中...</div>
+        </div>
+    </section>
+
+    <!-- 國家放大詳情彈窗 -->
+    <div class="modal-overlay" id="country-modal" onclick="closeCountryModal()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button type="button" class="modal-close-btn" onclick="closeCountryModal()" aria-label="關閉視窗">✕</button>
+            <div id="country-modal-body"></div>
+        </div>
+    </div>
+
+    <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
+
+    <script>
+        /* =====================================================================
+           1. 世界國家 / 地區圖鑑資料庫（ISO-2、ISO-Numeric、洲別、袖珍地區座標）
+           ===================================================================== */
+        const $ = id => document.getElementById(id);
+        const urlParams = new URLSearchParams(location.search);
+        const isPreviewMode = ['1', 'true'].includes(urlParams.get('preview'));
+        if (isPreviewMode) $('preview-banner').style.display = 'block';
+
+        const TOTAL_WORLD_TARGETS = 197;
+        const escHtml = s => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+        const normalizeCountry = name => String(name || '').trim().replace(/^臺灣$/, '台灣');
+
+        function getTodayStrTW() {
+            try {
+                const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date());
+                const y = parts.find(p => p.type === 'year')?.value;
+                const m = parts.find(p => p.type === 'month')?.value;
+                const d = parts.find(p => p.type === 'day')?.value;
+                if (y && m && d) return `${y}-${m}-${d}`;
+            } catch {}
+            const d = new Date();
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        }
+        const todayStr = getTodayStrTW();
+
+        const WORLD_CATALOG = [
+            // 亞洲
+            { code: 'TW', num: '158', name: '台灣',     en: 'Taiwan',         continent: '亞洲', flag: '🇹🇼', micro: false, coords: [120.96, 23.70] },
+            { code: 'JP', num: '392', name: '日本',     en: 'Japan',          continent: '亞洲', flag: '🇯🇵', micro: false },
+            { code: 'KR', num: '410', name: '韓國',     en: 'South Korea',    continent: '亞洲', flag: '🇰🇷', micro: false },
+            { code: 'HK', num: '344', name: '香港',     en: 'Hong Kong',      continent: '亞洲', flag: '🇭🇰', micro: true,  coords: [114.17, 22.32] },
+            { code: 'MO', num: '446', name: '澳門',     en: 'Macau',          continent: '亞洲', flag: '🇲🇴', micro: true,  coords: [113.54, 22.20] },
+            { code: 'MY', num: '458', name: '馬來西亞', en: 'Malaysia',       continent: '亞洲', flag: '🇲🇾', micro: false },
+            { code: 'SG', num: '702', name: '新加坡',   en: 'Singapore',      continent: '亞洲', flag: '🇸🇬', micro: true,  coords: [103.82, 1.35] },
+            { code: 'CN', num: '156', name: '中國',     en: 'China',          continent: '亞洲', flag: '🇨🇳', micro: false },
+            { code: 'TH', num: '764', name: '泰國',     en: 'Thailand',       continent: '亞洲', flag: '🇹🇭', micro: false },
+            { code: 'VN', num: '704', name: '越南',     en: 'Vietnam',        continent: '亞洲', flag: '🇻🇳', micro: false },
+            { code: 'ID', num: '360', name: '印尼',     en: 'Indonesia',      continent: '亞洲', flag: '🇮🇩', micro: false },
+            { code: 'PH', num: '608', name: '菲律賓',   en: 'Philippines',    continent: '亞洲', flag: '🇵🇭', micro: false },
+            { code: 'IN', num: '356', name: '印度',     en: 'India',          continent: '亞洲', flag: '🇮🇳', micro: false },
+            { code: 'TR', num: '792', name: '土耳其',   en: 'Turkey',         continent: '亞洲', flag: '🇹🇷', micro: false },
+            { code: 'AE', num: '784', name: '阿聯酋',   en: 'UAE',            continent: '亞洲', flag: '🇦🇪', micro: false },
+
+            // 歐洲
+            { code: 'GB', num: '826', name: '英國',     en: 'United Kingdom', continent: '歐洲', flag: '🇬🇧', micro: false },
+            { code: 'FR', num: '250', name: '法國',     en: 'France',         continent: '歐洲', flag: '🇫🇷', micro: false },
+            { code: 'DE', num: '276', name: '德國',     en: 'Germany',        continent: '歐洲', flag: '🇩🇪', micro: false },
+            { code: 'IT', num: '380', name: '義大利',   en: 'Italy',          continent: '歐洲', flag: '🇮🇹', micro: false },
+            { code: 'CH', num: '756', name: '瑞士',     en: 'Switzerland',    continent: '歐洲', flag: '🇨🇭', micro: false },
+            { code: 'ES', num: '724', name: '西班牙',   en: 'Spain',          continent: '歐洲', flag: '🇪🇸', micro: false },
+            { code: 'PT', num: '620', name: '葡萄牙',   en: 'Portugal',       continent: '歐洲', flag: '🇵🇹', micro: false },
+            { code: 'NL', num: '528', name: '荷蘭',     en: 'Netherlands',    continent: '歐洲', flag: '🇳🇱', micro: false },
+            { code: 'AT', num: '040', name: '奧地利',   en: 'Austria',        continent: '歐洲', flag: '🇦🇹', micro: false },
+            { code: 'CZ', num: '203', name: '捷克',     en: 'Czechia',        continent: '歐洲', flag: '🇨🇿', micro: false },
+            { code: 'GR', num: '300', name: '希臘',     en: 'Greece',         continent: '歐洲', flag: '🇬🇷', micro: false },
+            { code: 'IS', num: '352', name: '冰島',     en: 'Iceland',        continent: '歐洲', flag: '🇮🇸', micro: false },
+            { code: 'NO', num: '578', name: '挪威',     en: 'Norway',         continent: '歐洲', flag: '🇳🇴', micro: false },
+            { code: 'FI', num: '246', name: '芬蘭',     en: 'Finland',        continent: '歐洲', flag: '🇫🇮', micro: false },
+
+            // 北美洲
+            { code: 'US', num: '840', name: '美國',     en: 'United States',  continent: '北美洲', flag: '🇺🇸', micro: false },
+            { code: 'CA', num: '124', name: '加拿大',   en: 'Canada',         continent: '北美洲', flag: '🇨🇦', micro: false },
+            { code: 'MX', num: '484', name: '墨西哥',   en: 'Mexico',         continent: '北美洲', flag: '🇲🇽', micro: false },
+
+            // 南美洲
+            { code: 'BR', num: '076', name: '巴西',     en: 'Brazil',         continent: '南美洲', flag: '🇧🇷', micro: false },
+            { code: 'AR', num: '032', name: '阿根廷',   en: 'Argentina',      continent: '南美洲', flag: '🇦🇷', micro: false },
+            { code: 'PE', num: '604', name: '秘魯',     en: 'Peru',           continent: '南美洲', flag: '🇵🇪', micro: false },
+            { code: 'CL', num: '152', name: '智利',     en: 'Chile',          continent: '南美洲', flag: '🇨🇱', micro: false },
+
+            // 大洋洲
+            { code: 'AU', num: '036', name: '澳洲',     en: 'Australia',      continent: '大洋洲', flag: '🇦🇺', micro: false },
+            { code: 'NZ', num: '554', name: '紐西蘭',   en: 'New Zealand',    continent: '大洋洲', flag: '🇳🇿', micro: false },
+
+            // 非洲
+            { code: 'EG', num: '818', name: '埃及',     en: 'Egypt',          continent: '非洲', flag: '🇪🇬', micro: false },
+            { code: 'MA', num: '504', name: '摩洛哥',   en: 'Morocco',        continent: '非洲', flag: '🇲🇦', micro: false },
+            { code: 'ZA', num: '710', name: '南非',     en: 'South Africa',   continent: '非洲', flag: '🇿🇦', micro: false },
+            { code: 'KE', num: '404', name: '肯亞',     en: 'Kenya',          continent: '非洲', flag: '🇰🇪', micro: false }
+        ];
+
+        const CONTINENT_ORDER = ['亞洲', '歐洲', '北美洲', '南美洲', '大洋洲', '非洲'];
+
+        let countryRecords = new Map();
+        let currentContinentFilter = 'ALL';
+        let currentSearch = '';
+        let mapZoomBehavior = null;
+        let mapSvgSel = null;
+        let mapProjection = null;
+
+        function ensureRecord(name, extra = {}) {
+            const std = normalizeCountry(name);
+            if (!std) return null;
+            if (!countryRecords.has(std)) {
+                const catalogItem = WORLD_CATALOG.find(c => c.name === std || (extra.code && c.code === extra.code.toUpperCase()));
+                countryRecords.set(std, {
+                    code: (extra.code || catalogItem?.code || '').toUpperCase(),
+                    num: catalogItem?.num || '',
+                    name: std,
+                    en: catalogItem?.en || extra.code || std,
+                    continent: catalogItem?.continent || '其他',
+                    flag: catalogItem?.flag || '🏳️',
+                    micro: Boolean(catalogItem?.micro),
+                    coords: catalogItem?.coords || null,
+                    unlocked: false,
+                    badgeImage: '',
+                    note: '',
+                    crossingCount: 0,
+                    dates: new Set(),
+                    trips: new Map()
+                });
+            }
+            return countryRecords.get(std);
+        }
+
+        function addDaysISO(baseDateStr, offsetDays) {
+            if (!baseDateStr) return '';
+            const parts = baseDateStr.split('-').map(Number);
+            if (parts.length !== 3 || parts.some(isNaN)) return baseDateStr;
+            const dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + offsetDays));
+            return `${dt.getUTCFullYear()}-${String(dt.getUTCMonth() + 1).padStart(2, '0')}-${String(dt.getUTCDate()).padStart(2, '0')}`;
+        }
+
+        /* =====================================================================
+           2. 讀取護照設定與行程檔並合併各國解鎖狀態
+           ===================================================================== */
+        async function initCountriesPage() {
+            WORLD_CATALOG.forEach(item => ensureRecord(item.name, item));
+
+            let passportCfg = {
+                trackedTrips: ['tohoku_2026', 'malaysia_2027'],
+                manualCrossings: [],
+                manualSpotStamps: [],
+                countries: []
+            };
+            try {
+                const res = await fetch(`passport/passport.json?t=${Date.now()}`, { cache: 'no-store' });
+                if (res.ok) passportCfg = { ...passportCfg, ...(await res.json()) };
+            } catch {}
+
+            // 1. 套用 passport.json 的 countries 設定（手動解鎖、自訂徽章圖、小語）
+            (passportCfg.countries || []).forEach(c => {
+                if (!c?.name) return;
+                const rec = ensureRecord(c.name, { code: c.code });
+                if (!rec) return;
+                if (c.unlocked !== false) rec.unlocked = true;
+                if (c.badgeImage) rec.badgeImage = c.badgeImage.trim();
+                if (c.note) rec.note = c.note.trim();
+            });
+
+            // 2. 合併 manualCrossings
+            (passportCfg.manualCrossings || []).forEach(mc => {
+                if (!mc?.country || !mc?.date) return;
+                if (!isPreviewMode && mc.date > todayStr) return;
+                const rec = ensureRecord(mc.country);
+                if (!rec) return;
+                rec.unlocked = true;
+                rec.crossingCount++;
+                rec.dates.add(mc.date);
+                if (mc.tripId) {
+                    rec.trips.set(mc.tripId, { tripId: mc.tripId, tripName: mc.tripName || mc.tripId, hasPublishedJournal: false });
+                }
+            });
+
+            // 3. 合併 manualSpotStamps
+            (passportCfg.manualSpotStamps || []).forEach(ms => {
+                if (!ms?.country) return;
+                if (!isPreviewMode && ms.date && ms.date > todayStr) return;
+                const rec = ensureRecord(ms.country);
+                if (!rec) return;
+                rec.unlocked = true;
+                if (ms.date) rec.dates.add(ms.date);
+            });
+
+            // 4. 自動讀取 trackedTrips
+            const trackedTrips = Array.isArray(passportCfg.trackedTrips) ? passportCfg.trackedTrips.filter(Boolean) : [];
+            await Promise.all(trackedTrips.map(async id => {
+                const [itin, data] = await Promise.all([
+                    fetch(`itinerary/${id}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null),
+                    fetch(`data/${id}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null)
+                ]);
+                if (!itin) return;
+                if (!isPreviewMode && (itin.isDraft === true || itin.hidden === true)) return;
+
+                const hasPublishedJournal = Boolean(data && data.isDraft !== true && data.hidden !== true && data.status !== 'draft');
+                const tripCleanTitle = (itin.tripTitle || id).split('｜').pop().trim();
+                const tripCountry = normalizeCountry(itin.country || '');
+
+                if (tripCountry !== '台灣' && Array.isArray(itin.borderCrossings)) {
+                    itin.borderCrossings.forEach(bc => {
+                        if (!bc?.date) return;
+                        if (!isPreviewMode && bc.date > todayStr) return;
+                        const rec = ensureRecord(bc.country || tripCountry);
+                        if (!rec) return;
+                        rec.unlocked = true;
+                        rec.crossingCount++;
+                        rec.dates.add(bc.date);
+                        rec.trips.set(id, { tripId: id, tripName: tripCleanTitle, hasPublishedJournal });
+                    });
+                }
+
+                (itin.days || []).forEach((d, idx) => {
+                    if (!isPreviewMode && d.isDraft === true) return;
+                    const dayDate = addDaysISO(itin.startDate, idx);
+                    if (!isPreviewMode && dayDate && dayDate > todayStr) return;
+                    const dayCountry = normalizeCountry(d.country || tripCountry);
+                    if (dayCountry) {
+                        const rec = ensureRecord(dayCountry);
+                        if (rec) {
+                            rec.unlocked = true;
+                            if (dayDate) rec.dates.add(dayDate);
+                            rec.trips.set(id, { tripId: id, tripName: tripCleanTitle, hasPublishedJournal });
+                        }
+                    }
+                });
+            }));
+
+            const unlockedList = [...countryRecords.values()].filter(r => r.unlocked);
+            const pct = ((unlockedList.length / TOTAL_WORLD_TARGETS) * 100).toFixed(1);
+            $('top-progress-badge').textContent = `🌍 已點亮 ${unlockedList.length} / ${TOTAL_WORLD_TARGETS} 國（${pct}%）`;
+
+            renderContinentFilters();
+            renderCountriesCollection();
+            await renderInteractiveWorldMap();
+        }
+
+        /* =====================================================================
+           3. 互動 SVG 世界地圖（Natural Earth 投影 ＋ 香港 / 新加坡發光圓點）
+           ===================================================================== */
+        async function renderInteractiveWorldMap() {
+            const svgEl = $('world-map-svg');
+            const tooltip = $('map-tooltip');
+            const stage = $('world-map-stage');
+
+            if (!window.d3 || !window.topojson) {
+                stage.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-light);padding:20px;text-align:center;">地圖引擎載入中或暫時無法連線，下方國家蒐集冊仍可正常瀏覽。</div>`;
+                return;
+            }
+
+            try {
+                const topo = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json());
+                const countriesGeo = topojson.feature(topo, topo.objects.countries);
+
+                const width = 960, height = 500;
+                mapProjection = d3.geoNaturalEarth1().fitExtent([[18, 16], [width - 18, height - 16]], countriesGeo);
+                const pathGen = d3.geoPath(mapProjection);
+
+                const recByNum = new Map();
+                countryRecords.forEach(r => { if (r.num) recByNum.set(String(r.num).padStart(3, '0'), r); });
+
+                mapSvgSel = d3.select(svgEl);
+                mapSvgSel.selectAll('*').remove();
+
+                const gRoot = mapSvgSel.append('g').attr('class', 'map-zoom-layer');
+
+                gRoot.append('path')
+                    .datum(d3.geoGraticule10())
+                    .attr('d', pathGen)
+                    .attr('fill', 'none')
+                    .attr('stroke', 'rgba(196, 169, 158, 0.2)')
+                    .attr('stroke-width', 0.6);
+
+                const showTip = (event, text) => {
+                    const rect = stage.getBoundingClientRect();
+                    tooltip.textContent = text;
+                    tooltip.style.left = `${event.clientX - rect.left}px`;
+                    tooltip.style.top = `${event.clientY - rect.top}px`;
+                    tooltip.classList.add('show');
+                };
+                const hideTip = () => tooltip.classList.remove('show');
+
+                // 世界各國多邊形
+                gRoot.selectAll('path.land-path')
+                    .data(countriesGeo.features.filter(f => String(f.id).padStart(3, '0') !== '010'))
+                    .enter()
+                    .append('path')
+                    .attr('class', f => {
+                        const rec = recByNum.get(String(f.id).padStart(3, '0'));
+                        return `land-path ${rec?.unlocked ? 'unlocked' : ''}`;
+                    })
+                    .attr('d', pathGen)
+                    .on('mousemove', (event, f) => {
+                        const numId = String(f.id).padStart(3, '0');
+                        const rec = recByNum.get(numId);
+                        if (rec) {
+                            showTip(event, `${rec.flag} ${rec.name}（${rec.unlocked ? '已解鎖' : '待探索'}）`);
+                        } else {
+                            showTip(event, `${f.properties?.name || '探索中地區'}（待探索）`);
+                        }
+                    })
+                    .on('mouseleave', hideTip)
+                    .on('click', (event, f) => {
+                        const rec = recByNum.get(String(f.id).padStart(3, '0'));
+                        if (rec) openCountryModal(rec.name);
+                    });
+
+                // 袖珍地區發光圓點（香港、新加坡、澳門）
+                const microRegions = [...countryRecords.values()].filter(r => r.micro && Array.isArray(r.coords));
+                const pinGroups = gRoot.selectAll('g.micro-pin-group')
+                    .data(microRegions)
+                    .enter()
+                    .append('g')
+                    .attr('class', d => `micro-pin-group ${d.unlocked ? 'unlocked' : 'locked'}`)
+                    .attr('transform', d => {
+                        const pt = mapProjection(d.coords);
+                        return pt ? `translate(${pt[0].toFixed(2)}, ${pt[1].toFixed(2)})` : 'translate(-100,-100)';
+                    })
+                    .on('mousemove', (event, d) => {
+                        showTip(event, `${d.flag} ${d.name}（${d.unlocked ? '已解鎖' : '待探索'}）`);
+                    })
+                    .on('mouseleave', hideTip)
+                    .on('click', (event, d) => {
+                        event.stopPropagation();
+                        openCountryModal(d.name);
+                    });
+
+                pinGroups.filter(d => d.unlocked)
+                    .append('circle')
+                    .attr('class', 'micro-pin-pulse')
+                    .attr('r', 6.5);
+
+                pinGroups.append('circle')
+                    .attr('class', 'micro-pin-core')
+                    .attr('r', d => d.unlocked ? 4.2 : 2.8);
+
+                mapZoomBehavior = d3.zoom()
+                    .scaleExtent([1, 7])
+                    .translateExtent([[0, 0], [width, height]])
+                    .on('zoom', e => { gRoot.attr('transform', e.transform); });
+                mapSvgSel.call(mapZoomBehavior);
+
+                const FOCUS_PRESETS = {
+                    WORLD:     { k: 1,   lon: 15,  lat: 15 },
+                    EAST_ASIA: { k: 3.1, lon: 118, lat: 22 },
+                    EUROPE:    { k: 3.4, lon: 12,  lat: 51 },
+                    AMERICAS:  { k: 1.7, lon: -85, lat: 15 },
+                    OCEANIA:   { k: 2.8, lon: 142, lat: -26 }
+                };
+
+                document.querySelectorAll('#map-zoom-pills .map-zoom-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('#map-zoom-pills .map-zoom-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const preset = FOCUS_PRESETS[btn.dataset.focus] || FOCUS_PRESETS.WORLD;
+                        if (preset.k === 1) {
+                            mapSvgSel.transition().duration(550).call(mapZoomBehavior.transform, d3.zoomIdentity);
+                        } else {
+                            const [px, py] = mapProjection([preset.lon, preset.lat]);
+                            const transform = d3.zoomIdentity
+                                .translate(width / 2 - px * preset.k, height / 2 - py * preset.k)
+                                .scale(preset.k);
+                            mapSvgSel.transition().duration(550).call(mapZoomBehavior.transform, transform);
+                        }
+                    };
+                });
+            } catch {
+                stage.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-light);padding:20px;text-align:center;">世界地圖向量資料暫時無法載入，請檢查網路或直接瀏覽下方各洲國家蒐集冊。</div>`;
+            }
+        }
+
+        /* =====================================================================
+           4. 各洲國家蒐集冊渲染與篩選
+           ===================================================================== */
+        function renderContinentFilters() {
+            const all = [...countryRecords.values()];
+            const unlockedTotal = all.filter(r => r.unlocked).length;
+            const tabs = [
+                { key: 'ALL', label: '全部洲別', count: all.length },
+                { key: 'UNLOCKED', label: '✨ 僅看已解鎖', count: unlockedTotal },
+                ...CONTINENT_ORDER.map(cont => ({
+                    key: cont,
+                    label: cont,
+                    count: all.filter(r => r.continent === cont).length
+                }))
+            ];
+
+            $('continent-filter-row').innerHTML = tabs.map(t => `
+                <button type="button" class="capsule-btn ${currentContinentFilter === t.key ? 'active' : ''}"
+                    onclick="currentContinentFilter='${escHtml(t.key)}';renderContinentFilters();renderCountriesCollection();">
+                    ${escHtml(t.label)}<span class="capsule-count">(${t.count})</span>
+                </button>`).join('');
+        }
+
+        function buildBadgeMedallionInner(rec) {
+            if (rec.badgeImage) {
+                return `<img src="${escHtml(rec.badgeImage)}" alt="${escHtml(rec.name)} 徽章" onerror="this.outerHTML='<span class=\\'badge-flag-emoji\\'>${rec.flag}</span>'">`;
+            }
+            return `<span class="badge-flag-emoji">${rec.flag}</span>${rec.code ? `<span class="badge-iso-chip">${escHtml(rec.code)}</span>` : ''}`;
+        }
+
+        function renderCountriesCollection() {
+            const kw = currentSearch.trim().toLowerCase();
+            const all = [...countryRecords.values()].filter(r => {
+                if (currentContinentFilter === 'UNLOCKED' && !r.unlocked) return false;
+                if (currentContinentFilter !== 'ALL' && currentContinentFilter !== 'UNLOCKED' && r.continent !== currentContinentFilter) return false;
+                if (!kw) return true;
+                return `${r.name} ${r.en} ${r.code} ${r.continent}`.toLowerCase().includes(kw);
+            });
+
+            if (!all.length) {
+                $('countries-collection-wrap').innerHTML = `<div style="text-align:center;padding:34px;color:var(--text-light);border:1.5px dashed var(--accent-brown);border-radius:14px;">找不到符合條件的國家 / 地區。</div>`;
+                return;
+            }
+
+            const groups = {};
+            all.forEach(r => {
+                const g = r.continent || '其他';
+                if (!groups[g]) groups[g] = [];
+                groups[g].push(r);
+            });
+
+            const orderedContinents = [...CONTINENT_ORDER, '其他'].filter(c => groups[c]?.length);
+            $('countries-collection-wrap').innerHTML = orderedContinents.map(cont => {
+                const list = groups[cont].sort((a, b) => (a.unlocked === b.unlocked ? 0 : (a.unlocked ? -1 : 1)));
+                const unlockedInCont = list.filter(x => x.unlocked).length;
+                return `
+                    <div class="continent-block">
+                        <div class="continent-heading">
+                            <span>🌐 ${escHtml(cont)}</span>
+                            <span class="continent-progress">已解鎖 ${unlockedInCont} / ${list.length}</span>
+                        </div>
+                        <div class="countries-grid">
+                            ${list.map(r => {
+                                const datesSorted = [...r.dates].sort();
+                                const latestYear = datesSorted.length ? datesSorted[datesSorted.length - 1].slice(0, 4) : '';
+                                const subText = r.unlocked
+                                    ? (r.crossingCount > 0 ? `${r.crossingCount} 枚通關章` : (latestYear ? `${latestYear} 足跡` : '已點亮解鎖'))
+                                    : '待探索';
+                                return `
+                                    <button type="button" class="country-badge-card ${r.unlocked ? 'unlocked' : 'locked'}" onclick="openCountryModal('${escHtml(r.name)}')">
+                                        ${r.unlocked ? `<span class="unlocked-check-dot" title="已解鎖">✓</span>` : ''}
+                                        <div class="badge-medallion">${buildBadgeMedallionInner(r)}</div>
+                                        <h3 class="country-card-name">${escHtml(r.name)}</h3>
+                                        <div class="country-card-sub">${escHtml(subText)}</div>
+                                    </button>`;
+                            }).join('')}
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+
+        /* =====================================================================
+           5. 國家詳情放大彈窗
+           ===================================================================== */
+        function openCountryModal(countryName) {
+            const rec = countryRecords.get(normalizeCountry(countryName));
+            if (!rec) return;
+
+            const datesSorted = [...rec.dates].sort();
+            const firstDate = datesSorted[0] || '-';
+            const latestDate = datesSorted[datesSorted.length - 1] || '-';
+            const tripItems = [...rec.trips.values()];
+
+            const tripsHtml = tripItems.map(t => `
+                <a href="journal.html?trip=${encodeURIComponent(t.tripId)}&view=${t.hasPublishedJournal ? 'journal' : 'itinerary'}" class="modal-link-btn">
+                    ${t.hasPublishedJournal ? '📖' : '📅'} ${escHtml(t.tripName)}
+                </a>`).join('');
+
+            $('country-modal-body').innerHTML = `
+                <div class="modal-hero-badge">
+                    <div class="modal-medallion ${rec.unlocked ? '' : 'locked'}">${buildBadgeMedallionInner(rec)}</div>
+                    <h3 class="modal-title">${escHtml(rec.name)}</h3>
+                    <div class="modal-en-sub">${escHtml(rec.en)}${rec.code ? ' ・ ' + escHtml(rec.code) : ''}</div>
+                    <div class="modal-tags-row">
+                        <span class="modal-pill">${escHtml(rec.continent)}</span>
+                        <span class="modal-pill ${rec.unlocked ? 'unlocked' : ''}">${rec.unlocked ? '✨ 已點亮解鎖' : '🔒 尚未踏足'}</span>
+                    </div>
+                </div>
+
+                ${rec.note ? `<div class="modal-note-box">「${escHtml(rec.note)}」</div>` : ''}
+
+                <table class="modal-info-table">
+                    <tr><th>海關通關章</th><td>${rec.crossingCount > 0 ? `<strong>${rec.crossingCount} 枚</strong>` : (rec.name === '台灣' ? '出發地 / 國內行程不蓋海關章' : '尚無紀錄')}</td></tr>
+                    <tr><th>首次足跡日</th><td>${escHtml(firstDate)}</td></tr>
+                    <tr><th>最近造訪日</th><td>${escHtml(latestDate)}</td></tr>
+                </table>
+
+                <div class="modal-actions">
+                    ${rec.unlocked ? `<a href="passport.html" class="modal-link-btn primary">🛂 返回查看印章牆</a>` : ''}
+                    ${tripsHtml}
+                </div>
+                ${!rec.unlocked ? `<div style="margin-top:10px;font-size:0.78rem;color:var(--text-light);">💡 未來新增此國家的行程檔或於 /admin/ 護照設定中手動解鎖後，地圖與徽章會自動點亮！</div>` : ''}
+            `;
+            $('country-modal').classList.add('open');
+        }
+
+        function closeCountryModal() { $('country-modal').classList.remove('open'); }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCountryModal(); });
+        $('country-search-input').addEventListener('input', e => {
+            currentSearch = e.target.value || '';
+            renderCountriesCollection();
+        });
+
+        initCountriesPage();
+    </script>
+</body>
+</html>
