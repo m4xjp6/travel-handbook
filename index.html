@@ -40,7 +40,7 @@
         /* === 基礎版面與標題 === */
         body {
             margin: 0 auto;
-            padding: 32px 24px 96px;
+            padding: 32px 24px 104px;
             max-width: 1060px;
             box-sizing: border-box;
             font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
@@ -54,13 +54,34 @@
         }
         h1 { text-align: center; font-size: 1.85rem; letter-spacing: 0.06em; margin: 0 0 18px; }
 
-        /* === 頂部四大導覽列 === */
-        .main-nav-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+        /* === 頂部五大導覽列（桌機置中、手機單排橫向滑動） === */
+        .main-nav-tabs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 10px;
+            margin-bottom: 28px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 2px 4px 6px;
+        }
+        .main-nav-tabs::-webkit-scrollbar { display: none; }
         .main-tab-btn {
-            font-family: inherit; background: transparent; color: var(--text-main);
-            border: 1.5px solid transparent; padding: 9px 20px; border-radius: 24px;
-            font-size: 0.94rem; font-weight: 600; cursor: pointer; text-decoration: none;
-            white-space: nowrap; transition: all 0.2s ease;
+            font-family: inherit;
+            flex: 0 0 auto;
+            background: transparent;
+            color: var(--text-main);
+            border: 1.5px solid transparent;
+            padding: 9px 18px;
+            border-radius: 24px;
+            font-size: 0.94rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
         }
         .main-tab-btn:hover { color: var(--accent-brown-dark); border-color: var(--border-soft); background: rgba(245, 239, 230, 0.5); }
         .main-tab-btn.active { background: var(--accent-brown); color: #fff; border-color: var(--accent-brown); box-shadow: 0 4px 12px rgba(196, 169, 158, 0.42); font-weight: 700; }
@@ -195,19 +216,28 @@
 
         .admin-fab {
             position: fixed; bottom: 24px; right: 24px; z-index: 1000;
-            background: var(--accent-brown); color: #fff; text-decoration: none;
-            padding: 12px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 600;
-            box-shadow: 0 4px 15px rgba(196, 169, 158, 0.5);
+            background: rgba(196, 169, 158, 0.94); backdrop-filter: blur(6px);
+            color: #fff; text-decoration: none;
+            padding: 11px 18px; border-radius: 30px; font-size: 0.88rem; font-weight: 600;
+            box-shadow: 0 4px 14px rgba(196, 169, 158, 0.45);
+            transition: transform 0.2s, background 0.2s;
         }
+        .admin-fab:hover { background: var(--accent-brown-dark); transform: translateY(-2px); }
 
         /* === 手機版排版專屬優化 === */
         @media (max-width: 768px) {
-            body { padding: 18px 14px 96px; }
+            body { padding: 18px 14px 116px; }
             h1 { font-size: 1.42rem; }
 
-            /* 1. 頂部 4 個分類平均單行排列，避免第 4 顆掉行 */
-            .main-nav-tabs { flex-wrap: nowrap; gap: 4px; margin-bottom: 22px; }
-            .main-tab-btn { flex: 1; padding: 8px 4px; font-size: 0.84rem; text-align: center; }
+            /* 1. 頂部五大分頁單排橫向滑動，不折行不壓縮 */
+            .main-nav-tabs {
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                gap: 6px;
+                margin: 0 -14px 20px;
+                padding: 2px 14px 6px;
+            }
+            .main-tab-btn { flex: 0 0 auto; padding: 8px 14px; font-size: 0.86rem; text-align: center; }
 
             /* 2. 插畫頂部兩個膠囊縮小字級與間距，防止擠壓裁切 */
             .illustration-badges { top: 8px; left: 8px; right: 8px; gap: 6px; }
@@ -220,7 +250,7 @@
             /* 4. 卡片單欄與懸浮按鈕精簡化 */
             .upcoming-body { padding: 16px; }
             .grid-container { grid-template-columns: 1fr; }
-            .admin-fab { bottom: 16px; right: 16px; padding: 10px 16px; font-size: 0.84rem; }
+            .admin-fab { bottom: 16px; right: 14px; padding: 9px 15px; font-size: 0.82rem; }
         }
     </style>
 </head>
@@ -229,11 +259,12 @@
     <!-- 【✏️ 文字修改】網站主標題 -->
     <h1>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅行手帳書櫃</h1>
 
-    <!-- 頂部四大導覽列 -->
+    <!-- 頂部五大導覽列 -->
     <nav class="main-nav-tabs" aria-label="手帳主選單">
         <button type="button" class="main-tab-btn active" data-target="tab-upcoming">未來旅程</button>
         <button type="button" class="main-tab-btn" data-target="tab-ongoing">旅途連載</button>
         <button type="button" class="main-tab-btn" data-target="tab-completed">歸檔風景</button>
+        <a href="passport.html" class="main-tab-btn">旅遊護照</a>
         <a href="planner.html" class="main-tab-btn">漫遊提案</a>
     </nav>
 
@@ -307,11 +338,11 @@
 
                 <div class="upcoming-body">
                     <div class="upcoming-tags">
-                        <span class="up-tag" id="up-route-tag">吉隆坡・馬六甲・新加坡</span>
+                        <span class="up-tag" id="up-route-tag">吉隆坡・怡保・馬六甲・新加坡</span>
                         <span class="up-tag members" id="up-member-tag">春季漫旅・11天10夜</span>
                     </div>
-                    <h3 class="upcoming-title" id="up-title">南洋星馬春季漫旅</h3>
-                    <p class="upcoming-subtitle" id="up-date-text">2027.04.07 (三) — 2027.04.17 (六) ・ 吉隆坡敘宴、又見馬六甲、星耀樟宜</p>
+                    <h3 class="upcoming-title" id="up-title">南洋雙星春季漫旅</h3>
+                    <p class="upcoming-subtitle" id="up-date-text">2027.04.07 (三) — 2027.04.17 (六) ・ 怡保舊街場、又見馬六甲、星耀樟宜</p>
 
                     <div class="countdown-boxes">
                         <div class="cd-box highlight"><span class="cd-num" id="cd-days">00</span><span class="cd-label">天</span></div>
@@ -319,23 +350,23 @@
                         <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">分</span></div>
                         <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">秒</span></div>
                     </div>
-                    <p class="countdown-note" id="up-note-text">距離展開 南洋星馬春季漫旅 倒數計時中</p>
+                    <p class="countdown-note" id="up-note-text">距離展開 南洋雙星春季漫旅 倒數計時中</p>
                 </div>
             </div>
 
             <div class="memo-card">
                 <div class="memo-card-header">
                     <span class="memo-badge">🧳 旅途重點與行前備忘</span>
-                    <span class="memo-vehicle" id="up-vehicle-tag">跨國雙城慢旅</span>
+                    <span class="memo-vehicle" id="up-vehicle-tag">ETS電動列車・跨國包車慢旅</span>
                 </div>
                 <div class="memo-list" id="up-memo-list">
-                    • <strong>簽證與入境：</strong>馬來西亞 MDAC 電子入境卡（出發前3天內填寫）、新加坡 SG Arrival Card。<br>
-                    • <strong>核心體驗：</strong>吉隆坡敘宴沉浸式宮廷宴、又見馬六甲劇場、星耀樟宜雨漩渦。
+                    • <strong>入境必辦：</strong>馬來西亞 MDAC 與新加坡 SG Arrival Card（均須於抵達前 3 天內免費線上申報）。<br>
+                    • <strong>重點體驗：</strong>怡保舊街場白咖啡與壁畫、皇家雪蘭莪錫碗工坊、又見馬六甲劇場、濱海灣花園與星耀樟宜。
                 </div>
             </div>
 
             <a href="journal.html?trip=malaysia_2027&view=itinerary" class="upcoming-action-btn" id="up-link-btn">
-                📅 前往查看／編輯這份行程安排 ➔
+                📅 前往查看 / 編輯這份行程安排 ➔
             </a>
         </div>
     </section>
@@ -350,7 +381,7 @@
                 <div style="font-size: 2rem;">🍵</div>
                 <div class="empty-title">目前沒有正在進行中的旅程</div>
                 <p class="empty-desc">
-                    當下一趟旅程（<span id="ongoing-next-name">南洋星馬春季漫旅</span>）於 <span id="ongoing-next-date">2027/04/07</span> 出發時，<br>這裡就會自動切換為旅途實戰模式！
+                    當下一趟旅程（<span id="ongoing-next-name">南洋雙星春季漫旅</span>）於 <span id="ongoing-next-date">2027/04/07</span> 出發時，<br>這裡就會自動切換為旅途實戰模式！
                 </p>
                 <div class="empty-actions">
                     <button type="button" class="secondary-pill-btn" onclick="switchMainTab('tab-upcoming')">查看未出發倒數</button>
@@ -403,10 +434,10 @@
                     <div><img src="media/malaysia_2027/cover-3.png" alt="封面照 3" onerror="this.parentElement.innerHTML='封面照 3'"></div>
                 </div>
                 <div class="card-content">
-                    <h3>南洋星馬春季漫旅</h3>
+                    <h3>南洋雙星春季漫旅</h3>
                     <table>
                         <tr><th>日期</th><td>2027/04/07 — 04/17 (11天10夜)</td></tr>
-                        <tr><th>重點</th><td>吉隆坡敘宴、又見馬六甲、星耀樟宜</td></tr>
+                        <tr><th>重點</th><td>怡保舊街場、又見馬六甲、星耀樟宜</td></tr>
                         <tr><th>季節</th><td>2027 春季</td></tr>
                     </table>
                 </div>
@@ -432,7 +463,7 @@
 
             <a href="journal.html?trip=tohoku_2026" class="trip-card"
                data-trip-id="tohoku_2026" data-continent="亞洲" data-country="日本"
-               data-start="2026-01-28" data-end="2026-02-05">
+               data-start="2026-01-09" data-end="2026-01-17">
                 <div class="cover-collage">
                     <div><img src="media/tohoku_2026/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
                     <div><img src="media/tohoku_2026/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
@@ -474,19 +505,19 @@
         const DEFAULT_UPCOMING_META = {
             malaysia_2027: {
                 tripId: "malaysia_2027",
-                tripTitle: "南洋星馬春季漫旅",
-                routeTag: "吉隆坡・馬六甲・新加坡",
+                tripTitle: "南洋雙星春季漫旅",
+                routeTag: "吉隆坡・怡保・馬六甲・新加坡",
                 memberTag: "春季漫旅・11天10夜",
                 startDate: "2027-04-07",
                 endDate: "2027-04-17",
-                dateSubTitle: "2027.04.07 (三) — 2027.04.17 (六) ・ 吉隆坡敘宴、又見馬六甲、星耀樟宜",
+                dateSubTitle: "2027.04.07 (三) — 2027.04.17 (六) ・ 怡保舊街場、又見馬六甲、星耀樟宜",
                 timezone: "Asia/Kuala_Lumpur",
                 timezoneLabel: "星馬時間",
                 weatherCity: "吉隆坡",
                 lat: 3.1390,
                 lng: 101.6869,
-                vehicleTag: "跨國雙城慢旅",
-                memoHtml: "• <strong>簽證與入境：</strong>馬來西亞 MDAC 電子入境卡（出發前3天內填寫）、新加坡 SG Arrival Card。<br>• <strong>核心體驗：</strong>吉隆坡敘宴沉浸式宮廷宴、又見馬六甲劇場、星耀樟宜雨漩渦。"
+                vehicleTag: "ETS電動列車・跨國包車慢旅",
+                memoHtml: "• <strong>入境必辦：</strong>馬來西亞 MDAC 與新加坡 SG Arrival Card（均須於抵達前 3 天內免費線上申報）。<br>• <strong>重點體驗：</strong>怡保舊街場白咖啡與壁畫、皇家雪蘭莪錫碗工坊、又見馬六甲劇場、濱海灣花園與星耀樟宜。"
             }
         };
 
