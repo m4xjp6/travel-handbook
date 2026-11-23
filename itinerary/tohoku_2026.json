@@ -70,14 +70,14 @@
       "nights": 2,
       "bookingId": "APAHT-TK-056435",
       "roomType": "標準雙人房 (Standard Room)",
-      "mealPlan": "京成上野站池之端口出站即達・直通成田機場 Skyliner",
+      "mealPlan": "京成上野站池之端口出站即達・直通成田 Skyliner",
       "address": "東京都台東區上野 2-14-26（京成上野站步行 1 分鐘）",
       "estNightCost": 3780
     }
   ],
   "expenseItems": [
     { "category": "交通", "day": "Day 01", "title": "高雄 (KHH) → 東京成田 (NRT) 國際航班", "amount": 3885 },
-    { "category": "交通", "day": "Day 01", "title": "成田機場 → 京成上野 (京成 Skyliner)", "amount": 542 },
+    { "category": "交通", "day": "Day 01", "title": "成田 → 京成上野 (京成 Skyliner)", "amount": 542 },
     { "category": "交通", "day": "Day 01", "title": "JR 上野 → 福島 → 山形 (山形新幹線 翼號)", "amount": 2398 },
     { "category": "餐飲", "day": "Day 01", "title": "山形五十番飯店 駅前店（炒飯＆炒豆苗）", "amount": 252 },
     { "category": "交通", "day": "Day 02", "title": "JR 山形站 ↔ 藏王溫泉（山交巴士來回）", "amount": 504 },
@@ -111,7 +111,7 @@
     { "category": "餐飲", "day": "Day 08", "title": "五代目 野田岩 麻布飯倉本店（鰻魚飯）", "amount": 1155 },
     { "category": "門票", "day": "Day 08", "title": "東京鐵塔 Top Deck Tour 頂層展望台", "amount": 630 },
     { "category": "住宿", "day": "Day 07–09", "title": "APA 飯店〈京成上野站前〉（2晚・每人預估）", "amount": 3780 },
-    { "category": "交通", "day": "Day 09", "title": "京成上野 → 成田機場第2航廈 (Skyliner)", "amount": 542 },
+    { "category": "交通", "day": "Day 09", "title": "京成上野 → 成田第2航廈 (Skyliner)", "amount": 542 },
     { "category": "餐飲", "day": "Day 09", "title": "謝朋殿 成田空港店（中華料理套餐）", "amount": 462 },
     { "category": "交通", "day": "Day 09", "title": "東京成田 (NRT) → 高雄 (KHH) 國際航班", "amount": 3885 }
   ],
@@ -167,8 +167,8 @@
       "region": "東京・關東地區",
       "urgent": false,
       "tag": "京成電鐵快訊",
-      "title": "成田機場 Skyliner 電子憑證兌換實體車票提醒",
-      "desc": "網購 QR Code 無法直接進站，須先至成田機場 B1 售票機或服務櫃檯兌換實體指定席車票。"
+      "title": "成田 Skyliner 電子憑證兌換實體車票提醒",
+      "desc": "網購 QR Code 無法直接進站，須先至成田 B1 售票機或服務櫃檯兌換實體指定席車票。"
     }
   ],
   "days": [
@@ -183,7 +183,7 @@
           "hideStamp": false,
           "country": "台灣",
           "time": "05:40",
-          "spotName": "高雄小港機場 (KHH)",
+          "spotName": "高雄小港國際機場 (KHH)",
           "categoryLabel": "交通樞紐",
           "routeFromTo": "高雄市區 → 高雄小港國際機場 (KHH)",
           "scheduleTime": "05:40 專車出發 → 08:05 AirAsia FD234 起飛",
@@ -191,7 +191,7 @@
           "transitMins": 35,
           "transitCost": 0,
           "timetableUrl": "https://www.kia.gov.tw/InstantScheduleC001110.aspx",
-          "timetableLabel": "小港機場即時航班",
+          "timetableLabel": "高雄小港國際機場即時航班",
           "intro": "南台灣主要國際航廈，出境大廳位於 3 樓，提供自助報到與 e-Gate 自動通關。",
           "note": "• 起飛前 2.5–3 小時報到；行動電源與備用鋰電池僅限隨身手提。\n• 預訂專車時 20 吋以上行李箱計為大件行李。"
         },
@@ -201,14 +201,14 @@
           "time": "13:00",
           "spotName": "京成 Skyliner（成田國際機場 (NRT) → 京成上野站）",
           "categoryLabel": "交通樞紐",
-          "routeFromTo": "高雄 (KHH) → 成田機場（轉乘 Skyliner）→ 京成上野站",
+          "routeFromTo": "高雄 (KHH) → 成田國際機場（轉乘 Skyliner）→ 京成上野站",
           "scheduleTime": "08:05 起飛 → 12:30 抵成田 → 13:00 Skyliner 發車",
           "seatType": "💺 全車對號指定席 (Keisei Skyliner)",
           "transitMins": 41,
           "transitCost": 542,
           "timetableUrl": "https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/traffic/skyliner.php",
           "timetableLabel": "Skyliner 官方時刻表",
-          "intro": "連接成田機場與日暮里、京成上野的高速特急列車，最快 41 分鐘直達上野，全車對號指定席。",
+          "intro": "連接成田國際機場與日暮里、京成上野的高速特急列車，最快 41 分鐘直達上野，全車對號指定席。",
           "note": "• 網購 QR Code 須先至成田 B1 售票機或櫃檯換取實體車票。\n• 轉乘新幹線前可在 JR 上野站旁「いろり庵きらくそば」吃立食蕎麥麵。"
         },
         {
@@ -1117,7 +1117,7 @@
           "transitCost": 542,
           "timetableUrl": "https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/traffic/skyliner.php",
           "timetableLabel": "Skyliner 回程時刻表",
-          "intro": "自 APA 飯店步行 1 分鐘進站，最快 41 分鐘直達成田機場第 2 航廈地下車站。",
+          "intro": "自 APA 飯店步行 1 分鐘進站，最快 41 分鐘直達成田國際機場第 2 航廈地下車站。",
           "note": "• 回程同樣須先於京成上野站售票機／櫃檯劃位領取實體指定席車票。"
         },
         {
@@ -1132,7 +1132,7 @@
           "transitMins": 5,
           "transitCost": 0,
           "timetableUrl": "https://www.narita-airport.jp/zh-tc/shop/shop-search/t2mn04_t0004q/",
-          "timetableLabel": "成田機場謝朋殿資訊",
+          "timetableLabel": "成田國際機場謝朋殿資訊",
           "intro": "1967 年創立的新宿老字號中華料理，位於第 2 航廈出境安檢前 4 樓美食街，空間寬敞雅緻。",
           "note": "• 營業 08:30–21:00（最後點餐時間 20:30）；地域限定伴手禮建議市區買齊，出境免稅店補東京芭娜娜與 ROYCE。",
           "isFood": true,
@@ -1147,12 +1147,12 @@
           "spotName": "成田國際機場 (NRT)",
           "categoryLabel": "交通樞紐",
           "routeFromTo": "東京成田 (NRT) → 飛越富士山 → 高雄小港 (KHH)",
-          "scheduleTime": "13:35 成田起飛 → 17:10 抵高雄小港機場",
+          "scheduleTime": "13:35 成田起飛 → 17:10 抵高雄小港國際機場",
           "seatType": "✈️ 國際航班（推薦右側靠窗 K 排賞富士山）",
           "transitMins": 265,
           "transitCost": 0,
           "timetableUrl": "https://www.narita-airport.jp/ch2/flight/flight-search/",
-          "timetableLabel": "成田機場即時航班",
+          "timetableLabel": "成田國際機場即時航班",
           "intro": "下午自成田起飛返高雄，冬季起飛後約 20–30 分鐘可於高空近賞覆雪富士山，為九天東北漫旅畫下句點。",
           "note": "• 【賞富士山選位】東京飛台灣回程富士山在飛機「右側」，劃位推薦選右側靠窗（避開機翼排數）。"
         }
