@@ -149,6 +149,7 @@ collections:
               - {label: "站點 ID（須與遊記 id 相同）", name: "id", widget: "string", hint: "如 d1-ch1"}
               - {label: "隱藏此站點（草稿）", name: "isDraft", widget: "boolean", default: false, required: false}
               - {label: "🛂 隱藏景點印章（預設關閉＝自動繪製）", name: "hideStamp", widget: "boolean", default: false, required: false}
+              - {label: "🛂 站點所屬國家覆寫（選填，留空則繼承當日或旅程國家）", name: "country", widget: "string", required: false, hint: "同一天跨國或出發地機場時填寫，如 台灣、新加坡"}
               - {label: "緯度（Lat，純行程時必填）", name: "lat", widget: "number", value_type: "float", required: false}
               - {label: "經度（Lng，純行程時必填）", name: "lng", widget: "number", value_type: "float", required: false}
               - label: "抵達交通方式"
