@@ -578,14 +578,14 @@
                     <button type="button" class="pack-sub-btn active" onclick="switchPackSubTab('pack-vouchers', this)">🎫 票券住宿</button>
                     <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-transit', this)">🚄 交通時刻</button>
                     <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-budget', this)">💰 台幣記帳</button>
-                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 美食紀錄</button>                    
+                    <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-food', this)">🍱 美食紀錄</button>
                     <button type="button" class="pack-sub-btn" onclick="switchPackSubTab('pack-notes', this)">📝 隨手記事</button>
                 </div>
                 <div id="pack-checklist" class="pack-panel"></div>
                 <div id="pack-vouchers" class="pack-panel active"></div>
                 <div id="pack-transit" class="pack-panel"></div>
                 <div id="pack-budget" class="pack-panel"></div>
-                <div id="pack-food" class="pack-panel"></div>                
+                <div id="pack-food" class="pack-panel"></div>
                 <div id="pack-notes" class="pack-panel"></div>
             </div>
 
@@ -758,6 +758,7 @@
 
                 return {
                     ...dayObj,
+                    itinDayTitle: (itinDay?.dayTitle || dayObj.dayTitle || '').trim(),
                     daySub: (itinDay?.daySub || dayObj.daySub || '').trim(),
                     region: dayRegion,
                     _isDraft: dayDraft,
@@ -767,28 +768,40 @@
 
             normalizedDays = isPreviewMode ? mergedDays : mergedDays.filter(d => !d._isDraft && d.chapters.length > 0);
 
+            const reqDayRaw = (urlParams.get('day') || '').trim();
+            const matchedDay = reqDayRaw
+                ? normalizedDays.find(d => d.day.toLowerCase() === reqDayRaw.toLowerCase())?.day
+                : null;
+            const initialDayKey = matchedDay || 'ALL';
+            const reqView = urlParams.get('view');
+            const reqSpot = (urlParams.get('spot') || '').trim();
+            const resolvedViewId = reqView ? (reqView.startsWith('view-') ? reqView : `view-${reqView}`) : 'view-itinerary';
+
             initMap(normalizedDays, fallbackCoord);
             buildDayTabs();
-            renderDay('ALL');
+            if (initialDayKey !== 'ALL') {
+                document.querySelectorAll('.day-tab').forEach(b => b.classList.toggle('active', b.dataset.dayKey === initialDayKey));
+            }
+            renderDay(initialDayKey, Boolean(reqSpot));
             renderPackStaticViews();
             loadCloudData();
             refreshInfoStation(false);
 
-            const reqView = urlParams.get('view');
-            if (reqView) {
-                const targetId = reqView.startsWith('view-') ? reqView : `view-${reqView}`;
-                if ($(targetId)) switchRightView(targetId);
+            if (reqSpot) {
+                focusSpotById(reqSpot, resolvedViewId);
+            } else if (reqView && $(resolvedViewId)) {
+                switchRightView(resolvedViewId);
             }
         }).catch(err => {
             $('itinerary-content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${err.message}</p>`;
         });
 
         /* === 3. 視角切換與地圖顯示模式 === */
-        function switchRightView(viewId) {
+        function switchRightView(viewId, shouldScrollTop = true) {
             document.querySelectorAll('.view-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.view === viewId));
             document.querySelectorAll('.view-section').forEach(s => s.classList.toggle('active', s.id === viewId));
             $('day-tabs').style.display = (viewId === 'view-itinerary' || (viewId === 'view-journal' && !isWholeJournalDraft)) ? 'flex' : 'none';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (shouldScrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function switchPackSubTab(panelId, btnEl) {
@@ -1003,6 +1016,7 @@
             tabs.forEach((tab, idx) => {
                 const btn = document.createElement('button');
                 btn.className = `day-tab ${idx === 0 ? 'active' : ''}`;
+                btn.dataset.dayKey = tab.key;
                 btn.textContent = tab.label;
                 btn.onclick = () => {
                     document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
@@ -1133,13 +1147,13 @@
                 const mode = resolveTransportMode(ch, distKm);
                 const modeMap = {
                     flight:  { icon: '✈️', name: '國際航班', mins: 210, cost: 8500 },
-                    hsr:     { icon: '🚄', name: '高速鐵路／ETS', mins: Math.max(45, Math.round(distKm * 0.45)), cost: Math.round(distKm * 32) },
+                    hsr:     { icon: '🚄', name: '高速鐵路 / ETS', mins: Math.max(45, Math.round(distKm * 0.45)), cost: Math.round(distKm * 32) },
                     train:   { icon: '🚃', name: '鐵道列車', mins: Math.max(20, Math.round(distKm * 1.1)), cost: Math.max(240, Math.round(distKm * 22)) },
-                    metro:   { icon: '🚇', name: '地鐵／捷運', mins: 18, cost: 210 },
+                    metro:   { icon: '🚇', name: '地鐵 / 捷運', mins: 18, cost: 210 },
                     ropeway: { icon: '🚡', name: '山岳纜車', mins: 20, cost: 3800 },
                     boat:    { icon: '⛴️', name: '觀光遊船', mins: 50, cost: 1500 },
-                    bus:     { icon: '🚌', name: '路線／高速巴士', mins: Math.max(20, Math.round(distKm * 1.6)), cost: Math.max(500, Math.round(distKm * 45)) },
-                    drive:   { icon: '🚕', name: '專車／包車／Grab', mins: Math.max(15, Math.round(distKm * 1.3)), cost: Math.max(1200, Math.round(distKm * 300)) },
+                    bus:     { icon: '🚌', name: '路線 / 高速巴士', mins: Math.max(20, Math.round(distKm * 1.6)), cost: Math.max(500, Math.round(distKm * 45)) },
+                    drive:   { icon: '🚕', name: '專車 / 包車 / Grab', mins: Math.max(15, Math.round(distKm * 1.3)), cost: Math.max(1200, Math.round(distKm * 300)) },
                     walk:    { icon: '🚶', name: '漫步前往', mins: Math.max(5, Math.round(distKm * 12)), cost: 0 }
                 };
                 const picked = modeMap[mode] || modeMap.bus;
@@ -1187,7 +1201,47 @@
         }
         const focusSpotOnMap = chIndex => transitionToChapter(chIndex);
 
-        function renderDay(dayKey) {
+        function focusSpotById(spotId, preferViewId = 'view-itinerary') {
+            if (!spotId) return;
+            let chIndex = currentChaptersList.findIndex(c => c.id === spotId);
+            if (chIndex < 0 && currentDayKey !== 'ALL') {
+                document.querySelectorAll('.day-tab').forEach(b => b.classList.toggle('active', b.dataset.dayKey === 'ALL'));
+                renderDay('ALL', true);
+                chIndex = currentChaptersList.findIndex(c => c.id === spotId);
+            }
+            if (chIndex < 0) {
+                if (currentChaptersList.length) transitionToChapter(0, Boolean(prevDayOriginChapter));
+                return;
+            }
+
+            const useJournal = (preferViewId === 'view-journal') && !isWholeJournalDraft;
+            switchRightView(useJournal ? 'view-journal' : 'view-itinerary', false);
+
+            setTimeout(() => {
+                isClickScrolling = true;
+                clearTimeout(scrollUnlockTimer);
+                transitionToChapter(chIndex);
+
+                const navBottom = document.querySelector('.top-nav')?.getBoundingClientRect().bottom || 0;
+                if (useJournal) {
+                    const sec = $(`section-${spotId}`);
+                    if (sec) {
+                        setActiveChapter(sec);
+                        window.scrollTo({ top: Math.max(0, window.pageYOffset + sec.getBoundingClientRect().top - navBottom - 20), behavior: 'smooth' });
+                    }
+                } else {
+                    document.querySelectorAll('.spot-intro-card.open').forEach(c => c.classList.remove('open'));
+                    const card = $(`itin-card-${spotId}`);
+                    if (card) {
+                        card.classList.add('open');
+                        window.scrollTo({ top: Math.max(0, window.pageYOffset + card.getBoundingClientRect().top - navBottom - 16), behavior: 'smooth' });
+                    }
+                }
+                scrollUnlockTimer = setTimeout(() => { isClickScrolling = false; }, 1100);
+            }, 120);
+        }
+
+        function renderDay(dayKey, skipInitialFocus = false) {
             currentDayKey = dayKey;
             const contentDiv = $('content'), itinDiv = $('itinerary-content');
             contentDiv.innerHTML = ''; itinDiv.innerHTML = '';
@@ -1346,7 +1400,7 @@
                 block.className = 'itinerary-day-block';
                 block.innerHTML = `
                     <div class="itin-day-header">
-                        <h3 class="itin-day-title">${dayObj.day}｜${dayObj.dayTitle || ''}</h3>
+                        <h3 class="itin-day-title">${dayObj.day}｜${dayObj.itinDayTitle || dayObj.dayTitle || ''}</h3>
                         <div class="itin-day-sub">📅 ${escHtml(dayObj.daySub || spotNames.join(' · '))}</div>
                     </div>
                     <div class="itin-summary-box">
@@ -1362,7 +1416,7 @@
             if (currentChaptersList.length) {
                 const first = document.querySelector('.chapter');
                 if (first) setActiveChapter(first);
-                transitionToChapter(0, Boolean(prevDayOriginChapter));
+                if (!skipInitialFocus) transitionToChapter(0, Boolean(prevDayOriginChapter));
             }
 
             if (!isWholeJournalDraft) {
@@ -1713,7 +1767,7 @@
                 }
                 return '';
             };
-            
+
             // 1. 票券住宿
             $('pack-vouchers').innerHTML = `
                 <div class="pack-toolbar">
@@ -1740,7 +1794,7 @@
                                 </div>
                                 <table class="hv-info-table">
                                     <tr><th>飯店名稱</th><td><strong>${h.officialName}</strong></td></tr>
-                                    <tr><th>訂單編號</th><td>${h.bookingIds.join(' ／ ')}</td></tr>
+                                    <tr><th>訂單編號</th><td>${h.bookingIds.join(' / ')}</td></tr>
                                     <tr><th>預訂房型</th><td>${h.roomType}</td></tr>
                                     <tr><th>專案設施</th><td>${h.mealPlan}</td></tr>
                                     <tr><th>地址交通</th><td>${h.address}</td></tr>
@@ -1816,7 +1870,7 @@
                         </div>
                         <div class="ticket-detail-body">
                             <div class="food-review-box"><div style="font-weight:700;margin-bottom:4px;color:#1E40AF;">📘 美味紀錄</div><div style="white-space:pre-line;">${f.review}</div></div>
-                            <div class="food-policy-box"><div style="font-weight:700;margin-bottom:4px;color:#22543D;">⚠️ 用餐／預約注意</div><div style="white-space:pre-line;">${f.policy}</div></div>
+                            <div class="food-policy-box"><div style="font-weight:700;margin-bottom:4px;color:#22543D;">⚠️ 用餐 / 預約注意</div><div style="white-space:pre-line;">${f.policy}</div></div>
                             ${f.affHtml || ''}
                         </div>
                     </div>`).join('')}`;
@@ -2000,7 +2054,7 @@
                     </div>
                 </div>
 
-                <!-- 互動新增／編輯記帳表單（解鎖後顯示） -->
+                <!-- 互動新增 / 編輯記帳表單（解鎖後顯示） -->
                 ${cloudEditPassword ? `
                     <div class="expense-form-panel" id="expense-form-panel">
                         <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -2035,7 +2089,7 @@
                                 <input type="text" id="exp-title" class="exp-input" placeholder="例如：新源隆白咖啡、KLIA Ekspres、紀念品" value="${escHtml(fTitle)}">
                             </div>
                             <div class="exp-field">
-                                <label>刷卡／消費幣別</label>
+                                <label>刷卡 / 消費幣別</label>
                                 <select id="exp-cur" class="exp-select" onchange="onCurrencyChange()">
                                     ${[
                                         ['TWD', 'TWD 台幣 (NT$)'], ['MYR', 'MYR 馬幣 (RM)'], ['SGD', 'SGD 新幣 (S$)'],
@@ -2107,7 +2161,7 @@
                                         <div class="expense-item-amount">NT$${Number(i.twdAmount).toLocaleString()}</div>
                                         ${(!i.isBaseline && cloudEditPassword) ? `
                                             <div class="expense-row-ops">
-                                                <button type="button" class="icon-mini-btn" onclick="startEditExpense('${i.id}')" title="編輯／更新實際帳單金額">✏️ 編輯</button>
+                                                <button type="button" class="icon-mini-btn" onclick="startEditExpense('${i.id}')" title="編輯 / 更新實際帳單金額">✏️ 編輯</button>
                                                 <button type="button" class="icon-mini-btn del" onclick="deleteCloudExpense('${i.id}')" title="刪除">🗑️</button>
                                             </div>` : ''}
                                     </div>
@@ -2116,7 +2170,7 @@
                     </div>
                 </div>`;
 
-            // 新開表單且為外幣時自動抓一次最新／當日匯率
+            // 新開表單且為外幣時自動抓一次最新 / 當日匯率
             if (cloudEditPassword && !editingItem && fCur !== 'TWD') {
                 fetchRateForForm(false);
             }
@@ -2263,7 +2317,7 @@
             const common = [
                 { group: '證件與入境', text: '護照正本（確認效期滿 6 個月以上）' },
                 { group: '證件與入境', text: '機票電子憑證、飯店訂房確認單離線存檔' },
-                { group: '交通與票券', text: '海外刷卡信用卡（開啟海外刷卡／確認免年費與回饋）' },
+                { group: '交通與票券', text: '海外刷卡信用卡（開啟海外刷卡 / 確認免年費與回饋）' },
                 { group: '電子與網路', text: '行動電源（限隨身手提上機）與充電線' },
                 { group: '電子與網路', text: '海外 eSIM 或實體網卡設定完成' },
                 { group: '個人藥品雜項', text: '個人常備藥品（腸胃藥、止痛藥、OK繃）' }
