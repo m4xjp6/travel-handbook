@@ -1,246 +1,170 @@
-# === 1. Git 儲存庫與分支設定 ===
-backend:
-  name: git-gateway
-  branch: main
-
-# === 2. 全域媒體存放路徑 ===
-media_folder: "media"
-public_folder: "media"
-
-# === 3. 雙模組資料集合（行程規劃 ＆ 圖文遊記） ===
-collections:
-  # =====================================================================
-  # 模組 A：行程規劃、票券、花費與情報（對應 itinerary/*.json）
-  # =====================================================================
-  - name: "itineraries"
-    label: "📅 行程規劃＆票券情報"
-    folder: "itinerary"
-    create: true
-    identifier_field: "tripId"
-    slug: "{{tripId}}"
-    extension: "json"
-    format: "json"
-    fields:
-      # --- 旅程基本與首頁倒數設定 ---
-      - {label: "旅程 ID（須與遊記相同，如 tohoku_2026）", name: "tripId", widget: "string"}
-      - {label: "旅程總標題", name: "tripTitle", widget: "string"}
-      - {label: "隱藏整份行程（草稿）", name: "isDraft", widget: "boolean", default: false, required: false}
-      - {label: "地圖移動頭貼（Emoji 或圖片路徑）", name: "avatar", widget: "string", default: "🦊", required: false}
-      - {label: "出發日期（YYYY-MM-DD）", name: "startDate", widget: "string", required: false, hint: "如 2027-04-07"}
-      - {label: "結束日期（YYYY-MM-DD）", name: "endDate", widget: "string", required: false, hint: "過期後情報站自動封存"}
-      - {label: "目的地時區", name: "timezone", widget: "string", default: "Asia/Tokyo", required: false, hint: "如 Asia/Tokyo、Asia/Kuala_Lumpur"}
-      - {label: "時區顯示名稱（選填）", name: "timezoneLabel", widget: "string", required: false, hint: "如 星馬時間"}
-      - {label: "首頁即時天氣城市（選填）", name: "weatherCity", widget: "string", required: false, hint: "如 吉隆坡"}
-      - {label: "首頁路線標籤（選填）", name: "routeTag", widget: "string", required: false, hint: "如 吉隆坡・怡保・馬六甲・新加坡"}
-      - {label: "首頁天數標籤（選填）", name: "memberTag", widget: "string", required: false, hint: "如 春季漫旅・11天10夜"}
-      - {label: "首頁日期副標題（選填）", name: "dateSubTitle", widget: "string", required: false}
-      - {label: "首頁交通標籤（選填）", name: "vehicleTag", widget: "string", required: false}
-      - {label: "首頁行前備忘 HTML（選填）", name: "memoHtml", widget: "text", required: false}
-      - {label: "主要幣別代碼", name: "currency", widget: "string", default: "TWD", required: false, hint: "如 TWD、JPY、MYR、SGD"}
-      - {label: "貨幣符號", name: "currencySymbol", widget: "string", default: "NT$", required: false, hint: "如 NT$、¥、RM、S$"}
-      - {label: "預估總預算上限", name: "budgetTotal", widget: "number", value_type: "int", default: 160000, required: false}
-
-      # --- 情報站即時新聞搜尋關鍵字 ---
-      - label: "🔍 情報站新聞搜尋關鍵字"
-        name: "newsKeywords"
-        widget: "list"
-        required: false
-        field: {label: "關鍵字", name: "keyword", widget: "string", hint: "如：吉隆坡 交通 天氣"}
-
-      # --- 住宿確認憑證清單 ---
-      - label: "🏨 住宿確認憑證清單"
-        name: "hotelVouchers"
-        widget: "list"
-        required: false
-        summary: "{{fields.hotelName}} ({{fields.checkIn}} ➔ {{fields.checkOut}})"
-        fields:
-          - {label: "飯店名稱", name: "hotelName", widget: "string"}
-          - {label: "入住天數", name: "checkIn", widget: "string", hint: "如 Day 01"}
-          - {label: "退房天數", name: "checkOut", widget: "string", hint: "如 Day 03"}
-          - {label: "住宿晚數", name: "nights", widget: "number", value_type: "int", default: 1}
-          - {label: "訂單編號", name: "bookingId", widget: "string", required: false}
-          - {label: "預訂房型", name: "roomType", widget: "string", required: false}
-          - {label: "專案與設施說明", name: "mealPlan", widget: "string", required: false}
-          - {label: "地址與交通方式", name: "address", widget: "string", required: false}
-          - {label: "預估每晚金額", name: "estNightCost", widget: "number", value_type: "int", required: false, default: 3000}
-
-      # --- 預估花費細項（與雲端記帳基底連動） ---
-      - label: "💰 行程預估花費細項"
-        name: "expenseItems"
-        widget: "list"
-        required: false
-        summary: "[{{fields.category}}] {{fields.day}} {{fields.title}} ｜ {{fields.amount}}"
-        fields:
-          - label: "花費分類"
-            name: "category"
-            widget: "select"
-            options: ["交通", "住宿", "餐飲", "門票", "購物", "其他"]
-            default: "交通"
-          - {label: "天數標籤", name: "day", widget: "string", required: false, hint: "如 Day 01 或 行前"}
-          - {label: "細項名稱", name: "title", widget: "string"}
-          - {label: "預估金額", name: "amount", widget: "number", value_type: "int", default: 0}
-
-      # --- 資訊情報站：常駐快訊與提醒 ---
-      - label: "📡 資訊情報站：重要快訊與提醒"
-        name: "urgentNews"
-        widget: "list"
-        required: false
-        summary: "[{{fields.region}}・{{fields.category}}] {{fields.title}}"
-        fields:
-          - {label: "快訊識別碼（避免重複）", name: "id", widget: "string"}
-          - label: "分類"
-            name: "category"
-            widget: "select"
-            options: ["快訊", "交通", "天氣", "防災"]
-            default: "交通"
-          - {label: "所屬地區", name: "region", widget: "string", hint: "如：馬來西亞・吉隆坡、山形地區"}
-          - {label: "標記為緊急注意", name: "urgent", widget: "boolean", default: true, required: false}
-          - {label: "副標標籤", name: "tag", widget: "string", required: false}
-          - {label: "快訊標題", name: "title", widget: "string"}
-          - {label: "快訊內容", name: "desc", widget: "text"}
-
-      # --- 每日行程與站點攻略 ---
-      - label: "📅 每日行程與站點攻略"
-        name: "days"
-        widget: "list"
-        summary: "{{fields.day}} ｜ {{fields.dayTitle}}"
-        fields:
-          - {label: "天數標籤", name: "day", widget: "string", hint: "如 Day 01"}
-          - {label: "當日主題標題", name: "dayTitle", widget: "string", required: false}
-          - {label: "當日所屬地區", name: "region", widget: "string", required: false}
-          - {label: "隱藏這一天（草稿）", name: "isDraft", widget: "boolean", default: false, required: false}
-          - label: "當日站點清單"
-            name: "spots"
-            widget: "list"
-            summary: "{{fields.time}} ｜ {{fields.spotName}}"
-            fields:
-              - {label: "站點 ID（須與遊記 id 相同）", name: "id", widget: "string", hint: "如 d1-ch1"}
-              - {label: "隱藏此站點（草稿）", name: "isDraft", widget: "boolean", default: false, required: false}
-              - {label: "緯度（Lat，純行程時必填）", name: "lat", widget: "number", value_type: "float", required: false}
-              - {label: "經度（Lng，純行程時必填）", name: "lng", widget: "number", value_type: "float", required: false}
-              - label: "抵達交通方式"
-                name: "transport"
-                widget: "select"
-                default: "walk"
-                required: false
-                options:
-                  - { label: "🚶 步行 / 散步", value: "walk" }
-                  - { label: "🚌 巴士 / 公車 / 客運", value: "bus" }
-                  - { label: "🚗 自駕 / 專車 / 計程車", value: "drive" }
-                  - { label: "🚇 捷運 / 地鐵 / 輕軌", value: "metro" }
-                  - { label: "🚆 火車 / 台鐵 / JR / KTM", value: "train" }
-                  - { label: "🚄 高鐵 / 新幹線 / ETS", value: "hsr" }
-                  - { label: "🚡 纜車 / 索道", value: "ropeway" }
-                  - { label: "⛴️ 遊船 / 渡輪", value: "boat" }
-                  - { label: "✈️ 飛機 / 國際航班", value: "flight" }
-              - {label: "預計時間", name: "time", widget: "string", required: false, hint: "如 09:00"}
-              - {label: "站點／店鋪名稱", name: "spotName", widget: "string"}
-              - {label: "分類標籤", name: "categoryLabel", widget: "string", required: false, default: "經典必訪"}
-              - {label: "交通起訖動線", name: "routeFromTo", widget: "string", required: false}
-              - {label: "完整班次時刻說明", name: "scheduleTime", widget: "string", required: false}
-              - {label: "座位／票種性質", name: "seatType", widget: "string", required: false}
-              - {label: "移動分鐘數", name: "transitMins", widget: "number", value_type: "int", required: false}
-              - {label: "單程車資", name: "transitCost", widget: "number", value_type: "int", required: false}
-              - {label: "時刻表／地圖網址", name: "timetableUrl", widget: "string", required: false}
-              - {label: "按鈕文字", name: "timetableLabel", widget: "string", required: false, default: "查看時刻表"}
-              - {label: "📘 景點介紹", name: "intro", widget: "text", required: false}
-              - {label: "⚠️ 注意事項＆攻略", name: "note", widget: "text", required: false}
-              - {label: "🍱 列入在地美食紀錄", name: "isFood", widget: "boolean", default: false, required: false}
-              - {label: "📘 美味紀錄（用餐後可更新實測）", name: "foodReview", widget: "text", required: false}
-              - {label: "⚠️ 用餐／預約注意與潛規則", name: "foodPolicy", widget: "text", required: false}
-
-  # =====================================================================
-  # 模組 B：純圖文遊記手帳（對應 data/*.json，含照片／影片上傳）
-  # =====================================================================
-  - name: "trips"
-    label: "📖 圖文遊記手帳"
-    folder: "data"
-    create: true
-    identifier_field: "tripId"
-    slug: "{{tripId}}"
-    extension: "json"
-    format: "json"
-    fields:
-      - {label: "旅程 ID（如 tohoku_2026）", name: "tripId", widget: "string"}
-      - {label: "地圖移動頭貼（Emoji 或圖片路徑）", name: "avatar", widget: "string", default: "🦊", required: false}
-      - {label: "旅程結束日期（YYYY-MM-DD）", name: "endDate", widget: "string", required: false, hint: "如 2026-01-17"}
-      - {label: "旅程總標題", name: "tripTitle", widget: "string"}
-      - {label: "整本設為編輯中草稿（隱藏於首頁歸檔）", name: "isDraft", widget: "boolean", default: false, required: false}
-
-      - label: "天數日記列表"
-        name: "days"
-        widget: "list"
-        summary: "{{fields.day}} ｜ {{fields.dayTitle}}"
-        fields:
-          - {label: "天數標籤", name: "day", widget: "string", hint: "如 Day 01"}
-          - {label: "當日主題標題", name: "dayTitle", widget: "string"}
-          - {label: "單日設為草稿（暫時隱藏）", name: "isDraft", widget: "boolean", default: false, required: false}
-          - {label: "標記為【行程實測】", name: "isFieldTest", widget: "boolean", default: false, required: false}
-
-          - label: "章節內容"
-            name: "chapters"
-            widget: "list"
-            summary: "{{fields.title}}"
-            fields:
-              - {label: "章節 ID", name: "id", widget: "string"}
-              - {label: "緯度 (Lat)", name: "lat", widget: "number", value_type: "float"}
-              - {label: "經度 (Lng)", name: "lng", widget: "number", value_type: "float"}
-              - {label: "地圖縮放層級 (Zoom)", name: "zoom", widget: "number", value_type: "int", default: 13}
-              - label: "抵達交通方式（地圖路線與頭貼移動用）"
-                name: "transport"
-                widget: "select"
-                default: "walk"
-                required: false
-                options:
-                  - { label: "🚶 步行 / 散步", value: "walk" }
-                  - { label: "🚌 巴士 / 公車 / 客運", value: "bus" }
-                  - { label: "🚗 自駕 / 專車 / 計程車", value: "drive" }
-                  - { label: "🚇 捷運 / 地鐵 / 輕軌", value: "metro" }
-                  - { label: "🚆 火車 / 台鐵 / JR / KTM", value: "train" }
-                  - { label: "🚄 高鐵 / 新幹線 / ETS", value: "hsr" }
-                  - { label: "🚡 纜車 / 索道", value: "ropeway" }
-                  - { label: "⛴️ 遊船 / 渡輪", value: "boat" }
-                  - { label: "✈️ 飛機 / 國際航班", value: "flight" }
-              - {label: "章節標題", name: "title", widget: "string", hint: "格式：01. 動作/亮點｜地點與細節"}
-              - label: "照片排版樣式"
-                name: "mediaLayout"
-                widget: "select"
-                required: false
-                default: "auto"
-                options:
-                  - { label: "✨ 自動智慧排版", value: "auto" }
-                  - { label: "📐 左寬右窄 (2:1)", value: "grid-2-1" }
-                  - { label: "📐 左窄右寬 (1:2)", value: "grid-1-2" }
-                  - { label: "📐 雙窄中寬 (1:2:1)", value: "grid-1-2-1" }
-                  - { label: "⚖️ 雙欄對稱 (1:1)", value: "grid-equal" }
-                  - { label: "⚖️ 三張並排 (1:1:1)", value: "grid-3" }
-                  - { label: "⚖️ 四張並排 (1:1:1:1)", value: "grid-4" }
-                  - { label: "🎠 橫向滑動輪播", value: "carousel" }
-                  - { label: "🖼️ 單欄垂直大圖", value: "stack" }
-              - label: "單張主圖／影片（相容舊資料）"
-                name: "mediaPlaceholder"
-                widget: "file"
-                required: false
-                media_folder: "../media/{{tripId}}"
-                public_folder: "media/{{tripId}}"
-              - label: "多張照片與影片清單"
-                name: "mediaList"
-                widget: "list"
-                required: false
-                fields:
-                  - label: "檔案（照片 / GIF / 影片）"
-                    name: "src"
-                    widget: "file"
-                    media_folder: "../media/{{tripId}}"
-                    public_folder: "media/{{tripId}}"
-                  - {label: "圖說（選填）", name: "caption", widget: "string", required: false}
-              - {label: "遊記內文", name: "content", widget: "text"}
-              - {label: "推薦預訂按鈕文字（選填）", name: "affiliateText", widget: "string", required: false}
-              - {label: "Travelpayouts 分潤網址（選填）", name: "affiliateUrl", widget: "string", required: false}
-              - label: "多筆推薦預訂按鈕（選填）"
-                name: "affiliateLinks"
-                widget: "list"
-                required: false
-                fields:
-                  - {label: "按鈕文字", name: "text", widget: "string", required: false}
-                  - {label: "分潤網址", name: "url", widget: "string", required: false}
+{
+  "trackedTrips": [
+    "tohoku_2026",
+    "malaysia_2027"
+  ],
+  "excludedCategories": [],
+  "manualCrossings": [
+    {
+      "date": "2025-05-17",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "香港",
+      "portCode": "HKG",
+      "portName": "香港國際機場",
+      "flightNo": "UO134",
+      "route": "HKG → KHH",
+      "tripName": "2025 香港初夏快閃",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-05-14",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "香港",
+      "portCode": "HKG",
+      "portName": "香港國際機場",
+      "flightNo": "UO131",
+      "route": "KHH → HKG",
+      "tripName": "2025 香港初夏快閃",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-03-08",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "香港",
+      "portCode": "HKG",
+      "portName": "香港國際機場",
+      "flightNo": "UO134",
+      "route": "HKG → KHH",
+      "tripName": "2025 香港春季漫遊",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-03-06",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "香港",
+      "portCode": "HKG",
+      "portName": "香港國際機場",
+      "flightNo": "HX293",
+      "route": "RMQ → HKG",
+      "tripName": "2025 香港春季漫遊",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-01-24",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "韓國",
+      "portCode": "ICN",
+      "portName": "仁川國際機場",
+      "flightNo": "OZ713",
+      "route": "ICN → TPE",
+      "tripName": "2025 首爾冬日散策",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-01-18",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "韓國",
+      "portCode": "ICN",
+      "portName": "仁川國際機場",
+      "flightNo": "IT602",
+      "route": "TPE → ICN",
+      "tripName": "2025 首爾冬日散策",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2024-06-16",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "日本",
+      "portCode": "KIX",
+      "portName": "關西國際機場",
+      "flightNo": "CI103",
+      "route": "KIX → KHH",
+      "tripName": "2024 關西初夏之旅",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2024-06-09",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "日本",
+      "portCode": "KIX",
+      "portName": "關西國際機場",
+      "flightNo": "IT284",
+      "route": "KHH → KIX",
+      "tripName": "2024 關西初夏之旅",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2024-01-04",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "日本",
+      "portCode": "KIX",
+      "portName": "關西國際機場",
+      "flightNo": "IT285",
+      "route": "KIX → KHH",
+      "tripName": "2023–2024 跨年關西旅",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2023-12-28",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "日本",
+      "portCode": "KIX",
+      "portName": "關西國際機場",
+      "flightNo": "IT284",
+      "route": "KHH → KIX",
+      "tripName": "2023–2024 跨年關西旅",
+      "tripId": "",
+      "note": ""
+    }
+  ],
+  "manualSpotStamps": [],
+  "countries": [
+    {
+      "code": "TW",
+      "name": "台灣",
+      "unlocked": true,
+      "badgeImage": "",
+      "note": "出發的起點，每一趟遠行歸來的家。"
+    },
+    {
+      "code": "JP",
+      "name": "日本",
+      "unlocked": true,
+      "badgeImage": "",
+      "note": ""
+    },
+    {
+      "code": "KR",
+      "name": "韓國",
+      "unlocked": true,
+      "badgeImage": "",
+      "note": ""
+    },
+    {
+      "code": "HK",
+      "name": "香港",
+      "unlocked": true,
+      "badgeImage": "",
+      "note": ""
+    }
+  ]
+}
