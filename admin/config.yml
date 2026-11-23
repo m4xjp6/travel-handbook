@@ -307,7 +307,15 @@ collections:
             hint: "預設留空代表全部繪製；未來若想整批過濾特定分類（如「交通樞紐」），新增於此即可"
             field: {label: "分類標籤名稱", name: "category", widget: "string"}
 
-          # --- 3. 手動補登出入境／通關紀錄（無行程檔的過去旅程） ---
+          # --- 3. 精準隱藏特定印章名稱（適用拆章後的單顆剔除） ---
+          - label: "🙈 隱藏特定印章名稱清單（精準剔除單顆子印章）"
+            name: "hiddenStampNames"
+            widget: "list"
+            required: false
+            hint: "自動拆解「→」或「＆」後，若有單顆不想顯示（如 屋台美食、鹽釜港），直接填寫印章名稱即可單獨隱藏"
+            field: {label: "要隱藏的印章名稱", name: "stampName", widget: "string"}
+
+          # --- 4. 手動補登出入境／通關紀錄（無行程檔的過去旅程） ---
           - label: "✈️ 手動補登出入境紀錄（無行程檔之歷史旅程）"
             name: "manualCrossings"
             widget: "list"
@@ -339,7 +347,7 @@ collections:
               - {label: "對應遊記 tripId（選填）", name: "tripId", widget: "string", required: false, hint: "若有補寫遊記可填此自動串聯按鈕"}
               - {label: "備註（選填）", name: "note", widget: "string", required: false}
 
-          # --- 4. 手動補登景點紀念章（預留日後新增） ---
+          # --- 5. 手動補登景點紀念章（預留日後新增） ---
           - label: "📍 手動新增景點紀念章（補登過去旅程或私藏景點）"
             name: "manualSpotStamps"
             widget: "list"
@@ -354,7 +362,7 @@ collections:
               - {label: "旅程名稱（選填）", name: "tripName", widget: "string", required: false, hint: "如 2025 首爾冬日散策"}
               - {label: "備註小記（選填）", name: "note", widget: "text", required: false}
 
-          # --- 5. 國家／地區蒐集冊設定（手動點亮與自訂徽章圖） ---
+          # --- 6. 國家／地區蒐集冊設定（手動點亮與自訂徽章圖） ---
           - label: "🌍 國家／地區蒐集冊設定（手動解鎖＆自訂徽章圖片）"
             name: "countries"
             widget: "list"
