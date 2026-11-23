@@ -1,0 +1,170 @@
+{
+  "trackedTrips": [
+    "tohoku_2026",
+    "malaysia_2027"
+  ],
+  "excludedCategories": [],
+  "manualCrossings": [
+    {
+      "date": "2025-05-17",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "香港",
+      "portCode": "HKG",
+      "portName": "香港國際機場",
+      "flightNo": "UO134",
+      "route": "HKG → KHH",
+      "tripName": "2025 香港初夏快閃",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-05-14",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "香港",
+      "portCode": "HKG",
+      "portName": "香港國際機場",
+      "flightNo": "UO131",
+      "route": "KHH → HKG",
+      "tripName": "2025 香港初夏快閃",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-03-08",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "香港",
+      "portCode": "HKG",
+      "portName": "香港國際機場",
+      "flightNo": "UO134",
+      "route": "HKG → KHH",
+      "tripName": "2025 香港春季漫遊",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-03-06",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "香港",
+      "portCode": "HKG",
+      "portName": "香港國際機場",
+      "flightNo": "HX293",
+      "route": "RMQ → HKG",
+      "tripName": "2025 香港春季漫遊",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-01-24",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "韓國",
+      "portCode": "ICN",
+      "portName": "仁川國際機場",
+      "flightNo": "OZ713",
+      "route": "ICN → TPE",
+      "tripName": "2025 首爾冬日散策",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2025-01-18",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "韓國",
+      "portCode": "ICN",
+      "portName": "仁川國際機場",
+      "flightNo": "IT602",
+      "route": "TPE → ICN",
+      "tripName": "2025 首爾冬日散策",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2024-06-16",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "日本",
+      "portCode": "KIX",
+      "portName": "關西國際機場",
+      "flightNo": "CI103",
+      "route": "KIX → KHH",
+      "tripName": "2024 關西初夏之旅",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2024-06-09",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "日本",
+      "portCode": "KIX",
+      "portName": "關西國際機場",
+      "flightNo": "IT284",
+      "route": "KHH → KIX",
+      "tripName": "2024 關西初夏之旅",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2024-01-04",
+      "direction": "departure",
+      "mode": "flight",
+      "country": "日本",
+      "portCode": "KIX",
+      "portName": "關西國際機場",
+      "flightNo": "IT285",
+      "route": "KIX → KHH",
+      "tripName": "2023–2024 跨年關西旅",
+      "tripId": "",
+      "note": ""
+    },
+    {
+      "date": "2023-12-28",
+      "direction": "arrival",
+      "mode": "flight",
+      "country": "日本",
+      "portCode": "KIX",
+      "portName": "關西國際機場",
+      "flightNo": "IT284",
+      "route": "KHH → KIX",
+      "tripName": "2023–2024 跨年關西旅",
+      "tripId": "",
+      "note": ""
+    }
+  ],
+  "manualSpotStamps": [],
+  "countries": [
+    {
+      "code": "TW",
+      "name": "台灣",
+      "unlocked": true,
+      "badgeImage": "",
+      "note": "出發的起點，每一趟遠行歸來的家。"
+    },
+    {
+      "code": "JP",
+      "name": "日本",
+      "unlocked": true,
+      "badgeImage": "",
+      "note": ""
+    },
+    {
+      "code": "KR",
+      "name": "韓國",
+      "unlocked": true,
+      "badgeImage": "",
+      "note": ""
+    },
+    {
+      "code": "HK",
+      "name": "香港",
+      "unlocked": true,
+      "badgeImage": "",
+      "note": ""
+    }
+  ]
+}
