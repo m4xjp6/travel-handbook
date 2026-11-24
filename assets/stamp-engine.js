@@ -11,27 +11,29 @@
 
     /* === 1. 外框、圖樣與復古印泥色定義 === */
     const STAMP_SHAPES = [
-        { key: 'circle',  label: '雙圓環（經典車站）' },
-        { key: 'ticket',  label: '硬券車票（鐵道／交通）' },
-        { key: 'octagon', label: '八角印（神社／古蹟）' },
-        { key: 'hexagon', label: '六角印（絕景／地標）' },
-        { key: 'square',  label: '圓角方印（美食／老街）' },
-        { key: 'wave',    label: '波浪戳（港灣／風景印）' }
+        { key: 'circle',  label: '圓形雙層' },
+        { key: 'ticket',  label: '硬券車票' },
+        { key: 'octagon', label: '八角印' },
+        { key: 'hexagon', label: '六角印' },
+        { key: 'square',  label: '圓角方印' },
+        { key: 'wave',    label: '多層波浪' },
+        { key: 'shrine',    label: '日式神社' }
     ];
 
     const STAMP_MOTIFS = [
-        { key: 'train',    label: '🚄 列車鐵道' },
-        { key: 'flight',   label: '✈️ 機場航班' },
-        { key: 'torii',    label: '⛩️ 神社鳥居' },
-        { key: 'mountain', label: '🏔️ 山岳絕景' },
-        { key: 'boat',     label: '⛴️ 港灣遊船' },
-        { key: 'food',     label: '🍜 在地美饌' },
-        { key: 'onsen',    label: '♨️ 溫泉名湯' },
-        { key: 'tower',    label: '🗼 城市高塔' },
-        { key: 'animal',   label: '🦊 動物生態' },
-        { key: 'hotel',    label: '🏨 旅宿飯店' },
+        { key: 'snow_ice', label: '❄️ 雪景 / 冰雪景觀' },
+        { key: 'train',    label: '🚄 車站 / 鐵道交通' },
+        { key: 'flight',   label: '✈️ 機場 / 航空通關' },
+        { key: 'torii',    label: '⛩️ 神社 / 神道信仰' },
+        { key: 'mountain', label: '🏔️ 山岳 / 展望絕景' },
+        { key: 'boat',     label: '⛴️ 港灣 / 遊船海景' },
+        { key: 'food',     label: '🍜 美食 / 在地美饌' },
+        { key: 'onsen',    label: '♨️ 溫泉 / 湯屋名湯' },
+        { key: 'tower',    label: '🗼 地標 / 城市塔樓' },
+        { key: 'animal',   label: '🦊 生態 / 動物景點' },
+        { key: 'hotel',    label: '🏨 旅宿 / 飯店入住' },
         { key: 'shopping', label: '🏮 老街散策' },
-        { key: 'landmark', label: '🧭 經典印記' }
+        { key: 'landmark', label: '🧭 經典 / 綜合印記' }
     ];
 
     const STAMP_COLORS = [
