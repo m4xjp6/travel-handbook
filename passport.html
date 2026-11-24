@@ -6,7 +6,7 @@
     <!-- 【✏️ 文字修改】瀏覽器分頁標題 -->
     <title>°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° 旅遊護照＆紀念印章冊</title>
 
-    <!-- 【⚙️ 功能設定】Travelpayouts 分潤腳本 -->
+    <!-- 【⚙️ 功能設定】Travelpayouts 分潤腳本（依網域自動切換） -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
     (function () {
         var isCloudflare = location.hostname.indexOf('workers.dev') !== -1 || location.hostname.indexOf('pages.dev') !== -1;
@@ -18,7 +18,7 @@
             : 'https://emrld.ltd/NTk5Njg0.js?t=599684';
         document.head.appendChild(script);
     })();
-</script>
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +34,7 @@
             --accent-pink: #E5D1C7;       /* 柔和藕粉 */
             --accent-gold: #E8C984;       /* 護照燙金點綴 */
             --accent-sage: #D8E2D5;       /* 鼠尾草綠 */
+            --accent-sage-dark: #5B7A67;  /* 深鼠尾草綠 */
             --text-main: #7A6258;         /* 主要字色：深可可棕 */
             --text-light: #9E887E;        /* 次要字色：淺可可棕 */
             --callout-bg: #F5EFE6;        /* 提示框底色 */
@@ -69,19 +70,15 @@
             padding: 10px 16px; border-radius: 12px; margin-bottom: 18px; font-size: 0.86rem; text-align: center; font-weight: 600;
         }
 
-        /* 跨裝置行內真實向量小國旗（修正 Windows 不顯示國旗 Emoji） */
+        /* 跨裝置行內真實向量小國旗 */
         .inline-flag-img {
             width: 18px; height: 13px; object-fit: cover; border-radius: 2.5px;
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14);
             display: inline-block; flex-shrink: 0; vertical-align: -2px;
             filter: sepia(0.08) saturate(0.95);
         }
-        .inline-flag-img.on-dark {
-            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35), 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-        .inline-flag-img.lg {
-            width: 24px; height: 17px; border-radius: 3px; vertical-align: -2px; margin-right: 7px;
-        }
+        .inline-flag-img.on-dark { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35), 0 1px 3px rgba(0, 0, 0, 0.2); }
+        .inline-flag-img.lg { width: 24px; height: 17px; border-radius: 3px; vertical-align: -2px; margin-right: 7px; }
 
         /* === 區塊一：上方「目前解鎖國家」可點擊護照總覽進度卡 === */
         .passport-hero-link { display: block; text-decoration: none; color: inherit; margin-bottom: 28px; }
@@ -138,9 +135,24 @@
                 radial-gradient(circle at 88% 82%, rgba(216, 226, 213, 0.2) 0%, transparent 45%),
                 #FFFDFA;
         }
-        .section-header-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1.5px solid var(--border-soft); }
+        .section-header-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1.5px solid var(--border-soft); }
         .section-title { font-size: 1.26rem; margin: 0; display: flex; align-items: center; gap: 8px; }
+        .section-header-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .section-sub-note { font-size: 0.82rem; color: var(--text-light); }
+
+        /* 印章牆管理小按鈕 */
+        .mgr-btn {
+            font-family: inherit; border: 1.2px solid var(--accent-brown); background: #fff;
+            color: var(--accent-brown-dark); padding: 5px 12px; border-radius: 16px;
+            font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+        }
+        .mgr-btn:hover { background: var(--accent-brown); color: #fff; }
+        .mgr-btn.primary { background: var(--accent-brown-dark); border-color: var(--accent-brown-dark); color: #fff; }
+        .mgr-btn.primary:hover { filter: brightness(0.92); }
+        .mgr-btn.sage { background: var(--accent-sage-dark); border-color: var(--accent-sage-dark); color: #fff; }
+        .mgr-btn.danger { background: #FFF1F2; border-color: #FDA4AF; color: #BE123C; }
+        .mgr-btn.danger:hover { background: #BE123C; border-color: #BE123C; color: #fff; }
 
         /* === 篩選膠囊列與搜尋欄 === */
         .filter-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
@@ -177,7 +189,7 @@
         .crossing-svg-wrap svg { width: 100%; height: 100%; overflow: visible; }
         .crossing-mini-caption { font-size: 0.74rem; color: var(--text-light); font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 
-        /* === 區塊三：景點紀念章牆（Ekitag × TRAIN TRIP 純印章風格） === */
+        /* === 區塊三：景點紀念章牆（TRAIN TRIP × EKITAG 共用引擎） === */
         .spot-stamp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(156px, 1fr)); gap: 18px 14px; }
         .spot-stamp-btn {
             appearance: none; border: 1px solid transparent; background: transparent; border-radius: 18px;
@@ -186,17 +198,25 @@
             transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
         }
         .spot-stamp-btn:hover { transform: translateY(-4px) scale(1.04); background: rgba(245, 239, 230, 0.65); border-color: var(--border-soft); }
-        .spot-svg-wrap { width: 100%; max-width: 146px; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; }
-        .spot-svg-wrap svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 2px 4px rgba(90, 72, 62, 0.08)); }
+        .spot-svg-wrap { width: 100%; max-width: 148px; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; }
+        .stamp-visual-box { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .flaneur-stamp-svg {
+            width: 100%; height: 100%; display: block; overflow: visible;
+            filter: url(#vintage-ink) drop-shadow(0 2px 4px rgba(90, 72, 62, 0.08));
+        }
+        .flaneur-stamp-custom-img {
+            width: 100%; height: 100%; object-fit: contain; display: block;
+            mix-blend-mode: multiply;
+        }
         .visit-count-badge {
             position: absolute; top: 6px; right: 8px; z-index: 3;
             background: var(--accent-brown-dark); color: #fff; font-size: 0.72rem; font-weight: 700;
             padding: 2px 7px; border-radius: 12px; box-shadow: 0 2px 6px rgba(122, 98, 88, 0.3);
         }
 
-        .empty-state-box { text-align: center; padding: 36px 20px; background: var(--bg-color); border: 1.5px dashed var(--accent-brown); border-radius: 14px; color: var(--text-light); font-size: 0.9rem; line-height: 1.65; }
+        .empty-state-box { text-align: center; padding: 36px 20px; background: var(--bg-color); border: 1.5px dashed var(--accent-brown); border-radius: 14px; color: var(--text-light); font-size: 0.9rem; line-height: 1.7; }
 
-        /* === 印章放大詳情彈窗 === */
+        /* === 印章放大詳情彈窗 ＆ 編輯／補蓋表單彈窗 === */
         .stamp-modal-overlay {
             display: none; position: fixed; inset: 0; background: rgba(58, 46, 40, 0.68); backdrop-filter: blur(4px);
             z-index: 2000; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
@@ -204,7 +224,7 @@
         .stamp-modal-overlay.open { display: flex; }
         .stamp-modal-card {
             background: #FDFBF7; border: 2px solid var(--accent-brown); border-radius: 22px;
-            max-width: 480px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 24px 24px 22px;
+            max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 24px 24px 22px;
             box-sizing: border-box; box-shadow: 0 18px 46px rgba(45, 34, 28, 0.32); position: relative;
             animation: modalPop 0.22s ease;
         }
@@ -212,12 +232,13 @@
         .modal-close-btn {
             position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%;
             border: 1px solid var(--border-soft); background: #fff; color: var(--text-main); font-size: 1rem;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 5;
         }
         .modal-close-btn:hover { background: var(--accent-brown); color: #fff; }
-        .modal-stamp-preview { display: flex; justify-content: center; align-items: center; padding: 16px; background: #FAF5EC; border: 1px dashed var(--border-soft); border-radius: 16px; margin-bottom: 16px; }
-        .modal-stamp-preview svg { max-width: 210px; max-height: 210px; width: 100%; height: auto; }
-        .modal-title { font-size: 1.24rem; margin: 0 0 8px; line-height: 1.4; }
+        .modal-stamp-preview { display: flex; justify-content: center; align-items: center; padding: 14px; background: #FAF5EC; border: 1px dashed var(--border-soft); border-radius: 16px; margin-bottom: 16px; }
+        .modal-stamp-preview .stamp-visual-box { width: 175px; height: 175px; }
+        .modal-stamp-preview > svg { max-width: 210px; max-height: 210px; width: 100%; height: auto; }
+        .modal-title { font-size: 1.24rem; margin: 0 0 8px; line-height: 1.4; padding-right: 28px; }
         .modal-tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
         .modal-pill {
             display: inline-flex; align-items: center; gap: 5px;
@@ -228,21 +249,63 @@
         .modal-info-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 14px; }
         .modal-info-table th, .modal-info-table td { padding: 7px 6px; border-bottom: 1px dashed #EAE1D8; text-align: left; vertical-align: top; }
         .modal-info-table th { width: 28%; color: var(--text-light); font-weight: 600; }
-        .modal-visits-title { font-size: 0.86rem; font-weight: 700; color: var(--accent-brown-dark); margin: 12px 0 8px; }
+        .modal-visits-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin: 14px 0 8px; }
+        .modal-visits-title { font-size: 0.86rem; font-weight: 700; color: var(--accent-brown-dark); margin: 0; }
         .modal-visit-item { background: #fff; border: 1px solid var(--border-soft); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; font-size: 0.84rem; }
         .modal-visit-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
         .modal-visit-date { font-weight: 700; color: var(--accent-brown-dark); }
         .modal-visit-trip { font-size: 0.78rem; color: var(--text-light); }
-        .modal-visit-orig { font-size: 0.82rem; color: var(--text-main); margin-bottom: 6px; }
+        .modal-visit-ops { display: flex; align-items: center; gap: 5px; }
+        .mini-op-btn {
+            font-family: inherit; border: 1px solid #E2D9CE; background: #FAF7F2; color: var(--text-light);
+            border-radius: 8px; padding: 2px 7px; font-size: 0.72rem; cursor: pointer;
+        }
+        .mini-op-btn:hover { background: #EFE7DC; color: var(--text-main); }
+        .mini-op-btn.del:hover { background: #FFF1F2; border-color: #FDA4AF; color: #BE123C; }
         .modal-action-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
         .modal-link-btn {
-            display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; border-radius: 18px;
-            font-size: 0.82rem; font-weight: 600; text-decoration: none; border: 1.5px solid var(--accent-brown);
+            display: inline-flex; align-items: center; gap: 5px; padding: 6px 13px; border-radius: 18px;
+            font-size: 0.8rem; font-weight: 600; text-decoration: none; border: 1.5px solid var(--accent-brown);
             background: #fff; color: var(--accent-brown-dark); transition: all 0.2s;
         }
         .modal-link-btn:hover { background: var(--accent-brown); color: #fff; }
         .modal-link-btn.primary { background: var(--accent-brown); color: #fff; }
         .modal-link-btn.primary:hover { background: var(--accent-brown-dark); }
+
+        /* 編輯／補蓋印章表單樣式 */
+        .edit-preview-row {
+            display: flex; align-items: center; gap: 14px; padding: 12px;
+            background: #FAF5EC; border: 1px dashed var(--border-soft); border-radius: 14px; margin-bottom: 12px;
+        }
+        .edit-preview-box { width: 112px; height: 112px; flex-shrink: 0; }
+        .edit-preview-desc { font-size: 0.78rem; color: var(--text-light); line-height: 1.55; }
+        .edit-form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .edit-field { display: flex; flex-direction: column; gap: 4px; }
+        .edit-field.full { grid-column: 1 / -1; }
+        .edit-field label { font-size: 0.76rem; font-weight: 700; color: var(--accent-brown-dark); }
+        .edit-input, .edit-select {
+            font-family: inherit; width: 100%; box-sizing: border-box;
+            border: 1px solid #D8C8B8; border-radius: 10px; padding: 8px 10px;
+            font-size: 0.85rem; color: var(--text-main); background: #fff;
+        }
+        .swatch-row { display: flex; flex-wrap: wrap; gap: 7px; padding: 4px 2px; }
+        .swatch-btn {
+            width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff;
+            box-shadow: 0 0 0 1.5px rgba(0,0,0,0.16); cursor: pointer; padding: 0; transition: transform 0.15s;
+        }
+        .swatch-btn:hover { transform: scale(1.14); }
+        .swatch-btn.active { transform: scale(1.16); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent-brown-dark); }
+        .similar-warn-box {
+            background: #FFF9EB; border: 1px solid #EBD08E; border-left: 4px solid #D97724;
+            border-radius: 10px; padding: 9px 11px; margin-bottom: 10px; font-size: 0.76rem; color: #A65310;
+        }
+        .similar-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .similar-chip {
+            font-family: inherit; border: 1px solid #E7B966; background: #FFFDF7; color: #9C5214;
+            border-radius: 14px; padding: 3px 9px; font-size: 0.74rem; font-weight: 600; cursor: pointer;
+        }
+        .similar-chip:hover { background: #D97724; color: #fff; border-color: #D97724; }
+        .edit-footer { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; padding-top: 12px; border-top: 1px dashed #E5D9CC; flex-wrap: wrap; }
 
         .admin-fab {
             position: fixed; bottom: 24px; right: 24px; z-index: 1000;
@@ -265,6 +328,8 @@
             .crossing-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .spot-stamp-grid { grid-template-columns: repeat(2, 1fr); gap: 12px 8px; }
             .spot-svg-wrap { max-width: 138px; }
+            .edit-form-grid { grid-template-columns: 1fr; }
+            .edit-preview-row { flex-direction: column; text-align: center; }
             .admin-fab { bottom: 16px; right: 14px; padding: 9px 15px; font-size: 0.82rem; }
         }
     </style>
@@ -276,7 +341,7 @@
         <defs>
             <filter id="vintage-ink" x="-5%" y="-5%" width="110%" height="110%">
                 <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="2" seed="7" result="noise"/>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.85" xChannelSelector="R" yChannelSelector="G"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.8" xChannelSelector="R" yChannelSelector="G"/>
             </filter>
         </defs>
     </svg>
@@ -293,7 +358,7 @@
     </nav>
 
     <div id="preview-banner" class="preview-banner">
-        📝 預覽模式：已顯示尚未出發的未來行程通關章與景點印章（一般瀏覽會依出發日期自動解鎖）
+        📝 預覽模式：已顯示尚未出發的未來行程通關章（一般瀏覽會依出發日期自動解鎖）
     </div>
 
     <!-- 區塊一：目前解鎖國家（可點擊前往 countries.html 世界地圖＆蒐集冊） -->
@@ -328,7 +393,7 @@
         </section>
     </a>
 
-    <!-- 區塊二：上半部 — 出入境 / 陸路通關印章牆（由新到舊） -->
+    <!-- 區塊二：上半部 — 出入境 / 陸路通關印章牆（自動抓取，由新到舊） -->
     <section class="passport-page-panel paper-bg">
         <div class="section-header-bar">
             <h2 class="section-title">✈️ 出入境 / 陸路通關印章牆</h2>
@@ -344,11 +409,14 @@
         </div>
     </section>
 
-    <!-- 區塊三：下半部 — 景點紀念印章牆（Ekitag × TRAIN TRIP 風格・全站自動去重） -->
+    <!-- 區塊三：下半部 — 景點紀念印章牆（主動收集・TRAIN TRIP × EKITAG 風格・同名自動計次） -->
     <section class="passport-page-panel paper-bg">
         <div class="section-header-bar">
             <h2 class="section-title">🏮 景點紀念印章牆</h2>
-            <span class="section-sub-note">同景點自動去重計次（同日計 1 次）・點擊開啟造訪足跡</span>
+            <div class="section-header-right">
+                <span class="section-sub-note">同名不同日自動合併計次・點擊直達對應遊記</span>
+                <span id="spot-manager-actions"></span>
+            </div>
         </div>
 
         <div class="filter-toolbar">
@@ -360,7 +428,7 @@
         </div>
 
         <div class="spot-stamp-grid" id="spot-stamps-grid">
-            <div class="empty-state-box" style="grid-column: 1 / -1;">繪製紀念印章中...</div>
+            <div class="empty-state-box" style="grid-column: 1 / -1;">讀取雲端景點紀念印章中...</div>
         </div>
     </section>
 
@@ -372,12 +440,80 @@
         </div>
     </div>
 
+    <!-- 印章編輯／補蓋隱藏景點彈窗（解鎖管理後使用） -->
+    <div class="stamp-modal-overlay" id="stamp-editor-modal" onclick="closeEditorModal()">
+        <div class="stamp-modal-card" onclick="event.stopPropagation()">
+            <button type="button" class="modal-close-btn" onclick="closeEditorModal()" aria-label="關閉視窗">✕</button>
+            <h3 class="modal-title" id="editor-modal-title">💮 補蓋隱藏景點印章</h3>
+
+            <div class="edit-preview-row">
+                <div class="edit-preview-box" id="editor-stamp-preview"></div>
+                <div class="edit-preview-desc" id="editor-preview-hint">
+                    補登未寫在行程中的私房景點，或修改現有印章名稱、外框、圖樣、印泥色與自訂圖片。
+                </div>
+            </div>
+
+            <div id="editor-similar-box" class="similar-warn-box" style="display:none;"></div>
+
+            <div class="edit-form-grid">
+                <div class="edit-field full">
+                    <label for="ed-name">印章名稱</label>
+                    <input type="text" id="ed-name" class="edit-input" placeholder="例如：藏王溫泉郵便局、東京鐵塔" oninput="onEditorFormInput()">
+                </div>
+                <div class="edit-field">
+                    <label for="ed-country">國家</label>
+                    <input type="text" id="ed-country" class="edit-input" placeholder="例如：日本、台灣、馬來西亞" oninput="updateEditorPreview()">
+                </div>
+                <div class="edit-field">
+                    <label for="ed-region">地區（外圈弧形字）</label>
+                    <input type="text" id="ed-region" class="edit-input" placeholder="例如：山形、宮城、東京" oninput="updateEditorPreview()">
+                </div>
+                <div class="edit-field" id="ed-date-wrap">
+                    <label for="ed-date">收集日期</label>
+                    <input type="date" id="ed-date" class="edit-input" onchange="onEditorFormInput()">
+                </div>
+                <div class="edit-field">
+                    <label for="ed-shape">外框樣式</label>
+                    <select id="ed-shape" class="edit-select" onchange="updateEditorPreview()"></select>
+                </div>
+                <div class="edit-field">
+                    <label for="ed-motif">中央線條圖樣</label>
+                    <select id="ed-motif" class="edit-select" onchange="updateEditorPreview()"></select>
+                </div>
+                <div class="edit-field">
+                    <label>復古印泥色</label>
+                    <input type="hidden" id="ed-color" value="#354F6B">
+                    <div id="ed-color-swatches" class="swatch-row"></div>
+                </div>
+                <div class="edit-field full" id="ed-trip-wrap">
+                    <label for="ed-trip">關聯旅程（選填，方便串接該趟遊記）</label>
+                    <select id="ed-trip" class="edit-select"></select>
+                </div>
+                <div class="edit-field full">
+                    <label for="ed-custom-img">自訂手繪／實體印章圖片路徑（選填，留空則自動繪製）</label>
+                    <input type="text" id="ed-custom-img" class="edit-input" placeholder="只填檔名如 zao_stamp.png（傳至 media/passport/stamps/）" oninput="updateEditorPreview()">
+                </div>
+                <div class="edit-field full" id="ed-note-wrap">
+                    <label for="ed-note">集章備註（選填）</label>
+                    <input type="text" id="ed-note" class="edit-input" placeholder="例如：郵局限定風景印、車站東口蓋章台">
+                </div>
+            </div>
+
+            <div class="edit-footer">
+                <button type="button" class="mgr-btn" onclick="closeEditorModal()">取消</button>
+                <button type="button" class="mgr-btn primary" id="btn-editor-save" onclick="submitEditorModal()">💾 儲存至雲端護照</button>
+            </div>
+        </div>
+    </div>
+
     <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
 
+    <script src="assets/stamp-engine.js?v=20261124b"></script>
     <script>
         /* =====================================================================
-           1. 全域設定、國家對照（與 countries.html 同步）與工具函式
+           1. 全域設定、Google 試算表接口與工具函式
            ===================================================================== */
+        const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyRbstjJeBCcJaO4hfQxovl46GEmA_l0YrY9UkhglvVA1zRG7RVazHrbHcIau8gl2c4/exec';
         const $ = id => document.getElementById(id);
         const urlParams = new URLSearchParams(location.search);
         const isPreviewMode = ['1', 'true'].includes(urlParams.get('preview'));
@@ -433,22 +569,6 @@
             '肯亞':     { code: 'KE', en: 'KENYA' }
         };
 
-        const AIRPORT_CANONICAL = {
-            KHH: { name: '高雄小港國際機場 (KHH)', country: '台灣', region: '高雄' },
-            TPE: { name: '桃園國際機場 (TPE)',     country: '台灣', region: '桃園' },
-            TSA: { name: '台北松山機場 (TSA)',     country: '台灣', region: '台北' },
-            RMQ: { name: '台中國際機場 (RMQ)',     country: '台灣', region: '台中' },
-            NRT: { name: '成田國際機場 (NRT)',     country: '日本', region: '東京' },
-            HND: { name: '羽田國際機場 (HND)',     country: '日本', region: '東京' },
-            KIX: { name: '關西國際機場 (KIX)',     country: '日本', region: '大阪' },
-            ICN: { name: '仁川國際機場 (ICN)',     country: '韓國', region: '首爾' },
-            GMP: { name: '金浦國際機場 (GMP)',     country: '韓國', region: '首爾' },
-            HKG: { name: '香港國際機場 (HKG)',     country: '香港', region: '香港' },
-            KUL: { name: '吉隆坡國際機場 (KUL)',   country: '馬來西亞', region: '吉隆坡' },
-            SIN: { name: '新加坡樟宜國際機場 (SIN)', country: '新加坡', region: '新加坡' }
-        };
-
-        const GENERIC_ARROW_PREFIXES = new Set(['機場', '車站', '航段', '交通', '轉乘']);
         const escHtml = s => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
         const normalizeCountry = name => String(name || '').trim().replace(/^臺灣$/, '台灣');
 
@@ -477,14 +597,6 @@
             return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
         }
 
-        function addDaysISO(baseDateStr, offsetDays) {
-            if (!baseDateStr) return '';
-            const parts = baseDateStr.split('-').map(Number);
-            if (parts.length !== 3 || parts.some(isNaN)) return baseDateStr;
-            const dt = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] + offsetDays));
-            return `${dt.getUTCFullYear()}-${String(dt.getUTCMonth() + 1).padStart(2, '0')}-${String(dt.getUTCDate()).padStart(2, '0')}`;
-        }
-
         function hashString(str) {
             let h = 2166136261;
             for (let i = 0; i < str.length; i++) {
@@ -495,202 +607,32 @@
         }
 
         const todayStr = getTodayStrTW();
+        let passportCfgCache = null;
         let allCrossings = [];
-        let allSpotStamps = [];
+        let cloudStampsRaw = [];
+        let legacyManualStampsRaw = [];
+        let groupedSpotStamps = [];
+        let baseUnlockedCountries = new Set();
         let publishedJournalMap = new Map();
+        let tripTitleMap = new Map();
+
         let currentCrossingCountry = 'ALL';
         let currentSpotCountry = 'ALL';
         let currentSpotSearch = '';
 
-        /* =====================================================================
-           2. 站點拆章（＆、→、括號內 →）與去重標準化引擎
-           ===================================================================== */
-        function splitOutsideParensFullAmp(str) {
-            const parts = [];
-            let buf = '', depth = 0;
-            for (let i = 0; i < str.length; i++) {
-                const ch = str[i];
-                if (ch === '（' || ch === '(') { depth++; buf += ch; }
-                else if (ch === '）' || ch === ')') { depth = Math.max(0, depth - 1); buf += ch; }
-                else if (depth === 0 && ch === '＆') {
-                    const prev = i > 0 ? str[i - 1] : '';
-                    const next = i + 1 < str.length ? str[i + 1] : '';
-                    if (/[\s）)」』]/.test(prev) || /\s/.test(next)) {
-                        if (buf.trim()) parts.push(buf.trim());
-                        buf = '';
-                        continue;
-                    }
-                    buf += ch;
-                } else {
-                    buf += ch;
-                }
-            }
-            if (buf.trim()) parts.push(buf.trim());
-            return parts;
-        }
+        // 雲端編輯密碼（與 journal.html 共用 localStorage key）
+        let cloudEditPassword = '';
+        try { cloudEditPassword = localStorage.getItem('flaneur_gas_pwd') || ''; } catch {}
 
-        function splitTopLevelArrows(str) {
-            const parts = [];
-            let buf = '', depth = 0;
-            for (let i = 0; i < str.length; i++) {
-                const ch = str[i];
-                if (ch === '（' || ch === '(') { depth++; buf += ch; }
-                else if (ch === '）' || ch === ')') { depth = Math.max(0, depth - 1); buf += ch; }
-                else if (depth === 0 && (ch === '→' || ch === '➔')) {
-                    if (buf.trim()) parts.push(buf.trim());
-                    buf = '';
-                } else {
-                    buf += ch;
-                }
-            }
-            if (buf.trim()) parts.push(buf.trim());
-            return parts;
-        }
-
-        function extractOuterParenArrow(str) {
-            let depth = 0, start = -1;
-            for (let i = 0; i < str.length; i++) {
-                const ch = str[i];
-                if (ch === '（' || ch === '(') {
-                    if (depth === 0) start = i;
-                    depth++;
-                } else if (ch === '）' || ch === ')') {
-                    depth = Math.max(0, depth - 1);
-                    if (depth === 0 && start !== -1) {
-                        const inner = str.slice(start + 1, i);
-                        if (inner.includes('→') || inner.includes('➔')) {
-                            const prefix = (str.slice(0, start) + str.slice(i + 1)).trim();
-                            const endpoints = inner.split(/[→➔]/).map(s => s.trim()).filter(Boolean);
-                            return { prefix, endpoints };
-                        }
-                        start = -1;
-                    }
-                }
-            }
-            return null;
-        }
-
-        function expandSpotToPieces(rawName) {
-            const cleaned = String(rawName || '').replace(/[🈯📍]/g, '').replace(/\s+/g, ' ').trim();
-            if (!cleaned) return [];
-            const ampParts = splitOutsideParensFullAmp(cleaned);
-            const out = [];
-            for (const part of ampParts) {
-                const topArrows = splitTopLevelArrows(part);
-                if (topArrows.length > 1) {
-                    topArrows.forEach(ep => out.push({ raw: ep, isSubEndpoint: true }));
-                    continue;
-                }
-                const parenArrow = extractOuterParenArrow(part);
-                if (parenArrow && parenArrow.endpoints.length > 1) {
-                    if (parenArrow.prefix && !GENERIC_ARROW_PREFIXES.has(parenArrow.prefix)) {
-                        out.push({ raw: parenArrow.prefix, isSubEndpoint: false });
-                    }
-                    parenArrow.endpoints.forEach(ep => out.push({ raw: ep, isSubEndpoint: true }));
-                } else {
-                    out.push({ raw: part, isSubEndpoint: false });
-                }
-            }
-            return out;
-        }
-
-        function canonicalizePiece(pieceText, defaultCountry, defaultRegion, sp) {
-            let name = String(pieceText || '')
-                .replace(/\s*Check-?(in|out)\b/gi, '')
-                .replace(/\s+/g, ' ')
-                .trim();
-
-            let country = normalizeCountry(defaultCountry);
-            let region = String(defaultRegion || '').replace(/地區$/, '').trim();
-
-            // 1. 國際機場代碼歸一
-            const iataMatch = name.match(/\(([A-Z]{3})\)/);
-            if (iataMatch && AIRPORT_CANONICAL[iataMatch[1]]) {
-                const ap = AIRPORT_CANONICAL[iataMatch[1]];
-                return { name: ap.name, country: ap.country, region: ap.region, kind: 'airport', iata: iataMatch[1] };
-            }
-            if (/高雄小港|小港機場|高雄國際航空站/.test(name)) {
-                return { name: AIRPORT_CANONICAL.KHH.name, country: '台灣', region: '高雄', kind: 'airport', iata: 'KHH' };
-            }
-            if (/成田.*機場/.test(name)) {
-                return { name: AIRPORT_CANONICAL.NRT.name, country: '日本', region: '東京', kind: 'airport', iata: 'NRT' };
-            }
-
-            // 2. 跨國關鍵字防呆（如馬六甲 → 新加坡同日跨國包車）
-            if (/桃園國際機場|松山機場|宜蘭|高雄|台北|台中|台南/.test(name)) {
-                country = '台灣';
-            } else if (/馬六甲|麻六甲|吉隆坡|怡保|新山|黑風洞|茨廠街|鬼仔巷|TBS|雪蘭莪/.test(name)) {
-                country = '馬來西亞';
-                if (/馬六甲|麻六甲/.test(name)) region = '馬六甲';
-                else if (/怡保/.test(name)) region = '怡保';
-                else if (/吉隆坡|TBS|黑風洞/.test(name)) region = '吉隆坡';
-            } else if (/新加坡|樟宜|牛車水|濱海灣|魚尾獅|武吉士|新達城|麥士威/.test(name)) {
-                country = '新加坡';
-                region = '新加坡';
-            } else if (/成田|上野|山形|仙台|松島|藏王|銀山|東京|大石田|本鹽釜|日暮里|谷中|根津/.test(name)) {
-                country = '日本';
-            } else if (!sp?.country && sp?.lat && sp?.lng && sp.lat >= 21.5 && sp.lat <= 25.5 && sp.lng >= 119.5 && sp.lng <= 122.5) {
-                country = '台灣';
-            }
-
-            // 3. 大車站不同出入口歸併（排除飯店、餐廳與觀景展望台）
-            const isHotelOrFood = sp?.isFood || /飯店|酒店|旅館|食堂|餐廳|展望台|午餐|晚餐/.test(name);
-            if (!isHotelOrFood) {
-                const stMatch = name.match(/^(JR\s*|京成|地鐵|捷運|KTM\s*)?([\u4e00-\u9fff]{2,5}站)/);
-                if (stMatch) {
-                    const prefix = (stMatch[1] || '').trim();
-                    const baseSt = stMatch[2];
-                    if (baseSt === '仙台站') {
-                        return { name: 'JR 仙台站', country: country || '日本', region: region || '宮城・仙台', kind: 'station' };
-                    }
-                    const stdSt = prefix
-                        ? ((prefix === 'JR' || prefix === 'KTM') ? `${prefix} ${baseSt}` : `${prefix}${baseSt}`)
-                        : baseSt;
-                    return { name: stdSt, country: country || '日本', region, kind: 'station' };
-                }
-            }
-
-            return { name, country: country || '其他', region, kind: '' };
-        }
-
-        function inferStampTheme(name, categoryLabel, isFood, kind) {
-            const cat = String(categoryLabel || '');
-            if (kind === 'airport' || /機場|\([A-Z]{3}\)/.test(name)) {
-                return { motif: 'airport', ink: '#2E4A62', frame: 'oval-ticket', label: '國際機場' };
-            }
-            if (/遊船|觀光船|鴨子船|DUCKtours|鹽釜港|松島海岸|碼頭|海事/.test(name)) {
-                return { motif: 'boat', ink: '#2F6680', frame: 'scalloped', label: '水岸遊船' };
-            }
-            if (/纜車|山頂/.test(name)) {
-                return { motif: 'ropeway', ink: '#3D6B59', frame: 'shield', label: '山岳索道' };
-            }
-            if (kind === 'station' || /新幹線|Skyliner|仙石線|ETS|火車站|車站|巴士|包車/.test(name) || cat === '交通樞紐') {
-                return { motif: 'train', ink: '#2E4A62', frame: 'double-circle', label: '鐵道車站' };
-            }
-            if (/溫泉|御宿野乃/.test(name) || cat === '溫泉住宿') {
-                return { motif: 'onsen', ink: '#734B6D', frame: 'double-circle', label: '溫泉旅宿' };
-            }
-            if (/飯店|酒店|旅館|Hotel|Stay|APA/i.test(name) && !isFood && !/五十番|能登屋/.test(name)) {
-                return { motif: 'hotel', ink: '#734B6D', frame: 'rounded-sq', label: '精選住宿' };
-            }
-            if (/神社|寺|廟|宮|鳥居|清真寺|教堂|大黑天|大觀音|古城門|城跡|皇宮|別墅/.test(name) || cat === '歷史古剎') {
-                return { motif: 'shrine', ink: '#A84438', frame: 'octagon', label: '歷史古蹟' };
-            }
-            if (/狐狸|動物園|草莓/.test(name) || cat === '主題園區' || cat === '體驗採果') {
-                return { motif: 'animal', ink: '#3D6B59', frame: 'scalloped', label: '自然生態' };
-            }
-            if (/鐵塔|吉隆坡塔|鐘樓|展望|瀑布|樹冰|魚尾獅|濱海灣|星耀樟宜|極樂洞|黑風洞|羅摩衍那洞|財富之泉|獨立廣場|夕陽/.test(name) || cat === '名勝絕景') {
-                const isTower = /鐵塔|吉隆坡塔|鐘樓|大廈/.test(name);
-                return { motif: isTower ? 'tower' : 'mountain', ink: '#3D6B59', frame: 'shield', label: '名勝絕景' };
-            }
-            if (isFood || cat === '在地美饌' || /茶室|茶餐室|咖啡|燒肉|拉麵|烤鴨|肉骨茶|鰻魚|豬排|牛舌|魚市場|熟食中心|糖水|烤餅|屋台|敘宴|羊湯|蕎麥|吐司|芽菜雞|五十番|伊豆の華|音茶屋|真都|野田岩|謝朋殿|すずき|しっぽや/.test(name)) {
-                return { motif: 'food', ink: '#9E5A2B', frame: 'rounded-sq', label: '在地美饌' };
-            }
-            return { motif: 'culture', ink: '#7C5A46', frame: 'double-circle', label: cat || '散策紀念' };
-        }
+        // 編輯彈窗狀態
+        let editorControlsInited = false;
+        let editorMode = 'add'; // add | editGroup | editSingle
+        let editorTargetOldName = '';
+        let editorTargetVisit = null;
+        let editorSimilarList = [];
 
         /* =====================================================================
-           3. SVG 印章繪製引擎（出入境海關章 ＋ Ekitag × TRAIN TRIP 景點章）
+           2. 海關出入境章 SVG 繪製引擎（維持原本經典樣式）
            ===================================================================== */
         function buildCrossingSVG(item) {
             const isArr = item.direction !== 'departure';
@@ -755,209 +697,98 @@
                 </svg>`;
         }
 
-        function getMotifPath(motif, ink) {
-            switch (motif) {
-                case 'airport':
-                    return `<g transform="translate(100,72) scale(1.15)"><path d="M-20,0 L-5,-2 L4,-14 L8,-14 L4,-2 L15,-2 L20,-7 L22,-7 L20,0 L22,7 L20,7 L15,2 L4,2 L8,14 L4,14 L-5,2 Z" fill="${ink}" opacity="0.88"/></g>`;
-                case 'train':
-                    return `<g transform="translate(100,71)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="-18" y="-14" width="36" height="24" rx="7"/><line x1="-18" y1="-2" x2="18" y2="-2"/><rect x="-12" y="-10" width="24" height="6" rx="2" fill="${ink}" opacity="0.2"/><circle cx="-9" cy="4" r="2" fill="${ink}"/><circle cx="9" cy="4" r="2" fill="${ink}"/><line x1="-13" y1="10" x2="-18" y2="17"/><line x1="13" y1="10" x2="18" y2="17"/><line x1="-16" y1="14" x2="16" y2="14"/></g>`;
-                case 'boat':
-                    return `<g transform="translate(100,72)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M-22,4 L22,4 L15,13 L-15,13 Z"/><path d="M-11,4 L-11,-7 L11,-7 L11,4"/><line x1="0" y1="-15" x2="0" y2="-7"/><path d="M-24,18 Q-16,14 -8,18 T8,18 T24,18" stroke-width="1.6"/></g>`;
-                case 'ropeway':
-                    return `<g transform="translate(100,72)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="-26" y1="-16" x2="26" y2="-6"/><line x1="0" y1="-11" x2="0" y2="-2"/><rect x="-14" y="-2" width="28" height="17" rx="4"/><line x1="-14" y1="6" x2="14" y2="6"/><line x1="-4" y1="-2" x2="-4" y2="6"/><line x1="4" y1="-2" x2="4" y2="6"/></g>`;
-                case 'shrine':
-                    return `<g transform="translate(100,73)" fill="none" stroke="${ink}" stroke-width="2.3" stroke-linecap="round"><path d="M-24,-13 Q0,-8 24,-13" stroke-width="3"/><line x1="-19" y1="-5" x2="19" y2="-5"/><line x1="-12" y1="-10" x2="-12" y2="16"/><line x1="12" y1="-10" x2="12" y2="16"/><line x1="0" y1="-10" x2="0" y2="-5"/></g>`;
-                case 'tower':
-                    return `<g transform="translate(100,73)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="-20" x2="0" y2="-12"/><path d="M-3,-12 L-13,16 M3,-12 L13,16"/><line x1="-9" y1="-1" x2="9" y2="-1"/><line x1="-11" y1="7" x2="11" y2="7"/><path d="M-7,16 Q0,9 7,16"/></g>`;
-                case 'mountain':
-                    return `<g transform="translate(100,74)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M-25,14 L-6,-14 L12,14 Z"/><path d="M-13,-3 L-6,-7 L1,-3"/><path d="M4,14 L15,-4 L26,14 Z"/><circle cx="15" cy="-14" r="4"/></g>`;
-                case 'onsen':
-                    return `<g transform="translate(100,74)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round"><path d="M-9,-4 Q-12,-11 -9,-17"/><path d="M0,-2 Q-3,-10 0,-18"/><path d="M9,-4 Q6,-11 9,-17"/><path d="M-20,3 A20,10 0 1,0 20,3 A20,10 0 1,0 -20,3"/><path d="M-13,5 Q0,11 13,5" stroke-width="1.5"/></g>`;
-                case 'hotel':
-                    return `<g transform="translate(100,73)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="-17" y="-14" width="34" height="29" rx="2"/><rect x="-11" y="-8" width="5" height="5"/><rect x="-2.5" y="-8" width="5" height="5"/><rect x="6" y="-8" width="5" height="5"/><rect x="-11" y="1" width="5" height="5"/><rect x="6" y="1" width="5" height="5"/><path d="M-4,15 L-4,6 L4,6 L4,15"/></g>`;
-                case 'food':
-                    return `<g transform="translate(100,75)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M-20,-2 C-20,11 -11,16 0,16 C11,16 20,11 20,-2 Z"/><line x1="-10" y1="16" x2="10" y2="16"/><path d="M-8,-7 Q-10,-13 -7,-17"/><path d="M0,-7 Q-2,-13 1,-17"/><path d="M8,-7 Q6,-13 9,-17"/></g>`;
-                case 'animal':
-                    return `<g transform="translate(100,74)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M-16,-14 L-6,-4 L6,-4 L16,-14 L18,4 L0,16 L-18,4 Z"/><circle cx="-6" cy="2" r="1.5" fill="${ink}"/><circle cx="6" cy="2" r="1.5" fill="${ink}"/><circle cx="0" cy="9" r="1.8" fill="${ink}"/></g>`;
-                default:
-                    return `<g transform="translate(100,73)" fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="0" cy="0" rx="14" ry="15"/><line x1="-6" y1="-15" x2="6" y2="-15"/><line x1="-6" y1="15" x2="6" y2="15"/><line x1="-13" y1="-5" x2="13" y2="-5" stroke-width="1.3"/><line x1="-13" y1="5" x2="13" y2="5" stroke-width="1.3"/><line x1="0" y1="-19" x2="0" y2="-15"/></g>`;
-            }
-        }
-
-        function shortenStampTitle(fullName) {
-            let clean = String(fullName || '')
-                .replace(/\s*\([^)]*[A-Za-z]{4,}[^)]*\)/g, '')
-                .replace(/（[^）]*）/g, '')
-                .replace(/〈[^〉]*〉/g, '')
-                .replace(/「([^」]*)」/g, '$1')
-                .replace(/\s*-\s*萬豪旗下/g, '')
-                .replace(/^天然温泉\s*杜都の湯\s*/g, '')
-                .replace(/^萬態野生動物世界[：:]/g, '')
-                .replace(/^東京都恩賜/g, '')
-                .replace(/\s+/g, ' ')
-                .trim();
-            if (!clean) clean = fullName;
-            if (clean.length <= 8) return [clean];
-            if (clean.length <= 16) {
-                const mid = Math.ceil(clean.length / 2);
-                return [clean.slice(0, mid), clean.slice(mid)];
-            }
-            return [clean.slice(0, 8), clean.slice(8, 15) + '…'];
-        }
-
-        function buildSpotStampSVG(stamp, uid) {
-            const theme = inferStampTheme(stamp.name, stamp.categoryLabel, stamp.isFood, stamp.kind);
-            const ink = theme.ink;
-            const seed = hashString(stamp.key);
-            const tilt = ((seed % 9) - 4) * 0.85;
-            const cMeta = COUNTRY_META[stamp.country] || { en: (stamp.country || 'TRIP').toUpperCase() };
-            const topLabel = stamp.region ? `${cMeta.en}・${stamp.region.slice(0, 6)}` : cMeta.en;
-            const latestDate = (stamp.latestDate || '').replace(/-/g, '.');
-            const lines = shortenStampTitle(stamp.name);
-            const arcIdTop = `arc-t-${uid}`;
-            const arcIdBot = `arc-b-${uid}`;
-
-            let frameSvg = '';
-            if (theme.frame === 'octagon') {
-                frameSvg = `<polygon points="62,10 138,10 190,62 190,138 138,190 62,190 10,138 10,62" fill="none" stroke="${ink}" stroke-width="3.6"/><polygon points="66,18 134,18 182,66 182,134 134,182 66,182 18,134 18,66" fill="none" stroke="${ink}" stroke-width="1.3" stroke-dasharray="4 2.5"/>`;
-            } else if (theme.frame === 'rounded-sq') {
-                frameSvg = `<rect x="12" y="12" width="176" height="176" rx="22" fill="none" stroke="${ink}" stroke-width="3.6"/><rect x="20" y="20" width="160" height="160" rx="16" fill="none" stroke="${ink}" stroke-width="1.3" stroke-dasharray="4 2.5"/>`;
-            } else if (theme.frame === 'shield') {
-                frameSvg = `<polygon points="100,8 182,48 182,134 100,192 18,134 18,48" fill="none" stroke="${ink}" stroke-width="3.6" stroke-linejoin="round"/><polygon points="100,17 174,53 174,130 100,182 26,130 26,53" fill="none" stroke="${ink}" stroke-width="1.25" stroke-dasharray="4 2.5" stroke-linejoin="round"/>`;
-            } else if (theme.frame === 'scalloped' || theme.frame === 'oval-ticket') {
-                frameSvg = `<circle cx="100" cy="100" r="88" fill="none" stroke="${ink}" stroke-width="3.4"/><circle cx="100" cy="100" r="82" fill="none" stroke="${ink}" stroke-width="1.4" stroke-dasharray="3 3"/><circle cx="100" cy="100" r="76" fill="none" stroke="${ink}" stroke-width="0.9" opacity="0.6"/>`;
-            } else {
-                frameSvg = `<circle cx="100" cy="100" r="88" fill="none" stroke="${ink}" stroke-width="3.8"/><circle cx="100" cy="100" r="79" fill="none" stroke="${ink}" stroke-width="1.3"/>`;
-            }
-
-            const useCircularArc = (theme.frame === 'double-circle' || theme.frame === 'scalloped' || theme.frame === 'oval-ticket');
-            const headerFooterSvg = useCircularArc
-                ? `<defs><path id="${arcIdTop}" d="M 32,100 A 68,68 0 0,1 168,100"/><path id="${arcIdBot}" d="M 168,105 A 68,68 0 0,1 32,105"/></defs>
-                   <text fill="${ink}" font-size="9.5" font-weight="700" letter-spacing="1.4"><textPath href="#${arcIdTop}" startOffset="50%" text-anchor="middle">${escHtml(topLabel)}</textPath></text>
-                   <text fill="${ink}" font-size="9" font-weight="700" letter-spacing="1.4"><textPath href="#${arcIdBot}" startOffset="50%" text-anchor="middle">${escHtml(latestDate || theme.label)}</textPath></text>`
-                : `<text x="100" y="38" text-anchor="middle" fill="${ink}" font-size="9.2" font-weight="700" letter-spacing="1.2">${escHtml(topLabel)}</text>
-                   <line x1="48" y1="45" x2="152" y2="45" stroke="${ink}" stroke-width="0.9" opacity="0.5"/>
-                   <line x1="54" y1="154" x2="146" y2="154" stroke="${ink}" stroke-width="0.9" opacity="0.5"/>
-                   <text x="100" y="169" text-anchor="middle" fill="${ink}" font-size="9.2" font-weight="700" letter-spacing="1.2">${escHtml(latestDate || theme.label)}</text>`;
-
-            const titleY1 = lines.length === 1 ? 128 : 120;
-            const titleFontSize = lines[0].length >= 8 ? 13 : 14.5;
-            const titleSvg = lines.length === 1
-                ? `<text x="100" y="${titleY1}" text-anchor="middle" fill="${ink}" font-family="Noto Serif TC, serif" font-size="${titleFontSize}" font-weight="700">${escHtml(lines[0])}</text>`
-                : `<text x="100" y="${titleY1}" text-anchor="middle" fill="${ink}" font-family="Noto Serif TC, serif" font-size="${titleFontSize}" font-weight="700">${escHtml(lines[0])}</text>
-                   <text x="100" y="${titleY1 + 17}" text-anchor="middle" fill="${ink}" font-family="Noto Serif TC, serif" font-size="${titleFontSize}" font-weight="700">${escHtml(lines[1])}</text>`;
-
-            return `
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(${tilt.toFixed(1)}deg);">
-                    <g filter="url(#vintage-ink)" opacity="0.92">
-                        ${frameSvg}
-                        ${headerFooterSvg}
-                        ${getMotifPath(theme.motif, ink)}
-                        ${titleSvg}
-                    </g>
-                </svg>`;
-        }
-
         /* =====================================================================
-           4. 載入 passport/passport.json 與所有 trackedTrips 行程資料
+           3. 載入 passport/passport.json、行程出入境章與雲端景點印章
            ===================================================================== */
+        async function callGasPost(payload) {
+            const res = await fetch(GAS_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ ...payload, password: cloudEditPassword })
+            });
+            return res.json();
+        }
+
         async function initPassportPage() {
             let passportCfg = {
                 trackedTrips: ['tohoku_2026', 'malaysia_2027'],
-                excludedCategories: [],
-                hiddenStampNames: [],
                 manualCrossings: [],
                 manualSpotStamps: [],
                 countries: []
             };
 
-            try {
-                const res = await fetch(`passport/passport.json?t=${Date.now()}`, { cache: 'no-store' });
-                if (res.ok) passportCfg = { ...passportCfg, ...(await res.json()) };
-            } catch {}
+            // 同步讀取 passport.json 與雲端公開景點印章
+            const [cfgRes, cloudRes] = await Promise.all([
+                fetch(`passport/passport.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null),
+                fetch(`${GAS_API_URL}?action=getStamps`).then(r => r.ok ? r.json() : null).catch(() => null)
+            ]);
 
-            const trackedTrips = Array.isArray(passportCfg.trackedTrips) ? passportCfg.trackedTrips.filter(Boolean) : [];
-            const excludedCategories = new Set((passportCfg.excludedCategories || []).map(s => String(s).trim()).filter(Boolean));
-            const hiddenStampNames = new Set((passportCfg.hiddenStampNames || []).map(s => String(s).trim().toLowerCase()).filter(Boolean));
+            if (cfgRes) passportCfg = { ...passportCfg, ...cfgRes };
+            passportCfgCache = passportCfg;
 
-            const tripResults = await Promise.all(trackedTrips.map(async id => {
+            cloudStampsRaw = (cloudRes?.ok && Array.isArray(cloudRes.stamps))
+                ? cloudRes.stamps.map(s => ({ ...s, isCloud: true }))
+                : [];
+
+            // 蒐集所有需要查詢旅程名稱與遊記公開狀態的 tripId
+            const tripIdSet = new Set(Array.isArray(passportCfg.trackedTrips) ? passportCfg.trackedTrips.filter(Boolean) : []);
+            cloudStampsRaw.forEach(s => { if (s.tripId) tripIdSet.add(s.tripId); });
+            (passportCfg.manualCrossings || []).forEach(mc => { if (mc.tripId) tripIdSet.add(mc.tripId); });
+            (passportCfg.manualSpotStamps || []).forEach(ms => { if (ms.tripId) tripIdSet.add(ms.tripId); });
+
+            const trackedSet = new Set(Array.isArray(passportCfg.trackedTrips) ? passportCfg.trackedTrips.filter(Boolean) : []);
+            const tripResults = await Promise.all([...tripIdSet].map(async id => {
                 const [itin, data] = await Promise.all([
                     fetch(`itinerary/${id}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null),
                     fetch(`data/${id}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null)
                 ]);
                 const hasPublishedJournal = Boolean(data && data.isDraft !== true && data.hidden !== true && data.status !== 'draft');
                 publishedJournalMap.set(id, hasPublishedJournal);
-                return { id, itin };
+                const cleanTitle = (itin?.tripTitle || data?.tripTitle || id).split('｜').pop().trim();
+                tripTitleMap.set(id, cleanTitle);
+                return { id, itin, isTracked: trackedSet.has(id) };
             }));
 
             const crossings = [];
-            const spotMap = new Map();
-            const unlockedCountrySet = new Set();
+            baseUnlockedCountries = new Set();
 
             (passportCfg.countries || []).forEach(c => {
                 if (c && c.unlocked !== false && c.name) {
                     const stdName = normalizeCountry(c.name);
-                    unlockedCountrySet.add(stdName);
+                    baseUnlockedCountries.add(stdName);
                     if (c.code && !COUNTRY_META[stdName]) {
                         COUNTRY_META[stdName] = { code: String(c.code).toUpperCase(), en: String(c.code).toUpperCase() };
                     }
                 }
             });
 
+            // 手動補登出入境章
             (passportCfg.manualCrossings || []).forEach((mc, idx) => {
                 if (!mc?.date) return;
                 if (!isPreviewMode && mc.date > todayStr) return;
                 const country = normalizeCountry(mc.country);
-                if (country) unlockedCountrySet.add(country);
+                if (country) baseUnlockedCountries.add(country);
                 crossings.push({
                     uid: `mc-${idx}`, date: mc.date, direction: mc.direction || 'arrival', mode: mc.mode || 'flight',
                     country, portCode: mc.portCode || '', portName: mc.portName || '', flightNo: mc.flightNo || '',
-                    route: mc.route || '', tripName: mc.tripName || '', tripId: mc.tripId || '', note: mc.note || '', isManual: true
+                    route: mc.route || '', tripName: mc.tripName || tripTitleMap.get(mc.tripId) || '', tripId: mc.tripId || '',
+                    note: mc.note || '', isManual: true
                 });
             });
 
-            function recordSpotStamp({ name, country, region, date, categoryLabel, isFood, kind, tripId, tripName, spotId, rawSpotName, note }) {
-                if (!name) return;
-                if (hiddenStampNames.has(name.toLowerCase()) || hiddenStampNames.has(String(rawSpotName || '').toLowerCase())) return;
-                if (!isPreviewMode && date && date > todayStr) return;
-
-                const stdCountry = normalizeCountry(country) || '其他';
-                if (stdCountry && stdCountry !== '其他') unlockedCountrySet.add(stdCountry);
-
-                const key = `${stdCountry}::${name.toLowerCase()}`;
-                if (!spotMap.has(key)) {
-                    spotMap.set(key, {
-                        key, name, country: stdCountry, region: region || '',
-                        categoryLabel: categoryLabel || '經典必訪', isFood: Boolean(isFood), kind: kind || '',
-                        datesSet: new Set(), visits: [], latestDate: date || ''
-                    });
-                }
-                const entry = spotMap.get(key);
-                if (date) {
-                    entry.datesSet.add(date);
-                    if (!entry.latestDate || date > entry.latestDate) entry.latestDate = date;
-                }
-                if (!entry.region && region) entry.region = region;
-                if (isFood) entry.isFood = true;
-                entry.visits.push({
-                    date: date || '', tripId: tripId || '', tripName: tripName || '',
-                    spotId: spotId || '', rawSpotName: rawSpotName || name, note: note || ''
-                });
-            }
-
-            tripResults.forEach(({ id, itin }) => {
-                if (!itin) return;
+            // 自動抓取各 trackedTrips 的出入境章（景點章不再自動抓取）
+            tripResults.forEach(({ id, itin, isTracked }) => {
+                if (!isTracked || !itin) return;
                 if (!isPreviewMode && (itin.isDraft === true || itin.hidden === true)) return;
-
                 const tripCountry = normalizeCountry(itin.country || '');
-                const tripCleanTitle = (itin.tripTitle || id).split('｜').pop().trim();
+                const tripCleanTitle = tripTitleMap.get(id) || id;
 
                 if (tripCountry !== '台灣' && Array.isArray(itin.borderCrossings)) {
                     itin.borderCrossings.forEach((bc, idx) => {
                         if (!bc?.date) return;
                         if (!isPreviewMode && bc.date > todayStr) return;
                         const country = normalizeCountry(bc.country || tripCountry);
-                        if (country) unlockedCountrySet.add(country);
+                        if (country) baseUnlockedCountries.add(country);
                         crossings.push({
                             uid: `${id}-bc-${idx}`, date: bc.date, direction: bc.direction || 'arrival', mode: bc.mode || 'flight',
                             country, portCode: bc.portCode || '', portName: bc.portName || '', flightNo: bc.flightNo || '',
@@ -965,45 +796,6 @@
                         });
                     });
                 }
-
-                (itin.days || []).forEach((d, dIdx) => {
-                    if (!isPreviewMode && d.isDraft === true) return;
-                    const dayDate = addDaysISO(itin.startDate, dIdx);
-                    if (!isPreviewMode && dayDate && dayDate > todayStr) return;
-
-                    const dayCountry = normalizeCountry(d.country || tripCountry);
-                    const dayRegion = String(d.region || '').replace(/地區$/, '').trim();
-
-                    (d.spots || []).forEach(sp => {
-                        if (!isPreviewMode && sp.isDraft === true) return;
-                        if (sp.hideStamp === true) return;
-                        if (sp.categoryLabel && excludedCategories.has(sp.categoryLabel.trim())) return;
-
-                        const pieces = expandSpotToPieces(sp.spotName);
-                        pieces.forEach(pieceObj => {
-                            const pieceRaw = pieceObj.raw;
-                            if (hiddenStampNames.has(pieceRaw.toLowerCase())) return;
-                            const canon = canonicalizePiece(pieceRaw, sp.country || dayCountry, dayRegion, sp);
-                            recordSpotStamp({
-                                name: canon.name, country: canon.country, region: canon.region, date: dayDate,
-                                categoryLabel: pieceObj.isSubEndpoint ? (canon.kind === 'airport' ? '交通樞紐' : (sp.categoryLabel || '經典必訪')) : (sp.categoryLabel || '經典必訪'),
-                                isFood: pieceObj.isSubEndpoint ? false : Boolean(sp.isFood), kind: canon.kind,
-                                tripId: id, tripName: tripCleanTitle, spotId: sp.id || '', rawSpotName: sp.spotName || pieceRaw, note: ''
-                            });
-                        });
-                    });
-                });
-            });
-
-            (passportCfg.manualSpotStamps || []).forEach(ms => {
-                if (!ms?.spotName) return;
-                if (!isPreviewMode && ms.date && ms.date > todayStr) return;
-                const canon = canonicalizePiece(ms.spotName, ms.country, ms.region, {});
-                recordSpotStamp({
-                    name: canon.name, country: canon.country, region: canon.region || ms.region || '',
-                    date: ms.date || '', categoryLabel: ms.categoryLabel || '經典必訪', isFood: false, kind: canon.kind,
-                    tripId: ms.tripId || '', tripName: ms.tripName || '歷史補登紀錄', spotId: '', rawSpotName: ms.spotName, note: ms.note || ''
-                });
             });
 
             allCrossings = crossings.sort((a, b) => {
@@ -1012,24 +804,116 @@
                 return rank(b.direction) - rank(a.direction);
             });
 
-            allSpotStamps = [...spotMap.values()].map(s => ({
+            // 向下相容舊版 passport.json 中的 manualSpotStamps
+            legacyManualStampsRaw = (passportCfg.manualSpotStamps || [])
+                .filter(ms => ms?.spotName)
+                .map((ms, idx) => {
+                    const preset = FlaneurStampEngine.inferStampPreset({
+                        name: ms.spotName, categoryLabel: ms.categoryLabel, country: ms.country, region: ms.region
+                    });
+                    return {
+                        id: `legacy_${idx}`,
+                        name: String(ms.spotName).trim(),
+                        country: normalizeCountry(ms.country || preset.country),
+                        region: String(ms.region || preset.region || '').trim(),
+                        date: String(ms.date || '').trim(),
+                        tripId: String(ms.tripId || '').trim(),
+                        day: '',
+                        spotId: '',
+                        shape: ms.shape || preset.shape,
+                        motif: ms.motif || preset.motif,
+                        color: ms.color || preset.color,
+                        customImage: ms.customImage || '',
+                        note: ms.note || '',
+                        tripName: ms.tripName || tripTitleMap.get(ms.tripId) || '歷史補登紀錄',
+                        isCloud: false
+                    };
+                });
+
+            renderCrossingFilters();
+            renderCrossingsWall();
+            rebuildGroupedSpotsAndRender();
+        }
+
+        /* =====================================================================
+           4. 景點印章同名合併計次（同名不同日合併，並保留每次日期與遊記連結）
+           ===================================================================== */
+        function rebuildGroupedSpotsAndRender() {
+            const spotMap = new Map();
+            const combined = [...cloudStampsRaw, ...legacyManualStampsRaw];
+            const unlockedSet = new Set(baseUnlockedCountries);
+
+            combined.forEach(item => {
+                const name = String(item.name || '').trim();
+                if (!name) return;
+                const country = normalizeCountry(item.country) || '其他';
+                if (country && country !== '其他' && (!item.date || item.date <= todayStr || isPreviewMode)) {
+                    unlockedSet.add(country);
+                }
+
+                // 依「印章名稱（不分大小寫）」合併同名多日紀錄
+                const key = name.toLowerCase();
+                if (!spotMap.has(key)) {
+                    spotMap.set(key, {
+                        key,
+                        name,
+                        country,
+                        region: item.region || '',
+                        shape: item.shape || 'circle',
+                        motif: item.motif || 'landmark',
+                        color: item.color || '#354F6B',
+                        customImage: item.customImage || '',
+                        datesSet: new Set(),
+                        visits: [],
+                        latestDate: item.date || '',
+                        hasCloud: false
+                    });
+                }
+
+                const entry = spotMap.get(key);
+                if (item.isCloud) {
+                    entry.hasCloud = true;
+                    // 以最新一筆雲端樣式作為主樣式
+                    if (!entry.customImage && item.customImage) entry.customImage = item.customImage;
+                }
+                if (item.date) {
+                    entry.datesSet.add(item.date);
+                    if (!entry.latestDate || item.date > entry.latestDate) {
+                        entry.latestDate = item.date;
+                        if (item.shape) entry.shape = item.shape;
+                        if (item.motif) entry.motif = item.motif;
+                        if (item.color) entry.color = item.color;
+                        if (item.customImage) entry.customImage = item.customImage;
+                    }
+                }
+                if (!entry.region && item.region) entry.region = item.region;
+                if (entry.country === '其他' && country !== '其他') entry.country = country;
+
+                entry.visits.push({
+                    ...item,
+                    country,
+                    tripName: item.tripName || tripTitleMap.get(item.tripId) || item.tripId || ''
+                });
+            });
+
+            groupedSpotStamps = [...spotMap.values()].map((s, idx) => ({
                 ...s,
-                visitCount: Math.max(1, s.datesSet.size),
+                uid: `sg-${idx}`,
+                visitCount: Math.max(1, s.datesSet.size || s.visits.length),
                 visits: s.visits.sort((a, b) => (b.date || '').localeCompare(a.date || ''))
             })).sort((a, b) => {
                 if (b.latestDate !== a.latestDate) return (b.latestDate || '').localeCompare(a.latestDate || '');
                 return b.visitCount - a.visitCount;
             });
 
-            renderHeroSummary([...unlockedCountrySet]);
-            renderCrossingFilters();
-            renderCrossingsWall();
+            renderHeroSummary([...unlockedSet]);
+            renderSpotManagerActions();
             renderSpotFilters();
             renderSpotsWall();
         }
 
         /* =====================================================================
-           5. 畫面渲染：進度卡、通關印章牆、景點紀念章牆與詳情彈窗
+           5. 畫面渲染：進度卡、通關印章牆、景點紀念章牆與管理按鈕
            ===================================================================== */
         function renderHeroSummary(unlockedCountries) {
             const ordered = unlockedCountries.sort((a, b) => {
@@ -1047,12 +931,55 @@
             $('unlocked-pct-label').textContent = `世界探索度 ${pct}%`;
             $('unlocked-progress-fill').style.width = `${Math.max(3, Math.min(100, Number(pct)))}%`;
             $('stat-crossing-count').textContent = allCrossings.length;
-            $('stat-spot-count').textContent = allSpotStamps.length;
+            $('stat-spot-count').textContent = groupedSpotStamps.length;
 
             $('unlocked-flags-wrap').innerHTML = ordered.map(c => {
                 const flagHtml = buildFlagImgHtml(c, 'on-dark') || '<span>🌐</span>';
                 return `<span class="unlocked-flag-chip">${flagHtml}<span>${escHtml(c)}</span></span>`;
             }).join('');
+        }
+
+        function renderSpotManagerActions() {
+            const slot = $('spot-manager-actions');
+            if (!slot) return;
+            if (cloudEditPassword) {
+                slot.innerHTML = `
+                    <button type="button" class="mgr-btn sage" onclick="openAddStampModal()">＋ 補蓋印章</button>
+                    <button type="button" class="mgr-btn" onclick="lockPassportEdit()">🔒 鎖定</button>`;
+            } else {
+                slot.innerHTML = `<button type="button" class="mgr-btn" onclick="unlockPassportEdit()">🔑 解鎖管理</button>`;
+            }
+        }
+
+        async function unlockPassportEdit() {
+            const pwd = prompt('請輸入你的雲端編輯密碼（與手帳記帳／隨手記相同）：');
+            if (!pwd) return false;
+            try {
+                const res = await fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'verifyPassword', password: pwd })
+                }).then(r => r.json());
+                if (res?.ok) {
+                    cloudEditPassword = pwd;
+                    try { localStorage.setItem('flaneur_gas_pwd', pwd); } catch {}
+                    renderSpotManagerActions();
+                    return true;
+                }
+                alert(res?.error || '密碼錯誤，請重新確認！');
+                return false;
+            } catch {
+                alert('雲端驗證連線失敗，請稍後再試。');
+                return false;
+            }
+        }
+
+        function lockPassportEdit() {
+            cloudEditPassword = '';
+            try { localStorage.removeItem('flaneur_gas_pwd'); } catch {}
+            closeEditorModal();
+            closeStampModal();
+            renderSpotManagerActions();
         }
 
         function renderCrossingFilters() {
@@ -1091,7 +1018,7 @@
 
         function renderSpotFilters() {
             const counts = {};
-            allSpotStamps.forEach(s => { counts[s.country] = (counts[s.country] || 0) + 1; });
+            groupedSpotStamps.forEach(s => { counts[s.country] = (counts[s.country] || 0) + 1; });
             const prio = ['日本', '台灣', '馬來西亞', '新加坡', '韓國', '香港'];
             const countries = Object.keys(counts).sort((a, b) => {
                 const ia = prio.indexOf(a), ib = prio.indexOf(b);
@@ -1101,8 +1028,10 @@
                 return a.localeCompare(b, 'zh-Hant');
             });
 
+            if (currentSpotCountry !== 'ALL' && !counts[currentSpotCountry]) currentSpotCountry = 'ALL';
+
             const pills = [
-                { key: 'ALL', label: '全部國家', country: '', count: allSpotStamps.length },
+                { key: 'ALL', label: '全部國家', country: '', count: groupedSpotStamps.length },
                 ...countries.map(c => ({ key: c, label: c, country: c, count: counts[c] }))
             ];
             $('spot-country-filters').innerHTML = pills.map(p => `
@@ -1114,25 +1043,51 @@
 
         function renderSpotsWall() {
             const kw = currentSpotSearch.trim().toLowerCase();
-            const list = allSpotStamps.filter(s => {
+            const list = groupedSpotStamps.filter(s => {
                 if (currentSpotCountry !== 'ALL' && s.country !== currentSpotCountry) return false;
                 if (!kw) return true;
-                const hay = `${s.name} ${s.country} ${s.region} ${s.categoryLabel} ${s.visits.map(v => v.rawSpotName + ' ' + v.tripName).join(' ')}`.toLowerCase();
+                const hay = `${s.name} ${s.country} ${s.region} ${s.visits.map(v => `${v.tripName} ${v.note}`).join(' ')}`.toLowerCase();
                 return hay.includes(kw);
             });
+
+            if (!groupedSpotStamps.length) {
+                $('spot-stamps-grid').innerHTML = `
+                    <div class="empty-state-box" style="grid-column:1 / -1;">
+                        <div style="font-size:1.7rem;margin-bottom:6px;">💮</div>
+                        <strong>尚無已收集的景點紀念印章</strong><br>
+                        請前往任一旅程的「📅 行程安排」，在喜歡的站點卡片按下「<strong>💮 收集景點章</strong>」，<br>
+                        或點右上方「🔑 解鎖管理 ➔ ＋ 補蓋印章」直接在此建立你的第一枚收藏印章！
+                    </div>`;
+                return;
+            }
 
             if (!list.length) {
                 $('spot-stamps-grid').innerHTML = `<div class="empty-state-box" style="grid-column:1 / -1;">找不到符合「${escHtml(currentSpotSearch || currentSpotCountry)}」的景點紀念印章。</div>`;
                 return;
             }
 
-            $('spot-stamps-grid').innerHTML = list.map((stamp, idx) => `
-                <button type="button" class="spot-stamp-btn" onclick="openSpotModal('${encodeURIComponent(stamp.key)}')" title="${escHtml(stamp.name)}">
-                    ${stamp.visitCount > 1 ? `<span class="visit-count-badge">×${stamp.visitCount}</span>` : ''}
-                    <div class="spot-svg-wrap">${buildSpotStampSVG(stamp, `sp${idx}`)}</div>
-                </button>`).join('');
+            $('spot-stamps-grid').innerHTML = list.map(stamp => {
+                const visual = FlaneurStampEngine.renderStampVisualHTML({
+                    name: stamp.name,
+                    country: stamp.country,
+                    region: stamp.region,
+                    date: stamp.latestDate,
+                    shape: stamp.shape,
+                    motif: stamp.motif,
+                    color: stamp.color,
+                    customImage: stamp.customImage
+                });
+                return `
+                    <button type="button" class="spot-stamp-btn" onclick="openSpotModal('${escHtml(stamp.uid)}')" title="${escHtml(stamp.name)}">
+                        ${stamp.visitCount > 1 ? `<span class="visit-count-badge">×${stamp.visitCount}</span>` : ''}
+                        <div class="spot-svg-wrap">${visual}</div>
+                    </button>`;
+            }).join('');
         }
 
+        /* =====================================================================
+           6. 印章詳情彈窗（含遊記跳轉 ＆ 解鎖後的編輯／刪除入口）
+           ===================================================================== */
         function openCrossingModal(uid) {
             const item = allCrossings.find(c => c.uid === uid);
             if (!item) return;
@@ -1166,48 +1121,357 @@
             $('stamp-modal').classList.add('open');
         }
 
-        function openSpotModal(encodedKey) {
-            const key = decodeURIComponent(encodedKey);
-            const stamp = allSpotStamps.find(s => s.key === key);
+        function openSpotModal(uid) {
+            const stamp = groupedSpotStamps.find(s => s.uid === uid);
             if (!stamp) return;
             const flagHtml = buildFlagImgHtml(stamp.country) || '📍';
-            const theme = inferStampTheme(stamp.name, stamp.categoryLabel, stamp.isFood, stamp.kind);
+            const shapeLabel = FlaneurStampEngine.STAMP_SHAPES.find(s => s.key === stamp.shape)?.label?.split('（')[0] || '經典印章';
+
+            const previewHtml = FlaneurStampEngine.renderStampVisualHTML({
+                name: stamp.name,
+                country: stamp.country,
+                region: stamp.region,
+                date: stamp.latestDate,
+                shape: stamp.shape,
+                motif: stamp.motif,
+                color: stamp.color,
+                customImage: stamp.customImage
+            }, { noTilt: true });
 
             const visitsHtml = stamp.visits.map(v => {
                 const hasJournal = v.tripId && publishedJournalMap.get(v.tripId);
                 const spotQuery = v.spotId ? `&spot=${encodeURIComponent(v.spotId)}` : '';
+                const dayQuery = (!v.spotId && v.day) ? `&day=${encodeURIComponent(v.day)}` : '';
                 return `
                     <div class="modal-visit-item">
                         <div class="modal-visit-top">
-                            <span class="modal-visit-date">📅 ${escHtml(v.date || '造訪紀錄')}</span>
-                            <span class="modal-visit-trip">${escHtml(v.tripName || v.tripId || '')}</span>
+                            <div>
+                                <span class="modal-visit-date">📅 ${escHtml(v.date || '造訪紀錄')}</span>
+                                ${v.day ? `<span class="modal-visit-trip">・${escHtml(v.day)}</span>` : ''}
+                            </div>
+                            <div class="modal-visit-ops">
+                                ${v.tripName ? `<span class="modal-visit-trip">${escHtml(v.tripName)}</span>` : ''}
+                                ${(cloudEditPassword && v.isCloud) ? `
+                                    <button type="button" class="mini-op-btn" onclick="openEditSingleVisitModal('${escHtml(v.id)}')" title="編輯此筆日期或備註">✏️</button>
+                                    <button type="button" class="mini-op-btn del" onclick="deleteCloudStampVisit('${escHtml(v.id)}','${escHtml(stamp.uid)}')" title="刪除此筆印章">🗑️</button>
+                                ` : (!v.isCloud ? `<span class="modal-visit-trip">(JSON)</span>` : '')}
+                            </div>
                         </div>
-                        <div class="modal-visit-orig">${escHtml(v.rawSpotName)}</div>
-                        ${v.note ? `<div style="font-size:0.8rem;color:var(--text-light);margin-bottom:6px;">${escHtml(v.note)}</div>` : ''}
+                        ${v.note ? `<div style="font-size:0.82rem;color:var(--text-main);margin:4px 0 6px;">📝 ${escHtml(v.note)}</div>` : ''}
                         ${v.tripId ? `
                             <div class="modal-action-row">
-                                ${hasJournal ? `<a href="journal.html?trip=${encodeURIComponent(v.tripId)}&view=journal${spotQuery}" class="modal-link-btn primary">📖 看實拍遊記</a>` : ''}
-                                <a href="journal.html?trip=${encodeURIComponent(v.tripId)}&view=itinerary${spotQuery}" class="modal-link-btn">📅 看行程攻略</a>
+                                ${hasJournal ? `<a href="journal.html?trip=${encodeURIComponent(v.tripId)}&view=journal${spotQuery}${dayQuery}" class="modal-link-btn primary">📖 看實拍遊記</a>` : ''}
+                                <a href="journal.html?trip=${encodeURIComponent(v.tripId)}&view=itinerary${spotQuery}${dayQuery}" class="modal-link-btn">📅 看行程攻略</a>
                             </div>` : ''}
                     </div>`;
             }).join('');
 
             $('stamp-modal-body').innerHTML = `
-                <div class="modal-stamp-preview">${buildSpotStampSVG(stamp, 'modal')}</div>
+                <div class="modal-stamp-preview">${previewHtml}</div>
                 <h3 class="modal-title">${escHtml(stamp.name)}</h3>
                 <div class="modal-tags-row">
                     <span class="modal-pill">${flagHtml}<span>${escHtml(stamp.country)}${stamp.region ? '・' + escHtml(stamp.region) : ''}</span></span>
-                    <span class="modal-pill sage">${escHtml(theme.label)}</span>
+                    <span class="modal-pill sage">${escHtml(shapeLabel)}</span>
                     <span class="modal-pill">累計造訪 ${stamp.visitCount} 次</span>
+                    ${stamp.customImage ? `<span class="modal-pill">🖼️ 自訂圖樣</span>` : ''}
                 </div>
-                <div class="modal-visits-title">足跡紀錄（共 ${stamp.visits.length} 筆行程關聯）</div>
+                <div class="modal-visits-head">
+                    <div class="modal-visits-title">造訪足跡（共 ${stamp.visits.length} 筆紀錄）</div>
+                    ${(cloudEditPassword && stamp.hasCloud) ? `<button type="button" class="mgr-btn" onclick="openEditGroupModal('${escHtml(stamp.uid)}')">✏️ 修改名稱／換樣式</button>` : ''}
+                </div>
                 <div>${visitsHtml}</div>
             `;
             $('stamp-modal').classList.add('open');
         }
 
         function closeStampModal() { $('stamp-modal').classList.remove('open'); }
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeStampModal(); });
+
+        /* =====================================================================
+           7. 護照內直接管理：補蓋隱藏景點、修改名稱／樣式與刪除誤蓋印章
+           ===================================================================== */
+        function initEditorControls() {
+            if (editorControlsInited) return;
+            $('ed-shape').innerHTML = FlaneurStampEngine.STAMP_SHAPES
+                .map(s => `<option value="${s.key}">${escHtml(s.label)}</option>`).join('');
+            $('ed-motif').innerHTML = FlaneurStampEngine.STAMP_MOTIFS
+                .map(m => `<option value="${m.key}">${escHtml(m.label)}</option>`).join('');
+            $('ed-color-swatches').innerHTML = FlaneurStampEngine.STAMP_COLORS
+                .map(c => `<button type="button" class="swatch-btn" data-color="${c.key}" style="background:${c.key};" title="${escHtml(c.label)}" onclick="selectEditorColor('${c.key}')"></button>`).join('');
+            editorControlsInited = true;
+        }
+
+        function populateEditorTripOptions(selectedTripId = '') {
+            const opts = [`<option value="">不綁定特定旅程（純收集印章）</option>`];
+            tripTitleMap.forEach((title, id) => {
+                opts.push(`<option value="${escHtml(id)}" ${id === selectedTripId ? 'selected' : ''}>${escHtml(title)} (${escHtml(id)})</option>`);
+            });
+            $('ed-trip').innerHTML = opts.join('');
+        }
+
+        function selectEditorColor(colorKey) {
+            $('ed-color').value = colorKey;
+            document.querySelectorAll('#ed-color-swatches .swatch-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.color === colorKey);
+            });
+            updateEditorPreview();
+        }
+
+        async function openAddStampModal() {
+            if (!cloudEditPassword) {
+                const ok = await unlockPassportEdit();
+                if (!ok) return;
+            }
+            initEditorControls();
+            editorMode = 'add';
+            editorTargetOldName = '';
+            editorTargetVisit = null;
+
+            $('editor-modal-title').textContent = '💮 補蓋隱藏景點印章';
+            $('editor-preview-hint').textContent = '可補蓋沒寫在行程表裡的私房景點或歷史造訪；若與現有印章同名但不同日期，將自動合併累計次數。';
+            $('btn-editor-save').textContent = '💮 蓋章並收入護照';
+            $('ed-date-wrap').style.display = 'flex';
+            $('ed-trip-wrap').style.display = 'flex';
+            $('ed-note-wrap').style.display = 'flex';
+
+            $('ed-name').value = '';
+            $('ed-country').value = '日本';
+            $('ed-region').value = '';
+            $('ed-date').value = todayStr;
+            $('ed-shape').value = 'circle';
+            $('ed-motif').value = 'landmark';
+            $('ed-custom-img').value = '';
+            $('ed-note').value = '';
+            populateEditorTripOptions('');
+            selectEditorColor('#354F6B');
+
+            onEditorFormInput();
+            $('stamp-editor-modal').classList.add('open');
+        }
+
+        function openEditGroupModal(uid) {
+            const stamp = groupedSpotStamps.find(s => s.uid === uid);
+            if (!stamp) return;
+            initEditorControls();
+            closeStampModal();
+
+            editorMode = 'editGroup';
+            editorTargetOldName = stamp.name;
+            editorTargetVisit = stamp;
+
+            $('editor-modal-title').textContent = '✏️ 編輯印章名稱與外觀樣式';
+            $('editor-preview-hint').textContent = '修改名稱、外框、圖樣、印泥色或自訂圖片後，將一次同步更新此景點的所有造訪紀錄（改成既有印章名稱可自動合併）。';
+            $('btn-editor-save').textContent = '💾 儲存印章變更';
+            $('ed-date-wrap').style.display = 'none';
+            $('ed-trip-wrap').style.display = 'none';
+            $('ed-note-wrap').style.display = 'none';
+
+            $('ed-name').value = stamp.name || '';
+            $('ed-country').value = stamp.country || '';
+            $('ed-region').value = stamp.region || '';
+            $('ed-date').value = stamp.latestDate || '';
+            $('ed-shape').value = stamp.shape || 'circle';
+            $('ed-motif').value = stamp.motif || 'landmark';
+            $('ed-custom-img').value = stamp.customImage || '';
+            selectEditorColor(stamp.color || '#354F6B');
+
+            onEditorFormInput();
+            $('stamp-editor-modal').classList.add('open');
+        }
+
+        function openEditSingleVisitModal(visitId) {
+            const visit = cloudStampsRaw.find(s => s.id === visitId);
+            if (!visit) return;
+            initEditorControls();
+            closeStampModal();
+
+            editorMode = 'editSingle';
+            editorTargetOldName = visit.name;
+            editorTargetVisit = visit;
+
+            $('editor-modal-title').textContent = '✏️ 編輯單筆造訪紀錄';
+            $('editor-preview-hint').textContent = '可修改這筆紀錄的收集日期、關聯旅程、集章備註或印章名稱。';
+            $('btn-editor-save').textContent = '💾 更新此筆紀錄';
+            $('ed-date-wrap').style.display = 'flex';
+            $('ed-trip-wrap').style.display = 'flex';
+            $('ed-note-wrap').style.display = 'flex';
+
+            $('ed-name').value = visit.name || '';
+            $('ed-country').value = visit.country || '';
+            $('ed-region').value = visit.region || '';
+            $('ed-date').value = visit.date || '';
+            $('ed-shape').value = visit.shape || 'circle';
+            $('ed-motif').value = visit.motif || 'landmark';
+            $('ed-custom-img').value = visit.customImage || '';
+            $('ed-note').value = visit.note || '';
+            populateEditorTripOptions(visit.tripId || '');
+            selectEditorColor(visit.color || '#354F6B');
+
+            onEditorFormInput();
+            $('stamp-editor-modal').classList.add('open');
+        }
+
+        function applyEditorSimilarSuggestion(idx) {
+            const item = editorSimilarList[idx];
+            if (!item) return;
+            $('ed-name').value = item.name;
+            if (item.country) $('ed-country').value = item.country;
+            if (item.region) $('ed-region').value = item.region;
+            if (item.shape) $('ed-shape').value = item.shape;
+            if (item.motif) $('ed-motif').value = item.motif;
+            if (item.customImage) $('ed-custom-img').value = item.customImage;
+            if (item.color) selectEditorColor(item.color);
+            onEditorFormInput();
+        }
+
+        function onEditorFormInput() {
+            const name = ($('ed-name')?.value || '').trim();
+            const simBox = $('editor-similar-box');
+            const excludeId = editorMode === 'editSingle' ? editorTargetVisit?.id : '';
+            const excludeOldName = editorMode === 'editGroup' ? editorTargetOldName.toLowerCase() : '';
+
+            const pool = cloudStampsRaw.filter(s =>
+                (!excludeId || s.id !== excludeId) &&
+                (!excludeOldName || String(s.name || '').trim().toLowerCase() !== excludeOldName)
+            );
+            editorSimilarList = FlaneurStampEngine.findSimilarExistingStamps(name, pool);
+
+            if (simBox) {
+                if (editorSimilarList.length) {
+                    simBox.style.display = 'block';
+                    simBox.innerHTML = `
+                        <div>💡 護照裡已有相似名稱的印章，點擊可直接沿用相同名稱與樣式（不同日將自動合併計次）：</div>
+                        <div class="similar-chips">
+                            ${editorSimilarList.map((it, i) => `
+                                <button type="button" class="similar-chip" onclick="applyEditorSimilarSuggestion(${i})">
+                                    💮 ${escHtml(it.name)}（已收 ${it.visitCount} 次）
+                                </button>`).join('')}
+                        </div>`;
+                } else {
+                    simBox.style.display = 'none';
+                    simBox.innerHTML = '';
+                }
+            }
+            updateEditorPreview();
+        }
+
+        function updateEditorPreview() {
+            const el = $('editor-stamp-preview');
+            if (!el) return;
+            el.innerHTML = FlaneurStampEngine.renderStampVisualHTML({
+                name: ($('ed-name')?.value || '').trim() || '景點印章',
+                country: ($('ed-country')?.value || '').trim(),
+                region: ($('ed-region')?.value || '').trim(),
+                date: ($('ed-date')?.value || '').trim(),
+                shape: $('ed-shape')?.value || 'circle',
+                motif: $('ed-motif')?.value || 'landmark',
+                color: $('ed-color')?.value || '#354F6B',
+                customImage: ($('ed-custom-img')?.value || '').trim()
+            }, { noTilt: true });
+        }
+
+        function closeEditorModal() {
+            $('stamp-editor-modal').classList.remove('open');
+            editorSimilarList = [];
+        }
+
+        async function submitEditorModal() {
+            const name = ($('ed-name')?.value || '').trim();
+            if (!name) return alert('請輸入印章名稱！');
+
+            const btn = $('btn-editor-save');
+            const origText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = '⏳ 雲端同步中...';
+
+            try {
+                if (editorMode === 'editGroup') {
+                    const groupData = {
+                        oldName: editorTargetOldName,
+                        name,
+                        country: normalizeCountry($('ed-country').value),
+                        region: ($('ed-region').value || '').trim(),
+                        shape: $('ed-shape').value || 'circle',
+                        motif: $('ed-motif').value || 'landmark',
+                        color: $('ed-color').value || '#354F6B',
+                        customImage: ($('ed-custom-img').value || '').trim()
+                    };
+                    const res = await callGasPost({ action: 'updateStampGroup', data: groupData });
+                    if (res?.ok) {
+                        const oldNorm = editorTargetOldName.toLowerCase();
+                        cloudStampsRaw = cloudStampsRaw.map(s =>
+                            String(s.name || '').trim().toLowerCase() === oldNorm
+                                ? { ...s, name: groupData.name, country: groupData.country, region: groupData.region, shape: groupData.shape, motif: groupData.motif, color: groupData.color, customImage: groupData.customImage }
+                                : s
+                        );
+                        rebuildGroupedSpotsAndRender();
+                        closeEditorModal();
+                    } else {
+                        alert(res?.error || '更新失敗');
+                    }
+                } else {
+                    const isEditSingle = editorMode === 'editSingle' && editorTargetVisit;
+                    const stampData = {
+                        id: isEditSingle ? editorTargetVisit.id : `stp_${Date.now()}`,
+                        name,
+                        country: normalizeCountry($('ed-country').value),
+                        region: ($('ed-region').value || '').trim(),
+                        date: ($('ed-date').value || '').trim(),
+                        tripId: $('ed-trip').value || '',
+                        day: isEditSingle ? (editorTargetVisit.day || '') : '',
+                        spotId: isEditSingle ? (editorTargetVisit.spotId || '') : '',
+                        shape: $('ed-shape').value || 'circle',
+                        motif: $('ed-motif').value || 'landmark',
+                        color: $('ed-color').value || '#354F6B',
+                        customImage: ($('ed-custom-img').value || '').trim(),
+                        note: ($('ed-note').value || '').trim()
+                    };
+                    const res = await callGasPost({ action: 'saveStamp', data: stampData });
+                    if (res?.ok) {
+                        const nextObj = { ...stampData, isCloud: true };
+                        const idx = cloudStampsRaw.findIndex(s => s.id === nextObj.id);
+                        if (idx >= 0) cloudStampsRaw[idx] = nextObj;
+                        else cloudStampsRaw.unshift(nextObj);
+                        rebuildGroupedSpotsAndRender();
+                        closeEditorModal();
+                    } else {
+                        alert(res?.error || '儲存失敗');
+                    }
+                }
+            } catch {
+                alert('雲端連線失敗，請稍後再試');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = origText;
+            }
+        }
+
+        async function deleteCloudStampVisit(visitId, groupUid) {
+            if (!confirm('確定要從旅遊護照刪除這筆造訪印章紀錄嗎？')) return;
+            try {
+                const res = await callGasPost({ action: 'deleteStamp', id: visitId });
+                if (res?.ok) {
+                    const prevGroup = groupedSpotStamps.find(s => s.uid === groupUid);
+                    const prevKey = prevGroup?.key;
+                    cloudStampsRaw = cloudStampsRaw.filter(s => s.id !== visitId);
+                    rebuildGroupedSpotsAndRender();
+                    // 若該印章還有其他造訪紀錄就原地刷新詳情彈窗，否則關閉彈窗
+                    const updatedGroup = prevKey ? groupedSpotStamps.find(s => s.key === prevKey) : null;
+                    if (updatedGroup) openSpotModal(updatedGroup.uid);
+                    else closeStampModal();
+                } else {
+                    alert(res?.error || '刪除失敗');
+                }
+            } catch {
+                alert('雲端連線失敗');
+            }
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                if ($('stamp-editor-modal').classList.contains('open')) closeEditorModal();
+                else closeStampModal();
+            }
+        });
         $('spot-search-input').addEventListener('input', e => { currentSpotSearch = e.target.value || ''; renderSpotsWall(); });
 
         initPassportPage();
