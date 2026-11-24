@@ -1,6 +1,7 @@
 /* =====================================================================
    °•* Flâneur *•° 共用數位景點印章引擎（assets/stamp-engine.js）
    風格融合：JR TRAIN TRIP 經典幾何章 × EKITAG 數位車站章 × 莫蘭迪復古印泥
+   設計核心：先判斷景點分類與本質，再決定主視覺、外框、構圖、配色與文字
    適用頁面：journal.html（收集預覽＆防呆建議）與 passport.html（印章牆渲染）
    ===================================================================== */
 
@@ -9,15 +10,32 @@
 
     let _svgUid = 0;
 
-    /* === 1. 外框、圖樣與復古印泥色定義 === */
+    /* === 1. 景點分類、外框、圖樣與復古印泥色定義 === */
+    const STAMP_CATEGORIES = [
+        { key: 'religion',   label: '⛩️ 宗教信仰（神社／寺院／佛像）', defaultShape: 'octagon', defaultMotif: 'torii',    defaultColor: '#A84438', composition: '正面對稱式' },
+        { key: 'heritage',   label: '🏯 歷史建築（城堡／古蹟／街區）', defaultShape: 'shield',  defaultMotif: 'tower',    defaultColor: '#6E5A4F', composition: '正面對稱式' },
+        { key: 'rail',       label: '🚄 鐵道交通（車站／列車／纜車）', defaultShape: 'ticket',  defaultMotif: 'train',    defaultColor: '#354F6B', composition: '水平延伸式' },
+        { key: 'nature',     label: '🏔️ 自然景觀（山岳／湖泊／森林）', defaultShape: 'hexagon', defaultMotif: 'mountain', defaultColor: '#3B6B52', composition: '前中後景式' },
+        { key: 'seasonal',   label: '❄️ 季節景觀（雪景／樹冰／花季）', defaultShape: 'flower',  defaultMotif: 'snow_ice', defaultColor: '#346E8C', composition: '前中後景式' },
+        { key: 'facility',   label: '🏛️ 觀光設施（博物館／展望台）',   defaultShape: 'square',  defaultMotif: 'tower',    defaultColor: '#354F6B', composition: '中央主體式' },
+        { key: 'culture',    label: '🏮 文化體驗（祭典／工藝／民俗）', defaultShape: 'shield',  defaultMotif: 'shopping', defaultColor: '#B27C35', composition: '環繞式' },
+        { key: 'district',   label: '♨️ 特色街區（溫泉街／老街／港灣）', defaultShape: 'wave',  defaultMotif: 'onsen',    defaultColor: '#73527A', composition: '透視縱深式' },
+        { key: 'gourmet',    label: '🍜 地方物產（美食／農產／伴手禮）', defaultShape: 'none',  defaultMotif: 'food',     defaultColor: '#8E5B3E', composition: '中央主體式' },
+        { key: 'wildlife',   label: '🦊 動植物（動物／植物／花卉）',   defaultShape: 'oval',    defaultMotif: 'animal',   defaultColor: '#3B6B52', composition: '中央主體式' }
+    ];
+
     const STAMP_SHAPES = [
         { key: 'circle',  label: '圓形雙層' },
-        { key: 'ticket',  label: '硬券車票' },
-        { key: 'octagon', label: '八角印' },
-        { key: 'hexagon', label: '六角印' },
+        { key: 'oval',    label: '橢圓形' },
         { key: 'square',  label: '圓角方印' },
+        { key: 'hexagon', label: '六角印' },
+        { key: 'octagon', label: '八角印' },
+        { key: 'shield',  label: '盾形徽章' },
+        { key: 'flower',  label: '花形輪廓' },
+        { key: 'ticket',  label: '硬券車票' },
         { key: 'wave',    label: '多層波浪' },
-        { key: 'shrine',    label: '日式神社' }
+        { key: 'shrine',  label: '日式神社' },
+        { key: 'none',    label: '無外框' }
     ];
 
     const STAMP_MOTIFS = [
@@ -96,7 +114,7 @@
         const s = String(raw || '').trim().replace(/^\/+/, '');
         if (!s) return '';
         if (/^https?:\/\//i.test(s) || s.includes('/')) return s;
-        return `media/stamps/${s}`;
+        return `media/passport/stamps/${s}`;
     }
 
     function calcTripDayDate(startDate, dayStr) {
@@ -112,7 +130,7 @@
         return `${y}-${mo}-${d}`;
     }
 
-    /* === 3. 依站點與分類自動推斷外框、圖樣與復古印泥色 === */
+    /* === 3. 依景點分類與本質自動推斷主視覺、外框、構圖與配色 === */
     function inferCountryFromContext(countryHint, regionHint, tripIdHint, timezoneHint) {
         const direct = String(countryHint || '').trim();
         if (direct) return direct;
@@ -130,6 +148,22 @@
         return '日本';
     }
 
+    function inferCategoryFromMeta(name = '', cat = '', isFood = false) {
+        const hay = `${name} ${cat}`;
+        if (/雪景|冰雪|樹冰|雪原|櫻花|紅葉|楓葉|花海|花季/i.test(hay)) return 'seasonal';
+        if (/神社|寺|廟|宮|鳥居|大佛|教堂|清真寺/i.test(hay)) return 'religion';
+        if (/城跡|城堡|古城|遺跡|古蹟|老建築|歷史街區/i.test(hay)) return 'heritage';
+        if (/機場|航空站|航廈|航班|新幹線|Skyliner|ETS|KTM|JR|電鐵|地鐵|捷運|車站|轉乘|火車|巴士|纜車/i.test(hay) || cat.includes('交通')) return 'rail';
+        if (/山|峰|峽|瀑布|湖|夕陽|森林|花園|海岸|海灣/i.test(hay)) return 'nature';
+        if (/博物館|美術館|水族館|展望台|摩天輪|鐵塔|雙峰塔|晴空塔|塔|星耀樟宜|Tower|Sky/i.test(hay)) return 'facility';
+        if (/祭典|工藝|民俗|體驗|手作/i.test(hay)) return 'culture';
+        if (/溫泉|湯|澡堂|銀山|藏王溫泉|商店街|老街|市場|夜市|港口|碼頭|遊船|渡輪|郵局|郵便局|阿美橫丁|谷中銀座|雞場街|茨廠街/i.test(hay)) return 'district';
+        if (isFood || cat.includes('美饌') || /餐廳|料理|拉麵|牛舌|牛たん|燒肉|烤鴨|咖啡|茶室|茶餐室|肉骨茶|雞飯|娘惹|甜點|屋台|美食|伴手禮|農產|Cafe|Coffee/i.test(hay)) return 'gourmet';
+        if (/狐狸|動物園|牧場|生態|鳥園|貓|熊|植物|花卉/i.test(hay)) return 'wildlife';
+        if (cat.includes('住宿') || /飯店|酒店|旅館|溫泉旅|御宿野乃|Hotel|Méridien|Aloft|Holiday Inn|Village|APA/i.test(hay)) return 'facility';
+        return 'facility';
+    }
+
     function inferStampPreset(meta = {}) {
         const name = String(meta.name || meta.spotName || meta.title || '').trim();
         const cat = String(meta.categoryLabel || '').trim();
@@ -137,42 +171,56 @@
         const country = inferCountryFromContext(meta.country, `${name} ${region}`, meta.tripId, meta.timezone);
         const hay = `${name} ${cat}`;
 
-        let shape = 'circle';
-        let motif = 'landmark';
-        let color = '#6E5A4F';
+        const categoryKey = STAMP_CATEGORIES.some(c => c.key === meta.category)
+            ? meta.category
+            : inferCategoryFromMeta(name, cat, Boolean(meta.isFood));
+        const catDef = STAMP_CATEGORIES.find(c => c.key === categoryKey) || STAMP_CATEGORIES[5];
 
+        let shape = catDef.defaultShape;
+        let motif = catDef.defaultMotif;
+        let color = catDef.defaultColor;
+        let composition = catDef.composition;
+
+        // 1. 主視覺優先順序：地標識別 -> 地方特色 -> 自然特色 -> 輔助元素
         if (/機場|航空站|航廈|航班|起飛|降落|AirAsia|KHH|TPE|NRT|HND|KIX|KUL|SIN|ICN|HKG/i.test(hay)) {
-            shape = 'ticket'; motif = 'flight'; color = '#354F6B';
+            shape = 'ticket'; motif = 'flight'; color = '#354F6B'; composition = '水平延伸式';
         } else if (/遊船|觀光船|渡輪|港口|鹽釜港|松島海岸|海灣|碼頭/i.test(hay)) {
-            shape = 'wave'; motif = 'boat'; color = '#346E8C';
-        } else if (/新幹線|Skyliner|ETS|KTM|JR|電鐵|地鐵|捷運|車站|轉乘|火車|巴士|纜車/i.test(hay) || cat.includes('交通')) {
-            shape = /纜車/.test(hay) ? 'hexagon' : 'ticket';
-            motif = /纜車/.test(hay) ? 'mountain' : 'train';
-            color = '#354F6B';
-        } else if (/神社|寺|廟|宮|鳥居|城跡|城堡|古城|遺跡|大佛|教堂|清真寺/i.test(hay)) {
-            shape = 'octagon'; motif = 'torii'; color = '#A84438';
+            shape = 'wave'; motif = 'boat'; color = '#346E8C'; composition = '水平延伸式';
+        } else if (/纜車/i.test(hay)) {
+            shape = 'hexagon'; motif = 'mountain'; color = '#354F6B'; composition = '垂直延伸式';
+        } else if (/新幹線|Skyliner|ETS|KTM|JR|電鐵|地鐵|捷運|車站|轉乘|火車|巴士/i.test(hay) || cat.includes('交通')) {
+            shape = 'ticket'; motif = 'train'; color = '#354F6B'; composition = '水平延伸式';
+        } else if (/神社|寺|廟|宮|鳥居|大佛|教堂|清真寺/i.test(hay)) {
+            shape = 'octagon'; motif = 'torii'; color = '#A84438'; composition = '正面對稱式';
+        } else if (/城跡|城堡|古城|遺跡|古蹟/i.test(hay)) {
+            shape = 'shield'; motif = 'tower'; color = '#6E5A4F'; composition = '正面對稱式';
         } else if (/溫泉|湯|澡堂|銀山|藏王溫泉/i.test(hay)) {
-            shape = 'wave'; motif = 'onsen'; color = '#73527A';
+            shape = 'wave'; motif = 'onsen'; color = '#73527A'; composition = '前中後景式';
         } else if (/狐狸|動物園|水族館|牧場|生態|鳥園|貓|熊/i.test(hay)) {
-            shape = 'circle'; motif = 'animal'; color = '#3B6B52';
+            shape = 'oval'; motif = 'animal'; color = '#3B6B52'; composition = '中央主體式';
         } else if (/鐵塔|雙峰塔|晴空塔|展望台|摩天輪|塔|星耀樟宜|Tower|Sky/i.test(hay)) {
-            shape = 'hexagon'; motif = 'tower'; color = '#3B6B52';
-        } else if (/樹冰|雪|山|峰|峽|瀑布|湖|夕陽|階梯|公園|展望|森林|花園/i.test(hay)) {
-            shape = 'hexagon'; motif = 'mountain'; color = '#3B6B52';
+            shape = 'hexagon'; motif = 'tower'; color = '#3B6B52'; composition = '垂直延伸式';
+        } else if (/樹冰|雪/i.test(hay)) {
+            shape = 'flower'; motif = 'snow_ice'; color = '#346E8C'; composition = '前中後景式';
+        } else if (/山|峰|峽|瀑布|湖|夕陽|階梯|公園|展望|森林|花園/i.test(hay)) {
+            shape = 'hexagon'; motif = 'mountain'; color = '#3B6B52'; composition = '前中後景式';
         } else if (meta.isFood || cat.includes('美饌') || /餐廳|料理|拉麵|牛舌|牛たん|燒肉|烤鴨|咖啡|茶室|茶餐室|肉骨茶|雞飯|娘惹|甜點|屋台|美食|Cafe|Coffee/i.test(hay)) {
-            shape = 'square'; motif = 'food'; color = '#8E5B3E';
+            shape = 'none'; motif = 'food'; color = '#8E5B3E'; composition = '中央主體式';
         } else if (cat.includes('住宿') || /飯店|酒店|旅館|溫泉旅|御宿野乃|Hotel|Méridien|Aloft|Holiday Inn|Village|APA/i.test(hay)) {
-            shape = 'square'; motif = 'hotel'; color = '#6E5A4F';
+            shape = 'square'; motif = 'hotel'; color = '#6E5A4F'; composition = '正面對稱式';
         } else if (/商店街|老街|市場|夜市|郵局|郵便局|雜貨|百貨|阿美橫丁|谷中銀座|雞場街|茨廠街/i.test(hay)) {
             shape = /郵局|郵便局/.test(hay) ? 'wave' : 'square';
             motif = 'shopping';
             color = '#B27C35';
+            composition = '透視縱深式';
         }
 
         return {
             name: cleanPrimarySpotName(name),
             country,
             region: region.replace(/地區/g, '').trim(),
+            category: categoryKey,
+            composition,
             shape,
             motif,
             color
@@ -269,7 +317,17 @@
             if (!n) return;
             const key = n.toLowerCase();
             if (!byName.has(key)) {
-                byName.set(key, { name: n, country: st.country || '', region: st.region || '', shape: st.shape, motif: st.motif, color: st.color, customImage: st.customImage || '', dates: new Set() });
+                byName.set(key, {
+                    name: n,
+                    country: st.country || '',
+                    region: st.region || '',
+                    category: st.category || '',
+                    shape: st.shape,
+                    motif: st.motif,
+                    color: st.color,
+                    customImage: st.customImage || '',
+                    dates: new Set()
+                });
             }
             if (st.date) byName.get(key).dates.add(st.date);
         });
@@ -319,9 +377,16 @@
         return set;
     }
 
-    /* === 5. 12 款精細單色線條向量插畫（48×48 畫布） === */
+    /* === 5. 精細單色線條向量插畫（48×48 畫布） === */
     function getMotifSvgPath(motif) {
         switch (motif) {
+            case 'snow_ice': // 雪花與冰雪景觀
+                return `
+                    <path d="M24 7 V41 M7 24 H41 M12 12 L36 36 M36 12 L12 36"
+                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M19 11 L24 16 L29 11 M19 37 L24 32 L29 37 M11 19 L16 24 L11 29 M37 19 L32 24 L37 29"
+                          fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="24" cy="24" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>`;
             case 'train': // JR 新幹線／鐵道車頭
                 return `
                     <rect x="11" y="7" width="26" height="27" rx="8" fill="none" stroke="currentColor" stroke-width="2.1"/>
@@ -398,7 +463,7 @@
         }
     }
 
-    /* === 6. 多變外框繪製（圓環、波浪、八角、六角、圓角方印、硬券車票） === */
+    /* === 6. 多變外框繪製（留足安全邊距，確保完整不裁切） === */
     function buildWavyCirclePath(cx, cy, r, waves, amp) {
         const steps = waves * 8;
         let d = '';
@@ -423,33 +488,56 @@
 
     function buildShapeFrameSvg(shape) {
         switch (shape) {
+            case 'oval':
+                return `
+                    <ellipse cx="100" cy="100" rx="92" ry="74" fill="none" stroke="currentColor" stroke-width="2.8"/>
+                    <ellipse cx="100" cy="100" rx="85" ry="67" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3.5 2.5"/>`;
+            case 'shield':
+                return `
+                    <path d="M 30 22 H 170 V 96 C 170 142 135 170 100 184 C 65 170 30 142 30 96 Z"
+                          fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
+                    <path d="M 37 29 H 163 V 95 C 163 135 132 160 100 174 C 68 160 37 135 37 95 Z"
+                          fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 2.5" stroke-linejoin="round"/>`;
+            case 'flower':
+                return `
+                    <path d="${buildWavyCirclePath(100, 100, 88, 12, 5.5)}" fill="none" stroke="currentColor" stroke-width="2.6"/>
+                    <circle cx="100" cy="100" r="78" fill="none" stroke="currentColor" stroke-width="1.15" stroke-dasharray="3 2.5"/>`;
             case 'wave':
                 return `
-                    <path d="${buildWavyCirclePath(100, 100, 91, 24, 3.2)}" fill="none" stroke="currentColor" stroke-width="2.6"/>
-                    <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2.5"/>`;
+                    <path d="${buildWavyCirclePath(100, 100, 90, 24, 3.0)}" fill="none" stroke="currentColor" stroke-width="2.6"/>
+                    <circle cx="100" cy="100" r="81" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 2.5"/>`;
             case 'octagon':
                 return `
-                    <polygon points="${buildRegularPolyPoints(100, 100, 93, 8, 22.5)}" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
-                    <polygon points="${buildRegularPolyPoints(100, 100, 85, 8, 22.5)}" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 2.5" stroke-linejoin="round"/>`;
+                    <polygon points="${buildRegularPolyPoints(100, 100, 92, 8, 22.5)}" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
+                    <polygon points="${buildRegularPolyPoints(100, 100, 84, 8, 22.5)}" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 2.5" stroke-linejoin="round"/>`;
             case 'hexagon':
                 return `
-                    <polygon points="${buildRegularPolyPoints(100, 100, 94, 6, -90)}" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
-                    <polygon points="${buildRegularPolyPoints(100, 100, 86, 6, -90)}" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 2.5" stroke-linejoin="round"/>`;
+                    <polygon points="${buildRegularPolyPoints(100, 100, 92, 6, -90)}" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
+                    <polygon points="${buildRegularPolyPoints(100, 100, 84, 6, -90)}" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 2.5" stroke-linejoin="round"/>`;
             case 'square':
                 return `
-                    <rect x="14" y="14" width="172" height="172" rx="18" fill="none" stroke="currentColor" stroke-width="2.8"/>
-                    <rect x="21" y="21" width="158" height="158" rx="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>`;
+                    <rect x="15" y="15" width="170" height="170" rx="18" fill="none" stroke="currentColor" stroke-width="2.8"/>
+                    <rect x="22" y="22" width="156" height="156" rx="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>`;
             case 'ticket':
                 return `
-                    <path d="M 22 24 H 178 A 10 10 0 0 1 188 34 V 87 A 13 13 0 0 0 188 113 V 166 A 10 10 0 0 1 178 176 H 22 A 10 10 0 0 1 12 166 V 113 A 13 13 0 0 0 12 87 V 34 A 10 10 0 0 1 22 24 Z"
+                    <path d="M 22 25 H 178 A 10 10 0 0 1 188 35 V 87 A 13 13 0 0 0 188 113 V 165 A 10 10 0 0 1 178 175 H 22 A 10 10 0 0 1 12 165 V 113 A 13 13 0 0 0 12 87 V 35 A 10 10 0 0 1 22 25 Z"
                           fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
-                    <rect x="24" y="31" width="152" height="138" rx="6" fill="none" stroke="currentColor" stroke-width="1.15" stroke-dasharray="4 3"/>`;
+                    <rect x="24" y="32" width="152" height="136" rx="6" fill="none" stroke="currentColor" stroke-width="1.15" stroke-dasharray="4 3"/>`;
+            case 'shrine':
+                return `
+                    <path d="M 14 25 Q 100 35 186 25 L 178 37 H 22 Z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+                    <rect x="25" y="37" width="150" height="138" rx="10" fill="none" stroke="currentColor" stroke-width="2.4"/>
+                    <rect x="31" y="43" width="138" height="126" rx="7" fill="none" stroke="currentColor" stroke-width="1.15" stroke-dasharray="3.5 2.5"/>`;
+            case 'none':
+                return `
+                    <line x1="48" y1="34" x2="152" y2="34" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.5"/>
+                    <line x1="48" y1="166" x2="152" y2="166" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.5"/>`;
             default: // circle（雙圓環）
                 return `
-                    <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="3"/>
-                    <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" stroke-width="1.2"/>
-                    <circle cx="24" cy="100" r="2.1" fill="currentColor" opacity="0.75"/>
-                    <circle cx="176" cy="100" r="2.1" fill="currentColor" opacity="0.75"/>`;
+                    <circle cx="100" cy="100" r="91" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <circle cx="100" cy="100" r="84" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                    <circle cx="25" cy="100" r="2.1" fill="currentColor" opacity="0.75"/>
+                    <circle cx="175" cy="100" r="2.1" fill="currentColor" opacity="0.75"/>`;
         }
     }
 
@@ -505,8 +593,8 @@
             ? `${countryEn} ・ ${regionShort}`
             : countryEn;
 
-        const isCurved = (shape === 'circle' || shape === 'wave');
-        const maxPerLine = (shape === 'hexagon') ? 6 : 7;
+        const isCurved = (shape === 'circle' || shape === 'wave' || shape === 'flower');
+        const maxPerLine = (shape === 'hexagon' || shape === 'shield') ? 6 : 7;
         const lines = splitStampTitleLines(name, maxPerLine);
         const maxLineLen = Math.max(...lines.map(l => l.length));
 
@@ -527,8 +615,8 @@
         let headerFooterSvg = '';
         let defsSvg = '';
         if (isCurved) {
-            const topR = shape === 'wave' ? 68 : 71;
-            const botR = shape === 'wave' ? 70 : 73;
+            const topR = shape === 'wave' ? 68 : (shape === 'flower' ? 65 : 71);
+            const botR = shape === 'wave' ? 70 : (shape === 'flower' ? 67 : 73);
             defsSvg = `
                 <defs>
                     <path id="st-top-${uid}" d="M ${100 - topR},100 A ${topR},${topR} 0 0,1 ${100 + topR},100"/>
@@ -542,8 +630,8 @@
                     <textPath href="#st-bot-${uid}" xlink:href="#st-bot-${uid}" startOffset="50%" text-anchor="middle">${escSvg(dateLabel)}</textPath>
                 </text>`;
         } else {
-            const topY = shape === 'hexagon' ? 47 : (shape === 'ticket' ? 47 : 41);
-            const botY = shape === 'hexagon' ? 160 : (shape === 'ticket' ? 158 : 165);
+            const topY = shape === 'hexagon' ? 47 : (shape === 'ticket' ? 47 : (shape === 'shrine' ? 54 : (shape === 'shield' ? 43 : 42)));
+            const botY = shape === 'hexagon' ? 160 : (shape === 'ticket' ? 158 : (shape === 'shrine' ? 158 : (shape === 'shield' ? 156 : 162)));
             const dividerW = shape === 'hexagon' ? 36 : 48;
             headerFooterSvg = `
                 <text x="100" y="${topY}" text-anchor="middle" font-size="9.2" font-weight="700" letter-spacing="1.4" fill="currentColor" opacity="0.86">${escSvg(topLabel)}</text>
@@ -551,7 +639,7 @@
                 <text x="100" y="${botY}" text-anchor="middle" font-size="9.2" font-weight="700" letter-spacing="1.5" fill="currentColor" opacity="0.82">${escSvg(dateLabel)}</text>`;
         }
 
-        const motifTranslateY = isCurved ? 52 : (shape === 'hexagon' ? 54 : 50);
+        const motifTranslateY = isCurved ? 52 : (shape === 'hexagon' ? 54 : (shape === 'shrine' ? 56 : 50));
 
         return `
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -591,6 +679,7 @@
 
     /* === 匯出共用介面 === */
     global.FlaneurStampEngine = {
+        STAMP_CATEGORIES,
         STAMP_SHAPES,
         STAMP_MOTIFS,
         STAMP_COLORS,
