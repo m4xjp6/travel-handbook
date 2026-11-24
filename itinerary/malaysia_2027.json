@@ -232,7 +232,6 @@
       "spots": [
         {
           "id": "d1-ch1",
-          "hideStamp": false,
           "country": "台灣",
           "lat": 22.5751,
           "lng": 120.3472,
@@ -252,7 +251,6 @@
         },
         {
           "id": "d1-ch2",
-          "hideStamp": false,
           "lat": 2.7448,
           "lng": 101.6852,
           "transport": "flight",
@@ -271,7 +269,6 @@
         },
         {
           "id": "d1-ch3",
-          "hideStamp": false,
           "lat": 2.7444,
           "lng": 101.6849,
           "transport": "walk",
@@ -293,7 +290,6 @@
         },
         {
           "id": "d1-ch4",
-          "hideStamp": false,
           "lat": 3.1359,
           "lng": 101.6866,
           "transport": "train",
@@ -320,7 +316,6 @@
       "spots": [
         {
           "id": "d2-ch1",
-          "hideStamp": false,
           "lat": 4.5978,
           "lng": 101.073,
           "transport": "train",
@@ -339,7 +334,6 @@
         },
         {
           "id": "d2-ch2",
-          "hideStamp": false,
           "lat": 4.5953,
           "lng": 101.0774,
           "transport": "walk",
@@ -358,7 +352,6 @@
         },
         {
           "id": "d2-ch3",
-          "hideStamp": false,
           "lat": 4.5934,
           "lng": 101.0772,
           "transport": "walk",
@@ -380,7 +373,6 @@
         },
         {
           "id": "d2-ch4",
-          "hideStamp": false,
           "lat": 4.559,
           "lng": 101.1293,
           "transport": "drive",
@@ -399,7 +391,6 @@
         },
         {
           "id": "d2-ch5",
-          "hideStamp": false,
           "lat": 4.5941,
           "lng": 101.084,
           "transport": "drive",
@@ -421,7 +412,6 @@
         },
         {
           "id": "d2-ch6",
-          "hideStamp": false,
           "lat": 4.595,
           "lng": 101.0843,
           "transport": "walk",
@@ -440,7 +430,6 @@
         },
         {
           "id": "d2-ch7",
-          "hideStamp": false,
           "lat": 4.596,
           "lng": 101.0842,
           "transport": "walk",
@@ -459,7 +448,6 @@
         },
         {
           "id": "d2-ch8",
-          "hideStamp": false,
           "lat": 4.5952,
           "lng": 101.0872,
           "transport": "walk",
@@ -481,7 +469,6 @@
         },
         {
           "id": "d2-ch9",
-          "hideStamp": false,
           "lat": 4.5953,
           "lng": 101.0774,
           "transport": "walk",
@@ -508,7 +495,6 @@
       "spots": [
         {
           "id": "d3-ch1",
-          "hideStamp": false,
           "lat": 4.5934,
           "lng": 101.0769,
           "transport": "walk",
@@ -530,7 +516,6 @@
         },
         {
           "id": "d3-ch2",
-          "hideStamp": false,
           "lat": 4.5967,
           "lng": 101.0776,
           "transport": "walk",
@@ -549,7 +534,6 @@
         },
         {
           "id": "d3-ch3",
-          "hideStamp": false,
           "lat": 4.5963,
           "lng": 101.0783,
           "transport": "walk",
@@ -568,7 +552,6 @@
         },
         {
           "id": "d3-ch4",
-          "hideStamp": false,
           "lat": 4.5964,
           "lng": 101.079,
           "transport": "walk",
@@ -587,7 +570,6 @@
         },
         {
           "id": "d3-ch5",
-          "hideStamp": false,
           "lat": 4.5952,
           "lng": 101.079,
           "transport": "walk",
@@ -609,7 +591,6 @@
         },
         {
           "id": "d3-ch6",
-          "hideStamp": false,
           "lat": 4.5965,
           "lng": 101.0791,
           "transport": "walk",
@@ -628,7 +609,6 @@
         },
         {
           "id": "d3-ch7",
-          "hideStamp": false,
           "lat": 4.5969,
           "lng": 101.0761,
           "transport": "walk",
@@ -647,7 +627,6 @@
         },
         {
           "id": "d3-ch8",
-          "hideStamp": false,
           "lat": 4.5966,
           "lng": 101.0736,
           "transport": "walk",
@@ -666,7 +645,6 @@
         },
         {
           "id": "d3-ch9",
-          "hideStamp": false,
           "lat": 4.5978,
           "lng": 101.073,
           "transport": "walk",
@@ -685,7 +663,6 @@
         },
         {
           "id": "d3-ch10",
-          "hideStamp": false,
           "lat": 3.133,
           "lng": 101.6863,
           "transport": "train",
@@ -712,7 +689,6 @@
       "spots": [
         {
           "id": "d4-ch1",
-          "hideStamp": false,
           "lat": 3.2381,
           "lng": 101.684,
           "transport": "train",
@@ -731,7 +707,6 @@
         },
         {
           "id": "d4-ch2",
-          "hideStamp": false,
           "lat": 3.2389,
           "lng": 101.6816,
           "transport": "walk",
@@ -750,7 +725,6 @@
         },
         {
           "id": "d4-ch3",
-          "hideStamp": false,
           "lat": 3.2339,
           "lng": 101.6829,
           "transport": "walk",
@@ -772,7 +746,6 @@
         },
         {
           "id": "d4-ch4",
-          "hideStamp": false,
           "lat": 3.1969,
           "lng": 101.7244,
           "transport": "drive",
@@ -791,7 +764,6 @@
         },
         {
           "id": "d4-ch5",
-          "hideStamp": false,
           "lat": 3.1531,
           "lng": 101.7038,
           "transport": "drive",
@@ -810,7 +782,6 @@
         },
         {
           "id": "d4-ch6",
-          "hideStamp": false,
           "lat": 3.1482,
           "lng": 101.7139,
           "transport": "drive",
@@ -832,7 +803,6 @@
         },
         {
           "id": "d4-ch7",
-          "hideStamp": false,
           "lat": 3.133,
           "lng": 101.6863,
           "transport": "drive",
@@ -859,7 +829,6 @@
       "spots": [
         {
           "id": "d5-ch1",
-          "hideStamp": false,
           "lat": 3.1399,
           "lng": 101.6937,
           "transport": "train",
@@ -878,7 +847,6 @@
         },
         {
           "id": "d5-ch2",
-          "hideStamp": false,
           "lat": 3.142,
           "lng": 101.6918,
           "transport": "walk",
@@ -897,7 +865,6 @@
         },
         {
           "id": "d5-ch3",
-          "hideStamp": false,
           "lat": 3.1417,
           "lng": 101.6976,
           "transport": "walk",
@@ -916,7 +883,6 @@
         },
         {
           "id": "d5-ch4",
-          "hideStamp": false,
           "lat": 3.1446,
           "lng": 101.6976,
           "transport": "walk",
@@ -938,7 +904,6 @@
         },
         {
           "id": "d5-ch5",
-          "hideStamp": false,
           "lat": 3.1443,
           "lng": 101.6967,
           "transport": "walk",
@@ -957,7 +922,6 @@
         },
         {
           "id": "d5-ch6",
-          "hideStamp": false,
           "lat": 3.1493,
           "lng": 101.6937,
           "transport": "walk",
@@ -976,7 +940,6 @@
         },
         {
           "id": "d5-ch7",
-          "hideStamp": false,
           "lat": 3.1424,
           "lng": 101.7106,
           "transport": "metro",
@@ -995,7 +958,6 @@
         },
         {
           "id": "d5-ch8",
-          "hideStamp": false,
           "lat": 3.143,
           "lng": 101.7154,
           "transport": "walk",
@@ -1017,7 +979,6 @@
         },
         {
           "id": "d5-ch9",
-          "hideStamp": false,
           "lat": 3.133,
           "lng": 101.6863,
           "transport": "drive",
@@ -1044,7 +1005,6 @@
       "spots": [
         {
           "id": "d6-ch1",
-          "hideStamp": false,
           "lat": 3.0779,
           "lng": 101.7111,
           "transport": "bus",
@@ -1063,7 +1023,6 @@
         },
         {
           "id": "d6-ch2",
-          "hideStamp": false,
           "lat": 2.2214,
           "lng": 102.2501,
           "transport": "bus",
@@ -1085,7 +1044,6 @@
         },
         {
           "id": "d6-ch3",
-          "hideStamp": false,
           "lat": 2.1876,
           "lng": 102.2476,
           "transport": "drive",
@@ -1104,7 +1062,6 @@
         },
         {
           "id": "d6-ch4",
-          "hideStamp": false,
           "lat": 2.1916,
           "lng": 102.2481,
           "transport": "boat",
@@ -1123,7 +1080,6 @@
         },
         {
           "id": "d6-ch5",
-          "hideStamp": false,
           "lat": 2.1920,
           "lng": 102.2503,
           "transport": "walk",
@@ -1142,7 +1098,6 @@
         },
         {
           "id": "d6-ch6",
-          "hideStamp": false,
           "lat": 2.1941,
           "lng": 102.2491,
           "transport": "walk",
@@ -1161,7 +1116,6 @@
         },
         {
           "id": "d6-ch7",
-          "hideStamp": false,
           "lat": 2.1950,
           "lng": 102.2480,
           "transport": "walk",
@@ -1183,7 +1137,6 @@
         },
         {
           "id": "d6-ch8",
-          "hideStamp": false,
           "lat": 2.1962,
           "lng": 102.2471,
           "transport": "walk",
@@ -1202,7 +1155,6 @@
         },
         {
           "id": "d6-ch9",
-          "hideStamp": false,
           "lat": 2.1876,
           "lng": 102.2476,
           "transport": "walk",
@@ -1229,7 +1181,6 @@
       "spots": [
         {
           "id": "d7-ch1",
-          "hideStamp": false,
           "lat": 2.1927,
           "lng": 102.2512,
           "transport": "walk",
@@ -1248,7 +1199,6 @@
         },
         {
           "id": "d7-ch2",
-          "hideStamp": false,
           "lat": 2.1975,
           "lng": 102.2465,
           "transport": "walk",
@@ -1267,7 +1217,6 @@
         },
         {
           "id": "d7-ch3",
-          "hideStamp": false,
           "lat": 2.1965,
           "lng": 102.247,
           "transport": "walk",
@@ -1289,7 +1238,6 @@
         },
         {
           "id": "d7-ch4",
-          "hideStamp": false,
           "lat": 2.1918,
           "lng": 102.2468,
           "transport": "walk",
@@ -1308,7 +1256,6 @@
         },
         {
           "id": "d7-ch5",
-          "hideStamp": false,
           "lat": 2.189,
           "lng": 102.2225,
           "transport": "drive",
@@ -1335,7 +1282,6 @@
       "spots": [
         {
           "id": "d8-ch1",
-          "hideStamp": false,
           "lat": 1.3018,
           "lng": 103.8576,
           "transport": "drive",
@@ -1354,7 +1300,6 @@
         },
         {
           "id": "d8-ch2",
-          "hideStamp": false,
           "lat": 1.2998,
           "lng": 103.8554,
           "transport": "walk",
@@ -1376,7 +1321,6 @@
         },
         {
           "id": "d8-ch3",
-          "hideStamp": false,
           "lat": 1.2815,
           "lng": 103.8448,
           "transport": "metro",
@@ -1403,7 +1347,6 @@
       "spots": [
         {
           "id": "d9-ch1",
-          "hideStamp": false,
           "lat": 1.2946,
           "lng": 103.8588,
           "transport": "boat",
@@ -1422,7 +1365,6 @@
         },
         {
           "id": "d9-ch2",
-          "hideStamp": false,
           "lat": 1.2952,
           "lng": 103.8582,
           "transport": "walk",
@@ -1444,7 +1386,6 @@
         },
         {
           "id": "d9-ch3",
-          "hideStamp": false,
           "lat": 1.2816,
           "lng": 103.8636,
           "transport": "metro",
@@ -1471,7 +1412,6 @@
       "spots": [
         {
           "id": "d10-ch1",
-          "hideStamp": false,
           "lat": 1.2868,
           "lng": 103.8545,
           "transport": "metro",
@@ -1490,7 +1430,6 @@
         },
         {
           "id": "d10-ch2",
-          "hideStamp": false,
           "lat": 1.2823,
           "lng": 103.8443,
           "transport": "metro",
@@ -1509,7 +1448,6 @@
         },
         {
           "id": "d10-ch3",
-          "hideStamp": false,
           "lat": 1.2803,
           "lng": 103.8448,
           "transport": "walk",
@@ -1531,7 +1469,6 @@
         },
         {
           "id": "d10-ch4",
-          "hideStamp": false,
           "lat": 1.4043,
           "lng": 103.793,
           "transport": "bus",
@@ -1558,7 +1495,6 @@
       "spots": [
         {
           "id": "d11-ch1",
-          "hideStamp": false,
           "lat": 1.3602,
           "lng": 103.9898,
           "transport": "metro",
@@ -1577,7 +1513,6 @@
         },
         {
           "id": "d11-ch2",
-          "hideStamp": false,
           "lat": 22.5751,
           "lng": 120.3472,
           "transport": "flight",
