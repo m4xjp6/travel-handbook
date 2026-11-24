@@ -1,6 +1,7 @@
 /* =====================================================================
-   °•* Flâneur *•° 雲端同步、站點隨手記、素材庫與旅遊小冊引擎（assets/journal-cloud.js）
-   相依：assets/journal-core.js（須在其之後載入）
+   °•* Flâneur *•° 雲端同步、站點隨手記、素材庫、景點集章與旅遊小冊引擎
+   檔案：assets/journal-cloud.js
+   相依：assets/stamp-engine.js、assets/journal-core.js（須在其之後載入）
    ===================================================================== */
 
 /* === 1. 本模組專屬狀態 === */
@@ -9,8 +10,9 @@ const NOTE_TAGS = [
     { key: '美食口感', icon: '🍽️' },
     { key: '避坑提醒', icon: '⚠️' },
     { key: '實用情報', icon: '💡' },
-    { key: '戰利品', icon: '🛍️' }
+    { key: '戰利好物', icon: '🛍️' }
 ];
+const normalizeNoteTag = t => (t === '戰利品' ? '戰利好物' : (t || '心情碎片'));
 
 let currentNoteDayFilter = 'ALL';
 let currentNoteTagFilter = 'ALL';
@@ -23,6 +25,13 @@ let libraryFormRating = 0;
 let activeInlineSpotIndex = null;
 let editingInlineNoteId = null;
 let inlineFormRating = 0;
+
+// 景點印章收集彈窗狀態
+let stampModalChIndex = null;
+let editingStampId = null;
+let stampControlsInited = false;
+let modalSpotSuggestNames = [];
+let modalSimilarStamps = [];
 
 /* === 2. Google 試算表雲端同步核心 === */
 async function callGasPost(payload) {
@@ -40,6 +49,7 @@ async function loadCloudData() {
     renderChecklistPanel();
     renderNotesPanel();
     refreshItinerarySpotNotes();
+    refreshItinerarySpotStamps();
 
     try {
         const pwdQuery = cloudEditPassword ? `&password=${encodeURIComponent(cloudEditPassword)}` : '';
@@ -49,8 +59,13 @@ async function loadCloudData() {
             cloudExpenses = Array.isArray(cloudRes.expenses) ? cloudRes.expenses : [];
             cloudChecklist = Array.isArray(cloudRes.checklist) ? cloudRes.checklist : [];
             cloudNotes = Array.isArray(cloudRes.notes)
-                ? cloudRes.notes.map(n => ({ ...n, rating: Math.max(0, Math.min(5, Number(n.rating) || 0)) }))
+                ? cloudRes.notes.map(n => ({
+                    ...n,
+                    tag: normalizeNoteTag(n.tag),
+                    rating: Math.max(0, Math.min(5, Number(n.rating) || 0))
+                }))
                 : [];
+            cloudStamps = Array.isArray(cloudRes.stamps) ? cloudRes.stamps : [];
             cloudSyncState = 'ready';
         } else {
             cloudSyncState = 'error';
@@ -63,6 +78,7 @@ async function loadCloudData() {
     renderChecklistPanel();
     renderNotesPanel();
     refreshItinerarySpotNotes();
+    refreshItinerarySpotStamps();
 }
 
 async function unlockCloudEdit() {
@@ -97,11 +113,14 @@ function lockCloudEdit() {
     editingInlineNoteId = null;
     showLibraryNoteForm = false;
     cloudNotes = [];
+    // 印章資料為公開展示內容，鎖定時僅關閉彈窗、不清空已讀取的印章清單
+    closeStampModal();
     try { localStorage.removeItem('flaneur_gas_pwd'); } catch {}
     renderBudgetPanel();
     renderChecklistPanel();
     renderNotesPanel();
     refreshItinerarySpotNotes();
+    refreshItinerarySpotStamps();
 }
 
 function buildCloudAuthBarHTML() {
@@ -691,23 +710,26 @@ function jumpToNotesLibrary() {
 
 function refreshItinerarySpotNotes() {
     const unlockSlot = $('itin-unlock-bar');
+    const tripStampCount = cloudStamps.filter(s => s.tripId === tripId).length;
     if (unlockSlot) {
         if (cloudEditPassword) {
             const ratedCount = cloudNotes.filter(n => n.rating > 0).length;
             unlockSlot.innerHTML = `
                 <div class="itin-unlock-bar">
-                    <span>🔓 <strong>站點隨手記已解鎖</strong>（已收錄 ${cloudNotes.length} 則筆記・${ratedCount} 筆評分）</span>
+                    <span>🔓 <strong>編輯已解鎖</strong>（本趟 ${cloudNotes.length} 則筆記・${ratedCount} 筆評分・${tripStampCount} 枚印章）</span>
                     <div class="itin-unlock-actions">
-                        <button type="button" class="cloud-btn sage" onclick="jumpToNotesLibrary()">📋 前往寫作素材庫</button>
+                        <a href="passport.html" class="cloud-btn" style="text-decoration:none;">🛂 護照印章牆</a>
+                        <button type="button" class="cloud-btn sage" onclick="jumpToNotesLibrary()">📋 寫作素材庫</button>
                         <button type="button" class="cloud-btn" onclick="lockCloudEdit()">🔒 鎖定</button>
                     </div>
                 </div>`;
         } else {
             unlockSlot.innerHTML = `
                 <div class="itin-unlock-bar">
-                    <span>🔒 旅途隨手記與星級評價目前為私人鎖定狀態</span>
+                    <span>🔒 隨手記與集章目前為唯讀狀態${tripStampCount > 0 ? `（本趟已收 ${tripStampCount} 枚印章）` : ''}</span>
                     <div class="itin-unlock-actions">
-                        <button type="button" class="cloud-btn primary" onclick="unlockCloudEdit()">🔑 解鎖隨手記</button>
+                        <a href="passport.html" class="cloud-btn" style="text-decoration:none;">🛂 護照印章牆</a>
+                        <button type="button" class="cloud-btn primary" onclick="unlockCloudEdit()">🔑 解鎖編輯</button>
                     </div>
                 </div>`;
         }
@@ -747,7 +769,7 @@ function renderSingleSpotNoteMount(chIndex) {
     const editingItem = (isFormOpen && editingInlineNoteId)
         ? cloudNotes.find(n => n.id === editingInlineNoteId)
         : null;
-    const fTag = editingItem?.tag || (ch.isFood ? '美食口感' : '心情碎片');
+    const fTag = normalizeNoteTag(editingItem?.tag || (ch._isFoodSpot ? '美食口感' : '心情碎片'));
     const fContent = editingItem?.content || '';
 
     mount.innerHTML = `
@@ -758,12 +780,13 @@ function renderSingleSpotNoteMount(chIndex) {
             </div>
 
             ${spotNotes.map(n => {
-                const tagIcon = NOTE_TAGS.find(t => t.key === n.tag)?.icon || '📝';
+                const tagNorm = normalizeNoteTag(n.tag);
+                const tagIcon = NOTE_TAGS.find(t => t.key === tagNorm)?.icon || '📝';
                 return `
                     <div class="spot-note-item">
                         <div class="spot-note-item-top">
                             <div class="note-meta">
-                                <span class="note-tag-pill">${tagIcon} ${escHtml(n.tag)}</span>
+                                <span class="note-tag-pill">${tagIcon} ${escHtml(tagNorm)}</span>
                                 ${n.rating > 0 ? `<span class="note-rating-pill">${formatStarsText(n.rating)} ${n.rating}.0</span>` : ''}
                                 <span class="note-time">${escHtml(n.createdAt)}</span>
                             </div>
@@ -849,7 +872,7 @@ async function submitInlineSpotNote(chIndex) {
         tripId,
         day: ch._dayKey || 'Day 01',
         spot: ch._pureName || '',
-        tag: $(`inline-note-tag-${chIndex}`)?.value || '心情碎片',
+        tag: normalizeNoteTag($(`inline-note-tag-${chIndex}`)?.value || '心情碎片'),
         content: content || `（給予 ${inlineFormRating} 顆星評價）`,
         rating: inlineFormRating,
         createdAt: oldItem?.createdAt || localNow
@@ -903,7 +926,7 @@ function updateNoteSpotSuggestions() {
 function getFilteredNotesForLibrary() {
     return cloudNotes.filter(n => {
         if (currentNoteDayFilter !== 'ALL' && n.day !== currentNoteDayFilter) return false;
-        if (currentNoteTagFilter !== 'ALL' && n.tag !== currentNoteTagFilter) return false;
+        if (currentNoteTagFilter !== 'ALL' && normalizeNoteTag(n.tag) !== currentNoteTagFilter) return false;
         const r = Number(n.rating) || 0;
         if (currentNoteRatingFilter === '4+' && r < 4) return false;
         if (currentNoteRatingFilter === '3' && r !== 3) return false;
@@ -954,7 +977,7 @@ function renderNotesPanel() {
     const isFormVisible = showLibraryNoteForm || Boolean(editingItem);
     const fDay = editingItem?.day || (normalizedDays[0]?.day || 'Day 01');
     const fSpot = editingItem?.spot || '';
-    const fTag = editingItem?.tag || '心情碎片';
+    const fTag = normalizeNoteTag(editingItem?.tag || '心情碎片');
     const fContent = editingItem?.content || '';
     if (editingItem && libraryFormRating === 0 && editingItem.rating > 0) {
         libraryFormRating = editingItem.rating;
@@ -965,7 +988,6 @@ function renderNotesPanel() {
     box.innerHTML = `
         ${buildCloudAuthBarHTML()}
 
-        <!-- 頂部精簡收合式補記條 -->
         <div class="notes-quick-toggle-bar">
             <span>💡 景點筆記建議直接寫在「📅 行程安排」各站點卡片；零碎雜記可在此補記。</span>
             <button type="button" class="cloud-btn primary" onclick="toggleLibraryNoteForm()">${isFormVisible ? '▲ 收合表單' : '＋ 補記零碎雜記'}</button>
@@ -1001,7 +1023,7 @@ function renderNotesPanel() {
                     </div>
                     <div class="exp-field full">
                         <label>記事內容</label>
-                        <textarea id="note-content" class="note-textarea" placeholder="記下搭車心情、行前備忘、機場戰利品或想放進遊記的句子...">${escHtml(fContent)}</textarea>
+                        <textarea id="note-content" class="note-textarea" placeholder="記下搭車心情、行前備忘、機場好物或想放進遊記的句子...">${escHtml(fContent)}</textarea>
                     </div>
                 </div>
                 <div class="exp-form-footer">
@@ -1011,7 +1033,6 @@ function renderNotesPanel() {
             </div>
         ` : ''}
 
-        <!-- 寫作素材總覽、三維度篩選與雙模式複製 -->
         <div class="expense-detail-panel">
             <div class="notes-library-head">
                 <h4 style="margin:0;font-size:0.98rem;color:#3B4D54;">📋 寫作素材庫（共 ${filteredNotes.length} / ${cloudNotes.length} 則）</h4>
@@ -1041,12 +1062,13 @@ function renderNotesPanel() {
 
             <div>
                 ${filteredNotes.length ? filteredNotes.map(n => {
-                    const tagIcon = NOTE_TAGS.find(t => t.key === n.tag)?.icon || '📝';
+                    const tagNorm = normalizeNoteTag(n.tag);
+                    const tagIcon = NOTE_TAGS.find(t => t.key === tagNorm)?.icon || '📝';
                     return `
-                        <div class="note-card tag-${escHtml(n.tag)}">
+                        <div class="note-card tag-${escHtml(tagNorm)}">
                             <div class="note-card-top">
                                 <div class="note-meta">
-                                    <span class="note-tag-pill">${tagIcon} ${escHtml(n.tag)}</span>
+                                    <span class="note-tag-pill">${tagIcon} ${escHtml(tagNorm)}</span>
                                     <span class="expense-sub-pill">${escHtml(n.day)}</span>
                                     ${n.spot ? `<span class="note-spot-pill">📍 ${escHtml(n.spot)}</span>` : ''}
                                     ${n.rating > 0 ? `<span class="note-rating-pill">${formatStarsText(n.rating)} ${n.rating}.0</span>` : ''}
@@ -1098,7 +1120,7 @@ async function submitNoteForm() {
         tripId,
         day: $('note-day').value || 'Day 01',
         spot: ($('note-spot').value || '').trim(),
-        tag: $('note-tag').value || '心情碎片',
+        tag: normalizeNoteTag($('note-tag').value || '心情碎片'),
         content: content || `（給予 ${libraryFormRating} 顆星評價）`,
         rating: libraryFormRating,
         createdAt: oldItem?.createdAt || localNow
@@ -1143,10 +1165,9 @@ async function deleteCloudNote(id) {
 }
 
 async function copyNotesMaterial(mode = 'draft') {
-    const list = getFilteredNotesForLibrary().slice().reverse(); // 依時間順時序排列
+    const list = getFilteredNotesForLibrary().slice().reverse();
     if (!list.length) return alert('目前沒有可複製的素材筆記');
 
-    // 依天數 → 站點分組
     const byDay = new Map();
     list.forEach(n => {
         const dKey = n.day || '未分類天數';
@@ -1166,7 +1187,7 @@ async function copyNotesMaterial(mode = 'draft') {
             const starBadge = rated.length ? `（${formatStarsText(rated[0].rating)} ${rated[0].rating}.0）` : '';
             dayLines.push(`### ${spotName}${starBadge}`);
             notes.forEach(n => {
-                dayLines.push(`- [${n.tag}${n.createdAt ? '・' + n.createdAt : ''}] ${n.content}`);
+                dayLines.push(`- [${normalizeNoteTag(n.tag)}${n.createdAt ? '・' + n.createdAt : ''}] ${n.content}`);
             });
         });
         sections.push(dayLines.join('\n'));
@@ -1210,7 +1231,6 @@ function openBookletModal() {
     const overlay = $('booklet-modal-overlay');
     if (!overlay) return;
 
-    // 只有解鎖編輯密碼後才顯示「併入私人隨手記／星級」選項，且預設不勾選
     const privWrap = $('pb-inc-notes-wrap');
     const privChk = $('pb-inc-notes');
     if (privWrap && privChk) {
@@ -1282,7 +1302,6 @@ function generateAndPrintBooklet() {
 
     const htmlParts = [];
 
-    // 1. 極簡手帳封面頁
     if (incCover) {
         const coverPhotos = collectBookletCoverPhotos();
         htmlParts.push(`
@@ -1312,7 +1331,6 @@ function generateAndPrintBooklet() {
             </section>`);
     }
 
-    // 2. 通關、住宿憑證與交通摘要頁
     if ((incVouchers && cachedMergedHotels.length) || (incTransit && cachedTransits.length)) {
         let secHtml = `<section class="pb-section-page">`;
         if (incVouchers && cachedMergedHotels.length) {
@@ -1350,7 +1368,6 @@ function generateAndPrintBooklet() {
         htmlParts.push(secHtml);
     }
 
-    // 3. 每日行程頁（一天起新頁）
     if (incItinerary) {
         normalizedDays.forEach(dayObj => {
             let dayMins = 0, dayCost = 0;
@@ -1371,7 +1388,7 @@ function generateAndPrintBooklet() {
                     if (matchedNotes.length) {
                         personalBlock = matchedNotes.map(n => `
                             <div class="pb-personal-note">
-                                <strong>📝 我的隨手記${n.rating > 0 ? `・${formatStarsText(n.rating)} ${n.rating}.0` : ''}（${escHtml(n.tag)}）：</strong>${escHtml(n.content)}
+                                <strong>📝 我的隨手記${n.rating > 0 ? `・${formatStarsText(n.rating)} ${n.rating}.0` : ''}（${escHtml(normalizeNoteTag(n.tag))}）：</strong>${escHtml(n.content)}
                             </div>`).join('');
                     }
                 }
@@ -1404,7 +1421,6 @@ function generateAndPrintBooklet() {
         });
     }
 
-    // 4. 末頁：帶核取方框的行前清單
     if (incChecklist) {
         const srcList = cloudChecklist.length ? cloudChecklist : getSuggestedChecklistForTrip().map(i => ({ ...i, checked: false }));
         const grouped = {};
@@ -1429,6 +1445,369 @@ function generateAndPrintBooklet() {
     container.innerHTML = htmlParts.join('');
     closeBookletModal();
 
-    // 略等片刻讓圖片與樣式就緒後再呼叫系統列印
     setTimeout(() => window.print(), 180);
+}
+
+/* =====================================================================
+   8. 💮 行程站點主動收集景點印章（含即時預覽、相似章防呆與雲端同步）
+   ===================================================================== */
+function getStampsForSpot(ch) {
+    if (!ch || !Array.isArray(cloudStamps) || !cloudStamps.length) return [];
+    return cloudStamps.filter(s => s.tripId === tripId && s.spotId && s.spotId === ch.id);
+}
+
+function refreshItinerarySpotStamps() {
+    currentChaptersList.forEach((ch, chIndex) => {
+        const slot = $(`spot-stamp-slot-${chIndex}`);
+        const btn = $(`spot-stamp-btn-${chIndex}`);
+        const spotStamps = getStampsForSpot(ch);
+
+        if (slot) {
+            slot.innerHTML = spotStamps.length
+                ? `<span class="spot-stamp-badge" title="已收入旅遊護照">💮 ${spotStamps.length > 1 ? `已收 ${spotStamps.length} 章` : '已收印章'}</span>`
+                : '';
+        }
+        if (btn) {
+            btn.classList.toggle('collected', spotStamps.length > 0);
+            btn.textContent = spotStamps.length > 0
+                ? `💮 已收印章${spotStamps.length > 1 ? ` (${spotStamps.length})` : ''} ✓`
+                : '💮 收集景點章';
+        }
+    });
+}
+
+function initStampModalControls() {
+    if (stampControlsInited || typeof FlaneurStampEngine === 'undefined') return;
+    const shapeSel = $('stp-shape');
+    const motifSel = $('stp-motif');
+    const swatchBox = $('stp-color-swatches');
+
+    if (shapeSel) {
+        shapeSel.innerHTML = FlaneurStampEngine.STAMP_SHAPES
+            .map(s => `<option value="${s.key}">${escHtml(s.label)}</option>`).join('');
+    }
+    if (motifSel) {
+        motifSel.innerHTML = FlaneurStampEngine.STAMP_MOTIFS
+            .map(m => `<option value="${m.key}">${escHtml(m.label)}</option>`).join('');
+    }
+    if (swatchBox) {
+        swatchBox.innerHTML = FlaneurStampEngine.STAMP_COLORS
+            .map(c => `<button type="button" class="stamp-color-swatch" data-color="${c.key}" style="background:${c.key};" title="${escHtml(c.label)}" onclick="selectStampColor('${c.key}')"></button>`).join('');
+    }
+    stampControlsInited = true;
+}
+
+function selectStampColor(colorKey) {
+    const input = $('stp-color');
+    if (input) input.value = colorKey;
+    document.querySelectorAll('#stp-color-swatches .stamp-color-swatch').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.color === colorKey);
+    });
+    updateStampModalPreview();
+}
+
+async function openSpotStampModal(chIndex, editId = null) {
+    if (typeof FlaneurStampEngine === 'undefined') {
+        return alert('印章引擎尚未載入完成，請重新整理頁面再試。');
+    }
+    if (!cloudEditPassword) {
+        const ok = await unlockCloudEdit();
+        if (!ok) return;
+    }
+
+    initStampModalControls();
+    const ch = currentChaptersList[chIndex];
+    if (!ch) return;
+
+    stampModalChIndex = chIndex;
+    const spotStamps = getStampsForSpot(ch);
+
+    // 若本站已收過印章且沒有指定新建，預設開啟第一顆供管理，同時上方可切換「＋ 同站再收一顆」
+    const targetStamp = editId === '__NEW__'
+        ? null
+        : (editId ? spotStamps.find(s => s.id === editId) : (spotStamps[0] || null));
+
+    loadStampIntoModalForm(targetStamp, ch, spotStamps);
+    $('stamp-modal-overlay')?.classList.add('open');
+}
+
+function loadStampIntoModalForm(stampObj, ch, spotStamps) {
+    const eng = FlaneurStampEngine;
+    const isEdit = Boolean(stampObj);
+    editingStampId = isEdit ? stampObj.id : null;
+
+    if (isEdit) {
+        $('stp-name').value = stampObj.name || '';
+        $('stp-country').value = stampObj.country || '';
+        $('stp-region').value = stampObj.region || '';
+        $('stp-date').value = stampObj.date || eng.calcTripDayDate(currentTripStartDate, ch._dayKey) || todayISO();
+        $('stp-shape').value = stampObj.shape || 'circle';
+        $('stp-motif').value = stampObj.motif || 'landmark';
+        $('stp-custom-img').value = stampObj.customImage || '';
+        $('stp-note').value = stampObj.note || '';
+        selectStampColor(stampObj.color || '#354F6B');
+
+        $('stamp-modal-title').textContent = '✏️ 管理景點印章';
+        $('btn-save-stamp').textContent = '💾 更新護照印章';
+        $('btn-delete-stamp').style.display = 'inline-block';
+    } else {
+        const preset = eng.inferStampPreset({
+            name: ch._pureName,
+            categoryLabel: ch._categoryLabel,
+            isFood: ch._isFoodSpot,
+            region: ch._region,
+            country: ch._country,
+            tripId,
+            timezone: currentTripTimezone
+        });
+        $('stp-name').value = preset.name;
+        $('stp-country').value = preset.country;
+        $('stp-region').value = preset.region;
+        $('stp-date').value = eng.calcTripDayDate(currentTripStartDate, ch._dayKey) || todayISO();
+        $('stp-shape').value = preset.shape;
+        $('stp-motif').value = preset.motif;
+        $('stp-custom-img').value = '';
+        $('stp-note').value = '';
+        selectStampColor(preset.color);
+
+        $('stamp-modal-title').textContent = '💮 收集景點印章';
+        $('btn-save-stamp').textContent = '💮 蓋章並收入護照';
+        $('btn-delete-stamp').style.display = 'none';
+    }
+
+    // 1. 本站已收印章管理條
+    const existingBox = $('stamp-existing-on-spot');
+    if (existingBox) {
+        if (spotStamps.length) {
+            existingBox.style.display = 'block';
+            existingBox.innerHTML = `
+                <div class="stamp-existing-head">
+                    <span>✓ 本站已收錄 ${spotStamps.length} 枚印章（點擊可修改，或同站再蓋一顆）</span>
+                </div>
+                <div class="stamp-existing-chips">
+                    ${spotStamps.map(s => `
+                        <button type="button" class="stamp-existing-chip ${editingStampId === s.id ? 'active' : ''}"
+                                onclick="openSpotStampModal(${stampModalChIndex}, '${escHtml(s.id)}')">
+                            💮 ${escHtml(s.name)}（${escHtml(s.date || '無日期')}）
+                        </button>`).join('')}
+                    <button type="button" class="stamp-existing-chip ${!editingStampId ? 'active' : ''}"
+                            onclick="openSpotStampModal(${stampModalChIndex}, '__NEW__')">
+                        ＋ 同站再收一顆
+                    </button>
+                </div>`;
+        } else {
+            existingBox.style.display = 'none';
+            existingBox.innerHTML = '';
+        }
+    }
+
+    // 2. 複合站名快選建議（自動拆解 → / ＆ / 括號）
+    const suggestBox = $('stamp-suggest-box');
+    modalSpotSuggestNames = eng.suggestStampNames(ch.spotName || ch.title || ch._pureName);
+    if (suggestBox) {
+        if (modalSpotSuggestNames.length > 1) {
+            suggestBox.style.display = 'block';
+            suggestBox.innerHTML = `
+                <div class="stamp-suggest-title">✨ 站點名稱快選（偵測到複合站名，點擊可直接套用簡潔章名）：</div>
+                <div class="stamp-suggest-chips">
+                    ${modalSpotSuggestNames.map((n, idx) => `
+                        <button type="button" class="stamp-suggest-chip" onclick="applySuggestedStampName(${idx})">${escHtml(n)}</button>
+                    `).join('')}
+                </div>`;
+        } else {
+            suggestBox.style.display = 'none';
+            suggestBox.innerHTML = '';
+        }
+    }
+
+    onStampFormInput();
+}
+
+function applySuggestedStampName(idx) {
+    const picked = modalSpotSuggestNames[idx];
+    if (!picked) return;
+    $('stp-name').value = picked;
+    // 若正在新增印章，順便依新名稱自動切換對應外框、圖樣與印泥色
+    if (!editingStampId && typeof FlaneurStampEngine !== 'undefined') {
+        const ch = currentChaptersList[stampModalChIndex] || {};
+        const preset = FlaneurStampEngine.inferStampPreset({
+            name: picked,
+            categoryLabel: ch._categoryLabel,
+            isFood: ch._isFoodSpot,
+            region: $('stp-region')?.value || ch._region,
+            country: $('stp-country')?.value || ch._country,
+            tripId,
+            timezone: currentTripTimezone
+        });
+        $('stp-shape').value = preset.shape;
+        $('stp-motif').value = preset.motif;
+        selectStampColor(preset.color);
+    }
+    onStampFormInput();
+}
+
+function applyExistingStampSuggestion(idx) {
+    const item = modalSimilarStamps[idx];
+    if (!item) return;
+    $('stp-name').value = item.name;
+    if (item.country) $('stp-country').value = item.country;
+    if (item.region) $('stp-region').value = item.region;
+    if (item.shape) $('stp-shape').value = item.shape;
+    if (item.motif) $('stp-motif').value = item.motif;
+    if (item.customImage) $('stp-custom-img').value = item.customImage;
+    if (item.color) selectStampColor(item.color);
+    onStampFormInput();
+}
+
+function onStampFormInput() {
+    const name = ($('stp-name')?.value || '').trim();
+    const dateVal = ($('stp-date')?.value || '').trim();
+    const simBox = $('stamp-similar-box');
+
+    if (simBox && typeof FlaneurStampEngine !== 'undefined') {
+        const otherStamps = cloudStamps.filter(s => s.id !== editingStampId);
+        const sameDayDup = dateVal && name
+            ? otherStamps.find(s => s.date === dateVal && String(s.name || '').trim().toLowerCase() === name.toLowerCase())
+            : null;
+        modalSimilarStamps = FlaneurStampEngine.findSimilarExistingStamps(name, otherStamps);
+
+        if (sameDayDup) {
+            simBox.style.display = 'block';
+            simBox.innerHTML = `
+                <div class="stamp-suggest-title">⚠️ 「${escHtml(sameDayDup.name)}」在 ${escHtml(dateVal)} 已經收錄過囉！為避免重複蓋章，請修改名稱或點上方已收印章直接編輯。</div>`;
+        } else if (modalSimilarStamps.length) {
+            const hasExact = modalSimilarStamps.some(m => m.exact);
+            simBox.style.display = 'block';
+            simBox.innerHTML = `
+                <div class="stamp-suggest-title">
+                    ${hasExact
+                        ? '💡 護照裡已有同名印章！不同日期儲存後將自動合併為同一顆並累計次數（點擊可同步沿用舊章樣式）：'
+                        : '💡 防呆提醒：護照裡已有相似名稱的印章，點擊可直接沿用相同名稱與樣式，避免收成兩顆重複章：'}
+                </div>
+                <div class="stamp-suggest-chips">
+                    ${modalSimilarStamps.map((item, idx) => `
+                        <button type="button" class="stamp-suggest-chip warn-chip" onclick="applyExistingStampSuggestion(${idx})">
+                            💮 沿用「${escHtml(item.name)}」・已收 ${item.visitCount} 次
+                        </button>`).join('')}
+                </div>`;
+        } else {
+            simBox.style.display = 'none';
+            simBox.innerHTML = '';
+        }
+    }
+
+    updateStampModalPreview();
+}
+
+function updateStampModalPreview() {
+    const previewEl = $('stamp-modal-preview');
+    const ctxEl = $('stamp-modal-context');
+    if (!previewEl || typeof FlaneurStampEngine === 'undefined') return;
+
+    const stampObj = {
+        name: ($('stp-name')?.value || '').trim() || '景點印章',
+        country: ($('stp-country')?.value || '').trim(),
+        region: ($('stp-region')?.value || '').trim(),
+        date: ($('stp-date')?.value || '').trim(),
+        shape: $('stp-shape')?.value || 'circle',
+        motif: $('stp-motif')?.value || 'landmark',
+        color: $('stp-color')?.value || '#354F6B',
+        customImage: ($('stp-custom-img')?.value || '').trim()
+    };
+
+    previewEl.innerHTML = FlaneurStampEngine.renderStampVisualHTML(stampObj, { noTilt: true });
+
+    const ch = currentChaptersList[stampModalChIndex];
+    if (ctxEl && ch) {
+        ctxEl.textContent = `${editingStampId ? '編輯中' : '綁定行程'}：${ch._dayKey} ｜ ${ch._pureName}`;
+    }
+}
+
+function closeStampModal() {
+    $('stamp-modal-overlay')?.classList.remove('open');
+    stampModalChIndex = null;
+    editingStampId = null;
+    modalSpotSuggestNames = [];
+    modalSimilarStamps = [];
+}
+
+async function submitStampModal() {
+    const ch = currentChaptersList[stampModalChIndex];
+    if (!ch) return;
+
+    const name = ($('stp-name')?.value || '').trim();
+    const dateVal = ($('stp-date')?.value || '').trim();
+    if (!name) return alert('請輸入印章名稱！');
+
+    // 前端即時攔截同日同名重複
+    const dup = dateVal
+        ? cloudStamps.find(s => s.id !== editingStampId && s.date === dateVal && String(s.name || '').trim().toLowerCase() === name.toLowerCase())
+        : null;
+    if (dup) {
+        return alert(`「${name}」在 ${dateVal} 已經收集過囉！請修改名稱或直接編輯原本的印章。`);
+    }
+
+    const btn = $('btn-save-stamp');
+    const origText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '⏳ 蓋印同步中...';
+
+    const stampData = {
+        id: editingStampId || `stp_${Date.now()}`,
+        name,
+        country: ($('stp-country')?.value || '').trim(),
+        region: ($('stp-region')?.value || '').trim(),
+        date: dateVal,
+        tripId,
+        day: ch._dayKey || '',
+        spotId: ch.id || '',
+        shape: $('stp-shape')?.value || 'circle',
+        motif: $('stp-motif')?.value || 'landmark',
+        color: $('stp-color')?.value || '#354F6B',
+        customImage: ($('stp-custom-img')?.value || '').trim(),
+        note: ($('stp-note')?.value || '').trim()
+    };
+
+    try {
+        const res = await callGasPost({ action: 'saveStamp', data: stampData });
+        if (res?.ok) {
+            const idx = cloudStamps.findIndex(s => s.id === stampData.id);
+            if (idx >= 0) cloudStamps[idx] = stampData;
+            else cloudStamps.unshift(stampData);
+
+            refreshItinerarySpotStamps();
+            refreshItinerarySpotNotes();
+            closeStampModal();
+        } else {
+            alert(res?.error || '儲存印章失敗，請確認密碼與網路連線');
+        }
+    } catch {
+        alert('雲端連線失敗，請稍後再試');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = origText;
+    }
+}
+
+async function deleteEditingStamp() {
+    if (!editingStampId) return;
+    if (!confirm('確定要從旅遊護照移除這枚印章紀錄嗎？')) return;
+
+    const btn = $('btn-delete-stamp');
+    btn.disabled = true;
+    try {
+        const res = await callGasPost({ action: 'deleteStamp', id: editingStampId });
+        if (res?.ok) {
+            cloudStamps = cloudStamps.filter(s => s.id !== editingStampId);
+            refreshItinerarySpotStamps();
+            refreshItinerarySpotNotes();
+            closeStampModal();
+        } else {
+            alert(res?.error || '刪除失敗');
+        }
+    } catch {
+        alert('雲端連線失敗');
+    } finally {
+        btn.disabled = false;
+    }
 }
