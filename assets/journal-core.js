@@ -3,7 +3,7 @@
    功能：資料縫合、互動地圖與滾動連動、行程＆遊記渲染、燈箱、情報站、靜態票券
    ===================================================================== */
 
-/* 【⚙️ 功能設定】Google 試算表雲端同步網址（費用明細、行前清單、隨手記事） */
+/* 【⚙️ 功能設定】Google 試算表雲端同步網址（費用明細、行前清單、隨手記事、景點印章） */
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyRbstjJeBCcJaO4hfQxovl46GEmA_l0YrY9UkhglvVA1zRG7RVazHrbHcIau8gl2c4/exec';
 
 /* === 1. 全域狀態與共用工具 === */
@@ -59,6 +59,7 @@ let totalTripSpotCount = 0;
 let cloudExpenses = [];
 let cloudChecklist = [];
 let cloudNotes = [];
+let cloudStamps = [];
 let includeBaselineEstimates = true;
 let currentExpenseFilter = 'ALL';
 let editingExpenseId = null;
@@ -158,6 +159,7 @@ function bootJournalApp() {
                     affiliateText: sp.affiliateText || ch.affiliateText || jCh.affiliateText || '',
                     affiliateUrl: sp.affiliateUrl || ch.affiliateUrl || jCh.affiliateUrl || '',
                     affiliateLinks: mergedAffLinks,
+                    country: sp.country || ch.country || itinDay?.country || rawItineraryData.country || '',
                     dayRegion, _isDraft: isItemDraft(ch) || isItemDraft(sp)
                 };
             });
@@ -167,6 +169,7 @@ function bootJournalApp() {
                 itinDayTitle: (itinDay?.dayTitle || dayObj.dayTitle || '').trim(),
                 daySub: (itinDay?.daySub || dayObj.daySub || '').trim(),
                 region: dayRegion,
+                country: itinDay?.country || dayObj.country || '',
                 _isDraft: dayDraft,
                 chapters: isPreviewMode ? chapters : chapters.filter(c => !c._isDraft)
             };
@@ -520,6 +523,8 @@ function initCoreEventListeners() {
             if (e.key === 'ArrowLeft') { e.preventDefault(); stepLightbox(-1); }
             else if (e.key === 'ArrowRight') { e.preventDefault(); stepLightbox(1); }
             else if (e.key === 'Escape') { e.preventDefault(); closeLightbox(); }
+        } else if (e.key === 'Escape' && $('stamp-modal-overlay')?.classList.contains('open')) {
+            if (typeof closeStampModal === 'function') closeStampModal();
         } else if (e.key === 'Escape' && $('booklet-modal-overlay')?.classList.contains('open')) {
             if (typeof closeBookletModal === 'function') closeBookletModal();
         }
@@ -721,7 +726,7 @@ function renderDay(dayKey, skipInitialFocus = false) {
         return;
     }
 
-    // 行程頂部預留低調的隨手記解鎖狀態條（由 journal-cloud.js 填寫內容）
+    // 行程頂部預留低調的隨手記與集章解鎖狀態條（由 journal-cloud.js 填寫內容）
     const unlockSlot = document.createElement('div');
     unlockSlot.id = 'itin-unlock-bar';
     itinDiv.appendChild(unlockSlot);
@@ -771,6 +776,10 @@ function renderDay(dayKey, skipInitialFocus = false) {
             const meta = classifyChapterMeta(ch, idxInDay, idxInDay > 0 ? dayObj.chapters[idxInDay - 1] : null);
             ch._pureName = meta.pureName;
             ch._dayKey = dayObj.day;
+            ch._categoryLabel = meta.categoryLabel;
+            ch._isFoodSpot = meta.isFoodSpot;
+            ch._region = ch.dayRegion || dayObj.region || '';
+            ch._country = ch.country || dayObj.country || rawItineraryData.country || '';
             currentChaptersList.push(ch);
 
             if (meta.stampChar === '住') {
@@ -822,6 +831,7 @@ function renderDay(dayKey, skipInitialFocus = false) {
                             <span class="spot-cat-pill">${escHtml(meta.categoryLabel)}</span>
                             <span class="spot-title-text">${escHtml(meta.pureName)}</span>
                             <span class="spot-star-slot" id="spot-star-slot-${chIndex}"></span>
+                            <span class="spot-stamp-slot" id="spot-stamp-slot-${chIndex}"></span>
                         </div>
                         <span class="spot-toggle-arrow">▶</span>
                     </div>
@@ -832,6 +842,7 @@ function renderDay(dayKey, skipInitialFocus = false) {
                             <a href="${gmapUrl}" target="_blank" rel="noopener" class="spot-pill-btn">🗺️ Google 地圖導航</a>
                             <button type="button" class="spot-pill-btn loc" onclick="setActiveSpotFocus(${chIndex});focusSpotOnMap(${chIndex});">📍 地圖定位</button>
                             <button type="button" class="spot-pill-btn note-btn" onclick="openSpotNoteEditorByIndex(${chIndex})">📝 寫隨手記／⭐ 評分</button>
+                            <button type="button" class="spot-pill-btn stamp-btn" id="spot-stamp-btn-${chIndex}" onclick="openSpotStampModal(${chIndex})">💮 收集景點章</button>
                             ${!isWholeJournalDraft ? `<button type="button" class="spot-pill-btn loc" onclick="jumpToJournalChapter(${chIndex},'section-${escHtml(ch.id)}')">📖 看實拍遊記</button>` : ''}
                         </div>
                         <div class="spot-notes-mount" id="spot-notes-mount-${chIndex}"></div>
@@ -926,8 +937,9 @@ function renderDay(dayKey, skipInitialFocus = false) {
         initVideoAutoplay();
     }
 
-    // 若雲端隨手記已載入，立即同步渲染到新建立的行程卡片上
+    // 若雲端隨手記與印章已載入，立即同步渲染到新建立的行程卡片上
     if (typeof refreshItinerarySpotNotes === 'function') refreshItinerarySpotNotes();
+    if (typeof refreshItinerarySpotStamps === 'function') refreshItinerarySpotStamps();
 }
 
 /* === 8. 📡 資訊情報引擎（出發前 3 天～旅程結束日才啟動即時抓取） === */
