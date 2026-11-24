@@ -180,7 +180,7 @@
       "spots": [
         {
           "id": "d1-ch1",
-          "hideStamp": false,
+          "hideStamp": true,
           "country": "台灣",
           "time": "05:40",
           "spotName": "高雄小港國際機場 (KHH)",
@@ -197,7 +197,7 @@
         },
         {
           "id": "d1-ch2",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "13:00",
           "spotName": "京成 Skyliner（成田國際機場 (NRT) → 京成上野站）",
           "categoryLabel": "交通樞紐",
@@ -213,7 +213,7 @@
         },
         {
           "id": "d1-ch3",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "16:06",
           "spotName": "JR 山形新幹線「翼號 (Tsubasa)」",
           "categoryLabel": "交通樞紐",
@@ -229,7 +229,7 @@
         },
         {
           "id": "d1-ch4",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "19:15",
           "spotName": "山形五十番飯店 駅前店",
           "categoryLabel": "在地美饌",
@@ -256,7 +256,7 @@
       "spots": [
         {
           "id": "d2-ch1",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "07:40",
           "spotName": "藏王溫泉山交巴士 ＆ 藏王山麓纜車",
           "categoryLabel": "名勝絕景",
@@ -288,7 +288,7 @@
         },
         {
           "id": "d2-ch3",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "12:15",
           "spotName": "音茶屋 (Otochaya)",
           "categoryLabel": "在地美饌",
@@ -323,7 +323,7 @@
         },
         {
           "id": "d2-ch5",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "17:30",
           "spotName": "山形牛ステーキ＆焼肉 かかし 駅前店",
           "categoryLabel": "在地美饌",
@@ -350,7 +350,7 @@
       "spots": [
         {
           "id": "d3-ch1",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "09:18",
           "spotName": "JR 大石田站（銀山溫泉轉乘樞紐）",
           "categoryLabel": "交通樞紐",
@@ -382,7 +382,7 @@
         },
         {
           "id": "d3-ch3",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "11:00",
           "spotName": "伊豆の華 (Izu no Hana)",
           "categoryLabel": "在地美饌",
@@ -401,7 +401,7 @@
         },
         {
           "id": "d3-ch4",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "12:45",
           "spotName": "銀山溫泉 能登屋旅館（國家登錄有形文化財）",
           "categoryLabel": "名勝絕景",
@@ -417,7 +417,7 @@
         },
         {
           "id": "d3-ch5",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "13:30",
           "spotName": "白銀瀑布 ＆ 洞窟守護者鬼子母神",
           "categoryLabel": "名勝絕景",
@@ -433,7 +433,7 @@
         },
         {
           "id": "d3-ch6",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "16:30",
           "spotName": "平田牧場 ホテルメトロポリタン山形店",
           "categoryLabel": "在地美饌",
@@ -452,7 +452,7 @@
         },
         {
           "id": "d3-ch7",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "19:30",
           "spotName": "天然温泉 杜都の湯 御宿野乃 仙台",
           "categoryLabel": "溫泉住宿",
@@ -476,7 +476,7 @@
       "spots": [
         {
           "id": "d4-ch1",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "08:30",
           "spotName": "JR 仙台站東口觀光巴士乘車處",
           "categoryLabel": "交通樞紐",
@@ -524,7 +524,7 @@
         },
         {
           "id": "d4-ch4",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "15:30",
           "spotName": "JR 仙台站東口（麵包超人雕像＆購仙台二日券）",
           "categoryLabel": "下町散策",
@@ -540,7 +540,7 @@
         },
         {
           "id": "d4-ch5",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "18:00",
           "spotName": "創作料理 真都 －マツ－",
           "categoryLabel": "在地美饌",
@@ -559,7 +559,7 @@
         },
         {
           "id": "d4-ch6",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "20:30",
           "spotName": "天然温泉 杜都の湯 御宿野乃 仙台",
           "categoryLabel": "溫泉住宿",
@@ -583,7 +583,7 @@
       "spots": [
         {
           "id": "d5-ch1",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "08:30",
           "spotName": "JR 仙石線（仙台站 → 本鹽釜站）",
           "categoryLabel": "交通樞紐",
@@ -682,7 +682,7 @@
         },
         {
           "id": "d5-ch7",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "17:30",
           "spotName": "牛たん料理 閣 ブランドーム本店",
           "categoryLabel": "在地美饌",
@@ -701,7 +701,7 @@
         },
         {
           "id": "d5-ch8",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "20:00",
           "spotName": "天然温泉 杜都の湯 御宿野乃 仙台",
           "categoryLabel": "溫泉住宿",
@@ -773,7 +773,7 @@
         },
         {
           "id": "d6-ch4",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "12:00",
           "spotName": "らーめん山頭火 仙台南中山店",
           "categoryLabel": "在地美饌",
@@ -843,7 +843,7 @@
         },
         {
           "id": "d6-ch8",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "20:30",
           "spotName": "天然温泉 杜都の湯 御宿野乃 仙台",
           "categoryLabel": "溫泉住宿",
@@ -867,7 +867,7 @@
       "spots": [
         {
           "id": "d7-ch1",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "09:30",
           "spotName": "東北新幹線 Hayabusa ＆ APA 飯店〈京成上野站前〉",
           "categoryLabel": "交通樞紐",
@@ -883,7 +883,7 @@
         },
         {
           "id": "d7-ch2",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "12:00",
           "spotName": "民福北京烤鴨店 上野店",
           "categoryLabel": "在地美饌",
@@ -918,7 +918,7 @@
         },
         {
           "id": "d7-ch4",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "18:00",
           "spotName": "羊貴妃羊湯館 御徒町店",
           "categoryLabel": "在地美饌",
@@ -977,7 +977,7 @@
         },
         {
           "id": "d8-ch2",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "11:45",
           "spotName": "ダージリン (Darjeeling) 日暮里店",
           "categoryLabel": "在地美饌",
@@ -1063,7 +1063,7 @@
         },
         {
           "id": "d8-ch7",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "17:45",
           "spotName": "五代目 野田岩 麻布飯倉本店",
           "categoryLabel": "在地美饌",
@@ -1084,7 +1084,7 @@
           "id": "d8-ch8",
           "hideStamp": false,
           "time": "19:30",
-          "spotName": "東京鐵塔 250m Top Deck 展望台",
+          "spotName": "東京鐵塔",
           "categoryLabel": "名勝絕景",
           "routeFromTo": "五代目 野田岩 → 東京鐵塔",
           "scheduleTime": "19:20 步行 → 19:30 登 250m Top Deck 賞夜景",
@@ -1106,7 +1106,7 @@
       "spots": [
         {
           "id": "d9-ch1",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "09:20",
           "spotName": "京成 Skyliner（京成上野站 → 成田國際機場 (NRT)）",
           "categoryLabel": "交通樞紐",
@@ -1122,7 +1122,7 @@
         },
         {
           "id": "d9-ch2",
-          "hideStamp": false,
+          "hideStamp": true,
           "time": "11:15",
           "spotName": "謝朋殿 成田空港店",
           "categoryLabel": "在地美饌",
@@ -1141,7 +1141,7 @@
         },
         {
           "id": "d9-ch3",
-          "hideStamp": false,
+          "hideStamp": true,
           "country": "日本",
           "time": "13:35",
           "spotName": "成田國際機場 (NRT)",
