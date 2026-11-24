@@ -94,7 +94,7 @@
         const s = String(raw || '').trim().replace(/^\/+/, '');
         if (!s) return '';
         if (/^https?:\/\//i.test(s) || s.includes('/')) return s;
-        return `media/passport/stamps/${s}`;
+        return `media/stamps/${s}`;
     }
 
     function calcTripDayDate(startDate, dayStr) {
