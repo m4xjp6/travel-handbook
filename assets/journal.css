@@ -754,3 +754,150 @@ body, html {
     .chk-add-row { grid-template-columns: 1fr; }
     .booklet-size-grid { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   13. 💮 收集景點印章按鈕、即時預覽彈窗與防呆建議（Step 3 新增）
+   ===================================================================== */
+
+/* 行程卡片標題列的「已收印章」小標章與操作列集章按鈕 */
+.spot-stamp-badge {
+    display: inline-flex; align-items: center; gap: 2px;
+    background: #FDF2F0; border: 1px solid #E4B9B2; color: #A84438;
+    font-size: 0.72rem; font-weight: 700; padding: 2px 7px; border-radius: 10px;
+    white-space: nowrap;
+}
+.spot-pill-btn.stamp-btn {
+    background: #FDF2F0; border-color: #E4B9B2; color: #9A3D32;
+}
+.spot-pill-btn.stamp-btn:hover { background: #F8E2DE; }
+.spot-pill-btn.stamp-btn.collected {
+    background: #EDF6EF; border-color: #A3C9AE; color: #2F6B43;
+}
+.spot-pill-btn.stamp-btn.collected:hover { background: #DDF0E2; }
+
+/* 刪除操作按鈕樣式 */
+.cloud-btn.danger {
+    background: #FFF1F2; color: #BE123C; border-color: #FDA4AF;
+}
+.cloud-btn.danger:hover {
+    background: #BE123C; color: #fff; border-color: #BE123C;
+}
+
+/* 收集景點印章彈窗外層與卡片 */
+#stamp-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9600;
+    background: rgba(45, 38, 34, 0.56); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 16px;
+}
+#stamp-modal-overlay.open { display: flex; }
+.stamp-modal {
+    background: var(--bg-color); border: 1.5px solid var(--accent-brown);
+    border-radius: 18px; width: 100%; max-width: 540px; max-height: 92vh;
+    overflow-y: auto; box-shadow: 0 18px 48px rgba(45, 38, 34, 0.3);
+}
+.stamp-modal-foot { flex-wrap: wrap; }
+
+/* 本站已收集印章管理條 */
+.stamp-existing-box {
+    background: #F3F8F4; border: 1px solid #C6DEC9; border-radius: 12px;
+    padding: 10px 12px; margin-bottom: 12px;
+}
+.stamp-existing-head {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+    gap: 6px; font-size: 0.78rem; font-weight: 700; color: #2F6B43; margin-bottom: 7px;
+}
+.stamp-existing-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.stamp-existing-chip {
+    font-family: inherit; border: 1px solid #B5D2BA; background: #fff; color: #2F6B43;
+    padding: 4px 10px; border-radius: 14px; font-size: 0.76rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+}
+.stamp-existing-chip:hover { background: #E4F2E7; }
+.stamp-existing-chip.active { background: #2F6B43; color: #fff; border-color: #2F6B43; }
+
+/* 即時印章預覽舞台 */
+.stamp-preview-stage {
+    display: flex; align-items: center; gap: 16px;
+    background: #FAF6F0; border: 1px solid #E6DCD0; border-radius: 14px;
+    padding: 12px 14px; margin-bottom: 12px;
+}
+.stamp-preview-frame {
+    width: 126px; height: 126px; flex-shrink: 0;
+    background: #FDFBF7; border: 1.5px dashed #D5C5B6; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; padding: 6px;
+    box-sizing: border-box;
+}
+.stamp-preview-meta { flex: 1; min-width: 0; }
+.stamp-preview-context {
+    font-size: 0.86rem; font-weight: 700; color: #3A2E2A; margin-bottom: 5px; line-height: 1.45;
+}
+.stamp-preview-hint {
+    font-size: 0.76rem; color: var(--text-light); line-height: 1.55;
+}
+
+/* 共用印章視覺容器（SVG ＆ 自訂手繪圖片自然融合紙面） */
+.stamp-visual-box {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+}
+.flaneur-stamp-svg {
+    width: 100%; height: 100%; display: block;
+    filter: drop-shadow(0 1px 1px rgba(60, 45, 35, 0.08));
+}
+.flaneur-stamp-custom-img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+    mix-blend-mode: multiply; /* 讓白底手繪圖或實體印章掃描照自然融入米白紙張 */
+}
+
+/* 相似舊章防呆提醒 ＆ 複合站名快選區 */
+.stamp-suggest-panel {
+    background: #F4EFE6; border: 1px solid #DFD3C5; border-radius: 12px;
+    padding: 9px 12px; margin-bottom: 10px;
+}
+.stamp-suggest-panel.warn {
+    background: #FFF9EB; border-color: #EBD08E; border-left: 4px solid #D97724;
+}
+.stamp-suggest-title {
+    font-size: 0.76rem; font-weight: 700; color: #6E5A4F; margin-bottom: 6px; line-height: 1.4;
+}
+.stamp-suggest-panel.warn .stamp-suggest-title { color: #A65310; }
+.stamp-suggest-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.stamp-suggest-chip {
+    font-family: inherit; border: 1px solid #D8C8B8; background: #fff; color: var(--text-dark);
+    padding: 4px 10px; border-radius: 14px; font-size: 0.76rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+}
+.stamp-suggest-chip:hover { background: var(--accent-brown); color: #fff; border-color: var(--accent-brown); }
+.stamp-suggest-chip.warn-chip {
+    border-color: #E7B966; background: #FFFDF7; color: #9C5214;
+}
+.stamp-suggest-chip.warn-chip:hover {
+    background: #D97724; color: #fff; border-color: #D97724;
+}
+
+/* 8 色復古印泥色票選取器 */
+.stamp-color-swatches {
+    display: flex; flex-wrap: wrap; gap: 7px; padding: 4px 2px; align-items: center;
+}
+.stamp-color-swatch {
+    width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff;
+    box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.16); cursor: pointer; padding: 0;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.stamp-color-swatch:hover { transform: scale(1.14); }
+.stamp-color-swatch.active {
+    transform: scale(1.16);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent-brown-dark);
+}
+
+/* 列印旅遊小冊時同步隱藏印章彈窗 */
+@media print {
+    #stamp-modal-overlay { display: none !important; }
+}
+
+/* 手機版印章彈窗響應式微調 */
+@media (max-width: 768px) {
+    .stamp-preview-stage { flex-direction: column; text-align: center; gap: 10px; }
+    .stamp-preview-frame { width: 118px; height: 118px; }
+    .stamp-modal-foot { justify-content: flex-end; }
+}
