@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/journal.css?v=20261124" />
+    <link rel="stylesheet" href="assets/journal.css?v=20261124b" />
 </head>
 <body>
 
@@ -195,11 +195,87 @@
         </div>
     </div>
 
+    <!-- 💮 收集景點印章彈窗（TRAIN TRIP × EKITAG 即時預覽與名稱防呆） -->
+    <div id="stamp-modal-overlay" onclick="if(event.target===this)closeStampModal()">
+        <div class="stamp-modal" role="dialog" aria-modal="true" aria-labelledby="stamp-modal-title">
+            <div class="booklet-modal-head">
+                <h3 id="stamp-modal-title">💮 收集景點印章</h3>
+                <button type="button" class="booklet-close-btn" onclick="closeStampModal()" aria-label="關閉">✕</button>
+            </div>
+            <div class="booklet-modal-body">
+                <!-- 本站已收集印章列表（若本站已蓋過，可切換編輯或同站再加一顆） -->
+                <div id="stamp-existing-on-spot" class="stamp-existing-box" style="display:none;"></div>
+
+                <!-- 即時印章預覽 -->
+                <div class="stamp-preview-stage">
+                    <div id="stamp-modal-preview" class="stamp-preview-frame"></div>
+                    <div class="stamp-preview-meta">
+                        <div id="stamp-modal-context" class="stamp-preview-context">準備蓋印中...</div>
+                        <div class="stamp-preview-hint">同名不同日會自動合併累計造訪次數（×2），並於護照串接回本篇遊記。</div>
+                    </div>
+                </div>
+
+                <!-- 相似既有印章防呆提醒（避免同景點收兩顆重複印章） -->
+                <div id="stamp-similar-box" class="stamp-suggest-panel warn" style="display:none;"></div>
+
+                <!-- 複合站名快選建議（自動拆解 → / ＆ / 括號） -->
+                <div id="stamp-suggest-box" class="stamp-suggest-panel" style="display:none;"></div>
+
+                <!-- 印章基本與外觀設定表單 -->
+                <div class="exp-form-grid">
+                    <div class="exp-field full">
+                        <label for="stp-name">印章名稱（顯示於印章中央）</label>
+                        <input type="text" id="stp-name" class="exp-input" placeholder="例如：藏王樹冰、仙台站、松島灣觀光船" oninput="onStampFormInput()">
+                    </div>
+                    <div class="exp-field">
+                        <label for="stp-country">國家</label>
+                        <input type="text" id="stp-country" class="exp-input" placeholder="例如：日本、台灣、馬來西亞" oninput="updateStampModalPreview()">
+                    </div>
+                    <div class="exp-field">
+                        <label for="stp-region">地區（外圈弧形字）</label>
+                        <input type="text" id="stp-region" class="exp-input" placeholder="例如：宮城、山形、東京" oninput="updateStampModalPreview()">
+                    </div>
+                    <div class="exp-field">
+                        <label for="stp-date">收集日期</label>
+                        <input type="date" id="stp-date" class="exp-input" onchange="onStampFormInput()">
+                    </div>
+                    <div class="exp-field">
+                        <label for="stp-shape">外框樣式</label>
+                        <select id="stp-shape" class="exp-select" onchange="updateStampModalPreview()"></select>
+                    </div>
+                    <div class="exp-field">
+                        <label for="stp-motif">中央線條圖樣</label>
+                        <select id="stp-motif" class="exp-select" onchange="updateStampModalPreview()"></select>
+                    </div>
+                    <div class="exp-field">
+                        <label>復古印泥色</label>
+                        <input type="hidden" id="stp-color" value="#354F6B">
+                        <div id="stp-color-swatches" class="stamp-color-swatches"></div>
+                    </div>
+                    <div class="exp-field full">
+                        <label for="stp-custom-img">自訂手繪／實體印章圖片路徑（選填，留空則自動繪製）</label>
+                        <input type="text" id="stp-custom-img" class="exp-input" placeholder="只填檔名如 zao_stamp.png（圖檔傳至 media/passport/stamps/）" oninput="updateStampModalPreview()">
+                    </div>
+                    <div class="exp-field full">
+                        <label for="stp-note">集章備註（選填）</label>
+                        <input type="text" id="stp-note" class="exp-input" placeholder="例如：在郵局蓋到限定風景印、車站改札口旁蓋章台">
+                    </div>
+                </div>
+            </div>
+            <div class="booklet-modal-foot stamp-modal-foot">
+                <button type="button" class="cloud-btn danger" id="btn-delete-stamp" style="display:none;margin-right:auto;" onclick="deleteEditingStamp()">🗑️ 刪除此印章</button>
+                <button type="button" class="cloud-btn" onclick="closeStampModal()">取消</button>
+                <button type="button" class="cloud-btn primary" id="btn-save-stamp" onclick="submitStampModal()">💮 蓋章並收入護照</button>
+            </div>
+        </div>
+    </div>
+
     <!-- 專屬列印容器（平時隱藏，列印時自動接管版面） -->
     <div id="print-booklet" aria-hidden="true"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="assets/journal-core.js?v=20261124"></script>
-    <script src="assets/journal-cloud.js?v=20261124"></script>
+    <script src="assets/stamp-engine.js?v=20261124b"></script>
+    <script src="assets/journal-core.js?v=20261124b"></script>
+    <script src="assets/journal-cloud.js?v=20261124b"></script>
 </body>
 </html>
