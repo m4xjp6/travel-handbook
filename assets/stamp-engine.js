@@ -1,8 +1,8 @@
 /* =====================================================================
    °•* Flâneur *•° 共用數位景點印章引擎（assets/stamp-engine.js）
    風格融合：JR TRAIN TRIP 經典幾何章 × EKITAG 數位車站章 × 莫蘭迪復古印泥
-   設計核心：先判斷景點分類與本質，再決定主視覺、外框、構圖、配色與文字
-   適用頁面：journal.html（收集預覽＆防呆建議）與 passport.html（印章牆渲染）
+   設計核心：先判斷景點分類與本質，再決定主視覺、外框、構圖、配色、圖鑑與特別標記
+   適用頁面：journal.html（收集預覽＆防呆建議）與 passport.html（印章牆渲染＆子圖鑑篩選）
    ===================================================================== */
 
 (function (global) {
@@ -10,7 +10,7 @@
 
     let _svgUid = 0;
 
-    /* === 1. 景點分類、外框、圖樣與復古印泥色定義 === */
+    /* === 1. 景點分類、主題子圖鑑、Special 標籤、外框、圖樣與復古印泥色定義 === */
     const STAMP_CATEGORIES = [
         { key: 'religion',   label: '⛩️ 宗教信仰（神社／寺院／佛像）', defaultShape: 'octagon', defaultMotif: 'torii',    defaultColor: '#A84438', composition: '正面對稱式' },
         { key: 'heritage',   label: '🏯 歷史建築（城堡／古蹟／街區）', defaultShape: 'shield',  defaultMotif: 'tower',    defaultColor: '#6E5A4F', composition: '正面對稱式' },
@@ -22,6 +22,24 @@
         { key: 'district',   label: '♨️ 特色街區（溫泉街／老街／港灣）', defaultShape: 'wave',  defaultMotif: 'onsen',    defaultColor: '#73527A', composition: '透視縱深式' },
         { key: 'gourmet',    label: '🍜 地方物產（美食／農產／伴手禮）', defaultShape: 'none',  defaultMotif: 'food',     defaultColor: '#8E5B3E', composition: '中央主體式' },
         { key: 'wildlife',   label: '🦊 動植物（動物／植物／花卉）',   defaultShape: 'oval',    defaultMotif: 'animal',   defaultColor: '#3B6B52', composition: '中央主體式' }
+    ];
+
+    const STAMP_ALBUMS = [
+        { key: 'rail_transit',    label: '🚄 鐵道與通關',     shortLabel: '鐵道通關',   categories: ['rail'],                 motifs: ['train', 'flight'] },
+        { key: 'shrine_heritage', label: '⛩️ 御朱印與古蹟',   shortLabel: '御朱印古蹟', categories: ['religion', 'heritage'], motifs: ['torii'] },
+        { key: 'nature_scenery',  label: '🏔️ 山海絕景',       shortLabel: '山海絕景',   categories: ['nature', 'seasonal'],   motifs: ['mountain', 'snow_ice', 'boat'] },
+        { key: 'onsen_stroll',    label: '♨️ 名湯與散策',     shortLabel: '名湯散策',   categories: ['district'],             motifs: ['onsen', 'shopping'] },
+        { key: 'gourmet_local',   label: '🍜 在地美饌',       shortLabel: '在地美饌',   categories: ['gourmet'],              motifs: ['food'] },
+        { key: 'wildlife_eco',    label: '🦊 生態圖鑑',       shortLabel: '生態圖鑑',   categories: ['wildlife'],             motifs: ['animal'] },
+        { key: 'city_culture',    label: '🗼 地標旅宿與文化', shortLabel: '地標文化',   categories: ['facility', 'culture'],  motifs: ['tower', 'hotel', 'landmark'] }
+    ];
+
+    const SPECIAL_STAMP_TYPES = [
+        { key: 'seasonal',    label: '❄️ 季節限定',     badge: 'SEASONAL',  defaultShort: '季節限定' },
+        { key: 'event',       label: '🏮 活動祭典限定', badge: 'EVENT',     defaultShort: '活動限定' },
+        { key: 'rare_spot',   label: '✨ 絕景特別章',   badge: 'SPECIAL',   defaultShort: '特別絕景' },
+        { key: 'handcrafted', label: '🎨 實體手繪典藏', badge: 'EDITION',   defaultShort: '典藏印記' },
+        { key: 'milestone',   label: '🏆 旅途里程碑',   badge: 'MILESTONE', defaultShort: '里程碑' }
     ];
 
     const STAMP_SHAPES = [
@@ -130,7 +148,7 @@
         return `${y}-${mo}-${d}`;
     }
 
-    /* === 3. 依景點分類與本質自動推斷主視覺、外框、構圖與配色 === */
+    /* === 3. 依景點分類與本質自動推斷主視覺、外框、構圖、配色、圖鑑與 Special === */
     function inferCountryFromContext(countryHint, regionHint, tripIdHint, timezoneHint) {
         const direct = String(countryHint || '').trim();
         if (direct) return direct;
@@ -164,6 +182,130 @@
         return 'facility';
     }
 
+    function resolveStampAlbumKey(stamp = {}) {
+        // 1. 優先尊重手動指定的子圖鑑
+        if (stamp.album && STAMP_ALBUMS.some(a => a.key === stamp.album)) {
+            return stamp.album;
+        }
+
+        // 2. 取得底層分類與圖樣（100% 相容未存 category 的舊印章）
+        const category = STAMP_CATEGORIES.some(c => c.key === stamp.category)
+            ? stamp.category
+            : inferCategoryFromMeta(stamp.name || stamp.spotName || '', stamp.categoryLabel || '', Boolean(stamp.isFood));
+        const motif = String(stamp.motif || '').trim();
+
+        // 3. 細粒度圖樣優先分流（例：港灣遊船歸山海絕景、溫泉老街歸名湯散策）
+        if (motif === 'boat') return 'nature_scenery';
+        if (motif === 'onsen' || motif === 'shopping') return 'onsen_stroll';
+        if (motif === 'train' || motif === 'flight') return 'rail_transit';
+        if (motif === 'animal') return 'wildlife_eco';
+        if (motif === 'food') return 'gourmet_local';
+        if (motif === 'torii') return 'shrine_heritage';
+
+        // 4. 依 10 大分類映射至 7 大主題子圖鑑
+        const matched = STAMP_ALBUMS.find(a => a.categories.includes(category));
+        return matched ? matched.key : 'city_culture';
+    }
+
+    function getStampAlbumDef(albumKey) {
+        return STAMP_ALBUMS.find(a => a.key === albumKey) || STAMP_ALBUMS[STAMP_ALBUMS.length - 1];
+    }
+
+    function resolveSpecialStampMeta(stamp = {}) {
+        const name = String(stamp.name || stamp.spotName || '').trim();
+        const cat = STAMP_CATEGORIES.some(c => c.key === stamp.category)
+            ? stamp.category
+            : inferCategoryFromMeta(name, stamp.categoryLabel || '', Boolean(stamp.isFood));
+
+        // 明確設為 false 時強制關閉自動 Special 標記
+        if (stamp.isSpecial === false) {
+            return { isSpecial: false, specialType: '', specialLabel: '', badgeText: '' };
+        }
+
+        let detectedType = '';
+        if (stamp.specialType && SPECIAL_STAMP_TYPES.some(t => t.key === stamp.specialType)) {
+            detectedType = stamp.specialType;
+        } else if (cat === 'seasonal' || /樹冰|雪景|冰雪|雪怪|櫻花|賞櫻|紅葉|賞楓|楓葉|花海|點燈|イルミネーション/i.test(name)) {
+            detectedType = 'seasonal';
+        } else if (cat === 'culture' || /祭典|祭り|花火|限定|週年|周年|藝術祭|博覽會|限定列車|\bSL\b/i.test(name)) {
+            detectedType = 'event';
+        } else if (/世界遺產|日本三景|百名城|國寶|秘境/i.test(name)) {
+            detectedType = 'rare_spot';
+        }
+
+        const isSpecial = stamp.isSpecial === true ? true : Boolean(detectedType);
+        if (!isSpecial) {
+            return { isSpecial: false, specialType: '', specialLabel: '', badgeText: '' };
+        }
+
+        const finalType = detectedType || 'rare_spot';
+        const typeDef = SPECIAL_STAMP_TYPES.find(t => t.key === finalType) || SPECIAL_STAMP_TYPES[2];
+        const specialLabel = String(stamp.specialLabel || '').trim() || typeDef.defaultShort;
+
+        return {
+            isSpecial: true,
+            specialType: finalType,
+            specialLabel,
+            badgeText: typeDef.badge
+        };
+    }
+
+    // 護照牆多維交叉篩選（國家 × 主題子圖鑑 × Special Stamp）
+    function filterStampsByTaxonomy(stamps = [], filters = {}) {
+        const {
+            country = 'ALL',
+            album = 'ALL',
+            specialOnly = false,
+            specialType = 'ALL'
+        } = filters;
+
+        return (Array.isArray(stamps) ? stamps : []).filter(st => {
+            if (country && country !== 'ALL' && String(st.country || '').trim() !== country) {
+                return false;
+            }
+            if (album && album !== 'ALL' && resolveStampAlbumKey(st) !== album) {
+                return false;
+            }
+            if (specialOnly || (specialType && specialType !== 'ALL')) {
+                const sp = resolveSpecialStampMeta(st);
+                if (!sp.isSpecial) return false;
+                if (specialType && specialType !== 'ALL' && sp.specialType !== specialType) return false;
+            }
+            return true;
+        });
+    }
+
+    // 統計各主題子圖鑑與 Special Stamp 數量（供 passport.html 篩選列徽章顯示）
+    function buildAlbumStats(stamps = [], countryFilter = 'ALL') {
+        const list = filterStampsByTaxonomy(stamps, { country: countryFilter });
+        const albumCounts = {};
+        STAMP_ALBUMS.forEach(a => { albumCounts[a.key] = 0; });
+
+        let specialCount = 0;
+        const specialTypeCounts = {};
+        SPECIAL_STAMP_TYPES.forEach(t => { specialTypeCounts[t.key] = 0; });
+
+        list.forEach(st => {
+            const albumKey = resolveStampAlbumKey(st);
+            if (albumCounts[albumKey] !== undefined) albumCounts[albumKey]++;
+
+            const sp = resolveSpecialStampMeta(st);
+            if (sp.isSpecial) {
+                specialCount++;
+                if (specialTypeCounts[sp.specialType] !== undefined) {
+                    specialTypeCounts[sp.specialType]++;
+                }
+            }
+        });
+
+        return {
+            total: list.length,
+            albumCounts,
+            specialCount,
+            specialTypeCounts
+        };
+    }
+
     function inferStampPreset(meta = {}) {
         const name = String(meta.name || meta.spotName || meta.title || '').trim();
         const cat = String(meta.categoryLabel || '').trim();
@@ -171,7 +313,8 @@
         const country = inferCountryFromContext(meta.country, `${name} ${region}`, meta.tripId, meta.timezone);
         const hay = `${name} ${cat}`;
 
-        const categoryKey = STAMP_CATEGORIES.some(c => c.key === meta.category)
+        const hasExplicitCategory = STAMP_CATEGORIES.some(c => c.key === meta.category);
+        const categoryKey = hasExplicitCategory
             ? meta.category
             : inferCategoryFromMeta(name, cat, Boolean(meta.isFood));
         const catDef = STAMP_CATEGORIES.find(c => c.key === categoryKey) || STAMP_CATEGORIES[5];
@@ -181,41 +324,43 @@
         let color = catDef.defaultColor;
         let composition = catDef.composition;
 
-        // 1. 主視覺優先順序：地標識別 -> 地方特色 -> 自然特色 -> 輔助元素
-        if (/機場|航空站|航廈|航班|起飛|降落|AirAsia|KHH|TPE|NRT|HND|KIX|KUL|SIN|ICN|HKG/i.test(hay)) {
-            shape = 'ticket'; motif = 'flight'; color = '#354F6B'; composition = '水平延伸式';
-        } else if (/遊船|觀光船|渡輪|港口|鹽釜港|松島海岸|海灣|碼頭/i.test(hay)) {
-            shape = 'wave'; motif = 'boat'; color = '#346E8C'; composition = '水平延伸式';
-        } else if (/纜車/i.test(hay)) {
-            shape = 'hexagon'; motif = 'mountain'; color = '#354F6B'; composition = '垂直延伸式';
-        } else if (/新幹線|Skyliner|ETS|KTM|JR|電鐵|地鐵|捷運|車站|轉乘|火車|巴士/i.test(hay) || cat.includes('交通')) {
-            shape = 'ticket'; motif = 'train'; color = '#354F6B'; composition = '水平延伸式';
-        } else if (/神社|寺|廟|宮|鳥居|大佛|教堂|清真寺/i.test(hay)) {
-            shape = 'octagon'; motif = 'torii'; color = '#A84438'; composition = '正面對稱式';
-        } else if (/城跡|城堡|古城|遺跡|古蹟/i.test(hay)) {
-            shape = 'shield'; motif = 'tower'; color = '#6E5A4F'; composition = '正面對稱式';
-        } else if (/溫泉|湯|澡堂|銀山|藏王溫泉/i.test(hay)) {
-            shape = 'wave'; motif = 'onsen'; color = '#73527A'; composition = '前中後景式';
-        } else if (/狐狸|動物園|水族館|牧場|生態|鳥園|貓|熊/i.test(hay)) {
-            shape = 'oval'; motif = 'animal'; color = '#3B6B52'; composition = '中央主體式';
-        } else if (/鐵塔|雙峰塔|晴空塔|展望台|摩天輪|塔|星耀樟宜|Tower|Sky/i.test(hay)) {
-            shape = 'hexagon'; motif = 'tower'; color = '#3B6B52'; composition = '垂直延伸式';
-        } else if (/樹冰|雪/i.test(hay)) {
-            shape = 'flower'; motif = 'snow_ice'; color = '#346E8C'; composition = '前中後景式';
-        } else if (/山|峰|峽|瀑布|湖|夕陽|階梯|公園|展望|森林|花園/i.test(hay)) {
-            shape = 'hexagon'; motif = 'mountain'; color = '#3B6B52'; composition = '前中後景式';
-        } else if (meta.isFood || cat.includes('美饌') || /餐廳|料理|拉麵|牛舌|牛たん|燒肉|烤鴨|咖啡|茶室|茶餐室|肉骨茶|雞飯|娘惹|甜點|屋台|美食|Cafe|Coffee/i.test(hay)) {
-            shape = 'none'; motif = 'food'; color = '#8E5B3E'; composition = '中央主體式';
-        } else if (cat.includes('住宿') || /飯店|酒店|旅館|溫泉旅|御宿野乃|Hotel|Méridien|Aloft|Holiday Inn|Village|APA/i.test(hay)) {
-            shape = 'square'; motif = 'hotel'; color = '#6E5A4F'; composition = '正面對稱式';
-        } else if (/商店街|老街|市場|夜市|郵局|郵便局|雜貨|百貨|阿美橫丁|谷中銀座|雞場街|茨廠街/i.test(hay)) {
-            shape = /郵局|郵便局/.test(hay) ? 'wave' : 'square';
-            motif = 'shopping';
-            color = '#B27C35';
-            composition = '透視縱深式';
+        // 未手動指定分類時，依「地標識別 -> 地方特色 -> 自然特色 -> 輔助元素」做細粒度微調
+        if (!hasExplicitCategory) {
+            if (/機場|航空站|航廈|航班|起飛|降落|AirAsia|KHH|TPE|NRT|HND|KIX|KUL|SIN|ICN|HKG/i.test(hay)) {
+                shape = 'ticket'; motif = 'flight'; color = '#354F6B'; composition = '水平延伸式';
+            } else if (/遊船|觀光船|渡輪|港口|鹽釜港|松島海岸|海灣|碼頭/i.test(hay)) {
+                shape = 'wave'; motif = 'boat'; color = '#346E8C'; composition = '水平延伸式';
+            } else if (/纜車/i.test(hay)) {
+                shape = 'hexagon'; motif = 'mountain'; color = '#354F6B'; composition = '垂直延伸式';
+            } else if (/新幹線|Skyliner|ETS|KTM|JR|電鐵|地鐵|捷運|車站|轉乘|火車|巴士/i.test(hay) || cat.includes('交通')) {
+                shape = 'ticket'; motif = 'train'; color = '#354F6B'; composition = '水平延伸式';
+            } else if (/神社|寺|廟|宮|鳥居|大佛|教堂|清真寺/i.test(hay)) {
+                shape = 'octagon'; motif = 'torii'; color = '#A84438'; composition = '正面對稱式';
+            } else if (/城跡|城堡|古城|遺跡|古蹟/i.test(hay)) {
+                shape = 'shield'; motif = 'tower'; color = '#6E5A4F'; composition = '正面對稱式';
+            } else if (/溫泉|湯|澡堂|銀山|藏王溫泉/i.test(hay)) {
+                shape = 'wave'; motif = 'onsen'; color = '#73527A'; composition = '前中後景式';
+            } else if (/狐狸|動物園|水族館|牧場|生態|鳥園|貓|熊/i.test(hay)) {
+                shape = 'oval'; motif = 'animal'; color = '#3B6B52'; composition = '中央主體式';
+            } else if (/鐵塔|雙峰塔|晴空塔|展望台|摩天輪|塔|星耀樟宜|Tower|Sky/i.test(hay)) {
+                shape = 'hexagon'; motif = 'tower'; color = '#3B6B52'; composition = '垂直延伸式';
+            } else if (/樹冰|雪/i.test(hay)) {
+                shape = 'flower'; motif = 'snow_ice'; color = '#346E8C'; composition = '前中後景式';
+            } else if (/山|峰|峽|瀑布|湖|夕陽|階梯|公園|展望|森林|花園/i.test(hay)) {
+                shape = 'hexagon'; motif = 'mountain'; color = '#3B6B52'; composition = '前中後景式';
+            } else if (meta.isFood || cat.includes('美饌') || /餐廳|料理|拉麵|牛舌|牛たん|燒肉|烤鴨|咖啡|茶室|茶餐室|肉骨茶|雞飯|娘惹|甜點|屋台|美食|Cafe|Coffee/i.test(hay)) {
+                shape = 'none'; motif = 'food'; color = '#8E5B3E'; composition = '中央主體式';
+            } else if (cat.includes('住宿') || /飯店|酒店|旅館|溫泉旅|御宿野乃|Hotel|Méridien|Aloft|Holiday Inn|Village|APA/i.test(hay)) {
+                shape = 'square'; motif = 'hotel'; color = '#6E5A4F'; composition = '正面對稱式';
+            } else if (/商店街|老街|市場|夜市|郵局|郵便局|雜貨|百貨|阿美橫丁|谷中銀座|雞場街|茨廠街/i.test(hay)) {
+                shape = /郵局|郵便局/.test(hay) ? 'wave' : 'square';
+                motif = 'shopping';
+                color = '#B27C35';
+                composition = '透視縱深式';
+            }
         }
 
-        return {
+        const basePreset = {
             name: cleanPrimarySpotName(name),
             country,
             region: region.replace(/地區/g, '').trim(),
@@ -224,6 +369,22 @@
             shape,
             motif,
             color
+        };
+
+        const album = resolveStampAlbumKey({ ...basePreset, album: meta.album });
+        const sp = resolveSpecialStampMeta({
+            ...basePreset,
+            isSpecial: meta.isSpecial,
+            specialType: meta.specialType,
+            specialLabel: meta.specialLabel
+        });
+
+        return {
+            ...basePreset,
+            album,
+            isSpecial: sp.isSpecial,
+            specialType: sp.specialType,
+            specialLabel: sp.specialLabel
         };
     }
 
@@ -317,11 +478,16 @@
             if (!n) return;
             const key = n.toLowerCase();
             if (!byName.has(key)) {
+                const sp = resolveSpecialStampMeta(st);
                 byName.set(key, {
                     name: n,
                     country: st.country || '',
                     region: st.region || '',
                     category: st.category || '',
+                    album: resolveStampAlbumKey(st),
+                    isSpecial: sp.isSpecial,
+                    specialType: sp.specialType,
+                    specialLabel: sp.specialLabel,
                     shape: st.shape,
                     motif: st.motif,
                     color: st.color,
@@ -546,7 +712,7 @@
         const clean = String(title || '旅途印記').trim();
         if (clean.length <= maxCharsPerLine) return [clean];
 
-        // 優先在空白、中點、括號處斷行
+        // 優先在空白、中點、斜線處斷行
         const tokens = clean.split(/(\s+|・|·|\/)/).filter(Boolean);
         if (tokens.length > 1) {
             const lines = [];
@@ -658,33 +824,50 @@
             </svg>`;
     }
 
-    /* === 9. 統一渲染入口（支援自訂圖片＋失敗自動退回 SVG 不破圖） === */
+    /* === 9. 統一渲染入口（支援自訂圖片、Special 徽章＋失敗自動退回 SVG 不破圖） === */
     function renderStampVisualHTML(stamp = {}, options = {}) {
         const svgHtml = buildStampSvg(stamp, options);
         const imgPath = normalizeStampImagePath(stamp.customImage);
+        const sp = resolveSpecialStampMeta(stamp);
+        const showSpecial = sp.isSpecial && !options.hideSpecialBadge;
+
+        const specialBadgeHtml = showSpecial
+            ? `<span class="stamp-special-pill" data-special-type="${escSvg(sp.specialType)}" title="${escSvg(sp.specialLabel)}">★ ${escSvg(sp.specialLabel)}</span>`
+            : '';
+        const boxClass = `stamp-visual-box${showSpecial ? ' is-special-stamp' : ''}`;
+
         if (!imgPath) {
-            return `<div class="stamp-visual-box">${svgHtml}</div>`;
+            return `<div class="${boxClass}">${svgHtml}${specialBadgeHtml}</div>`;
         }
         const angle = options.noTilt ? 0 : (((hashString(stamp.name || '') % 70) - 35) / 10);
         return `
-            <div class="stamp-visual-box">
+            <div class="${boxClass}">
                 <img src="${escSvg(imgPath)}" alt="${escSvg(stamp.name || '自訂印章')}"
                      class="flaneur-stamp-custom-img"
                      style="transform:rotate(${angle.toFixed(1)}deg);"
                      loading="lazy"
                      onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='block';">
                 <div class="stamp-svg-fallback" style="display:none;width:100%;height:100%;">${svgHtml}</div>
+                ${specialBadgeHtml}
             </div>`;
     }
 
     /* === 匯出共用介面 === */
     global.FlaneurStampEngine = {
         STAMP_CATEGORIES,
+        STAMP_ALBUMS,
+        SPECIAL_STAMP_TYPES,
         STAMP_SHAPES,
         STAMP_MOTIFS,
         STAMP_COLORS,
+        inferCategoryFromMeta,
         inferStampPreset,
         inferCountryFromContext,
+        resolveStampAlbumKey,
+        getStampAlbumDef,
+        resolveSpecialStampMeta,
+        filterStampsByTaxonomy,
+        buildAlbumStats,
         cleanPrimarySpotName,
         normalizeForCompare,
         normalizeStampImagePath,
