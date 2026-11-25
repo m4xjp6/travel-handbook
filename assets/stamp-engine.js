@@ -53,10 +53,12 @@
         { key: 'hexagon', label: '六角印' },
         { key: 'octagon', label: '八角印' },
         { key: 'shield',  label: '盾形徽章' },
+        { key: 'badge',  label: '不規則徽章' },
+        { key: 'shuin',  label: '御朱印' },
         { key: 'flower',  label: '花形輪廓' },
-        { key: 'ticket',  label: '硬券車票' },
         { key: 'wave',    label: '多層波浪' },
-        { key: 'shrine',  label: '日式神社' },
+        { key: 'ticket',  label: '票券' },
+        { key: 'perforations',  label: '郵票齒孔' },
         { key: 'none',    label: '無外框' }
     ];
 
