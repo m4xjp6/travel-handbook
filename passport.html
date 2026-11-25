@@ -33,6 +33,7 @@
             --accent-brown-dark: #a6897c; /* 深奶茶棕 */
             --accent-pink: #E5D1C7;       /* 柔和藕粉 */
             --accent-gold: #E8C984;       /* 護照燙金點綴 */
+            --accent-amber: #B27C35;      /* Special Stamp 復古琥珀金 */
             --accent-sage: #D8E2D5;       /* 鼠尾草綠 */
             --accent-sage-dark: #5B7A67;  /* 深鼠尾草綠 */
             --text-main: #7A6258;         /* 主要字色：深可可棕 */
@@ -154,8 +155,8 @@
         .mgr-btn.danger { background: #FFF1F2; border-color: #FDA4AF; color: #BE123C; }
         .mgr-btn.danger:hover { background: #BE123C; border-color: #BE123C; color: #fff; }
 
-        /* === 篩選膠囊列與搜尋欄 === */
-        .filter-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+        /* === 篩選膠囊列、主題子圖鑑列與搜尋欄 === */
+        .filter-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
         .capsule-row { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
         .capsule-btn {
             font-family: inherit; display: inline-flex; align-items: center; gap: 5px;
@@ -167,6 +168,31 @@
         .capsule-btn.active { background: var(--accent-brown); border-color: var(--accent-brown); color: #fff; box-shadow: 0 2px 8px rgba(196, 169, 158, 0.35); }
         .capsule-btn.active .inline-flag-img { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45); }
         .capsule-count { opacity: 0.82; font-size: 0.76rem; }
+
+        /* 第二排：主題子圖鑑 ＆ Special Stamp 篩選列 */
+        .album-filter-bar {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
+            padding: 10px 12px; margin-bottom: 18px;
+            background: rgba(245, 239, 230, 0.62); border: 1px dashed var(--border-soft); border-radius: 14px;
+        }
+        .album-bar-label {
+            font-size: 0.75rem; font-weight: 700; color: var(--text-light); letter-spacing: 0.04em;
+            margin-right: 2px; white-space: nowrap;
+        }
+        .capsule-btn.album-btn { padding: 5px 11px; font-size: 0.79rem; background: #fff; }
+        .capsule-btn.album-btn.is-empty { opacity: 0.56; border-style: dashed; }
+        .capsule-btn.album-btn.is-empty:hover { opacity: 0.88; }
+        .capsule-btn.special-filter-btn {
+            padding: 5px 12px; font-size: 0.79rem;
+            border-color: rgba(178, 124, 53, 0.52); background: #FFFBF2; color: #8F5D22;
+        }
+        .capsule-btn.special-filter-btn:hover { background: #FFF3D9; border-color: var(--accent-amber); }
+        .capsule-btn.special-filter-btn.active {
+            background: linear-gradient(135deg, #B27C35, #8F5D22);
+            border-color: #8F5D22; color: #FFFDF8;
+            box-shadow: 0 2px 10px rgba(178, 124, 53, 0.36);
+        }
+
         .search-input-wrap { position: relative; flex: 1 1 220px; max-width: 300px; }
         .search-input {
             font-family: inherit; width: 100%; box-sizing: border-box; padding: 8px 14px 8px 34px;
@@ -190,16 +216,30 @@
         .crossing-mini-caption { font-size: 0.74rem; color: var(--text-light); font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
 
         /* === 區塊三：景點紀念章牆（TRAIN TRIP × EKITAG 共用引擎） === */
-        .spot-stamp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(156px, 1fr)); gap: 18px 14px; }
+        .spot-stamp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(156px, 1fr)); gap: 20px 14px; }
         .spot-stamp-btn {
             appearance: none; border: 1px solid transparent; background: transparent; border-radius: 18px;
-            padding: 8px 6px; cursor: pointer; font-family: inherit; position: relative;
+            padding: 8px 6px 14px; cursor: pointer; font-family: inherit; position: relative;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
         }
         .spot-stamp-btn:hover { transform: translateY(-4px) scale(1.04); background: rgba(245, 239, 230, 0.65); border-color: var(--border-soft); }
         .spot-svg-wrap { width: 100%; max-width: 148px; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; }
-        .stamp-visual-box { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .stamp-visual-box { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+        .stamp-visual-box.is-special-stamp::before {
+            content: ""; position: absolute; inset: -4px; border-radius: 16px;
+            border: 1px dashed rgba(178, 124, 53, 0.45);
+            background: radial-gradient(circle, rgba(232, 201, 132, 0.12) 0%, transparent 72%);
+            pointer-events: none;
+        }
+        .stamp-special-pill {
+            position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); z-index: 4;
+            padding: 2px 8px; border-radius: 999px;
+            background: linear-gradient(135deg, #B27C35, #8F5D22);
+            color: #FDFBF7; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em;
+            box-shadow: 0 2px 6px rgba(110, 90, 79, 0.3);
+            pointer-events: none; white-space: nowrap; max-width: 94%; overflow: hidden; text-overflow: ellipsis;
+        }
         .flaneur-stamp-svg {
             width: 100%; height: 100%; display: block; overflow: visible;
             filter: url(#vintage-ink) drop-shadow(0 2px 4px rgba(90, 72, 62, 0.08));
@@ -209,7 +249,7 @@
             mix-blend-mode: multiply;
         }
         .visit-count-badge {
-            position: absolute; top: 6px; right: 8px; z-index: 3;
+            position: absolute; top: 6px; right: 8px; z-index: 4;
             background: var(--accent-brown-dark); color: #fff; font-size: 0.72rem; font-weight: 700;
             padding: 2px 7px; border-radius: 12px; box-shadow: 0 2px 6px rgba(122, 98, 88, 0.3);
         }
@@ -224,7 +264,7 @@
         .stamp-modal-overlay.open { display: flex; }
         .stamp-modal-card {
             background: #FDFBF7; border: 2px solid var(--accent-brown); border-radius: 22px;
-            max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 24px 24px 22px;
+            max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 24px 24px 22px;
             box-sizing: border-box; box-shadow: 0 18px 46px rgba(45, 34, 28, 0.32); position: relative;
             animation: modalPop 0.22s ease;
         }
@@ -235,7 +275,7 @@
             cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 5;
         }
         .modal-close-btn:hover { background: var(--accent-brown); color: #fff; }
-        .modal-stamp-preview { display: flex; justify-content: center; align-items: center; padding: 14px; background: #FAF5EC; border: 1px dashed var(--border-soft); border-radius: 16px; margin-bottom: 16px; }
+        .modal-stamp-preview { display: flex; justify-content: center; align-items: center; padding: 18px 14px 22px; background: #FAF5EC; border: 1px dashed var(--border-soft); border-radius: 16px; margin-bottom: 16px; }
         .modal-stamp-preview .stamp-visual-box { width: 175px; height: 175px; }
         .modal-stamp-preview > svg { max-width: 210px; max-height: 210px; width: 100%; height: auto; }
         .modal-title { font-size: 1.24rem; margin: 0 0 8px; line-height: 1.4; padding-right: 28px; }
@@ -246,6 +286,7 @@
             background: #F5EFE6; color: var(--accent-brown-dark); border: 1px solid var(--border-soft);
         }
         .modal-pill.sage { background: var(--accent-sage); color: var(--text-main); border-color: #B8C9B4; }
+        .modal-pill.special { background: #FFF6E2; color: #8F5D22; border-color: rgba(178, 124, 53, 0.5); font-weight: 700; }
         .modal-info-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-bottom: 14px; }
         .modal-info-table th, .modal-info-table td { padding: 7px 6px; border-bottom: 1px dashed #EAE1D8; text-align: left; vertical-align: top; }
         .modal-info-table th { width: 28%; color: var(--text-light); font-weight: 600; }
@@ -274,7 +315,7 @@
 
         /* 編輯／補蓋印章表單樣式 */
         .edit-preview-row {
-            display: flex; align-items: center; gap: 14px; padding: 12px;
+            display: flex; align-items: center; gap: 14px; padding: 14px 12px 18px;
             background: #FAF5EC; border: 1px dashed var(--border-soft); border-radius: 14px; margin-bottom: 12px;
         }
         .edit-preview-box { width: 112px; height: 112px; flex-shrink: 0; }
@@ -287,6 +328,10 @@
             font-family: inherit; width: 100%; box-sizing: border-box;
             border: 1px solid #D8C8B8; border-radius: 10px; padding: 8px 10px;
             font-size: 0.85rem; color: var(--text-main); background: #fff;
+        }
+        .special-edit-box {
+            grid-column: 1 / -1; background: #FFFBF3; border: 1px dashed rgba(178, 124, 53, 0.5);
+            border-radius: 12px; padding: 10px 12px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px;
         }
         .swatch-row { display: flex; flex-wrap: wrap; gap: 7px; padding: 4px 2px; }
         .swatch-btn {
@@ -325,10 +370,12 @@
             .passport-cover-title { font-size: 1.15rem; }
             .passport-page-panel { padding: 18px 14px 22px; }
             .search-input-wrap { max-width: none; width: 100%; }
+            .album-filter-bar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .album-filter-bar::-webkit-scrollbar { display: none; }
             .crossing-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .spot-stamp-grid { grid-template-columns: repeat(2, 1fr); gap: 12px 8px; }
+            .spot-stamp-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 8px; }
             .spot-svg-wrap { max-width: 138px; }
-            .edit-form-grid { grid-template-columns: 1fr; }
+            .edit-form-grid, .special-edit-box { grid-template-columns: 1fr; }
             .edit-preview-row { flex-direction: column; text-align: center; }
             .admin-fab { bottom: 16px; right: 14px; padding: 9px 15px; font-size: 0.82rem; }
         }
@@ -388,6 +435,7 @@
                 <div class="hero-mini-stats">
                     <span>海關通關章 <strong id="stat-crossing-count">0</strong> 枚</span>
                     <span>景點紀念章 <strong id="stat-spot-count">0</strong> 枚</span>
+                    <span>特別典藏 <strong id="stat-special-count">0</strong> 枚</span>
                 </div>
             </div>
         </section>
@@ -409,7 +457,7 @@
         </div>
     </section>
 
-    <!-- 區塊三：下半部 — 景點紀念印章牆（主動收集・TRAIN TRIP × EKITAG 風格・同名自動計次） -->
+    <!-- 區塊三：下半部 — 景點紀念印章牆（主動收集・TRAIN TRIP × EKITAG 風格・主題子圖鑑＆Special Stamp） -->
     <section class="passport-page-panel paper-bg">
         <div class="section-header-bar">
             <h2 class="section-title">🏮 景點紀念印章牆</h2>
@@ -419,13 +467,17 @@
             </div>
         </div>
 
+        <!-- 第一排：國家篩選 ＆ 關鍵字搜尋 -->
         <div class="filter-toolbar">
             <div class="capsule-row" id="spot-country-filters"></div>
             <div class="search-input-wrap">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="spot-search-input" class="search-input" placeholder="搜尋景點、車站、美食或地區...">
+                <input type="text" id="spot-search-input" class="search-input" placeholder="搜尋景點、車站、圖鑑、特別章...">
             </div>
         </div>
+
+        <!-- 第二排：主題子圖鑑 ＆ Special Stamp 篩選列 -->
+        <div class="album-filter-bar" id="spot-album-filters" aria-label="主題子圖鑑與 Special Stamp 篩選"></div>
 
         <div class="spot-stamp-grid" id="spot-stamps-grid">
             <div class="empty-state-box" style="grid-column: 1 / -1;">讀取雲端景點紀念印章中...</div>
@@ -449,7 +501,7 @@
             <div class="edit-preview-row">
                 <div class="edit-preview-box" id="editor-stamp-preview"></div>
                 <div class="edit-preview-desc" id="editor-preview-hint">
-                    補登未寫在行程中的私房景點，或修改現有印章名稱、外框、圖樣、印泥色與自訂圖片。
+                    補登未寫在行程中的私房景點，或修改現有印章名稱、分類、子圖鑑、Special 標記、外框與自訂圖片。
                 </div>
             </div>
 
@@ -458,7 +510,7 @@
             <div class="edit-form-grid">
                 <div class="edit-field full">
                     <label for="ed-name">印章名稱</label>
-                    <input type="text" id="ed-name" class="edit-input" placeholder="例如：藏王溫泉郵便局、東京鐵塔" oninput="onEditorFormInput()">
+                    <input type="text" id="ed-name" class="edit-input" placeholder="例如：藏王溫泉郵便局、藏王樹冰" oninput="onEditorFormInput()">
                 </div>
                 <div class="edit-field">
                     <label for="ed-country">國家</label>
@@ -467,6 +519,14 @@
                 <div class="edit-field">
                     <label for="ed-region">地區（外圈弧形字）</label>
                     <input type="text" id="ed-region" class="edit-input" placeholder="例如：山形、宮城、東京" oninput="updateEditorPreview()">
+                </div>
+                <div class="edit-field">
+                    <label for="ed-category">景點分類（切換會自動配對外觀）</label>
+                    <select id="ed-category" class="edit-select" onchange="onEditorCategoryChange()"></select>
+                </div>
+                <div class="edit-field">
+                    <label for="ed-album">主題子圖鑑</label>
+                    <select id="ed-album" class="edit-select" onchange="updateEditorPreview()"></select>
                 </div>
                 <div class="edit-field" id="ed-date-wrap">
                     <label for="ed-date">收集日期</label>
@@ -485,13 +545,34 @@
                     <input type="hidden" id="ed-color" value="#354F6B">
                     <div id="ed-color-swatches" class="swatch-row"></div>
                 </div>
+
+                <!-- Special Stamp 特別典藏設定區 -->
+                <div class="special-edit-box">
+                    <div class="edit-field full">
+                        <label for="ed-special-mode">★ Special Stamp 特別典藏標記</label>
+                        <select id="ed-special-mode" class="edit-select" onchange="onEditorSpecialModeChange()">
+                            <option value="auto">自動判斷（季節景觀／祭典活動／絕景關鍵字）</option>
+                            <option value="true">★ 設為 Special Stamp 特別章</option>
+                            <option value="false">一般印章（關閉自動標記）</option>
+                        </select>
+                    </div>
+                    <div class="edit-field" id="ed-special-type-wrap">
+                        <label for="ed-special-type">特別章類型</label>
+                        <select id="ed-special-type" class="edit-select" onchange="updateEditorPreview()"></select>
+                    </div>
+                    <div class="edit-field" id="ed-special-label-wrap">
+                        <label for="ed-special-label">徽章短標籤（選填，建議 4–6 字）</label>
+                        <input type="text" id="ed-special-label" class="edit-input" placeholder="如：冬季限定、世界遺產" oninput="updateEditorPreview()">
+                    </div>
+                </div>
+
                 <div class="edit-field full" id="ed-trip-wrap">
                     <label for="ed-trip">關聯旅程（選填，方便串接該趟遊記）</label>
                     <select id="ed-trip" class="edit-select"></select>
                 </div>
                 <div class="edit-field full">
-                    <label for="ed-custom-img">自訂手繪／實體印章圖片路徑（選填，留空則自動繪製）</label>
-                    <input type="text" id="ed-custom-img" class="edit-input" placeholder="只填檔名如 zao_stamp.png（傳至 media/stamps/）" oninput="updateEditorPreview()">
+                    <label for="ed-custom-img">自訂手繪／透明 PNG 印章檔名（選填，留空則自動繪製 SVG）</label>
+                    <input type="text" id="ed-custom-img" class="edit-input" placeholder="只填檔名如 jp_yamagata_zao_juhyo.png（傳至 media/passport/stamps/）" oninput="updateEditorPreview()">
                 </div>
                 <div class="edit-field full" id="ed-note-wrap">
                     <label for="ed-note">集章備註（選填）</label>
@@ -508,7 +589,7 @@
 
     <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
 
-    <script src="assets/stamp-engine.js?v=20261124b"></script>
+    <script src="assets/stamp-engine.js?v=20261125a"></script>
     <script>
         /* =====================================================================
            1. 全域設定、Google 試算表接口與工具函式
@@ -572,6 +653,16 @@
         const escHtml = s => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
         const normalizeCountry = name => String(name || '').trim().replace(/^臺灣$/, '台灣');
 
+        // 相容 Google Sheets 可能回傳字串 "TRUE" / "FALSE" / "" 的三態布林解析
+        function parseOptionalBool(val) {
+            if (val === true) return true;
+            if (val === false) return false;
+            const s = String(val ?? '').trim().toLowerCase();
+            if (s === 'true' || s === '1' || s === 'yes') return true;
+            if (s === 'false' || s === '0' || s === 'no') return false;
+            return undefined;
+        }
+
         function getFlagSvgUrl(countryName) {
             const meta = COUNTRY_META[normalizeCountry(countryName)];
             const code = String(meta?.code || '').toLowerCase();
@@ -618,6 +709,8 @@
 
         let currentCrossingCountry = 'ALL';
         let currentSpotCountry = 'ALL';
+        let currentSpotAlbum = 'ALL';
+        let currentSpecialOnly = false;
         let currentSpotSearch = '';
 
         // 雲端編輯密碼（與 journal.html 共用 localStorage key）
@@ -652,13 +745,11 @@
             const seed = hashString(`${item.date}-${item.portCode}-${item.direction}`);
             const tilt = ((seed % 7) - 3) * 0.9;
 
-            // 決定外框形狀（未來若有國家要改圓形章，加進 'circle' 判斷或在資料設 item.shape = 'circle' 即可）
             let shape = item.shape || 'rect';
             if (!item.shape) {
                 if (item.country === '日本') shape = 'octagon';
                 else if (item.country === '香港') shape = 'oval';
                 else if (item.country === '馬來西亞' || item.country === '新加坡') shape = 'hexagon';
-                // else if (item.country === '泰國') shape = 'circle';
             }
 
             let frameSvg = '';
@@ -711,7 +802,6 @@
                 const topId = `cross-top-${uid}`;
                 const botId = `cross-bot-${uid}`;
 
-                // 依弧長與字數自動微調字級和字距，避免長字擠壓
                 const topFont = isCircle
                     ? (topRaw.length > 20 ? 6.4 : (topRaw.length > 16 ? 7.0 : 7.6))
                     : (topRaw.length > 22 ? 7.4 : (topRaw.length > 18 ? 8.0 : 8.6));
@@ -758,7 +848,6 @@
                         <textPath href="#${botId}" xlink:href="#${botId}" startOffset="50%" text-anchor="middle">${botEsc}</textPath>
                     </text>`;
             } else {
-                // 方形、八角、六角維持原本水平排版，並為長字數加上安全縮放
                 const topFont = topRaw.length > 20 ? 8.0 : (topRaw.length > 18 ? 8.6 : 9.5);
                 const topTrack = topRaw.length > 18 ? 1.0 : 1.6;
                 const botFont = botRaw.length > 20 ? 7.8 : 9;
@@ -805,7 +894,6 @@
                 countries: []
             };
 
-            // 同步讀取 passport.json 與雲端公開景點印章
             const [cfgRes, cloudRes] = await Promise.all([
                 fetch(`passport/passport.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null),
                 fetch(`${GAS_API_URL}?action=getStamps`).then(r => r.ok ? r.json() : null).catch(() => null)
@@ -815,10 +903,13 @@
             passportCfgCache = passportCfg;
 
             cloudStampsRaw = (cloudRes?.ok && Array.isArray(cloudRes.stamps))
-                ? cloudRes.stamps.map(s => ({ ...s, isCloud: true }))
+                ? cloudRes.stamps.map(s => ({
+                    ...s,
+                    isSpecial: parseOptionalBool(s.isSpecial),
+                    isCloud: true
+                }))
                 : [];
 
-            // 蒐集所有需要查詢旅程名稱與遊記公開狀態的 tripId
             const tripIdSet = new Set(Array.isArray(passportCfg.trackedTrips) ? passportCfg.trackedTrips.filter(Boolean) : []);
             cloudStampsRaw.forEach(s => { if (s.tripId) tripIdSet.add(s.tripId); });
             (passportCfg.manualCrossings || []).forEach(mc => { if (mc.tripId) tripIdSet.add(mc.tripId); });
@@ -850,7 +941,6 @@
                 }
             });
 
-            // 手動補登出入境章
             (passportCfg.manualCrossings || []).forEach((mc, idx) => {
                 if (!mc?.date) return;
                 if (!isPreviewMode && mc.date > todayStr) return;
@@ -864,7 +954,6 @@
                 });
             });
 
-            // 自動抓取各 trackedTrips 的出入境章（景點章不再自動抓取）
             tripResults.forEach(({ id, itin, isTracked }) => {
                 if (!isTracked || !itin) return;
                 if (!isPreviewMode && (itin.isDraft === true || itin.hidden === true)) return;
@@ -897,7 +986,15 @@
                 .filter(ms => ms?.spotName)
                 .map((ms, idx) => {
                     const preset = FlaneurStampEngine.inferStampPreset({
-                        name: ms.spotName, categoryLabel: ms.categoryLabel, country: ms.country, region: ms.region
+                        name: ms.spotName,
+                        categoryLabel: ms.categoryLabel,
+                        category: ms.category,
+                        country: ms.country,
+                        region: ms.region,
+                        album: ms.album,
+                        isSpecial: parseOptionalBool(ms.isSpecial),
+                        specialType: ms.specialType,
+                        specialLabel: ms.specialLabel
                     });
                     return {
                         id: `legacy_${idx}`,
@@ -908,6 +1005,11 @@
                         tripId: String(ms.tripId || '').trim(),
                         day: '',
                         spotId: '',
+                        category: ms.category || preset.category,
+                        album: ms.album || '',
+                        isSpecial: parseOptionalBool(ms.isSpecial),
+                        specialType: ms.specialType || '',
+                        specialLabel: ms.specialLabel || '',
                         shape: ms.shape || preset.shape,
                         motif: ms.motif || preset.motif,
                         color: ms.color || preset.color,
@@ -924,7 +1026,7 @@
         }
 
         /* =====================================================================
-           4. 景點印章同名合併計次（同名不同日合併，並保留每次日期與遊記連結）
+           4. 景點印章同名合併計次（整合主題子圖鑑與 Special Stamp 推斷）
            ===================================================================== */
         function rebuildGroupedSpotsAndRender() {
             const spotMap = new Map();
@@ -939,7 +1041,6 @@
                     unlockedSet.add(country);
                 }
 
-                // 依「印章名稱（不分大小寫）」合併同名多日紀錄
                 const key = name.toLowerCase();
                 if (!spotMap.has(key)) {
                     spotMap.set(key, {
@@ -947,6 +1048,11 @@
                         name,
                         country,
                         region: item.region || '',
+                        category: item.category || '',
+                        album: item.album || '',
+                        isSpecial: parseOptionalBool(item.isSpecial),
+                        specialType: item.specialType || '',
+                        specialLabel: item.specialLabel || '',
                         shape: item.shape || 'circle',
                         motif: item.motif || 'landmark',
                         color: item.color || '#354F6B',
@@ -959,15 +1065,26 @@
                 }
 
                 const entry = spotMap.get(key);
+                const itemSpecial = parseOptionalBool(item.isSpecial);
+
                 if (item.isCloud) {
                     entry.hasCloud = true;
-                    // 以最新一筆雲端樣式作為主樣式
                     if (!entry.customImage && item.customImage) entry.customImage = item.customImage;
+                    if (!entry.category && item.category) entry.category = item.category;
+                    if (!entry.album && item.album) entry.album = item.album;
+                    if (entry.isSpecial === undefined && itemSpecial !== undefined) entry.isSpecial = itemSpecial;
+                    if (!entry.specialType && item.specialType) entry.specialType = item.specialType;
+                    if (!entry.specialLabel && item.specialLabel) entry.specialLabel = item.specialLabel;
                 }
                 if (item.date) {
                     entry.datesSet.add(item.date);
                     if (!entry.latestDate || item.date > entry.latestDate) {
                         entry.latestDate = item.date;
+                        if (item.category) entry.category = item.category;
+                        if (item.album) entry.album = item.album;
+                        if (itemSpecial !== undefined) entry.isSpecial = itemSpecial;
+                        if (item.specialType) entry.specialType = item.specialType;
+                        if (item.specialLabel) entry.specialLabel = item.specialLabel;
                         if (item.shape) entry.shape = item.shape;
                         if (item.motif) entry.motif = item.motif;
                         if (item.color) entry.color = item.color;
@@ -984,12 +1101,22 @@
                 });
             });
 
-            groupedSpotStamps = [...spotMap.values()].map((s, idx) => ({
-                ...s,
-                uid: `sg-${idx}`,
-                visitCount: Math.max(1, s.datesSet.size || s.visits.length),
-                visits: s.visits.sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-            })).sort((a, b) => {
+            groupedSpotStamps = [...spotMap.values()].map((s, idx) => {
+                const resolvedCategory = FlaneurStampEngine.STAMP_CATEGORIES.some(c => c.key === s.category)
+                    ? s.category
+                    : FlaneurStampEngine.inferCategoryFromMeta(s.name, '', false);
+                const resolvedAlbum = FlaneurStampEngine.resolveStampAlbumKey({ ...s, category: resolvedCategory });
+                const specialMeta = FlaneurStampEngine.resolveSpecialStampMeta({ ...s, category: resolvedCategory });
+                return {
+                    ...s,
+                    uid: `sg-${idx}`,
+                    resolvedCategory,
+                    resolvedAlbum,
+                    specialMeta,
+                    visitCount: Math.max(1, s.datesSet.size || s.visits.length),
+                    visits: s.visits.sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+                };
+            }).sort((a, b) => {
                 if (b.latestDate !== a.latestDate) return (b.latestDate || '').localeCompare(a.latestDate || '');
                 return b.visitCount - a.visitCount;
             });
@@ -1001,7 +1128,7 @@
         }
 
         /* =====================================================================
-           5. 畫面渲染：進度卡、通關印章牆、景點紀念章牆與管理按鈕
+           5. 畫面渲染：進度卡、通關印章牆、主題子圖鑑列與景點紀念章牆
            ===================================================================== */
         function renderHeroSummary(unlockedCountries) {
             const ordered = unlockedCountries.sort((a, b) => {
@@ -1015,11 +1142,14 @@
 
             const count = ordered.length;
             const pct = ((count / TOTAL_WORLD_TARGETS) * 100).toFixed(1);
+            const specialTotal = groupedSpotStamps.filter(s => s.specialMeta?.isSpecial).length;
+
             $('unlocked-count-num').textContent = count;
             $('unlocked-pct-label').textContent = `世界探索度 ${pct}%`;
             $('unlocked-progress-fill').style.width = `${Math.max(3, Math.min(100, Number(pct)))}%`;
             $('stat-crossing-count').textContent = allCrossings.length;
             $('stat-spot-count').textContent = groupedSpotStamps.length;
+            if ($('stat-special-count')) $('stat-special-count').textContent = specialTotal;
 
             $('unlocked-flags-wrap').innerHTML = ordered.map(c => {
                 const flagHtml = buildFlagImgHtml(c, 'on-dark') || '<span>🌐</span>';
@@ -1104,6 +1234,29 @@
             }).join('');
         }
 
+        function selectSpotCountry(countryKey) {
+            currentSpotCountry = countryKey;
+            renderSpotFilters();
+            renderSpotsWall();
+        }
+
+        function selectSpotAlbum(albumKey) {
+            if (albumKey === 'ALL') {
+                currentSpotAlbum = 'ALL';
+                currentSpecialOnly = false;
+            } else {
+                currentSpotAlbum = (currentSpotAlbum === albumKey) ? 'ALL' : albumKey;
+            }
+            renderSpotAlbumFilters();
+            renderSpotsWall();
+        }
+
+        function toggleSpecialOnlyFilter() {
+            currentSpecialOnly = !currentSpecialOnly;
+            renderSpotAlbumFilters();
+            renderSpotsWall();
+        }
+
         function renderSpotFilters() {
             const counts = {};
             groupedSpotStamps.forEach(s => { counts[s.country] = (counts[s.country] || 0) + 1; });
@@ -1124,17 +1277,54 @@
             ];
             $('spot-country-filters').innerHTML = pills.map(p => `
                 <button type="button" class="capsule-btn ${currentSpotCountry === p.key ? 'active' : ''}"
-                    onclick="currentSpotCountry='${escHtml(p.key)}';renderSpotFilters();renderSpotsWall();">
+                    onclick="selectSpotCountry('${escHtml(p.key)}')">
                     ${p.country ? buildFlagImgHtml(p.country) : ''}<span>${escHtml(p.label)}</span><span class="capsule-count">(${p.count})</span>
                 </button>`).join('');
+
+            renderSpotAlbumFilters();
+        }
+
+        function renderSpotAlbumFilters() {
+            const container = $('spot-album-filters');
+            if (!container) return;
+
+            const stats = FlaneurStampEngine.buildAlbumStats(groupedSpotStamps, currentSpotCountry);
+            const isAllActive = currentSpotAlbum === 'ALL' && !currentSpecialOnly;
+
+            const albumBtns = FlaneurStampEngine.STAMP_ALBUMS.map(alb => {
+                const cnt = stats.albumCounts[alb.key] || 0;
+                const activeCls = currentSpotAlbum === alb.key ? 'active' : '';
+                const emptyCls = cnt === 0 ? 'is-empty' : '';
+                return `
+                    <button type="button" class="capsule-btn album-btn ${activeCls} ${emptyCls}"
+                        onclick="selectSpotAlbum('${escHtml(alb.key)}')" title="${escHtml(alb.label)}">
+                        <span>${escHtml(alb.label)}</span><span class="capsule-count">(${cnt})</span>
+                    </button>`;
+            }).join('');
+
+            container.innerHTML = `
+                <span class="album-bar-label">📚 主題圖鑑</span>
+                <button type="button" class="capsule-btn album-btn ${isAllActive ? 'active' : ''}" onclick="selectSpotAlbum('ALL')">
+                    <span>全部圖鑑</span><span class="capsule-count">(${stats.total})</span>
+                </button>
+                <button type="button" class="capsule-btn special-filter-btn ${currentSpecialOnly ? 'active' : ''}" onclick="toggleSpecialOnlyFilter()">
+                    <span>★ SPECIAL STAMP</span><span class="capsule-count">(${stats.specialCount})</span>
+                </button>
+                ${albumBtns}`;
         }
 
         function renderSpotsWall() {
             const kw = currentSpotSearch.trim().toLowerCase();
-            const list = groupedSpotStamps.filter(s => {
-                if (currentSpotCountry !== 'ALL' && s.country !== currentSpotCountry) return false;
-                if (!kw) return true;
-                const hay = `${s.name} ${s.country} ${s.region} ${s.visits.map(v => `${v.tripName} ${v.note}`).join(' ')}`.toLowerCase();
+            const taxonomyFiltered = FlaneurStampEngine.filterStampsByTaxonomy(groupedSpotStamps, {
+                country: currentSpotCountry,
+                album: currentSpotAlbum,
+                specialOnly: currentSpecialOnly
+            });
+
+            const list = !kw ? taxonomyFiltered : taxonomyFiltered.filter(s => {
+                const albumDef = FlaneurStampEngine.getStampAlbumDef(s.resolvedAlbum);
+                const spLabel = s.specialMeta?.isSpecial ? s.specialMeta.specialLabel : '';
+                const hay = `${s.name} ${s.country} ${s.region} ${albumDef.label} ${spLabel} ${s.visits.map(v => `${v.tripName} ${v.note}`).join(' ')}`.toLowerCase();
                 return hay.includes(kw);
             });
 
@@ -1150,7 +1340,16 @@
             }
 
             if (!list.length) {
-                $('spot-stamps-grid').innerHTML = `<div class="empty-state-box" style="grid-column:1 / -1;">找不到符合「${escHtml(currentSpotSearch || currentSpotCountry)}」的景點紀念印章。</div>`;
+                const filterParts = [];
+                if (currentSpotCountry !== 'ALL') filterParts.push(currentSpotCountry);
+                if (currentSpecialOnly) filterParts.push('★ SPECIAL STAMP');
+                if (currentSpotAlbum !== 'ALL') filterParts.push(FlaneurStampEngine.getStampAlbumDef(currentSpotAlbum).label);
+                if (currentSpotSearch.trim()) filterParts.push(currentSpotSearch.trim());
+                $('spot-stamps-grid').innerHTML = `
+                    <div class="empty-state-box" style="grid-column:1 / -1;">
+                        找不到符合「${escHtml(filterParts.join(' / '))}」的景點紀念印章。<br>
+                        <button type="button" class="mgr-btn" style="margin-top:10px;" onclick="currentSpotCountry='ALL';currentSpotAlbum='ALL';currentSpecialOnly=false;currentSpotSearch='';$('spot-search-input').value='';renderSpotFilters();renderSpotsWall();">↺ 顯示全部印章</button>
+                    </div>`;
                 return;
             }
 
@@ -1159,6 +1358,11 @@
                     name: stamp.name,
                     country: stamp.country,
                     region: stamp.region,
+                    category: stamp.resolvedCategory,
+                    album: stamp.resolvedAlbum,
+                    isSpecial: stamp.isSpecial,
+                    specialType: stamp.specialType,
+                    specialLabel: stamp.specialLabel,
                     date: stamp.latestDate,
                     shape: stamp.shape,
                     motif: stamp.motif,
@@ -1174,7 +1378,7 @@
         }
 
         /* =====================================================================
-           6. 印章詳情彈窗（含遊記跳轉 ＆ 解鎖後的編輯／刪除入口）
+           6. 印章詳情彈窗（含主題圖鑑、Special 標記、遊記跳轉 ＆ 管理入口）
            ===================================================================== */
         function openCrossingModal(uid) {
             const item = allCrossings.find(c => c.uid === uid);
@@ -1214,11 +1418,18 @@
             if (!stamp) return;
             const flagHtml = buildFlagImgHtml(stamp.country) || '📍';
             const shapeLabel = FlaneurStampEngine.STAMP_SHAPES.find(s => s.key === stamp.shape)?.label?.split('（')[0] || '經典印章';
+            const albumDef = FlaneurStampEngine.getStampAlbumDef(stamp.resolvedAlbum);
+            const sp = stamp.specialMeta || { isSpecial: false };
 
             const previewHtml = FlaneurStampEngine.renderStampVisualHTML({
                 name: stamp.name,
                 country: stamp.country,
                 region: stamp.region,
+                category: stamp.resolvedCategory,
+                album: stamp.resolvedAlbum,
+                isSpecial: stamp.isSpecial,
+                specialType: stamp.specialType,
+                specialLabel: stamp.specialLabel,
                 date: stamp.latestDate,
                 shape: stamp.shape,
                 motif: stamp.motif,
@@ -1259,7 +1470,9 @@
                 <h3 class="modal-title">${escHtml(stamp.name)}</h3>
                 <div class="modal-tags-row">
                     <span class="modal-pill">${flagHtml}<span>${escHtml(stamp.country)}${stamp.region ? '・' + escHtml(stamp.region) : ''}</span></span>
-                    <span class="modal-pill sage">${escHtml(shapeLabel)}</span>
+                    <span class="modal-pill sage">${escHtml(albumDef.label)}</span>
+                    ${sp.isSpecial ? `<span class="modal-pill special">★ ${escHtml(sp.specialLabel)}</span>` : ''}
+                    <span class="modal-pill">${escHtml(shapeLabel)}</span>
                     <span class="modal-pill">累計造訪 ${stamp.visitCount} 次</span>
                     ${stamp.customImage ? `<span class="modal-pill">🖼️ 自訂圖樣</span>` : ''}
                 </div>
@@ -1275,10 +1488,20 @@
         function closeStampModal() { $('stamp-modal').classList.remove('open'); }
 
         /* =====================================================================
-           7. 護照內直接管理：補蓋隱藏景點、修改名稱／樣式與刪除誤蓋印章
+           7. 護照內直接管理：補蓋隱藏景點、修改分類／子圖鑑／Special 與外觀樣式
            ===================================================================== */
         function initEditorControls() {
             if (editorControlsInited) return;
+            $('ed-category').innerHTML = FlaneurStampEngine.STAMP_CATEGORIES
+                .map(c => `<option value="${c.key}">${escHtml(c.label)}</option>`).join('');
+            $('ed-album').innerHTML = [
+                `<option value="">自動依分類與圖樣歸類</option>`,
+                ...FlaneurStampEngine.STAMP_ALBUMS.map(a => `<option value="${a.key}">${escHtml(a.label)}</option>`)
+            ].join('');
+            $('ed-special-type').innerHTML = [
+                `<option value="">自動判定特別類型</option>`,
+                ...FlaneurStampEngine.SPECIAL_STAMP_TYPES.map(t => `<option value="${t.key}">${escHtml(t.label)}</option>`)
+            ].join('');
             $('ed-shape').innerHTML = FlaneurStampEngine.STAMP_SHAPES
                 .map(s => `<option value="${s.key}">${escHtml(s.label)}</option>`).join('');
             $('ed-motif').innerHTML = FlaneurStampEngine.STAMP_MOTIFS
@@ -1304,6 +1527,39 @@
             updateEditorPreview();
         }
 
+        function getEditorSpecialValue() {
+            const mode = $('ed-special-mode')?.value || 'auto';
+            if (mode === 'true') return true;
+            if (mode === 'false') return false;
+            return undefined;
+        }
+
+        function syncEditorSpecialVisibility() {
+            const mode = $('ed-special-mode')?.value || 'auto';
+            const showDetails = (mode !== 'false');
+            $('ed-special-type-wrap').style.display = showDetails ? 'flex' : 'none';
+            $('ed-special-label-wrap').style.display = showDetails ? 'flex' : 'none';
+        }
+
+        function onEditorCategoryChange() {
+            const selectedCat = $('ed-category').value;
+            const preset = FlaneurStampEngine.inferStampPreset({
+                name: ($('ed-name')?.value || '').trim(),
+                country: ($('ed-country')?.value || '').trim(),
+                region: ($('ed-region')?.value || '').trim(),
+                category: selectedCat
+            });
+            $('ed-shape').value = preset.shape;
+            $('ed-motif').value = preset.motif;
+            selectEditorColor(preset.color);
+            updateEditorPreview();
+        }
+
+        function onEditorSpecialModeChange() {
+            syncEditorSpecialVisibility();
+            updateEditorPreview();
+        }
+
         async function openAddStampModal() {
             if (!cloudEditPassword) {
                 const ok = await unlockPassportEdit();
@@ -1324,12 +1580,18 @@
             $('ed-name').value = '';
             $('ed-country').value = '日本';
             $('ed-region').value = '';
+            $('ed-category').value = 'facility';
+            $('ed-album').value = '';
             $('ed-date').value = todayStr;
             $('ed-shape').value = 'circle';
             $('ed-motif').value = 'landmark';
+            $('ed-special-mode').value = 'auto';
+            $('ed-special-type').value = '';
+            $('ed-special-label').value = '';
             $('ed-custom-img').value = '';
             $('ed-note').value = '';
             populateEditorTripOptions('');
+            syncEditorSpecialVisibility();
             selectEditorColor('#354F6B');
 
             onEditorFormInput();
@@ -1347,7 +1609,7 @@
             editorTargetVisit = stamp;
 
             $('editor-modal-title').textContent = '✏️ 編輯印章名稱與外觀樣式';
-            $('editor-preview-hint').textContent = '修改名稱、外框、圖樣、印泥色或自訂圖片後，將一次同步更新此景點的所有造訪紀錄（改成既有印章名稱可自動合併）。';
+            $('editor-preview-hint').textContent = '修改名稱、分類、子圖鑑、Special 標記、外框、圖樣、印泥色或自訂圖片後，將一次同步更新此景點的所有造訪紀錄。';
             $('btn-editor-save').textContent = '💾 儲存印章變更';
             $('ed-date-wrap').style.display = 'none';
             $('ed-trip-wrap').style.display = 'none';
@@ -1356,10 +1618,16 @@
             $('ed-name').value = stamp.name || '';
             $('ed-country').value = stamp.country || '';
             $('ed-region').value = stamp.region || '';
+            $('ed-category').value = stamp.resolvedCategory || 'facility';
+            $('ed-album').value = stamp.album || '';
             $('ed-date').value = stamp.latestDate || '';
             $('ed-shape').value = stamp.shape || 'circle';
             $('ed-motif').value = stamp.motif || 'landmark';
+            $('ed-special-mode').value = stamp.isSpecial === true ? 'true' : (stamp.isSpecial === false ? 'false' : 'auto');
+            $('ed-special-type').value = stamp.specialType || '';
+            $('ed-special-label').value = stamp.specialLabel || '';
             $('ed-custom-img').value = stamp.customImage || '';
+            syncEditorSpecialVisibility();
             selectEditorColor(stamp.color || '#354F6B');
 
             onEditorFormInput();
@@ -1377,21 +1645,31 @@
             editorTargetVisit = visit;
 
             $('editor-modal-title').textContent = '✏️ 編輯單筆造訪紀錄';
-            $('editor-preview-hint').textContent = '可修改這筆紀錄的收集日期、關聯旅程、集章備註或印章名稱。';
+            $('editor-preview-hint').textContent = '可修改這筆紀錄的收集日期、關聯旅程、集章備註、分類圖鑑或印章外觀。';
             $('btn-editor-save').textContent = '💾 更新此筆紀錄';
             $('ed-date-wrap').style.display = 'flex';
             $('ed-trip-wrap').style.display = 'flex';
             $('ed-note-wrap').style.display = 'flex';
 
+            const inferredCat = FlaneurStampEngine.STAMP_CATEGORIES.some(c => c.key === visit.category)
+                ? visit.category
+                : FlaneurStampEngine.inferCategoryFromMeta(visit.name, '', false);
+
             $('ed-name').value = visit.name || '';
             $('ed-country').value = visit.country || '';
             $('ed-region').value = visit.region || '';
+            $('ed-category').value = inferredCat;
+            $('ed-album').value = visit.album || '';
             $('ed-date').value = visit.date || '';
             $('ed-shape').value = visit.shape || 'circle';
             $('ed-motif').value = visit.motif || 'landmark';
+            $('ed-special-mode').value = visit.isSpecial === true ? 'true' : (visit.isSpecial === false ? 'false' : 'auto');
+            $('ed-special-type').value = visit.specialType || '';
+            $('ed-special-label').value = visit.specialLabel || '';
             $('ed-custom-img').value = visit.customImage || '';
             $('ed-note').value = visit.note || '';
             populateEditorTripOptions(visit.tripId || '');
+            syncEditorSpecialVisibility();
             selectEditorColor(visit.color || '#354F6B');
 
             onEditorFormInput();
@@ -1404,9 +1682,19 @@
             $('ed-name').value = item.name;
             if (item.country) $('ed-country').value = item.country;
             if (item.region) $('ed-region').value = item.region;
+            if (item.category && FlaneurStampEngine.STAMP_CATEGORIES.some(c => c.key === item.category)) {
+                $('ed-category').value = item.category;
+            }
+            if (item.album) $('ed-album').value = item.album;
             if (item.shape) $('ed-shape').value = item.shape;
             if (item.motif) $('ed-motif').value = item.motif;
+            if (item.isSpecial === true) $('ed-special-mode').value = 'true';
+            else if (item.isSpecial === false) $('ed-special-mode').value = 'false';
+            else $('ed-special-mode').value = 'auto';
+            if (item.specialType) $('ed-special-type').value = item.specialType;
+            if (item.specialLabel) $('ed-special-label').value = item.specialLabel;
             if (item.customImage) $('ed-custom-img').value = item.customImage;
+            syncEditorSpecialVisibility();
             if (item.color) selectEditorColor(item.color);
             onEditorFormInput();
         }
@@ -1445,10 +1733,16 @@
         function updateEditorPreview() {
             const el = $('editor-stamp-preview');
             if (!el) return;
+            const specialVal = getEditorSpecialValue();
             el.innerHTML = FlaneurStampEngine.renderStampVisualHTML({
                 name: ($('ed-name')?.value || '').trim() || '景點印章',
                 country: ($('ed-country')?.value || '').trim(),
                 region: ($('ed-region')?.value || '').trim(),
+                category: $('ed-category')?.value || 'facility',
+                album: $('ed-album')?.value || '',
+                isSpecial: specialVal,
+                specialType: $('ed-special-type')?.value || '',
+                specialLabel: ($('ed-special-label')?.value || '').trim(),
                 date: ($('ed-date')?.value || '').trim(),
                 shape: $('ed-shape')?.value || 'circle',
                 motif: $('ed-motif')?.value || 'landmark',
@@ -1471,6 +1765,15 @@
             btn.disabled = true;
             btn.textContent = '⏳ 雲端同步中...';
 
+            const specialVal = getEditorSpecialValue();
+            const taxonomyPayload = {
+                category: $('ed-category').value || 'facility',
+                album: $('ed-album').value || '',
+                isSpecial: specialVal === undefined ? '' : specialVal,
+                specialType: specialVal === false ? '' : ($('ed-special-type').value || ''),
+                specialLabel: specialVal === false ? '' : (($('ed-special-label').value || '').trim())
+            };
+
             try {
                 if (editorMode === 'editGroup') {
                     const groupData = {
@@ -1478,6 +1781,7 @@
                         name,
                         country: normalizeCountry($('ed-country').value),
                         region: ($('ed-region').value || '').trim(),
+                        ...taxonomyPayload,
                         shape: $('ed-shape').value || 'circle',
                         motif: $('ed-motif').value || 'landmark',
                         color: $('ed-color').value || '#354F6B',
@@ -1488,7 +1792,21 @@
                         const oldNorm = editorTargetOldName.toLowerCase();
                         cloudStampsRaw = cloudStampsRaw.map(s =>
                             String(s.name || '').trim().toLowerCase() === oldNorm
-                                ? { ...s, name: groupData.name, country: groupData.country, region: groupData.region, shape: groupData.shape, motif: groupData.motif, color: groupData.color, customImage: groupData.customImage }
+                                ? {
+                                    ...s,
+                                    name: groupData.name,
+                                    country: groupData.country,
+                                    region: groupData.region,
+                                    category: groupData.category,
+                                    album: groupData.album,
+                                    isSpecial: specialVal,
+                                    specialType: groupData.specialType,
+                                    specialLabel: groupData.specialLabel,
+                                    shape: groupData.shape,
+                                    motif: groupData.motif,
+                                    color: groupData.color,
+                                    customImage: groupData.customImage
+                                }
                                 : s
                         );
                         rebuildGroupedSpotsAndRender();
@@ -1507,6 +1825,7 @@
                         tripId: $('ed-trip').value || '',
                         day: isEditSingle ? (editorTargetVisit.day || '') : '',
                         spotId: isEditSingle ? (editorTargetVisit.spotId || '') : '',
+                        ...taxonomyPayload,
                         shape: $('ed-shape').value || 'circle',
                         motif: $('ed-motif').value || 'landmark',
                         color: $('ed-color').value || '#354F6B',
@@ -1515,7 +1834,7 @@
                     };
                     const res = await callGasPost({ action: 'saveStamp', data: stampData });
                     if (res?.ok) {
-                        const nextObj = { ...stampData, isCloud: true };
+                        const nextObj = { ...stampData, isSpecial: specialVal, isCloud: true };
                         const idx = cloudStampsRaw.findIndex(s => s.id === nextObj.id);
                         if (idx >= 0) cloudStampsRaw[idx] = nextObj;
                         else cloudStampsRaw.unshift(nextObj);
@@ -1542,7 +1861,6 @@
                     const prevKey = prevGroup?.key;
                     cloudStampsRaw = cloudStampsRaw.filter(s => s.id !== visitId);
                     rebuildGroupedSpotsAndRender();
-                    // 若該印章還有其他造訪紀錄就原地刷新詳情彈窗，否則關閉彈窗
                     const updatedGroup = prevKey ? groupedSpotStamps.find(s => s.key === prevKey) : null;
                     if (updatedGroup) openSpotModal(updatedGroup.uid);
                     else closeStampModal();
