@@ -33,6 +33,30 @@ let stampControlsInited = false;
 let modalSpotSuggestNames = [];
 let modalSimilarStamps = [];
 
+// 向下相容舊版 Google 試算表曾儲存過的框型與圖樣鍵值
+const LEGACY_STAMP_SHAPE_MAP = { flower: 'badge', shrine: 'goshuin', shuin: 'goshuin', perforations: 'ticket' };
+const LEGACY_STAMP_MOTIF_MAP = {
+    torii: 'shrine', mountain: 'nature', snow_ice: 'nature', boat: 'nature',
+    tower: 'landmark', hotel: 'landmark', animal: 'wildlife',
+    shopping: 'heritage', flight: 'train'
+};
+
+function normalizeStampShapeKey(raw) {
+    const k = LEGACY_STAMP_SHAPE_MAP[raw] || raw;
+    if (typeof FlaneurStampEngine !== 'undefined' && FlaneurStampEngine.STAMP_SHAPES.some(s => s.key === k)) {
+        return k;
+    }
+    return 'circle';
+}
+
+function normalizeStampMotifKey(raw) {
+    const k = LEGACY_STAMP_MOTIF_MAP[raw] || raw;
+    if (typeof FlaneurStampEngine !== 'undefined' && FlaneurStampEngine.STAMP_MOTIFS.some(m => m.key === k)) {
+        return k;
+    }
+    return 'landmark';
+}
+
 /* === 2. Google 試算表雲端同步核心 === */
 async function callGasPost(payload) {
     const res = await fetch(GAS_API_URL, {
@@ -65,7 +89,13 @@ async function loadCloudData() {
                     rating: Math.max(0, Math.min(5, Number(n.rating) || 0))
                 }))
                 : [];
-            cloudStamps = Array.isArray(cloudRes.stamps) ? cloudRes.stamps : [];
+            cloudStamps = Array.isArray(cloudRes.stamps)
+                ? cloudRes.stamps.map(s => ({
+                    ...s,
+                    shape: normalizeStampShapeKey(s.shape),
+                    motif: normalizeStampMotifKey(s.motif)
+                }))
+                : [];
             cloudSyncState = 'ready';
         } else {
             cloudSyncState = 'error';
@@ -1449,7 +1479,7 @@ function generateAndPrintBooklet() {
 }
 
 /* =====================================================================
-   8. 💮 行程站點主動收集景點印章（含即時預覽、相似章防呆與雲端同步）
+   8. 💮 行程站點主動收集景點印章（11 分類 × 15 外框 × 13 圖樣 × 11 標準色）
    ===================================================================== */
 function getStampsForSpot(ch) {
     if (!ch || !Array.isArray(cloudStamps) || !cloudStamps.length) return [];
@@ -1478,10 +1508,15 @@ function refreshItinerarySpotStamps() {
 
 function initStampModalControls() {
     if (stampControlsInited || typeof FlaneurStampEngine === 'undefined') return;
+    const catSel = $('stp-category');
     const shapeSel = $('stp-shape');
     const motifSel = $('stp-motif');
     const swatchBox = $('stp-color-swatches');
 
+    if (catSel) {
+        catSel.innerHTML = FlaneurStampEngine.STAMP_CATEGORIES
+            .map(c => `<option value="${c.key}">${escHtml(c.label)}</option>`).join('');
+    }
     if (shapeSel) {
         shapeSel.innerHTML = FlaneurStampEngine.STAMP_SHAPES
             .map(s => `<option value="${s.key}">${escHtml(s.label)}</option>`).join('');
@@ -1501,9 +1536,23 @@ function selectStampColor(colorKey) {
     const input = $('stp-color');
     if (input) input.value = colorKey;
     document.querySelectorAll('#stp-color-swatches .stamp-color-swatch').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.color === colorKey);
+        btn.classList.toggle('active', btn.dataset.color.toUpperCase() === String(colorKey || '').toUpperCase());
     });
     updateStampModalPreview();
+}
+
+function onStampCategoryChange() {
+    if (typeof FlaneurStampEngine === 'undefined') return updateStampModalPreview();
+    const selectedCat = $('stp-category')?.value || 'landmark';
+    const preset = FlaneurStampEngine.inferStampPreset({
+        name: ($('stp-name')?.value || '').trim(),
+        country: ($('stp-country')?.value || '').trim(),
+        region: ($('stp-region')?.value || '').trim(),
+        category: selectedCat
+    });
+    if ($('stp-shape')) $('stp-shape').value = preset.shape;
+    if ($('stp-motif')) $('stp-motif').value = preset.motif;
+    selectStampColor(preset.color);
 }
 
 async function openSpotStampModal(chIndex, editId = null) {
@@ -1537,15 +1586,20 @@ function loadStampIntoModalForm(stampObj, ch, spotStamps) {
     editingStampId = isEdit ? stampObj.id : null;
 
     if (isEdit) {
+        const resolvedCategory = eng.STAMP_CATEGORIES.some(c => c.key === stampObj.category)
+            ? stampObj.category
+            : eng.inferCategoryFromMeta(stampObj.name || ch._pureName, ch._categoryLabel, Boolean(ch._isFoodSpot));
+
         $('stp-name').value = stampObj.name || '';
+        if ($('stp-category')) $('stp-category').value = resolvedCategory;
         $('stp-country').value = stampObj.country || '';
         $('stp-region').value = stampObj.region || '';
         $('stp-date').value = stampObj.date || eng.calcTripDayDate(currentTripStartDate, ch._dayKey) || todayISO();
-        $('stp-shape').value = stampObj.shape || 'circle';
-        $('stp-motif').value = stampObj.motif || 'landmark';
+        $('stp-shape').value = normalizeStampShapeKey(stampObj.shape);
+        $('stp-motif').value = normalizeStampMotifKey(stampObj.motif);
         $('stp-custom-img').value = stampObj.customImage || '';
         $('stp-note').value = stampObj.note || '';
-        selectStampColor(stampObj.color || '#354F6B');
+        selectStampColor(stampObj.color || '#1B5AA6');
 
         $('stamp-modal-title').textContent = '✏️ 管理景點印章';
         $('btn-save-stamp').textContent = '💾 更新護照印章';
@@ -1561,6 +1615,7 @@ function loadStampIntoModalForm(stampObj, ch, spotStamps) {
             timezone: currentTripTimezone
         });
         $('stp-name').value = preset.name;
+        if ($('stp-category')) $('stp-category').value = preset.category;
         $('stp-country').value = preset.country;
         $('stp-region').value = preset.region;
         $('stp-date').value = eng.calcTripDayDate(currentTripStartDate, ch._dayKey) || todayISO();
@@ -1627,7 +1682,7 @@ function applySuggestedStampName(idx) {
     const picked = modalSpotSuggestNames[idx];
     if (!picked) return;
     $('stp-name').value = picked;
-    // 若正在新增印章，順便依新名稱自動切換對應外框、圖樣與印泥色
+    // 若正在新增印章，順便依新名稱自動切換對應分類、外框、圖樣與標準印章色
     if (!editingStampId && typeof FlaneurStampEngine !== 'undefined') {
         const ch = currentChaptersList[stampModalChIndex] || {};
         const preset = FlaneurStampEngine.inferStampPreset({
@@ -1639,6 +1694,7 @@ function applySuggestedStampName(idx) {
             tripId,
             timezone: currentTripTimezone
         });
+        if ($('stp-category')) $('stp-category').value = preset.category;
         $('stp-shape').value = preset.shape;
         $('stp-motif').value = preset.motif;
         selectStampColor(preset.color);
@@ -1652,8 +1708,11 @@ function applyExistingStampSuggestion(idx) {
     $('stp-name').value = item.name;
     if (item.country) $('stp-country').value = item.country;
     if (item.region) $('stp-region').value = item.region;
-    if (item.shape) $('stp-shape').value = item.shape;
-    if (item.motif) $('stp-motif').value = item.motif;
+    if ($('stp-category') && item.category && typeof FlaneurStampEngine !== 'undefined' && FlaneurStampEngine.STAMP_CATEGORIES.some(c => c.key === item.category)) {
+        $('stp-category').value = item.category;
+    }
+    if (item.shape) $('stp-shape').value = normalizeStampShapeKey(item.shape);
+    if (item.motif) $('stp-motif').value = normalizeStampMotifKey(item.motif);
     if (item.customImage) $('stp-custom-img').value = item.customImage;
     if (item.color) selectStampColor(item.color);
     onStampFormInput();
@@ -1708,10 +1767,11 @@ function updateStampModalPreview() {
         name: ($('stp-name')?.value || '').trim() || '景點印章',
         country: ($('stp-country')?.value || '').trim(),
         region: ($('stp-region')?.value || '').trim(),
+        category: $('stp-category')?.value || 'landmark',
         date: ($('stp-date')?.value || '').trim(),
         shape: $('stp-shape')?.value || 'circle',
         motif: $('stp-motif')?.value || 'landmark',
-        color: $('stp-color')?.value || '#354F6B',
+        color: $('stp-color')?.value || '#1B5AA6',
         customImage: ($('stp-custom-img')?.value || '').trim()
     };
 
@@ -1761,9 +1821,10 @@ async function submitStampModal() {
         tripId,
         day: ch._dayKey || '',
         spotId: ch.id || '',
+        category: $('stp-category')?.value || 'landmark',
         shape: $('stp-shape')?.value || 'circle',
         motif: $('stp-motif')?.value || 'landmark',
-        color: $('stp-color')?.value || '#354F6B',
+        color: $('stp-color')?.value || '#1B5AA6',
         customImage: ($('stp-custom-img')?.value || '').trim(),
         note: ($('stp-note')?.value || '').trim()
     };
