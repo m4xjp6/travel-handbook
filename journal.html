@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/journal.css?v=20261124b" />
+    <link rel="stylesheet" href="assets/journal.css?v=20261125" />
 </head>
 <body>
 
@@ -141,7 +141,7 @@
         </div>
     </div>
 
-    <!-- 點圖/點影片放大預覽燈箱 -->
+    <!-- 點圖 / 點影片放大預覽燈箱 -->
     <div id="lightbox-overlay" onclick="handleOverlayClick()">
         <button type="button" class="lightbox-nav prev" id="lightbox-prev" onclick="event.stopPropagation(); stepLightbox(-1)">❮</button>
         <img id="lightbox-img" src="" alt="放大預覽" onclick="event.stopPropagation()">
@@ -176,11 +176,11 @@
                     <label class="booklet-check-item"><input type="checkbox" id="pb-inc-vouchers" checked><span>🏨 住宿確認憑證與通關地址速查</span></label>
                     <label class="booklet-check-item"><input type="checkbox" id="pb-inc-transit" checked><span>🚄 重要交通與跨城移動時刻表</span></label>
                     <label class="booklet-check-item"><input type="checkbox" id="pb-inc-itinerary" checked><span>📅 每日詳細行程攻略（強制一天一頁）</span></label>
-                    <label class="booklet-check-item"><input type="checkbox" id="pb-inc-memo" checked><span>✍️ 每日頁尾附「手寫隨筆／蓋章留白格」</span></label>
+                    <label class="booklet-check-item"><input type="checkbox" id="pb-inc-memo" checked><span>✍️ 每日頁尾附「手寫隨筆 / 蓋章留白格」</span></label>
                     <label class="booklet-check-item"><input type="checkbox" id="pb-inc-checklist" checked><span>✅ 末頁帶核取框之行前準備清單</span></label>
                     <label class="booklet-check-item private-opt" id="pb-inc-notes-wrap" style="display:none;">
                         <input type="checkbox" id="pb-inc-notes">
-                        <span>⭐ <strong>併入已解鎖的隨手記／星級評價</strong>（回國紀念版）</span>
+                        <span>⭐ <strong>併入已解鎖的隨手記 / 星級評價</strong>（回國紀念版）</span>
                     </label>
                 </div>
 
@@ -253,8 +253,8 @@
                         <div id="stp-color-swatches" class="stamp-color-swatches"></div>
                     </div>
                     <div class="exp-field full">
-                        <label for="stp-custom-img">自訂手繪／實體印章圖片路徑（選填，留空則自動繪製）</label>
-                        <input type="text" id="stp-custom-img" class="exp-input" placeholder="只填檔名如 zao_stamp.png（圖檔傳至 media/stamps/）" oninput="updateStampModalPreview()">
+                        <label for="stp-custom-img">自訂手繪 / 實體印章圖片路徑（選填，留空則自動繪製）</label>
+                        <input type="text" id="stp-custom-img" class="exp-input" placeholder="只填檔名如 zao_stamp.png（圖檔傳至 Cloudflare R2 _stamps/）或完整網址" oninput="updateStampModalPreview()">
                     </div>
                     <div class="exp-field full">
                         <label for="stp-note">集章備註（選填）</label>
@@ -274,8 +274,8 @@
     <div id="print-booklet" aria-hidden="true"></div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="assets/stamp-engine.js?v=20261124b"></script>
-    <script src="assets/journal-core.js?v=20261124b"></script>
-    <script src="assets/journal-cloud.js?v=20261124b"></script>
+    <script src="assets/stamp-engine.js?v=20261125"></script>
+    <script src="assets/journal-core.js?v=20261125"></script>
+    <script src="assets/journal-cloud.js?v=20261125"></script>
 </body>
 </html>
