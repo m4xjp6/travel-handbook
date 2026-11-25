@@ -3,7 +3,7 @@ backend:
   name: git-gateway
   branch: main
 
-# === 2. 全域媒體存放路徑（Decap CMS 啟動必填保留，實際照片／影片皆存放於 Cloudflare R2） ===
+# === 2. 全域媒體存放路徑（Decap CMS 啟動必填保留，實際照片 / 影片皆存放於 Cloudflare R2） ===
 media_folder: "media"
 public_folder: "media"
 
@@ -41,8 +41,8 @@ collections:
       - {label: "貨幣符號", name: "currencySymbol", widget: "string", default: "NT$", required: false, hint: "如 NT$、¥、RM、S$"}
       - {label: "預估總預算上限", name: "budgetTotal", widget: "number", value_type: "int", default: 160000, required: false}
 
-      # --- 護照出入境／通關紀錄（依各筆日期自動蓋章，未出發前隱藏） ---
-      - label: "🛂 護照出入境／通關紀錄"
+      # --- 護照出入境 / 通關紀錄（依各筆日期自動蓋章，未出發前隱藏） ---
+      - label: "🛂 護照出入境 / 通關紀錄"
         name: "borderCrossings"
         widget: "list"
         required: false
@@ -63,12 +63,12 @@ collections:
             options:
               - { label: "✈️ 航空通關", value: "flight" }
               - { label: "🚗 陸路關卡", value: "land" }
-              - { label: "⛴️ 水路／郵輪", value: "sea" }
-          - {label: "國家／地區", name: "country", widget: "string", hint: "如 日本、馬來西亞、新加坡"}
-          - {label: "機場代碼／關卡代碼", name: "portCode", widget: "string", hint: "如 NRT、KUL、SIN、JB-WDL"}
-          - {label: "機場或關卡名稱（選填）", name: "portName", widget: "string", required: false, hint: "如 成田國際機場、新山／兀蘭陸路關卡"}
-          - {label: "航班號／車次（選填）", name: "flightNo", widget: "string", required: false, hint: "如 FD234（陸路通關可留空）"}
-          - {label: "航線／通關動線（選填）", name: "route", widget: "string", required: false, hint: "如 KHH → NRT 或 新山 → 新加坡"}
+              - { label: "⛴️ 水路 / 郵輪", value: "sea" }
+          - {label: "國家 / 地區", name: "country", widget: "string", hint: "如 日本、馬來西亞、新加坡"}
+          - {label: "機場代碼 / 關卡代碼", name: "portCode", widget: "string", hint: "如 NRT、KUL、SIN、JB-WDL"}
+          - {label: "機場或關卡名稱（選填）", name: "portName", widget: "string", required: false, hint: "如 成田國際機場、新山 / 兀蘭陸路關卡"}
+          - {label: "航班號 / 車次（選填）", name: "flightNo", widget: "string", required: false, hint: "如 FD234（陸路通關可留空）"}
+          - {label: "航線 / 通關動線（選填）", name: "route", widget: "string", required: false, hint: "如 KHH → NRT 或 新山 → 新加坡"}
           - {label: "備註（選填）", name: "note", widget: "string", required: false}
 
       # --- 情報站即時新聞搜尋關鍵字 ---
@@ -167,20 +167,20 @@ collections:
                   - { label: "⛴️ 遊船 / 渡輪", value: "boat" }
                   - { label: "✈️ 飛機 / 國際航班", value: "flight" }
               - {label: "預計時間", name: "time", widget: "string", required: false, hint: "如 09:00"}
-              - {label: "站點／店鋪名稱", name: "spotName", widget: "string"}
+              - {label: "站點 / 店鋪名稱", name: "spotName", widget: "string"}
               - {label: "分類標籤", name: "categoryLabel", widget: "string", required: false, default: "經典必訪"}
               - {label: "交通起訖動線", name: "routeFromTo", widget: "string", required: false}
               - {label: "完整班次時刻說明", name: "scheduleTime", widget: "string", required: false}
-              - {label: "座位／票種性質", name: "seatType", widget: "string", required: false}
+              - {label: "座位 / 票種性質", name: "seatType", widget: "string", required: false}
               - {label: "移動分鐘數", name: "transitMins", widget: "number", value_type: "int", required: false}
               - {label: "單程車資", name: "transitCost", widget: "number", value_type: "int", required: false}
-              - {label: "時刻表／地圖網址", name: "timetableUrl", widget: "string", required: false}
+              - {label: "時刻表 / 地圖網址", name: "timetableUrl", widget: "string", required: false}
               - {label: "按鈕文字", name: "timetableLabel", widget: "string", required: false, default: "查看時刻表"}
               - {label: "📘 景點介紹", name: "intro", widget: "text", required: false}
               - {label: "⚠️ 注意事項＆攻略", name: "note", widget: "text", required: false}
               - {label: "🍱 列入在地美食紀錄", name: "isFood", widget: "boolean", default: false, required: false}
               - {label: "📘 美味紀錄（用餐後可更新實測）", name: "foodReview", widget: "text", required: false}
-              - {label: "⚠️ 用餐／預約注意與潛規則", name: "foodPolicy", widget: "text", required: false}
+              - {label: "⚠️ 用餐 / 預約注意與潛規則", name: "foodPolicy", widget: "text", required: false}
 
   # =====================================================================
   # 模組 B：純圖文遊記手帳（對應 data/*.json，媒體路徑指向 Cloudflare R2）
@@ -250,7 +250,7 @@ collections:
                   - { label: "⚖️ 四張並排 (1:1:1:1)", value: "grid-4" }
                   - { label: "🎠 橫向滑動輪播", value: "carousel" }
                   - { label: "🖼️ 單欄垂直大圖", value: "stack" }
-              - label: "單張主圖／影片或佔位文字（相容舊資料）"
+              - label: "單張主圖 / 影片或佔位文字（相容舊資料）"
                 name: "mediaPlaceholder"
                 widget: "string"
                 required: false
@@ -297,7 +297,7 @@ collections:
             hint: "填入 itinerary/ 內的 tripId（如 tohoku_2026、malaysia_2027）；未出發或草稿會自動隱藏"
             field: {label: "旅程 ID", name: "tripId", widget: "string"}
 
-          # --- 2. 手動補登出入境／通關紀錄（無行程檔的過去旅程） ---
+          # --- 2. 手動補登出入境 / 通關紀錄（無行程檔的過去旅程） ---
           - label: "✈️ 手動補登出入境紀錄（無行程檔之歷史旅程）"
             name: "manualCrossings"
             widget: "list"
@@ -319,29 +319,29 @@ collections:
                 options:
                   - { label: "✈️ 航空通關", value: "flight" }
                   - { label: "🚗 陸路關卡", value: "land" }
-                  - { label: "⛴️ 水路／郵輪", value: "sea" }
-              - {label: "國家／地區", name: "country", widget: "string", hint: "如 日本、韓國、香港"}
-              - {label: "機場代碼／關卡代碼", name: "portCode", widget: "string", hint: "如 KIX、ICN、HKG"}
+                  - { label: "⛴️ 水路 / 郵輪", value: "sea" }
+              - {label: "國家 / 地區", name: "country", widget: "string", hint: "如 日本、韓國、香港"}
+              - {label: "機場代碼 / 關卡代碼", name: "portCode", widget: "string", hint: "如 KIX、ICN、HKG"}
               - {label: "機場或關卡名稱（選填）", name: "portName", widget: "string", required: false, hint: "如 關西國際機場、仁川國際機場"}
-              - {label: "航班號／車次（選填）", name: "flightNo", widget: "string", required: false, hint: "如 IT284、OZ713"}
-              - {label: "航線／通關動線（選填）", name: "route", widget: "string", required: false, hint: "如 KHH → KIX"}
+              - {label: "航班號 / 車次（選填）", name: "flightNo", widget: "string", required: false, hint: "如 IT284、OZ713"}
+              - {label: "航線 / 通關動線（選填）", name: "route", widget: "string", required: false, hint: "如 KHH → KIX"}
               - {label: "旅程名稱（選填）", name: "tripName", widget: "string", required: false, hint: "如 2024 關西初夏行"}
               - {label: "對應遊記 tripId（選填）", name: "tripId", widget: "string", required: false, hint: "若有補寫遊記可填此自動串聯按鈕"}
               - {label: "備註（選填）", name: "note", widget: "string", required: false}
 
-          # --- 3. 國家／地區蒐集冊設定（手動點亮與自訂徽章圖） ---
-          - label: "🌍 國家／地區蒐集冊設定（手動解鎖＆自訂徽章圖片）"
+          # --- 3. 國家 / 地區蒐集冊設定（手動點亮與自訂徽章圖） ---
+          - label: "🌍 國家 / 地區蒐集冊設定（手動解鎖＆自訂徽章圖片）"
             name: "countries"
             widget: "list"
             required: false
             summary: "{{fields.name}} ({{fields.code}}) ｜ 已解鎖: {{fields.unlocked}}"
             fields:
-              - {label: "國家／地區代碼（ISO-2）", name: "code", widget: "string", hint: "如 TW、JP、KR、HK、MY、SG"}
-              - {label: "國家／地區中文名稱", name: "name", widget: "string", hint: "如 台灣、日本、韓國、香港"}
+              - {label: "國家 / 地區代碼（ISO-2）", name: "code", widget: "string", hint: "如 TW、JP、KR、HK、MY、SG"}
+              - {label: "國家 / 地區中文名稱", name: "name", widget: "string", hint: "如 台灣、日本、韓國、香港"}
               - {label: "手動點亮解鎖", name: "unlocked", widget: "boolean", default: true, required: false}
               - label: "自訂插畫徽章圖片（選填，留空則自動生成國旗徽章）"
                 name: "badgeImage"
                 widget: "string"
                 required: false
                 hint: "填寫 Cloudflare R2 相對路徑（如 _stamps/JP-badge.png）或完整網址，留空則自動生成國旗徽章"
-              - {label: "旅遊小語／收藏備註（選填）", name: "note", widget: "text", required: false}
+              - {label: "旅遊小語 / 收藏備註（選填）", name: "note", widget: "text", required: false}
