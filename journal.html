@@ -211,7 +211,7 @@
                     <div id="stamp-modal-preview" class="stamp-preview-frame"></div>
                     <div class="stamp-preview-meta">
                         <div id="stamp-modal-context" class="stamp-preview-context">準備蓋印中...</div>
-                        <div class="stamp-preview-hint">同名不同日會自動合併累計造訪次數（×2），並於護照串接回本篇遊記。</div>
+                        <div class="stamp-preview-hint">同名不同日會自動合併累計造訪次數（×2）；選擇「季節限定 / 期間限定」會自動標示限定徽章。</div>
                     </div>
                 </div>
 
@@ -221,18 +221,22 @@
                 <!-- 複合站名快選建議（自動拆解 → / ＆ / 括號） -->
                 <div id="stamp-suggest-box" class="stamp-suggest-panel" style="display:none;"></div>
 
-                <!-- 印章基本與外觀設定表單 -->
+                <!-- 印章基本與外觀設定表單（對應新版 11 分類 × 15 外框 × 13 圖樣 × 11 色） -->
                 <div class="exp-form-grid">
                     <div class="exp-field full">
                         <label for="stp-name">印章名稱（顯示於印章中央）</label>
-                        <input type="text" id="stp-name" class="exp-input" placeholder="例如：藏王樹冰、仙台站、松島灣觀光船" oninput="onStampFormInput()">
+                        <input type="text" id="stp-name" class="exp-input" placeholder="例如：藏王樹冰、仙台站、瑞鳳殿" oninput="onStampFormInput()">
+                    </div>
+                    <div class="exp-field full">
+                        <label for="stp-category">景點分類（切換後自動帶入預設外框、圖樣與色碼）</label>
+                        <select id="stp-category" class="exp-select" onchange="typeof onStampCategoryChange === 'function' ? onStampCategoryChange() : updateStampModalPreview()"></select>
                     </div>
                     <div class="exp-field">
                         <label for="stp-country">國家</label>
                         <input type="text" id="stp-country" class="exp-input" placeholder="例如：日本、台灣、馬來西亞" oninput="updateStampModalPreview()">
                     </div>
                     <div class="exp-field">
-                        <label for="stp-region">地區（外圈弧形字）</label>
+                        <label for="stp-region">地區（外圈標示字）</label>
                         <input type="text" id="stp-region" class="exp-input" placeholder="例如：宮城、山形、東京" oninput="updateStampModalPreview()">
                     </div>
                     <div class="exp-field">
@@ -240,16 +244,16 @@
                         <input type="date" id="stp-date" class="exp-input" onchange="onStampFormInput()">
                     </div>
                     <div class="exp-field">
-                        <label for="stp-shape">外框樣式</label>
+                        <label for="stp-shape">外框類型</label>
                         <select id="stp-shape" class="exp-select" onchange="updateStampModalPreview()"></select>
                     </div>
                     <div class="exp-field">
-                        <label for="stp-motif">中央線條圖樣</label>
+                        <label for="stp-motif">圖樣分類</label>
                         <select id="stp-motif" class="exp-select" onchange="updateStampModalPreview()"></select>
                     </div>
                     <div class="exp-field">
-                        <label>復古印泥色</label>
-                        <input type="hidden" id="stp-color" value="#354F6B">
+                        <label>標準印章色</label>
+                        <input type="hidden" id="stp-color" value="#1B5AA6">
                         <div id="stp-color-swatches" class="stamp-color-swatches"></div>
                     </div>
                     <div class="exp-field full">
