@@ -8,17 +8,17 @@
 
     <!-- 【⚙️ 功能設定】Travelpayouts 分潤腳本 -->
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
-    (function () {
-        var isCloudflare = location.hostname.indexOf('workers.dev') !== -1 || location.hostname.indexOf('pages.dev') !== -1;
-        var script = document.createElement("script");
-        script.async = 1;
-        script.setAttribute("data-cmp-ab", "2");
-        script.src = isCloudflare
-            ? 'https://emrld.ltd/NjA1OTc5.js?t=605979'
-            : 'https://emrld.ltd/NTk5Njg0.js?t=599684';
-        document.head.appendChild(script);
-    })();
-</script>
+        (function () {
+            var isCloudflare = location.hostname.indexOf('workers.dev') !== -1 || location.hostname.indexOf('pages.dev') !== -1;
+            var script = document.createElement("script");
+            script.async = 1;
+            script.setAttribute("data-cmp-ab", "2");
+            script.src = isCloudflare
+                ? 'https://emrld.ltd/NjA1OTc5.js?t=605979'
+                : 'https://emrld.ltd/NTk5Njg0.js?t=599684';
+            document.head.appendChild(script);
+        })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -426,15 +426,15 @@
             <strong>📚 總覽資訊：</strong>點擊上方七大洲可展開對應國家篩選，點擊旅程卡片即可開啟「動態地圖手帳」。
         </div>
 
-        <!-- 【✏️ 文字修改】歸檔旅程卡片列表 -->
+        <!-- 【✏️ 文字修改】歸檔旅程卡片列表（封面照存放於 Cloudflare R2 各旅程資料夾之 cover/） -->
         <div class="grid-container" id="cards-grid">
             <a href="journal.html?trip=malaysia_2027" class="trip-card"
                data-trip-id="malaysia_2027" data-continent="亞洲" data-country="馬來西亞,新加坡"
                data-start="2027-04-07" data-end="2027-04-17">
                 <div class="cover-collage">
-                    <div><img src="media/malaysia_2027/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
-                    <div><img src="media/malaysia_2027/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
-                    <div><img src="media/malaysia_2027/cover-3.png" alt="封面照 3" onerror="this.parentElement.innerHTML='封面照 3'"></div>
+                    <div><img data-r2-src="my-malaysia-2027/cover/cover-1.png" alt="封面照 1" loading="lazy" onerror="this.parentElement.innerHTML='封面照 1'"></div>
+                    <div><img data-r2-src="my-malaysia-2027/cover/cover-2.png" alt="封面照 2" loading="lazy" onerror="this.parentElement.innerHTML='封面照 2'"></div>
+                    <div><img data-r2-src="my-malaysia-2027/cover/cover-3.png" alt="封面照 3" loading="lazy" onerror="this.parentElement.innerHTML='封面照 3'"></div>
                 </div>
                 <div class="card-content">
                     <h3>南洋雙星春季漫旅</h3>
@@ -450,9 +450,9 @@
                data-trip-id="yilan_2026" data-continent="亞洲" data-country="台灣"
                data-start="2026-09-25" data-end="2026-09-28">
                 <div class="cover-collage">
-                    <div><img src="media/yilan_2026/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
-                    <div><img src="media/yilan_2026/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
-                    <div><img src="media/yilan_2026/cover-3.png" alt="封面照 3" onerror="this.parentElement.innerHTML='封面照 3'"></div>
+                    <div><img data-r2-src="tw-yilan-2026/cover/cover-1.png" alt="封面照 1" loading="lazy" onerror="this.parentElement.innerHTML='封面照 1'"></div>
+                    <div><img data-r2-src="tw-yilan-2026/cover/cover-2.png" alt="封面照 2" loading="lazy" onerror="this.parentElement.innerHTML='封面照 2'"></div>
+                    <div><img data-r2-src="tw-yilan-2026/cover/cover-3.png" alt="封面照 3" loading="lazy" onerror="this.parentElement.innerHTML='封面照 3'"></div>
                 </div>
                 <div class="card-content">
                     <h3>台灣宜蘭秋季漫旅</h3>
@@ -468,9 +468,9 @@
                data-trip-id="tohoku_2026" data-continent="亞洲" data-country="日本"
                data-start="2026-01-09" data-end="2026-01-17">
                 <div class="cover-collage">
-                    <div><img src="media/tohoku_2026/cover-1.png" alt="封面照 1" onerror="this.parentElement.innerHTML='封面照 1'"></div>
-                    <div><img src="media/tohoku_2026/cover-2.png" alt="封面照 2" onerror="this.parentElement.innerHTML='封面照 2'"></div>
-                    <div><img src="media/tohoku_2026/cover-3.png" alt="封面照 3" onerror="this.parentElement.innerHTML='封面照 3'"></div>
+                    <div><img data-r2-src="jp-tohoku-2026/cover/cover-1.png" alt="封面照 1" loading="lazy" onerror="this.parentElement.innerHTML='封面照 1'"></div>
+                    <div><img data-r2-src="jp-tohoku-2026/cover/cover-2.png" alt="封面照 2" loading="lazy" onerror="this.parentElement.innerHTML='封面照 2'"></div>
+                    <div><img data-r2-src="jp-tohoku-2026/cover/cover-3.png" alt="封面照 3" loading="lazy" onerror="this.parentElement.innerHTML='封面照 3'"></div>
                 </div>
                 <div class="card-content">
                     <h3>日本東北冬季漫旅</h3>
@@ -491,6 +491,19 @@
     <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
 
     <script>
+        /* === 【⚙️ 功能設定】0. Cloudflare R2 媒體公開網址（結尾不加斜線） === */
+        const R2_MEDIA_BASE = 'https://pub-180de6e9b96341e68b7fc31ef30c4a2f.r2.dev';
+
+        function hydrateR2CoverImages() {
+            document.querySelectorAll('img[data-r2-src]').forEach(img => {
+                const raw = (img.dataset.r2Src || '').trim();
+                if (!raw) return;
+                img.src = /^https?:\/\//i.test(raw)
+                    ? raw
+                    : `${R2_MEDIA_BASE}/${raw.replace(/^\/+/, '')}`;
+            });
+        }
+
         /* === 【⚙️ 功能設定】1. 頂部分頁切換與網址參數 === */
         const $ = id => document.getElementById(id);
 
@@ -858,6 +871,7 @@
         }
 
         /* === 啟動初始化 === */
+        hydrateR2CoverImages();
         rebuildPublishedState();
         syncCardsWithDataJson();
         discoverAllItineraryTrips();
