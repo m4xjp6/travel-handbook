@@ -8,20 +8,24 @@
 (function (global) {
     'use strict';
 
+    /* 【⚙️ 功能設定】Cloudflare R2 媒體與景點印章公開網址（結尾不加斜線） */
+    const R2_MEDIA_BASE = 'https://pub-180de6e9b96341e68b7fc31ef30c4a2f.r2.dev';
+    const R2_STAMPS_BASE = `${R2_MEDIA_BASE}/_stamps`;
+
     let _svgUid = 0;
 
     /* === 1. 景點分類、主題子圖鑑、Special 標籤、外框、圖樣與復古印泥色定義 === */
     const STAMP_CATEGORIES = [
-        { key: 'religion',   label: '⛩️ 宗教信仰（神社／寺院／佛像）', defaultShape: 'octagon', defaultMotif: 'torii',    defaultColor: '#A84438', composition: '正面對稱式' },
-        { key: 'heritage',   label: '🏯 歷史建築（城堡／古蹟／街區）', defaultShape: 'shield',  defaultMotif: 'tower',    defaultColor: '#6E5A4F', composition: '正面對稱式' },
-        { key: 'rail',       label: '🚄 鐵道交通（車站／列車／纜車）', defaultShape: 'ticket',  defaultMotif: 'train',    defaultColor: '#354F6B', composition: '水平延伸式' },
-        { key: 'nature',     label: '🏔️ 自然景觀（山岳／湖泊／森林）', defaultShape: 'hexagon', defaultMotif: 'mountain', defaultColor: '#3B6B52', composition: '前中後景式' },
-        { key: 'seasonal',   label: '❄️ 季節景觀（雪景／樹冰／花季）', defaultShape: 'flower',  defaultMotif: 'snow_ice', defaultColor: '#346E8C', composition: '前中後景式' },
-        { key: 'facility',   label: '🏛️ 觀光設施（博物館／展望台）',   defaultShape: 'square',  defaultMotif: 'tower',    defaultColor: '#354F6B', composition: '中央主體式' },
-        { key: 'culture',    label: '🏮 文化體驗（祭典／工藝／民俗）', defaultShape: 'shield',  defaultMotif: 'shopping', defaultColor: '#B27C35', composition: '環繞式' },
-        { key: 'district',   label: '♨️ 特色街區（溫泉街／老街／港灣）', defaultShape: 'wave',  defaultMotif: 'onsen',    defaultColor: '#73527A', composition: '透視縱深式' },
-        { key: 'gourmet',    label: '🍜 地方物產（美食／農產／伴手禮）', defaultShape: 'none',  defaultMotif: 'food',     defaultColor: '#8E5B3E', composition: '中央主體式' },
-        { key: 'wildlife',   label: '🦊 動植物（動物／植物／花卉）',   defaultShape: 'oval',    defaultMotif: 'animal',   defaultColor: '#3B6B52', composition: '中央主體式' }
+        { key: 'religion',   label: '⛩️ 宗教信仰（神社 / 寺院 / 佛像）', defaultShape: 'octagon', defaultMotif: 'torii',    defaultColor: '#A84438', composition: '正面對稱式' },
+        { key: 'heritage',   label: '🏯 歷史建築（城堡 / 古蹟 / 街區）', defaultShape: 'shield',  defaultMotif: 'tower',    defaultColor: '#6E5A4F', composition: '正面對稱式' },
+        { key: 'rail',       label: '🚄 鐵道交通（車站 / 列車 / 纜車）', defaultShape: 'ticket',  defaultMotif: 'train',    defaultColor: '#354F6B', composition: '水平延伸式' },
+        { key: 'nature',     label: '🏔️ 自然景觀（山岳 / 湖泊 / 森林）', defaultShape: 'hexagon', defaultMotif: 'mountain', defaultColor: '#3B6B52', composition: '前中後景式' },
+        { key: 'seasonal',   label: '❄️ 季節景觀（雪景 / 樹冰 / 花季）', defaultShape: 'flower',  defaultMotif: 'snow_ice', defaultColor: '#346E8C', composition: '前中後景式' },
+        { key: 'facility',   label: '🏛️ 觀光設施（博物館 / 展望台）',   defaultShape: 'square',  defaultMotif: 'tower',    defaultColor: '#354F6B', composition: '中央主體式' },
+        { key: 'culture',    label: '🏮 文化體驗（祭典 / 工藝 / 民俗）', defaultShape: 'shield',  defaultMotif: 'shopping', defaultColor: '#B27C35', composition: '環繞式' },
+        { key: 'district',   label: '♨️ 特色街區（溫泉街 / 老街 / 港灣）', defaultShape: 'wave',  defaultMotif: 'onsen',    defaultColor: '#73527A', composition: '透視縱深式' },
+        { key: 'gourmet',    label: '🍜 地方物產（美食 / 農產 / 伴手禮）', defaultShape: 'none',  defaultMotif: 'food',     defaultColor: '#8E5B3E', composition: '中央主體式' },
+        { key: 'wildlife',   label: '🦊 動植物（動物 / 植物 / 花卉）',   defaultShape: 'oval',    defaultMotif: 'animal',   defaultColor: '#3B6B52', composition: '中央主體式' }
     ];
 
     const STAMP_ALBUMS = [
@@ -68,7 +72,7 @@
         { key: 'tower',    label: '🗼 地標 / 城市塔樓' },
         { key: 'animal',   label: '🦊 生態 / 動物景點' },
         { key: 'hotel',    label: '🏨 旅宿 / 飯店入住' },
-        { key: 'shopping', label: '🏮 老街散策' },
+        { key: 'shopping', label: '🏮 老街 / 購物散策' },
         { key: 'landmark', label: '🧭 經典 / 綜合印記' }
     ];
 
@@ -129,10 +133,19 @@
     }
 
     function normalizeStampImagePath(raw) {
-        const s = String(raw || '').trim().replace(/^\/+/, '');
+        const s = String(raw || '').trim();
         if (!s) return '';
-        if (/^https?:\/\//i.test(s) || s.includes('/')) return s;
-        return `media/passport/stamps/${s}`;
+        if (/^(https?:)?\/\//i.test(s) || s.startsWith('data:')) return s;
+
+        const clean = s.replace(/^\/+/, '');
+        if (/^(media\/passport\/stamps\/|media\/stamps\/|_stamps\/)/i.test(clean)) {
+            const fileName = clean.replace(/^(media\/passport\/stamps\/|media\/stamps\/|_stamps\/)/i, '');
+            return `${R2_STAMPS_BASE}/${fileName}`;
+        }
+        if (clean.includes('/')) {
+            return `${R2_MEDIA_BASE}/${clean}`;
+        }
+        return `${R2_STAMPS_BASE}/${clean}`;
     }
 
     function calcTripDayDate(startDate, dayStr) {
@@ -553,7 +566,7 @@
                     <path d="M19 11 L24 16 L29 11 M19 37 L24 32 L29 37 M11 19 L16 24 L11 29 M37 19 L32 24 L37 29"
                           fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
                     <circle cx="24" cy="24" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>`;
-            case 'train': // JR 新幹線／鐵道車頭
+            case 'train': // JR 新幹線 / 鐵道車頭
                 return `
                     <rect x="11" y="7" width="26" height="27" rx="8" fill="none" stroke="currentColor" stroke-width="2.1"/>
                     <path d="M15 17 H33 M15 11 H33" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -573,7 +586,7 @@
                     <path d="M11 23 H37" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     <path d="M16 17 V41 M32 17 V41 M24 17 V23" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
                     <path d="M13 41 H19 M29 41 H35" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`;
-            case 'mountain': // 雪山／藏王樹冰絕景
+            case 'mountain': // 雪山 / 藏王樹冰絕景
                 return `
                     <path d="M5 38 L19 14 L30 31 L35 23 L43 38 Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
                     <path d="M14.5 21.5 L18 24 L20.5 21.5 L23.5 23.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -602,7 +615,7 @@
                     <path d="M24 6 V12 M21 12 H27 L31 30 L37 41 H29 C28 36 20 36 19 41 H11 L17 30 Z"
                           fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                     <path d="M16 24 H32 M18 31 H30 M19 19 L29 24 M29 19 L19 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`;
-            case 'animal': // 狐狸／動物生態
+            case 'animal': // 狐狸 / 動物生態
                 return `
                     <path d="M11 11 L19 17 H29 L37 11 L39 25 L24 39 L9 25 Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/>
                     <path d="M15 24 L19 25 M33 24 L29 25" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -614,7 +627,7 @@
                     <rect x="16" y="18" width="4" height="4" fill="currentColor"/><rect x="28" y="18" width="4" height="4" fill="currentColor"/>
                     <rect x="16" y="25" width="4" height="4" fill="currentColor"/><rect x="28" y="25" width="4" height="4" fill="currentColor"/>
                     <path d="M21 40 V33 A3 3 0 0 1 27 33 V40" fill="none" stroke="currentColor" stroke-width="1.8"/>`;
-            case 'shopping': // 老街暖簾／散策
+            case 'shopping': // 老街暖簾 / 散策
                 return `
                     <path d="M9 14 H39 V25 H9 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                     <path d="M19 14 V25 M29 14 V25 M12 25 V39 H36 V25 M7 39 H41" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
@@ -854,6 +867,8 @@
 
     /* === 匯出共用介面 === */
     global.FlaneurStampEngine = {
+        R2_MEDIA_BASE,
+        R2_STAMPS_BASE,
         STAMP_CATEGORIES,
         STAMP_ALBUMS,
         SPECIAL_STAMP_TYPES,
