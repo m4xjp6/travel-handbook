@@ -1352,7 +1352,7 @@ function generateAndPrintBooklet() {
             secHtml += `
                 <h2 class="pb-section-title" style="margin-top:14px;">🚄 重要交通與跨城移動時刻表</h2>
                 <table class="pb-transit-table">
-                    <thead><tr><th>天數</th><th>時間</th><th>動線與交通方式</th><th>席次／預估車資</th></tr></thead>
+                    <thead><tr><th>天數</th><th>時間</th><th>動線與交通方式</th><th>席次 / 預估車資</th></tr></thead>
                     <tbody>
                         ${cachedTransits.map(t => `
                             <tr>
@@ -1416,7 +1416,7 @@ function generateAndPrintBooklet() {
                         <div class="pb-day-banner-meta">📍 ${escHtml(dayObj.region || '')} ｜ 當日區域移動約 ${moveSummary} ｜ 預估交通 NT$${dayCost.toLocaleString()}</div>
                     </div>
                     ${spotCards.join('')}
-                    ${incMemo ? `<div class="pb-memo-box"><span class="pb-memo-title">✍️ 旅途隨筆 ／ 車站紀念章留白區</span></div>` : ''}
+                    ${incMemo ? `<div class="pb-memo-box"><span class="pb-memo-title">✍️ 旅途隨筆 / 車站紀念章留白區</span></div>` : ''}
                 </section>`);
         });
     }
