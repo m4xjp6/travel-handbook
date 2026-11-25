@@ -720,9 +720,25 @@
         const isPreviewMode = ['1', 'true'].includes(urlParams.get('preview'));
         if (isPreviewMode) $('preview-banner').style.display = 'block';
 
+        /* 【⚙️ 功能設定】Cloudflare R2 媒體公開網址（供自訂國家徽章路徑解析） */
+        const R2_MEDIA_BASE = 'https://pub-180de6e9b96341e68b7fc31ef30c4a2f.r2.dev';
+
         const TOTAL_WORLD_TARGETS = 197;
         const escHtml = s => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
         const normalizeCountry = name => String(name || '').trim().replace(/^臺灣$/, '台灣');
+
+        function normalizeR2BadgePath(raw) {
+            const s = String(raw || '').trim();
+            if (!s) return '';
+            if (/^(https?:)?\/\//i.test(s) || s.startsWith('data:')) return s;
+            const clean = s.replace(/^\/+/, '');
+            if (/^(media\/passport\/stamps\/|media\/stamps\/|_stamps\/)/i.test(clean)) {
+                const fileName = clean.replace(/^(media\/passport\/stamps\/|media\/stamps\/|_stamps\/)/i, '');
+                return `${R2_MEDIA_BASE}/_stamps/${fileName}`;
+            }
+            if (clean.includes('/')) return `${R2_MEDIA_BASE}/${clean}`;
+            return `${R2_MEDIA_BASE}/_stamps/${clean}`;
+        }
 
         function getFlagSvgUrl(isoCode) {
             const c = String(isoCode || '').trim().toLowerCase();
@@ -879,7 +895,7 @@
 
             const flagUrl = getFlagSvgUrl(rec.code);
             const hasCustom = Boolean(rec.badgeImage);
-            const imgSrc = hasCustom ? rec.badgeImage : flagUrl;
+            const imgSrc = hasCustom ? normalizeR2BadgePath(rec.badgeImage) : flagUrl;
             const fallbackCode = escHtml(rec.code || rec.name.slice(0, 2));
 
             const innerMedia = imgSrc
