@@ -256,7 +256,7 @@
 
         .empty-state-box { text-align: center; padding: 36px 20px; background: var(--bg-color); border: 1.5px dashed var(--accent-brown); border-radius: 14px; color: var(--text-light); font-size: 0.9rem; line-height: 1.7; }
 
-        /* === 印章放大詳情彈窗 ＆ 編輯／補蓋表單彈窗 === */
+        /* === 印章放大詳情彈窗 ＆ 編輯 / 補蓋表單彈窗 === */
         .stamp-modal-overlay {
             display: none; position: fixed; inset: 0; background: rgba(58, 46, 40, 0.68); backdrop-filter: blur(4px);
             z-index: 2000; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
@@ -313,7 +313,7 @@
         .modal-link-btn.primary { background: var(--accent-brown); color: #fff; }
         .modal-link-btn.primary:hover { background: var(--accent-brown-dark); }
 
-        /* 編輯／補蓋印章表單樣式 */
+        /* 編輯 / 補蓋印章表單樣式 */
         .edit-preview-row {
             display: flex; align-items: center; gap: 14px; padding: 14px 12px 18px;
             background: #FAF5EC; border: 1px dashed var(--border-soft); border-radius: 14px; margin-bottom: 12px;
@@ -492,7 +492,7 @@
         </div>
     </div>
 
-    <!-- 印章編輯／補蓋隱藏景點彈窗（解鎖管理後使用） -->
+    <!-- 印章編輯 / 補蓋隱藏景點彈窗（解鎖管理後使用） -->
     <div class="stamp-modal-overlay" id="stamp-editor-modal" onclick="closeEditorModal()">
         <div class="stamp-modal-card" onclick="event.stopPropagation()">
             <button type="button" class="modal-close-btn" onclick="closeEditorModal()" aria-label="關閉視窗">✕</button>
@@ -551,7 +551,7 @@
                     <div class="edit-field full">
                         <label for="ed-special-mode">★ Special Stamp 特別典藏標記</label>
                         <select id="ed-special-mode" class="edit-select" onchange="onEditorSpecialModeChange()">
-                            <option value="auto">自動判斷（季節景觀／祭典活動／絕景關鍵字）</option>
+                            <option value="auto">自動判斷（季節景觀 / 祭典活動 / 絕景關鍵字）</option>
                             <option value="true">★ 設為 Special Stamp 特別章</option>
                             <option value="false">一般印章（關閉自動標記）</option>
                         </select>
@@ -571,8 +571,8 @@
                     <select id="ed-trip" class="edit-select"></select>
                 </div>
                 <div class="edit-field full">
-                    <label for="ed-custom-img">自訂手繪／透明 PNG 印章檔名（選填，留空則自動繪製 SVG）</label>
-                    <input type="text" id="ed-custom-img" class="edit-input" placeholder="只填檔名如 jp_yamagata_zao_juhyo.png（傳至 media/passport/stamps/）" oninput="updateEditorPreview()">
+                    <label for="ed-custom-img">自訂手繪 / 透明 PNG 印章檔名（選填，留空則自動繪製 SVG）</label>
+                    <input type="text" id="ed-custom-img" class="edit-input" placeholder="只填檔名如 jp_yamagata_zao_juhyo.png（圖檔傳至 Cloudflare R2 _stamps/）或完整網址" oninput="updateEditorPreview()">
                 </div>
                 <div class="edit-field full" id="ed-note-wrap">
                     <label for="ed-note">集章備註（選填）</label>
@@ -589,7 +589,7 @@
 
     <a href="admin/" class="admin-fab">✏️ 管理手帳</a>
 
-    <script src="assets/stamp-engine.js?v=20261125a"></script>
+    <script src="assets/stamp-engine.js?v=20261125b"></script>
     <script>
         /* =====================================================================
            1. 全域設定、Google 試算表接口與工具函式
@@ -1170,7 +1170,7 @@
         }
 
         async function unlockPassportEdit() {
-            const pwd = prompt('請輸入你的雲端編輯密碼（與手帳記帳／隨手記相同）：');
+            const pwd = prompt('請輸入你的雲端編輯密碼（與手帳記帳 / 隨手記相同）：');
             if (!pwd) return false;
             try {
                 const res = await fetch(GAS_API_URL, {
@@ -1478,7 +1478,7 @@
                 </div>
                 <div class="modal-visits-head">
                     <div class="modal-visits-title">造訪足跡（共 ${stamp.visits.length} 筆紀錄）</div>
-                    ${(cloudEditPassword && stamp.hasCloud) ? `<button type="button" class="mgr-btn" onclick="openEditGroupModal('${escHtml(stamp.uid)}')">✏️ 修改名稱／換樣式</button>` : ''}
+                    ${(cloudEditPassword && stamp.hasCloud) ? `<button type="button" class="mgr-btn" onclick="openEditGroupModal('${escHtml(stamp.uid)}')">✏️ 修改名稱 / 換樣式</button>` : ''}
                 </div>
                 <div>${visitsHtml}</div>
             `;
@@ -1488,7 +1488,7 @@
         function closeStampModal() { $('stamp-modal').classList.remove('open'); }
 
         /* =====================================================================
-           7. 護照內直接管理：補蓋隱藏景點、修改分類／子圖鑑／Special 與外觀樣式
+           7. 護照內直接管理：補蓋隱藏景點、修改分類 / 子圖鑑 / Special 與外觀樣式
            ===================================================================== */
         function initEditorControls() {
             if (editorControlsInited) return;
