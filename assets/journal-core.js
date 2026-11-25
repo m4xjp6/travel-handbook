@@ -6,6 +6,9 @@
 /* 【⚙️ 功能設定】Google 試算表雲端同步網址（費用明細、行前清單、隨手記事、景點印章） */
 const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyRbstjJeBCcJaO4hfQxovl46GEmA_l0YrY9UkhglvVA1zRG7RVazHrbHcIau8gl2c4/exec';
 
+/* 【⚙️ 功能設定】Cloudflare R2 媒體儲存公開網址（結尾不加斜線，未來換專屬網域只須改這行） */
+const R2_MEDIA_BASE = 'https://pub-180de6e9b96341e68b7fc31ef30c4a2f.r2.dev';
+
 /* === 1. 全域狀態與共用工具 === */
 const $ = id => document.getElementById(id);
 const urlParams = new URLSearchParams(location.search);
@@ -444,12 +447,15 @@ function buildDayTabs() {
     });
 }
 
-/* === 5. 多媒體畫廊、預訂按鈕與燈箱 === */
-const isMediaFile = s => typeof s === 'string' && (/\.(jpeg|jpg|gif|png|webp|avif|svg|heic|mp4|mov|m4v|webm)$/i.test(s.trim()) || /media\/|images\//.test(s));
-const isVideoFile = s => /\.(mp4|mov|m4v|webm)$/i.test((s || '').trim());
+/* === 5. 多媒體畫廊、預訂按鈕與燈箱（全面串接 Cloudflare R2） === */
+const isMediaFile = s => typeof s === 'string' && /\.(jpeg|jpg|gif|png|webp|avif|svg|heic|mp4|mov|m4v|webm)(\?.*)?$/i.test(s.trim());
+const isVideoFile = s => /\.(mp4|mov|m4v|webm)(\?.*)?$/i.test((s || '').trim());
 function normalizeMediaSrc(raw) {
-    const s = (raw || '').trim().replace(/^\/+/, '');
-    return s && !s.includes('/') && !s.startsWith('http') ? `media/${tripId}/${s}` : s;
+    const s = String(raw || '').trim();
+    if (!s) return '';
+    if (/^https?:\/\//i.test(s) || s.startsWith('data:')) return s;
+    const cleanPath = s.replace(/^\/+/, '');
+    return `${R2_MEDIA_BASE}/${cleanPath}`;
 }
 
 function buildMediaHTML(ch, chIndex) {
@@ -841,7 +847,7 @@ function renderDay(dayKey, skipInitialFocus = false) {
                         <div class="spot-action-pills">
                             <a href="${gmapUrl}" target="_blank" rel="noopener" class="spot-pill-btn">🗺️ Google 地圖導航</a>
                             <button type="button" class="spot-pill-btn loc" onclick="setActiveSpotFocus(${chIndex});focusSpotOnMap(${chIndex});">📍 地圖定位</button>
-                            <button type="button" class="spot-pill-btn note-btn" onclick="openSpotNoteEditorByIndex(${chIndex})">📝 寫隨手記／⭐ 評分</button>
+                            <button type="button" class="spot-pill-btn note-btn" onclick="openSpotNoteEditorByIndex(${chIndex})">📝 寫隨手記 / ⭐ 評分</button>
                             <button type="button" class="spot-pill-btn stamp-btn" id="spot-stamp-btn-${chIndex}" onclick="openSpotStampModal(${chIndex})">💮 收集景點章</button>
                             ${!isWholeJournalDraft ? `<button type="button" class="spot-pill-btn loc" onclick="jumpToJournalChapter(${chIndex},'section-${escHtml(ch.id)}')">📖 看實拍遊記</button>` : ''}
                         </div>
