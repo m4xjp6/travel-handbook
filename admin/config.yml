@@ -3,7 +3,7 @@ backend:
   name: git-gateway
   branch: main
 
-# === 2. 全域媒體存放路徑 ===
+# === 2. 全域媒體存放路徑（Decap CMS 啟動必填保留，實際照片／影片皆存放於 Cloudflare R2） ===
 media_folder: "media"
 public_folder: "media"
 
@@ -26,7 +26,7 @@ collections:
       - {label: "旅程總標題", name: "tripTitle", widget: "string"}
       - {label: "隱藏整份行程（草稿）", name: "isDraft", widget: "boolean", default: false, required: false}
       - {label: "主要國家（單國行程填此即可；填「台灣」則為國內行程不蓋海關章）", name: "country", widget: "string", required: false, hint: "如 日本、台灣、韓國；跨國行程請改填在下方「每日行程」"}
-      - {label: "地圖移動頭貼（Emoji 或圖片路徑）", name: "avatar", widget: "string", default: "🦊", required: false}
+      - {label: "地圖移動頭貼（Emoji 或 R2 圖片路徑）", name: "avatar", widget: "string", default: "🦊", required: false}
       - {label: "出發日期（YYYY-MM-DD）", name: "startDate", widget: "string", required: false, hint: "如 2027-04-07"}
       - {label: "結束日期（YYYY-MM-DD）", name: "endDate", widget: "string", required: false, hint: "過期後情報站自動封存"}
       - {label: "目的地時區", name: "timezone", widget: "string", default: "Asia/Tokyo", required: false, hint: "如 Asia/Tokyo、Asia/Kuala_Lumpur"}
@@ -183,7 +183,7 @@ collections:
               - {label: "⚠️ 用餐／預約注意與潛規則", name: "foodPolicy", widget: "text", required: false}
 
   # =====================================================================
-  # 模組 B：純圖文遊記手帳（對應 data/*.json，含照片／影片上傳）
+  # 模組 B：純圖文遊記手帳（對應 data/*.json，媒體路徑指向 Cloudflare R2）
   # =====================================================================
   - name: "trips"
     label: "📖 圖文遊記手帳"
@@ -195,7 +195,7 @@ collections:
     format: "json"
     fields:
       - {label: "旅程 ID（如 tohoku_2026）", name: "tripId", widget: "string"}
-      - {label: "地圖移動頭貼（Emoji 或圖片路徑）", name: "avatar", widget: "string", default: "🦊", required: false}
+      - {label: "地圖移動頭貼（Emoji 或 R2 圖片路徑）", name: "avatar", widget: "string", default: "🦊", required: false}
       - {label: "旅程結束日期（YYYY-MM-DD）", name: "endDate", widget: "string", required: false, hint: "如 2026-01-17"}
       - {label: "旅程總標題", name: "tripTitle", widget: "string"}
       - {label: "整本設為編輯中草稿（隱藏於首頁歸檔）", name: "isDraft", widget: "boolean", default: false, required: false}
@@ -250,22 +250,21 @@ collections:
                   - { label: "⚖️ 四張並排 (1:1:1:1)", value: "grid-4" }
                   - { label: "🎠 橫向滑動輪播", value: "carousel" }
                   - { label: "🖼️ 單欄垂直大圖", value: "stack" }
-              - label: "單張主圖／影片（相容舊資料）"
+              - label: "單張主圖／影片或佔位文字（相容舊資料）"
                 name: "mediaPlaceholder"
-                widget: "file"
+                widget: "string"
                 required: false
-                media_folder: "../media/{{tripId}}"
-                public_folder: "media/{{tripId}}"
-              - label: "多張照片與影片清單"
+                hint: "請先上傳至 Cloudflare R2 再填相對路徑（如 jp-tohoku-2026/day01/d1-ch1-1.png），或填純文字提示"
+              - label: "多張照片與影片清單（Cloudflare R2 路徑）"
                 name: "mediaList"
                 widget: "list"
                 required: false
+                summary: "{{fields.src}}"
                 fields:
-                  - label: "檔案（照片 / GIF / 影片）"
+                  - label: "R2 媒體路徑（照片 / GIF / 影片）"
                     name: "src"
-                    widget: "file"
-                    media_folder: "../media/{{tripId}}"
-                    public_folder: "media/{{tripId}}"
+                    widget: "string"
+                    hint: "請先上傳至 Cloudflare R2，再填相對路徑（如 jp-tohoku-2026/day01/d1-ch1-1.png）或完整網址"
                   - {label: "圖說（選填）", name: "caption", widget: "string", required: false}
               - {label: "遊記內文", name: "content", widget: "text"}
               - {label: "推薦預訂按鈕文字（選填）", name: "affiliateText", widget: "string", required: false}
@@ -342,8 +341,7 @@ collections:
               - {label: "手動點亮解鎖", name: "unlocked", widget: "boolean", default: true, required: false}
               - label: "自訂插畫徽章圖片（選填，留空則自動生成國旗徽章）"
                 name: "badgeImage"
-                widget: "image"
+                widget: "string"
                 required: false
-                media_folder: "../media/passport"
-                public_folder: "media/passport"
+                hint: "填寫 Cloudflare R2 相對路徑（如 _stamps/JP-badge.png）或完整網址，留空則自動生成國旗徽章"
               - {label: "旅遊小語／收藏備註（選填）", name: "note", widget: "text", required: false}
