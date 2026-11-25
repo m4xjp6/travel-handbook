@@ -30,7 +30,7 @@ body, html {
 #map { width: 100%; height: 100%; }
 #right-panel { width: 50vw; box-sizing: border-box; }
 
-/* 地圖頂部浮動列（統計膠囊與路線/尋訪切換） */
+/* 地圖頂部浮動列（統計膠囊與路線 / 尋訪切換） */
 .map-top-bar {
     position: absolute; top: 14px; left: 14px; right: 14px; z-index: 800;
     display: flex; justify-content: space-between; align-items: center; gap: 8px;
@@ -696,7 +696,7 @@ body, html {
         padding: 5px 8px; border-radius: 4px; margin-top: 5px; white-space: pre-line;
     }
 
-    /* 手寫隨筆／紀念章留白格 */
+    /* 手寫隨筆 / 紀念章留白格 */
     .pb-memo-box {
         margin-top: 10px; border: 1.2px dashed #C4A99E; border-radius: 8px;
         padding: 8px 10px; min-height: 28mm;
