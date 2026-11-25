@@ -330,22 +330,7 @@ collections:
               - {label: "對應遊記 tripId（選填）", name: "tripId", widget: "string", required: false, hint: "若有補寫遊記可填此自動串聯按鈕"}
               - {label: "備註（選填）", name: "note", widget: "string", required: false}
 
-          # --- 3. 手動補登景點紀念章（預留日後新增） ---
-          - label: "📍 手動新增景點紀念章（補登過去旅程或私藏景點）"
-            name: "manualSpotStamps"
-            widget: "list"
-            required: false
-            summary: "{{fields.date}} ｜ [{{fields.country}}] {{fields.spotName}}"
-            fields:
-              - {label: "景點／地點名稱", name: "spotName", widget: "string", hint: "如 北村韓屋村、大阪城"}
-              - {label: "國家／地區", name: "country", widget: "string", hint: "如 日本、韓國、香港、台灣"}
-              - {label: "城市／地區（選填）", name: "region", widget: "string", required: false, hint: "如 首爾、大阪"}
-              - {label: "造訪日期（YYYY-MM-DD）", name: "date", widget: "string", hint: "如 2025-01-20"}
-              - {label: "分類標籤（選填）", name: "categoryLabel", widget: "string", required: false, default: "經典必訪"}
-              - {label: "旅程名稱（選填）", name: "tripName", widget: "string", required: false, hint: "如 2025 首爾冬日散策"}
-              - {label: "備註小記（選填）", name: "note", widget: "text", required: false}
-
-          # --- 4. 國家／地區蒐集冊設定（手動點亮與自訂徽章圖） ---
+          # --- 3. 國家／地區蒐集冊設定（手動點亮與自訂徽章圖） ---
           - label: "🌍 國家／地區蒐集冊設定（手動解鎖＆自訂徽章圖片）"
             name: "countries"
             widget: "list"
