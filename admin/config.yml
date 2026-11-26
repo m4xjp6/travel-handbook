@@ -94,6 +94,16 @@ collections:
           - {label: "專案與設施說明", name: "mealPlan", widget: "string", required: false}
           - {label: "地址與交通方式", name: "address", widget: "string", required: false}
           - {label: "預估每晚金額", name: "estNightCost", widget: "number", value_type: "int", required: false, default: 3000}
+          - {label: "推薦預訂按鈕文字（選填，留空則自動抓取行程站點連結）", name: "affiliateText", widget: "string", required: false}
+          - {label: "Travelpayouts 分潤網址（選填）", name: "affiliateUrl", widget: "string", required: false}
+          - label: "多筆推薦預訂按鈕（選填，如 Agoda / Booking / Trip 比價）"
+            name: "affiliateLinks"
+            widget: "list"
+            required: false
+            summary: "{{fields.text}}"
+            fields:
+              - {label: "按鈕文字", name: "text", widget: "string", required: false}
+              - {label: "分潤網址", name: "url", widget: "string", required: false}
 
       # --- 預估花費細項（與雲端記帳基底連動） ---
       - label: "💰 行程預估花費細項"
@@ -181,6 +191,17 @@ collections:
               - {label: "🍱 列入在地美食紀錄", name: "isFood", widget: "boolean", default: false, required: false}
               - {label: "📘 美味紀錄（用餐後可更新實測）", name: "foodReview", widget: "text", required: false}
               - {label: "⚠️ 用餐 / 預約注意與潛規則", name: "foodPolicy", widget: "text", required: false}
+              # --- Travelpayouts 聯盟行銷預訂按鈕（圖文遊記、票券與美食分頁皆自動同步讀取） ---
+              - {label: "推薦預訂按鈕文字（選填）", name: "affiliateText", widget: "string", required: false, hint: "填寫後將同步顯示於行程安排、圖文遊記與票券頁"}
+              - {label: "Travelpayouts 分潤網址（選填）", name: "affiliateUrl", widget: "string", required: false}
+              - label: "多筆推薦預訂按鈕（選填）"
+                name: "affiliateLinks"
+                widget: "list"
+                required: false
+                summary: "{{fields.text}}"
+                fields:
+                  - {label: "按鈕文字", name: "text", widget: "string", required: false}
+                  - {label: "分潤網址", name: "url", widget: "string", required: false}
 
   # =====================================================================
   # 模組 B：純圖文遊記手帳（對應 data/*.json，媒體路徑指向 Cloudflare R2）
@@ -234,7 +255,7 @@ collections:
                   - { label: "🚡 纜車 / 索道", value: "ropeway" }
                   - { label: "⛴️ 遊船 / 渡輪", value: "boat" }
                   - { label: "✈️ 飛機 / 國際航班", value: "flight" }
-              - {label: "章節標題", name: "title", widget: "string", hint: "格式：01. 動作/亮點｜地點與細節"}
+              - {label: "章節標題", name: "title", widget: "string", hint: "格式：01. 動作 / 亮點｜地點與細節"}
               - label: "照片排版樣式"
                 name: "mediaLayout"
                 widget: "select"
@@ -267,12 +288,14 @@ collections:
                     hint: "請先上傳至 Cloudflare R2，再填相對路徑（如 jp-tohoku-2026/day01/d1-ch1-1.png）或完整網址"
                   - {label: "圖說（選填）", name: "caption", widget: "string", required: false}
               - {label: "遊記內文", name: "content", widget: "text"}
-              - {label: "推薦預訂按鈕文字（選填）", name: "affiliateText", widget: "string", required: false}
-              - {label: "Travelpayouts 分潤網址（選填）", name: "affiliateUrl", widget: "string", required: false}
-              - label: "多筆推薦預訂按鈕（選填）"
+              # --- Travelpayouts 聯盟行銷預訂按鈕（備援相容：建議統一填寫於「行程規劃」，此處留空將自動讀取行程連結） ---
+              - {label: "推薦預訂按鈕文字（選填 / 備援）", name: "affiliateText", widget: "string", required: false, hint: "建議統一填在行程規劃；若行程未填時才讀取此處"}
+              - {label: "Travelpayouts 分潤網址（選填 / 備援）", name: "affiliateUrl", widget: "string", required: false}
+              - label: "多筆推薦預訂按鈕（選填 / 備援）"
                 name: "affiliateLinks"
                 widget: "list"
                 required: false
+                summary: "{{fields.text}}"
                 fields:
                   - {label: "按鈕文字", name: "text", widget: "string", required: false}
                   - {label: "分潤網址", name: "url", widget: "string", required: false}
