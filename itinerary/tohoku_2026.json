@@ -50,7 +50,14 @@
       "roomType": "禁菸雙人房 (Standard Double)",
       "mealPlan": "JR 山形站東口直結免淋雪・行李可寄放櫃檯",
       "address": "山形縣山形市香澄町 1-1-1（JR 山形站東口直結）",
-      "estNightCost": 4620
+      "estNightCost": 4620,
+      "affiliateLinks": [
+        { "text": "官方網站｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://yamagata.hotel-metropolitan.com/tw/" },
+        { "text": "agoda｜JR東日本大都會大飯店山形", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=9067279" },
+        { "text": "trip.com｜JR東日本大都會大飯店山形", "url": "https://www.trip.com/t/qZMwt06s9X2" },
+        { "text": "kkday｜JR東日本大都會大飯店山形", "url": "https://kkday.tpk.lu/VjMGBnKI" },
+        { "text": "klook｜JR東日本大都會大飯店山形", "url": "https://klook.tpk.lu/HOdCFhKI" }
+      ]
     },
     {
       "hotelName": "天然温泉 杜都の湯 御宿野乃 仙台 (Onyado Nono Sendai)",
@@ -61,7 +68,15 @@
       "roomType": "禁菸雙人房 (Standard Double)",
       "mealPlan": "全館榻榻米・含海鮮丼＆牛舌早餐、免費宵夜拉麵＆頂樓溫泉",
       "address": "宮城縣仙台市青葉區本町 2-2-5（廣瀨通站東2出口步行 1 分鐘）",
-      "estNightCost": 3780
+      "estNightCost": 3780,
+      "affiliateLinks": [
+        { "text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/dormyinn/hotels/nono_sendai/" },
+        { "text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/" },
+        { "text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500" },
+        { "text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2" },
+        { "text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r" },
+        { "text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA" }
+      ]
     },
     {
       "hotelName": "APA 飯店〈京成上野站前〉(APA Hotel Keisei Ueno Ekimae)",
@@ -72,7 +87,14 @@
       "roomType": "標準雙人房 (Standard Room)",
       "mealPlan": "京成上野站池之端口出站即達・直通成田 Skyliner",
       "address": "東京都台東區上野 2-14-26（京成上野站步行 1 分鐘）",
-      "estNightCost": 3780
+      "estNightCost": 3780,
+      "affiliateLinks": [
+        { "text": "官方網站｜アパホテル〈京成上野駅前〉", "url": "https://www.apahotel.com/hotel/syutoken/tokyo/keisei-ueno-ekimae/" },
+        { "text": "agoda｜アパホテル〈京成上野駅前〉", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=1145700" },
+        { "text": "booking.com｜アパホテル〈京成上野駅前〉", "url": "https://reurl.cc/MWqArp" },
+        { "text": "trip.com｜アパホテル〈京成上野駅前〉", "url": "https://www.trip.com/t/MUuq0mxgCX2" },
+        { "text": "hotels.com｜アパホテル〈京成上野駅前〉", "url": "https://reurl.cc/p8Og7Z" }
+      ]
     }
   ],
   "expenseItems": [
@@ -192,7 +214,11 @@
           "timetableUrl": "https://www.kia.gov.tw/InstantScheduleC001110.aspx",
           "timetableLabel": "高雄小港國際機場即時航班",
           "intro": "南台灣主要國際航廈，出境大廳位於 3 樓，提供自助報到與 e-Gate 自動通關。",
-          "note": "• 起飛前 2.5–3 小時報到；行動電源與備用鋰電池僅限隨身手提。\n• 預訂專車時 20 吋以上行李箱計為大件行李。"
+          "note": "• 起飛前 2.5–3 小時報到；行動電源與備用鋰電池僅限隨身手提。\n• 預訂專車時 20 吋以上行李箱計為大件行李。",
+          "affiliateLinks": [
+            { "text": "kkday｜高雄小港機場專車接送", "url": "https://kkday.tpk.lu/uHxcv1ku" },
+            { "text": "klook｜高雄小港機場專車接送", "url": "https://klook.tpk.lu/YH8NQa3A" }
+          ]
         },
         {
           "id": "d1-ch2",
@@ -207,7 +233,13 @@
           "timetableUrl": "https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/traffic/skyliner.php",
           "timetableLabel": "Skyliner 官方時刻表",
           "intro": "連接成田國際機場與日暮里、京成上野的高速特急列車，最快 41 分鐘直達上野，全車對號指定席。",
-          "note": "• 網購 QR Code 須先至成田 B1 售票機或櫃檯換取實體車票。\n• 轉乘新幹線前可在 JR 上野站旁「いろり庵きらくそば」吃立食蕎麥麵。"
+          "note": "• 網購 QR Code 須先至成田 B1 售票機或櫃檯換取實體車票。\n• 轉乘新幹線前可在 JR 上野站旁「いろり庵きらくそば」吃立食蕎麥麵。",
+          "affiliateLinks": [
+            { "text": "官方網站｜京成電鐵 Skyliner 特急車票", "url": "https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/zht/" },
+            { "text": "trip.com｜京成電鐵 Skyliner 特急車票", "url": "https://www.trip.com/t/9H8O3xjr9X2" },
+            { "text": "kkday｜京成電鐵 Skyliner 特急車票", "url": "https://kkday.tpk.lu/I8DI56to" },
+            { "text": "klook｜京成電鐵 Skyliner 特急車票", "url": "https://klook.tpk.lu/u1yyYcRx" }
+          ]
         },
         {
           "id": "d1-ch3",
@@ -222,7 +254,13 @@
           "timetableUrl": "https://www.jreast-timetable.jp/",
           "timetableLabel": "JR 東日本時刻表",
           "intro": "沿東北新幹線行駛至福島站後轉入山形線，穿越板谷峠雪景直達山形。",
-          "note": "• 全面改為全車指定席（無自由席），持 JR Pass 亦須劃位。\n• 列車於福島站解聯，請確認搭乘 11–17 號往山形車廂。"
+          "note": "• 全面改為全車指定席（無自由席），持 JR Pass 亦須劃位。\n• 列車於福島站解聯，請確認搭乘 11–17 號往山形車廂。",
+          "affiliateLinks": [
+            { "text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html" },
+            { "text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2" },
+            { "text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons" },
+            { "text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk" }
+          ]
         },
         {
           "id": "d1-ch4",
@@ -240,7 +278,14 @@
           "note": "• 入住東口直結「山形大都會飯店」，出改札 3 分鐘免淋雪即達。\n• 地址：山形市香澄町 1-8-8 1F。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】招牌五目炒飯粒粒分明帶焦香鍋氣，搭配蒜香炒豆苗與酸辣湯麵，零下低溫吃超暖胃。",
-          "foodPolicy": "• 免預約直接入店，附圖片平板點餐；慣例每人低消一品，以現金支付為主。"
+          "foodPolicy": "• 免預約直接入店，附圖片平板點餐；慣例每人低消一品，以現金支付為主。",
+          "affiliateLinks": [
+            { "text": "官方網站｜山形大都會飯店 Hotel Metropolitan Yamagata", "url": "https://yamagata.hotel-metropolitan.com/tw/" },
+            { "text": "agoda｜JR東日本大都會大飯店山形", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=9067279" },
+            { "text": "trip.com｜JR東日本大都會大飯店山形", "url": "https://www.trip.com/t/qZMwt06s9X2" },
+            { "text": "kkday｜JR東日本大都會大飯店山形", "url": "https://kkday.tpk.lu/VjMGBnKI" },
+            { "text": "klook｜JR東日本大都會大飯店山形", "url": "https://klook.tpk.lu/HOdCFhKI" }
+          ]
         }
       ]
     },
@@ -263,7 +308,11 @@
           "timetableUrl": "https://www.yamakobus.jp/busroute/regular/zao-onsen/",
           "timetableLabel": "山交巴士時刻表",
           "intro": "由山形站搭巴士上藏王溫泉，再乘雙段纜車登上海拔 1,661 公尺地藏山頂俯瞰樹冰林海。",
-          "note": "• 山交巴士停售藏王樹冰套票，建議提早至東口 1 號月台刷 Suica 上車，或網購纜車優先票。\n• 巴士站步行至纜車站斜坡易結冰，強烈建議套上簡易冰爪。"
+          "note": "• 山交巴士停售藏王樹冰套票，建議提早至東口 1 號月台刷 Suica 上車，或網購纜車優先票。\n• 巴士站步行至纜車站斜坡易結冰，強烈建議套上簡易冰爪。",
+          "affiliateLinks": [
+            { "text": "官方網站｜藏王樹冰纜車票券", "url": "https://zaoropeway.co.jp/winter/cn.php" },
+            { "text": "官方網站｜山交巴士樹冰觀景套票", "url": "https://travel.yamagatakotsu.jp/zh-tw/ticket/guide-to-the-tree-top-icicle-viewing-ride-ticket.html" }
+          ]
         },
         {
           "id": "d2-ch2",
@@ -278,7 +327,8 @@
           "timetableUrl": "https://zaoropeway.co.jp/winter/cn.php",
           "timetableLabel": "藏王纜車運行資訊",
           "intro": "觀賞世界奇景「藏王樹冰」核心展望台，站外有開運之鐘與 1775 年建的藏王地藏尊。",
-          "note": "• 山頂低於 -10°C 手機掉電極快，不拍時請與暖暖包同放外套內回溫。\n• 山頂站 1 樓餐廳僅收現金，可吃霜淇淋配熱紅茶取暖。"
+          "note": "• 山頂低於 -10°C 手機掉電極快，不拍時請與暖暖包同放外套內回溫。\n• 山頂站 1 樓餐廳僅收現金，可吃霜淇淋配熱紅茶取暖。",
+          "affiliateLinks": []
         },
         {
           "id": "d2-ch3",
@@ -296,7 +346,8 @@
           "note": "• 地址：山形市藏王溫泉 553-20；營業 10:00–18:00（週三公休、無午休）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】推薦香料湯咖哩與山形牛蓋飯；甜點必點「巧克力巴斯克配自製柚子檸檬醬」，微酸解膩。",
-          "foodPolicy": "• 無訂位採現場候位，一人一品低消；支援現金、刷卡與 Suica。"
+          "foodPolicy": "• 無訂位採現場候位，一人一品低消；支援現金、刷卡與 Suica。",
+          "affiliateLinks": []
         },
         {
           "id": "d2-ch4",
@@ -311,7 +362,8 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=酢川温泉神社",
           "timetableLabel": "查看神社地圖",
           "intro": "走訪 1900 年歷史溫泉街，郵便局有限定樹冰風景印，沿五段長階梯可抵西元 110 年創立的酢川溫泉神社。",
-          "note": "• 【風景印禮儀】僅平日 09:00–17:00 提供，須先貼 ¥85 以上郵票並說「風景印を押してもらえますか？」。\n• 參道雪階極滑，上下務必緊抓扶手。"
+          "note": "• 【風景印禮儀】僅平日 09:00–17:00 提供，須先貼 ¥85 以上郵票並說「風景印を押してもらえますか？」。\n• 參道雪階極滑，上下務必緊抓扶手。",
+          "affiliateLinks": []
         },
         {
           "id": "d2-ch5",
@@ -329,7 +381,11 @@
           "note": "• 地址：東口交通中心 2F（同層另有米澤牛餐廳，勿看錯招牌）。\n• 霞城中央大樓 24F 展望台 07:00–23:00 免費開放。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】A4/A5 山形牛綜合燒肉拼盤（盛り合わせ）囊括五花、里肌與稀有部位，炭烤油脂配白飯入口即化。",
-          "foodPolicy": "• 旺季 18:00–20:00 易客滿，建議預約或 17:30 前入店；平板點餐，羽絨衣建議收入防味袋。"
+          "foodPolicy": "• 旺季 18:00–20:00 易客滿，建議預約或 17:30 前入店；平板點餐，羽絨衣建議收入防味袋。",
+          "affiliateLinks": [
+            { "text": "instagram｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://www.instagram.com/yamagatagyukakashi/" },
+            { "text": "tabelog｜山形牛ステーキ＆焼肉 かかし 駅前店", "url": "https://tabelog.com/tw/yamagata/A0601/A060101/6004194/" }
+          ]
         }
       ]
     },
@@ -352,7 +408,13 @@
           "timetableUrl": "https://www.jreast-timetable.jp/",
           "timetableLabel": "JR 奧羽本線時刻表",
           "intro": "通往銀山溫泉的鐵道門戶，站外即為尾花澤市營巴士銀山線乘車處，班次與 JR 緊密接續。",
-          "note": "• 早上先將大行李寄放山形大都會飯店，輕裝出遊。\n• 大石田站出站轉乘前，刷 IC 卡請排隊由站務員人工過卡。"
+          "note": "• 早上先將大行李寄放山形大都會飯店，輕裝出遊。\n• 大石田站出站轉乘前，刷 IC 卡請排隊由站務員人工過卡。",
+          "affiliateLinks": [
+            { "text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html" },
+            { "text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2" },
+            { "text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons" },
+            { "text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk" }
+          ]
         },
         {
           "id": "d3-ch2",
@@ -367,7 +429,8 @@
           "timetableUrl": "https://www.hanagasa-bus-taisei.co.jp/base.html",
           "timetableLabel": "銀山溫泉巴士時刻表",
           "intro": "銀山川兩岸綿延的大正至昭和初期木造三、四層樓溫泉旅宿群，雪景宛如穿越百年。",
-          "note": "• 路線巴士可直達溫泉街入口；自駕須於大正浪漫館換接駁車，管制期禁止步行。\n• 單程 ¥1,000 下車投現，請備妥紙鈔零錢。"
+          "note": "• 路線巴士可直達溫泉街入口；自駕須於大正浪漫館換接駁車，管制期禁止步行。\n• 單程 ¥1,000 下車投現，請備妥紙鈔零錢。",
+          "affiliateLinks": []
         },
         {
           "id": "d3-ch3",
@@ -385,7 +448,12 @@
           "note": "• 地址：尾花澤市銀山新畑 440；午餐 11:00–14:30、午茶 14:30–18:00（週三公休）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】必吃「炸茄子蘿蔔泥蕎麥麵（揚げ茄子おろしそば）」，酥脆多汁炸茄子配溫潤湯頭與手打麵。",
-          "foodPolicy": "• 午餐不開放預約，建議 11:00 開店前排隊搶二樓窗景位；登二樓須脫鞋入座。"
+          "foodPolicy": "• 午餐不開放預約，建議 11:00 開店前排隊搶二樓窗景位；登二樓須脫鞋入座。",
+          "affiliateLinks": [
+            { "text": "官方網站｜伊豆の華", "url": "https://www.izunohana.com/" },
+            { "text": "instagram｜伊豆の華", "url": "https://www.instagram.com/izunohana/" },
+            { "text": "tabelog｜伊豆の華", "url": "https://tabelog.com/tw/yamagata/A0605/A060503/6000500/" }
+          ]
         },
         {
           "id": "d3-ch4",
@@ -400,7 +468,8 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=能登屋旅館+銀山温泉",
           "timetableLabel": "查看地標位置",
           "intro": "大正 10 年落成的木造代表旅館與朱紅木橋，為《神隱少女》湯屋意象的經典象徵。",
-          "note": "• 紅橋供住客進出，非住客請於橋頭兩側拍照即可，勿長時間佔用或擅入館內。"
+          "note": "• 紅橋供住客進出，非住客請於橋頭兩側拍照即可，勿長時間佔用或擅入館內。",
+          "affiliateLinks": []
         },
         {
           "id": "d3-ch5",
@@ -415,7 +484,8 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=白銀の滝+銀山温泉",
           "timetableLabel": "查看地標位置",
           "intro": "溫泉街盡頭落差 22 公尺的壯麗瀑布，對面岩壁紅欄杆洞窟供奉守護旅人與兒童的鬼子母神。",
-          "note": "• 冬季坡道積雪深厚請防滑，並預留時間返回溫泉街口搭下山巴士。"
+          "note": "• 冬季坡道積雪深厚請防滑，並預留時間返回溫泉街口搭下山巴士。",
+          "affiliateLinks": []
         },
         {
           "id": "d3-ch6",
@@ -433,7 +503,12 @@
           "note": "• 餐後至飯店 1F 領寄放行李，前往站前 1 號月台搭高速巴士赴仙台。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】幻之「金華豚」油脂細緻甘甜、炸衣酥脆，配無限續加的山形つや姫白飯與高麗菜絲。",
-          "foodPolicy": "• 11:00–21:00 全日供餐無午休，每人低消一份；門口物販櫃可買豬排三明治外帶。"
+          "foodPolicy": "• 11:00–21:00 全日供餐無午休，每人低消一份；門口物販櫃可買豬排三明治外帶。",
+          "affiliateLinks": [
+            { "text": "官方網站｜平田牧場 ホテルメトロポリタン山形店", "url": "https://www.hiraboku.info/shop/metropolitan/" },
+            { "text": "instagram｜平田牧場 ホテルメトロポリタン山形店", "url": "https://www.instagram.com/hiraboku_official/" },
+            { "text": "tabelog｜平田牧場 ホテルメトロポリタン山形店", "url": "https://tabelog.com/tw/yamagata/A0601/A060101/6005167/" }
+          ]
         },
         {
           "id": "d3-ch7",
@@ -448,7 +523,15 @@
           "timetableUrl": "https://www.yamakobus.jp/busroute/highway/yamagata-sendai/",
           "timetableLabel": "山形—仙台高速巴士時刻表",
           "intro": "Dormy Inn 高階和風溫泉飯店，全館榻榻米鋪設、14F 設有天然溫泉與桑拿，每晚供應免費宵夜拉麵。",
-          "note": "• 【末班車警報】山形往仙台高速巴士末班 21:30、JR 仙山線末班 21:46（錯過計程車 ¥15,000 起跳）。\n• 入館即脫鞋鎖入 1F 鞋櫃；21:30–23:00 免費供應宵夜醬油拉麵。"
+          "note": "• 【末班車警報】山形往仙台高速巴士末班 21:30、JR 仙山線末班 21:46（錯過計程車 ¥15,000 起跳）。\n• 入館即脫鞋鎖入 1F 鞋櫃；21:30–23:00 免費供應宵夜醬油拉麵。",
+          "affiliateLinks": [
+            { "text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/dormyinn/hotels/nono_sendai/" },
+            { "text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/" },
+            { "text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500" },
+            { "text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2" },
+            { "text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r" },
+            { "text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA" }
+          ]
         }
       ]
     },
@@ -471,7 +554,10 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=仙台駅東口観光バス乗降場",
           "timetableLabel": "查看東口集合點",
           "intro": "仙台站東口 1 樓團體觀光巴士乘降場，一日遊專車主要集合點。",
-          "note": "• 08:45 準時發車逾時不候，請 08:30 前認明藍色 HIS 旗幟報到。"
+          "note": "• 08:45 準時發車逾時不候，請 08:30 前認明藍色 HIS 旗幟報到。",
+          "affiliateLinks": [
+            { "text": "官方網站｜株式会社エイチ・アイ・エス（H.I.S 日本旅行）", "url": "https://bushisgo.rezio.shop/zh-TW" }
+          ]
         },
         {
           "id": "d4-ch2",
@@ -486,7 +572,13 @@
           "timetableUrl": "http://zao-fox-village.com/",
           "timetableLabel": "藏王狐狸村官網",
           "intro": "放養逾百隻北狐、銀狐與北極藍狐的自然山林園區，冬季雪景蓬鬆冬毛極為療癒。",
-          "note": "• 放養區嚴禁觸摸與蹲下拍照；手機吊飾、手套繩、長裙擺與塑膠袋請收妥以免被咬。\n• 遇風雪交加時抱狐狸體驗可能臨時取消。"
+          "note": "• 放養區嚴禁觸摸與蹲下拍照；手機吊飾、手套繩、長裙擺與塑膠袋請收妥以免被咬。\n• 遇風雪交加時抱狐狸體驗可能臨時取消。",
+          "affiliateLinks": [
+            { "text": "官方網站｜宮城蔵王キツネ村", "url": "https://zao-fox-village.com/" },
+            { "text": "trip.com｜藏王狐狸村", "url": "https://www.trip.com/t/Lc8RvRXv9X2" },
+            { "text": "kkday｜藏王狐狸村", "url": "https://kkday.tpk.lu/yBVq8nkp" },
+            { "text": "klook｜藏王狐狸村", "url": "https://klook.tpk.lu/ElsJgKzZ" }
+          ]
         },
         {
           "id": "d4-ch3",
@@ -501,7 +593,13 @@
           "timetableUrl": "https://st-arahama.jp/",
           "timetableLabel": "JR 荒濱果樹園官網",
           "intro": "JR 東日本營運的高架溫室果樹園，冬季主打宮城品牌完熟草莓，免彎腰即可現採。",
-          "note": "• 選蒂頭微翹且全紅果實最甜；採摘時像轉瓶蓋般輕轉果蒂，勿硬拉果樹。"
+          "note": "• 選蒂頭微翹且全紅果實最甜；採摘時像轉瓶蓋般輕轉果蒂，勿硬拉果樹。",
+          "affiliateLinks": [
+            { "text": "官方網站｜JRフルーツパーク仙台あらはま", "url": "https://stbl-fruit-farm.jp/arahama/" },
+            { "text": "instagram｜JRフルーツパーク仙台あらはま", "url": "https://www.instagram.com/stbl_fruitfarm/?hl=ja" },
+            { "text": "facebook｜JRフルーツパーク仙台あらはま", "url": "https://www.facebook.com/sendaiagriculture/" },
+            { "text": "klook｜JRフルーツパーク仙台あらはま", "url": "https://klook.tpk.lu/WoDTFRgj" }
+          ]
         },
         {
           "id": "d4-ch4",
@@ -516,7 +614,10 @@
           "timetableUrl": "https://www.sentabi.jp/marugoto/",
           "timetableLabel": "仙台二日券介紹",
           "intro": "東口廣場與電梯口設有麵包超人石雕與地磚；順道至 2F 綠色窗口買「仙台まるごとパス」。",
-          "note": "• 仙台二日券（¥2,720）涵蓋 JR 仙石線、仙山線、地鐵、市營與 Loople 巴士，並附松島遊船與瑞巖寺折價券。"
+          "note": "• 仙台二日券（¥2,720）涵蓋 JR 仙石線、仙山線、地鐵、市營與 Loople 巴士，並附松島遊船與瑞巖寺折價券。",
+          "affiliateLinks": [
+            { "text": "官方網站｜仙台二日券", "url": "https://sendaitravelpass.jp/2days/en/" }
+          ]
         },
         {
           "id": "d4-ch5",
@@ -534,7 +635,12 @@
           "note": "• 地址：仙台市青葉區一番町 4-3-12 第五吉岡屋ビル 5F（勾當台公園站或廣瀨通站步行 3–4 分鐘）。\n• 預約不同暢飲方案有嚴格用餐限時（2–3 小時），請先確認方案規定。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】¥8,800 暢飲套餐招牌「海膽與 A5 仙台牛炙燒」，霜降和牛裹甜美海膽海陸旨味十足。",
-          "foodPolicy": "• 強烈建議預約，暢飲於結束前 30 分鐘最後加點；若改單點居酒屋慣例收開胃小菜席料（約 ¥400–500）與一杯飲品低消。"
+          "foodPolicy": "• 強烈建議預約，暢飲於結束前 30 分鐘最後加點；若改單點居酒屋慣例收開胃小菜席料（約 ¥400–500）與一杯飲品低消。",
+          "affiliateLinks": [
+            { "text": "instagram｜創作料理 真都", "url": "https://www.instagram.com/sosakuryouri.matu/" },
+            { "text": "tabelog｜創作料理 真都", "url": "https://tabelog.com/tw/miyagi/A0401/A040101/4023058/" },
+            { "text": "kkday｜創作料理 真都", "url": "https://kkday.tpk.lu/tXUpBboA" }
+          ]
         },
         {
           "id": "d4-ch6",
@@ -549,7 +655,15 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=御宿野乃仙台",
           "timetableLabel": "查看飯店位置",
           "intro": "返回飯店 14F 浸泡天然溫泉「杜都の湯」舒緩雪地步行的疲勞。",
-          "note": "• 泡湯自帶房內大小毛巾與房卡（女湯須輸入每日密碼）；免費提供晚間冰棒（15:00–25:00）與晨間乳酸菌飲（05:00–10:00）。"
+          "note": "• 泡湯自帶房內大小毛巾與房卡（女湯須輸入每日密碼）；免費提供晚間冰棒（15:00–25:00）與晨間乳酸菌飲（05:00–10:00）。",
+          "affiliateLinks": [
+            { "text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/dormyinn/hotels/nono_sendai/" },
+            { "text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/" },
+            { "text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500" },
+            { "text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2" },
+            { "text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r" },
+            { "text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA" }
+          ]
         }
       ]
     },
@@ -572,7 +686,13 @@
           "timetableUrl": "https://www.jreast-timetable.jp/",
           "timetableLabel": "JR 仙石線時刻表",
           "intro": "連接仙台市區與鹽釜、日本三景松島的海景鐵道，約 25–30 分鐘抵達本鹽釜站準備前往鹽釜港搭船。",
-          "note": "• 本鹽釜站與松島海岸站皆適用仙台二日券或 Suica / PASMO（持二日券走人工通道）。\n• 若直達松島海岸站（約 40 分鐘），去程坐右側可搶先賞松島灣海景。"
+          "note": "• 本鹽釜站與松島海岸站皆適用仙台二日券或 Suica / PASMO（持二日券走人工通道）。\n• 若直達松島海岸站（約 40 分鐘），去程坐右側可搶先賞松島灣海景。",
+          "affiliateLinks": [
+            { "text": "官方網站｜JR 東日本鐵路周遊券", "url": "https://www.jreast.co.jp/zh-CHT/multi/pass/eastpass.html" },
+            { "text": "trip.com｜JR 東日本鐵路周遊券", "url": "https://www.trip.com/t/cS2OzEtr9X2" },
+            { "text": "kkday｜JR 東日本鐵路周遊券", "url": "https://kkday.tpk.lu/ksQCmons" },
+            { "text": "klook｜JR 東日本鐵路周遊券", "url": "https://klook.tpk.lu/L2UmFhzk" }
+          ]
         },
         {
           "id": "d5-ch2",
@@ -587,7 +707,12 @@
           "timetableUrl": "https://www.matsushima.or.jp/cruise/timetable/",
           "timetableLabel": "松島觀光船時刻表",
           "intro": "自本鹽釜站步行約 7–10 分鐘、走過跨路天橋至 Marine Gate 鹽釜登船，穿梭松島灣約 260 座奇岩松島直達松島海岸。",
-          "note": "• 冬季鹽釜港發船班次較少，開航前 15 分鐘完成換票並留意官網時刻；船上全面禁止餵食海鷗。"
+          "note": "• 冬季鹽釜港發船班次較少，開航前 15 分鐘完成換票並留意官網時刻；船上全面禁止餵食海鷗。",
+          "affiliateLinks": [
+            { "text": "官方網站｜松島灣觀光船", "url": "https://www.matsushima.or.jp/" },
+            { "text": "kkday｜松島灣觀光船組合套票", "url": "https://kkday.tpk.lu/Ka7WunkH" },
+            { "text": "klook｜松島灣觀光船組合套票", "url": "https://klook.tpk.lu/6GLUFjjj" }
+          ]
         },
         {
           "id": "d5-ch3",
@@ -602,7 +727,8 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=松島+五大堂",
           "timetableLabel": "查看五大堂地圖",
           "intro": "伊達政宗 1604 年重建的東北最古老桃山建築，登島須跨鏤空「透橋」，鄰近 252 公尺朱紅福浦橋。",
-          "note": "• 透橋縫隙可直望海水，過橋請收好手機避免掉落；08:30–17:00 免費參拜。"
+          "note": "• 透橋縫隙可直望海水，過橋請收好手機避免掉落；08:30–17:00 免費參拜。",
+          "affiliateLinks": []
         },
         {
           "id": "d5-ch4",
@@ -620,7 +746,10 @@
           "note": "• 地址：松島町松島字普賢堂 4-10；營業 08:00–16:00（熱食至 15:00、燒烤屋台 09:00–15:00）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】冬季松島帶殼烤牡蠣肥美無腥味，必配鮪魚鮭魚卵海鮮丼與熱騰騰牡蠣汁。",
-          "foodPolicy": "• 11:30–13:00 建議分工一人佔位、一人食券機排隊；餐畢須自行將餐盤與牡蠣殼分類回收。"
+          "foodPolicy": "• 11:30–13:00 建議分工一人佔位、一人食券機排隊；餐畢須自行將餐盤與牡蠣殼分類回收。",
+          "affiliateLinks": [
+            { "text": "官方網站｜松島さかな市場", "url": "https://www.sakana-ichiba.co.jp/" }
+          ]
         },
         {
           "id": "d5-ch5",
@@ -635,7 +764,14 @@
           "timetableUrl": "https://www.date-masamune.jp/",
           "timetableLabel": "伊達政宗歷史館官網",
           "intro": "以逾 200 尊等身蠟像與 25 個歷史場景重現獨眼龍伊達政宗的一生。",
-          "note": "• 營業 09:00–17:00（最終入館 16:30）；門票 ¥1,000，出示仙台二日券享團體折扣。"
+          "note": "• 營業 09:00–17:00（最終入館 16:30）；門票 ¥1,000，出示仙台二日券享團體折扣。",
+          "affiliateLinks": [
+            { "text": "官方網站｜伊達政宗歷史博物館", "url": "https://date-masamune.jp/" },
+            { "text": "instagram｜伊達政宗歷史博物館", "url": "https://www.instagram.com/datemasamunerksk/" },
+            { "text": "facebook｜伊達政宗歷史博物館", "url": "https://www.facebook.com/p/%E3%81%BF%E3%81%A1%E3%81%AE%E3%81%8F%E4%BC%8A%E9%81%94%E6%94%BF%E5%AE%97%E6%AD%B4%E5%8F%B2%E9%A4%A8-100032983496283/" },
+            { "text": "trip.com｜伊達政宗歷史博物館", "url": "https://www.trip.com/t/BNIgctHSCX2" },
+            { "text": "kkday｜伊達政宗歷史博物館", "url": "https://kkday.tpk.lu/EVhyqdPg" }
+          ]
         },
         {
           "id": "d5-ch6",
@@ -650,7 +786,11 @@
           "timetableUrl": "https://www.zuiganji.or.jp/",
           "timetableLabel": "國寶瑞巖寺官網",
           "intro": "伊達政宗家族菩提寺，高聳杉木參道盡頭為國寶本堂與庫裡，展現華麗桃山雕刻與障壁畫。",
-          "note": "• 12–1 月僅開放至 15:30 請注意入場時間；進入本堂須脫鞋且內部禁止拍照。"
+          "note": "• 12–1 月僅開放至 15:30 請注意入場時間；進入本堂須脫鞋且內部禁止拍照。",
+          "affiliateLinks": [
+            { "text": "官方網站｜瑞巖寺", "url": "https://www.zuiganji.or.jp/" },
+            { "text": "官方網站｜円通院", "url": "https://www.entuuin.or.jp/" }
+          ]
         },
         {
           "id": "d5-ch7",
@@ -668,7 +808,13 @@
           "note": "• 地址：仙台市青葉區一番町 3-8-14 B1F（一番町 ブランドーム拱廊街地下 1 樓）。\n• 營業：11:30–14:30 / 17:00–22:30（售完提早打烊）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】炭火厚切牛舌外焦脆內軟嫩多汁、毫無筋感，搭配清甜大蔥牛尾湯與麥飯。",
-          "foodPolicy": "• 僅 26 席，午餐不開放預約，晚餐未訂位建議 16:45 排隊；嚴禁解壓縮插隊，須全員到齊入座且每人低消一品。"
+          "foodPolicy": "• 僅 26 席，午餐不開放預約，晚餐未訂位建議 16:45 排隊；嚴禁解壓縮插隊，須全員到齊入座且每人低消一品。",
+          "affiliateLinks": [
+            { "text": "官方網站｜牛たん料理 閣 ブランドーム本店", "url": "https://gyutankaku.in/" },
+            { "text": "instagram｜牛たん料理 閣 ブランドーム本店", "url": "https://www.instagram.com/gyutankaku/" },
+            { "text": "facebook｜牛たん料理 閣 ブランドーム本店", "url": "https://www.facebook.com/gyutankaku" },
+            { "text": "tabelog｜牛たん料理 閣 ブランドーム本店", "url": "https://tabelog.com/tw/miyagi/A0401/A040101/4000039/" }
+          ]
         },
         {
           "id": "d5-ch8",
@@ -683,7 +829,15 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=御宿野乃仙台",
           "timetableLabel": "查看飯店位置",
           "intro": "沿廣瀨通漫步回飯店泡天然溫泉與享用 21:30 免費宵夜醬油拉麵。",
-          "note": "• 續住不須整房時可於門外貼磁鐵，房務會將乾淨毛巾袋掛於門把。"
+          "note": "• 續住不須整房時可於門外貼磁鐵，房務會將乾淨毛巾袋掛於門把。",
+          "affiliateLinks": [
+            { "text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/dormyinn/hotels/nono_sendai/" },
+            { "text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/" },
+            { "text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500" },
+            { "text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2" },
+            { "text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r" },
+            { "text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA" }
+          ]
         }
       ]
     },
@@ -706,7 +860,10 @@
           "timetableUrl": "https://www.kotsu.city.sendai.jp/bus/",
           "timetableLabel": "仙台市營巴士查詢",
           "intro": "搭市營巴士駛入泉區中山住宅區，從巷弄夾縫間搶先直擊 100 公尺純白巨人身影。",
-          "note": "• 由後門上車刷卡或抽整理券，前門下車刷卡或出示二日券日期面。"
+          "note": "• 由後門上車刷卡或抽整理券，前門下車刷卡或出示二日券日期面。",
+          "affiliateLinks": [
+            { "text": "官方網站｜仙台二日券", "url": "https://sendaitravelpass.jp/2days/en/" }
+          ]
         },
         {
           "id": "d6-ch2",
@@ -721,7 +878,8 @@
           "timetableUrl": "https://daikannon.com/",
           "timetableLabel": "仙台大觀音官網",
           "intro": "高 100 公尺的巨型白衣觀音像，由龍口入內搭電梯登 12F 俯瞰市景，再沿螺旋步道參拜 108 尊胎內佛。",
-          "note": "• 門票（守護札）¥500，平日 10:00–15:30（最終入場 15:00）；拍住宅區街景請站人行道勿入車道。"
+          "note": "• 門票（守護札）¥500，平日 10:00–15:30（最終入場 15:00）；拍住宅區街景請站人行道勿入車道。",
+          "affiliateLinks": []
         },
         {
           "id": "d6-ch3",
@@ -736,7 +894,8 @@
           "timetableUrl": "https://daikannon.com/",
           "timetableLabel": "查看參拜介紹",
           "intro": "大觀音旁小巧神社，舀麻油香專用油淋於大黑天像上，並綁粉（良緣）或紫（事業）彩帶祈願。",
-          "note": "• 【浴油法步驟】點蠟燭 ➔ 點線香 ➔ 邊淋油邊唸真言 7 次（おん・まか・きゃらや・そわか）。"
+          "note": "• 【浴油法步驟】點蠟燭 ➔ 點線香 ➔ 邊淋油邊唸真言 7 次（おん・まか・きゃらや・そわか）。",
+          "affiliateLinks": []
         },
         {
           "id": "d6-ch4",
@@ -754,7 +913,11 @@
           "note": "• 地址：仙台市泉區南中山 1-1-12；營業 11:00–21:00（無午休）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】必點「辣味噌拉麵（辛味噌らーめん）」，濃醇豚骨融合赤味噌辣油，冬日喝湯超暖身。",
-          "foodPolicy": "• 拉麵店慣例一人一碗麵，尖峰餐畢不建議久坐；以現金支付為主。"
+          "foodPolicy": "• 拉麵店慣例一人一碗麵，尖峰餐畢不建議久坐；以現金支付為主。",
+          "affiliateLinks": [
+            { "text": "官方網站｜らーめん山頭火", "url": "https://www.santouka.co.jp/zh" },
+            { "text": "facebook｜らーめん山頭火", "url": "https://www.facebook.com/HokkaidoRamenSantouka/" }
+          ]
         },
         {
           "id": "d6-ch5",
@@ -769,7 +932,10 @@
           "timetableUrl": "https://loople-sendai.jp/tw/",
           "timetableLabel": "Loople 巴士時刻表",
           "intro": "1601 年伊達政宗於青葉山築造的居城遺址，本丸高台矗立騎馬像並可遠眺仙台市景與太平洋。",
-          "note": "• Loople 仙台觀光巴士末班約 16:00–16:30，請留意下山班次。"
+          "note": "• Loople 仙台觀光巴士末班約 16:00–16:30，請留意下山班次。",
+          "affiliateLinks": [
+            { "text": "官方網站｜仙台城跡", "url": "https://www.city.sendai.jp/shisekichosa/kurashi/manabu/kyoiku/inkai/bunkazai/bunkazai/joseki/index.html" }
+          ]
         },
         {
           "id": "d6-ch6",
@@ -784,7 +950,12 @@
           "timetableUrl": "https://www.oosaki-hachiman.or.jp/",
           "timetableLabel": "大崎八幡宮官網",
           "intro": "1607 年建成的日本最古老國寶權現造御社殿，黑漆金箔雕刻華麗，祈求必勝與除厄極靈驗。",
-          "note": "• 參拜須經重要文化財「長床」，境內掛滿職棒東北樂天金鷲隊必勝繪馬。"
+          "note": "• 參拜須經重要文化財「長床」，境內掛滿職棒東北樂天金鷲隊必勝繪馬。",
+          "affiliateLinks": [
+            { "text": "官方網站｜大崎八幡宮", "url": "https://www.oosaki-hachiman.or.jp/index.html" },
+            { "text": "instagram｜大崎八幡宮", "url": "https://www.instagram.com/osakihachimangu_shrine/" },
+            { "text": "facebook｜大崎八幡宮", "url": "https://www.facebook.com/profile.php?id=100068690528180" }
+          ]
         },
         {
           "id": "d6-ch7",
@@ -802,7 +973,10 @@
           "note": "• 當晚表參道與國道 48 號實施大規模交管，回程請依指引至臨時巴士站搭車。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】寒冬參道屋台必嚐熱騰騰豚汁、山形玉こんにゃく（滷蒟蒻球）、廣島燒與甘酒。",
-          "foodPolicy": "• 屋台僅收現金（備百圓與千圓鈔）；請於攤旁享用勿拿熱湯擠入裸參拜隊伍，垃圾丟回攤位。"
+          "foodPolicy": "• 屋台僅收現金（備百圓與千圓鈔）；請於攤旁享用勿拿熱湯擠入裸參拜隊伍，垃圾丟回攤位。",
+          "affiliateLinks": [
+            { "text": "官方網站｜大崎八幡宮 松焚祭", "url": "https://www.oosaki-hachiman.or.jp/festival/matsutaki/" }
+          ]
         },
         {
           "id": "d6-ch8",
@@ -817,7 +991,15 @@
           "timetableUrl": "https://www.kotsu.city.sendai.jp/",
           "timetableLabel": "仙台市交通局官網",
           "intro": "仙台最後一晚返飯店泡天然溫泉洗去冬夜寒氣，整理行囊準備明日回東京。",
-          "note": "• 隔早退房前別忘了享用御宿野乃招牌自製海鮮丼＆厚切牛舌自助早餐。"
+          "note": "• 隔早退房前別忘了享用御宿野乃招牌自製海鮮丼＆厚切牛舌自助早餐。",
+          "affiliateLinks": [
+            { "text": "官方網站｜仙台御宿野乃溫泉飯店 Onyado Nono Sendai", "url": "https://dormy-hotels.com/dormyinn/hotels/nono_sendai/" },
+            { "text": "instagram｜仙台御宿野乃溫泉飯店", "url": "https://www.instagram.com/dormyinn.official/" },
+            { "text": "agoda｜仙台御宿野乃溫泉飯店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=30903500" },
+            { "text": "trip.com｜仙台御宿野乃溫泉飯店", "url": "https://www.trip.com/t/sRFMcjEv9X2" },
+            { "text": "kkday｜仙台御宿野乃溫泉飯店", "url": "https://kkday.tpk.lu/eIem8Y1r" },
+            { "text": "klook｜仙台御宿野乃溫泉飯店", "url": "https://klook.tpk.lu/jxJIUXXA" }
+          ]
         }
       ]
     },
@@ -840,7 +1022,14 @@
           "timetableUrl": "https://www.jreast-timetable.jp/",
           "timetableLabel": "JR 東北新幹線時刻表",
           "intro": "搭乘時速 320 公里的東北新幹線隼號 1.5 小時直返上野，至京成上野站旁 APA 飯店寄放行李。",
-          "note": "• Hayabusa 為全車指定席；三邊合計逾 160cm 特大行李須事先預約特大行李席。"
+          "note": "• Hayabusa 為全車指定席；三邊合計逾 160cm 特大行李須事先預約特大行李席。",
+          "affiliateLinks": [
+            { "text": "官方網站｜アパホテル〈京成上野駅前〉", "url": "https://www.apahotel.com/hotel/syutoken/tokyo/keisei-ueno-ekimae/" },
+            { "text": "agoda｜アパホテル〈京成上野駅前〉", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=1145700" },
+            { "text": "booking.com｜アパホテル〈京成上野駅前〉", "url": "https://reurl.cc/MWqArp" },
+            { "text": "trip.com｜アパホテル〈京成上野駅前〉", "url": "https://www.trip.com/t/MUuq0mxgCX2" },
+            { "text": "hotels.com｜アパホテル〈京成上野駅前〉", "url": "https://reurl.cc/p8Og7Z" }
+          ]
         },
         {
           "id": "d7-ch2",
@@ -858,7 +1047,11 @@
           "note": "• 地址：東京都台東區上野公園 1-57 UENO3153 1F（JR 上野站不忍口步行 1 分鐘）；營業 11:00–23:00（最後點餐時間 22:30）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】招牌果木北京烤鴨皮脆不膩配手工荷葉餅，另有小籠包與熱炒，四人聚餐超飽足。",
-          "foodPolicy": "• 支援中文點餐；單點與吃到飽方案須同桌一致；支援現金、刷卡與 PayPay，不支援 Suica / PASMO 等交通系 IC 卡。"
+          "foodPolicy": "• 支援中文點餐；單點與吃到飽方案須同桌一致；支援現金、刷卡與 PayPay，不支援 Suica / PASMO 等交通系 IC 卡。",
+          "affiliateLinks": [
+            { "text": "官方網站｜北京ダック専門店 上野店", "url": "https://pekingduckstoreueno.foodre.jp/" },
+            { "text": "tabelog｜北京ダック専門店 上野店", "url": "https://tabelog.com/tw/tokyo/A1311/A131101/13278864/" }
+          ]
         },
         {
           "id": "d7-ch3",
@@ -873,7 +1066,12 @@
           "timetableUrl": "https://www.tokyo-zoo.net/zoo/ueno/",
           "timetableLabel": "上野動物園官網",
           "intro": "1882 年開園的日本最古老動物園，分東西兩園，飼育鯨頭鸛、兔猻、小熊貓與北極熊等逾 300 種動物。",
-          "note": "• 營業 09:30–17:00（16:00 停售票 / 週一休），門票 ¥600。\n• 【2026 最新快訊】雙胞胎大貓熊「曉曉」與「蕾蕾」已於 2026 年 1 月底正式返還中國，目前園內已無大貓熊展示。"
+          "note": "• 營業 09:30–17:00（16:00 停售票 / 週一休），門票 ¥600。\n• 【2026 最新快訊】雙胞胎大貓熊「曉曉」與「蕾蕾」已於 2026 年 1 月底正式返還中國，目前園內已無大貓熊展示。",
+          "affiliateLinks": [
+            { "text": "官方網站｜上野動物園", "url": "https://www.tokyo-zoo.net/zh-CHT/ueno/index.html" },
+            { "text": "instagram｜上野動物園", "url": "https://www.instagram.com/ueno_zoo_official/" },
+            { "text": "trip.com｜上野動物園", "url": "https://www.trip.com/t/8FOzyCRyEX2" }
+          ]
         },
         {
           "id": "d7-ch4",
@@ -891,7 +1089,10 @@
           "note": "• 地址：東京都台東區上野 4-1-3 仙家ビル B1F（JR 御徒町站北口步行 1–2 分鐘）；營業 11:30–23:00（週日至 22:00）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】招牌「純肉羊肉湯」湯頭濃白溫潤無羶味，嫩羊肉配酥脆燒餅，全家評為本趟最驚豔美味之一。",
-          "foodPolicy": "• 掃桌上 QR Code 中文點餐，可選純肉或羊雜並自由加蔥花香菜與辣油；僅收現金與行動支付，不支援信用卡與交通系 IC 卡。"
+          "foodPolicy": "• 掃桌上 QR Code 中文點餐，可選純肉或羊雜並自由加蔥花香菜與辣油；僅收現金與行動支付，不支援信用卡與交通系 IC 卡。",
+          "affiliateLinks": [
+            { "text": "tabelog｜羊貴妃羊湯館", "url": "https://tabelog.com/tw/tokyo/A1311/A131101/13255339/" }
+          ]
         },
         {
           "id": "d7-ch5",
@@ -906,7 +1107,11 @@
           "timetableUrl": "https://www.ameyoko.net/",
           "timetableLabel": "阿美橫丁商店街指南",
           "intro": "高架橋下逾 400 間店舖的熱鬧商圈，以低價藥妝 OS Drug 與零食批發二木の菓子最受歡迎。",
-          "note": "• 多數店家 19:30–20:00 打烊請趁早採買。\n• OS Drug 僅收現金無退稅；二木の菓子與連鎖藥妝滿未稅 ¥5,000 持護照可退稅。"
+          "note": "• 多數店家 19:30–20:00 打烊請趁早採買。\n• OS Drug 僅收現金無退稅；二木の菓子與連鎖藥妝滿未稅 ¥5,000 持護照可退稅。",
+          "affiliateLinks": [
+            { "text": "instagram｜アメ横style", "url": "https://www.instagram.com/ameyoko_style/" },
+            { "text": "facebook｜アメ横style", "url": "https://www.facebook.com/ameyokostyle/" }
+          ]
         }
       ]
     },
@@ -929,7 +1134,11 @@
           "timetableUrl": "https://www.nippori-senigai.com/",
           "timetableLabel": "日暮里纖維街官網",
           "intro": "綿延 1 公里、聚集逾 80 間布料皮革與裁縫配件批發老店的手作迷天堂。",
-          "note": "• 多為 10:00–18:00 營業（週日及國定假日多休）；剪布前請確認最低剪裁單位（10cm 或 50cm 起）。"
+          "note": "• 多為 10:00–18:00 營業（週日及國定假日多休）；剪布前請確認最低剪裁單位（10cm 或 50cm 起）。",
+          "affiliateLinks": [
+            { "text": "官方網站｜日暮里纖維街", "url": "https://www.nippori-senigai.com/zh-hant/" },
+            { "text": "instagram｜日暮里纖維街", "url": "https://www.instagram.com/nippori_concierge/" }
+          ]
         },
         {
           "id": "d8-ch2",
@@ -947,7 +1156,13 @@
           "note": "• 地址：荒川區西日暮里 3-10-3 2F；營業 11:00–23:00。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】現沖高空拉茶印度香料奶茶（Chai）香氣濃郁，配紮實重乳酪起司蛋糕或咖哩烤餅。",
-          "foodPolicy": "• 每人低消一杯飲品或餐點；店內瓷器擺飾多請留意隨身背包碰撞。"
+          "foodPolicy": "• 每人低消一杯飲品或餐點；店內瓷器擺飾多請留意隨身背包碰撞。",
+          "affiliateLinks": [
+            { "text": "官方網站｜ダージリン 日暮里店", "url": "https://akr4118853167.owst.jp/" },
+            { "text": "instagram｜ダージリン 日暮里店", "url": "https://www.instagram.com/_darjeeling_nippori_/" },
+            { "text": "tabelog｜ダージリン 日暮里店", "url": "https://tabelog.com/tw/tokyo/A1311/A131105/13015467/" },
+            { "text": "kkday｜ダージリン 日暮里店", "url": "https://kkday.tpk.lu/Bi51qEBU" }
+          ]
         },
         {
           "id": "d8-ch3",
@@ -962,7 +1177,12 @@
           "timetableUrl": "http://gallery.necomachi.com/",
           "timetableLabel": "ギャラリー猫町官網",
           "intro": "谷中昭和木造老宅內的貓咪主題專門藝廊，定期展出日本陶藝與插畫個展。",
-          "note": "• 週四至週日 11:00–18:00 開放（展期最後一日至 17:00，週一至三休）；入內須脫鞋，拍展品前請先詢問。"
+          "note": "• 週四至週日 11:00–18:00 開放（展期最後一日至 17:00，週一至三休）；入內須脫鞋，拍展品前請先詢問。",
+          "affiliateLinks": [
+            { "text": "官方網站｜ギャラリー猫町", "url": "http://gallery.necomachi.com/" },
+            { "text": "instagram｜ギャラリー猫町", "url": "https://www.instagram.com/gallery.nekomachi/" },
+            { "text": "facebook｜ギャラリー猫町", "url": "https://www.facebook.com/GalleryNecomachi/" }
+          ]
         },
         {
           "id": "d8-ch4",
@@ -977,7 +1197,11 @@
           "timetableUrl": "https://nedujinja.or.jp/",
           "timetableLabel": "根津神社官網",
           "intro": "1900 年歷史東京十社之一，保存 7 棟江戶國定重要文化財，乙女稻荷神社蜿蜒朱紅千本鳥居極靜謐。",
-          "note": "• 06:00–17:00 免費參拜；千本鳥居高度較低，高個子通過請留意上方木樑。"
+          "note": "• 06:00–17:00 免費參拜；千本鳥居高度較低，高個子通過請留意上方木樑。",
+          "affiliateLinks": [
+            { "text": "官方網站｜根津神社", "url": "https://nedujinja.or.jp/" },
+            { "text": "instagram｜根津神社", "url": "https://www.instagram.com/nedujinja_official/" }
+          ]
         },
         {
           "id": "d8-ch5",
@@ -995,7 +1219,10 @@
           "note": "• 地址：台東區谷中 3-9-15；營業約 10:30–18:00（售完為止）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】必吃熱騰騰和牛「元氣炸肉餅」配人氣第一虎紋貓（Tora）可可白巧克力烤甜甜圈。",
-          "foodPolicy": "• 嚴禁邊走邊吃，請於店口指定區吃完再丟垃圾；街邊老店多僅收現金。"
+          "foodPolicy": "• 嚴禁邊走邊吃，請於店口指定區吃完再丟垃圾；街邊老店多僅收現金。",
+          "affiliateLinks": [
+            { "text": "官方網站｜谷中銀座商店街", "url": "https://www.yanakaginza.com/" }
+          ]
         },
         {
           "id": "d8-ch6",
@@ -1010,7 +1237,8 @@
           "timetableUrl": "https://www.google.com/maps/search/?api=1&query=夕やけだんだん",
           "timetableLabel": "查看夕陽階梯地圖",
           "intro": "俯瞰谷中銀座商店街的著名寬闊石階，黃昏橘金餘暉灑落懷舊街景宛如經典日劇場景。",
-          "note": "• 拍照請靠兩側欄杆站立，保留中央通道供居民通行。"
+          "note": "• 拍照請靠兩側欄杆站立，保留中央通道供居民通行。",
+          "affiliateLinks": []
         },
         {
           "id": "d8-ch7",
@@ -1028,7 +1256,10 @@
           "note": "• 地址：港區東麻布 1-5-4（赤羽橋站步行 5 分鐘）；營業 11:00–14:30 / 17:00–20:00（週日及不定休）。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】傳承五代江戶前技法「素燒、深蒸、三度炭烤」，蒲燒與白燒鰻魚鬆軟清雅不膩。",
-          "foodPolicy": "• 晚餐強烈建議預約；請著整潔休閒正裝（Smart Casual），避免拖鞋、短褲或濃烈香水。"
+          "foodPolicy": "• 晚餐強烈建議預約；請著整潔休閒正裝（Smart Casual），避免拖鞋、短褲或濃烈香水。",
+          "affiliateLinks": [
+            { "text": "tabelog｜野田岩 麻布飯倉本店", "url": "https://tabelog.com/tw/tokyo/A1314/A131401/13002789/" }
+          ]
         },
         {
           "id": "d8-ch8",
@@ -1043,7 +1274,14 @@
           "timetableUrl": "https://www.tokyotower.co.jp/",
           "timetableLabel": "東京鐵塔官網",
           "intro": "高 333 公尺東京地標，搭專梯登 250 公尺頂層幾何鏡面空間，360 度飽覽東京灣與都會星河夜景。",
-          "note": "• Top Deck 採時段預約制（含迎賓飲與導覽機），請依票面時段至 Main Deck 電梯口報到。"
+          "note": "• Top Deck 採時段預約制（含迎賓飲與導覽機），請依票面時段至 Main Deck 電梯口報到。",
+          "affiliateLinks": [
+            { "text": "官方網站｜東京鐵塔", "url": "https://zh.tokyotower.co.jp/" },
+            { "text": "agoda｜東京鐵塔", "url": "https://www.agoda.com/zh-tw/activities/detail?activityId=1262374&ds=WRpwk1f9d+tIHc6A&currency=TWD&cid=1909882&cityId=5085" },
+            { "text": "trip.com｜東京鐵塔", "url": "https://www.trip.com/t/D6gjDY72FX2" },
+            { "text": "kkday｜東京鐵塔", "url": "https://kkday.tpk.lu/knVz5OUR" },
+            { "text": "klook｜東京鐵塔", "url": "https://klook.tpk.lu/srtSwpBJ" }
+          ]
         }
       ]
     },
@@ -1066,7 +1304,13 @@
           "timetableUrl": "https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/traffic/skyliner.php",
           "timetableLabel": "Skyliner 回程時刻表",
           "intro": "自 APA 飯店步行 1 分鐘進站，最快 41 分鐘直達成田國際機場第 2 航廈地下車站。",
-          "note": "• 回程同樣須先於京成上野站售票機 / 櫃檯劃位領取實體指定席車票。"
+          "note": "• 回程同樣須先於京成上野站售票機 / 櫃檯劃位領取實體指定席車票。",
+          "affiliateLinks": [
+            { "text": "官方網站｜京成電鐵 Skyliner 特急車票", "url": "https://www.keisei.co.jp/keisei/tetudou/skyliner/e-ticket/zht/" },
+            { "text": "trip.com｜京成電鐵 Skyliner 特急車票", "url": "https://www.trip.com/t/9H8O3xjr9X2" },
+            { "text": "kkday｜京成電鐵 Skyliner 特急車票", "url": "https://kkday.tpk.lu/I8DI56to" },
+            { "text": "klook｜京成電鐵 Skyliner 特急車票", "url": "https://klook.tpk.lu/u1yyYcRx" }
+          ]
         },
         {
           "id": "d9-ch2",
@@ -1084,7 +1328,13 @@
           "note": "• 營業 08:30–21:00（最後點餐時間 20:30）；地域限定伴手禮建議市區買齊，出境免稅店補東京芭娜娜與 ROYCE。",
           "isFood": true,
           "foodReview": "【AI 美味預覽】推薦軟嫩雞牛肉熱炒與粒粒分明的五目炒飯，登機前優雅飽餐一頓。",
-          "foodPolicy": "• 位於出境安檢前公共區，大推車可停店口；建議起飛前 75–90 分鐘結帳下 3F 通關。"
+          "foodPolicy": "• 位於出境安檢前公共區，大推車可停店口；建議起飛前 75–90 分鐘結帳下 3F 通關。",
+          "affiliateLinks": [
+            { "text": "官方網站｜謝朋殿 成田店", "url": "https://www.shahoden.com/" },
+            { "text": "instagram｜謝朋殿 成田店", "url": "https://www.instagram.com/shahoden_official/" },
+            { "text": "facebook｜謝朋殿 成田店", "url": "https://www.facebook.com/shahoden" },
+            { "text": "tabelog｜謝朋殿 成田店", "url": "https://tabelog.com/tw/chiba/A1204/A120401/12001111/" }
+          ]
         },
         {
           "id": "d9-ch3",
@@ -1100,7 +1350,8 @@
           "timetableUrl": "https://www.narita-airport.jp/ch2/flight/flight-search/",
           "timetableLabel": "成田國際機場即時航班",
           "intro": "下午自成田起飛返高雄，冬季起飛後約 20–30 分鐘可於高空近賞覆雪富士山，為九天東北漫旅畫下句點。",
-          "note": "• 【賞富士山選位】東京飛台灣回程富士山在飛機「右側」，劃位推薦選右側靠窗（避開機翼排數）。"
+          "note": "• 【賞富士山選位】東京飛台灣回程富士山在飛機「右側」，劃位推薦選右側靠窗（避開機翼排數）。",
+          "affiliateLinks": []
         }
       ]
     }
