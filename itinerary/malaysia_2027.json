@@ -80,10 +80,11 @@
       "address": "2, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur",
       "estNightCost": 3417,
       "affiliateLinks": [
-        { "text": "agoda｜吉隆坡艾美酒店", "url": "" },
-        { "text": "booking.com｜吉隆坡艾美酒店", "url": "" },
-        { "text": "trip.com｜吉隆坡艾美酒店", "url": "" },
-        { "text": "klook｜吉隆坡艾美酒店", "url": "" }
+        { "text": "官方網站｜吉隆坡艾美酒店", "url": "https://www.marriott.com/en-us/hotels/kulmd-le-meridien-kuala-lumpur/overview/" },
+        { "text": "agoda｜吉隆坡艾美酒店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=63305" },
+        { "text": "booking.com｜吉隆坡艾美酒店", "url": "https://www.booking.com/hotel/my/le-meridien-kuala-lumpur.zh-tw.html" },
+        { "text": "trip.com｜吉隆坡艾美酒店", "url": "https://www.trip.com/t/JYjRL3P2KX2" },
+        { "text": "ezTravel｜吉隆坡艾美酒店", "url": "https://hotel.eztravel.com.tw/detail-kualalumpur-315-994108/le-mridien-kuala-lumpur/" }
       ]
     },
     {
@@ -113,6 +114,7 @@
       "address": "No. 5, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur",
       "estNightCost": 2500,
       "affiliateLinks": [
+        { "text": "官方網站｜吉隆坡雅樂軒飯店", "url": "https://www.marriott.com/en-us/hotels/kulal-aloft-kuala-lumpur-sentral/overview/" },
         { "text": "agoda｜吉隆坡雅樂軒飯店", "url": "" },
         { "text": "booking.com｜吉隆坡雅樂軒飯店", "url": "" },
         { "text": "trip.com｜吉隆坡雅樂軒飯店", "url": "" },
