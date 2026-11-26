@@ -344,10 +344,11 @@
           "intro": "緊鄰交通樞紐「吉隆坡中央車站（KL Sentral）」的五星級現代藝術設計酒店，以直通機場快線與地鐵的絕佳便利性、豐富的餐飲選擇及俯瞰湖濱公園的城市景觀而聞名。",
           "note": "• 訂房平台：AGODA。\n• 地址：2, Jalan Stesen Sentral, Kuala Lumpur Sentral, 50470 Kuala Lumpur。\n• 與 KL Sentral 直結，隔早下樓即達 ETS 電動列車月台。\n• KLIA Ekspres 自 2027/01/01 起成人單程調漲為 MYR65（約 NT$522、來回 MYR118）；2 人以上同行也可彈性比價 Grab（單車含過路費約 MYR65–85）；23:00 後快線改為站站停，21:00 出發不受影響。",
           "affiliateLinks": [
-            { "text": "agoda｜吉隆坡艾美酒店", "url": "" },
-            { "text": "booking.com｜吉隆坡艾美酒店", "url": "" },
-            { "text": "trip.com｜吉隆坡艾美酒店", "url": "" },
-            { "text": "klook｜吉隆坡艾美酒店", "url": "" }
+            { "text": "官方網站｜吉隆坡艾美酒店", "url": "https://www.marriott.com/en-us/hotels/kulmd-le-meridien-kuala-lumpur/overview/" },
+            { "text": "agoda｜吉隆坡艾美酒店", "url": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1955335&hid=63305" },
+            { "text": "booking.com｜吉隆坡艾美酒店", "url": "https://www.booking.com/hotel/my/le-meridien-kuala-lumpur.zh-tw.html" },
+            { "text": "trip.com｜吉隆坡艾美酒店", "url": "https://www.trip.com/t/JYjRL3P2KX2" },
+            { "text": "ezTravel｜吉隆坡艾美酒店", "url": "https://hotel.eztravel.com.tw/detail-kualalumpur-315-994108/le-mridien-kuala-lumpur/" }
           ]
         }
       ]
