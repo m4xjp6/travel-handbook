@@ -1,6 +1,7 @@
 {
   "tripId": "malaysia_2027",
   "avatar": "🦁",
+  "startDate": "2027-04-07",
   "endDate": "2027-04-17",
   "tripTitle": "°•* 𝐅𝐥â𝐧𝐞𝐮𝐫 *•° ｜ 南洋雙星春季漫旅",
   "isDraft": true,
@@ -13,8 +14,8 @@
       "chapters": [
         {
           "id": "d1-ch1",
-          "lat": 22.5752,
-          "lng": 120.3471,
+          "lat": 22.5751,
+          "lng": 120.3472,
           "zoom": 13,
           "transport": "drive",
           "title": "01. 啟程｜專車直達高雄小港機場",
@@ -23,16 +24,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d1-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：08:00 起床整理行囊，10:00 搭專車前往小港機場的心情與報到實況）<div class='callout-box callout-tip'><div class='callout-icon'>💳</div><div class='callout-content'><div class='callout-title'>省錢妙招｜信用卡機場接送</div>預訂專車前先確認刷機票的信用卡權益，不少銀行提供<strong>免費或優惠價接送</strong>（需提前預約），可先與平台比價。</div></div><div class='callout-box callout-tip'><div class='callout-icon'>🚗</div><div class='callout-content'><div class='callout-title'>專車預約｜車型與行李規則</div><ul><li><strong>車型：</strong>五人座（1–3人、2–4件大行李）、七人座（4–6人、4–6件）、九人座（5–8人、6–8件）。</li><li><strong>計件：</strong>20吋以上及紙箱皆算一件大行李；嬰兒車等特殊行李須事先告知。</li></ul></div></div>",
-          "affiliateLinks": [
-            {"text": "kkday｜高雄小港機場專車接送", "url": "https://kkday.tpk.lu/uHxcv1ku"},
-            {"text": "klook｜高雄小港機場專車接送", "url": "https://klook.tpk.lu/YH8NQa3A"}
-          ]
+          "content": "（出發後補寫：08:00 起床整理行囊，10:00 搭專車前往小港機場的心情與報到實況）<div class='callout-box callout-tip'><div class='callout-icon'>💳</div><div class='callout-content'><div class='callout-title'>省錢妙招｜信用卡機場接送</div>預訂專車前先確認刷機票的信用卡權益，不少銀行提供<strong>免費或優惠價接送</strong>（需提前預約），可先與平台比價。</div></div><div class='callout-box callout-tip'><div class='callout-icon'>🚗</div><div class='callout-content'><div class='callout-title'>專車預約｜車型與行李規則</div><ul><li><strong>車型：</strong>五人座（1–3人、2–4件大行李）、七人座（4–6人、4–6件）、九人座（5–8人、6–8件）。</li><li><strong>計件：</strong>20吋以上及紙箱皆算一件大行李；嬰兒車等特殊行李須事先告知。</li></ul></div></div>"
         },
         {
           "id": "d1-ch2",
-          "lat": 2.7456,
-          "lng": 101.7072,
+          "lat": 2.7448,
+          "lng": 101.6852,
           "zoom": 12,
           "transport": "flight",
           "title": "02. 飛行｜亞洲航空直飛吉隆坡 klia2",
@@ -41,37 +38,35 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d1-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：13:45 亞航起飛、4 小時 25 分航程與 18:10 落地 klia2 通關領行李實錄）<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>入境提醒｜馬來西亞 MDAC 電子入境卡</div>抵達前 3 天內須至官網免費申報 <strong>MDAC</strong>，截圖確認信備查；klia2 航廈較大，通關與領行李建議預留 1–1.5 小時。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜馬來西亞 MDAC 電子入境卡", "url": ""},
-            {"text": "trip.com｜吉隆坡機場快線 KLIA Ekspres", "url": ""},
-            {"text": "kkday｜吉隆坡機場快線 KLIA Ekspres", "url": ""},
-            {"text": "klook｜吉隆坡機場快線 KLIA Ekspres", "url": ""}
-          ]
+          "content": "（出發後補寫：13:45 亞航起飛、4 小時 25 分航程與 18:10 落地 klia2 通關領行李實錄）<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>入境提醒｜馬來西亞 MDAC 電子入境卡</div>抵達前 3 天內須至官網免費申報 <strong>MDAC</strong>，截圖確認信備查；klia2 航廈較大，通關與領行李建議預留 1–1.5 小時。</div></div>"
         },
         {
           "id": "d1-ch3",
-          "lat": 3.1357,
-          "lng": 101.6865,
+          "lat": 2.7444,
+          "lng": 101.6849,
           "zoom": 15,
-          "transport": "train",
-          "title": "03. 晚餐＆住宿｜家鄉海南咖啡與吉隆坡艾美酒店",
+          "transport": "walk",
+          "title": "03. 晚餐｜家鄉海南咖啡初嚐南洋味",
           "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放海南白咖啡晚餐或艾美酒店房間照",
+          "mediaPlaceholder": "此處可放海南白咖啡、咖椰吐司或海南雞飯照",
           "mediaList": [
             { "src": "media/malaysia_2027/d1-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：第一餐「家鄉海南咖啡」的南洋滋味，以及入住 KL Sentral 直結艾美酒店的便利體驗）<div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜吉隆坡艾美酒店 (Le Méridien Kuala Lumpur)</div><ul><li><strong>位置：</strong>KL Sentral 車站直結，隔早下樓即達 ETS 電動列車月台。</li><li><strong>晚餐參考：</strong>家鄉海南咖啡（預算約 RM40，推薦海南白咖啡、咖椰吐司、海南雞飯）。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "agoda｜吉隆坡艾美酒店", "url": ""},
-            {"text": "booking.com｜吉隆坡艾美酒店", "url": ""},
-            {"text": "trip.com｜吉隆坡艾美酒店", "url": ""},
-            {"text": "klook｜吉隆坡艾美酒店", "url": ""}
-          ]
+          "content": "（出發後補寫：落地後第一餐「家鄉海南咖啡」的南洋滋味，海南白咖啡配咖椰牛油烤吐司與海南雞飯實評）<div class='callout-box callout-info'><div class='callout-icon'>☕</div><div class='callout-content'><div class='callout-title'>餐廳資訊｜家鄉海南咖啡 (Hometown Hainan Coffee @klia2)</div><ul><li><strong>位置：</strong>gateway@klia2 2 樓入境層（L2-113），24 小時營業。</li><li><strong>推薦餐點：</strong>海南白咖啡 / 摻、咖椰牛油烤吐司、海南雞飯、咖哩叻沙麵（餐飲預算約 MYR40）。</li></ul></div></div>"
+        },
+        {
+          "id": "d1-ch4",
+          "lat": 3.1359,
+          "lng": 101.6866,
+          "zoom": 15,
+          "transport": "train",
+          "title": "04. 住宿｜吉隆坡艾美酒店 Check-in",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放 KLIA Ekspres 或艾美酒店房間照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d1-ch4-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：搭機場快線 / Grab 進市區，入住 KL Sentral 直結艾美酒店的便利體驗）<div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜吉隆坡艾美酒店 (Le Méridien Kuala Lumpur)</div><ul><li><strong>位置：</strong>2, Jalan Stesen Sentral（KL Sentral 車站直結，隔早下樓即達 ETS 電動列車月台）。</li><li><strong>交通備註：</strong>KLIA Ekspres 成人單程 MYR65，2 人以上同行亦可彈性比價 Grab。</li></ul></div></div>"
         }
       ]
     },
@@ -83,8 +78,8 @@
       "chapters": [
         {
           "id": "d2-ch1",
-          "lat": 4.5975,
-          "lng": 101.0736,
+          "lat": 4.5978,
+          "lng": 101.073,
           "zoom": 13,
           "transport": "train",
           "title": "01. 移動｜搭乘 KTMB ETS 電動列車前進怡保",
@@ -93,19 +88,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d2-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：08:00 由 KL Sentral 搭 ETS 北上沿途風景，以及抵達「怡保泰姬瑪哈陵」火車站的第一印象）<div class='callout-box callout-sci'><div class='callout-icon'>🚂</div><div class='callout-content'><div class='callout-title'>鐵道小知識｜ETS vs. KTM Komuter</div>ETS 為馬來亞鐵道最高速對號電動列車（時速 140km/h，如台鐵自強號），<strong>發車前 30 分鐘驗票、前 5 分鐘關閘門</strong>，別誤搭站站停的 Komuter 區間車。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜KTMB ETS 線上訂票", "url": "https://online.ktmb.com.my/"},
-            {"text": "kkday｜", "url": ""},
-            {"text": "klook｜", "url": ""}
-          ]
+          "content": "（出發後補寫：08:00 由 KL Sentral 搭 ETS 北上沿途風景，以及抵達「怡保泰姬瑪哈陵」火車站的第一印象）<div class='callout-box callout-sci'><div class='callout-icon'>🚂</div><div class='callout-content'><div class='callout-title'>鐵道小知識｜ETS vs. KTM Komuter</div>ETS 為馬來亞鐵道最高速對號電動列車（時速 140km/h，如台鐵自強號），<strong>發車前 30 分鐘驗票、前 5 分鐘關閘門</strong>，別誤搭站站停的 Komuter 區間車。</div></div>"
         },
         {
           "id": "d2-ch2",
-          "lat": 4.5952,
-          "lng": 101.0784,
+          "lat": 4.5953,
+          "lng": 101.0774,
           "zoom": 16,
           "transport": "walk",
           "title": "02. 住宿｜薩朗柏羅傳承飯店（快樂窩遺產旅館）",
@@ -114,18 +102,11 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d2-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：12:00 抵達舊街場核心區的百年古蹟旅宿 Check-in／寄放行李的氛圍感受）<div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜薩朗柏羅傳承飯店 (Sarang Paloh Heritage Stay)</div><ul><li><strong>位置：</strong>16, Jalan Sultan Iskandar（距二奶巷與白咖啡名店步行 3 分鐘）。</li><li><strong>備註：</strong>Day 03 退房可寄放行李至 18:00。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "agoda｜薩朗柏羅傳承飯店", "url": ""},
-            {"text": "booking.com｜薩朗柏羅傳承飯店", "url": ""},
-            {"text": "trip.com｜薩朗柏羅傳承飯店", "url": ""}
-          ]
+          "content": "（出發後補寫：12:00 抵達舊街場核心區的百年古蹟旅宿 Check-in／寄放行李的氛圍感受）<div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜薩朗柏羅傳承飯店 (Sarang Paloh Heritage Stay)</div><ul><li><strong>位置：</strong>16, Jalan Sultan Iskandar（距二奶巷與白咖啡名店步行 3 分鐘）。</li><li><strong>備註：</strong>Day 03 退房可寄放行李至 18:00。</li></ul></div></div>"
         },
         {
           "id": "d2-ch3",
-          "lat": 4.596,
+          "lat": 4.5934,
           "lng": 101.0772,
           "zoom": 16,
           "transport": "walk",
@@ -135,15 +116,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d2-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：朝聖 OldTown 白咖啡發源老店，冰白咖啡與現烤千層蛋撻、雞絲河粉的實吃口感）<div class='callout-box callout-tip'><div class='callout-icon'>☕</div><div class='callout-content'><div class='callout-title'>傳統茶室點餐潛規則</div>先找空桌記桌號，<strong>飲品向茶室店員點、熟食直接找各檔口點</strong>，上桌時個別以馬幣現金結帳。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：朝聖 OldTown 白咖啡發源老店，冰白咖啡與現烤千層蛋撻、雞絲河粉的實吃口感）<div class='callout-box callout-tip'><div class='callout-icon'>☕</div><div class='callout-content'><div class='callout-title'>傳統茶室點餐潛規則</div>先找空桌記桌號，<strong>飲品向茶室店員點、熟食直接找各檔口點</strong>，上桌時個別以馬幣現金結帳。</div></div>"
         },
         {
           "id": "d2-ch4",
-          "lat": 4.5588,
-          "lng": 101.1292,
+          "lat": 4.559,
+          "lng": 101.1293,
           "zoom": 15,
           "transport": "drive",
           "title": "04. 秘境｜極樂洞鐘乳石溶洞與後山湖景花園",
@@ -152,15 +130,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d2-ch4-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：搭 Grab 前往極樂洞，穿過挑高鐘乳石洞窟後豁然開朗的湖景庭園震撼感）<div class='callout-box callout-info'><div class='callout-icon'>⛰️</div><div class='callout-content'><div class='callout-title'>景點資訊｜極樂洞 (Kek Lok Tong)</div><ul><li><strong>開放：</strong>07:00–17:30，免費入場（建議 Grab 往返）。</li><li><strong>停留：</strong>約 2–2.5 小時；洞內偶有滴水請留意腳步。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：搭 Grab 前往極樂洞，穿過挑高鐘乳石洞窟後豁然開朗的湖景庭園震撼感）<div class='callout-box callout-info'><div class='callout-icon'>⛰️</div><div class='callout-content'><div class='callout-title'>景點資訊｜極樂洞 (Kek Lok Tong)</div><ul><li><strong>開放：</strong>07:00–17:30，免費入場（建議 Grab 往返）。</li><li><strong>停留：</strong>約 2–2.5 小時；洞內偶有滴水請留意腳步。</li></ul></div></div>"
         },
         {
           "id": "d2-ch5",
           "lat": 4.5941,
-          "lng": 101.0842,
+          "lng": 101.084,
           "zoom": 16,
           "transport": "drive",
           "title": "05. 晚餐｜安記芽菜雞沙河粉與伴手禮散策",
@@ -169,10 +144,63 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d2-ch5-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：怡保名物粗脆山泉芽菜配滑雞、沙河粉的實測心得，以及姚德勝街買香餅戰利品）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：怡保名物粗脆山泉芽菜配滑雞、沙河粉的實測心得，以及姚德勝街買香餅戰利品）"
+        },
+        {
+          "id": "d2-ch6",
+          "lat": 4.595,
+          "lng": 101.0843,
+          "zoom": 16,
+          "transport": "walk",
+          "title": "06. 夜市｜新街場夜市 (Gerbang Malam Ipoh) 夜間市集",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放新街場夜市燈火與在地市集攤位照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d2-ch6-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：18:35 飯後散步逛新街場夜間市集的熱鬧街景與挖掘在地小物實錄）"
+        },
+        {
+          "id": "d2-ch7",
+          "lat": 4.596,
+          "lng": 101.0842,
+          "zoom": 16,
+          "transport": "walk",
+          "title": "07. 散策｜時光塔公園夜間散步打卡",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放時光塔公園地標與夜間散步照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d2-ch7-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：19:35 漫步至時光塔公園吹晚風、拍公園地標與感受怡保居民的悠閒夜生活）"
+        },
+        {
+          "id": "d2-ch8",
+          "lat": 4.5952,
+          "lng": 101.0872,
+          "zoom": 16,
+          "transport": "walk",
+          "title": "08. 宵夜｜怡保糖水街品嚐古早味甜品",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放雜果冰、港式糖水或大排檔宵夜照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d2-ch8-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：20:15 走進露天宵夜美食街，大啖冰涼雜果冰、燉煮糖水與街邊小吃的滿足感）<div class='callout-box callout-tip'><div class='callout-icon'>🍨</div><div class='callout-content'><div class='callout-title'>糖水街點餐規則</div>露天大排檔型態，先找空桌坐下再向各攤口點餐（報桌號送餐並於上桌時付馬幣現金）。</div></div>"
+        },
+        {
+          "id": "d2-ch9",
+          "lat": 4.5953,
+          "lng": 101.0774,
+          "zoom": 16,
+          "transport": "walk",
+          "title": "09. 晚安｜返回薩朗柏羅傳承飯店休息",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放夜晚古蹟旅宿庭院或房間休息照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d2-ch9-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：21:30 跨越近打河返回舊街場的古蹟旅宿梳洗休息，養足精神迎接明日舊街場巡禮）"
         }
       ]
     },
@@ -184,8 +212,8 @@
       "chapters": [
         {
           "id": "d3-ch1",
-          "lat": 4.5957,
-          "lng": 101.0774,
+          "lat": 4.5934,
+          "lng": 101.0769,
           "zoom": 16,
           "transport": "walk",
           "title": "01. 早餐｜1937 年老字號新源隆茶室",
@@ -194,32 +222,26 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d3-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：08:00 報到新源隆與南香的味蕾對決、咖椰牛油吐司配半熟蛋，以及退房寄行李小記）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：08:00 退房寄行李後報到新源隆，與南香的味蕾對決、咖椰牛油吐司配半熟蛋實吃心得）"
         },
         {
           "id": "d3-ch2",
-          "lat": 4.5964,
-          "lng": 101.0785,
+          "lat": 4.5967,
+          "lng": 101.0776,
           "zoom": 17,
           "transport": "walk",
-          "title": "02. 散策｜鹹魚街與三奶巷彩虹傘壁畫",
+          "title": "02. 散策｜三奶巷彩虹傘與童趣壁畫",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放三奶巷彩色雨傘陣或老街壁畫照",
           "mediaList": [
             { "src": "media/malaysia_2027/d3-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：趁 09:00 晨光柔和先拍鹹魚街與三奶巷空景與童趣壁畫）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：趁 09:20 晨光柔和先拍三奶巷彩色雨傘空景與充滿童趣的在地生活壁畫）"
         },
         {
           "id": "d3-ch3",
-          "lat": 4.5969,
-          "lng": 101.0779,
+          "lat": 4.5963,
+          "lng": 101.0783,
           "zoom": 17,
           "transport": "walk",
           "title": "03. 巡禮｜二奶巷百年排屋與藝文小巷",
@@ -228,15 +250,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d3-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：漫步二奶巷與藝文小巷的文創選物、古早味甜品與熱鬧街景）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：漫步二奶巷與藝文小巷的文創選物、古早味豆腐花與熱鬧街景）"
         },
         {
           "id": "d3-ch4",
-          "lat": 4.5974,
-          "lng": 101.0772,
+          "lat": 4.5964,
+          "lng": 101.079,
           "zoom": 17,
           "transport": "walk",
           "title": "04. 走讀｜閒真別墅揭開百年錫礦豪門秘辛",
@@ -245,17 +264,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d3-ch4-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：11:00 預約導覽，聽客家錫礦俱樂部的百年採錫史與精巧模型故事）<div class='callout-box callout-warning'><div class='callout-icon'>🈯</div><div class='callout-content'><div class='callout-title'>參觀提醒｜全預約制</div>閒真別墅採全預約導覽（週一休），須先官網預約並提早 10 分鐘報到；免費參觀（建議隨喜樂捐），入內須脫鞋。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜閒真別墅線上預約", "url": "https://www.ipohworld.org/reservation/"}
-          ]
+          "content": "（出發後補寫：11:00 預約導覽，聽客家錫礦俱樂部的百年採錫史與精巧模型故事）<div class='callout-box callout-warning'><div class='callout-icon'>🈯</div><div class='callout-content'><div class='callout-title'>參觀提醒｜全預約制</div>閒真別墅採全預約導覽（週一休），須先官網預約並提早 5 分鐘報到；免費參觀（建議隨喜樂捐），入內須脫鞋。</div></div>"
         },
         {
           "id": "d3-ch5",
-          "lat": 4.5971,
-          "lng": 101.0776,
+          "lat": 4.5952,
+          "lng": 101.079,
           "zoom": 17,
           "transport": "walk",
           "title": "05. 午餐｜舊街場回憶餐廳正午避暑",
@@ -264,15 +278,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d3-ch5-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：12:00 躲進冷氣老屋吃南洋簡餐、吹冷氣充電 1.5 小時）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：12:05 躲進冷氣老屋吃蝶豆花椰漿飯與煎蕊冰品、吹冷氣充電 1.5 小時）"
         },
         {
           "id": "d3-ch6",
-          "lat": 4.5976,
-          "lng": 101.0773,
+          "lat": 4.5965,
+          "lng": 101.0791,
           "zoom": 17,
           "transport": "walk",
           "title": "06. 文化｜錫米巷壁畫與何人可涼茶博物館",
@@ -281,46 +292,75 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d3-ch6-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：拍完錫米巷與《老虎與樹》壁畫，走進 1941 年大馬國民涼茶發源地免費試飲草本涼茶）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜何人可博物館", "url": "https://hoyanhor.com/museum/"}
-          ]
+          "content": "（出發後補寫：拍完錫米巷與《老虎與樹》壁畫，走進 1941 年大馬國民涼茶發源地免費試飲草本涼茶）"
         },
         {
           "id": "d3-ch7",
-          "lat": 4.5968,
-          "lng": 101.0758,
+          "lat": 4.5969,
+          "lng": 101.0761,
           "zoom": 16,
           "transport": "walk",
-          "title": "07. 集點＆返程｜舊街場七大壁畫、畢治鐘樓與夜返吉隆坡",
+          "title": "07. 集點｜舊街場七大壁畫與畢治紀念鐘樓",
           "mediaLayout": "auto",
           "mediaPlaceholder": "此處可放《老人喝白咖啡》《紙飛機》壁畫或畢治紀念鐘樓照",
           "mediaList": [
             { "src": "media/malaysia_2027/d3-ch7-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：一口氣收集《演變》《工匠》《大蜂鳥》、細奶巷、再興大廈、《紙飛機》《老人咖啡》與畢治鐘樓，17:30 領行李搭 ETS 返吉隆坡入住雅樂軒連住 3 晚）<div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜吉隆坡中央車站雅樂軒飯店 (Aloft KL Sentral)</div><ul><li><strong>位置：</strong>No. 5, Jalan Stesen Sentral（與 KL Sentral 及 NU Sentral 商場空橋直結）。</li><li><strong>入住房晚：</strong>Day 03–06 連續 3 晚。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "agoda｜吉隆坡雅樂軒飯店", "url": ""},
-            {"text": "booking.com｜吉隆坡雅樂軒飯店", "url": ""},
-            {"text": "trip.com｜吉隆坡雅樂軒飯店", "url": ""},
-            {"text": "klook｜吉隆坡雅樂軒飯店", "url": ""}
-          ]
+          "content": "（出發後補寫：一口氣收集《演變》《工匠》《大蜂鳥》、細奶巷、再興大廈、《紙飛機》《老人喝白咖啡》與 1909 年畢治紀念鐘樓）"
+        },
+        {
+          "id": "d3-ch8",
+          "lat": 4.5966,
+          "lng": 101.0736,
+          "zoom": 16,
+          "transport": "walk",
+          "title": "08. 寄信｜怡保總郵局寄出南洋明信片",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放怡保總郵局建築或蓋郵戳寄明信片照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d3-ch8-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：16:50 回飯店領行李後趕在 17:30 關門前衝怡保總郵局買郵票、寄出寫滿舊街場回憶的明信片）"
+        },
+        {
+          "id": "d3-ch9",
+          "lat": 4.5978,
+          "lng": 101.073,
+          "zoom": 15,
+          "transport": "walk",
+          "title": "09. 返程｜怡保火車站搭 ETS 電動列車南返吉隆坡",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放傍晚純白怡保火車站與 ETS 列車照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d3-ch9-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：17:30 抵達怡保火車站候車與補拍純白摩爾式車站外觀，搭乘晚間 ETS 列車返回吉隆坡）"
+        },
+        {
+          "id": "d3-ch10",
+          "lat": 3.133,
+          "lng": 101.6863,
+          "zoom": 15,
+          "transport": "train",
+          "title": "10. 住宿｜吉隆坡中央車站雅樂軒飯店 Check-in",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放雅樂軒飯店設計大廳或房間照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d3-ch10-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：約 21:00 抵達 KL Sentral 經室內空橋步行入住雅樂軒飯店，開啟連住 3 晚的都會基地）<div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜吉隆坡中央車站雅樂軒飯店 (Aloft KL Sentral)</div><ul><li><strong>位置：</strong>No. 5, Jalan Stesen Sentral（與 KL Sentral 及 NU Sentral 商場空橋直結）。</li><li><strong>入住房晚：</strong>Day 03–06 連續 3 晚。</li></ul></div></div>"
         }
       ]
     },
     {
       "day": "Day 04",
-      "dayTitle": "挑戰黑風洞 272 級彩虹階梯！手作錫碗與吉隆坡塔落日天際線",
+      "dayTitle": "挑戰黑風洞 272 級彩虹階梯！手作錫碗、吉隆坡塔夕陽與敘宴晚宴",
       "isDraft": true,
       "isFieldTest": false,
       "chapters": [
         {
           "id": "d4-ch1",
-          "lat": 3.2379,
+          "lat": 3.2381,
           "lng": 101.684,
           "zoom": 15,
           "transport": "train",
@@ -330,86 +370,103 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d4-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：早上 08:00 出發攀登 272 級彩虹階梯的腳力挑戰、洞內天坑光影與獼猴互動）<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>黑風洞服裝與防猴提醒</div><ul><li><strong>服裝規定：</strong>男女皆禁露膝短褲短裙（現場租沙龍約 RM15）。</li><li><strong>防猴守則：</strong>階梯獼猴會搶食，切勿手提塑膠袋、食物或水瓶。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "trip.com｜黑風洞半日遊", "url": ""},
-            {"text": "kkday｜黑風洞半日遊", "url": ""},
-            {"text": "klook｜黑風洞半日遊", "url": ""}
-          ]
+          "content": "（出發後補寫：早上 08:00 出發攀登 272 級彩虹階梯的腳力挑戰、洞內天坑光影與獼猴互動）<div class='callout-box callout-warning'><div class='callout-icon'>⚠️</div><div class='callout-content'><div class='callout-title'>黑風洞服裝與防猴提醒</div><ul><li><strong>服裝規定：</strong>男女皆禁露膝短褲短裙（現場租沙龍約 MYR15）。</li><li><strong>防猴守則：</strong>階梯獼猴會搶食，切勿手提塑膠袋、食物或水瓶。</li></ul></div></div>"
         },
         {
           "id": "d4-ch2",
-          "lat": 3.2366,
-          "lng": 101.6834,
+          "lat": 3.2389,
+          "lng": 101.6816,
           "zoom": 16,
           "transport": "walk",
-          "title": "02. 午餐｜Han's Kopitiam 冷氣茶室補水回血",
+          "title": "02. 探秘｜羅摩衍那洞史詩彩繪溶洞",
           "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放冰鎮美祿恐龍、咖椰吐司或炒粿條照",
+          "mediaPlaceholder": "此處可放綠色哈奴曼神像或洞內彩繪史詩雕像照",
           "mediaList": [
             { "src": "media/malaysia_2027/d4-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：爬完 272 階後躲進黑風洞旁冷氣茶室大喝冰飲、吃炒粿條的救贖感）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：10:55 走進黑風洞左側的羅摩衍那洞，仰望洞口綠色猴神哈奴曼巨像與洞內七彩燈光演繹的印度史詩）<div class='callout-box callout-info'><div class='callout-icon'>🪔</div><div class='callout-content'><div class='callout-title'>參觀提醒｜羅摩衍那洞 (Ramayana Cave)</div>此洞須另購門票（約 MYR 5，馬幣現金為主），洞內階梯略陡且地面偶有潮濕，上下請留意腳步防滑。</div></div>"
         },
         {
           "id": "d4-ch3",
-          "lat": 3.1973,
-          "lng": 101.7244,
+          "lat": 3.2339,
+          "lng": 101.6829,
           "zoom": 16,
-          "transport": "drive",
-          "title": "03. 手作｜皇家雪蘭莪當代錫鑞館敲錫碗體驗",
+          "transport": "walk",
+          "title": "03. 午餐｜Han's Kopitiam 冷氣茶室補水回血",
           "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放敲擊錫碗過程、成品與圍裙紀念照",
+          "mediaPlaceholder": "此處可放冰鎮美祿恐龍、咖椰吐司或炒粿條照",
           "mediaList": [
             { "src": "media/malaysia_2027/d4-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：14:00 參觀全球最大錫鑞品牌總部，親手敲出專屬刻字錫碗的趣味過程）<div class='callout-box callout-info'><div class='callout-icon'>🔨</div><div class='callout-content'><div class='callout-title'>體驗資訊｜皇家雪蘭莪遊客中心 (Royal Selangor)</div><ul><li><strong>開放：</strong>每日 09:00–17:00，免費導覽。</li><li><strong>工坊：</strong>敲擊錫碗體驗（🈯 預約制），成品、圍裙與證書皆可帶回留念。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜皇家雪蘭莪遊客中心", "url": "https://visitorcentre.royalselangor.com/"},
-            {"text": "kkday｜皇家雪蘭莪錫鑞體驗", "url": ""},
-            {"text": "klook｜皇家雪蘭莪錫鑞體驗", "url": ""}
-          ]
+          "content": "（出發後補寫：爬完 272 階與洞窟後躲進黑風洞旁冷氣茶室大喝冰飲、吃炒粿條的救贖感）"
         },
         {
           "id": "d4-ch4",
-          "lat": 3.1528,
-          "lng": 101.7038,
+          "lat": 3.1969,
+          "lng": 101.7244,
           "zoom": 16,
           "transport": "drive",
-          "title": "04. 絕景｜吉隆坡塔飽覽雙峰塔與默迪卡 118 夕陽",
+          "title": "04. 手作｜皇家雪蘭莪當代錫鑞館敲錫碗體驗",
           "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放吉隆坡塔 Sky Deck 與雙峰塔同框夕陽照",
+          "mediaPlaceholder": "此處可放敲擊錫碗過程、成品與圍裙紀念照",
           "mediaList": [
             { "src": "media/malaysia_2027/d4-ch4-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：16:10–18:10 登上 300 公尺露天 Sky Deck，從晴空看到落日餘暉映照雙峰塔與默迪卡 118）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜吉隆坡塔 KL Tower", "url": "https://kltower.com.my/"},
-            {"text": "trip.com｜吉隆坡塔觀景台門票", "url": ""},
-            {"text": "kkday｜吉隆坡塔觀景台門票", "url": ""},
-            {"text": "klook｜吉隆坡塔觀景台門票", "url": ""}
-          ]
+          "content": "（出發後補寫：13:45 先參加免費專人導覽，接續 14:30 親手敲出專屬刻字錫碗的趣味過程）<div class='callout-box callout-info'><div class='callout-icon'>🔨</div><div class='callout-content'><div class='callout-title'>體驗資訊｜皇家雪蘭莪遊客中心 (Royal Selangor)</div><ul><li><strong>開放：</strong>每日 09:00–17:00，免費導覽。</li><li><strong>工坊：</strong>敲擊錫碗體驗（🈯 預約制），成品、圍裙與證書皆可帶回留念。</li></ul></div></div>"
+        },
+        {
+          "id": "d4-ch5",
+          "lat": 3.1531,
+          "lng": 101.7038,
+          "zoom": 16,
+          "transport": "drive",
+          "title": "05. 絕景｜吉隆坡塔飽覽雙峰塔與默迪卡 118 夕陽",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放吉隆坡塔 Sky Deck 與雙峰塔同框夕陽照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d4-ch5-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：16:10–18:10 登上 300 公尺露天 Sky Deck，從晴空看到落日餘暉映照雙峰塔與默迪卡 118）"
+        },
+        {
+          "id": "d4-ch6",
+          "lat": 3.1482,
+          "lng": 101.7139,
+          "zoom": 16,
+          "transport": "drive",
+          "title": "06. 晚宴｜吉隆坡敘宴沉浸式宮廷饗宴",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放古風宮廷舞台演出與位上御膳料理照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d4-ch6-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：19:00 入席體驗一道菜配一段歌舞演出的沉浸式宮廷晚宴，視聽與味覺雙重盛宴實錄）<div class='callout-box callout-warning'><div class='callout-icon'>🈯</div><div class='callout-content'><div class='callout-title'>預約報到提醒｜吉隆坡敘宴</div>採預約場次制（本次為純用餐方案），建議開席前 15–20 分鐘完成報到入場。</div></div>"
+        },
+        {
+          "id": "d4-ch7",
+          "lat": 3.133,
+          "lng": 101.6863,
+          "zoom": 15,
+          "transport": "drive",
+          "title": "07. 晚安｜返回吉隆坡中央車站雅樂軒飯店休息",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放吉隆坡夜色或雅樂軒飯店休息照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d4-ch7-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：21:00 返回雅樂軒飯店梳洗休息，養足體力迎接隔日的吉隆坡老城文化走讀）"
         }
       ]
     },
     {
       "day": "Day 05",
-      "dayTitle": "吉隆坡老城多元文化走讀！四大信仰地標、茨廠街與舒壓按摩",
+      "dayTitle": "吉隆坡老城多元文化走讀！四大信仰地標、茨廠街、按摩與肉骨茶",
       "isDraft": true,
       "isFieldTest": false,
       "chapters": [
         {
           "id": "d5-ch1",
-          "lat": 3.1396,
+          "lat": 3.1399,
           "lng": 101.6937,
           "zoom": 16,
           "transport": "train",
@@ -419,15 +476,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d5-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：08:15 趁晨間車少，在天橋與廣場拍下 1910 年純白摩爾式火車站全貌）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：08:15 趁晨間車少，在天橋與廣場拍下 1910 年純白摩爾式火車站全貌）"
         },
         {
           "id": "d5-ch2",
-          "lat": 3.1419,
-          "lng": 101.6917,
+          "lat": 3.142,
+          "lng": 101.6918,
           "zoom": 16,
           "transport": "walk",
           "title": "02. 建築｜馬來西亞國家清真寺湛藍傘狀穹頂",
@@ -436,15 +490,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d5-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：穿過地下道造訪國家清真寺，換穿紫色長袍走進水池與幾何光影迴廊的寧靜感受）<div class='callout-box callout-warning'><div class='callout-icon'>🕌</div><div class='callout-content'><div class='callout-title'>參訪規定｜國家清真寺</div>週日非穆斯林開放時段為 09:00–12:00、15:00–16:00、17:30–18:30；免費入場與借長袍頭巾，入迴廊須脫鞋。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：穿過地下道造訪國家清真寺，換穿紫色長袍走進水池與幾何光影迴廊的寧靜感受）<div class='callout-box callout-warning'><div class='callout-icon'>🕌</div><div class='callout-content'><div class='callout-title'>參訪規定｜國家清真寺</div>週日非穆斯林開放時段為 09:00–12:00、15:00–16:00、17:30–18:30；免費入場與借長袍頭巾，入迴廊須脫鞋。</div></div>"
         },
         {
           "id": "d5-ch3",
-          "lat": 3.1416,
-          "lng": 101.6974,
+          "lat": 3.1417,
+          "lng": 101.6976,
           "zoom": 17,
           "transport": "walk",
           "title": "03. 打卡｜鬼仔巷 1960 年代華人街坊壁畫",
@@ -453,15 +504,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d5-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：11:00 走進茨廠街旁翻修老巷，掃 QR Code 聽粵語配音配復古壁畫拍照）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：11:00 走進茨廠街旁翻修老巷，掃 QR Code 聽粵語配音配復古壁畫拍照）"
         },
         {
           "id": "d5-ch4",
-          "lat": 3.1442,
-          "lng": 101.6975,
+          "lat": 3.1446,
+          "lng": 101.6976,
           "zoom": 17,
           "transport": "walk",
           "title": "04. 午餐｜茨廠街百年老字號小吃巡禮",
@@ -470,15 +518,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d5-ch4-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：在吉隆坡百年唐人街品嚐羅漢果龍眼水、金蓮記福建麵、四眼仔鹹鴨等老味實評）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：在吉隆坡百年唐人街品嚐羅漢果龍眼水、金蓮記福建麵、四眼仔鹹鴨等老味實評）"
         },
         {
           "id": "d5-ch5",
-          "lat": 3.1432,
-          "lng": 101.6966,
+          "lat": 3.1443,
+          "lng": 101.6967,
           "zoom": 17,
           "transport": "walk",
           "title": "05. 信仰｜百公尺串聯關帝廟與馬里安曼興都廟",
@@ -487,15 +532,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d5-ch5-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：同條街從百年華人關帝廟走到雕滿 228 尊神像的南印興都廟，感受大馬宗教並存魅力）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：同條街從百年華人關帝廟走到雕滿 228 尊神像的南印興都廟，感受大馬宗教並存魅力）"
         },
         {
           "id": "d5-ch6",
-          "lat": 3.1486,
-          "lng": 101.6936,
+          "lat": 3.1493,
+          "lng": 101.6937,
           "zoom": 16,
           "transport": "walk",
           "title": "06. 地標｜獨立廣場與蘇丹阿都沙末大廈",
@@ -504,43 +546,62 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d5-ch6-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：途經中央藝術坊與生命之河，來到 1957 年大馬宣布獨立的歷史廣場與紅磚鐘樓）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：途經中央藝術坊與生命之河，來到 1957 年大馬宣布獨立的歷史廣場與紅磚鐘樓）"
         },
         {
           "id": "d5-ch7",
-          "lat": 3.1422,
-          "lng": 101.7105,
+          "lat": 3.1424,
+          "lng": 101.7106,
           "zoom": 16,
           "transport": "metro",
           "title": "07. 舒壓｜成功時代廣場 D'Blue 兩小時按摩",
           "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放按摩館環境或餐後阿羅街夜市照",
+          "mediaPlaceholder": "此處可放按摩館環境或舒壓體驗照",
           "mediaList": [
             { "src": "media/malaysia_2027/d5-ch7-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：17:00–19:00 在成功時代廣場 D'Blue 按摩徹底釋放雙腿疲勞，晚間順逛阿羅街夜市）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "kkday｜吉隆坡按摩體驗", "url": ""},
-            {"text": "klook｜吉隆坡按摩體驗", "url": ""}
-          ]
+          "content": "（出發後補寫：17:00–19:00 在成功時代廣場 D'Blue 享受兩小時芳香精油與穴位按摩，徹底釋放雙腿疲勞）"
+        },
+        {
+          "id": "d5-ch8",
+          "lat": 3.143,
+          "lng": 101.7154,
+          "zoom": 16,
+          "transport": "walk",
+          "title": "08. 晚餐｜友誼肉骨茶溫潤藥膳收尾",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放湯肉骨茶、乾肉骨茶與蒜香油飯照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d5-ch8-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：19:15 按摩後步行前往友誼肉骨茶，以藥膳湯肉骨茶與焦香乾肉骨茶為吉隆坡最後一晚收尾）"
+        },
+        {
+          "id": "d5-ch9",
+          "lat": 3.133,
+          "lng": 101.6863,
+          "zoom": 15,
+          "transport": "drive",
+          "title": "09. 晚安｜返回雅樂軒飯店整理行囊",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放雅樂軒飯店夜景或整理戰利品照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d5-ch9-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：21:00 返回雅樂軒飯店梳洗與打包行李，結束吉隆坡連住 3 晚都會巡禮，準備隔日南下馬六甲）"
         }
       ]
     },
     {
       "day": "Day 06",
-      "dayTitle": "南下世界遺產古城馬六甲！河岸彩繪遊船與聖保羅山夕照",
+      "dayTitle": "南下世界遺產古城馬六甲！河岸遊船、聖保羅夕照與雞場街夜散步",
       "isDraft": true,
       "isFieldTest": false,
       "chapters": [
         {
           "id": "d6-ch1",
-          "lat": 3.0772,
-          "lng": 101.711,
+          "lat": 3.0779,
+          "lng": 101.7111,
           "zoom": 14,
           "transport": "bus",
           "title": "01. 移動｜TBS 南湖鎮總站搭三排座巴士赴馬六甲",
@@ -549,19 +610,12 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d6-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：08:45 從 TBS 總站兌票登車，搭寬敞 VIP 三排座巴士南下馬六甲的 3 小時車程）<div class='callout-box callout-warning'><div class='callout-icon'>🚌</div><div class='callout-content'><div class='callout-title'>TBS 搭車小提醒</div>電子憑證須先至 3F 換領實體登車證（可能收 RM1–2 設施費）再下 2F 候車；車上冷氣強記得帶薄外套。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜TBS 巴士總站", "url": "https://www.tbsbts.com.my/"},
-            {"text": "kkday｜吉隆坡至馬六甲巴士", "url": ""},
-            {"text": "klook｜吉隆坡至馬六甲巴士", "url": ""}
-          ]
+          "content": "（出發後補寫：08:45 從 TBS 總站兌票登車，搭寬敞 VIP 三排座巴士南下馬六甲的 3 小時車程）<div class='callout-box callout-warning'><div class='callout-icon'>🚌</div><div class='callout-content'><div class='callout-title'>TBS 搭車小提醒</div>電子憑證須先至 3F 換領實體登車證（可能收 MYR 1–2 設施費）再下 2F 候車；車上冷氣強記得帶薄外套。</div></div>"
         },
         {
           "id": "d6-ch2",
-          "lat": 2.221,
-          "lng": 102.2505,
+          "lat": 2.2214,
+          "lng": 102.2501,
           "zoom": 15,
           "transport": "bus",
           "title": "02. 午餐｜馬六甲中央車站初嚐南洋味",
@@ -570,50 +624,105 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d6-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：12:00 抵達馬六甲中央車站吹冷氣吃午餐，餐後叫 Grab 赴海濱飯店）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：12:00 抵達馬六甲中央車站吹冷氣吃午餐，餐後轉車赴海濱飯店）"
         },
         {
           "id": "d6-ch3",
-          "lat": 2.1939,
-          "lng": 102.2486,
+          "lat": 2.1876,
+          "lng": 102.2476,
           "zoom": 16,
-          "transport": "boat",
-          "title": "03. 住宿＆遊船｜麻六甲假日酒店與馬六甲河遊船",
+          "transport": "drive",
+          "title": "03. 住宿｜麻六甲假日酒店 Check-in",
           "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放假日酒店海景或馬六甲河彩繪壁畫遊船照",
+          "mediaPlaceholder": "此處可放麻六甲假日酒店外觀或海景房照",
           "mediaList": [
             { "src": "media/malaysia_2027/d6-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：14:20 入住麻六甲假日酒店連住 2 晚，15:30 搭敞篷船漫遊彩繪河岸與馬來高腳屋聚落）<div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店＆遊船資訊｜麻六甲假日酒店 ＆ 馬六甲河遊船</div><ul><li><strong>飯店：</strong>Holiday Inn Melaka（Day 06–08 連住 2 晚，緊鄰海峽與英雄廣場）。</li><li><strong>遊船：</strong>🈯 預約／現場購票約 RM30，選船尾或兩側座位最方便拍河岸壁畫。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "agoda｜麻六甲假日酒店", "url": ""},
-            {"text": "trip.com｜麻六甲假日酒店", "url": ""},
-            {"text": "官方網站｜馬六甲河遊船", "url": "https://www.melakarivercruise.my/"},
-            {"text": "kkday｜馬六甲河遊船船票", "url": ""},
-            {"text": "klook｜馬六甲河遊船船票", "url": ""}
-          ]
+          "content": "（出發後補寫：14:20 抵達緊鄰馬六甲海峽的麻六甲假日酒店辦理入住與寄放行李，開啟連住 2 晚度假時光）<div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜麻六甲假日酒店 (Holiday Inn Melaka by IHG)</div><ul><li><strong>位置：</strong>Jalan Syed Abdul Aziz（緊鄰馬六甲海峽與英雄廣場，步行可達古城核心區）。</li><li><strong>入住房晚：</strong>Day 06–08 連續 2 晚。</li></ul></div></div>"
         },
         {
           "id": "d6-ch4",
-          "lat": 2.1918,
-          "lng": 102.2504,
+          "lat": 2.1916,
+          "lng": 102.2481,
           "zoom": 16,
-          "transport": "walk",
-          "title": "04. 夕照｜聖地牙哥古城門與聖保羅教堂遺址",
+          "transport": "boat",
+          "title": "04. 遊船｜馬六甲河彩繪壁畫敞篷遊船",
           "mediaLayout": "auto",
-          "mediaPlaceholder": "此處可放 A Famosa 古城門或聖保羅山海峽落日照",
+          "mediaPlaceholder": "此處可放馬六甲河彩繪壁畫、跨河石橋或遊船視角照",
           "mediaList": [
             { "src": "media/malaysia_2027/d6-ch4-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：黃昏走訪 1511 年葡萄牙城門遺蹟，登上聖保羅山迎著海風眺望馬六甲海峽暮色）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：15:30 搭乘馬六甲河敞篷觀光船，從水面穿梭荷蘭紅屋、彩繪河岸壁畫與馬來高腳屋聚落）<div class='callout-box callout-tip'><div class='callout-icon'>⛴️</div><div class='callout-content'><div class='callout-title'>遊船取景小撇步</div>建議開航前 15 分鐘至 Muara Jetty 報到，選船尾或兩側座位最方便拍河岸壁畫。</div></div>"
+        },
+        {
+          "id": "d6-ch5",
+          "lat": 2.192,
+          "lng": 102.2503,
+          "zoom": 16,
+          "transport": "walk",
+          "title": "05. 夕照｜聖地牙哥古城門與聖保羅教堂遺址",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放 A Famosa 古城門或聖保羅山海峽落日照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d6-ch5-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：16:30 走訪 1511 年葡萄牙城門遺蹟，登上聖保羅山迎著海風眺望馬六甲海峽黃金暮色）"
+        },
+        {
+          "id": "d6-ch6",
+          "lat": 2.1941,
+          "lng": 102.2491,
+          "zoom": 17,
+          "transport": "walk",
+          "title": "06. 地標｜荷蘭紅屋廣場黃金斜陽拍照",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放荷蘭紅屋建築群、鐘樓與維多利亞噴泉照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d6-ch6-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：18:05 走下聖保羅山來到荷蘭紅屋廣場，捕捉磚紅外牆在傍晚斜陽映照下的經典畫面）"
+        },
+        {
+          "id": "d6-ch7",
+          "lat": 2.195,
+          "lng": 102.248,
+          "zoom": 17,
+          "transport": "walk",
+          "title": "07. 晚餐｜雞場街雞飯粒品嚐古城招牌味",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放手揉雞飯粒、海南白斬雞與烏達照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d6-ch7-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：18:40 跨過陳金聲橋走進雞場街口，品嚐馬六甲招牌手揉雞飯粒配白斬滑雞與西刀魚丸湯）"
+        },
+        {
+          "id": "d6-ch8",
+          "lat": 2.1962,
+          "lng": 102.2471,
+          "zoom": 17,
+          "transport": "walk",
+          "title": "08. 夜散步｜雞場街文化街與馬六甲河畔夜景",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放夜晚雞場街牌樓與馬六甲河畔燈火倒影照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d6-ch8-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：19:45 漫步平日夜晚寧靜的雞場街百年騎樓，轉進馬六甲河畔步道欣賞燈火倒映水面的浪漫夜景）"
+        },
+        {
+          "id": "d6-ch9",
+          "lat": 2.1876,
+          "lng": 102.2476,
+          "zoom": 16,
+          "transport": "walk",
+          "title": "09. 晚安｜返回麻六甲假日酒店休息",
+          "mediaLayout": "auto",
+          "mediaPlaceholder": "此處可放馬六甲海濱夜景或飯店休息照",
+          "mediaList": [
+            { "src": "media/malaysia_2027/d6-ch9-1.png", "caption": "" }
+          ],
+          "content": "（出發後補寫：21:00 返回麻六甲假日酒店梳洗休息，養足精神迎接隔日的馬六甲世遺古蹟與劇場大秀）"
         }
       ]
     },
@@ -635,10 +744,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d7-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：09:00 開館首波參觀未用一釘的七層木造復刻蘇丹皇宮，認識馬六甲王朝興衰）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：09:00 開館首波參觀未用一釘的七層木造復刻蘇丹皇宮，認識馬六甲王朝興衰）"
         },
         {
           "id": "d7-ch2",
@@ -652,10 +758,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d7-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：跨過荷蘭紅屋步入和諧街，短短數百公尺內一次參訪青雲亭、寶塔風清真寺與興都廟）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：跨過荷蘭紅屋步入和諧街，短短數百公尺內一次參訪青雲亭、寶塔風清真寺與興都廟）"
         },
         {
           "id": "d7-ch3",
@@ -669,12 +772,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d7-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：走進《夏日麼麼茶》取景的黃色百年轉角老宅，大啖娘惹叻沙與椰糖西米露）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜地理學家咖啡館", "url": "https://www.geographer.com.my/"}
-          ]
+          "content": "（出發後補寫：走進《夏日麼麼茶》取景的黃色百年轉角老宅，大啖娘惹叻沙與椰糖西米露）"
         },
         {
           "id": "d7-ch4",
@@ -688,10 +786,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d7-ch4-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：13:35–16:00 一張聯票連逛古帆船本館、海事二館與海軍博物館的大航海時代巡禮）<div class='callout-box callout-tip'><div class='callout-icon'>⛵</div><div class='callout-content'><div class='callout-title'>參觀提醒</div>登上佛羅德號木造船艙須脫鞋，建議穿襪子避免午後木甲板過燙。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：13:35–16:00 一張聯票連逛古帆船本館、海事二館與海軍博物館的大航海時代巡禮）<div class='callout-box callout-tip'><div class='callout-icon'>⛵</div><div class='callout-content'><div class='callout-title'>參觀提醒</div>登上佛羅德號木造船艙須脫鞋，建議穿襪子避免午後木甲板過燙。</div></div>"
         },
         {
           "id": "d7-ch5",
@@ -705,15 +800,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d7-ch5-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：提前抵達拍純白劇院與夕陽，17:30 觀賞 70 分鐘水舞台旋轉大秀的感動與餘韻）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜又見麻六甲 Encore Melaka", "url": "https://encore-melaka.com/"},
-            {"text": "trip.com｜又見麻六甲門票", "url": ""},
-            {"text": "kkday｜又見麻六甲門票", "url": ""},
-            {"text": "klook｜又見麻六甲門票", "url": ""}
-          ]
+          "content": "（出發後補寫：提前抵達拍純白劇院與夕陽，17:30 觀賞 70 分鐘水舞台旋轉大秀的感動與餘韻）"
         }
       ]
     },
@@ -735,16 +822,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d8-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：09:30 包車出發、免下車通關新馬陸路邊境的奇妙體驗，13:10 入住悅樂武吉士連住 3 晚）<div class='callout-box callout-warning'><div class='callout-icon'>🛂</div><div class='callout-content'><div class='callout-title'>新加坡陸路通關提醒</div>入境前 3 天內須免費填報 <strong>SG Arrival Card</strong>；關口嚴禁拍照，並禁止攜帶口香糖、電子菸與肉製品。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜悅樂武吉士酒店 (Village Hotel Bugis)</div><ul><li><strong>位置：</strong>390 Victoria Street（距武吉士地鐵站步行約 5 分鐘，鄰近甘榜格南）。</li><li><strong>入住房晚：</strong>Day 08–11 連續 3 晚。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜新加坡 SG Arrival Card", "url": "https://eservices.ica.gov.sg/sgarrivalcard/"},
-            {"text": "agoda｜悅樂武吉士酒店", "url": ""},
-            {"text": "trip.com｜悅樂武吉士酒店", "url": ""},
-            {"text": "kkday｜馬六甲至新加坡私人包車", "url": ""},
-            {"text": "klook｜馬六甲至新加坡私人包車", "url": ""}
-          ]
+          "content": "（出發後補寫：09:30 包車出發、免下車通關新馬陸路邊境的奇妙體驗，13:10 入住悅樂武吉士連住 3 晚）<div class='callout-box callout-warning'><div class='callout-icon'>🛂</div><div class='callout-content'><div class='callout-title'>新加坡陸路通關提醒</div>入境前 3 天內須免費填報 <strong>SG Arrival Card</strong>；關口嚴禁拍照，並禁止攜帶口香糖、電子菸與肉製品。</div></div><div class='callout-box callout-info'><div class='callout-icon'>🏨</div><div class='callout-content'><div class='callout-title'>飯店資訊｜悅樂武吉士酒店 (Village Hotel Bugis)</div><ul><li><strong>位置：</strong>390 Victoria Street（距武吉士地鐵站步行約 5 分鐘，鄰近甘榜格南）。</li><li><strong>入住房晚：</strong>Day 08–11 連續 3 晚。</li></ul></div></div>"
         },
         {
           "id": "d8-ch2",
@@ -758,10 +836,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d8-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：放完行李在 14:00 享用乳白濃郁雞白湯拉麵，開啟新加坡行程）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：放完行李在 14:00 享用乳白濃郁雞白湯拉麵，開啟新加坡行程）"
         },
         {
           "id": "d8-ch3",
@@ -775,13 +850,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d8-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：16:00 邊解謎邊穿梭牛車水古蹟巷弄，在夕陽與華燈初上之間破關的成就感）<div class='callout-box callout-tip'><div class='callout-icon'>🧩</div><div class='callout-content'><div class='callout-title'>解謎小提醒</div>全程需開行動網路與 GPS 定位，務必攜帶行動電源；傍晚玩較涼爽且能順遊牛車水夜景。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "kkday｜新加坡牛車水戶外逃脫體驗", "url": ""},
-            {"text": "klook｜新加坡牛車水戶外逃脫體驗", "url": ""}
-          ]
+          "content": "（出發後補寫：16:00 邊解謎邊穿梭牛車水古蹟巷弄，在夕陽與華燈初上之間破關的成就感）<div class='callout-box callout-tip'><div class='callout-icon'>🧩</div><div class='callout-content'><div class='callout-title'>解謎小提醒</div>全程需開行動網路與 GPS 定位，務必攜帶行動電源；傍晚玩較涼爽且能順遊牛車水夜景。</div></div>"
         }
       ]
     },
@@ -803,15 +872,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d9-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：10:30 搭兩棲船直接衝進濱海灣的新奇瞬間，下船後順繞新達城財富之泉三圈許願）<div class='callout-box callout-warning'><div class='callout-icon'>🈯</div><div class='callout-content'><div class='callout-title'>報到提醒｜DUCKtours 鴨子船</div>開航前 <strong>30 分鐘</strong>須至新達城 1F #01-330 櫃檯領取登船牌，切勿遲到。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜DUCKtours 鴨子船", "url": "https://www.ducktours.com.sg/"},
-            {"text": "trip.com｜新加坡鴨子船門票", "url": ""},
-            {"text": "kkday｜新加坡鴨子船門票", "url": ""},
-            {"text": "klook｜新加坡鴨子船門票", "url": ""}
-          ]
+          "content": "（出發後補寫：10:30 搭兩棲船直接衝進濱海灣的新奇瞬間，下船後順繞新達城財富之泉三圈許願）<div class='callout-box callout-warning'><div class='callout-icon'>🈯</div><div class='callout-content'><div class='callout-title'>報到提醒｜DUCKtours 鴨子船</div>開航前 <strong>30 分鐘</strong>須至新達城 1F #01-330 櫃檯領取登船牌，切勿遲到。</div></div>"
         },
         {
           "id": "d9-ch2",
@@ -825,12 +886,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d9-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：在新達城商場內享用亞坤 A 套餐，炭烤脆吐司沾醬油胡椒半熟蛋的銷魂吃法）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜亞坤咖椰吐司 Ya Kun", "url": "https://yakun.com/"}
-          ]
+          "content": "（出發後補寫：在新達城商場內享用亞坤 A 套餐，炭烤脆吐司沾醬油胡椒半熟蛋的銷魂吃法）"
         },
         {
           "id": "d9-ch3",
@@ -844,15 +900,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d9-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：從 14:00 玩到夜晚！花穹、雲霧林室內瀑布與侏羅紀展，最後躺在超級樹下看 19:45 聲光秀）<div class='callout-box callout-tip'><div class='callout-icon'>🌿</div><div class='callout-content'><div class='callout-title'>參觀小撇步｜濱海灣花園</div><ul><li><strong>冷室保暖：</strong>花穹與雲霧林恆溫 23–25°C 偏涼，記得隨身帶薄外套。</li><li><strong>免費燈光秀：</strong>「花園狂想曲」每晚 19:45、20:45 各一場（15 分鐘）。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜濱海灣花園", "url": "https://www.gardensbythebay.com.sg/"},
-            {"text": "trip.com｜濱海灣花園門票", "url": ""},
-            {"text": "kkday｜濱海灣花園門票", "url": ""},
-            {"text": "klook｜濱海灣花園門票", "url": ""}
-          ]
+          "content": "（出發後補寫：從 14:00 玩到夜晚！花穹、雲霧林室內瀑布與侏羅紀展，最後躺在超級樹下看 19:45 聲光秀）<div class='callout-box callout-tip'><div class='callout-icon'>🌿</div><div class='callout-content'><div class='callout-title'>參觀小撇步｜濱海灣花園</div><ul><li><strong>冷室保暖：</strong>花穹與雲霧林恆溫 23–25°C 偏涼，記得隨身帶薄外套。</li><li><strong>免費燈光秀：</strong>「花園狂想曲」每晚 19:45、20:45 各一場（15 分鐘）。</li></ul></div></div>"
         }
       ]
     },
@@ -874,10 +922,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d10-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：09:20 趁順光拍下大小魚尾獅與對岸金沙酒店同框，必玩借位接財水照）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：09:20 趁順光拍下大小魚尾獅與對岸金沙酒店同框，必玩借位接財水照）"
         },
         {
           "id": "d10-ch2",
@@ -891,10 +936,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d10-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：漫步史密斯街老店街區，逛林志源、美珍香與特色伴手禮小鋪，注意肉乾禁帶回台）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：漫步史密斯街老店街區，逛林志源、美珍香與特色伴手禮小鋪，注意肉乾禁帶回台）"
         },
         {
           "id": "d10-ch3",
@@ -908,10 +950,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d10-ch3-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：體驗新加坡經典小販中心，排隊吃到天天海南雞飯配冰涼甘蔗檸檬汁的實評）<div class='callout-box callout-warning'><div class='callout-icon'>🍽️</div><div class='callout-content'><div class='callout-title'>小販中心兩大鐵則</div><ul><li><strong>面紙佔位（Chope）：</strong>桌上放面紙代表已有人坐，也可自備面紙先卡位。</li><li><strong>餐盤必歸還：</strong>餐後依法須自行回收餐盤至回收架，違者可能受罰；老攤以新幣現金為主。</li></ul></div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：體驗新加坡經典小販中心，排隊吃到天天海南雞飯配冰涼甘蔗檸檬汁的實評）<div class='callout-box callout-warning'><div class='callout-icon'>🍽️</div><div class='callout-content'><div class='callout-title'>小販中心兩大鐵則</div><ul><li><strong>面紙佔位（Chope）：</strong>桌上放面紙代表已有人坐，也可自備面紙先卡位。</li><li><strong>餐盤必歸還：</strong>餐後依法必須自行回收餐盤至回收架，違者可能受罰；老攤以新幣現金為主。</li></ul></div></div>"
         },
         {
           "id": "d10-ch4",
@@ -925,15 +964,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d10-ch4-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：13:45–18:00 沉浸全球頂級無鐵籠雨林動物園，看紅毛猩猩在頭頂樹冠穿梭）<div class='callout-box callout-tip'><div class='callout-icon'>🦧</div><div class='callout-content'><div class='callout-title'>交通與遊園小撇步</div>地鐵卡迪站 (NS14) A 出口轉 <strong>Mandai Shuttle</strong>（SGD 2.50，僅刷卡不收現金）；園區大建議搭含票遊園車並先載 Mandai App 查餵食秀。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜新加坡動物園", "url": "https://www.mandai.com/zh/singapore-zoo.html"},
-            {"text": "trip.com｜新加坡動物園門票", "url": ""},
-            {"text": "kkday｜新加坡動物園門票", "url": ""},
-            {"text": "klook｜新加坡動物園門票", "url": ""}
-          ]
+          "content": "（出發後補寫：13:45–18:00 沉浸全球頂級無鐵籠雨林動物園，看紅毛猩猩在頭頂樹冠穿梭）<div class='callout-box callout-tip'><div class='callout-icon'>🦧</div><div class='callout-content'><div class='callout-title'>交通與遊園小撇步</div>地鐵卡迪站 (NS14) A 出口轉 <strong>Mandai Shuttle</strong>（SGD 2.50，僅刷卡不收現金）；園區大建議搭含票遊園車並先載 Mandai App 查餵食秀。</div></div>"
         }
       ]
     },
@@ -955,14 +986,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d11-ch1-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：10:00 抵星耀樟宜先預辦登機／寄行李，狂拍 40 公尺雨漩渦、吃松發肉骨茶並掃貨 Bengawan Solo 斑蘭蛋糕）",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": [
-            {"text": "官方網站｜星耀樟宜 Jewel Changi", "url": "https://www.jewelchangiairport.com/zh.html"},
-            {"text": "kkday｜星耀樟宜景點門票", "url": ""},
-            {"text": "klook｜星耀樟宜景點門票", "url": ""}
-          ]
+          "content": "（出發後補寫：10:00 抵星耀樟宜先預辦登機／寄行李，狂拍 40 公尺雨漩渦、吃松發肉骨茶並掃貨 Bengawan Solo 斑蘭蛋糕）"
         },
         {
           "id": "d11-ch2",
@@ -976,10 +1000,7 @@
           "mediaList": [
             { "src": "media/malaysia_2027/d11-ch2-1.png", "caption": "" }
           ],
-          "content": "（出發後補寫：走進樟宜登機門安檢、揮別新加坡，為 11 天 10 夜吉隆坡、怡保、馬六甲與新加坡漫旅寫下收尾感言）<div class='callout-box callout-warning'><div class='callout-icon'>✈️</div><div class='callout-content'><div class='callout-title'>樟宜機場登機提醒</div>T1/T2/T3 隨身行李 X 光安檢設於<strong>各登機門入口</strong>，起飛前 60 分鐘須抵登機門，保溫瓶請先倒空水。</div></div>",
-          "affiliateText": "",
-          "affiliateUrl": "",
-          "affiliateLinks": []
+          "content": "（出發後補寫：走進樟宜登機門安檢、揮別新加坡，為 11 天 10 夜吉隆坡、怡保、馬六甲與新加坡漫旅寫下收尾感言）<div class='callout-box callout-warning'><div class='callout-icon'>✈️</div><div class='callout-content'><div class='callout-title'>樟宜機場登機提醒</div>T1/T2/T3 隨身行李 X 光安檢設於<strong>各登機門入口</strong>，起飛前 60 分鐘須抵登機門，保溫瓶請先倒空水。</div></div>"
         }
       ]
     }
