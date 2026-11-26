@@ -112,7 +112,7 @@ function bootJournalApp() {
             (d.spots || []).forEach(sp => sp.id && itinSpotById.set(sp.id, { ...sp, dayRegion: d.region || '' }));
         });
 
-        // 無論遊記是否為草稿，皆先建立章節索引以保留 affiliateLinks
+        // 無論遊記是否為草稿，皆先建立章節索引作為分潤連結備援（相容舊旅程）
         const journalChapById = new Map();
         (rawJournalData.days || []).forEach(d => (d.chapters || []).forEach(ch => ch.id && journalChapById.set(ch.id, ch)));
         (rawJournalData.chapters || []).forEach(ch => ch.id && journalChapById.set(ch.id, ch));
@@ -148,20 +148,28 @@ function bootJournalApp() {
             const dayDraft = isItemDraft(dayObj) || isItemDraft(itinDay);
 
             const chapters = (dayObj.chapters || []).map((ch, cIdx) => {
-                const sp = itinSpotById.get(ch.id) || itinDay?.spots?.[cIdx] || {};
-                const jCh = journalChapById.get(ch.id) || {};
-                const mergedAffLinks = (Array.isArray(sp.affiliateLinks) && sp.affiliateLinks.length)
-                    ? sp.affiliateLinks
-                    : ((Array.isArray(ch.affiliateLinks) && ch.affiliateLinks.length) ? ch.affiliateLinks : (jCh.affiliateLinks || []));
+                const indexedSp = itinDay?.spots?.[cIdx];
+                const sp = (ch.id && itinSpotById.get(ch.id))
+                    || (indexedSp && (!ch.id || !indexedSp.id || indexedSp.id === ch.id) ? indexedSp : null)
+                    || {};
+                const jCh = (ch.id && journalChapById.get(ch.id)) || {};
+
+                // 分潤連結優先從「行程安排 (itinerary/*.json)」讀取；若行程未填有效網址，才退回讀取圖文遊記 (data/*.json)
+                const itinAff = extractAffiliateList(sp);
+                const chAff = extractAffiliateList(ch);
+                const resolvedAffLinks = itinAff.length
+                    ? itinAff
+                    : (chAff.length ? chAff : extractAffiliateList(jCh));
+
                 return {
                     ...jCh, ...ch, ...sp,
                     day: dayObj.day,
                     id: ch.id || sp.id || `d${dIdx + 1}-ch${cIdx + 1}`,
                     lat: ch.lat ?? sp.lat ?? jCh.lat, lng: ch.lng ?? sp.lng ?? jCh.lng, zoom: ch.zoom || sp.zoom || jCh.zoom || 14,
                     title: ch.title || sp.spotName || jCh.title || '', content: ch.content || sp.intro || '',
-                    affiliateText: sp.affiliateText || ch.affiliateText || jCh.affiliateText || '',
-                    affiliateUrl: sp.affiliateUrl || ch.affiliateUrl || jCh.affiliateUrl || '',
-                    affiliateLinks: mergedAffLinks,
+                    affiliateText: '',
+                    affiliateUrl: '',
+                    affiliateLinks: resolvedAffLinks,
                     country: sp.country || ch.country || itinDay?.country || rawItineraryData.country || '',
                     dayRegion, _isDraft: isItemDraft(ch) || isItemDraft(sp)
                 };
@@ -478,12 +486,29 @@ function buildMediaHTML(ch, chIndex) {
     }).join('')}</div>`;
 }
 
+function extractAffiliateList(obj) {
+    if (!obj) return [];
+    const list = [], seen = new Set();
+    const pushLink = (url, text) => {
+        const cleanUrl = String(url || '').trim();
+        if (!cleanUrl || seen.has(cleanUrl)) return;
+        seen.add(cleanUrl);
+        list.push({
+            text: String(text || '').trim() || '🔗 查看同款行程與最新優惠',
+            url: cleanUrl
+        });
+    };
+    pushLink(obj.affiliateUrl, obj.affiliateText);
+    if (Array.isArray(obj.affiliateLinks)) {
+        obj.affiliateLinks.forEach(it => it && pushLink(it.url, it.text));
+    }
+    return list;
+}
+
 function buildAffiliateHTML(ch) {
-    const links = [];
-    if (ch.affiliateUrl?.trim()) links.push({ text: ch.affiliateText?.trim() || '🔗 查看同款行程與最新優惠', url: ch.affiliateUrl.trim() });
-    (ch.affiliateLinks || []).forEach(it => it?.url?.trim() && links.push({ text: it.text?.trim() || '🔗 查看同款行程與最新優惠', url: it.url.trim() }));
+    const links = extractAffiliateList(ch);
     if (!links.length) return '';
-    return `<div class="affiliate-container">${links.map(l => `<a href="${l.url}" target="_blank" rel="noopener sponsored" class="affiliate-btn"><span>${l.text}</span><span>↗</span></a>`).join('')}</div>`;
+    return `<div class="affiliate-container">${links.map(l => `<a href="${escHtml(l.url)}" target="_blank" rel="noopener sponsored" class="affiliate-btn"><span>${escHtml(l.text)}</span><span>↗</span></a>`).join('')}</div>`;
 }
 
 function replayVideo(btn) { const v = btn.parentElement.querySelector('video'); if (v) { v.currentTime = 0; v.play(); } }
@@ -1191,7 +1216,8 @@ function renderPackStaticViews() {
             key: name.split('(')[0].trim(), officialName: name,
             dayStart: hv.checkIn || `Day 0${idx + 1}`, dayEnd: hv.checkOut || '',
             nights: Number(hv.nights) || 1, bookingId: hv.bookingId || `HTL-0${idx + 1}`,
-            roomType: hv.roomType || '標準雙人房', mealPlan: hv.mealPlan || '依訂單方案為準', address: hv.address || ''
+            roomType: hv.roomType || '標準雙人房', mealPlan: hv.mealPlan || '依訂單方案為準', address: hv.address || '',
+            affHtml: buildAffiliateHTML(hv)
         });
     });
 
@@ -1250,6 +1276,7 @@ function renderPackStaticViews() {
         if (last && last.key === e.key && (!last.dayEnd || last.dayEnd === e.dayStart)) {
             last.totalNights += e.nights; last.dayEnd = e.dayEnd;
             if (e.bookingId && !last.bookingIds.includes(e.bookingId)) last.bookingIds.push(e.bookingId);
+            if (!last.affHtml && e.affHtml) last.affHtml = e.affHtml;
         } else mergedHotels.push({ ...e, totalNights: e.nights, bookingIds: [e.bookingId] });
     });
 
@@ -1309,7 +1336,7 @@ function renderPackStaticViews() {
                             <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.officialName)}" target="_blank" rel="noopener" class="timetable-link-btn">🗺️ 開啟飯店地圖 ↗</a>
                         </div>
                     </div>
-                    ${findHotelAffHtml(h.officialName)}
+                    ${h.affHtml || findHotelAffHtml(h.officialName)}
                 </div>
             </div>`).join('')}
         <h4 style="margin:20px 0 8px;color:var(--accent-brown-dark);font-size:0.92rem;">✈️ 航班・列車・重要票券（共 ${transportTickets.length} 項）</h4>
