@@ -16,7 +16,7 @@ const tripId = urlParams.get('trip') || 'tohoku_2026';
 const isPreviewMode = ['1', 'true'].includes(urlParams.get('preview'));
 
 let rawJournalData = {}, rawItineraryData = {};
-let isWholeJournalDraft = false;
+let isWholeJournalDraft = false, isWholeItineraryDraft = false;
 let currentTripAvatar = '🦊', currentTripStartDate = null, currentTripEndDate = null, currentTripTimezone = 'Asia/Tokyo';
 let currentCurrencyCode = 'JPY', currentCurrencySymbol = '¥';
 
@@ -71,7 +71,7 @@ let cloudEditPassword = '';
 try { cloudEditPassword = localStorage.getItem('flaneur_gas_pwd') || ''; } catch {}
 
 const CURVE_MODES = { flight: 0.22, hsr: 0.12, boat: 0.12, train: 0.08, metro: 0.05, ropeway: 0.04 };
-const isItemDraft = obj => Boolean(obj && (obj.isDraft === true || obj.hidden === true || obj.status === 'draft'));
+const isItemDraft = obj => Boolean(obj && (obj.isDraft === true || obj.isDraft === 'true' || obj.hidden === true || obj.status === 'draft'));
 const escHtml = s => String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 const todayISO = () => {
     const d = new Date();
@@ -79,19 +79,48 @@ const todayISO = () => {
 };
 const normalizeSpotKey = (day, spotName) => `${String(day || '').trim()}::${String(spotName || '').trim().toLowerCase()}`;
 
-/* === 2. 啟動流程：同步讀取 data/*.json 與 itinerary/*.json 並縫合 === */
+function safeFetchJson(url) {
+    return fetch(url, { cache: 'no-store' })
+        .then(async r => {
+            if (!r.ok) return null;
+            try { return await r.json(); }
+            catch (e) { console.error(`[JSON 語法錯誤] ${url}`, e); return null; }
+        })
+        .catch(() => null);
+}
+
+/* === 2. 啟動流程：同步讀取 data/*.json 與 itinerary/*.json 並獨立判斷隱藏狀態 === */
 function bootJournalApp() {
     initCoreEventListeners();
 
     Promise.all([
-        fetch(`data/${tripId}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null),
-        fetch(`itinerary/${tripId}.json?t=${Date.now()}`, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null)
+        safeFetchJson(`data/${tripId}.json?t=${Date.now()}`),
+        safeFetchJson(`itinerary/${tripId}.json?t=${Date.now()}`)
     ]).then(([journalJson, itinJson]) => {
-        if (!journalJson && !itinJson) throw new Error(`找不到 data/${tripId}.json 或 itinerary/${tripId}.json`);
+        if (!journalJson && !itinJson) throw new Error(`找不到或無法解析 data/${tripId}.json 與 itinerary/${tripId}.json`);
 
         rawJournalData = journalJson || {};
         rawItineraryData = itinJson || {};
-        isWholeJournalDraft = !isPreviewMode && (!journalJson || isItemDraft(rawJournalData));
+
+        const itinDaysList = Array.isArray(rawItineraryData.days) ? rawItineraryData.days : [];
+        const journalDaysList = Array.isArray(rawJournalData.days) && rawJournalData.days.length
+            ? rawJournalData.days
+            : (Array.isArray(rawJournalData.chapters) && rawJournalData.chapters.length
+                ? Object.values(rawJournalData.chapters.reduce((acc, ch) => {
+                    const d = ch.day || 'Day 01';
+                    if (!acc[d]) acc[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: !!ch.isFieldTest, chapters: [] };
+                    acc[d].chapters.push(ch);
+                    return acc;
+                }, {}))
+                : []);
+
+        const hasItinDays = itinDaysList.length > 0;
+        const allItinDaysDraft = hasItinDays && itinDaysList.every(d => isItemDraft(d));
+        isWholeItineraryDraft = !isPreviewMode && (!hasItinDays || isItemDraft(rawItineraryData) || allItinDaysDraft);
+
+        const hasJournalDays = journalDaysList.length > 0;
+        const allJournalDaysDraft = hasJournalDays && journalDaysList.every(d => isItemDraft(d));
+        isWholeJournalDraft = !isPreviewMode && (!hasJournalDays || isItemDraft(rawJournalData) || allJournalDaysDraft);
 
         const isMY = tripId.includes('malaysia');
         const mainTitle = rawItineraryData.tripTitle || rawJournalData.tripTitle || '電子旅行手帳';
@@ -107,81 +136,101 @@ function bootJournalApp() {
         baselineToTwdRate = FALLBACK_TWD_RATES[currentCurrencyCode] || 1;
 
         const itinSpotById = new Map(), itinDayByName = new Map();
-        (rawItineraryData.days || []).forEach(d => {
+        itinDaysList.forEach(d => {
             if (d.day) itinDayByName.set(d.day, d);
             (d.spots || []).forEach(sp => sp.id && itinSpotById.set(sp.id, { ...sp, dayRegion: d.region || '' }));
         });
 
         // 無論遊記是否為草稿，皆先建立章節索引作為分潤連結備援（相容舊旅程）
-        const journalChapById = new Map();
-        (rawJournalData.days || []).forEach(d => (d.chapters || []).forEach(ch => ch.id && journalChapById.set(ch.id, ch)));
-        (rawJournalData.chapters || []).forEach(ch => ch.id && journalChapById.set(ch.id, ch));
+        const journalDayByName = new Map(), journalChapById = new Map();
+        journalDaysList.forEach(d => {
+            if (d.day) journalDayByName.set(d.day, d);
+            (d.chapters || []).forEach(ch => ch.id && journalChapById.set(ch.id, ch));
+        });
 
         const fallbackCoord = isMY ? { lat: 3.1390, lng: 101.6869 } : { lat: 35.6895, lng: 139.6917 };
-        let baseDays = [];
-        if (!isWholeJournalDraft && Array.isArray(rawJournalData.days) && rawJournalData.days.length) {
-            baseDays = rawJournalData.days;
-        } else if (!isWholeJournalDraft && Array.isArray(rawJournalData.chapters)) {
-            const grouped = {};
-            rawJournalData.chapters.forEach(ch => {
-                const d = ch.day || 'Day 01';
-                if (!grouped[d]) grouped[d] = { day: d, dayTitle: ch.dayTitle || '', isFieldTest: !!ch.isFieldTest, chapters: [] };
-                grouped[d].chapters.push(ch);
-            });
-            baseDays = Object.values(grouped);
-        } else if (Array.isArray(rawItineraryData.days)) {
-            baseDays = rawItineraryData.days.map(d => ({
-                day: d.day,
-                dayTitle: d.dayTitle || d.region || d.day,
-                isDraft: isItemDraft(d),
-                isFieldTest: false,
-                chapters: (d.spots || []).map(sp => ({
-                    id: sp.id, lat: sp.lat ?? fallbackCoord.lat, lng: sp.lng ?? fallbackCoord.lng,
-                    zoom: 14, title: sp.spotName || sp.id, content: sp.intro || '', isDraft: isItemDraft(sp)
-                }))
-            }));
-        }
+        const orderedDayNames = [];
+        const pushDayName = name => { if (name && !orderedDayNames.includes(name)) orderedDayNames.push(name); };
 
-        const mergedDays = baseDays.map((dayObj, dIdx) => {
-            const itinDay = itinDayByName.get(dayObj.day) || rawItineraryData.days?.[dIdx];
-            const dayRegion = dayObj.region || itinDay?.region || dayObj.dayTitle || '主要旅遊地區';
-            const dayDraft = isItemDraft(dayObj) || isItemDraft(itinDay);
+        if (!isWholeItineraryDraft || isPreviewMode) itinDaysList.forEach(d => pushDayName(d.day));
+        if (!isWholeJournalDraft || isPreviewMode) journalDaysList.forEach(d => pushDayName(d.day));
 
-            const chapters = (dayObj.chapters || []).map((ch, cIdx) => {
-                const indexedSp = itinDay?.spots?.[cIdx];
-                const sp = (ch.id && itinSpotById.get(ch.id))
-                    || (indexedSp && (!ch.id || !indexedSp.id || indexedSp.id === ch.id) ? indexedSp : null)
-                    || {};
-                const jCh = (ch.id && journalChapById.get(ch.id)) || {};
+        const mergedDays = orderedDayNames.map((dayName, dIdx) => {
+            const itinDay = itinDayByName.get(dayName) || null;
+            const jDay = journalDayByName.get(dayName) || null;
+            const itinSpots = Array.isArray(itinDay?.spots) ? itinDay.spots : [];
+            const jChapters = Array.isArray(jDay?.chapters) ? jDay.chapters : [];
 
+            const itinDayDraft = isWholeItineraryDraft || !itinDay || isItemDraft(rawItineraryData) || isItemDraft(itinDay);
+            const journalDayDraft = isWholeJournalDraft || !jDay || isItemDraft(rawJournalData) || isItemDraft(jDay);
+
+            const entries = [];
+            const usedJournalIds = new Set();
+
+            if ((!itinDayDraft || isPreviewMode) && itinSpots.length) {
+                itinSpots.forEach((sp, cIdx) => {
+                    const indexedJCh = jChapters[cIdx];
+                    const jCh = (sp.id && journalChapById.get(sp.id))
+                        || (indexedJCh && (!sp.id || !indexedJCh.id || indexedJCh.id === sp.id) ? indexedJCh : null);
+                    if (jCh?.id) usedJournalIds.add(jCh.id);
+                    entries.push({ sp, jCh });
+                });
+            }
+            if ((!journalDayDraft || isPreviewMode) && jChapters.length) {
+                jChapters.forEach((jCh, cIdx) => {
+                    if (jCh?.id && usedJournalIds.has(jCh.id)) return;
+                    if (entries.some(e => e.jCh === jCh)) return;
+                    const indexedSp = itinSpots[cIdx];
+                    const sp = (jCh.id && itinSpotById.get(jCh.id))
+                        || (indexedSp && (!jCh.id || !indexedSp.id || indexedSp.id === jCh.id) ? indexedSp : null);
+                    entries.push({ sp, jCh });
+                });
+            }
+
+            const iDayTitle = (itinDay?.dayTitle || itinDay?.region || '').trim();
+            const jDayTitle = (jDay?.dayTitle || '').trim();
+            const dayRegion = (itinDay?.region || jDay?.region || iDayTitle || jDayTitle || '主要旅遊地區').trim();
+
+            const chapters = entries.map(({ sp, jCh }, cIdx) => {
                 // 分潤連結優先從「行程安排 (itinerary/*.json)」讀取；若行程未填有效網址，才退回讀取圖文遊記 (data/*.json)
                 const itinAff = extractAffiliateList(sp);
-                const chAff = extractAffiliateList(ch);
-                const resolvedAffLinks = itinAff.length
-                    ? itinAff
-                    : (chAff.length ? chAff : extractAffiliateList(jCh));
+                const resolvedAffLinks = itinAff.length ? itinAff : extractAffiliateList(jCh);
+
+                const chItinDraft = itinDayDraft || !sp || isItemDraft(sp);
+                const chJournalDraft = journalDayDraft || !jCh || isItemDraft(jCh);
 
                 return {
-                    ...jCh, ...ch, ...sp,
-                    day: dayObj.day,
-                    id: ch.id || sp.id || `d${dIdx + 1}-ch${cIdx + 1}`,
-                    lat: ch.lat ?? sp.lat ?? jCh.lat, lng: ch.lng ?? sp.lng ?? jCh.lng, zoom: ch.zoom || sp.zoom || jCh.zoom || 14,
-                    title: ch.title || sp.spotName || jCh.title || '', content: ch.content || sp.intro || '',
+                    ...(jCh || {}),
+                    ...(sp || {}),
+                    day: dayName,
+                    id: sp?.id || jCh?.id || `d${dIdx + 1}-ch${cIdx + 1}`,
+                    lat: (!itinDayDraft && sp?.lat != null) ? sp.lat : (jCh?.lat ?? sp?.lat ?? fallbackCoord.lat),
+                    lng: (!itinDayDraft && sp?.lng != null) ? sp.lng : (jCh?.lng ?? sp?.lng ?? fallbackCoord.lng),
+                    zoom: jCh?.zoom || sp?.zoom || 14,
+                    title: jCh?.title || sp?.spotName || sp?.id || '',
+                    content: jCh?.content || sp?.intro || '',
                     affiliateText: '',
                     affiliateUrl: '',
                     affiliateLinks: resolvedAffLinks,
-                    country: sp.country || ch.country || itinDay?.country || rawItineraryData.country || '',
-                    dayRegion, _isDraft: isItemDraft(ch) || isItemDraft(sp)
+                    country: sp?.country || jCh?.country || itinDay?.country || jDay?.country || rawItineraryData.country || '',
+                    dayRegion,
+                    _itinDraft: chItinDraft,
+                    _journalDraft: chJournalDraft,
+                    _isDraft: chItinDraft && chJournalDraft
                 };
             });
 
             return {
-                ...dayObj,
-                itinDayTitle: (itinDay?.dayTitle || dayObj.dayTitle || '').trim(),
-                daySub: (itinDay?.daySub || dayObj.daySub || '').trim(),
+                day: dayName,
+                dayTitle: jDayTitle || iDayTitle || dayName,
+                itinDayTitle: iDayTitle || jDayTitle || dayName,
+                daySub: (itinDay?.daySub || jDay?.daySub || '').trim(),
+                isFieldTest: Boolean(jDay?.isFieldTest),
                 region: dayRegion,
-                country: itinDay?.country || dayObj.country || '',
-                _isDraft: dayDraft,
+                country: itinDay?.country || jDay?.country || rawItineraryData.country || '',
+                _itinDraft: itinDayDraft,
+                _journalDraft: journalDayDraft,
+                _isDraft: itinDayDraft && journalDayDraft,
                 chapters: isPreviewMode ? chapters : chapters.filter(c => !c._isDraft)
             };
         });
@@ -195,7 +244,16 @@ function bootJournalApp() {
         const initialDayKey = matchedDay || 'ALL';
         const reqView = urlParams.get('view');
         const reqSpot = (urlParams.get('spot') || '').trim();
-        const resolvedViewId = reqView ? (reqView.startsWith('view-') ? reqView : `view-${reqView}`) : 'view-itinerary';
+        let resolvedViewId = reqView ? (reqView.startsWith('view-') ? reqView : `view-${reqView}`) : 'view-itinerary';
+
+        // 依兩份 JSON 的獨立草稿狀態，控制上方分頁按鈕顯示與預設視角
+        const itinTabBtn = document.querySelector('.view-mode-btn[data-view="view-itinerary"]');
+        const journalTabBtn = document.querySelector('.view-mode-btn[data-view="view-journal"]');
+        if (itinTabBtn) itinTabBtn.style.display = isWholeItineraryDraft ? 'none' : '';
+        if (journalTabBtn) journalTabBtn.style.display = isWholeJournalDraft ? 'none' : '';
+
+        if (resolvedViewId === 'view-itinerary' && isWholeItineraryDraft && !isWholeJournalDraft) resolvedViewId = 'view-journal';
+        if (resolvedViewId === 'view-journal' && isWholeJournalDraft && !isWholeItineraryDraft) resolvedViewId = 'view-itinerary';
 
         initMap(normalizedDays, fallbackCoord);
         buildDayTabs();
@@ -209,8 +267,8 @@ function bootJournalApp() {
 
         if (reqSpot) {
             focusSpotById(reqSpot, resolvedViewId);
-        } else if (reqView && $(resolvedViewId)) {
-            switchRightView(resolvedViewId);
+        } else if ($(resolvedViewId)) {
+            switchRightView(resolvedViewId, false);
         }
     }).catch(err => {
         $('itinerary-content').innerHTML = `<h2>糟糕，讀取失敗！</h2><p>${escHtml(err.message)}</p>`;
@@ -223,7 +281,7 @@ document.addEventListener('DOMContentLoaded', bootJournalApp);
 function switchRightView(viewId, shouldScrollTop = true) {
     document.querySelectorAll('.view-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.view === viewId));
     document.querySelectorAll('.view-section').forEach(s => s.classList.toggle('active', s.id === viewId));
-    $('day-tabs').style.display = (viewId === 'view-itinerary' || (viewId === 'view-journal' && !isWholeJournalDraft)) ? 'flex' : 'none';
+    $('day-tabs').style.display = ((viewId === 'view-itinerary' && !isWholeItineraryDraft) || (viewId === 'view-journal' && !isWholeJournalDraft)) ? 'flex' : 'none';
     if (shouldScrollTop) window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -253,7 +311,7 @@ function switchMapDisplayMode(mode) {
 
 /* === 4. 地圖初始化、交通判別與頭貼動畫 === */
 function initMap(daysData, fallbackCoord) {
-    const first = daysData?.[0]?.chapters?.[0];
+    const first = (daysData || []).flatMap(d => d.chapters || []).find(c => c.lat && c.lng);
     map = L.map('map', { zoomControl: false }).setView([first?.lat || fallbackCoord.lat, first?.lng || fallbackCoord.lng], first?.zoom || 7);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri', maxZoom: 16
@@ -437,7 +495,18 @@ async function transitionToChapter(newIndex, animateFromPrevOrigin = false) {
 }
 
 function buildDayTabs() {
-    const tabs = [{ key: 'ALL', label: '全部天數' }, ...normalizedDays.map(d => ({ key: d.day, label: (isPreviewMode && d._isDraft) ? `${d.day} (草稿)` : d.day }))];
+    const tabs = [
+        { key: 'ALL', label: '全部天數' },
+        ...normalizedDays.map(d => {
+            let label = d.day;
+            if (isPreviewMode) {
+                if (d._itinDraft && d._journalDraft) label = `${d.day} (草稿)`;
+                else if (d._itinDraft) label = `${d.day} (行程草稿)`;
+                else if (d._journalDraft) label = `${d.day} (遊記草稿)`;
+            }
+            return { key: d.day, label };
+        })
+    ];
     const box = $('day-tabs');
     box.innerHTML = '';
     tabs.forEach((tab, idx) => {
@@ -703,7 +772,10 @@ function focusSpotById(spotId, preferViewId = 'view-itinerary') {
         return;
     }
 
-    const useJournal = (preferViewId === 'view-journal') && !isWholeJournalDraft;
+    const targetCh = currentChaptersList[chIndex];
+    const canJournal = !isWholeJournalDraft && (isPreviewMode || !targetCh?._journalDraft);
+    const canItin = !isWholeItineraryDraft && (isPreviewMode || !targetCh?._itinDraft);
+    const useJournal = (preferViewId === 'view-journal' && canJournal) || (!canItin && canJournal);
     switchRightView(useJournal ? 'view-journal' : 'view-itinerary', false);
 
     setTimeout(() => {
@@ -748,19 +820,26 @@ function renderDay(dayKey, skipInitialFocus = false) {
 
     const daysToRender = dayKey === 'ALL' ? normalizedDays : normalizedDays.filter(d => d.day === dayKey);
 
+    if (isWholeItineraryDraft) {
+        itinDiv.innerHTML = `<div class="draft-empty-box"><div style="font-size:2rem;margin-bottom:8px;">📅</div><div style="font-weight:700;color:var(--accent-brown-dark);font-size:1.05rem;margin-bottom:6px;">這趟旅程的行程安排目前設為隱藏</div><p style="margin:0;font-size:0.9rem;">編輯中可於網址加上 <code>&preview=1</code> 預覽，或將 <code>itinerary/${escHtml(tripId)}.json</code> 的 <code>isDraft</code> 改為 <code>false</code> 即可公開。</p></div>`;
+    }
     if (isWholeJournalDraft) {
         contentDiv.innerHTML = `<div class="draft-empty-box"><div style="font-size:2rem;margin-bottom:8px;">✍️</div><div style="font-weight:700;color:var(--accent-brown-dark);font-size:1.05rem;margin-bottom:6px;">這趟旅程的圖文遊記尚在整理中</div><p style="margin:0;font-size:0.9rem;">目前已開放「📅 行程安排」、「📡 資訊情報」與「🎫 票券蒐集」完整規劃內容。<br>待完稿並將 <code>data/${escHtml(tripId)}.json</code> 的 <code>isDraft</code> 改為 <code>false</code> 後即可閱覽。</p></div>`;
     }
     if (!daysToRender.length) {
-        itinDiv.innerHTML = `<div class="draft-empty-box">✨ 目前尚無公開的行程天數（編輯中可於網址加上 <code>&preview=1</code> 預覽草稿）。</div>`;
+        if (!isWholeItineraryDraft) {
+            itinDiv.innerHTML = `<div class="draft-empty-box">✨ 目前尚無公開的行程天數（編輯中可於網址加上 <code>&preview=1</code> 預覽草稿）。</div>`;
+        }
         $('map-stats-pill').textContent = '0 日行跡';
         return;
     }
 
     // 行程頂部預留低調的隨手記與集章解鎖狀態條（由 journal-cloud.js 填寫內容）
-    const unlockSlot = document.createElement('div');
-    unlockSlot.id = 'itin-unlock-bar';
-    itinDiv.appendChild(unlockSlot);
+    if (!isWholeItineraryDraft) {
+        const unlockSlot = document.createElement('div');
+        unlockSlot.id = 'itin-unlock-bar';
+        itinDiv.appendChild(unlockSlot);
+    }
 
     // 單日視角時，自動抓取前一天最後一個有效站點當出發起點（相距 < 20 公尺則略過避免重疊）
     if (dayKey !== 'ALL') {
@@ -785,26 +864,43 @@ function renderDay(dayKey, skipInitialFocus = false) {
         }
     }
 
+    let renderedItinDayCount = 0;
+    let renderedJournalDayCount = 0;
+
     daysToRender.forEach(dayObj => {
-        if (!isWholeJournalDraft) {
+        const showDayInItin = !isWholeItineraryDraft && (isPreviewMode || !dayObj._itinDraft);
+        const showDayInJournal = !isWholeJournalDraft && (isPreviewMode || !dayObj._journalDraft);
+        if (!showDayInItin && !showDayInJournal) return;
+
+        let journalBannerAdded = false;
+        const ensureJournalBanner = () => {
+            if (journalBannerAdded) return;
+            journalBannerAdded = true;
+            renderedJournalDayCount++;
             const banner = document.createElement('div');
             banner.className = 'day-banner';
             banner.innerHTML = `
                 <div class="day-banner-header">
                     <div class="day-badge">${escHtml(dayObj.day)}</div>
                     ${dayObj.isFieldTest ? '<span class="field-test-badge">行程實測</span>' : ''}
-                    ${(isPreviewMode && dayObj._isDraft) ? '<span class="draft-preview-badge">📝 草稿預覽</span>' : ''}
+                    ${(isPreviewMode && dayObj._journalDraft) ? '<span class="draft-preview-badge">📝 遊記草稿</span>' : ''}
                 </div>
                 <h1>${escHtml(dayObj.dayTitle || dayObj.day)}</h1>`;
             contentDiv.appendChild(banner);
-        }
+        };
 
         let dayMins = 0, dayCost = 0;
         const dayCardsHTML = [], spotNames = [];
+        let prevVisibleItinCh = null;
+        let itinIdxInDay = 0;
 
         (dayObj.chapters || []).forEach((ch, idxInDay) => {
+            const showChInItin = showDayInItin && (isPreviewMode || !ch._itinDraft);
+            const showChInJournal = showDayInJournal && (isPreviewMode || !ch._journalDraft);
+            if (!showChInItin && !showChInJournal) return;
+
             const chIndex = currentChaptersList.length;
-            const meta = classifyChapterMeta(ch, idxInDay, idxInDay > 0 ? dayObj.chapters[idxInDay - 1] : null);
+            const meta = classifyChapterMeta(ch, idxInDay, prevVisibleItinCh || (idxInDay > 0 ? dayObj.chapters[idxInDay - 1] : null));
             ch._pureName = meta.pureName;
             ch._dayKey = dayObj.day;
             ch._categoryLabel = meta.categoryLabel;
@@ -821,65 +917,70 @@ function renderDay(dayKey, skipInitialFocus = false) {
             } else {
                 spotCount++;
             }
-            spotNames.push(meta.pureName);
 
             let section = null;
-            if (!isWholeJournalDraft) {
+            if (showChInJournal) {
+                ensureJournalBanner();
                 section = document.createElement('section');
                 section.className = `chapter ${chIndex === 0 ? 'active' : ''}`;
                 section.id = `section-${ch.id}`;
                 section.dataset.index = chIndex;
                 section.innerHTML = `
-                    <h2>${ch.title}${(isPreviewMode && ch._isDraft) ? '<span style="font-size:0.75rem;background:#B84A39;color:#fff;padding:2px 8px;border-radius:8px;margin-left:8px;">📝 草稿</span>' : ''}</h2>
+                    <h2>${ch.title}${(isPreviewMode && ch._journalDraft) ? '<span style="font-size:0.75rem;background:#B84A39;color:#fff;padding:2px 8px;border-radius:8px;margin-left:8px;">📝 草稿</span>' : ''}</h2>
                     ${buildMediaHTML(ch, chIndex)}
                     <div class="chapter-body">${ch.content || ''}</div>
                     ${buildAffiliateHTML(ch)}`;
                 contentDiv.appendChild(section);
             }
 
-            if (meta.transitInfo && idxInDay > 0 && meta.transitInfo.mode !== 'flight') {
-                const segCostTwd = toTwd(meta.transitInfo.cost, ch.transitCurrency);
-                dayMins += meta.transitInfo.mins; dayCost += segCostTwd;
-                dayCardsHTML.push(`
-                    <div class="itin-transit-row">
-                        <div class="itin-transit-left"><span class="itin-transit-icon">${meta.transitInfo.icon}</span><span>${escHtml(meta.transitInfo.modeName)}｜${escHtml(meta.transitInfo.routeText)}</span></div>
-                        <div class="itin-transit-right">${meta.transitInfo.mins} 分 &nbsp; NT$${segCostTwd.toLocaleString()}</div>
-                    </div>`);
-            }
+            if (showChInItin) {
+                spotNames.push(meta.pureName);
+                if (meta.transitInfo && itinIdxInDay > 0 && meta.transitInfo.mode !== 'flight') {
+                    const segCostTwd = toTwd(meta.transitInfo.cost, ch.transitCurrency);
+                    dayMins += meta.transitInfo.mins; dayCost += segCostTwd;
+                    dayCardsHTML.push(`
+                        <div class="itin-transit-row">
+                            <div class="itin-transit-left"><span class="itin-transit-icon">${meta.transitInfo.icon}</span><span>${escHtml(meta.transitInfo.modeName)}｜${escHtml(meta.transitInfo.routeText)}</span></div>
+                            <div class="itin-transit-right">${meta.transitInfo.mins} 分 &nbsp; NT$${segCostTwd.toLocaleString()}</div>
+                        </div>`);
+                }
 
-            const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(meta.pureName)}`;
-            dayCardsHTML.push(`
-                <div class="spot-intro-card ${idxInDay === 0 ? 'open' : ''} ${chIndex === 0 ? 'map-focused' : ''}"
-                     id="itin-card-${escHtml(ch.id)}"
-                     data-index="${chIndex}"
-                     data-lat="${ch.lat ?? ''}"
-                     data-lng="${ch.lng ?? ''}"
-                     data-zoom="${ch.zoom || 14}"
-                     data-spot-key="${escHtml(normalizeSpotKey(dayObj.day, meta.pureName))}">
-                    <div class="spot-card-header" onclick="handleSpotCardHeaderClick(this, ${chIndex});">
-                        <div class="spot-header-left">
-                            <span class="spot-time-box">${escHtml(meta.timeStr)}</span>
-                            <span class="spot-cat-pill">${escHtml(meta.categoryLabel)}</span>
-                            <span class="spot-title-text">${escHtml(meta.pureName)}</span>
-                            <span class="spot-star-slot" id="spot-star-slot-${chIndex}"></span>
-                            <span class="spot-stamp-slot" id="spot-stamp-slot-${chIndex}"></span>
+                const gmapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(meta.pureName)}`;
+                dayCardsHTML.push(`
+                    <div class="spot-intro-card ${itinIdxInDay === 0 ? 'open' : ''} ${chIndex === 0 ? 'map-focused' : ''}"
+                         id="itin-card-${escHtml(ch.id)}"
+                         data-index="${chIndex}"
+                         data-lat="${ch.lat ?? ''}"
+                         data-lng="${ch.lng ?? ''}"
+                         data-zoom="${ch.zoom || 14}"
+                         data-spot-key="${escHtml(normalizeSpotKey(dayObj.day, meta.pureName))}">
+                        <div class="spot-card-header" onclick="handleSpotCardHeaderClick(this, ${chIndex});">
+                            <div class="spot-header-left">
+                                <span class="spot-time-box">${escHtml(meta.timeStr)}</span>
+                                <span class="spot-cat-pill">${escHtml(meta.categoryLabel)}</span>
+                                <span class="spot-title-text">${escHtml(meta.pureName)}</span>
+                                <span class="spot-star-slot" id="spot-star-slot-${chIndex}"></span>
+                                <span class="spot-stamp-slot" id="spot-stamp-slot-${chIndex}"></span>
+                            </div>
+                            <span class="spot-toggle-arrow">▶</span>
                         </div>
-                        <span class="spot-toggle-arrow">▶</span>
-                    </div>
-                    <div class="spot-card-body">
-                        <div class="spot-sub-block intro-block"><div class="spot-sub-title">📘 景點介紹</div><p class="spot-sub-text">${escHtml(meta.introText)}</p></div>
-                        <div class="spot-sub-block note-block"><div class="spot-sub-title">⚠️ 注意事項＆攻略備註</div><p class="spot-sub-text">${escHtml(meta.noteText)}</p></div>
-                        <div class="spot-action-pills">
-                            <a href="${gmapUrl}" target="_blank" rel="noopener" class="spot-pill-btn">🗺️ Google 地圖導航</a>
-                            <button type="button" class="spot-pill-btn loc" onclick="setActiveSpotFocus(${chIndex});focusSpotOnMap(${chIndex});">📍 地圖定位</button>
-                            <button type="button" class="spot-pill-btn note-btn" onclick="openSpotNoteEditorByIndex(${chIndex})">📝 寫隨手記 / ⭐ 評分</button>
-                            <button type="button" class="spot-pill-btn stamp-btn" id="spot-stamp-btn-${chIndex}" onclick="openSpotStampModal(${chIndex})">💮 收集景點章</button>
-                            ${!isWholeJournalDraft ? `<button type="button" class="spot-pill-btn loc" onclick="jumpToJournalChapter(${chIndex},'section-${escHtml(ch.id)}')">📖 看實拍遊記</button>` : ''}
+                        <div class="spot-card-body">
+                            <div class="spot-sub-block intro-block"><div class="spot-sub-title">📘 景點介紹</div><p class="spot-sub-text">${escHtml(meta.introText)}</p></div>
+                            <div class="spot-sub-block note-block"><div class="spot-sub-title">⚠️ 注意事項＆攻略備註</div><p class="spot-sub-text">${escHtml(meta.noteText)}</p></div>
+                            <div class="spot-action-pills">
+                                <a href="${gmapUrl}" target="_blank" rel="noopener" class="spot-pill-btn">🗺️ Google 地圖導航</a>
+                                <button type="button" class="spot-pill-btn loc" onclick="setActiveSpotFocus(${chIndex});focusSpotOnMap(${chIndex});">📍 地圖定位</button>
+                                <button type="button" class="spot-pill-btn note-btn" onclick="openSpotNoteEditorByIndex(${chIndex})">📝 寫隨手記 / ⭐ 評分</button>
+                                <button type="button" class="spot-pill-btn stamp-btn" id="spot-stamp-btn-${chIndex}" onclick="openSpotStampModal(${chIndex})">💮 收集景點章</button>
+                                ${showChInJournal ? `<button type="button" class="spot-pill-btn loc" onclick="jumpToJournalChapter(${chIndex},'section-${escHtml(ch.id)}')">📖 看實拍遊記</button>` : ''}
+                            </div>
+                            <div class="spot-notes-mount" id="spot-notes-mount-${chIndex}"></div>
+                            ${buildAffiliateHTML(ch)}
                         </div>
-                        <div class="spot-notes-mount" id="spot-notes-mount-${chIndex}"></div>
-                        ${buildAffiliateHTML(ch)}
-                    </div>
-                </div>`);
+                    </div>`);
+                prevVisibleItinCh = ch;
+                itinIdxInDay++;
+            }
 
             if (ch.lat && ch.lng) {
                 simpleLatLngs.push([ch.lat, ch.lng]);
@@ -911,23 +1012,37 @@ function renderDay(dayKey, skipInitialFocus = false) {
             }
         });
 
-        const hrs = Math.floor(dayMins / 60), mins = dayMins % 60;
-        const block = document.createElement('div');
-        block.className = 'itinerary-day-block';
-        block.innerHTML = `
-            <div class="itin-day-header">
-                <h3 class="itin-day-title">${escHtml(dayObj.day)}｜${escHtml(dayObj.itinDayTitle || dayObj.dayTitle || '')}</h3>
-                <div class="itin-day-sub">📅 ${escHtml(dayObj.daySub || spotNames.join(' · '))}</div>
-            </div>
-            <div class="itin-summary-box">
-                <div class="itin-sum-col"><div class="itin-sum-label">當日區域移動時間</div><div class="itin-sum-val">${hrs > 0 ? `${hrs} 時 ${mins} 分` : `${mins} 分`}</div></div>
-                <div class="itin-sum-col"><div class="itin-sum-label">預估區域交通花費</div><div class="itin-sum-val cost">NT$${dayCost.toLocaleString()}</div></div>
-            </div>
-            ${dayCardsHTML.join('')}`;
-        itinDiv.appendChild(block);
+        if (showDayInItin && dayCardsHTML.length) {
+            renderedItinDayCount++;
+            const hrs = Math.floor(dayMins / 60), mins = dayMins % 60;
+            const block = document.createElement('div');
+            block.className = 'itinerary-day-block';
+            block.innerHTML = `
+                <div class="itin-day-header">
+                    <h3 class="itin-day-title">${escHtml(dayObj.day)}｜${escHtml(dayObj.itinDayTitle || dayObj.dayTitle || '')}${(isPreviewMode && dayObj._itinDraft) ? ' <span class="draft-preview-badge">📝 行程草稿</span>' : ''}</h3>
+                    <div class="itin-day-sub">📅 ${escHtml(dayObj.daySub || spotNames.join(' · '))}</div>
+                </div>
+                <div class="itin-summary-box">
+                    <div class="itin-sum-col"><div class="itin-sum-label">當日區域移動時間</div><div class="itin-sum-val">${hrs > 0 ? `${hrs} 時 ${mins} 分` : `${mins} 分`}</div></div>
+                    <div class="itin-sum-col"><div class="itin-sum-label">預估區域交通花費</div><div class="itin-sum-val cost">NT$${dayCost.toLocaleString()}</div></div>
+                </div>
+                ${dayCardsHTML.join('')}`;
+            itinDiv.appendChild(block);
+        }
     });
 
-    $('map-stats-pill').textContent = `${daysToRender.length} 日行跡・${spotCount} 處尋訪・${uniqueHotels.size} 處住宿點`;
+    if (!isWholeItineraryDraft && renderedItinDayCount === 0) {
+        const emptyItin = document.createElement('div');
+        emptyItin.className = 'draft-empty-box';
+        emptyItin.innerHTML = `📅 ${dayKey === 'ALL' ? '目前尚無公開的行程安排' : `${escHtml(dayKey)} 的行程安排目前設為隱藏`}（編輯中可於網址加上 <code>&preview=1</code> 預覽）。`;
+        itinDiv.appendChild(emptyItin);
+    }
+    if (!isWholeJournalDraft && renderedJournalDayCount === 0) {
+        contentDiv.innerHTML = `<div class="draft-empty-box"><div style="font-size:2rem;margin-bottom:8px;">✍️</div><div style="font-weight:700;color:var(--accent-brown-dark);font-size:1.05rem;margin-bottom:6px;">${dayKey === 'ALL' ? '目前尚無公開的圖文遊記' : `${escHtml(dayKey)} 的圖文遊記尚在整理中`}</div><p style="margin:0;font-size:0.9rem;">可先切換至「📅 行程安排」查看路線與攻略，或於網址加上 <code>&preview=1</code> 預覽草稿。</p></div>`;
+    }
+
+    const visibleDayCount = Math.max(renderedItinDayCount, renderedJournalDayCount);
+    $('map-stats-pill').textContent = `${visibleDayCount} 日行跡・${spotCount} 處尋訪・${uniqueHotels.size} 處住宿點`;
     if (simpleLatLngs.length > 1) L.polyline(simpleLatLngs, { color: '#C4A99E', weight: 2, opacity: 0.45, dashArray: '5, 10' }).addTo(baseRouteLayer);
     if (currentChaptersList.length) {
         setActiveSpotFocus(0);
@@ -935,21 +1050,23 @@ function renderDay(dayKey, skipInitialFocus = false) {
     }
 
     // 行程安排專用滾動監聽器（滾動行程卡片同步移動左側地圖，不自動開合卡片）
-    itinObserver = new IntersectionObserver(entries => {
-        if (isClickScrolling) return;
-        if (!$('view-itinerary')?.classList.contains('active')) return;
-        for (const e of entries) {
-            if (e.isIntersecting) {
-                const idx = parseInt(e.target.dataset.index, 10);
-                if (!isNaN(idx) && idx !== currentActiveIndex) {
-                    setActiveSpotFocus(idx);
-                    transitionToChapter(idx);
+    if (!isWholeItineraryDraft) {
+        itinObserver = new IntersectionObserver(entries => {
+            if (isClickScrolling) return;
+            if (!$('view-itinerary')?.classList.contains('active')) return;
+            for (const e of entries) {
+                if (e.isIntersecting) {
+                    const idx = parseInt(e.target.dataset.index, 10);
+                    if (!isNaN(idx) && idx !== currentActiveIndex) {
+                        setActiveSpotFocus(idx);
+                        transitionToChapter(idx);
+                    }
+                    break;
                 }
-                break;
             }
-        }
-    }, { rootMargin: '-32% 0px -56% 0px', threshold: 0 });
-    document.querySelectorAll('.spot-intro-card').forEach(c => itinObserver.observe(c));
+        }, { rootMargin: '-32% 0px -56% 0px', threshold: 0 });
+        document.querySelectorAll('.spot-intro-card').forEach(c => itinObserver.observe(c));
+    }
 
     // 圖文遊記專用滾動監聽器
     if (!isWholeJournalDraft) {
